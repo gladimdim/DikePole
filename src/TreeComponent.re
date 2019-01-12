@@ -42,7 +42,7 @@ let make = (_children) => {
                 <div>{Story.getTextForId(self.state.current, s) |> (text => <div>{ReasonReact.string(text)}</div>)}</div>
                 {
                     Story.getNextForId(self.state.current, s)
-                    |> List.mapi((_i, next: Story.tNextStory) =>
+                    |> List.map((next: Story.tNextStory) =>
                         <button onClick={_event => self.send(SetStory(next.target))}>{ReasonReact.string(next.text)}</button>
                     )
                     |> Array.of_list

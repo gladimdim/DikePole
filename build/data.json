@@ -1,0 +1,22 @@
+[
+    {
+        "id": 0,
+        "text": "Getting started",
+        "next": [{"text": "Go to 1", "target": 1}, {"text": "Go to 2", "target": 2}]
+    },
+    {
+        "id": 1,
+        "text": "Story 1",
+        "next": [{"text": "Go to 3", "target": 3}]
+    },
+    {
+        "id": 2,
+        "text": "Story 2",
+        "next": []
+    },
+    {
+        "id": 3,
+        "text": "Story 3",
+        "next": []
+    }
+]
