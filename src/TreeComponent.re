@@ -1,30 +1,30 @@
 type state = {
-    current: int,
+    current: Story.tPid,
     story: option(Story.tStory),
 };
 
 type action =
-    | Next(int)
+    | Next(Story.tPid)
     | Exit
     | LoadStories
     | StartStory(Story.tStory)
-    | SetStory(int)
+    | SetStory(Story.tPid)
 
 let component = ReasonReact.reducerComponent("Tree");
 
 let make = (_children) => {
     ...component,
-    initialState: () => { current: -1, story: None},
+    initialState: () => { current: "-1", story: None},
     reducer: (action, state) => 
     switch (action) {
         | SetStory(id) => ReasonReact.Update({...state, current: id})
-        | StartStory(story) => ReasonReact.Update({current: 0, story: Some(story)})
+        | StartStory(story) => ReasonReact.Update({current: "1", story: Some(story)})
         | Next(a) => ReasonReact.Update({...state, current: a})
         | Exit => ReasonReact.Update(state)
         | LoadStories => ReasonReact.SideEffects(
             (
                 self => Fetch.fetch(
-                    "/data.json"
+                    "/twinery.json"
                 )
                 |> Js.Promise.then_(Fetch.Response.json)
                 |> Js.Promise.then_(json => {
@@ -37,16 +37,19 @@ let make = (_children) => {
     },
     render: self => {
         switch (self.state.story) {
-            | Some(s) => {
+            | Some(story) => {
             <div>
-                <div>{Story.getTextForId(self.state.current, s) |> (text => <div>{ReasonReact.string(text)}</div>)}</div>
+                <div>{Story.getTextForPid(self.state.current, story.passages) |> (text => <div>{ReasonReact.string(text)}</div>)}</div>
                 {
-                    Story.getNextForId(self.state.current, s)
-                    |> List.map((next: Story.tNextStory) =>
-                        <button onClick={_event => self.send(SetStory(next.target))}>{ReasonReact.string(next.text)}</button>
-                    )
-                    |> Array.of_list
-                    |> ReasonReact.array
+                    switch (Story.getNextForPid(self.state.current, story.passages)) {
+                        | Some(n) => 
+                            List.map((next: Story.tNextStory) =>
+                                <button onClick={_event => self.send(SetStory(next.pid))}>{ReasonReact.string(next.name)}</button>
+                                , n)
+                            |> Array.of_list
+                            |> ReasonReact.array
+                        | None => ReasonReact.null
+                    }
                 }
                 
             </div>
