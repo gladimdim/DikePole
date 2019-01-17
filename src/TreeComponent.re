@@ -39,7 +39,7 @@ let make = (_children) => {
         switch (self.state.story) {
             | Some(story) => {
                 <div>
-                <img src="background/boat.jpg" style=(ReactDOMRe.Style.make(~width="100%", ~height="auto", ()))/> 
+                <img src=Background.imageForStory("boat") style=Background.backgroundStyleForTopImage()/>
                 <div>
                     {Story.getTextForPid(self.state.current, story.passages) |> (text => <div>{ReasonReact.string(text)}</div>)}</div>
                 {

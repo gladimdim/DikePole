@@ -1,5 +1,10 @@
-let backgroundStyleFor = (img: string) => {
-    switch (img) {
-        | "boat" => ReactDOMRe.Style.make(~backgroundRepeat="no-repeat", ~backgroundSize="100%", ~opacity="0.4", ~backgroundPosition="center", ~backgroundImage="url(background/boat.jpg)", ())
+let backgroundStyleForTopImage = () => {
+    ReactDOMRe.Style.make(~width="100%", ~height="auto", ())
+}
+
+let imageForStory = (name) => {
+    switch (name) {
+        | "boat" => "background/boat.jpg"
     }
 }
+
