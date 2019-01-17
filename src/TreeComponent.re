@@ -38,8 +38,10 @@ let make = (_children) => {
     render: self => {
         switch (self.state.story) {
             | Some(story) => {
-            <div>
-                <div>{Story.getTextForPid(self.state.current, story.passages) |> (text => <div>{ReasonReact.string(text)}</div>)}</div>
+                <div>
+                <img src="background/boat.jpg" style=(ReactDOMRe.Style.make(~width="100%", ~height="auto", ()))/> 
+                <div>
+                    {Story.getTextForPid(self.state.current, story.passages) |> (text => <div>{ReasonReact.string(text)}</div>)}</div>
                 {
                     switch (Story.getNextForPid(self.state.current, story.passages)) {
                         | Some(n) => 
