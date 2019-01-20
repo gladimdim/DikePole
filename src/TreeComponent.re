@@ -39,7 +39,10 @@ let make = _children => {
     | Some(story) =>
       <div>
         <img
-          src={Story.getStoryNodeByPid(story, self.state.current).background}
+          src={
+            Story.getStoryNodeByPid(story, self.state.current)
+            |> Background.imageForStory
+          }
           style={Background.backgroundStyleForTopImage()}
         />
         <div>
@@ -61,8 +64,16 @@ let make = _children => {
          }}
       </div>
     | None =>
-      <button onClick={_event => self.send(LoadStories)}>
-        {ReasonReact.string("Load Stories")}
+      <button
+        onClick={_event => self.send(LoadStories)}
+        style={ReactDOMRe.Style.make(
+          ~position="fixed",
+          ~top="50%",
+          ~left="50%",
+          ~transform="translate(-50%, -50%)",
+          (),
+        )}>
+        {ReasonReact.string({js|Розпочати гру|js})}
       </button>
     };
   },

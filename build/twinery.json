@@ -65,42 +65,6 @@
         "y": "356"
       },
       "background": "boat"
-    },
-    {
-      "text": "Double-click this passage to edit it.",
-      "name": "landing",
-      "pid": "4",
-      "position": {
-        "x": "257",
-        "y": "502"
-      }
-    },
-    {
-      "text": "Double-click this passage to edit it.",
-      "name": "escape",
-      "pid": "5",
-      "position": {
-        "x": "407",
-        "y": "502"
-      }
-    },
-    {
-      "text": "Double-click this passage to edit it.",
-      "name": "cane",
-      "pid": "6",
-      "position": {
-        "x": "697",
-        "y": "500"
-      }
-    },
-    {
-      "text": "Double-click this passage to edit it.",
-      "name": "take",
-      "pid": "7",
-      "position": {
-        "x": "555",
-        "y": "503"
-      }
     }
   ],
   "name": "Порятунок",
