@@ -1,10 +1,9 @@
 let backgroundStyleForTopImage = () => {
-    ReactDOMRe.Style.make(~width="100%", ~height="auto", ())
-}
+  ReactDOMRe.Style.make(~width="100%", ~height="auto", ());
+};
 
-let imageForStory = (name) => {
-    switch (name) {
-        | "boat" => "background/boat.jpg"
-    }
-}
-
+let imageForStory = (story: Story.tStoryNode): string => {
+  switch (story.background) {
+  | "boat" => "background/boat.jpg"
+  };
+};

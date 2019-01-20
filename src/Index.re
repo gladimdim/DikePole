@@ -1,1 +1,1 @@
-ReactDOMRe.renderToElementWithId(<TreeComponent/>, "app");
+ReactDOMRe.renderToElementWithId(<TreeComponent />, "app");
