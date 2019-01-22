@@ -5,3 +5,16 @@ npm-debug.log
 /lib/bs/
 /node_modules/
 *.bs.js
+
+/rust/target
+**/*.rs.bk
+Cargo.lock
+
+# Pycharm
+/.idea
+
+rust/pkg/*.wasm
+rust/pkg/*.d.ts
+rust/pkg/*.ts
+rust/pkg/*.js
+wasm-pack.log
