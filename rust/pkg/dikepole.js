@@ -212,36 +212,6 @@ __exports.__widl_f_set_autofocus_HTMLTextAreaElement = function(arg0, arg1) {
     getObject(arg0).autofocus = arg1 !== 0;
 };
 
-let cachedTextEncoder = new TextEncoder('utf-8');
-
-let WASM_VECTOR_LEN = 0;
-
-function passStringToWasm(arg) {
-
-    const buf = cachedTextEncoder.encode(arg);
-    const ptr = wasm.__wbindgen_malloc(buf.length);
-    getUint8Memory().set(buf, ptr);
-    WASM_VECTOR_LEN = buf.length;
-    return ptr;
-}
-
-__exports.__widl_f_pathname_Location = function(ret, arg0, exnptr) {
-    try {
-
-        const retptr = passStringToWasm(getObject(arg0).pathname);
-        const retlen = WASM_VECTOR_LEN;
-        const mem = getUint32Memory();
-        mem[ret / 4] = retptr;
-        mem[ret / 4 + 1] = retlen;
-
-    } catch (e) {
-        const view = getUint32Memory();
-        view[exnptr / 4] = 1;
-        view[exnptr / 4 + 1] = addHeapObject(e);
-
-    }
-};
-
 __exports.__widl_f_append_child_Node = function(arg0, arg1, exnptr) {
     try {
         return addHeapObject(getObject(arg0).appendChild(getObject(arg1)));
@@ -314,10 +284,6 @@ __exports.__widl_f_document_Window = function(arg0) {
 
 };
 
-__exports.__widl_f_location_Window = function(arg0) {
-    return addHeapObject(getObject(arg0).location);
-};
-
 __exports.__widl_f_fetch_with_str_and_init_Window = function(arg0, arg1, arg2, arg3) {
     let varg1 = getStringFromWasm(arg1, arg2);
     return addHeapObject(getObject(arg0).fetch(varg1, getObject(arg3)));
@@ -378,7 +344,7 @@ __exports.__wbg_new_5dc66f71c54d38f0 = function(arg0, arg1) {
         }
 
     };
-    cbarg0.f = wasm.__wbg_function_table.get(26);
+    cbarg0.f = wasm.__wbg_function_table.get(42);
     cbarg0.a = arg0;
     cbarg0.b = arg1;
     try {
@@ -422,6 +388,19 @@ __exports.__wbindgen_object_drop_ref = function(i) { dropObject(i); };
 __exports.__wbindgen_string_new = function(p, l) {
     return addHeapObject(getStringFromWasm(p, l));
 };
+
+let cachedTextEncoder = new TextEncoder('utf-8');
+
+let WASM_VECTOR_LEN = 0;
+
+function passStringToWasm(arg) {
+
+    const buf = cachedTextEncoder.encode(arg);
+    const ptr = wasm.__wbindgen_malloc(buf.length);
+    getUint8Memory().set(buf, ptr);
+    WASM_VECTOR_LEN = buf.length;
+    return ptr;
+}
 
 __exports.__wbindgen_string_get = function(i, len_ptr) {
     let obj = getObject(i);
@@ -515,9 +494,9 @@ __exports.__wbindgen_cb_drop = function(i) {
     return 0;
 };
 
-__exports.__wbindgen_closure_wrapper57 = function(a, b, _ignored) {
-    const f = wasm.__wbg_function_table.get(15);
-    const d = wasm.__wbg_function_table.get(16);
+__exports.__wbindgen_closure_wrapper69 = function(a, b, _ignored) {
+    const f = wasm.__wbg_function_table.get(23);
+    const d = wasm.__wbg_function_table.get(24);
     const cb = function(arg0) {
         this.cnt++;
         let a = this.a;
@@ -539,9 +518,9 @@ __exports.__wbindgen_closure_wrapper57 = function(a, b, _ignored) {
     return addHeapObject(real);
 };
 
-__exports.__wbindgen_closure_wrapper503 = function(a, b, _ignored) {
-    const f = wasm.__wbg_function_table.get(15);
-    const d = wasm.__wbg_function_table.get(49);
+__exports.__wbindgen_closure_wrapper2494 = function(a, b, _ignored) {
+    const f = wasm.__wbg_function_table.get(67);
+    const d = wasm.__wbg_function_table.get(68);
     const cb = function(arg0) {
         this.cnt++;
         let a = this.a;
