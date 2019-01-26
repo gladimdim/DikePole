@@ -1,13 +1,44 @@
-<section id="main"></section>
+<html>
 
-<script src='./pkg/dikepole.js'></script>
+<head>
+    <meta name="google-signin-client_id" content="874237405817-h3jotsenqrm4rv0aia0da1rptrnc311f.apps.googleusercontent.com">
+    <title>Loca Deserta. Знайди свій шлях.</title>
+    <script src='./pkg/dikepole.js'></script>
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <script>
+        function onSignIn(googleUser) {
+            var profile = googleUser.getBasicProfile();
+            console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+            console.log('Name: ' + profile.getName());
+            console.log('Image URL: ' + profile.getImageUrl());
+            console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+        }
+    </script>
 
-<script>
-    const { render } = wasm_bindgen;
-    function run() {
-        render();
-    }
-    wasm_bindgen('./pkg/dikepole_bg.wasm')
-        .then(run)
-        .catch(console.error);
-</script>
+</head>
+
+<body>
+    <div class="g-signin2" data-onsuccess="onSignIn"></div>
+    <a href="#" onclick="signOut();">Sign out</a>
+    <section id="main"></section>
+
+    <script>
+        function signOut() {
+            var auth2 = gapi.auth2.getAuthInstance();
+            auth2.signOut().then(function () {
+                console.log('User signed out.');
+            });
+        }
+    </script>
+    <script>
+        const { render } = wasm_bindgen;
+        function run() {
+            render();
+        }
+        wasm_bindgen('./pkg/dikepole_bg.wasm')
+            .then(run)
+            .catch(console.error);
+    </script>
+</body>
+
+</html>
