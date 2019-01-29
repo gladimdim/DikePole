@@ -4,14 +4,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- production -->
   <meta name="google-signin-client_id" content="874237405817-h3jotsenqrm4rv0aia0da1rptrnc311f.apps.googleusercontent.com">
+  <!-- dev -->
   <!-- <meta name="google-signin-client_id" content="92604655251-g1ockl9d9o4sf0lvh46k59fgv9j4ci3g.apps.googleusercontent.com"> -->
 
   <script src="https://apis.google.com/js/platform.js" async defer></script>
   <title>Дике Поле. Пригодницька розповідь-гра</title>
   <script>
     function onSignIn(googleUser) {
-      debugger;
       var profile = googleUser.getBasicProfile();
       console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
       console.log('Name: ' + profile.getName());
@@ -20,11 +21,17 @@
       const token = googleUser.getAuthResponse().id_token;
       fetch("/api/login", {
         method: "POST",
-        body: JSON.stringify({ token })
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          token,
+          email: profile.getEmail(),
+          id: profile.getId()
+        })
       }).then(response => {
         return response.json();
       }).then(json => {
-        debugger;
         console.log(json);
       });
     }
