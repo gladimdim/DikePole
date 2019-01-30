@@ -1,6 +1,6 @@
 const express = require("express");
 const bodyParser = require('body-parser');
-
+const dbBridge = require("../src/Db.bs");
 const sqlite = require('sqlite');
 const dbPromise = sqlite.open("dev.db", { Promise }).then(db => {
     return db.migrate();
@@ -11,7 +11,7 @@ app.use(bodyParser.json());
 app.post("/api/login", async (req, res) => {
     const token = req.body.token;
     const db = await dbPromise;
-    const { count } = await db.get("SELECT COUNT(*) as count FROM users WHERE id = ?", req.body.id);
+    const { count } = await db.get(dbBridge.userExists(req.body.id));
     console.log(count, token);
     if (count === 1) {
         res.send(JSON.stringify({
@@ -19,7 +19,7 @@ app.post("/api/login", async (req, res) => {
             details: `User with id ${req.body.id} already exists. Authorized.`
         }));
     } else {
-        const result = await db.all(`insert into users VALUES (?, ?, ?)`, req.body.id, req.body.email, req.body.token);
+        const result = await db.all(`insert into users VALUES (?, ?)`, req.body.id, req.body.token);
         console.log(result);
         res.send(JSON.stringify({
             message: "user_created",
