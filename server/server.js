@@ -19,7 +19,9 @@ app.post("/api/login", async (req, res) => {
             details: `User with id ${req.body.id} already exists. Authorized.`
         }));
     } else {
-        const result = await db.all(`insert into users VALUES (?, ?)`, req.body.id, req.body.token);
+        const createString = dbBridge.createUser(req.body.id, req.body.token);
+        console.log(`result insret: ${createString}`);
+        const result = await db.all(dbBridge.createUser(req.body.id, req.body.token));
         console.log(result);
         res.send(JSON.stringify({
             message: "user_created",

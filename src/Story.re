@@ -7,7 +7,7 @@ type tNextStory = {
 type tStoryNode = {
   text: string,
   pid: tPid,
-  background: string,
+  background: option(string),
   links: option(list(tNextStory)),
 };
 
@@ -24,7 +24,7 @@ let decodeStep = jsonStory =>
     text: jsonStory |> field("text", string),
     pid: jsonStory |> field("pid", string),
     links: jsonStory |> optional(field("links", list(decodeNextStory))),
-    background: jsonStory |> field("background", string),
+    background: jsonStory |> optional(field("background", string)),
   };
 
 let decodeStory = (json): tStory => {
@@ -42,6 +42,7 @@ let rec getTextForPid = (pid, passages) => {
 };
 
 let rec getNextForPid = (pid, passages) => {
+  Js.log();
   switch (passages) {
   | [] => None
   | [h, ..._t] when h.pid == pid => h.links
@@ -50,6 +51,7 @@ let rec getNextForPid = (pid, passages) => {
 };
 
 let getStoryNodeByPid = (story, pid) => {
+  Js.log(pid);
   let rec findPassage = passages => {
     switch (passages) {
     | [] => raise(Not_found)

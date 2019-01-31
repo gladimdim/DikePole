@@ -49,7 +49,8 @@ let make = _children => {
           {Story.getTextForPid(self.state.current, story.passages)
            |> (text => <div> {ReasonReact.string(text)} </div>)}
         </div>
-        {switch (Story.getNextForPid(self.state.current, story.passages)) {
+        {Js.log("Lol")
+         switch (Story.getNextForPid(self.state.current, story.passages)) {
          | Some(n) =>
            List.map(
              (next: Story.tNextStory) =>

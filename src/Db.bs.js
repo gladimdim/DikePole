@@ -6,5 +6,10 @@ function userExists(id) {
   return "SELECT COUNT(*) as count FROM users WHERE id = '" + (id + "'");
 }
 
+function createUser(id, token) {
+  return "insert into users VALUES (" + (id + (" , " + (token + ")")));
+}
+
 exports.userExists = userExists;
+exports.createUser = createUser;
 /* No side effect */
