@@ -1,21 +1,14 @@
 import 'package:flutter/material.dart';
 import "package:flutter/services.dart" show rootBundle;
 import "package:locadeserta/story.dart";
+import "package:locadeserta/fancyfab.dart";
 import "dart:convert";
 
-Future<String> loadStoryAsset() async {
-  return await rootBundle.loadString("stories/twinery.json");
-}
+Future<Story> loadStory() async {
+  final json = await rootBundle.loadString("stories/twinery.json");
+  Map map = jsonDecode(json);
 
-Future loadStory() async {
-  String result = await loadStoryAsset();
-  Map map = jsonDecode(result);
-  List<StoryNode> nodes = new List();
-  for (var node in map["passages"]) {
-    nodes.add(node);
-  }
-
-  return new Story(current: "1", passages: nodes);
+  return Story.fromJson(map);
 }
 
 void main() => runApp(LocaDesertaApp());
@@ -25,11 +18,11 @@ class LocaDesertaApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Loca Deserta',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+      home: MyHomePage(title: 'Дике Поле. Початок легенд.'),
     );
   }
 }
@@ -53,13 +46,10 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _current = 1;
   Story story;
 
   void _incrementCounter() {
-    setState(() {
-      _current++;
-    });
+    setState(() {});
   }
 
   @override
@@ -72,30 +62,36 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text(
-              'You have pushed the button this many times:',
-            ),
             FutureBuilder(
                 future: loadStory(),
                 builder: (context, snapshot) {
                   if (snapshot.hasData) {
-                    return Text(
-                      story.getCurrentStory().text.toString(),
-                      style: Theme.of(context).textTheme.display1,
+                    story = snapshot.data;
+                    return Expanded(
+                      flex: 1,
+                      child: SingleChildScrollView(
+                        child: Text(
+                          story.getCurrentStory().text.toString(),
+                          style: Theme.of(context).textTheme.title,
+                        ),
+                      ),
                     );
-                  } else if (snapshot.hasError){
+                  } else if (snapshot.hasError) {
                     return Text("${snapshot.error}");
                   }
+                  setState(() {});
                   return CircularProgressIndicator();
                 }),
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+      floatingActionButton: FancyFab(
+          onPressed: _incrementCounter,
+          answers: (story == null)
+              ? []
+              : story.getCurrentStory().links.map((nextStory) {
+                  return nextStory.name;
+                }).toList()), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
