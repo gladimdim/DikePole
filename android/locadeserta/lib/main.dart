@@ -54,20 +54,20 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            FutureBuilder(
-                future: loadStory(),
-                builder: (context, snapshot) {
-                  if (snapshot.hasData) {
-                    story = snapshot.data;
-                    return Expanded(
+    return FutureBuilder(
+        future: loadStory(),
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            story = snapshot.data;
+            return Scaffold(
+              appBar: AppBar(
+                title: Text(widget.title),
+              ),
+              body: Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Expanded(
                       flex: 1,
                       child: SingleChildScrollView(
                         child: Text(
@@ -75,23 +75,23 @@ class _MyHomePageState extends State<MyHomePage> {
                           style: Theme.of(context).textTheme.title,
                         ),
                       ),
-                    );
-                  } else if (snapshot.hasError) {
-                    return Text("${snapshot.error}");
-                  }
-                  setState(() {});
-                  return CircularProgressIndicator();
-                }),
-          ],
-        ),
-      ),
-      floatingActionButton: FancyFab(
-          onPressed: _incrementCounter,
-          answers: (story == null)
-              ? []
-              : story.getCurrentStory().links.map((nextStory) {
-                  return nextStory.name;
-                }).toList()), // This trailing comma makes auto-formatting nicer for build methods.
-    );
+                    )
+                  ],
+                ),
+              ),
+              floatingActionButton: FancyFab(
+                  onPressed: _incrementCounter,
+                  answers: (story == null)
+                      ? []
+                      : story.getCurrentStory().links.map((nextStory) {
+                    return nextStory.name;
+                  }).toList()), // This trailing comma makes auto-formatting nicer for build methods.
+            );
+          } else if (snapshot.hasError) {
+            return Text("Failed to load assets: ${snapshot.error}");
+          }
+          return CircularProgressIndicator();
+
+        });
   }
 }
