@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import "package:flutter/services.dart" show rootBundle;
+import 'package:locadeserta/passage.dart';
 import "package:locadeserta/story.dart";
 import "package:locadeserta/fancyfab.dart";
 import "dart:convert";
@@ -68,26 +69,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 title: Text(widget.title),
               ),
               body: Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Expanded(
-                      flex: 1,
-                      child: SingleChildScrollView(
-                        child: Container(
-                          decoration: BoxDecoration(
-                              image: DecorationImage(
-                                  image: ExactAssetImage(
-                                      "images/background/boat_0.jp"))),
-                          child: Text(
-                            story.getCurrentStory().text.toString(),
-                            style: Theme.of(context).textTheme.title,
-                          ),
-                        ),
-                      ),
-                    )
-                  ],
-                ),
+                child: Passage(story: story.getCurrentStory()),
               ),
               floatingActionButton: FancyFab(
                   onPressed: (String name) {
