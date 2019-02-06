@@ -32,7 +32,7 @@ class StoryNode {
 }
 
 class Story {
-  final String current;
+  String current;
   final List<StoryNode> passages;
 
   Story({this.passages, this.current = "1"});
@@ -47,6 +47,22 @@ class Story {
     return this.passages.where((story) {
       return story.pid == pid;
     }).elementAt(0);
+  }
+
+  void setCurrentStoryByPid(String pid) {
+    current = pid;
+  }
+
+  List<NextStory> getNextNodesForCurrentStory() {
+    return getCurrentStory().links;
+  }
+
+  String getNextPidForName(String name) {
+    final nextStories = getNextNodesForCurrentStory();
+    var nextStory = nextStories.where((n) {
+      return n.name == name;
+    }).elementAt(0);
+    return nextStory.pid;
   }
 
   factory Story.fromJson(Map<String, dynamic> map) {

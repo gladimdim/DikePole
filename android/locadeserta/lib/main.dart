@@ -48,7 +48,8 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   Story story;
 
-  void _incrementCounter() {
+  void nextStorySelected(dynamic pid) {
+    story.setCurrentStoryByPid(pid);
     setState(() {});
   }
 
@@ -58,7 +59,10 @@ class _MyHomePageState extends State<MyHomePage> {
         future: loadStory(),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            story = snapshot.data;
+            if (story == null) {
+              story = snapshot.data;
+            }
+
             return Scaffold(
               appBar: AppBar(
                 title: Text(widget.title),
@@ -70,9 +74,15 @@ class _MyHomePageState extends State<MyHomePage> {
                     Expanded(
                       flex: 1,
                       child: SingleChildScrollView(
-                        child: Text(
-                          story.getCurrentStory().text.toString(),
-                          style: Theme.of(context).textTheme.title,
+                        child: Container(
+                          decoration: BoxDecoration(
+                              image: DecorationImage(
+                                  image: ExactAssetImage(
+                                      "images/background/boat_0.jp"))),
+                          child: Text(
+                            story.getCurrentStory().text.toString(),
+                            style: Theme.of(context).textTheme.title,
+                          ),
                         ),
                       ),
                     )
@@ -80,18 +90,21 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
               ),
               floatingActionButton: FancyFab(
-                  onPressed: _incrementCounter,
+                  onPressed: (String name) {
+                    setState(() {
+                      story.setCurrentStoryByPid(story.getNextPidForName(name));
+                    });
+                  },
                   answers: (story == null)
                       ? []
                       : story.getCurrentStory().links.map((nextStory) {
-                    return nextStory.name;
-                  }).toList()), // This trailing comma makes auto-formatting nicer for build methods.
+                          return nextStory.name;
+                        }).toList()),
             );
           } else if (snapshot.hasError) {
             return Text("Failed to load assets: ${snapshot.error}");
           }
           return CircularProgressIndicator();
-
         });
   }
 }

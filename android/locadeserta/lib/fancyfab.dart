@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class FancyFab extends StatefulWidget {
-  final Function() onPressed;
+  final Function(String pid) onPressed;
   final List<String> answers;
 
   FancyFab({this.onPressed, this.answers});
@@ -73,7 +73,10 @@ class _FancyFabState extends State<FancyFab>
   Widget createButton(String text) {
     return new Container(
       child: FloatingActionButton.extended(
-        onPressed: null,
+        onPressed: () {
+          animate();
+          widget.onPressed(text);
+        },
         tooltip: text,
         icon: Icon(Icons.add),
         label: Text(text),
@@ -112,7 +115,7 @@ class _FancyFabState extends State<FancyFab>
   Widget build(BuildContext context) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.end,
-      children: createButtons(widget.answers),
+      children: widget.answers != null ? createButtons(widget.answers) : [],
     );
   }
 }
