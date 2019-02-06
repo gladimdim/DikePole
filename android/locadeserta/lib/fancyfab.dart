@@ -107,6 +107,9 @@ class _FancyFabState extends State<FancyFab>
               0.0, _translateButton.value * (index--), 0.0),
           child: createButton(value));
     }));
+    if (fabButtons.length == 0) {
+      fabButtons.add(createButton("Start Again"));
+    }
     fabButtons.add(toggle());
     return fabButtons.toList();
   }

@@ -74,7 +74,12 @@ class _MyHomePageState extends State<MyHomePage> {
               floatingActionButton: FancyFab(
                   onPressed: (String name) {
                     setState(() {
-                      story.setCurrentStoryByPid(story.getNextPidForName(name));
+                      if (name == "Start Again") {
+                        story.setCurrentStoryByPid("1");
+                      } else {
+                        story.setCurrentStoryByPid(
+                            story.getNextPidForName(name));
+                      }
                     });
                   },
                   answers: (story == null)
