@@ -48,19 +48,23 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   Story story;
+  bool showFAB = false;
 
   void nextStorySelected(dynamic pid) {
-    story.setCurrentStoryByPid(pid);
-    setState(() {});
+    setState(() {
+      story.setCurrentStoryByPid(pid);
+    });
   }
 
   ScrollController _passageScrollController;
 
   _scrollingPassage() {
-    if (_passageScrollController.offset >=
-        _passageScrollController.position.maxScrollExtent) {
-      debugPrint("Reached the end");
-    } else {}
+    var show = (_passageScrollController.offset >=
+        _passageScrollController.position.maxScrollExtent);
+
+    setState(() {
+      showFAB = show;
+    });
   }
 
   @override
@@ -90,7 +94,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   scrollController: _passageScrollController,
                 ),
               ),
-              floatingActionButton: FancyFab(
+              floatingActionButton: showFAB ? FancyFab(
                   onPressed: (String name) {
                     setState(() {
                       if (name == "Start Again") {
@@ -105,7 +109,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       ? []
                       : story.getCurrentStory().links.map((nextStory) {
                           return nextStory.name;
-                        }).toList()),
+                        }).toList()) : Text("yo"),
             );
           } else if (snapshot.hasError) {
             return Text("Failed to load assets: ${snapshot.error}");

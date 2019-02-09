@@ -73,6 +73,7 @@ class _FancyFabState extends State<FancyFab>
   Widget createButton(String text) {
     return new Container(
       child: FloatingActionButton.extended(
+
         onPressed: () {
           animate();
           widget.onPressed(text);

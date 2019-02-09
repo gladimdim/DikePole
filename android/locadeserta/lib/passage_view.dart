@@ -14,7 +14,7 @@ class Passage extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
-        Image.asset("images/background/boat_" + random.nextInt(2).toString() + ".jpg"),
+        Image.asset("images/background/boat_" + random.nextInt(2).toString() + ".jpg", height: 200.0),
         Expanded(
           flex: 1,
           child: Scrollbar(
