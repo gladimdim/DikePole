@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import "package:flutter/services.dart" show rootBundle;
-import 'package:locadeserta/passage.dart';
+import 'package:locadeserta/passage_view.dart';
 import "package:locadeserta/story.dart";
 import "package:locadeserta/fancyfab.dart";
 import "dart:convert";
 
 Future<Story> loadStory() async {
-  final json = await rootBundle.loadString("stories/twinery.json");
+  final json = await rootBundle.loadString("stories/LocaDeserta.json");
   Map map = jsonDecode(json);
 
   return Story.fromJson(map);
@@ -54,6 +54,22 @@ class _MyHomePageState extends State<MyHomePage> {
     setState(() {});
   }
 
+  ScrollController _passageScrollController;
+
+  _scrollingPassage() {
+    if (_passageScrollController.offset >=
+        _passageScrollController.position.maxScrollExtent) {
+      debugPrint("Reached the end");
+    } else {}
+  }
+
+  @override
+  void initState() {
+    _passageScrollController = ScrollController();
+    _passageScrollController.addListener(_scrollingPassage);
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
@@ -69,7 +85,10 @@ class _MyHomePageState extends State<MyHomePage> {
                 title: Text(widget.title),
               ),
               body: Center(
-                child: Passage(story: story.getCurrentStory()),
+                child: Passage(
+                  story: story.getCurrentStory(),
+                  scrollController: _passageScrollController,
+                ),
               ),
               floatingActionButton: FancyFab(
                   onPressed: (String name) {
