@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import "package:flutter/services.dart" show rootBundle;
 import 'package:locadeserta/passage_view.dart';
 import "package:locadeserta/story.dart";
-import "package:locadeserta/fancyfab.dart";
 import "dart:convert";
 
 Future<Story> loadStory() async {
@@ -23,13 +22,13 @@ class LocaDesertaApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: MyHomePage(title: 'Дике Поле. Початок легенд.'),
+      home: HomeWidget(title: 'Дике Поле. Початок легенд.'),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
+class HomeWidget extends StatefulWidget {
+  HomeWidget({Key key, this.title}) : super(key: key);
 
   // This widget is the home page of your application. It is stateful, meaning
   // that it has a State object (defined below) that contains fields that affect
@@ -43,35 +42,22 @@ class MyHomePage extends StatefulWidget {
   final String title;
 
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  _HomeWidgetState createState() => _HomeWidgetState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _HomeWidgetState extends State<HomeWidget> {
   Story story;
   bool showFAB = false;
 
-  void nextStorySelected(dynamic pid) {
-    setState(() {
-      story.setCurrentStoryByPid(pid);
+
+  _fabButtonPressed(String name) {
+      setState(() {
+      if (name == "Start Again") {
+        story.setCurrentStoryByPid("1");
+      } else {
+        story.setCurrentStoryByPid(story.getNextPidForName(name));
+      }
     });
-  }
-
-  ScrollController _passageScrollController;
-
-  _scrollingPassage() {
-    var show = (_passageScrollController.offset >=
-        _passageScrollController.position.maxScrollExtent);
-
-    setState(() {
-      showFAB = show;
-    });
-  }
-
-  @override
-  void initState() {
-    _passageScrollController = ScrollController();
-    _passageScrollController.addListener(_scrollingPassage);
-    super.initState();
   }
 
   @override
@@ -90,26 +76,9 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
               body: Center(
                 child: Passage(
-                  story: story.getCurrentStory(),
-                  scrollController: _passageScrollController,
-                ),
+                    story: story.getCurrentStory(),
+                    onNextOptionSelected: _fabButtonPressed),
               ),
-              floatingActionButton: showFAB ? FancyFab(
-                  onPressed: (String name) {
-                    setState(() {
-                      if (name == "Start Again") {
-                        story.setCurrentStoryByPid("1");
-                      } else {
-                        story.setCurrentStoryByPid(
-                            story.getNextPidForName(name));
-                      }
-                    });
-                  },
-                  answers: (story == null)
-                      ? []
-                      : story.getCurrentStory().links.map((nextStory) {
-                          return nextStory.name;
-                        }).toList()) : Text("yo"),
             );
           } else if (snapshot.hasError) {
             return Text("Failed to load assets: ${snapshot.error}");
