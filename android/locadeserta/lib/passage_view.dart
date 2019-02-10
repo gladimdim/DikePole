@@ -18,7 +18,7 @@ class PassageState extends State<Passage> {
   final _passageController = PageController();
 
   void _onOptionSelected() {
-    _passageController.jumpToPage(0);
+    _passageController.animateToPage(0, duration: Duration(seconds: 1), curve: Curves.fastOutSlowIn);
   }
   Widget createButton(String text) {
     return ListTile(
