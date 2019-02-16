@@ -1,15 +1,7 @@
 import 'package:flutter/material.dart';
-import "package:flutter/services.dart" show rootBundle;
+import "package:flutter/services.dart";
 import 'package:locadeserta/passage_view.dart';
 import "package:locadeserta/story.dart";
-import "dart:convert";
-
-Future<Story> loadStory() async {
-  final json = await rootBundle.loadString("stories/LocaDeserta.json");
-  Map map = jsonDecode(json);
-
-  return Story.fromJson(map);
-}
 
 void main() => runApp(LocaDesertaApp());
 
@@ -40,7 +32,8 @@ class HomeWidget extends StatefulWidget {
   // always marked "final".
 
   final String title;
-
+  String currentText;
+  final Story story = new Story();
   @override
   _HomeWidgetState createState() => _HomeWidgetState();
 }
@@ -48,26 +41,16 @@ class HomeWidget extends StatefulWidget {
 class _HomeWidgetState extends State<HomeWidget> {
   Story story;
   bool showFAB = false;
-
-
-  _fabButtonPressed(String name) {
-      setState(() {
-      if (name == "Start Again") {
-        story.setCurrentStoryByPid("1");
-      } else {
-        story.setCurrentStoryByPid(story.getNextPidForName(name));
-      }
-    });
-  }
+  static const platform = const MethodChannel('gladimdim.locadeserta/Ink');
 
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-        future: loadStory(),
+        future: widget.story.getContinue(),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            if (story == null) {
-              story = snapshot.data;
+            if (widget.currentText == null) {
+              widget.currentText = snapshot.data;
             }
 
             return Scaffold(
@@ -76,8 +59,8 @@ class _HomeWidgetState extends State<HomeWidget> {
               ),
               body: Center(
                 child: Passage(
-                    story: story.getCurrentStory(),
-                    onNextOptionSelected: _fabButtonPressed),
+                    currentText: widget.currentText,
+                    onNextOptionSelected: (s) {}),
               ),
             );
           } else if (snapshot.hasError) {
@@ -87,3 +70,4 @@ class _HomeWidgetState extends State<HomeWidget> {
         });
   }
 }
+

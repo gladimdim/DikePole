@@ -1,14 +1,13 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:locadeserta/story.dart';
 
 class Passage extends StatefulWidget {
-  final StoryNode story;
+  final String currentText;
   final random = new Random().nextInt(3);
   final Function(String pid) onNextOptionSelected;
 
-  Passage({this.story, this.onNextOptionSelected});
+  Passage({this.currentText, this.onNextOptionSelected});
 
   @override
   State<StatefulWidget> createState() => PassageState();
@@ -59,7 +58,7 @@ class PassageState extends State<Passage> {
               child: Scrollbar(
                 child: SingleChildScrollView(
                   child: Text(
-                    widget.story.text.toString(),
+                    widget.currentText,
                     style: Theme.of(context).textTheme.title,
                   ),
                 ),
@@ -68,7 +67,7 @@ class PassageState extends State<Passage> {
           ],
         ),
         createOptionList(
-            widget.story.links.map((nextStory) => nextStory.name).toList())
+            ["1", "2", "3"])
       ],
     );
   }

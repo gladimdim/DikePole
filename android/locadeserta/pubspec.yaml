@@ -40,6 +40,7 @@ flutter:
   assets:
     - stories/twinery.json
     - stories/LocaDeserta.json
+    - stories/inky.json
     - images/background/boat_0.jpg
     - images/background/boat_1.jpg
     - images/background/boat_2.jpg
