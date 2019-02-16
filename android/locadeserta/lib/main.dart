@@ -32,25 +32,25 @@ class HomeWidget extends StatefulWidget {
   // always marked "final".
 
   final String title;
-  String currentText;
-  final Story story = new Story();
+  Story currentStory;
+  final StoryBridge story = new StoryBridge();
   @override
   _HomeWidgetState createState() => _HomeWidgetState();
 }
 
 class _HomeWidgetState extends State<HomeWidget> {
-  Story story;
+  StoryBridge story;
   bool showFAB = false;
   static const platform = const MethodChannel('gladimdim.locadeserta/Ink');
 
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-        future: widget.story.getContinue(),
+        future: widget.story.tick(),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            if (widget.currentText == null) {
-              widget.currentText = snapshot.data;
+            if (widget.currentStory == null) {
+              widget.currentStory = snapshot.data;
             }
 
             return Scaffold(
@@ -59,7 +59,7 @@ class _HomeWidgetState extends State<HomeWidget> {
               ),
               body: Center(
                 child: Passage(
-                    currentText: widget.currentText,
+                    currentText: widget.currentStory.currentText,
                     onNextOptionSelected: (s) {}),
               ),
             );

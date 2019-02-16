@@ -37,6 +37,14 @@ public class MainActivity extends FlutterActivity {
                     if (methodCall.method.equals("Init")) {
                         story = _loadStory(methodCall.argument("text"));
                         result.success("success");
+                    } else if (methodCall.method.equals("canContinue")) {
+                        boolean canContinue;
+                        try {
+                            canContinue = story.canContinue();
+                            result.success(canContinue);
+                        } catch (Exception e) {
+                            result.error("EXCEPTION", e.toString(), null);
+                        }
                     } else if (methodCall.method.equals("Continue")) {
                         String currentNext;
                         try {
@@ -45,7 +53,7 @@ public class MainActivity extends FlutterActivity {
                         } catch (Exception e) {
                             result.error("EXCEPTION",e.toString(), null);
                         }
-                    } else if (methodCall.method.equals("CurrentChoices")) {
+                    } else if (methodCall.method.equals("getCurrentChoices")) {
                         List choices = story.getCurrentChoices().stream().map(Choice::getText).collect(Collectors.toList());
                         result.success(choices);
                     }

@@ -3,18 +3,29 @@ import 'package:flutter/services.dart';
 import 'dart:async';
 
 class Story {
+  final String currentText;
+  final List<String> currentChoices;
+  final bool canContinue;
+  Story({this.currentText, this.currentChoices, this.canContinue});
+}
+
+class StoryBridge {
   static const platform = const MethodChannel('gladimdim.locadeserta/Ink');
 
-  Future<String> getContinue() async {
-    String text;
+  Future<Story> tick() async {
+    String currentText;
+    List<String> choices;
+    bool canContinue;
     try {
-      await Story.initStory();
-      final currentText = await platform.invokeMethod("Continue");
-      text = currentText;
+      await StoryBridge.initStory();
+      currentText = await platform.invokeMethod("Continue");
+      var temp = await platform.invokeMethod("getCurrentChoices");
+      choices = new List.from(temp);
+      canContinue = await platform.invokeMethod("canContinue");
     } on PlatformException {
-      text = "test";
+      print("Error");
     }
-    return text;
+    return new Story(currentText: currentText, currentChoices: choices, canContinue: canContinue);
   }
 
   static Future<void> initStory() async {
