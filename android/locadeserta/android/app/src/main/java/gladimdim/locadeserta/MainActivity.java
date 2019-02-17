@@ -12,6 +12,7 @@ import java.io.IOError;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -33,7 +34,6 @@ public class MainActivity extends FlutterActivity {
             new MethodCallHandler() {
                 @Override
                 public void onMethodCall(MethodCall methodCall, Result result) {
-
                     if (methodCall.method.equals("Init")) {
                         story = _loadStory(methodCall.argument("text"));
                         result.success("success");
@@ -62,7 +62,10 @@ public class MainActivity extends FlutterActivity {
                           result.error("EXCEPTION", e.toString(), null);
                       }
                     } else if (methodCall.method.equals("getCurrentChoices")) {
-                        List choices = story.getCurrentChoices().stream().map(Choice::getText).collect(Collectors.toList());
+                        List choices = new ArrayList();
+                        for (Choice c : story.getCurrentChoices()) {
+                            choices.add((c.getText()));
+                        }
                         result.success(choices);
                     } else if (methodCall.method.equals("chooseChoiceIndex")) {
                         try {
@@ -75,7 +78,6 @@ public class MainActivity extends FlutterActivity {
                     else {
                         result.notImplemented();
                     }
-
                 }
             }
     );
