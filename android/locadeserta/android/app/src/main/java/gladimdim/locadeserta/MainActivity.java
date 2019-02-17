@@ -56,6 +56,13 @@ public class MainActivity extends FlutterActivity {
                     } else if (methodCall.method.equals("getCurrentChoices")) {
                         List choices = story.getCurrentChoices().stream().map(Choice::getText).collect(Collectors.toList());
                         result.success(choices);
+                    } else if (methodCall.method.equals("dd")) {
+                        try {
+                            story.chooseChoiceIndex(0);
+                            result.success(story);
+                        } catch (Exception e) {
+                            result.error("EXCEPTION", e.toString(), null);
+                        }
                     }
                     else {
                         result.notImplemented();
