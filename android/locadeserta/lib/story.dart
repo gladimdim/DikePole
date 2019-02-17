@@ -63,7 +63,7 @@ class StoryBridge {
 
   static Future<void> initStory() async {
     try {
-      final inkyText = await rootBundle.loadString("stories/inky.json");
+      final inkyText = await rootBundle.loadString("stories/locadeserta.ink.json");
       final result = await platform.invokeMethod("Init", {"text": inkyText});
     } on PlatformException {
       var text = "test";
