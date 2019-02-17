@@ -53,13 +53,21 @@ public class MainActivity extends FlutterActivity {
                         } catch (Exception e) {
                             result.error("EXCEPTION",e.toString(), null);
                         }
+                    } else if (methodCall.method.equals("getCurrentText")) {
+                      String currentText;
+                      try {
+                          currentText = story.getCurrentText();
+                          result.success(currentText);
+                      } catch (Exception e) {
+                          result.error("EXCEPTION", e.toString(), null);
+                      }
                     } else if (methodCall.method.equals("getCurrentChoices")) {
                         List choices = story.getCurrentChoices().stream().map(Choice::getText).collect(Collectors.toList());
                         result.success(choices);
-                    } else if (methodCall.method.equals("dd")) {
+                    } else if (methodCall.method.equals("chooseChoiceIndex")) {
                         try {
-                            story.chooseChoiceIndex(0);
-                            result.success(story);
+                            story.chooseChoiceIndex(methodCall.argument("index"));
+                            result.success(story.getCurrentText());
                         } catch (Exception e) {
                             result.error("EXCEPTION", e.toString(), null);
                         }

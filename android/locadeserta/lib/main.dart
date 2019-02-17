@@ -48,13 +48,13 @@ class _HomeWidgetState extends State<HomeWidget> {
               body: Center(
                 child: Passage(
                     currentStory: widget.currentStory,
-                    onNextOptionSelected: (s) async {
+                    onNextOptionSelected: (s, i) async {
                       if (s == "Next") {
-                        var next = await widget.storyBridge.doContinue();
-                        setState(() {});
+                        await widget.storyBridge.doContinue();
                       } else {
-                        print("kuku00");
+                        await widget.storyBridge.chooseChoiceIndex(i);
                       }
+                      setState(() {});
                     }),
               ),
             );

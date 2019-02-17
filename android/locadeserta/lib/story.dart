@@ -14,13 +14,12 @@ class StoryBridge {
   static const platform = const MethodChannel('gladimdim.locadeserta/Ink');
   Story story;
 
-  Future<Story> doContinue() async {
+  Future<void> refreshStory() async {
     String currentText;
     List<String> choices;
     bool canContinue;
     try {
-      await StoryBridge.initStory();
-      currentText = await platform.invokeMethod("Continue");
+      currentText = await platform.invokeMethod("getCurrentText");
       var temp = await platform.invokeMethod("getCurrentChoices");
       choices = new List.from(temp);
       canContinue = await platform.invokeMethod("canContinue");
@@ -31,7 +30,27 @@ class StoryBridge {
         currentText: currentText,
         currentChoices: choices,
         canContinue: canContinue);
+  }
+
+  Future<Story> doContinue() async {
+    try {
+      await platform.invokeMethod("Continue");
+    } on PlatformException {
+      print("Error");
+    }
+    await refreshStory();
     return story;
+  }
+
+  Future<Story> chooseChoiceIndex(int i) async {
+    try {
+      await platform.invokeMethod("chooseChoiceIndex", {"index": i});
+      await doContinue();
+      await refreshStory();
+      return story;
+    } catch (e) {
+      throw e;
+    }
   }
 
   Future<Story> tick() async {

@@ -6,7 +6,7 @@ import 'package:locadeserta/story.dart';
 class Passage extends StatefulWidget {
   final Story currentStory;
   final random = new Random().nextInt(3);
-  final Function(String pid) onNextOptionSelected;
+  final Function(String pid, int i) onNextOptionSelected;
 
   Passage({this.currentStory, this.onNextOptionSelected});
 
@@ -22,11 +22,11 @@ class PassageState extends State<Passage> {
         duration: Duration(seconds: 1), curve: Curves.fastOutSlowIn);
   }
 
-  Widget createButton(String text) {
+  Widget createButton(String text, int i) {
     return ListTile(
       onTap: () {
         _onOptionSelected();
-        widget.onNextOptionSelected(text);
+        widget.onNextOptionSelected(text, i);
       },
       title: Text(text),
     );
@@ -34,13 +34,11 @@ class PassageState extends State<Passage> {
 
   ListView createOptionList(List<String> options) {
     List<Widget> optionButtons = new List();
+    int index = 0;
     optionButtons.addAll(options.map((value) {
-      return createButton(value);
+      return createButton(value, index++);
     }));
 
-    if (optionButtons.length == 0) {
-      optionButtons.add(createButton("Start Again"));
-    }
     return ListView(
       children: optionButtons,
     );
@@ -52,7 +50,8 @@ class PassageState extends State<Passage> {
         ListTile(
           title: Text("Далі"),
           onTap: () {
-            widget.onNextOptionSelected("Next");
+            _onOptionSelected();
+            widget.onNextOptionSelected("Next", -1);
           },
         )
       ],
