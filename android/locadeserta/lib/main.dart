@@ -14,7 +14,7 @@ class LocaDesertaApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: HomeWidget(title: 'Дике Поле. Початок легенд.'),
+      home: HomeWidget(title: 'Дике Поле. Початок легенд .'),
     );
   }
 }
@@ -45,18 +45,16 @@ class _HomeWidgetState extends State<HomeWidget> {
               appBar: AppBar(
                 title: Text(widget.title),
               ),
-              body: Center(
-                child: Passage(
-                    currentStory: widget.currentStory,
-                    onNextOptionSelected: (s, i) async {
-                      if (s == "Next") {
-                        await widget.storyBridge.doContinue();
-                      } else {
-                        await widget.storyBridge.chooseChoiceIndex(i);
-                      }
-                      setState(() {});
-                    }),
-              ),
+              body: Passage(
+                  currentStory: widget.currentStory,
+                  onNextOptionSelected: (s, i) async {
+                    if (s == "Next") {
+                      await widget.storyBridge.doContinue();
+                    } else {
+                      await widget.storyBridge.chooseChoiceIndex(i);
+                    }
+                    setState(() {});
+                  }),
             );
           } else if (snapshot.hasError) {
             return Text("Failed to load assets: ${snapshot.error}");

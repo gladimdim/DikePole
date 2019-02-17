@@ -23,70 +23,64 @@ class PassageState extends State<Passage> {
   }
 
   Widget createButton(String text, int i) {
-    return ListTile(
-      onTap: () {
-        _onOptionSelected();
+    return RaisedButton(
+      onPressed: () {
         widget.onNextOptionSelected(text, i);
       },
-      title: Text(text),
+      child: Text(text),
     );
   }
 
-  ListView createOptionList(List<String> options) {
+  List<Widget> createOptionList(List<String> options) {
     List<Widget> optionButtons = new List();
     int index = 0;
     optionButtons.addAll(options.map((value) {
       return createButton(value, index++);
     }));
-
-    return ListView(
-      children: optionButtons,
-    );
+    return optionButtons;
   }
 
   Widget createContinue() {
-    return ListView(
-      children: <Widget>[
-        ListTile(
-          title: Text("Далі"),
-          onTap: () {
-            _onOptionSelected();
-            widget.onNextOptionSelected("Next", -1);
-          },
-        )
-      ],
-    );
+    return RaisedButton(
+        child: Text("Далі"),
+        onPressed: () {
+          widget.onNextOptionSelected("Next", -1);
+        });
   }
 
   @override
   Widget build(BuildContext context) {
-    return PageView(
-      scrollDirection: Axis.horizontal,
-      controller: _passageController,
-      children: <Widget>[
-        Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Image.asset(
-                "images/background/boat_" + widget.random.toString() + ".jpg",
-                height: 200.0),
-            Expanded(
-              flex: 1,
-              child: Scrollbar(
-                child: SingleChildScrollView(
-                  child: Text(
-                    widget.currentStory.currentText,
-                    style: Theme.of(context).textTheme.title,
-                  ),
-                ),
-              ),
-            )
-          ],
-        ),
-        widget.currentStory.canContinue == true
-            ? createContinue()
-            : createOptionList(widget.currentStory.currentChoices)
-      ],
+    return LayoutBuilder(
+      builder: (context, constraints) => Stack(
+            children: <Widget>[
+              Align(
+                  alignment: Alignment.topCenter,
+                  child: Image.asset(
+                      "images/background/boat_" +
+                          widget.random.toString() +
+                          ".jpg",
+                      height: 200.0)),
+              Positioned(
+                  top: 200,
+                  left: 0,
+                  child: Container(
+                    width: constraints.maxWidth,
+                    child: SingleChildScrollView(
+                      child: Text(
+                        widget.currentStory.currentText,
+                        style: Theme.of(context).textTheme.title,
+                      ),
+                    ),
+                  )),
+              Align(
+                  alignment: Alignment.bottomCenter,
+                  child: Flex(direction: Axis.horizontal,
+                      children: widget.currentStory.canContinue == true ? <Widget>[
+                        createContinue()] :
+                        createOptionList(widget.currentStory.currentChoices)
+                  ))
+            ],
+          ),
     );
   }
 }

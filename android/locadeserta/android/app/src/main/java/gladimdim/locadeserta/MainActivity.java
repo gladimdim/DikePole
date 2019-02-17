@@ -7,16 +7,8 @@ import io.flutter.plugins.GeneratedPluginRegistrant;
 import com.bladecoder.ink.runtime.Choice;
 import com.bladecoder.ink.runtime.Story;
 
-import java.io.BufferedReader;
-import java.io.IOError;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
-
-import io.flutter.app.FlutterActivity;
 import io.flutter.plugin.common.MethodCall;
 import io.flutter.plugin.common.MethodChannel;
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler;
@@ -62,7 +54,7 @@ public class MainActivity extends FlutterActivity {
                           result.error("EXCEPTION", e.toString(), null);
                       }
                     } else if (methodCall.method.equals("getCurrentChoices")) {
-                        List choices = new ArrayList();
+                        ArrayList choices = new ArrayList();
                         for (Choice c : story.getCurrentChoices()) {
                             choices.add((c.getText()));
                         }
