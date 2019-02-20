@@ -1,7 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:locadeserta/story.dart';
+import 'package:locadeserta/story_bridge.dart';
 
 class Passage extends StatefulWidget {
   final Story currentStory;
@@ -15,13 +15,6 @@ class Passage extends StatefulWidget {
 }
 
 class PassageState extends State<Passage> {
-  final _passageController = PageController();
-
-  void _onOptionSelected() {
-    _passageController.animateToPage(0,
-        duration: Duration(seconds: 1), curve: Curves.fastOutSlowIn);
-  }
-
   Widget createButton(String text, int i) {
     return RaisedButton(
       onPressed: () {
@@ -52,9 +45,11 @@ class PassageState extends State<Passage> {
   @override
   Widget build(BuildContext context) {
     List<Widget> list = new List();
-    list.add(Image.asset(
-        "images/background/boat_" + widget.random.toString() + ".jpg",
-        height: 100.0));
+    list.add(Center(
+      child: Image.asset(
+          "images/background/boat_" + widget.random.toString() + ".jpg",
+          height: 100.0),
+    ));
 
     list.add(Expanded(
       child: SingleChildScrollView(
