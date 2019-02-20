@@ -37,11 +37,12 @@ class PassageState extends State<Passage> {
     optionButtons.addAll(options.map((value) {
       return createButton(value, index++);
     }));
+
     return optionButtons;
   }
 
   Widget createContinue() {
-    return RaisedButton(
+    return FlatButton(
         child: Text("Далі"),
         onPressed: () {
           widget.onNextOptionSelected("Next", -1);
@@ -50,37 +51,25 @@ class PassageState extends State<Passage> {
 
   @override
   Widget build(BuildContext context) {
-    return LayoutBuilder(
-      builder: (context, constraints) => Stack(
-            children: <Widget>[
-              Align(
-                  alignment: Alignment.topCenter,
-                  child: Image.asset(
-                      "images/background/boat_" +
-                          widget.random.toString() +
-                          ".jpg",
-                      height: 200.0)),
-              Positioned(
-                  top: 200,
-                  left: 0,
-                  child: Container(
-                    width: constraints.maxWidth,
-                    child: SingleChildScrollView(
-                      child: Text(
-                        widget.currentStory.currentText,
-                        style: Theme.of(context).textTheme.title,
-                      ),
-                    ),
-                  )),
-              Align(
-                  alignment: Alignment.bottomCenter,
-                  child: Flex(direction: Axis.horizontal,
-                      children: widget.currentStory.canContinue == true ? <Widget>[
-                        createContinue()] :
-                        createOptionList(widget.currentStory.currentChoices)
-                  ))
-            ],
-          ),
-    );
+    List<Widget> list = new List();
+    list.add(Image.asset(
+        "images/background/boat_" + widget.random.toString() + ".jpg",
+        height: 100.0));
+
+    list.add(Expanded(
+      child: SingleChildScrollView(
+        child: Text(
+          widget.currentStory.currentText,
+          style: Theme.of(context).textTheme.title,
+        ),
+      ),
+    ));
+
+    widget.currentStory.canContinue == true
+        ? list.add(createContinue())
+        : list.addAll(createOptionList(widget.currentStory.currentChoices));
+
+
+    return Column(children: list);
   }
 }
