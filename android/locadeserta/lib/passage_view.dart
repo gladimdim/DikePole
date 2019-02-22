@@ -5,7 +5,7 @@ import 'package:locadeserta/story_bridge.dart';
 
 class Passage extends StatefulWidget {
   final Story currentStory;
-  final random = new Random().nextInt(3);
+  final random = new Random().nextInt(7);
   final Function(String pid, int i) onNextOptionSelected;
 
   Passage({this.currentStory, this.onNextOptionSelected});
