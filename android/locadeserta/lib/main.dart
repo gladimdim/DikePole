@@ -21,6 +21,7 @@ class LocaDesertaApp extends StatelessWidget {
 class HomeWidget extends StatefulWidget {
   HomeWidget({Key key, this.title}) : super(key: key);
   final String title;
+
   @override
   _HomeWidgetState createState() => _HomeWidgetState();
 }
@@ -29,17 +30,15 @@ class _HomeWidgetState extends State<HomeWidget> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title)
-      ),
-      body: LandingView(
-        onStartGamePressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => StoryView())
-          );
-        },
-      )
-    );
+        appBar: AppBar(
+          title: Text(widget.title),
+          backgroundColor: Colors.black,
+        ),
+        body: LandingView(
+          onStartGamePressed: () {
+            Navigator.push(
+                context, MaterialPageRoute(builder: (context) => StoryView()));
+          },
+        ));
   }
 }
