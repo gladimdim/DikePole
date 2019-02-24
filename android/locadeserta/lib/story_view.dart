@@ -2,19 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:locadeserta/passage_view.dart';
+import 'package:locadeserta/persistence.dart';
 import 'package:locadeserta/story_bridge.dart';
 
 class StoryView extends StatefulWidget {
-  Story currentStory;
-  final StoryBridge storyBridge = new StoryBridge();
+  final StoryBridge storyBridge;
+  StoryView({this.storyBridge});
 
   @override
   _StoryViewState createState() => _StoryViewState();
 }
 
 class _StoryViewState extends State<StoryView> {
-  StoryBridge storyBridge;
-  bool showFAB = false;
+  Story currentStory;
   static const platform = const MethodChannel('gladimdim.locadeserta/Ink');
   @override
   Widget build(BuildContext context) {
@@ -22,13 +22,22 @@ class _StoryViewState extends State<StoryView> {
         future: widget.storyBridge.tick(),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            widget.currentStory = widget.storyBridge.story;
+            currentStory = widget.storyBridge.story;
             return Scaffold(
               appBar: AppBar(
+                actions: <Widget>[
+                  IconButton(
+                    icon: Icon(Icons.save),
+                    onPressed: () async {
+                      Persistence pers = Persistence(bridge: widget.storyBridge);
+                      await pers.saveStoryToFile("game2");
+                    },
+                  )
+                ],
                 title: Text("Цицора"),
               ),
               body: Passage(
-                  currentStory: widget.currentStory,
+                  currentStory: currentStory,
                   onNextOptionSelected: (s, i) async {
                     if (s == "Next") {
                       await widget.storyBridge.doContinue();

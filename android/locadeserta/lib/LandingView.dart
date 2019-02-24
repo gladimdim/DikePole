@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'dart:async';
 
 class LandingView extends StatefulWidget {
   final Function onStartGamePressed;
@@ -22,7 +21,7 @@ class _LandingViewState extends State<LandingView> {
             padding: EdgeInsets.all(4.0),
             itemCount: 8,
             itemBuilder: (context, index) {
-              return Image.asset("images/background/boat_${index}.jpg",
+              return Image.asset("images/background/boat_$index.jpg",
                   fit: BoxFit.cover);
             }),
       ),

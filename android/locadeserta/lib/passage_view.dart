@@ -1,5 +1,4 @@
 import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:locadeserta/story_bridge.dart';
 
@@ -63,7 +62,6 @@ class PassageState extends State<Passage> {
     widget.currentStory.canContinue == true
         ? list.add(createContinue())
         : list.addAll(createOptionList(widget.currentStory.currentChoices));
-
 
     return Column(children: list);
   }
