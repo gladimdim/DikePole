@@ -55,7 +55,7 @@ flutter:
     - images/background/boat_9.jpg
     - images/background/landing_0.jpg
     - images/background/landing_1.jpg
-    - images/background/cossack_0.jpg
+#    - images/background/cossack_0.jpg
   #  - images/a_dot_burr.jpeg
   #  - images/a_dot_ham.jpeg
 

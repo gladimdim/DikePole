@@ -119,9 +119,6 @@ public class MainActivity extends FlutterActivity {
     }
 
     Story _loadStory(Object text) {
-        if (story != null) {
-            return story;
-        }
         try {
             story = new Story(text.toString());
         } catch (Exception e) {

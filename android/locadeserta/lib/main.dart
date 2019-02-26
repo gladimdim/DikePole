@@ -44,7 +44,7 @@ class _HomeWidgetState extends State<HomeWidget> {
             try {
               state = await pers.getStoryFromFile("game2");
             } catch (e) {}
-            await StoryBridge.initStory(state);
+            await bridge.initStory(state: state);
             Navigator.push(
                 context,
                 MaterialPageRoute(

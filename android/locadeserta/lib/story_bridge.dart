@@ -87,7 +87,7 @@ class StoryBridge {
     return story;
   }
 
-  static Future<void> initStory(String state) async {
+  Future<void> initStory({String state}) async {
     try {
       final inkyText =
           await rootBundle.loadString("stories/locadeserta.ink.json");
@@ -95,6 +95,13 @@ class StoryBridge {
       if (state != null) {
         await platform.invokeMethod("restoreState", {"text": state});
       }
-    } on PlatformException {}
+    } catch (e) {
+      print(e.toString());
+    }
+  }
+
+  Future<void> resetStory() async {
+    await this.initStory();
+    await this.refreshStory();
   }
 }

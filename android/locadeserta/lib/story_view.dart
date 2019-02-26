@@ -32,6 +32,13 @@ class _StoryViewState extends State<StoryView> {
                       Persistence pers = Persistence(bridge: widget.storyBridge);
                       await pers.saveStoryToFile("game2");
                     },
+                  ),
+                  IconButton(
+                    icon: Icon(Icons.clear_all),
+                    onPressed: () async {
+                      await widget.storyBridge.resetStory();
+                      setState(() {});
+                    },
                   )
                 ],
                 title: Text("Цицора"),
