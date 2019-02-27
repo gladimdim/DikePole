@@ -36,6 +36,14 @@ public class MainActivity extends FlutterActivity {
                         if (methodCall.method.equals("Init")) {
                             story = _loadStory(methodCall.argument("text"));
                             result.success("success");
+                        } else if (methodCall.method.equals("getInventory")) {
+                            Object inventory;
+                            try {
+                                inventory = story.getVariablesState().get("Inventory");
+                                result.success(inventory);
+                            } catch (Exception e) {
+                                result.error("EXCEPTION", e.toString(), null);
+                            }
                         } else if (methodCall.method.equals("restoreState")) {
                           String json = methodCall.argument("text");
                           try {

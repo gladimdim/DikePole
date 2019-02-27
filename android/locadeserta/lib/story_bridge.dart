@@ -27,7 +27,7 @@ class StoryBridge {
     }
   }
 
-  Future<void> refreshStory() async {
+  Future<void> _refreshStory() async {
     String currentText;
     List<String> choices;
     bool canContinue;
@@ -56,7 +56,7 @@ class StoryBridge {
     } on PlatformException {
       print("Error");
     }
-    await refreshStory();
+    await _refreshStory();
     return story;
   }
 
@@ -64,7 +64,7 @@ class StoryBridge {
     try {
       await platform.invokeMethod("chooseChoiceIndex", {"index": i});
       await doContinue();
-      await refreshStory();
+      await _refreshStory();
       return story;
     } catch (e) {
       throw e;
@@ -102,6 +102,15 @@ class StoryBridge {
 
   Future<void> resetStory() async {
     await this.initStory();
-    await this.refreshStory();
+    await this._refreshStory();
+  }
+
+  Future<List<String>> getInventory() async {
+    try {
+      final list = await platform.invokeMethod("getInventory");
+      return list;
+    } catch (e) {
+      print(e.toString());
+    }
   }
 }

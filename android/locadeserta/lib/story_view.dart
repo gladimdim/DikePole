@@ -31,6 +31,8 @@ class _StoryViewState extends State<StoryView> {
                     onPressed: () async {
                       Persistence pers = Persistence(bridge: widget.storyBridge);
                       await pers.saveStoryToFile("game2");
+                      await widget.storyBridge.getInventory();
+                      print("123");
                     },
                   ),
                   IconButton(
