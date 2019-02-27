@@ -1,7 +1,6 @@
 package gladimdim.locadeserta;
 
 import android.content.res.AssetFileDescriptor;
-import android.content.res.AssetManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 
@@ -9,10 +8,13 @@ import io.flutter.app.FlutterActivity;
 import io.flutter.plugins.GeneratedPluginRegistrant;
 
 import com.bladecoder.ink.runtime.Choice;
+import com.bladecoder.ink.runtime.InkList;
+import com.bladecoder.ink.runtime.InkListItem;
 import com.bladecoder.ink.runtime.Story;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import io.flutter.plugin.common.MethodCall;
@@ -37,10 +39,10 @@ public class MainActivity extends FlutterActivity {
                             story = _loadStory(methodCall.argument("text"));
                             result.success("success");
                         } else if (methodCall.method.equals("getInventory")) {
-                            Object inventory;
+                            InkList inventory;
                             try {
-                                inventory = story.getVariablesState().get("Inventory");
-                                result.success(inventory);
+                                inventory = (InkList) story.getVariablesState().get("Inventory");
+                                result.success(inventory.entrySet());
                             } catch (Exception e) {
                                 result.error("EXCEPTION", e.toString(), null);
                             }
