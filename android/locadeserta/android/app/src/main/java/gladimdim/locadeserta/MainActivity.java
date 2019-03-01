@@ -14,8 +14,9 @@ import com.bladecoder.ink.runtime.Story;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Iterator;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import io.flutter.plugin.common.MethodCall;
 import io.flutter.plugin.common.MethodChannel;
@@ -42,7 +43,15 @@ public class MainActivity extends FlutterActivity {
                             InkList inventory;
                             try {
                                 inventory = (InkList) story.getVariablesState().get("Inventory");
-                                result.success(inventory.entrySet());
+                                ArrayList aInventory = new ArrayList();
+
+                                for (Map.Entry<InkListItem, Integer> kv : inventory.entrySet()) {
+                                    HashMap m = new HashMap();
+                                    InkListItem inkListItem = kv.getKey();
+                                    m.put(inkListItem.getItemName(), kv.getValue());
+                                    aInventory.add(m);
+                                }
+                                result.success(aInventory);
                             } catch (Exception e) {
                                 result.error("EXCEPTION", e.toString(), null);
                             }
