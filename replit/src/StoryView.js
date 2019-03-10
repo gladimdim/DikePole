@@ -1,26 +1,35 @@
 import React from 'react';
+import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
+
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
 
 const containerStyle = {
-  "width": "100vw",
   "height": "auto",
-  "minHeight": "100vh",
   "display": "grid",
-  "gridTemplateRows": "5% auto 80px",
-  "backgroundColor": "#8888"
+  "minHeight": "100vh",
+  "gridTemplateRows": "auto 80px",
+//   "backgroundColor": "#8888"
 };
 
 const textStyle = {
-  "gridRow": "2 / 3",
+    "margin": "1rem",
+    "opacity": "0.8",
+  "gridRow": "1 / 2",
   "fontSize": "3vh"
+
 }
 
 const textButtonStyle = {
-  "gridRow": "3 / 4"
+    bottom: 0,
+  position: "sticky",
+  "gridRow": "2 / 3"
 }
 
 const ChoiceView = ({choices, onSelected}) => {
     const divs = choices.map(
-        (choice, i) => <button key={i} onClick={() => onSelected(i)}>{choice}</button>
+        (choice, i) => <Button variant="contained" color="primary" onClick={() => onSelected(i)}>{choice}</Button>
     );
     return (<div style={textButtonStyle}>
       {divs}
@@ -30,8 +39,12 @@ export const StoryView = (props) => {
     const {story, onNext, onChoiceSelected} = props;
         return (
             <div style={containerStyle}>
-                <div style={textStyle}>{story.currentText}</div>
-                {story.canContinue ? <button style={textButtonStyle} onClick={onNext}>Далі</button> : 
+                <Card elevation={5} style={textStyle}>
+                <CardContent>
+                    <Typography component="div" variant="headline">{story.currentText}</Typography>
+                    </CardContent>
+                </Card>
+                {story.canContinue ? <Button variant="contained" color="primary" style={textButtonStyle} onClick={onNext}>Далі</Button> : 
                 <ChoiceView style={textButtonStyle} onSelected={onChoiceSelected} choices={story.currentChoices.map(choice => choice.text)}/>}
             </div>
         );

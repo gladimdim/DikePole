@@ -32,12 +32,10 @@ if (keystorePropertiesFile.exists()) {
 
 
 android {
-    compileSdkVersion 27
-
+    compileSdkVersion 26
     lintOptions {
         disable 'InvalidPackage'
     }
-
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
         applicationId "gladimdim.locadeserta"
@@ -47,7 +45,6 @@ android {
         versionName flutterVersionName
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
-
     signingConfigs {
         release {
             keyAlias keystoreProperties['keyAlias']
@@ -60,7 +57,7 @@ android {
         release {
             signingConfig signingConfigs.release
             minifyEnabled true
-            useProguard true
+            useProguard false
 
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
@@ -69,6 +66,7 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+    buildToolsVersion '26.0.3'
 }
 
 flutter {

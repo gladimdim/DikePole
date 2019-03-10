@@ -7,7 +7,7 @@ version: 1.0.14
 # Both the version and the builder number may be overridden in flutter
 # build by specifying --build-name and --build-number, respectively.
 # Read more about versioning at semver.org.
-# version: 1.0.0+1
+# version: 1.0.0+1useProguard
 
 environment:
   sdk: ">=2.0.0-dev.68.0 <3.0.0"
@@ -84,3 +84,19 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.io/custom-fonts/#from-packages
+  fonts:
+    - family: Yakutovych
+      fonts:
+        - asset: fonts/Yakutovych.ttf
+    - family: Pelagiy
+      fonts:
+        - asset: fonts/Pelagiy.ttf
+    - family: CyrillicOld
+      fonts:
+        - asset: fonts/CyrillicOld_Bold.ttf
+    - family: Evangelie
+      fonts:
+        - asset: fonts/Evangelie.ttf
+    - family: Kotigoroshko
+      fonts:
+        - asset: fonts/Kotyhoroshko-Regular.0.2.otf
