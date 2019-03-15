@@ -4,6 +4,8 @@ import './App.css';
 import { StoryView } from './StoryView';
 import { LoadInkView } from './LoadInkView';
 import { SavedGamesView } from './SavedGamesView';
+import { SaveGameView } from './SaveGameView';
+import { deserialize } from './SavedGameModel';
 
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -12,7 +14,6 @@ import Toolbar from '@material-ui/core/Toolbar';
 import deepPurple from '@material-ui/core/colors/deepPurple';
 import blue from '@material-ui/core/colors/blue';
 import Button from '@material-ui/core/Button';
-import IconButton from '@material-ui/core/IconButton';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 
 const theme = createMuiTheme({
@@ -39,7 +40,8 @@ class App extends Component {
       loadInkOpened: false,
       savedGamesOpened: false,
       settingsMenuOpened: false,
-      anchorEl: null
+      anchorEl: null,
+      saveGameOpened: false,
     }
   }
 
@@ -69,6 +71,8 @@ class App extends Component {
     this.setState({
       ...this.state,
       loadInkOpened: true
+    }, () => {
+      this.handleSettingsMenuClose();
     });
   }
 
@@ -102,11 +106,28 @@ class App extends Component {
     this.setState({
       ...this.state,
       savedGamesOpened: true
+    }, () => {
+      this.handleSettingsMenuClose();
     })
   }
 
-  onGameSelected(sGame) {
+  onOpenSaveGameDialog() {
+    this.setState({
+      ...this.state,
+      saveGameOpened: true
+    }, () => {
+      this.handleSettingsMenuClose();
+    });
+  }
 
+  onGameSelected(gameJsonString) {
+    const inkStory = deserialize(gameJsonString);
+    this.setState({
+      inkStory,
+      savedGamesOpened: false,
+      initialLoad: false,
+      gameStarted: true,
+    });
   }
 
   onSettingsMenuOpen(anchorEl) {
@@ -123,6 +144,15 @@ class App extends Component {
       settingsMenuOpened: false,
       anchorEl: null
     })
+  }
+
+  onSaveGameDialogClose() {
+     this.setState({
+      ...this.state,
+      saveGameOpened: false
+    }, (state) => {
+      this.handleSettingsMenuClose();
+    });
   }
 
   render() {
@@ -144,9 +174,13 @@ class App extends Component {
           this.state.savedGamesOpened &&
           <SavedGamesView
             open={this.state.savedGamesOpened}
-            onGameSelected={this.state.onGameSelected}
+            onGameSelected={this.onGameSelected.bind(this)}
             onCancel={() => { this.onSavedGamesCloseDialog() }}
           />
+        }
+        {
+          this.state.saveGameOpened && this.state.inkStory &&
+            <SaveGameView inkStory={this.state.inkStory} open={this.state.saveGameOpened} onCancel={() => {this.onSaveGameDialogClose()}}/>
         }
         <LoadInkView
           open={this.state.loadInkOpened}
@@ -165,8 +199,9 @@ class App extends Component {
             {
               this.state.gameStarted ? <MenuItem onClick={() => this.onStartAgain()}>Заново</MenuItem> : <MenuItem onClick={() => this.begin()}>Почати</MenuItem>
               }
-            <MenuItem onClick={() => { this.handleSettingsMenuClose(); this.onOpenDialog() }}>Своє</MenuItem>
-            <MenuItem onClick={() => { this.handleSettingsMenuClose(); this.onOpenSavedGamesDialog() }}>Збережені</MenuItem>
+            <MenuItem onClick={() => { this.onOpenDialog() }}>Своє</MenuItem>
+            <MenuItem onClick={() => { this.onOpenSavedGamesDialog() }}>Збережені</MenuItem>
+            {this.state.gameStarted && <MenuItem onClick={() => { this.onOpenSaveGameDialog();}}>Зберегти</MenuItem>}
           </Menu>
         }
       </MuiThemeProvider>
