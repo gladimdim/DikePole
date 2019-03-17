@@ -1,47 +1,41 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import Dialog from '@material-ui/core/Dialog';
 import Button from '@material-ui/core/Button';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogActions from '@material-ui/core/DialogActions';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
 
-export class SavedGamesView extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            games: []
-        }
+export function SavedGamesView(props) {
+  const [games, updateGames] = useState([]);
+  useEffect(() => {
+    let store = window.localStorage.getItem("savedGames");
+    if (store !== null) {
+        store = JSON.parse(store);
+        updateGames(store);
     }
+  });
 
-    componentDidMount() {
-        let store = window.localStorage.getItem("savedGames");
-        if (store !== null) {
-            store = JSON.parse(store);
-            this.setState({
-                ...this.state,
-                games: store
-            })
-        }
-    }
+  return (
+      <Dialog open={props.open}>
+          <DialogTitle>Список збережених ігор</DialogTitle>
+          <DialogContent>
+              <List>
+                  {
+                      games.map((game, i) =>
+                        <ListItem key={i} button onClick={() => {
+                          props.onGameSelected(localStorage.getItem(games[i].name));
+                        }}>{game.name}</ListItem>)
+                  }
+              </List>
+          </DialogContent>
+          <DialogActions>
+              <Button onClick={props.onCancel}>Скасувати</Button>
+          </DialogActions>
+      </Dialog>
 
-    render() {
-        return (
-            <Dialog open={this.props.open}>
-                <DialogTitle>Список збережених ігор</DialogTitle>
-                <DialogContent>
-                    <div>
-                        {
-                            this.state.games.map((game) => <div>{game.name}</div>)
-                        }
-                    </div>
-                </DialogContent>
-                <DialogActions>
-                    <Button onClick={this.props.onCancel}>Скасувати</Button>
-                </DialogActions>
-            </Dialog>
-
-        );
-    }
+  );
 }
 
 /*
