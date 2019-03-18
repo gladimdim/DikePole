@@ -4,7 +4,7 @@ import Typography from '@material-ui/core/Typography';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 
-import { createStory } from './Story';
+import { createStory } from './models/Story';
 
 const containerStyle = {
   "height": "auto",

@@ -5,7 +5,8 @@ import { StoryView } from './StoryView';
 import { LoadInkView } from './LoadInkView';
 import { SavedGamesView } from './SavedGamesView';
 import { SaveGameView } from './SaveGameView';
-import { deserialize } from './SavedGameModel';
+import { deserialize } from './models/SavedGameModel';
+import { BookCatalogView } from './BookCatalogView';
 
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -42,16 +43,23 @@ class App extends Component {
       settingsMenuOpened: false,
       anchorEl: null,
       saveGameOpened: false,
+      booksCatalogOpened: false,
     }
   }
 
-  async begin() {
-    const response = await fetch("locadeserta.ink.json");
-    const json = await response.text();
-    const inkStory = new inkjs.Story(json);
+  async begin(inkJsonInput) {
+    let inkStory;
+    if (inkJsonInput) {
+      inkStory = new inkjs.Story(inkJsonInput);
+    } else {
+      const response = await fetch("locadeserta.ink.json");
+      const json = await response.text();
+      inkStory = new inkjs.Story(json);
+    }
     inkStory.Continue();
     this.setState({
       ...this.state,
+      ...this.clearDialogsAndMenus(),
       inkStory,
       initialLoad: false,
       gameStarted: true,
@@ -146,6 +154,14 @@ class App extends Component {
     })
   }
 
+  clearDialogsAndMenus() {
+    return {
+      settingsMenuOpened: false,
+      anchorEl: null,
+      booksCatalogOpened: false
+    }
+  }
+
   onSaveGameDialogClose() {
      this.setState({
       ...this.state,
@@ -153,6 +169,28 @@ class App extends Component {
     }, (state) => {
       this.handleSettingsMenuClose();
     });
+  }
+
+  onBooksCatalogDialogOpened() {
+    this.setState({
+      ...this.state,
+      booksCatalogOpened: true
+    })
+  }
+
+  onBooksCatalogDialogClosed() {
+    debugger;
+    this.setState({
+      ...this.state,
+      booksCatalogOpened: false
+    }, (state) => {
+      this.handleSettingsMenuClose()
+    })
+  }
+
+  onBookSelected(book) {
+    this.begin(book.content);
+    // this.onBooksCatalogDialogClosed();
   }
 
   render() {
@@ -190,6 +228,12 @@ class App extends Component {
           inkStory !== null && <StoryView inkStory={this.state.inkStory} />
         }
         {
+          this.state.booksCatalogOpened &&
+            <BookCatalogView onClose={() => this.onBooksCatalogDialogClosed()} open={this.state.booksCatalogOpened}
+              onSelected={(book) => {this.onBookSelected(book)}}
+            />
+        }
+        {
           this.state.settingsMenuOpened && <Menu
             id="simple-menu"
             anchorEl={this.state.anchorEl}
@@ -201,6 +245,7 @@ class App extends Component {
               }
             <MenuItem onClick={() => { this.onOpenDialog() }}>Своє</MenuItem>
             <MenuItem onClick={() => { this.onOpenSavedGamesDialog() }}>Збережені</MenuItem>
+            <MenuItem onClick={() => { this.onBooksCatalogDialogOpened() }}>Каталог</MenuItem>
             {this.state.gameStarted && <MenuItem onClick={() => { this.onOpenSaveGameDialog();}}>Зберегти</MenuItem>}
           </Menu>
         }
