@@ -7,6 +7,7 @@ import { SavedGamesView } from './SavedGamesView';
 import { SaveGameView } from './SaveGameView';
 import { deserialize } from './models/SavedGameModel';
 import { BookCatalogView } from './BookCatalogView';
+import { LandingView } from './LandingView';
 
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -208,6 +209,13 @@ class App extends Component {
             </Button>
           </Toolbar>
         </AppBar>
+        {
+          this.state.initialLoad &&
+            <LandingView
+              onContinueGame={this.onGameSelected.bind(this)}
+              onCatalogView={() => {this.onBooksCatalogDialogOpened()}}
+            />
+        }
         {
           this.state.savedGamesOpened &&
           <SavedGamesView

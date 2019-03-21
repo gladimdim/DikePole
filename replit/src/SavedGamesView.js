@@ -6,6 +6,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogActions from '@material-ui/core/DialogActions';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
+import { setLastGameName } from './models/Settings';
 
 export function SavedGamesView(props) {
   const [games, updateGames] = useState([]);
@@ -25,6 +26,7 @@ export function SavedGamesView(props) {
                   {
                       games.map((game, i) =>
                         <ListItem key={i} button onClick={() => {
+                          setLastGameName(games[i].name);
                           props.onGameSelected(localStorage.getItem(games[i].name));
                         }}>{game.name}</ListItem>)
                   }

@@ -17,7 +17,6 @@ const textStyle = {
   "margin": "1rem",
   "opacity": "0.8",
   "gridRow": "1 / 2",
-  "fontSize": "3vh",
   "height": "78vh",
   "overflow": "auto"
 }
