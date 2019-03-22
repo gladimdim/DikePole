@@ -7,6 +7,7 @@ import DialogActions from '@material-ui/core/DialogActions';
 import TextField from '@material-ui/core/TextField';
 
 import { serializeInkStory } from './models/SavedGameModel';
+import { setLastGameName } from './models/Settings';
 
 function saveGame(name, inkStory) {
   const sValue = serializeInkStory(inkStory);
@@ -35,7 +36,7 @@ export function SaveGameView(props) {
         }}></TextField>
       </DialogContent>
       <DialogActions>
-        <Button onClick={() => { saveGame(gameName, inkStory); props.onCancel() }}>Зберегти</Button>
+        <Button onClick={() => { setLastGameName(gameName); saveGame(gameName, inkStory); props.onCancel() }}>Зберегти</Button>
         <Button onClick={() => { props.onCancel() }}>Скасувати</Button>
       </DialogActions>
     </Dialog>
