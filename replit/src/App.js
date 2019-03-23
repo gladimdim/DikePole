@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-
 import './App.css';
 import { StoryView } from './StoryView';
 import { LoadInkView } from './LoadInkView';
