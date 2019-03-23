@@ -1,8 +1,10 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
 
 import { createStory } from './models/Story';
 
@@ -33,57 +35,65 @@ const textButtonStyle = {
 
 const ChoiceView = ({ choices, onSelected }) => {
   const divs = choices.map(
-    (choice, i) => <Button style={dialogChoicesViewStyle} key={i} variant="contained" color="primary" onClick={() => onSelected(i)}>{choice}</Button>
+    (choice, i) => <MenuItem style={dialogChoicesViewStyle} key={i} variant="contained" color="primary" onClick={() => onSelected(i)}>{choice}</MenuItem>
   );
   return (<div>
     {divs}
   </div>);
 }
 
-export class StoryView extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      inkStory: props.inkStory,
-      story: createStory(props.inkStory)
-    };
+export function StoryView(props) {
+  const [inkStory] = useState(props.inkStory);
+  const [story, updateStory] = useState(createStory(props.inkStory));
+  const [showOptionsView, updateShowOptionsView] = useState(false);
+  const [anchorEl, updateAnchorEl] = useState(null);
+  
+  function doContinue() {
+    inkStory.Continue();
+    updateStory(createStory(inkStory));
   }
 
-  doContinue() {
-    this.state.inkStory.Continue();
-    this.setState({
-      ...this.state,
-      story: createStory(this.state.inkStory)
-    })
-  }
-
-  onChoiceSelected(i) {
+  function onChoiceSelected(i) {
     const root = document.querySelector("#root");
     const random = Math.floor(Math.random() * Math.floor(10));
     root.setAttribute('style', `background: url(images/background/boat_${random}.jpg) no-repeat center center fixed; background-color: white; min-height: 100vh`);
-    this.state.inkStory.ChooseChoiceIndex(i);
-    this.state.inkStory.Continue();
-    this.setState({
-      ...this.state,
-      story: createStory(this.state.inkStory)
-    });
+    inkStory.ChooseChoiceIndex(i);
+    inkStory.Continue();
+    updateStory(createStory(inkStory));
+    updateAnchorEl(null);
+    updateShowOptionsView(false);
   }
 
-  render() {
-    const { story } = this.state;
-    return (
-      <div style={containerStyle}>
-        <Card elevation={5} style={textStyle}>
-          <CardContent>
-            <Typography component="div" variant="headline">{story.currentText}</Typography>
-          </CardContent>
-        </Card>
-        {
-          story.canContinue ? <Button variant="contained" color="primary" style={textButtonStyle} onClick={() => { this.doContinue()}}>Далі</Button> :
-            <ChoiceView onSelected={this.onChoiceSelected.bind(this)} choices={story.currentChoices.map(choice => choice.text)} />
-        }
-      </div>
-    );
+  function showOptionsDialog(anchor) {
+    updateAnchorEl(anchor);
+    updateShowOptionsView(true);
   }
+
+  function onChoiceViewClosed() {
+    updateAnchorEl(null);
+    updateShowOptionsView(false);
+  }
+
+  return (
+    <div style={containerStyle}>
+      <Card elevation={5} style={textStyle}>
+        <CardContent>
+          <Typography component="div" variant="headline">{story.currentText}</Typography>
+        </CardContent>
+      </Card>
+      {
+        story.canContinue ? <Button variant="contained" color="primary" style={textButtonStyle} onClick={() => { doContinue()}}>Далі</Button> :
+        <Button variant="contained" color="secondary" style={textButtonStyle} onClick={(e) => showOptionsDialog(e.currentTarget)}>Зробити вибір</Button>
+      }
+      {  showOptionsView && <Menu
+            id="simple-menu"
+            anchorEl={anchorEl}
+            open={showOptionsView}
+            onClose={onChoiceViewClosed}
+          >
+            <ChoiceView onSelected={onChoiceSelected} choices={story.currentChoices.map(choice => choice.text)}/>
+          </Menu>
+      }
+    </div>
+  );
 }
