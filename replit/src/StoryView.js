@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import ReactDOM from 'react-dom';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Card from '@material-ui/core/Card';
@@ -47,6 +48,12 @@ export function StoryView(props) {
   const [story, updateStory] = useState(createStory(props.inkStory));
   const [showOptionsView, updateShowOptionsView] = useState(false);
   const [anchorEl, updateAnchorEl] = useState(null);
+
+  const divStoryRef = React.createRef();
+
+  useEffect(() => {
+    ReactDOM.findDOMNode(divStoryRef.current).scrollIntoView();
+  })
   
   function doContinue() {
     inkStory.Continue();
@@ -75,9 +82,9 @@ export function StoryView(props) {
   }
 
   return (
-    <div style={containerStyle}>
+    <div style={containerStyle} >
       <Card elevation={5} style={textStyle}>
-        <CardContent>
+        <CardContent ref={divStoryRef}>
           <Typography component="div" variant="headline">{story.currentText}</Typography>
         </CardContent>
       </Card>
