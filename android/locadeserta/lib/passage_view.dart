@@ -15,11 +15,17 @@ class Passage extends StatefulWidget {
 
 class PassageState extends State<Passage> {
   Widget createButton(String text, int i) {
-    return RaisedButton(
-      onPressed: () {
-        widget.onNextOptionSelected(text, i);
-      },
-      child: Text(text),
+    return Padding(
+      padding: EdgeInsets.all(8.0),
+      child: SizedBox(
+          height: 100.0,
+          child: RaisedButton(
+            color: Colors.blue[50 * (i + 1)],
+            onPressed: () {
+              widget.onNextOptionSelected(text, i);
+            },
+            child: Text(text),
+          )),
     );
   }
 
@@ -34,68 +40,70 @@ class PassageState extends State<Passage> {
   }
 
   Widget createContinue() {
-    return FlatButton(
-        child: Text("Далі"),
-        onPressed: () {
-          widget.onNextOptionSelected("Next", -1);
-        });
+    return SizedBox(
+      height: 100.0,
+      child: FlatButton(
+          color: Colors.lightGreen,
+          child: Text(
+            "Далі",
+            style: TextStyle(fontSize: 20.0),
+          ),
+          onPressed: () {
+            widget.onNextOptionSelected("Next", -1);
+          }),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     List<Widget> list = new List();
 
-    list.add(
+    list.addAll(
+      [
         Expanded(
           child: SingleChildScrollView(
             child: Padding(
-              padding: const EdgeInsets.all(18.0),
+              padding: EdgeInsets.all(18.0),
               child: Card(
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text(
-                    widget.currentStory.currentText,
-                    style: Theme
-                        .of(context)
-                        .textTheme
-                        .title,
-                  ),
+                child: Stack(
+                  children: <Widget>[
+                    Opacity(
+                      opacity: 0.4,
+                      child: Container(
+                        height: 400,
+                        decoration: BoxDecoration(
+                            image: DecorationImage(
+                                fit: BoxFit.fitWidth,
+                                image: AssetImage(
+                                  "images/background/boat_" +
+                                      widget.random.toString() +
+                                      ".jpg",
+                                ))),
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Text(
+                        widget.currentStory.currentText,
+                        style: Theme.of(context).textTheme.title,
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ),
           ),
-        ));
+        )
+      ],
+    );
 
     final buttons = widget.currentStory.canContinue == true
-        ? createContinue()
+        ? [createContinue()]
         : createOptionList(widget.currentStory.currentChoices);
-
-    return Column(children: [
-      Center(
-        child: Image.asset(
-            "images/background/boat_" + widget.random.toString() + ".jpg",
-            height: 100.0),
-      ),
-      Expanded(
-        child: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.all(18.0),
-            child: Card(
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text(
-                  widget.currentStory.currentText,
-                  style: Theme
-                      .of(context)
-                      .textTheme
-                      .title,
-                ),
-              ),
-            ),
-          ),
-        ),
-      ),
-      buttons
-    ]);
+    list.addAll(buttons);
+    return Column(
+      children: list,
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+    );
   }
 }

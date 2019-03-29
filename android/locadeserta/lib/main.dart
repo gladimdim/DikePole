@@ -13,7 +13,7 @@ class LocaDesertaApp extends StatelessWidget {
     return MaterialApp(
       title: 'Loca Deserta',
       theme: ThemeData(
-        primarySwatch: Colors.red,
+        primarySwatch: Colors.grey,
       ),
       home: HomeWidget(title: 'Дике Поле. Початок легенд .'),
     );
@@ -34,7 +34,6 @@ class _HomeWidgetState extends State<HomeWidget> {
     return Scaffold(
         appBar: AppBar(
           title: Text(widget.title),
-          backgroundColor: Colors.black,
         ),
         body: LandingView(
           onStartGamePressed: () async {
