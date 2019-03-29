@@ -84,19 +84,19 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.io/custom-fonts/#from-packages
-#  fonts:
-#    - family: Yakutovych
-#      fonts:
-#        - asset: fonts/Yakutovych.ttf
-#    - family: Pelagiy
-#      fonts:
-#        - asset: fonts/Pelagiy.ttf
-#    - family: CyrillicOld
-#      fonts:
-#        - asset: fonts/CyrillicOld_Bold.ttf
-#    - family: Evangelie
-#      fonts:
-#        - asset: fonts/Evangelie.ttf
-#    - family: Kotigoroshko
-#      fonts:
-#        - asset: fonts/Kotyhoroshko-Regular.0.2.otf
+  fonts:
+    - family: Yakutovych
+      fonts:
+        - asset: fonts/Yakutovych.ttf
+    - family: Pelagiy
+      fonts:
+        - asset: fonts/Pelagiy.ttf
+    - family: CyrillicOld
+      fonts:
+        - asset: fonts/CyrillicOld_Bold.ttf
+    - family: Evangelie
+      fonts:
+        - asset: fonts/Evangelie.ttf
+    - family: Kotigoroshko
+      fonts:
+        - asset: fonts/Kotyhoroshko-Regular.0.2.otf

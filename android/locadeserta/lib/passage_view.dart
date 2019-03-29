@@ -44,25 +44,58 @@ class PassageState extends State<Passage> {
   @override
   Widget build(BuildContext context) {
     List<Widget> list = new List();
-    list.add(Center(
-      child: Image.asset(
-          "images/background/boat_" + widget.random.toString() + ".jpg",
-          height: 100.0),
-    ));
 
-    list.add(Expanded(
-      child: SingleChildScrollView(
-        child: Text(
-          widget.currentStory.currentText,
-          style: Theme.of(context).textTheme.title,
+    list.add(
+        Expanded(
+          child: SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.all(18.0),
+              child: Card(
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    widget.currentStory.currentText,
+                    style: Theme
+                        .of(context)
+                        .textTheme
+                        .title,
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ));
+
+    final buttons = widget.currentStory.canContinue == true
+        ? createContinue()
+        : createOptionList(widget.currentStory.currentChoices);
+
+    return Column(children: [
+      Center(
+        child: Image.asset(
+            "images/background/boat_" + widget.random.toString() + ".jpg",
+            height: 100.0),
+      ),
+      Expanded(
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(18.0),
+            child: Card(
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                  widget.currentStory.currentText,
+                  style: Theme
+                      .of(context)
+                      .textTheme
+                      .title,
+                ),
+              ),
+            ),
+          ),
         ),
       ),
-    ));
-
-    widget.currentStory.canContinue == true
-        ? list.add(createContinue())
-        : list.addAll(createOptionList(widget.currentStory.currentChoices));
-
-    return Column(children: list);
+      buttons
+    ]);
   }
 }
