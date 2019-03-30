@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:locadeserta/LandingView.dart';
-import 'package:locadeserta/persistence.dart';
 import 'package:locadeserta/story_view.dart';
-import 'package:locadeserta/story_bridge.dart';
 
 void main() => runApp(LocaDesertaApp());
 
@@ -13,9 +11,9 @@ class LocaDesertaApp extends StatelessWidget {
     return MaterialApp(
       title: 'Loca Deserta',
       theme: ThemeData(
-        primarySwatch: Colors.grey,
+        primarySwatch: Colors.blue,
       ),
-      home: HomeWidget(title: 'Дике Поле. Початок легенд .'),
+      home: HomeWidget(title: 'Дике Поле. Початок легенд.'),
     );
   }
 }
@@ -37,17 +35,10 @@ class _HomeWidgetState extends State<HomeWidget> {
         ),
         body: LandingView(
           onStartGamePressed: () async {
-            StoryBridge bridge = StoryBridge();
-            Persistence pers = Persistence(bridge: bridge);
-            String state;
-            try {
-              state = await pers.getStoryFromFile("game2");
-            } catch (e) {}
-            await bridge.initStory(state: state);
             Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) => StoryView(storyBridge: bridge)));
+                    builder: (context) => StoryView()));
           },
         ));
   }

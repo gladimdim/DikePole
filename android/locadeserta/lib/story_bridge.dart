@@ -16,6 +16,7 @@ class Story {
 }
 
 class StoryBridge {
+  final StreamController<Story> streamStory = StreamController<Story>();
   static const platform = const MethodChannel('gladimdim.locadeserta/Ink');
   Story story;
 
@@ -48,24 +49,24 @@ class StoryBridge {
       canContinue: canContinue,
       currentTags: currentTags,
     );
+
+    streamStory.add(story);
   }
 
-  Future<Story> doContinue() async {
+  Future<void> doContinue() async {
     try {
       await platform.invokeMethod("Continue");
     } on PlatformException {
       print("Error");
     }
     await _refreshStory();
-    return story;
   }
 
-  Future<Story> chooseChoiceIndex(int i) async {
+  Future<void> chooseChoiceIndex(int i) async {
     try {
       await platform.invokeMethod("chooseChoiceIndex", {"index": i});
       await doContinue();
       await _refreshStory();
-      return story;
     } catch (e) {
       throw e;
     }
@@ -80,13 +81,6 @@ class StoryBridge {
     }
   }
 
-  Future<Story> tick() async {
-    if (story == null) {
-      story = await doContinue();
-    }
-    return story;
-  }
-
   Future<void> initStory({String state}) async {
     try {
       final inkyText =
@@ -94,6 +88,7 @@ class StoryBridge {
       await platform.invokeMethod("Init", {"text": inkyText});
       if (state != null) {
         await platform.invokeMethod("restoreState", {"text": state});
+        await doContinue();
       }
     } catch (e) {
       print(e.toString());
