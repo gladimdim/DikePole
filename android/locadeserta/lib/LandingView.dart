@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:locadeserta/models/catalogs.dart';
 
 class LandingView extends StatefulWidget {
   final Function onStartGamePressed;
@@ -13,7 +15,34 @@ class LandingView extends StatefulWidget {
 class _LandingViewState extends State<LandingView> {
   @override
   Widget build(BuildContext context) {
-    return buildLandingListView();
+    return _buildCatalogView();
+  }
+
+  Widget _buildCatalogView() {
+    return StreamBuilder(
+      stream: Firestore.instance.collection('catalog').snapshots(),
+      builder: (context, snapshot) {
+        if (!snapshot.hasData) {
+          return LinearProgressIndicator();
+        }
+        return _buildCatalogList(snapshot.data.documents);
+      }
+    );
+  }
+
+  Widget _buildCatalogList(List<DocumentSnapshot> documents) {
+    return ListView(
+      padding: EdgeInsets.all(10.0),
+      children: documents.map((data) => _buildCatalogItem(data)).toList(),
+    );
+  }
+
+  Widget _buildCatalogItem(DocumentSnapshot data) {
+    final story = Story.fromSnapshot(data);
+    return ListTile(
+      title: Text(story.title),
+      subtitle: Text(story.description),
+    );
   }
 
   ListView buildLandingListView() {

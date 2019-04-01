@@ -1,13 +1,19 @@
-class Catalog {
-  List<SavedGame> savedGames;
+import 'package:cloud_firestore/cloud_firestore.dart';
 
-  SavedGame getSavedGameByName(String name) {
-    return savedGames.firstWhere((game) => game.name == name);
-  }
+class Catalog {
+  List<Story> stories;
 }
 
-class SavedGame {
-  final String name;
-  final String filepath;
-  SavedGame({this.name, this.filepath});
+class Story {
+  final String title;
+  final String description;
+  final DocumentReference documentReference;
+
+  Story({this.title, this.description, this.documentReference});
+
+  Story.fromMap(Map<String, dynamic> map, {this.documentReference})
+      : title = map['title'], description = map['description'];
+
+  Story.fromSnapshot(DocumentSnapshot snapshot) : this.fromMap(snapshot.data, documentReference: snapshot.reference);
+
 }

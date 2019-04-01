@@ -36,9 +36,7 @@ class _HomeWidgetState extends State<HomeWidget> {
         body: LandingView(
           onStartGamePressed: () async {
             Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => StoryView()));
+                context, MaterialPageRoute(builder: (context) => StoryView()));
           },
         ));
   }
