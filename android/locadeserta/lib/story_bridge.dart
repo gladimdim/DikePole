@@ -49,8 +49,7 @@ class StoryBridge {
       canContinue: canContinue,
       currentTags: currentTags,
     );
-
-    streamStory.add(story);
+    streamStory.sink.add(story);
   }
 
   Future<void> doContinue() async {
@@ -107,5 +106,10 @@ class StoryBridge {
     } catch (e) {
       print(e.toString());
     }
+  }
+
+  @override
+  void dispose() {
+    streamStory.sink.close();
   }
 }
