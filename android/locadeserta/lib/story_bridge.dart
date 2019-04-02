@@ -80,17 +80,30 @@ class StoryBridge {
     }
   }
 
-  Future<void> initStory({String state}) async {
-    try {
-      final inkyText =
-          await rootBundle.loadString("stories/locadeserta.ink.json");
-      await platform.invokeMethod("Init", {"text": inkyText});
-      if (state != null) {
-        await platform.invokeMethod("restoreState", {"text": state});
-        await doContinue();
+  Future<void> initStory({String storyJson, String state}) async {
+    if (storyJson == null) {
+      try {
+        final inkyText =
+        await rootBundle.loadString("stories/locadeserta.ink.json");
+        await platform.invokeMethod("Init", {"text": inkyText});
+        if (state != null) {
+          await platform.invokeMethod("restoreState", {"text": state});
+          await doContinue();
+        }
+      } catch (e) {
+        print(e.toString());
       }
-    } catch (e) {
-      print(e.toString());
+    } else {
+      try {
+        await platform.invokeMethod("Init", {"text": storyJson});
+        if (state != null) {
+          await platform.invokeMethod("restoreState", {"text": state});
+          await doContinue();
+        }
+        await doContinue();
+      } catch (e) {
+        print(e.toString());
+      }
     }
   }
 
@@ -106,10 +119,5 @@ class StoryBridge {
     } catch (e) {
       print(e.toString());
     }
-  }
-
-  @override
-  void dispose() {
-    streamStory.sink.close();
   }
 }

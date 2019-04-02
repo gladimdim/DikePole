@@ -3,7 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'package:locadeserta/catalog_view.dart';
 
 class LandingView extends StatefulWidget {
-  final Function onStartGamePressed;
+  final Function(String json) onStartGamePressed;
 
   LandingView({this.onStartGamePressed});
 
@@ -17,11 +17,12 @@ class _LandingViewState extends State<LandingView> {
     return _buildLandingListView(context);
   }
 
-  void _onViewCatalogPressed(BuildContext context) {
-    Navigator.push(
+  void _onViewCatalogPressed(BuildContext context) async {
+    final selectedStoryJsonString = await Navigator.push(
       context,
       MaterialPageRoute(builder: (context) => CatalogView())
     );
+    widget.onStartGamePressed(selectedStoryJsonString);
   }
 
   ListView _buildLandingListView(BuildContext context) {
@@ -49,7 +50,7 @@ class _LandingViewState extends State<LandingView> {
                     child: ButtonBar(
                   children: <Widget>[
                     FlatButton(
-                        onPressed: widget.onStartGamePressed,
+                        onPressed: () => widget.onStartGamePressed(null),
                         child: Text(
                           "Продовжити",
                           style: TextStyle(fontSize: 16.0),
