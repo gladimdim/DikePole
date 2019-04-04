@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:locadeserta/catalog_view.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:locadeserta/login_page.dart';
 
 class LandingView extends StatefulWidget {
   final Function(String json) onStartGamePressed;
@@ -19,15 +21,34 @@ class _LandingViewState extends State<LandingView> {
 
   void _onViewCatalogPressed(BuildContext context) async {
     final selectedStoryJsonString = await Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => CatalogView())
-    );
+        context, MaterialPageRoute(builder: (context) => CatalogView()));
     widget.onStartGamePressed(selectedStoryJsonString);
   }
 
   ListView _buildLandingListView(BuildContext context) {
     return ListView(
       children: <Widget>[
+        Center(
+          child: InkWell(
+            child: Padding(
+              padding: const EdgeInsets.only(top: 8.0),
+              child: Text(
+                "For Privacy Policy Tap here.",
+                style: TextStyle(
+                    color: Colors.blue,
+                    fontSize: 15.0,
+                    fontWeight: FontWeight.bold),
+              ),
+            ),
+            onTap: () async {
+              if (await canLaunch(
+                  "https://locadeserta.com/privacy_policy.html")) {
+                await launch("https://locadeserta.com/privacy_policy.html");
+              }
+            },
+          ),
+        ),
+        LoginView(),
         Padding(
           padding: const EdgeInsets.only(left: 32.0, top: 16.0, right: 32.0),
           child: Card(
