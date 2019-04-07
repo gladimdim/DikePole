@@ -12,10 +12,8 @@ class Persistence {
     final path = dir.path;
     return File("$path/$filename.inky.json");
   }
-  Future<void> saveStoryToFile(String filename) async {
-    String newState = await this.bridge.getStateJson();
-    File file = await getStoryFile(filename);
-    await file.writeAsString(newState);
+  Future<String> getStateJson() async {
+    return await this.bridge.getStateJson();
   }
 
   Future<String> getStoryFromFile(String filename) async {

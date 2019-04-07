@@ -1,14 +1,17 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:locadeserta/passage_view.dart';
 import 'package:locadeserta/persistence.dart';
 import 'package:locadeserta/story_bridge.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class StoryView extends StatefulWidget {
   final String storyJson;
+  final FirebaseUser user;
 
-  StoryView({this.storyJson});
+  StoryView({this.user, this.storyJson});
 
   @override
   _StoryViewState createState() => _StoryViewState();
@@ -24,6 +27,7 @@ class _StoryViewState extends State<StoryView> {
   }
 
   Future<StoryBridge> _initStoryBridge() async {
+    String storyJson;
     if (storyBridge == null) {
       storyBridge = StoryBridge();
       Persistence pers = Persistence(bridge: storyBridge);
@@ -33,9 +37,17 @@ class _StoryViewState extends State<StoryView> {
         return storyBridge;
       }
       try {
-        state = await pers.getStoryFromFile("game2");
-      } catch (e) {}
-      await storyBridge.initStory(storyJson: null, state: state);
+        DocumentReference userState = await Firestore.instance
+            .collection("user_states")
+            .document(widget.user.uid);
+        var snapshot = await userState.get();
+        print(snapshot);
+        state = snapshot.data["statejson"];
+        storyJson = snapshot.data["inkjson"];
+      } catch (e) {
+        print(e.toString());
+      }
+      await storyBridge.initStory(storyJson: storyJson, state: state);
     }
     return storyBridge;
   }
@@ -60,7 +72,15 @@ class _StoryViewState extends State<StoryView> {
                     icon: Icon(Icons.save),
                     onPressed: () async {
                       Persistence pers = Persistence(bridge: storyBridge);
-                      await pers.saveStoryToFile("game2");
+                      String stateJson = await pers.getStateJson();
+                      DocumentReference userState = await Firestore.instance
+                          .collection("user_states")
+                          .document(widget.user.uid);
+
+                      await userState.setData({
+                        "inkjson": widget.storyJson,
+                        "statejson": stateJson
+                      });
                     },
                   ),
                   IconButton(

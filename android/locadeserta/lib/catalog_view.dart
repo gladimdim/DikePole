@@ -8,7 +8,6 @@ class CatalogView extends StatefulWidget {
 }
 
 class _CatalogViewState extends State<CatalogView> {
-
   void onStorySelected(String json) {
     Navigator.pop(context, json);
   }
@@ -16,13 +15,12 @@ class _CatalogViewState extends State<CatalogView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Доступні історії'),
-      ),
-      body: Center(
-        child: _buildCatalogView(),
-      )
-    );
+        appBar: AppBar(
+          title: Text('Доступні історії'),
+        ),
+        body: Center(
+          child: _buildCatalogView(),
+        ));
   }
 
   Widget _buildCatalogView() {

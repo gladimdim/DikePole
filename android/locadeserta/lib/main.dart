@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:locadeserta/LandingView.dart';
-import 'package:locadeserta/story_view.dart';
 
 void main() => runApp(LocaDesertaApp());
 
@@ -33,11 +32,6 @@ class _HomeWidgetState extends State<HomeWidget> {
         appBar: AppBar(
           title: Text(widget.title),
         ),
-        body: LandingView(
-          onStartGamePressed: (String json) async {
-            Navigator.push(
-                context, MaterialPageRoute(builder: (context) => StoryView(storyJson: json)));
-          },
-        ));
+        body: LandingView());
   }
 }

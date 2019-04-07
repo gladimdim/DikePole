@@ -3,6 +3,8 @@ import 'package:flutter/widgets.dart';
 import 'package:locadeserta/catalog_view.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:locadeserta/login_page.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:locadeserta/story_view.dart';
 
 class LandingView extends StatefulWidget {
   final Function(String json) onStartGamePressed;
@@ -14,15 +16,22 @@ class LandingView extends StatefulWidget {
 }
 
 class _LandingViewState extends State<LandingView> {
+  FirebaseUser authedUser;
+
   @override
   Widget build(BuildContext context) {
     return _buildLandingListView(context);
   }
 
+  _goToStory(String json) {
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => StoryView(user: authedUser, storyJson: json)));
+  }
+
   void _onViewCatalogPressed(BuildContext context) async {
     final selectedStoryJsonString = await Navigator.push(
         context, MaterialPageRoute(builder: (context) => CatalogView()));
-    widget.onStartGamePressed(selectedStoryJsonString);
+    _goToStory(selectedStoryJsonString);
   }
 
   ListView _buildLandingListView(BuildContext context) {
@@ -48,7 +57,9 @@ class _LandingViewState extends State<LandingView> {
             },
           ),
         ),
-        LoginView(),
+        LoginView(onUserLoggedIn: (FirebaseUser user) {
+          authedUser = user;
+        }),
         Padding(
           padding: const EdgeInsets.only(left: 32.0, top: 16.0, right: 32.0),
           child: Card(
@@ -71,7 +82,7 @@ class _LandingViewState extends State<LandingView> {
                     child: ButtonBar(
                   children: <Widget>[
                     FlatButton(
-                        onPressed: () => widget.onStartGamePressed(null),
+                        onPressed: () => _goToStory(null),
                         child: Text(
                           "Продовжити",
                           style: TextStyle(fontSize: 16.0),
