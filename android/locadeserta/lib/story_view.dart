@@ -9,9 +9,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class StoryView extends StatefulWidget {
   final String storyJson;
-  final FirebaseUser user;
+  final String uid;
 
-  StoryView({this.user, this.storyJson});
+  StoryView({this.uid, this.storyJson});
 
   @override
   _StoryViewState createState() => _StoryViewState();
@@ -30,7 +30,6 @@ class _StoryViewState extends State<StoryView> {
     String storyJson;
     if (storyBridge == null) {
       storyBridge = StoryBridge();
-      Persistence pers = Persistence(bridge: storyBridge);
       String state;
       if (widget.storyJson != null) {
         await storyBridge.initStory(storyJson: widget.storyJson, state: null);
@@ -39,7 +38,7 @@ class _StoryViewState extends State<StoryView> {
       try {
         DocumentReference userState = await Firestore.instance
             .collection("user_states")
-            .document(widget.user.uid);
+            .document(widget.uid);
         var snapshot = await userState.get();
         print(snapshot);
         state = snapshot.data["statejson"];
@@ -75,7 +74,7 @@ class _StoryViewState extends State<StoryView> {
                       String stateJson = await pers.getStateJson();
                       DocumentReference userState = await Firestore.instance
                           .collection("user_states")
-                          .document(widget.user.uid);
+                          .document(widget.uid);
 
                       await userState.setData({
                         "inkjson": widget.storyJson,

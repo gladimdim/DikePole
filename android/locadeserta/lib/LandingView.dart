@@ -17,6 +17,7 @@ class LandingView extends StatefulWidget {
 
 class _LandingViewState extends State<LandingView> {
   FirebaseUser authedUser;
+  String userUid;
 
   @override
   Widget build(BuildContext context) {
@@ -24,8 +25,9 @@ class _LandingViewState extends State<LandingView> {
   }
 
   _goToStory(String json) {
+    var uid = authedUser == null ? userUid : authedUser.uid;
     Navigator.push(
-        context, MaterialPageRoute(builder: (context) => StoryView(user: authedUser, storyJson: json)));
+        context, MaterialPageRoute(builder: (context) => StoryView(uid: uid, storyJson: json)));
   }
 
   void _onViewCatalogPressed(BuildContext context) async {
@@ -57,8 +59,13 @@ class _LandingViewState extends State<LandingView> {
             },
           ),
         ),
-        LoginView(onUserLoggedIn: (FirebaseUser user) {
-          authedUser = user;
+        LoginView(onUserLoggedIn: (FirebaseUser user, String uid) {
+          if (user != null) {
+            authedUser = user;
+          }
+          if (uid != null) {
+            userUid = uid;
+          }
         }),
         Padding(
           padding: const EdgeInsets.only(left: 32.0, top: 16.0, right: 32.0),

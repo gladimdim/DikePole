@@ -112,12 +112,12 @@ class StoryBridge {
     await this._refreshStory();
   }
 
-  Future<List<String>> getInventory() async {
-    try {
-      final list = await platform.invokeMethod("getInventory");
-      return list;
-    } catch (e) {
-      print(e.toString());
-    }
-  }
+//  Future<List<String>> getInventory() async {
+//    try {
+//      final list = await platform.invokeMethod("getInventory");
+//      return list;
+//    } catch (e) {
+//      print(e.toString());
+//    }
+//  }
 }
