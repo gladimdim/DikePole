@@ -27,10 +27,12 @@ class _LandingViewState extends State<LandingView> {
   _goToStory(String json) {
     var uid = authedUser == null ? userUid : authedUser.uid;
     Navigator.push(
-        context, MaterialPageRoute(builder: (context) => StoryView(uid: uid, storyJson: json)));
+        context,
+        MaterialPageRoute(
+            builder: (context) => StoryView(uid: uid, storyJson: json)));
   }
 
-  void _onViewCatalogPressed(BuildContext context) async {
+  _onViewCatalogPressed(BuildContext context) async {
     final selectedStoryJsonString = await Navigator.push(
         context, MaterialPageRoute(builder: (context) => CatalogView()));
     _goToStory(selectedStoryJsonString);
@@ -39,16 +41,36 @@ class _LandingViewState extends State<LandingView> {
   ListView _buildLandingListView(BuildContext context) {
     return ListView(
       children: <Widget>[
+        LoginView(onUserLoggedIn: (FirebaseUser user, String uid) {
+          if (user != null) {
+            authedUser = user;
+          }
+          if (uid != null) {
+            userUid = uid;
+          }
+        }),
+        _buildCardWithImage(
+          image: "images/background/landing_1.jpg",
+          mainText: "У вас є збережена гра",
+          buttonText: "Продовжити",
+          onButtonPress: () => _goToStory(null),
+        ),
+        SizedBox(
+          height: 20.0,
+        ),
+        _buildCardWithImage(
+          image: "images/background/landing_0.jpg",
+          mainText: "Каталог ігор",
+          buttonText: "Переглянути",
+          onButtonPress: () => _onViewCatalogPressed(context),
+        ),
         Center(
           child: InkWell(
             child: Padding(
               padding: const EdgeInsets.only(top: 8.0),
               child: Text(
                 "For Privacy Policy Tap here.",
-                style: TextStyle(
-                    color: Colors.blue,
-                    fontSize: 15.0,
-                    fontWeight: FontWeight.bold),
+                style: TextStyle(fontSize: 15.0, fontWeight: FontWeight.bold),
               ),
             ),
             onTap: () async {
@@ -59,81 +81,55 @@ class _LandingViewState extends State<LandingView> {
             },
           ),
         ),
-        LoginView(onUserLoggedIn: (FirebaseUser user, String uid) {
-          if (user != null) {
-            authedUser = user;
-          }
-          if (uid != null) {
-            userUid = uid;
-          }
-        }),
-        Padding(
-          padding: const EdgeInsets.only(left: 32.0, top: 16.0, right: 32.0),
-          child: Card(
-            color: Colors.white70,
-            child: Column(
-              children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.only(top: 16.0),
-                  child: Image(
-                      image: AssetImage("images/background/landing_1.jpg"),
-                      fit: BoxFit.fill,
-                      height: 200.0),
-                ),
-                ListTile(
-                    title: Text(
-                  "У вас є збережена гра",
-                  style: TextStyle(fontSize: 20.0),
-                )),
-                ButtonTheme.bar(
-                    child: ButtonBar(
-                  children: <Widget>[
-                    FlatButton(
-                        onPressed: () => _goToStory(null),
-                        child: Text(
-                          "Продовжити",
-                          style: TextStyle(fontSize: 16.0),
-                        ))
-                  ],
-                ))
-              ],
-            ),
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.only(left: 32.0, top: 16.0, right: 32.0),
-          child: Card(
-            color: Colors.white70,
-            child: Column(
-              children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.only(top: 16.0),
-                  child: Image(
-                      image: AssetImage("images/background/landing_0.jpg"),
-                      fit: BoxFit.fill,
-                      height: 200.0),
-                ),
-                ListTile(
-                    title: Text(
-                  "Каталог ігор",
-                  style: TextStyle(fontSize: 20.0),
-                )),
-                ButtonTheme.bar(
-                    child: ButtonBar(
-                  children: <Widget>[
-                    FlatButton(
-                        onPressed: () => _onViewCatalogPressed(context),
-                        child: Text(
-                          "Переглянути",
-                          style: TextStyle(fontSize: 16.0),
-                        ))
-                  ],
-                ))
-              ],
-            ),
-          ),
-        ),
       ],
+    );
+  }
+
+  Widget _buildCardWithImage(
+      {String image,
+      String mainText,
+      String buttonText,
+      Function onButtonPress}) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Container(
+//      padding: const EdgeInsets.only(left: 32.0, top: 16.0, right: 32.0),
+        decoration: BoxDecoration(
+            border: Border.all(color: Colors.black, width: 2.0),
+            borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(20.0),
+                topRight: Radius.circular(20.0))),
+        child: Card(
+          elevation: 0.0,
+          color: Colors.white,
+          child: Column(
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.only(top: 16.0),
+                child: Image(
+                    image: AssetImage(image), fit: BoxFit.fill, height: 150.0),
+              ),
+              ListTile(
+                  title: Text(
+                mainText,
+                style: TextStyle(fontSize: 20.0),
+              )),
+              ButtonTheme.bar(
+                  child: ButtonBar(
+                children: <Widget>[
+                  FlatButton(
+                      onPressed: onButtonPress,
+                      child: Text(
+                        buttonText,
+                        style: TextStyle(
+                            fontSize: 16.0, fontWeight: FontWeight.bold),
+                      ))
+                ],
+              ))
+            ],
+          ),
+        ),
+      ),
     );
   }
 }

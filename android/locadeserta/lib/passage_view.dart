@@ -20,11 +20,14 @@ class PassageState extends State<Passage> {
       child: SizedBox(
           height: 100.0,
           child: RaisedButton(
-            color: Colors.blue[50 * (i + 1)],
+            color: Colors.black, // [50 * (i + 1)],
             onPressed: () {
               widget.onNextOptionSelected(text, i);
             },
-            child: Text(text),
+            child: Text(
+              text,
+              style: TextStyle(fontSize: 20.0, color: Colors.white),
+            ),
           )),
     );
   }
@@ -43,10 +46,10 @@ class PassageState extends State<Passage> {
     return SizedBox(
       height: 100.0,
       child: FlatButton(
-          color: Colors.lightGreen,
+          color: Colors.black87,
           child: Text(
             "Далі",
-            style: TextStyle(fontSize: 20.0),
+            style: TextStyle(fontSize: 20.0, color: Colors.white),
           ),
           onPressed: () {
             widget.onNextOptionSelected("Next", -1);
@@ -63,32 +66,40 @@ class PassageState extends State<Passage> {
         Expanded(
           child: SingleChildScrollView(
             child: Padding(
-              padding: EdgeInsets.all(18.0),
-              child: Card(
-                child: Stack(
-                  children: <Widget>[
-                    Opacity(
-                      opacity: 0.4,
-                      child: Container(
-                        height: 400,
-                        decoration: BoxDecoration(
-                            image: DecorationImage(
-                                fit: BoxFit.fitWidth,
-                                image: AssetImage(
-                                  "images/background/boat_" +
-                                      widget.random.toString() +
-                                      ".jpg",
-                                ))),
+              padding: const EdgeInsets.all(8.0),
+              child: Container(
+                decoration: BoxDecoration(
+                    border: Border.all(color: Colors.black, width: 2.0),
+                    borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(20.0),
+                        topRight: Radius.circular(20.0))),
+                child: Card(
+                  elevation: 0.0,
+                  child: Stack(
+                    children: <Widget>[
+                      Opacity(
+                        opacity: 0.4,
+                        child: Container(
+                          height: 400,
+                          decoration: BoxDecoration(
+                              image: DecorationImage(
+                                  fit: BoxFit.fitWidth,
+                                  image: AssetImage(
+                                    "images/background/boat_" +
+                                        widget.random.toString() +
+                                        ".jpg",
+                                  ))),
+                        ),
                       ),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.all(8.0),
-                      child: Text(
-                        widget.currentStory.currentText,
-                        style: Theme.of(context).textTheme.title,
+                      Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: Text(
+                          widget.currentStory.currentText,
+                          style: Theme.of(context).textTheme.title,
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ),

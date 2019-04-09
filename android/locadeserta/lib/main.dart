@@ -10,7 +10,10 @@ class LocaDesertaApp extends StatelessWidget {
     return MaterialApp(
       title: 'Дике Поле',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        brightness: Brightness.light,
+        primaryColor: Colors.black,
+        accentColor: Colors.black,
+        fontFamily: 'Montserrat',
       ),
       home: HomeWidget(title: 'Дике Поле. Початок легенд.'),
     );
@@ -32,6 +35,7 @@ class _HomeWidgetState extends State<HomeWidget> {
         appBar: AppBar(
           title: Text(widget.title),
         ),
+        backgroundColor: Colors.white,
         body: LandingView());
   }
 }
