@@ -14,7 +14,7 @@
     
     [inkChannel setMethodCallHandler:^(FlutterMethodCall * _Nonnull call, FlutterResult result) {
         if ([@"Init" isEqualToString:call.method]) {
-            self.inkStory = [[[InkStory alloc] init] initWithJsonString:call.arguments[0]];
+            self.inkStory = [[[InkStory alloc] init] initWithJsonString:call.arguments];
             result(@"success");
         } else if ([@"canContinue" isEqualToString:call.method]) {
             bool canContinue = [self.inkStory canContinue];
