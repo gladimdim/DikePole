@@ -104,7 +104,6 @@ class StoryBridge {
         await platform.invokeMethod("Init", storyJson );
         if (state != null) {
           await platform.invokeMethod("restoreState", {"text": state});
-          await doContinue();
         }
         await doContinue();
       } catch (e) {
