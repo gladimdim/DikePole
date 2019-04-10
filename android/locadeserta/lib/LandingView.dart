@@ -8,8 +8,8 @@ import 'package:locadeserta/story_view.dart';
 
 class LandingView extends StatefulWidget {
   final Function(String json) onStartGamePressed;
-
-  LandingView({this.onStartGamePressed});
+  final Function onUserLoggedIn;
+  LandingView({this.onUserLoggedIn, this.onStartGamePressed});
 
   @override
   _LandingViewState createState() => _LandingViewState();
