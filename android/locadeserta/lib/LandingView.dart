@@ -8,8 +8,7 @@ import 'package:locadeserta/story_view.dart';
 
 class LandingView extends StatefulWidget {
   final Function(String json) onStartGamePressed;
-  final Function onUserLoggedIn;
-  LandingView({this.onUserLoggedIn, this.onStartGamePressed});
+  LandingView({this.onStartGamePressed});
 
   @override
   _LandingViewState createState() => _LandingViewState();
@@ -41,14 +40,7 @@ class _LandingViewState extends State<LandingView> {
   ListView _buildLandingListView(BuildContext context) {
     return ListView(
       children: <Widget>[
-        LoginView(onUserLoggedIn: (FirebaseUser user, String uid) {
-          if (user != null) {
-            authedUser = user;
-          }
-          if (uid != null) {
-            userUid = uid;
-          }
-        }),
+        LoginView(onUserLoggedIn: (user, uid) => _onUserLoggedIn(user, uid)),
         _buildCardWithImage(
           image: "images/background/landing_1.jpg",
           mainText: "У вас є збережена гра",
@@ -84,6 +76,15 @@ class _LandingViewState extends State<LandingView> {
       ],
     );
   }
+
+  _onUserLoggedIn(FirebaseUser user, String uid) {
+        if (user != null) {
+          authedUser = user;
+        }
+        if (uid != null) {
+          userUid = uid;
+        }
+      }
 
   Widget _buildCardWithImage(
       {String image,
