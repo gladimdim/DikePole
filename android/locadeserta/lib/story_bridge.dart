@@ -69,7 +69,7 @@ class StoryBridge {
 
   Future<void> chooseChoiceIndex(int i) async {
     try {
-      await platform.invokeMethod("chooseChoiceIndex", {"index": i});
+      await platform.invokeMethod("chooseChoiceIndex", i);
       await doContinue();
       await _refreshStory();
     } catch (e) {

@@ -95,7 +95,7 @@ public class MainActivity extends FlutterActivity {
                             result.success(choices);
                         } else if (methodCall.method.equals("chooseChoiceIndex")) {
                             try {
-                                story.chooseChoiceIndex(methodCall.argument("index"));
+                                story.chooseChoiceIndex((Integer) methodCall.arguments);
                                 result.success(story.getCurrentText());
                             } catch (Exception e) {
                                 result.error("EXCEPTION", e.toString(), null);

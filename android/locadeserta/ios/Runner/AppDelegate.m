@@ -32,11 +32,13 @@
                 NSString* text = dict[@"text"];
                 [choices addObject:text];
             }
-        
             result(choices);
         } else if ([@"getCurrentTags" isEqualToString:call.method]) {
             NSArray* currentTags = [self.inkStory currentTags];
             result(currentTags);
+        } else if ([@"chooseChoiceIndex" isEqualToString:call.method]) {
+            [self.inkStory chooseChoiceIndex:[call.arguments integerValue]];
+            result([self.inkStory currentText]);
         } else {
             result(FlutterMethodNotImplemented);
         }
