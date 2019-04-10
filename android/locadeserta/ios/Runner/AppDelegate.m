@@ -27,7 +27,13 @@
             result(currentText);
         } else if ([@"getCurrentChoices" isEqualToString:call.method]) {
             NSArray* currentChoices = [self.inkStory currentChoices];
-            result(currentChoices);
+            NSMutableArray* choices = [[NSMutableArray alloc] init];
+            for (NSDictionary *dict in currentChoices) {
+                NSString* text = dict[@"text"];
+                [choices addObject:text];
+            }
+        
+            result(choices);
         } else if ([@"getCurrentTags" isEqualToString:call.method]) {
             NSArray* currentTags = [self.inkStory currentTags];
             result(currentTags);
