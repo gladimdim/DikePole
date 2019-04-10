@@ -36,9 +36,15 @@ class StoryBridge {
     try {
       currentText = await platform.invokeMethod("getCurrentText");
       var temp = await platform.invokeMethod("getCurrentChoices");
+      if (temp == null) {
+        temp = [];
+      }
       choices = new List.from(temp);
       canContinue = await platform.invokeMethod("canContinue");
       var dynamicTags = await platform.invokeMethod("getCurrentTags");
+      if (dynamicTags == null) {
+        dynamicTags = [];
+      }
       currentTags = List.from(dynamicTags);
     } on PlatformException {
       print("Error");
@@ -85,7 +91,7 @@ class StoryBridge {
       try {
         final inkyText =
         await rootBundle.loadString("stories/locadeserta.ink.json");
-        await platform.invokeMethod("Init", {"text": inkyText});
+        await platform.invokeMethod("Init", inkyText);
         if (state != null) {
           await platform.invokeMethod("restoreState", {"text": state});
           await doContinue();
@@ -95,7 +101,7 @@ class StoryBridge {
       }
     } else {
       try {
-        await platform.invokeMethod("Init", {"text": storyJson});
+        await platform.invokeMethod("Init", storyJson );
         if (state != null) {
           await platform.invokeMethod("restoreState", {"text": state});
           await doContinue();

@@ -37,7 +37,7 @@ public class MainActivity extends FlutterActivity {
                     @Override
                     public void onMethodCall(MethodCall methodCall, Result result) {
                         if (methodCall.method.equals("Init")) {
-                            story = _loadStory(methodCall.argument("text"));
+                            story = _loadStory(methodCall.arguments);
                             result.success("success");
                         } else if (methodCall.method.equals("getInventory")) {
                             InkList inventory;
