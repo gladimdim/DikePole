@@ -13,7 +13,7 @@ class Passage extends StatefulWidget {
   State<StatefulWidget> createState() => PassageState();
 }
 
-class PassageState extends State<Passage> {
+class PassageState extends State<Passage> with TickerProviderStateMixin {
   Widget createButton(String text, int i) {
     return Padding(
       padding: EdgeInsets.all(8.0),
@@ -43,17 +43,9 @@ class PassageState extends State<Passage> {
   }
 
   Widget createContinue() {
-    return SizedBox(
-      height: 100.0,
-      child: FlatButton(
-          color: Colors.black87,
-          child: Text(
-            "Далі",
-            style: TextStyle(fontSize: 20.0, color: Colors.white),
-          ),
-          onPressed: () {
-            widget.onNextOptionSelected("Next", -1);
-          }),
+    return SlideableButton(
+      buttonText: "Далі",
+      onPress: () => widget.onNextOptionSelected("Next", -1),
     );
   }
 
@@ -116,5 +108,69 @@ class PassageState extends State<Passage> {
       children: list,
       crossAxisAlignment: CrossAxisAlignment.stretch,
     );
+  }
+}
+
+class SlideableButton extends StatefulWidget {
+  final Widget child;
+  Function onPress;
+  final String buttonText;
+
+  SlideableButton({this.child, this.onPress, this.buttonText});
+
+  @override
+  _SlideableButtonState createState() => _SlideableButtonState();
+}
+
+class _SlideableButtonState extends State<SlideableButton>
+    with SingleTickerProviderStateMixin {
+  AnimationController controller;
+
+  @override
+  void initState() {
+    super.initState();
+    controller = AnimationController(
+      vsync: this,
+      duration: Duration(milliseconds: 3000),
+    )..addStatusListener((state) {
+        if (state == AnimationStatus.completed) {
+          widget.onPress();
+          controller.reverse();
+        }
+      });
+  }
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
+  @override
+  Widget build(BuildContext context) {
+    final animation = Tween(begin: 0.0, end: 1000.0).animate(CurvedAnimation(
+      parent: controller,
+      curve: Curves.easeInOut,
+    ));
+
+    return AnimatedBuilder(
+        animation: animation,
+        child: widget.child,
+        builder: (context, child) {
+          return Transform.translate(
+            offset: Offset(animation.value, 0.0),
+            child: SizedBox(
+              height: 100.0,
+              child: FlatButton(
+                  color: Colors.black87,
+                  child: Text(
+                    widget.buttonText,
+                    style: TextStyle(fontSize: 20.0, color: Colors.white),
+                  ),
+                  onPressed: () {
+                    controller.forward();
+                  }),
+            ),
+          );
+        });
   }
 }
