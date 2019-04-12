@@ -131,7 +131,7 @@ class _SlideableButtonState extends State<SlideableButton>
     super.initState();
     controller = AnimationController(
       vsync: this,
-      duration: Duration(milliseconds: 3000),
+      duration: Duration(milliseconds: 400),
     )..addStatusListener((state) {
         if (state == AnimationStatus.completed) {
           widget.onPress();
