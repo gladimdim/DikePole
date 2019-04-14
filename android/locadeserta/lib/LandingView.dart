@@ -46,6 +46,7 @@ class _LandingViewState extends State<LandingView> {
           mainText: "У вас є збережена гра",
           buttonText: "Продовжити",
           onButtonPress: () => _goToStory(null),
+          context: context
         ),
         SizedBox(
           height: 20.0,
@@ -55,6 +56,7 @@ class _LandingViewState extends State<LandingView> {
           mainText: "Каталог ігор",
           buttonText: "Переглянути",
           onButtonPress: () => _onViewCatalogPressed(context),
+          context: context
         ),
         Center(
           child: InkWell(
@@ -90,7 +92,7 @@ class _LandingViewState extends State<LandingView> {
       {String image,
       String mainText,
       String buttonText,
-      Function onButtonPress}) {
+      Function onButtonPress, @required BuildContext context}) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Container(
@@ -102,7 +104,7 @@ class _LandingViewState extends State<LandingView> {
                 topRight: Radius.circular(20.0))),
         child: Card(
           elevation: 0.0,
-          color: Colors.white,
+          color: Theme.of(context).backgroundColor,
           child: Column(
             children: <Widget>[
               Padding(
