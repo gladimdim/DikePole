@@ -55,48 +55,7 @@ class PassageState extends State<Passage> with TickerProviderStateMixin {
 
     list.addAll(
       [
-        Expanded(
-          child: SingleChildScrollView(
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Container(
-                decoration: BoxDecoration(
-                    border: Border.all(color: Colors.black, width: 2.0),
-                    borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(20.0),
-                        topRight: Radius.circular(20.0))),
-                child: Card(
-                  elevation: 0.0,
-                  child: Stack(
-                    children: <Widget>[
-                      Opacity(
-                        opacity: 0.4,
-                        child: Container(
-                          height: 400,
-                          decoration: BoxDecoration(
-                              image: DecorationImage(
-                                  fit: BoxFit.fitWidth,
-                                  image: AssetImage(
-                                    "images/background/boat_" +
-                                        widget.random.toString() +
-                                        ".jpg",
-                                  ))),
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: Text(
-                          widget.currentStory.currentText,
-                          style: Theme.of(context).textTheme.title,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-          ),
-        )
+        _buildTextRow(context)
       ],
     );
 
@@ -108,6 +67,27 @@ class PassageState extends State<Passage> with TickerProviderStateMixin {
       children: list,
       crossAxisAlignment: CrossAxisAlignment.stretch,
     );
+  }
+
+  Widget _buildTextRow(BuildContext context) {
+    return Expanded(
+        child: SingleChildScrollView(
+          padding: EdgeInsets.all(8.0),
+          child: Container(
+            decoration: BoxDecoration(
+              color: Theme.of(context).backgroundColor,
+              border: Border.all(color: Colors.black, width: 3.0),
+            ),
+            child: Padding(
+              padding: EdgeInsets.all(18.0),
+              child: Text(
+                widget.currentStory.currentText,
+                style: Theme.of(context).textTheme.title,
+              ),
+            ),
+          ),
+        ),
+      );
   }
 }
 
@@ -145,6 +125,7 @@ class _SlideableButtonState extends State<SlideableButton>
     controller.dispose();
     super.dispose();
   }
+
   @override
   Widget build(BuildContext context) {
     final animation = Tween(begin: 0.0, end: 1000.0).animate(CurvedAnimation(

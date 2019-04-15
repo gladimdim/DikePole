@@ -12,6 +12,7 @@ class LocaDesertaApp extends StatelessWidget {
       theme: ThemeData(
         brightness: Brightness.light,
         primaryColor: Colors.black,
+        backgroundColor: Colors.yellow[50],
         accentColor: Colors.black,
         fontFamily: 'Montserrat',
       ),
@@ -35,7 +36,7 @@ class _HomeWidgetState extends State<HomeWidget> {
         appBar: AppBar(
           title: Text(widget.title),
         ),
-        backgroundColor: Colors.white,
+        backgroundColor: Theme.of(context).backgroundColor,
         body: LandingView());
   }
 }

@@ -64,6 +64,7 @@ class _StoryViewState extends State<StoryView> {
 
           currentStory = storyBridge.story;
           return Scaffold(
+            backgroundColor: Theme.of(context).backgroundColor,
               appBar: AppBar(
                 actions: <Widget>[
                   IconButton(
