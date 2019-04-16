@@ -15,6 +15,7 @@ class Passage extends StatefulWidget {
 
 class PassageState extends State<Passage> with TickerProviderStateMixin {
   ScrollController _passageScrollController = new ScrollController();
+
   Widget createButton(String text, int i) {
     return Padding(
       padding: EdgeInsets.all(8.0),
@@ -23,7 +24,9 @@ class PassageState extends State<Passage> with TickerProviderStateMixin {
           child: RaisedButton(
             color: Colors.black, // [50 * (i + 1)],
             onPressed: () {
-              _passageScrollController.animateTo(0, duration: Duration(milliseconds: 50), curve: Curves.fastOutSlowIn);
+              _passageScrollController.animateTo(0,
+                  duration: Duration(milliseconds: 50),
+                  curve: Curves.fastOutSlowIn);
               widget.onNextOptionSelected(text, i);
             },
             child: Text(
@@ -46,13 +49,13 @@ class PassageState extends State<Passage> with TickerProviderStateMixin {
 
   Widget createContinue() {
     return SlideableButton(
-      buttonText: "Далі",
-      onPress: () {
-        _passageScrollController.animateTo(0, duration: Duration(milliseconds: 50), curve: Curves.fastOutSlowIn);
-        widget.onNextOptionSelected("Next", -1);
-
-      }
-    );
+        buttonText: "Далі",
+        onPress: () {
+          _passageScrollController.animateTo(0,
+              duration: Duration(milliseconds: 50),
+              curve: Curves.fastOutSlowIn);
+          widget.onNextOptionSelected("Next", -1);
+        });
   }
 
   @override
@@ -60,9 +63,7 @@ class PassageState extends State<Passage> with TickerProviderStateMixin {
     List<Widget> list = new List();
 
     list.addAll(
-      [
-        _buildTextRow(context)
-      ],
+      [_buildTextRow(context)],
     );
 
     final buttons = widget.currentStory.canContinue == true
@@ -77,31 +78,34 @@ class PassageState extends State<Passage> with TickerProviderStateMixin {
 
   Widget _buildTextRow(BuildContext context) {
     return Expanded(
-        child: SingleChildScrollView(
-          controller: _passageScrollController,
-          padding: EdgeInsets.all(8.0),
-          child: Column(
-            children: <Widget>[
-
-              Container(
-                decoration: BoxDecoration(
-                  color: Theme.of(context).backgroundColor,
-                  border: Border.all(color: Colors.black, width: 3.0),
-                ),
-                child: Padding(
-                  padding: EdgeInsets.all(18.0),
-                  child: Text(
-                    widget.currentStory.currentText,
-                    style: Theme.of(context).textTheme.title,
-                  ),
+      child: SingleChildScrollView(
+        controller: _passageScrollController,
+        padding: EdgeInsets.all(8.0),
+        child: Column(
+          children: <Widget>[
+            Container(
+              decoration: BoxDecoration(
+                color: Theme.of(context).backgroundColor,
+                border: Border.all(color: Colors.black, width: 3.0),
+              ),
+              child: Padding(
+                padding: EdgeInsets.all(18.0),
+                child: Text(
+                  widget.currentStory.currentText,
+                  style: Theme.of(context).textTheme.title,
                 ),
               ),
-              Image(
-                  image: AssetImage("images/background/boat_${widget.random.toString()}.jpg"), fit: BoxFit.fill, height: 200.0),
-            ],
-          ),
+            ),
+            Image(
+              image: AssetImage(
+                  "images/background/boat_${widget.random.toString()}.jpg"),
+              fit: BoxFit.fitWidth,
+              height: 300.0,
+            ),
+          ],
         ),
-      );
+      ),
+    );
   }
 }
 
