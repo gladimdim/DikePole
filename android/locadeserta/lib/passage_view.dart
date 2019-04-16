@@ -14,6 +14,7 @@ class Passage extends StatefulWidget {
 }
 
 class PassageState extends State<Passage> with TickerProviderStateMixin {
+  ScrollController _passageScrollController = new ScrollController();
   Widget createButton(String text, int i) {
     return Padding(
       padding: EdgeInsets.all(8.0),
@@ -22,6 +23,7 @@ class PassageState extends State<Passage> with TickerProviderStateMixin {
           child: RaisedButton(
             color: Colors.black, // [50 * (i + 1)],
             onPressed: () {
+              _passageScrollController.animateTo(0, duration: Duration(milliseconds: 50), curve: Curves.fastOutSlowIn);
               widget.onNextOptionSelected(text, i);
             },
             child: Text(
@@ -45,7 +47,11 @@ class PassageState extends State<Passage> with TickerProviderStateMixin {
   Widget createContinue() {
     return SlideableButton(
       buttonText: "Далі",
-      onPress: () => widget.onNextOptionSelected("Next", -1),
+      onPress: () {
+        _passageScrollController.animateTo(0, duration: Duration(milliseconds: 50), curve: Curves.fastOutSlowIn);
+        widget.onNextOptionSelected("Next", -1);
+
+      }
     );
   }
 
@@ -72,6 +78,7 @@ class PassageState extends State<Passage> with TickerProviderStateMixin {
   Widget _buildTextRow(BuildContext context) {
     return Expanded(
         child: SingleChildScrollView(
+          controller: _passageScrollController,
           padding: EdgeInsets.all(8.0),
           child: Container(
             decoration: BoxDecoration(
