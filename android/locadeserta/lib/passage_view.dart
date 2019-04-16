@@ -80,18 +80,25 @@ class PassageState extends State<Passage> with TickerProviderStateMixin {
         child: SingleChildScrollView(
           controller: _passageScrollController,
           padding: EdgeInsets.all(8.0),
-          child: Container(
-            decoration: BoxDecoration(
-              color: Theme.of(context).backgroundColor,
-              border: Border.all(color: Colors.black, width: 3.0),
-            ),
-            child: Padding(
-              padding: EdgeInsets.all(18.0),
-              child: Text(
-                widget.currentStory.currentText,
-                style: Theme.of(context).textTheme.title,
+          child: Column(
+            children: <Widget>[
+
+              Container(
+                decoration: BoxDecoration(
+                  color: Theme.of(context).backgroundColor,
+                  border: Border.all(color: Colors.black, width: 3.0),
+                ),
+                child: Padding(
+                  padding: EdgeInsets.all(18.0),
+                  child: Text(
+                    widget.currentStory.currentText,
+                    style: Theme.of(context).textTheme.title,
+                  ),
+                ),
               ),
-            ),
+              Image(
+                  image: AssetImage("images/background/boat_${widget.random.toString()}.jpg"), fit: BoxFit.fill, height: 200.0),
+            ],
           ),
         ),
       );
@@ -100,7 +107,7 @@ class PassageState extends State<Passage> with TickerProviderStateMixin {
 
 class SlideableButton extends StatefulWidget {
   final Widget child;
-  Function onPress;
+  final Function onPress;
   final String buttonText;
 
   SlideableButton({this.child, this.onPress, this.buttonText});
