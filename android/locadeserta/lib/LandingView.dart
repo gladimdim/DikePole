@@ -2,20 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:locadeserta/catalog_view.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:locadeserta/login_page.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:locadeserta/LoginView.dart';
 import 'package:locadeserta/story_view.dart';
+import 'package:locadeserta/models/Auth.dart';
 
 class LandingView extends StatefulWidget {
-  final Function(String json) onStartGamePressed;
-  LandingView({this.onStartGamePressed});
+  final Auth auth;
+  LandingView({this.auth});
 
   @override
   _LandingViewState createState() => _LandingViewState();
 }
 
 class _LandingViewState extends State<LandingView> {
-  FirebaseUser authedUser;
   String userUid;
 
   @override
@@ -23,12 +22,12 @@ class _LandingViewState extends State<LandingView> {
     return _buildLandingListView(context);
   }
 
-  _goToStory(String json) {
-    var uid = authedUser == null ? userUid : authedUser.uid;
+  _goToStory(String json) async {
+    var user = await  widget.auth.currentUser();
     Navigator.push(
         context,
         MaterialPageRoute(
-            builder: (context) => StoryView(uid: uid, storyJson: json)));
+            builder: (context) => StoryView(uid: user.uid, storyJson: json)));
   }
 
   _onViewCatalogPressed(BuildContext context) async {
@@ -39,54 +38,45 @@ class _LandingViewState extends State<LandingView> {
 
   ListView _buildLandingListView(BuildContext context) {
     return ListView(
-      children: <Widget>[
-        LoginView(onUserLoggedIn: (user, uid) => _onUserLoggedIn(user, uid)),
-        _buildCardWithImage(
-          image: "images/background/landing_1.jpg",
-          mainText: "У вас є збережена гра",
-          buttonText: "Продовжити",
-          onButtonPress: () => _goToStory(null),
-          context: context
-        ),
-        SizedBox(
-          height: 20.0,
-        ),
-        _buildCardWithImage(
-          image: "images/background/landing_0.jpg",
-          mainText: "Каталог ігор",
-          buttonText: "Переглянути",
-          onButtonPress: () => _onViewCatalogPressed(context),
-          context: context
-        ),
-        Center(
-          child: InkWell(
-            child: Padding(
-              padding: const EdgeInsets.only(top: 8.0),
-              child: Text(
-                "For Privacy Policy Tap here.",
-                style: TextStyle(fontSize: 15.0, fontWeight: FontWeight.bold),
-              ),
-            ),
-            onTap: () async {
-              if (await canLaunch(
-                  "https://locadeserta.com/privacy_policy.html")) {
-                await launch("https://locadeserta.com/privacy_policy.html");
-              }
-            },
+        children: <Widget>[
+          LoginView(auth: widget.auth),
+          _buildCardWithImage(
+            image: "images/background/landing_1.jpg",
+            mainText: "У вас є збережена гра",
+            buttonText: "Продовжити",
+            onButtonPress: () => _goToStory(null),
+            context: context
           ),
-        ),
-      ],
-    );
+          SizedBox(
+            height: 20.0,
+          ),
+          _buildCardWithImage(
+            image: "images/background/landing_0.jpg",
+            mainText: "Каталог ігор",
+            buttonText: "Переглянути",
+            onButtonPress: () => _onViewCatalogPressed(context),
+            context: context
+          ),
+          Center(
+            child: InkWell(
+              child: Padding(
+                padding: const EdgeInsets.only(top: 8.0),
+                child: Text(
+                  "For Privacy Policy Tap here.",
+                  style: TextStyle(fontSize: 15.0, fontWeight: FontWeight.bold),
+                ),
+              ),
+              onTap: () async {
+                if (await canLaunch(
+                    "https://locadeserta.com/privacy_policy.html")) {
+                  await launch("https://locadeserta.com/privacy_policy.html");
+                }
+              },
+            ),
+          ),
+        ],
+      );
   }
-
-  _onUserLoggedIn(FirebaseUser user, String uid) {
-        if (user != null) {
-          authedUser = user;
-        }
-        if (uid != null) {
-          userUid = uid;
-        }
-      }
 
   Widget _buildCardWithImage(
       {String image,
@@ -96,7 +86,6 @@ class _LandingViewState extends State<LandingView> {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Container(
-//      padding: const EdgeInsets.only(left: 32.0, top: 16.0, right: 32.0),
         decoration: BoxDecoration(
             border: Border.all(color: Colors.black, width: 2.0),
             borderRadius: BorderRadius.only(
