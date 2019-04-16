@@ -39,6 +39,11 @@
         } else if ([@"chooseChoiceIndex" isEqualToString:call.method]) {
             [self.inkStory chooseChoiceIndex:[call.arguments integerValue]];
             result([self.inkStory currentText]);
+        } else if ([@"restoreState" isEqualToString:call.method]) {
+            NSDictionary *dict = call.arguments;
+            NSString *str = [NSString stringWithFormat:@"%@", dict];
+            [self.inkStory loadJson:str];
+            result(@"success");
         } else {
             result(FlutterMethodNotImplemented);
         }

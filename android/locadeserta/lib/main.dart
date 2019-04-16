@@ -13,7 +13,7 @@ class LocaDesertaApp extends StatelessWidget {
       theme: ThemeData(
         brightness: Brightness.light,
         primaryColor: Colors.black,
-        backgroundColor: Colors.yellow[50],
+        backgroundColor: Colors.white,
         accentColor: Colors.black,
         fontFamily: 'Montserrat',
       ),
