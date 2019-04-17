@@ -17,7 +17,7 @@ class LocaDesertaApp extends StatelessWidget {
         accentColor: Colors.black,
         fontFamily: 'Montserrat',
       ),
-      home: HomeWidget(title: 'Дике Поле. Початок легенд.'),
+      home: HomeWidget(title: 'Дике Поле. vALPHA'),
     );
   }
 }
@@ -34,7 +34,6 @@ class HomeWidget extends StatefulWidget {
 class _HomeWidgetState extends State<HomeWidget> {
   @override
   Widget build(BuildContext context) {
-    var screenSize = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
