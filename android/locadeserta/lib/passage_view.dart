@@ -1,6 +1,7 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:locadeserta/story_bridge.dart';
+import 'package:swipedetector/swipedetector.dart';
 
 class Passage extends StatefulWidget {
   final Story currentStory;
@@ -51,11 +52,17 @@ class PassageState extends State<Passage> with TickerProviderStateMixin {
     return SlideableButton(
         buttonText: "Далі",
         onPress: () {
-          _passageScrollController.animateTo(0,
-              duration: Duration(milliseconds: 50),
-              curve: Curves.fastOutSlowIn);
-          widget.onNextOptionSelected("Next", -1);
+          _next();
         });
+  }
+
+  void _next() {
+    if (widget.currentStory.canContinue == true) {
+      _passageScrollController.animateTo(0,
+          duration: Duration(milliseconds: 50),
+          curve: Curves.fastOutSlowIn);
+      widget.onNextOptionSelected("Next", -1);
+    }
   }
 
   @override
@@ -83,16 +90,22 @@ class PassageState extends State<Passage> with TickerProviderStateMixin {
         padding: EdgeInsets.all(8.0),
         child: Column(
           children: <Widget>[
-            Container(
-              decoration: BoxDecoration(
-                color: Theme.of(context).backgroundColor,
-                border: Border.all(color: Colors.black, width: 3.0),
-              ),
-              child: Padding(
-                padding: EdgeInsets.all(18.0),
-                child: Text(
-                  widget.currentStory.currentText,
-                  style: Theme.of(context).textTheme.title,
+            SwipeDetector(
+              onSwipeLeft: () {
+                print("yo");
+                _next();
+              },
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Theme.of(context).backgroundColor,
+                  border: Border.all(color: Colors.black, width: 3.0),
+                ),
+                child: Padding(
+                  padding: EdgeInsets.all(18.0),
+                  child: Text(
+                    widget.currentStory.currentText,
+                    style: Theme.of(context).textTheme.title,
+                  ),
                 ),
               ),
             ),

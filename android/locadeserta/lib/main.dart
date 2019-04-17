@@ -34,22 +34,24 @@ class HomeWidget extends StatefulWidget {
 class _HomeWidgetState extends State<HomeWidget> {
   @override
   Widget build(BuildContext context) {
+    var screenSize = MediaQuery.of(context).size;
     return Scaffold(
-        appBar: AppBar(
-          title: Text(widget.title),
-          actions: [
-            FlatButton(
-              child: Text(
-                "Вийти",
-                style: TextStyle(color: Colors.white),
-              ),
-              onPressed: () => widget.auth.signOut(),
+      appBar: AppBar(
+        title: Text(widget.title),
+        actions: [
+          FlatButton(
+            child: Text(
+              "Вийти",
+              style: TextStyle(color: Colors.white),
             ),
-          ],
-        ),
-        backgroundColor: Theme.of(context).backgroundColor,
-        body: LandingView(
-          auth: widget.auth,
-        ));
+            onPressed: () => widget.auth.signOut(),
+          ),
+        ],
+      ),
+      backgroundColor: Theme.of(context).backgroundColor,
+      body: LandingView(
+        auth: widget.auth,
+      ),
+    );
   }
 }
