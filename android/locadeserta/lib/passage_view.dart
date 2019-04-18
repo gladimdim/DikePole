@@ -1,7 +1,6 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:locadeserta/story_bridge.dart';
-import 'package:swipedetector/swipedetector.dart';
 import 'package:locadeserta/animations/SlideableButton.dart';
 
 class Passage extends StatefulWidget {
@@ -87,22 +86,23 @@ class PassageState extends State<Passage> with TickerProviderStateMixin {
   Widget _buildTextRow(BuildContext context) {
     return Expanded(
       child: SingleChildScrollView(
+        scrollDirection: Axis.horizontal,
         controller: _passageScrollController,
         padding: EdgeInsets.all(8.0),
-        child: Column(
+        child: Row(
           children: <Widget>[
-            SwipeDetector(
-              onSwipeLeft: () {
-                print("yo");
-                _next();
-              },
-              child: Container(
-                decoration: BoxDecoration(
-                  color: Theme.of(context).backgroundColor,
-                  border: Border.all(color: Colors.black, width: 3.0),
-                ),
+            Container(
+              alignment: Alignment.topCenter,
+              width: MediaQuery.of(context).size.width * 0.79,
+//              height: MediaQuery.of(context).size.height,
+              decoration: BoxDecoration(
+                color: Theme.of(context).backgroundColor,
+                border: Border.all(color: Colors.black, width: 3.0),
+              ),
+              child: SingleChildScrollView(
+                scrollDirection: Axis.vertical,
                 child: Padding(
-                  padding: EdgeInsets.all(18.0),
+                  padding: EdgeInsets.all(8.0),
                   child: Text(
                     widget.currentStory.currentText,
                     style: Theme.of(context).textTheme.title,
