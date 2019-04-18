@@ -48,7 +48,6 @@ flutter:
   assets:
 #    - sounds/khoreya/kiriye.mp3
 #    - sounds/khoreya/michail.mp3
-    - flare/slideout-menu.flr
     - stories/twinery.json
     - stories/LocaDeserta.json
     - stories/locadeserta.ink.json

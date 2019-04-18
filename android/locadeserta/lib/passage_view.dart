@@ -22,20 +22,21 @@ class PassageState extends State<Passage> with TickerProviderStateMixin {
       padding: EdgeInsets.all(8.0),
       child: SizedBox(
           height: 100.0,
-          child: RaisedButton(
-            color: Colors.black, // [50 * (i + 1)],
-            onPressed: () {
-              _passageScrollController.animateTo(0,
-                  duration: Duration(milliseconds: 50),
-                  curve: Curves.fastOutSlowIn);
-              widget.onNextOptionSelected(text, i);
+          child: SlideableButton(
+            buttonText: text,
+            onPress: () {
+              _nextWithChoice(i);
             },
-            child: Text(
-              text,
-              style: TextStyle(fontSize: 20.0, color: Colors.white),
-            ),
-          )),
+          ),
+      ),
     );
+  }
+
+  void _nextWithChoice(int i) {
+    _passageScrollController.animateTo(0,
+        duration: Duration(milliseconds: 50),
+        curve: Curves.fastOutSlowIn);
+    widget.onNextOptionSelected(null, i);
   }
 
   List<Widget> createOptionList(List<String> options) {
@@ -59,8 +60,7 @@ class PassageState extends State<Passage> with TickerProviderStateMixin {
   void _next() {
     if (widget.currentStory.canContinue == true) {
       _passageScrollController.animateTo(0,
-          duration: Duration(milliseconds: 50),
-          curve: Curves.fastOutSlowIn);
+          duration: Duration(milliseconds: 50), curve: Curves.fastOutSlowIn);
       widget.onNextOptionSelected("Next", -1);
     }
   }

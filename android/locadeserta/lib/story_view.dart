@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
-import 'package:locadeserta/models/Auth.dart';
 import 'package:locadeserta/passage_view.dart';
 import 'package:locadeserta/persistence.dart';
 import 'package:locadeserta/story_bridge.dart';
@@ -36,7 +35,7 @@ class _StoryViewState extends State<StoryView> {
         return storyBridge;
       }
       try {
-        DocumentReference userState = await Firestore.instance
+        DocumentReference userState = Firestore.instance
             .collection("user_states")
             .document(widget.uid);
         var snapshot = await userState.get();
@@ -73,7 +72,7 @@ class _StoryViewState extends State<StoryView> {
                     onPressed: () async {
                       Persistence pers = Persistence(bridge: storyBridge);
                       String stateJson = await pers.getStateJson();
-                      DocumentReference userState = await Firestore.instance
+                      DocumentReference userState = Firestore.instance
                           .collection("user_states")
                           .document(widget.uid);
 
