@@ -63,8 +63,15 @@ flutter:
     - images/background/boat_7.jpg
     - images/background/boat_8.jpg
     - images/background/boat_9.jpg
-    - images/background/landing_0.jpg
-    - images/background/landing_1.jpg
+    - images/background/boat_10.jpg
+    - images/background/boat_11.jpg
+    - images/background/boat_12.jpg
+    - images/background/boat_13.jpg
+    - images/background/boat_14.jpg
+    - images/landing/landing_0.jpg
+    - images/landing/landing_1.jpg
+    - images/landing/landing_2.jpg
+    - images/landing/landing_3.jpg
 #    - images/background/cossack_0.jpg
   #  - images/a_dot_burr.jpeg
   #  - images/a_dot_ham.jpeg

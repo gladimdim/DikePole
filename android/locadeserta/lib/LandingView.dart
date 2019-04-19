@@ -41,7 +41,7 @@ class _LandingViewState extends State<LandingView> {
         children: <Widget>[
           LoginView(auth: widget.auth),
           _buildCardWithImage(
-            image: "images/background/landing_1.jpg",
+            image: "images/landing/landing_3.jpg",
             mainText: "У вас є збережена гра",
             buttonText: "Продовжити",
             onButtonPress: () => _goToStory(null),
@@ -51,7 +51,7 @@ class _LandingViewState extends State<LandingView> {
             height: 20.0,
           ),
           _buildCardWithImage(
-            image: "images/background/landing_0.jpg",
+            image: "images/landing/landing_2.jpg",
             mainText: "Каталог ігор",
             buttonText: "Переглянути",
             onButtonPress: () => _onViewCatalogPressed(context),
@@ -99,7 +99,7 @@ class _LandingViewState extends State<LandingView> {
               Padding(
                 padding: const EdgeInsets.only(top: 16.0),
                 child: Image(
-                    image: AssetImage(image), fit: BoxFit.fill, height: 150.0),
+                    image: AssetImage(image), fit: BoxFit.fitHeight, height: 250.0),
               ),
               ListTile(
                   title: Text(

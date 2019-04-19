@@ -5,7 +5,7 @@ import 'package:locadeserta/animations/SlideableButton.dart';
 
 class Passage extends StatefulWidget {
   final Story currentStory;
-  final random = new Random().nextInt(7);
+  final random = new Random().nextInt(14);
   final Function(String pid, int i) onNextOptionSelected;
 
   Passage({this.currentStory, this.onNextOptionSelected});
@@ -105,8 +105,8 @@ class PassageState extends State<Passage> with TickerProviderStateMixin {
                   child: Text(
                     widget.currentStory.currentText,
                     style: TextStyle(
-                      fontFamily: "Raleway-Black",
-                      fontSize: 20,
+                      fontFamily: "Raleway-Bold",
+                      fontSize: 18,
                     ) //Theme.of(context).textTheme.title,
                   ),
                 ),
@@ -115,8 +115,8 @@ class PassageState extends State<Passage> with TickerProviderStateMixin {
             Image(
               image: AssetImage(
                   "images/background/boat_${widget.random.toString()}.jpg"),
-              fit: BoxFit.fitWidth,
-              height: 300.0,
+              fit: BoxFit.fitHeight,
+              height: 800.0,
             ),
           ],
         ),
