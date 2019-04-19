@@ -94,7 +94,6 @@ class PassageState extends State<Passage> with TickerProviderStateMixin {
             Container(
               alignment: Alignment.topCenter,
               width: MediaQuery.of(context).size.width * 0.79,
-//              height: MediaQuery.of(context).size.height,
               decoration: BoxDecoration(
                 color: Theme.of(context).backgroundColor,
                 border: Border.all(color: Colors.black, width: 3.0),
@@ -105,7 +104,10 @@ class PassageState extends State<Passage> with TickerProviderStateMixin {
                   padding: EdgeInsets.all(8.0),
                   child: Text(
                     widget.currentStory.currentText,
-                    style: Theme.of(context).textTheme.title,
+                    style: TextStyle(
+                      fontFamily: "Raleway-Black",
+                      fontSize: 20,
+                    ) //Theme.of(context).textTheme.title,
                   ),
                 ),
               ),
