@@ -1,11 +1,10 @@
-import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:locadeserta/story_bridge.dart';
 import 'package:locadeserta/animations/SlideableButton.dart';
+import 'package:locadeserta/models/BackgroundImage.dart';
 
 class Passage extends StatefulWidget {
   final Story currentStory;
-  final random = new Random().nextInt(14);
   final Function(String pid, int i) onNextOptionSelected;
 
   Passage({this.currentStory, this.onNextOptionSelected});
@@ -113,8 +112,7 @@ class PassageState extends State<Passage> with TickerProviderStateMixin {
               ),
             ),
             Image(
-              image: AssetImage(
-                  "images/background/boat_${widget.random.toString()}.jpg"),
+              image: BackgroundImage().getAssetImageForType("boat"),
               fit: BoxFit.fitHeight,
               height: 800.0,
             ),
