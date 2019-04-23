@@ -35,6 +35,7 @@ class PassageState extends State<Passage> with TickerProviderStateMixin {
     _passageScrollController.animateTo(0,
         duration: Duration(milliseconds: 50),
         curve: Curves.fastOutSlowIn);
+    BackgroundImage.nextRandomForType(ImageType.BOAT);
     widget.onNextOptionSelected(null, i);
   }
 
@@ -112,7 +113,7 @@ class PassageState extends State<Passage> with TickerProviderStateMixin {
               ),
             ),
             Image(
-              image: BackgroundImage().getAssetImageForType("boat"),
+              image: BackgroundImage.getAssetImageForType(ImageType.BOAT),
               fit: BoxFit.fitHeight,
               height: 800.0,
             ),
