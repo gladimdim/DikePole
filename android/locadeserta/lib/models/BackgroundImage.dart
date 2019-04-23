@@ -43,6 +43,9 @@ class BoatImages implements RandomImage {
   }
 
   void nextRandom() {
+    if (_usedRandomNumbers.length == _MAX) {
+      _usedRandomNumbers = [];
+    }
     var temp = _random.nextInt(_MAX);
     if (_usedRandomNumbers.indexOf(temp) >= 0) {
       nextRandom();
