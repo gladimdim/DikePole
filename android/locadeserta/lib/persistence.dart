@@ -1,6 +1,6 @@
 import 'dart:io';
 import 'dart:async';
-import "package:locadeserta/story_bridge.dart";
+import "package:locadeserta/models/story_bridge.dart";
 import 'package:path_provider/path_provider.dart';
 
 class Persistence {

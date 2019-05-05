@@ -6,12 +6,14 @@ class Story {
   final String currentText;
   final List<String> currentChoices;
   final bool canContinue;
+  final List<String> inventory;
   final List<String> currentTags;
 
   Story(
       {this.currentText,
       this.currentChoices,
       this.canContinue,
+      this.inventory,
       this.currentTags});
 }
 
@@ -33,6 +35,7 @@ class StoryBridge {
     List<String> choices;
     bool canContinue;
     List<String> currentTags;
+    List<String> inventory;
     try {
       currentText = await platform.invokeMethod("getCurrentText");
       var temp = await platform.invokeMethod("getCurrentChoices");
@@ -46,14 +49,18 @@ class StoryBridge {
         dynamicTags = [];
       }
       currentTags = List.from(dynamicTags);
-    } on PlatformException {
-      print("Error");
+
+      var tempInventory = await platform.invokeMethod("getInventory");
+      inventory = List.from(tempInventory);
+    } catch (e) {
+      print("Error: ${e.toString()}");
     }
     story = new Story(
       currentText: currentText,
       currentChoices: choices,
       canContinue: canContinue,
       currentTags: currentTags,
+      inventory: inventory,
     );
     streamStory.sink.add(story);
   }
@@ -90,7 +97,7 @@ class StoryBridge {
     if (storyJson == null) {
       try {
         final inkyText =
-        await rootBundle.loadString("stories/locadeserta.ink.json");
+            await rootBundle.loadString("stories/locadeserta.ink.json");
         await platform.invokeMethod("Init", inkyText);
         if (state != null) {
           await platform.invokeMethod("restoreState", {"text": state});
@@ -101,7 +108,7 @@ class StoryBridge {
       }
     } else {
       try {
-        await platform.invokeMethod("Init", storyJson );
+        await platform.invokeMethod("Init", storyJson);
         if (state != null) {
           await platform.invokeMethod("restoreState", {"text": state});
         }
@@ -117,12 +124,12 @@ class StoryBridge {
     await this._refreshStory();
   }
 
-//  Future<List<String>> getInventory() async {
-//    try {
-//      final list = await platform.invokeMethod("getInventory");
-//      return list;
-//    } catch (e) {
-//      print(e.toString());
-//    }
-//  }
+  Future<List<String>> getInventory() async {
+    try {
+      final list = await platform.invokeMethod("getInventory");
+      return list;
+    } catch (e) {
+      print(e.toString());
+    }
+  }
 }

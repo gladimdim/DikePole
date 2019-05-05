@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:locadeserta/story_bridge.dart';
+import 'package:locadeserta/models/story_bridge.dart';
 import 'package:locadeserta/animations/SlideableButton.dart';
 import 'package:locadeserta/models/BackgroundImage.dart';
 
@@ -77,6 +77,7 @@ class PassageState extends State<Passage> with TickerProviderStateMixin {
         ? [createContinue()]
         : createOptionList(widget.currentStory.currentChoices);
     list.addAll(buttons);
+
     return Column(
       children: list,
       crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -84,6 +85,7 @@ class PassageState extends State<Passage> with TickerProviderStateMixin {
   }
 
   Widget _buildTextRow(BuildContext context) {
+    print(widget.currentStory.currentTags);
     return Expanded(
       child: SingleChildScrollView(
         scrollDirection: Axis.horizontal,

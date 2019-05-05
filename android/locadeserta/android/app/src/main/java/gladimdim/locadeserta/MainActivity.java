@@ -46,23 +46,21 @@ public class MainActivity extends FlutterActivity {
                                 ArrayList aInventory = new ArrayList();
 
                                 for (Map.Entry<InkListItem, Integer> kv : inventory.entrySet()) {
-                                    HashMap m = new HashMap();
                                     InkListItem inkListItem = kv.getKey();
-                                    m.put(inkListItem.getItemName(), kv.getValue());
-                                    aInventory.add(m);
+                                    aInventory.add(inkListItem.getItemName());
                                 }
                                 result.success(aInventory);
                             } catch (Exception e) {
                                 result.error("EXCEPTION", e.toString(), null);
                             }
                         } else if (methodCall.method.equals("restoreState")) {
-                          String json = methodCall.argument("text");
-                          try {
-                              story.getState().loadJson(json);
-                              result.success("success");
-                          } catch (Exception e) {
-                              result.error("EXCEPTION", e.toString(), null);
-                          }
+                            String json = methodCall.argument("text");
+                            try {
+                                story.getState().loadJson(json);
+                                result.success("success");
+                            } catch (Exception e) {
+                                result.error("EXCEPTION", e.toString(), null);
+                            }
                         } else if (methodCall.method.equals("canContinue")) {
                             boolean canContinue;
                             try {
@@ -128,8 +126,7 @@ public class MainActivity extends FlutterActivity {
                             } catch (Exception e) {
                                 result.error("EXCEPTION", e.toString(), null);
                             }
-                        }
-                        else {
+                        } else {
                             result.notImplemented();
                         }
                     }

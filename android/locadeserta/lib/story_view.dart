@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:locadeserta/passage_view.dart';
 import 'package:locadeserta/persistence.dart';
-import 'package:locadeserta/story_bridge.dart';
+import 'package:locadeserta/models/story_bridge.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class StoryView extends StatefulWidget {
