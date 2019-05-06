@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:locadeserta/LandingView.dart';
 import 'package:locadeserta/models/Auth.dart';
+import 'package:splashscreen/splashscreen.dart';
 
 void main() => runApp(LocaDesertaApp());
 
@@ -9,16 +10,24 @@ class LocaDesertaApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Дике Поле',
-      theme: ThemeData(
-        brightness: Brightness.light,
-        primaryColor: Colors.black,
-        backgroundColor: Colors.white,
-        accentColor: Colors.black,
-        fontFamily: 'Montserrat',
-      ),
-      home: HomeWidget(title: 'Дике Поле. vALPHA'),
-    );
+        title: 'Дике Поле',
+        theme: ThemeData(
+          brightness: Brightness.light,
+          primaryColor: Colors.black,
+          backgroundColor: Colors.white,
+          accentColor: Colors.black,
+          fontFamily: 'Montserrat',
+        ),
+        home: SplashScreen(
+          seconds: 3,
+          navigateAfterSeconds: HomeWidget(title: 'Дике Поле. vALPHA'),
+          title: Text(
+            "Loca Deserta",
+            style: TextStyle(fontWeight: FontWeight.bold),
+          ),
+          image: new Image.asset("images/background/cossack_0.jpg"),
+          photoSize: 200.0,
+        ));
   }
 }
 

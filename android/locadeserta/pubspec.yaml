@@ -15,6 +15,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  splashscreen:
   path_provider: ^0.5.0+1
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -68,6 +69,7 @@ flutter:
     - images/background/boat_12.jpg
     - images/background/boat_13.jpg
     - images/background/boat_14.jpg
+    - images/background/cossack_0.jpg
     - images/landing/landing_0.jpg
     - images/landing/landing_1.jpg
     - images/landing/landing_2.jpg
