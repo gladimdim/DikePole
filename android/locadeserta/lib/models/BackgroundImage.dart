@@ -17,6 +17,10 @@ class BackgroundImage {
     return images[type].getAssetImage();
   }
 
+  static AssetImage getColoredAssetImageForType(ImageType type) {
+    return images[type].getAssetImageColored();
+  }
+
   static void nextRandomForType(ImageType type) {
     return images[type].nextRandom();
   }
@@ -29,7 +33,7 @@ class BackgroundImage {
 class BoatImages implements RandomImage {
   Random _random = Random();
   int _currentRandom;
-  static const _MAX = 14;
+  static const _MAX = 4;
   List<int> _usedRandomNumbers;
 
   BoatImages() {
@@ -39,7 +43,13 @@ class BoatImages implements RandomImage {
 
   AssetImage getAssetImage() {
     return AssetImage(
-        "images/background/boat_${_currentRandom.toString()}.jpg");
+        "images/background/boat/boat_${_currentRandom.toString()}.jpg");
+  }
+
+  AssetImage getAssetImageColored() {
+    return AssetImage(
+        "images/background/boat/c_boat_${_currentRandom.toString()}.jpg"
+    );
   }
 
   void nextRandom() {
@@ -66,6 +76,7 @@ abstract class RandomImage {
   static const _MAX = 0;
   List<int> _usedRandomNumbers;
   AssetImage getAssetImage();
+  AssetImage getAssetImageColored();
   void nextRandom();
 
   void resetUsedRandomNumbers();

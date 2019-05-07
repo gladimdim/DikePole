@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:locadeserta/animations/TweenImage.dart';
 import 'package:locadeserta/models/story_bridge.dart';
 import 'package:locadeserta/animations/SlideableButton.dart';
 import 'package:locadeserta/models/BackgroundImage.dart';
+
 
 class Passage extends StatefulWidget {
   final Story currentStory;
@@ -114,11 +116,11 @@ class PassageState extends State<Passage> with TickerProviderStateMixin {
                 ),
               ),
             ),
-            Image(
-              image: BackgroundImage.getAssetImageForType(ImageType.BOAT),
-              fit: BoxFit.fitHeight,
-              height: 800.0,
-            ),
+            TweenImage(
+              duration: 1,
+              first:  BackgroundImage.getColoredAssetImageForType(ImageType.BOAT),
+              last:  BackgroundImage.getAssetImageForType(ImageType.BOAT),
+            )
           ],
         ),
       ),
