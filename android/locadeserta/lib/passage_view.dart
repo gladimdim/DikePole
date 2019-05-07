@@ -118,8 +118,8 @@ class PassageState extends State<Passage> with TickerProviderStateMixin {
             ),
             TweenImage(
               duration: 1,
-              first:  BackgroundImage.getColoredAssetImageForType(ImageType.BOAT),
-              last:  BackgroundImage.getAssetImageForType(ImageType.BOAT),
+              first:  BackgroundImage.getAssetImageForType(ImageType.BOAT),
+              last:  BackgroundImage.getColoredAssetImageForType(ImageType.BOAT),
             )
           ],
         ),

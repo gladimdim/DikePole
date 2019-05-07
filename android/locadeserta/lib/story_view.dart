@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
+import 'package:locadeserta/models/catalogs.dart';
 import 'package:locadeserta/passage_view.dart';
 import 'package:locadeserta/persistence.dart';
 import 'package:locadeserta/models/story_bridge.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class StoryView extends StatefulWidget {
-  final String storyJson;
+  final CatalogStory catalogStory;
+  // final String storyJson;
   final String uid;
 
-  StoryView({this.uid, this.storyJson});
+  StoryView({this.uid, this.catalogStory});
 
   @override
   _StoryViewState createState() => _StoryViewState();
@@ -30,8 +32,8 @@ class _StoryViewState extends State<StoryView> {
     if (storyBridge == null) {
       storyBridge = StoryBridge();
       String state;
-      if (widget.storyJson != null) {
-        await storyBridge.initStory(storyJson: widget.storyJson, state: null);
+      if (widget.catalogStory != null && widget.catalogStory.inkJson != null) {
+        await storyBridge.initStory(storyJson: widget.catalogStory.inkJson, state: null);
         return storyBridge;
       }
       try {
@@ -77,7 +79,7 @@ class _StoryViewState extends State<StoryView> {
                           .document(widget.uid);
 
                       await userState.setData({
-                        "inkjson": widget.storyJson,
+                        "inkjson": widget.catalogStory.inkJson,
                         "statejson": stateJson
                       });
                     },

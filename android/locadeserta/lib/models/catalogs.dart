@@ -1,21 +1,20 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Catalog {
-  List<Story> stories;
+  List<CatalogStory> stories;
 }
 
-class Story {
+class CatalogStory {
   final String title;
   final String description;
   final String inkJson;
   final DocumentReference documentReference;
 
+  CatalogStory({this.title, this.description, this.inkJson, this.documentReference});
 
-  Story({this.title, this.description, this.inkJson, this.documentReference});
-
-  Story.fromMap(Map<String, dynamic> map, {this.documentReference})
+  CatalogStory.fromMap(Map<String, dynamic> map, {this.documentReference})
       : title = map['title'], description = map['description'], inkJson = map['inkjson'];
 
-  Story.fromSnapshot(DocumentSnapshot snapshot) : this.fromMap(snapshot.data, documentReference: snapshot.reference);
+  CatalogStory.fromSnapshot(DocumentSnapshot snapshot) : this.fromMap(snapshot.data, documentReference: snapshot.reference);
 
 }

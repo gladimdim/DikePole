@@ -8,8 +8,8 @@ class CatalogView extends StatefulWidget {
 }
 
 class _CatalogViewState extends State<CatalogView> {
-  void onStorySelected(String json) {
-    Navigator.pop(context, json);
+  void onStorySelected(CatalogStory story) {
+    Navigator.pop(context, story);
   }
 
   @override
@@ -43,9 +43,9 @@ class _CatalogViewState extends State<CatalogView> {
   }
 
   Widget _buildCatalogItem(DocumentSnapshot data) {
-    final story = Story.fromSnapshot(data);
+    final story = CatalogStory.fromSnapshot(data);
     return ListTile(
-      onTap: () => onStorySelected(story.inkJson),
+      onTap: () => onStorySelected(story),
       title: Text(story.title),
       subtitle: Text(story.description),
     );

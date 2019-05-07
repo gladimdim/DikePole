@@ -5,6 +5,7 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:locadeserta/LoginView.dart';
 import 'package:locadeserta/story_view.dart';
 import 'package:locadeserta/models/Auth.dart';
+import 'package:locadeserta/models/catalogs.dart';
 
 class LandingView extends StatefulWidget {
   final Auth auth;
@@ -22,18 +23,18 @@ class _LandingViewState extends State<LandingView> {
     return _buildLandingListView(context);
   }
 
-  _goToStory(String json) async {
-    var user = await  widget.auth.currentUser();
+  _goToStory(CatalogStory story) async {
+    var user = await widget.auth.currentUser();
     Navigator.push(
         context,
         MaterialPageRoute(
-            builder: (context) => StoryView(uid: user.uid, storyJson: json)));
+            builder: (context) => StoryView(uid: user.uid, catalogStory: story)));
   }
 
   _onViewCatalogPressed(BuildContext context) async {
-    final selectedStoryJsonString = await Navigator.push(
+    final selectedStory = await Navigator.push(
         context, MaterialPageRoute(builder: (context) => CatalogView()));
-    _goToStory(selectedStoryJsonString);
+    _goToStory(selectedStory);
   }
 
   ListView _buildLandingListView(BuildContext context) {
