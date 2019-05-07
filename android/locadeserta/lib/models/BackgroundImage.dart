@@ -33,7 +33,7 @@ class BackgroundImage {
 class BoatImages implements RandomImage {
   Random _random = Random();
   int _currentRandom;
-  static const _MAX = 4;
+  static const _MAX = 14;
   List<int> _usedRandomNumbers;
 
   BoatImages() {
