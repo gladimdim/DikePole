@@ -120,6 +120,7 @@ class PassageState extends State<Passage> with TickerProviderStateMixin {
               duration: 1,
               first:  BackgroundImage.getAssetImageForType(ImageType.BOAT),
               last:  BackgroundImage.getColoredAssetImageForType(ImageType.BOAT),
+              height: 800.0
             )
           ],
         ),

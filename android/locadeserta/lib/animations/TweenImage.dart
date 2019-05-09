@@ -7,8 +7,9 @@ class TweenImage extends StatefulWidget {
   final AssetImage first;
   final AssetImage last;
   final int duration;
+  final double height;
 
-  TweenImage({this.first, this.last, this.duration});
+  TweenImage({this.first, this.last, this.duration = 1, this.height = 500});
 }
 
 class _TweenImageState extends State<TweenImage>
@@ -35,10 +36,14 @@ class _TweenImageState extends State<TweenImage>
       onTap: _opaque,
       child: Stack(
         children: <Widget>[
-          Image(
-            image: widget.first,
-            fit: BoxFit.fitHeight,
-            height: 800.0,
+          AnimatedOpacity(
+            duration: Duration(seconds: widget.duration),
+            opacity: 1.0 - _opacity,
+            child: Image(
+              image: widget.first,
+              fit: BoxFit.fitHeight,
+              height: widget.height,
+            ),
           ),
           AnimatedOpacity(
             duration: Duration(seconds: widget.duration),
@@ -46,7 +51,7 @@ class _TweenImageState extends State<TweenImage>
             child: Image(
               image: widget.last,
               fit: BoxFit.fitHeight,
-              height: 800.0,
+              height: widget.height,
             ),
           )
         ],

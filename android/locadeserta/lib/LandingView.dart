@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:locadeserta/catalog_view.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:locadeserta/LoginView.dart';
 import 'package:locadeserta/story_view.dart';
 import 'package:locadeserta/models/Auth.dart';
 import 'package:locadeserta/models/catalogs.dart';
@@ -40,7 +39,6 @@ class _LandingViewState extends State<LandingView> {
   ListView _buildLandingListView(BuildContext context) {
     return ListView(
         children: <Widget>[
-          LoginView(auth: widget.auth),
           _buildCardWithImage(
             image: "images/landing/landing_3.jpg",
             mainText: "У вас є збережена гра",
