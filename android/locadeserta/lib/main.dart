@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:locadeserta/LandingView.dart';
 import 'package:locadeserta/LoginView.dart';
 import 'package:locadeserta/models/Auth.dart';
+import 'package:locadeserta/models/Localizations.dart';
 
 void main() => runApp(LocaDesertaApp());
 
@@ -21,6 +23,16 @@ class LocaDesertaApp extends StatelessWidget {
         fontFamily: 'Montserrat',
       ),
       home: HomeWidget(title: "Loca Deserta"),
+      localizationsDelegates: [
+        const LDLocalizationsDelegate(),
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+      ],
+      supportedLocales: [
+        Locale('en'),
+        Locale('uk'),
+        Locale('pl'),
+      ],
     );
   }
 }
@@ -42,7 +54,7 @@ class _HomeWidgetState extends State<HomeWidget> {
         actions: [
           FlatButton(
             child: Text(
-              "Вийти",
+              LDLocalizations.of(context).signOut,
               style: TextStyle(color: Colors.white),
             ),
             onPressed: () => auth.signOut(),

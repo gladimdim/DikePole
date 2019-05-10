@@ -4,6 +4,8 @@ import 'package:locadeserta/models/story_bridge.dart';
 import 'package:locadeserta/animations/SlideableButton.dart';
 import 'package:locadeserta/models/BackgroundImage.dart';
 
+import 'models/Localizations.dart';
+
 
 class Passage extends StatefulWidget {
   final Story currentStory;
@@ -51,9 +53,9 @@ class PassageState extends State<Passage> with TickerProviderStateMixin {
     return optionButtons;
   }
 
-  Widget createContinue() {
+  Widget createContinue(BuildContext context) {
     return SlideableButton(
-        buttonText: "Далі",
+        buttonText: LDLocalizations.of(context).Continue,
         onPress: () {
           _next();
         });
@@ -76,7 +78,7 @@ class PassageState extends State<Passage> with TickerProviderStateMixin {
     );
 
     final buttons = widget.currentStory.canContinue == true
-        ? [createContinue()]
+        ? [createContinue(context)]
         : createOptionList(widget.currentStory.currentChoices);
     list.addAll(buttons);
 

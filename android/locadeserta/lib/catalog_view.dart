@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:locadeserta/models/catalogs.dart';
 
+import 'models/Localizations.dart';
+
 class CatalogView extends StatefulWidget {
   @override
   _CatalogViewState createState() => _CatalogViewState();
@@ -15,12 +17,13 @@ class _CatalogViewState extends State<CatalogView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text('Доступні історії'),
-        ),
-        body: Center(
-          child: _buildCatalogView(),
-        ));
+      appBar: AppBar(
+        title: Text(LDLocalizations.of(context).availableStories),
+      ),
+      body: Center(
+        child: _buildCatalogView(),
+      ),
+    );
   }
 
   Widget _buildCatalogView() {

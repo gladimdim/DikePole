@@ -6,6 +6,8 @@ import 'package:locadeserta/story_view.dart';
 import 'package:locadeserta/models/Auth.dart';
 import 'package:locadeserta/models/catalogs.dart';
 
+import 'models/Localizations.dart';
+
 class LandingView extends StatefulWidget {
   final Auth auth;
   LandingView({this.auth});
@@ -41,8 +43,8 @@ class _LandingViewState extends State<LandingView> {
         children: <Widget>[
           _buildCardWithImage(
             image: "images/landing/landing_3.jpg",
-            mainText: "У вас є збережена гра",
-            buttonText: "Продовжити",
+            mainText: LDLocalizations.of(context).youHaveSavedGame,
+            buttonText: LDLocalizations.of(context).Continue,
             onButtonPress: () => _goToStory(null),
             context: context
           ),

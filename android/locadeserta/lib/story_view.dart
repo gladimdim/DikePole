@@ -20,15 +20,17 @@ class StoryView extends StatefulWidget {
 
 class _StoryViewState extends State<StoryView> {
   StoryBridge storyBridge;
-
+  String storyJson;
   @override
   void initState() {
     _initStoryBridge();
+    if (widget.catalogStory != null) {
+      storyJson = widget.catalogStory.inkJson;
+    }
     super.initState();
   }
 
   Future<StoryBridge> _initStoryBridge() async {
-    String storyJson;
     if (storyBridge == null) {
       storyBridge = StoryBridge();
       String state;
@@ -79,7 +81,7 @@ class _StoryViewState extends State<StoryView> {
                           .document(widget.uid);
 
                       await userState.setData({
-                        "inkjson": widget.catalogStory.inkJson,
+                        "inkjson": storyJson,
                         "statejson": stateJson
                       });
                     },
