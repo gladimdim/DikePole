@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:locadeserta/animations/TweenImage.dart';
 import 'package:locadeserta/models/Auth.dart';
+import 'package:locadeserta/models/Localizations.dart';
 
 class LoginView extends StatelessWidget {
   final Auth auth;
@@ -17,57 +18,59 @@ class LoginView extends StatelessWidget {
       initialData: null,
       builder: (context, snapshot) {
         User user = snapshot.data;
-          return Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Center(
-                child: TweenImage(
-                  last: AssetImage("images/background/cossack_0.jpg"),
-                  first: AssetImage("images/background/c_cossack_0.jpg"),
-                  height: 500.0,
-                ),
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Center(
+              child: TweenImage(
+                last: AssetImage("images/background/cossack_0.jpg"),
+                first: AssetImage("images/background/c_cossack_0.jpg"),
+                height: 500.0,
               ),
-              snapshot.data == null ? Padding(
-                padding:
-                    const EdgeInsets.only(top: 16.0, left: 12.0, right: 12.0),
-                child: SizedBox(
-                  height: 50.0,
-                  child: RaisedButton(
-                      color: Colors.blue[300],
-                      onPressed: _onSignInPressed,
-                      child: Text(
-                        "Зайти з Google ID",
-                        textAlign: TextAlign.center,
-                      )),
-                ),
-              ) : _buildLoginedView(user),
-            ],
-          );
+            ),
+            snapshot.data == null
+                ? Padding(
+                    padding: const EdgeInsets.only(
+                        top: 16.0, left: 12.0, right: 12.0),
+                    child: SizedBox(
+                      height: 50.0,
+                      child: RaisedButton(
+                          color: Colors.blue[300],
+                          onPressed: _onSignInPressed,
+                          child: Text(
+                            LDLocalizations.of(context).signInWithGoogle,
+                            textAlign: TextAlign.center,
+                          )),
+                    ),
+                  )
+                : _buildLoginedView(user, context),
+          ],
+        );
       },
     );
   }
 
-  Widget _buildLoginedView(User user) {
-    return Column(
-      children: [
-        _buildTextDisplayName(user.displayName),
-        RaisedButton(
-          color: Colors.green,
-          onPressed: _onContinuePressed,
-            child: Text(
-              "Почати",
-              textAlign: TextAlign.center,
-            ),
-        )
-      ]
-    );
+  Widget _buildLoginedView(User user, BuildContext context) {
+    return Column(children: [
+      _buildTextDisplayName(user.displayName, context),
+      RaisedButton(
+        color: Colors.green,
+        onPressed: _onContinuePressed,
+        child: Text(
+          LDLocalizations.of(context).start,
+          textAlign: TextAlign.center,
+        ),
+      )
+    ]);
   }
 
-  Padding _buildTextDisplayName(String displayName) {
+  Padding _buildTextDisplayName(String displayName, context) {
     return Padding(
       padding: const EdgeInsets.only(top: 16.0),
-      child: Center(child: Text("Добрий день, $displayName")),
+      child: Center(
+        child: Text(LDLocalizations.of(context).greetUserByName(displayName)),
+      ),
     );
   }
 

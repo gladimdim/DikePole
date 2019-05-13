@@ -14,7 +14,7 @@ class LocaDesertaApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Дике Поле',
+      title: 'Loca Deserta',
       theme: ThemeData(
         brightness: Brightness.light,
         primaryColor: Colors.black,

@@ -1,3 +1,5 @@
+import 'dart:core';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart' show SynchronousFuture;
 
@@ -19,6 +21,10 @@ class LDLocalizations {
       'apptitle': 'Loca Deserta',
       'availablestories': 'Available stories',
       'youhavesavedgame': 'You have a saved game',
+      'bookcatalog': 'Catalog of books',
+      'view': 'View',
+      'start': 'Start',
+      'greet': 'Good day',
     },
     'uk': {
       'continue': 'Продовжити',
@@ -28,6 +34,10 @@ class LDLocalizations {
       'apptitle': 'Дике Поле',
       'availablestories': 'Доступні історії',
       'youhavesavedgame': 'У вас є збережена гра',
+      'bookcatalog': ' Каталог книжок',
+      'view': 'Переглянути',
+      'start': 'Почати',
+      'greet': 'Добрий день',
     },
     'pl': {
       'continue': 'Dalej',
@@ -37,6 +47,10 @@ class LDLocalizations {
       'apptitle': 'Dzikie Pole',
       'availablestories': 'Dostępne historie',
       'youhavesavedgame': 'Masz zapisaną grę',
+      'bookcatalog': 'Katalog książek',
+      'view': 'Widok',
+      'start': 'Początek',
+      'greet': 'Dobry dzień',
     }
   };
 
@@ -66,6 +80,22 @@ class LDLocalizations {
 
   String get youHaveSavedGame {
     return _localizedValues[locale.languageCode]['youhavesavedgame'];
+  }
+
+  String get bookCatalog {
+    return _localizedValues[locale.languageCode]['bookcatalog'];
+  }
+
+  String get view {
+    return _localizedValues[locale.languageCode]['view'];
+  }
+
+  String get start {
+    return _localizedValues[locale.languageCode]['start'];
+  }
+
+  String greetUserByName(String name) {
+    return '${_localizedValues[locale.languageCode]['greet']}, $name';
   }
 }
 

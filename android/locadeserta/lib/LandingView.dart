@@ -53,8 +53,8 @@ class _LandingViewState extends State<LandingView> {
           ),
           _buildCardWithImage(
             image: "images/landing/landing_2.jpg",
-            mainText: "Каталог ігор",
-            buttonText: "Переглянути",
+            mainText: LDLocalizations.of(context).bookCatalog,
+            buttonText: LDLocalizations.of(context).view,
             onButtonPress: () => _onViewCatalogPressed(context),
             context: context
           ),
