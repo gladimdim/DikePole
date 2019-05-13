@@ -56,6 +56,31 @@ flutter:
   assets:
     - stories/LocaDeserta.json
     - stories/locadeserta.ink.json
+    # bulrush images
+    - images/background/bulrush/c_0.resized.jpg
+    - images/background/bulrush/0.jpg
+    - images/background/bulrush/c_1.resized.jpg
+    - images/background/bulrush/1.jpg
+    - images/background/bulrush/c_2.resized.jpg
+    - images/background/bulrush/2.jpg
+    - images/background/bulrush/c_3.resized.jpg
+    - images/background/bulrush/3.jpg
+    - images/background/bulrush/c_4.resized.jpg
+    - images/background/bulrush/4.jpg
+    - images/background/bulrush/c_5.resized.jpg
+    - images/background/bulrush/5.jpg
+    - images/background/bulrush/c_6.resized.jpg
+    - images/background/bulrush/6.jpg
+    - images/background/bulrush/c_7.resized.jpg
+    - images/background/bulrush/7.jpg
+    - images/background/bulrush/c_8.resized.jpg
+    - images/background/bulrush/8.jpg
+    - images/background/bulrush/c_9.resized.jpg
+    - images/background/bulrush/9.jpg
+    - images/background/bulrush/c_10.resized.jpg
+    - images/background/bulrush/10.jpg
+    - images/background/bulrush/c_11.resized.jpg
+    - images/background/bulrush/11.jpg
     - images/background/boat_0.jpg
     - images/background/boat_1.jpg
     - images/background/boat_2.jpg
