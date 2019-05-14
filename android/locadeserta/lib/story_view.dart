@@ -9,6 +9,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class StoryView extends StatefulWidget {
   final CatalogStory catalogStory;
+
   // final String storyJson;
   final String uid;
 
@@ -21,6 +22,7 @@ class StoryView extends StatefulWidget {
 class _StoryViewState extends State<StoryView> {
   StoryBridge storyBridge;
   String storyJson;
+
   @override
   void initState() {
     _initStoryBridge();
@@ -35,13 +37,13 @@ class _StoryViewState extends State<StoryView> {
       storyBridge = StoryBridge();
       String state;
       if (widget.catalogStory != null && widget.catalogStory.inkJson != null) {
-        await storyBridge.initStory(storyJson: widget.catalogStory.inkJson, state: null);
+        await storyBridge.initStory(
+            storyJson: widget.catalogStory.inkJson, state: null);
         return storyBridge;
       }
       try {
-        DocumentReference userState = Firestore.instance
-            .collection("user_states")
-            .document(widget.uid);
+        DocumentReference userState =
+            Firestore.instance.collection("user_states").document(widget.uid);
         var snapshot = await userState.get();
         print(snapshot);
         state = snapshot.data["statejson"];
@@ -68,7 +70,7 @@ class _StoryViewState extends State<StoryView> {
 
           currentStory = storyBridge.story;
           return Scaffold(
-            backgroundColor: Theme.of(context).backgroundColor,
+              backgroundColor: Theme.of(context).backgroundColor,
               appBar: AppBar(
                 actions: <Widget>[
                   IconButton(
@@ -80,10 +82,8 @@ class _StoryViewState extends State<StoryView> {
                           .collection("user_states")
                           .document(widget.uid);
 
-                      await userState.setData({
-                        "inkjson": storyJson,
-                        "statejson": stateJson
-                      });
+                      await userState.setData(
+                          {"inkjson": storyJson, "statejson": stateJson});
                     },
                   ),
                   IconButton(
@@ -93,7 +93,10 @@ class _StoryViewState extends State<StoryView> {
                     },
                   )
                 ],
-                title: Text("Цецора"),
+                // TODO: Read book title from firebase
+                title: Text(widget.catalogStory == null
+                    ? "Цецора"
+                    : widget.catalogStory.title),
               ),
               body: snapshot.hasData
                   ? Passage(

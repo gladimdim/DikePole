@@ -9,20 +9,68 @@ void main() => runApp(LocaDesertaApp());
 
 final Auth auth = Auth();
 
-class LocaDesertaApp extends StatelessWidget {
+class LocaDesertaApp extends StatefulWidget {
   // This widget is the root of your application.
+  @override
+  _LocaDesertaAppState createState() => _LocaDesertaAppState();
+}
+
+class _LocaDesertaAppState extends State<LocaDesertaApp> {
+  Locale locale = Locale('en');
+  String _selectedLocale = 'en';
+  bool userLoggedIn = false;
+  final ThemeData theme = ThemeData(
+    brightness: Brightness.light,
+    primaryColor: Colors.black,
+    backgroundColor: Colors.white,
+    accentColor: Colors.black,
+    fontFamily: 'Montserrat',
+  );
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Дике Поле',
-      theme: ThemeData(
-        brightness: Brightness.light,
-        primaryColor: Colors.black,
-        backgroundColor: Colors.white,
-        accentColor: Colors.black,
-        fontFamily: 'Montserrat',
+      locale: locale,
+      title: 'Loca Deserta',
+      theme: theme,
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text('Loca Deserta'),
+          actions: [
+            FlatButton(
+              child: Icon(
+                Icons.exit_to_app,
+                color: Colors.white,
+              ),
+              onPressed: () {
+                setState(() {
+                  userLoggedIn = false;
+                });
+                auth.signOut();
+              },
+            ),
+          ],
+        ),
+        backgroundColor: theme.backgroundColor,
+        body: userLoggedIn
+            ? LandingView(auth: auth)
+            : Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(top: 8.0),
+                    child: LoginView(
+                      auth: auth,
+                      onContinue: onContinue,
+                    ),
+                  ),
+                  Container(
+                    child: _buildLocaleSelection(),
+                  )
+                ],
+              ),
       ),
-      home: HomeWidget(title: "Loca Deserta"),
       localizationsDelegates: [
         const LDLocalizationsDelegate(),
         GlobalMaterialLocalizations.delegate,
@@ -35,41 +83,43 @@ class LocaDesertaApp extends StatelessWidget {
       ],
     );
   }
-}
 
-class HomeWidget extends StatefulWidget {
-  HomeWidget({Key key, this.title}) : super(key: key);
-  final String title;
-
-  @override
-  _HomeWidgetState createState() => _HomeWidgetState();
-}
-
-class _HomeWidgetState extends State<HomeWidget> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-        actions: [
-          FlatButton(
-            child: Text(
-              LDLocalizations.of(context).signOut,
-              style: TextStyle(color: Colors.white),
-            ),
-            onPressed: () => auth.signOut(),
-          ),
-        ],
-      ),
-      backgroundColor: Theme.of(context).backgroundColor,
-      body: StreamBuilder<User>(
-          stream: auth.onAuthStateChange,
-          initialData: null,
-          builder: (context, snapshot) {
-            return snapshot.data == null
-                ? LoginView(auth: auth)
-                : LandingView(auth: auth);
-          }),
+  Widget _buildLocaleSelection() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Radio(
+          value: 'uk',
+          groupValue: _selectedLocale,
+          onChanged: _setNewLocale,
+        ),
+        Text('🇺🇦'),
+        Radio(
+          value: 'pl',
+          groupValue: _selectedLocale,
+          onChanged: _setNewLocale,
+        ),
+        Text('🇵🇱'),
+        Radio(
+          value: 'en',
+          groupValue: _selectedLocale,
+          onChanged: _setNewLocale,
+        ),
+        Text('🇺🇸'),
+      ],
     );
+  }
+
+  _setNewLocale(String newLocale) {
+    setState(() {
+      _selectedLocale = newLocale;
+      locale = Locale(newLocale);
+    });
+  }
+
+  void onContinue() {
+    setState(() {
+      userLoggedIn = true;
+    });
   }
 }
