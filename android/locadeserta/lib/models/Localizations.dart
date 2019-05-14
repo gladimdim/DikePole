@@ -43,7 +43,7 @@ class LDLocalizations {
       'continue': 'Dalej',
       'signout': 'Wyloguj się',
       'next': 'Kolejny',
-      'signinwithgoogle': "zaloguj się za pomocą Google",
+      'signinwithgoogle': "Zaloguj się za pomocą Google",
       'apptitle': 'Dzikie Pole',
       'availablestories': 'Dostępne historie',
       'youhavesavedgame': 'Masz zapisaną grę',
