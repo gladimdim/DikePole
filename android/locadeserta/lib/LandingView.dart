@@ -12,6 +12,7 @@ const LANDING_IMAGE_HEIGHT = 200.0;
 
 class LandingView extends StatefulWidget {
   final Auth auth;
+
   LandingView({this.auth});
 
   @override
@@ -31,7 +32,8 @@ class _LandingViewState extends State<LandingView> {
     Navigator.push(
         context,
         MaterialPageRoute(
-            builder: (context) => StoryView(uid: user.uid, catalogStory: story)));
+            builder: (context) =>
+                StoryView(uid: user.uid, catalogStory: story)));
   }
 
   _onViewCatalogPressed(BuildContext context) async {
@@ -42,50 +44,68 @@ class _LandingViewState extends State<LandingView> {
 
   ListView _buildLandingListView(BuildContext context) {
     return ListView(
-        children: <Widget>[
-          _buildCardWithImage(
+      children: <Widget>[
+        _buildCardWithImage(
             image: "images/landing/landing_3.jpg",
             mainText: LDLocalizations.of(context).youHaveSavedGame,
             buttonText: LDLocalizations.of(context).Continue,
             onButtonPress: () => _goToStory(null),
-            context: context
-          ),
-          SizedBox(
-            height: 20.0,
-          ),
-          _buildCardWithImage(
+            context: context),
+        SizedBox(
+          height: 20.0,
+        ),
+        _buildCardWithImage(
             image: "images/landing/landing_2.jpg",
             mainText: LDLocalizations.of(context).bookCatalog,
             buttonText: LDLocalizations.of(context).view,
             onButtonPress: () => _onViewCatalogPressed(context),
-            context: context
-          ),
-          Center(
-            child: InkWell(
-              child: Padding(
-                padding: const EdgeInsets.only(top: 8.0),
-                child: Text(
-                  "For Privacy Policy Tap here.",
-                  style: TextStyle(fontSize: 15.0, fontWeight: FontWeight.bold),
-                ),
+            context: context),
+        Center(
+          child: InkWell(
+            child: Padding(
+              padding: const EdgeInsets.only(top: 8.0),
+              child: Text(
+                "For Privacy Policy Tap here.",
+                style: TextStyle(fontSize: 15.0, fontWeight: FontWeight.bold),
               ),
-              onTap: () async {
-                if (await canLaunch(
-                    "https://locadeserta.com/privacy_policy.html")) {
-                  await launch("https://locadeserta.com/privacy_policy.html");
-                }
-              },
             ),
+            onTap: () async {
+              if (await canLaunch(
+                  "https://locadeserta.com/privacy_policy.html")) {
+                await launch("https://locadeserta.com/privacy_policy.html");
+              }
+            },
           ),
-        ],
-      );
+        ),
+      ],
+    );
+  }
+
+  Widget _buildDecoratedBoxWithImage(AssetImage image) {
+    return SizedBox(
+      height: LANDING_IMAGE_HEIGHT,
+      width: 400,
+      child: DecoratedBox(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: image,
+            fit: BoxFit.fitWidth,
+          ),
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(20.0),
+            topRight: Radius.circular(20.0),
+          ),
+        ),
+      ),
+    );
   }
 
   Widget _buildCardWithImage(
       {String image,
       String mainText,
       String buttonText,
-      Function onButtonPress, @required BuildContext context}) {
+      Function onButtonPress,
+      @required BuildContext context}) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Container(
@@ -99,10 +119,8 @@ class _LandingViewState extends State<LandingView> {
           color: Theme.of(context).backgroundColor,
           child: Column(
             children: <Widget>[
-              Padding(
-                padding: const EdgeInsets.only(top: 16.0),
-                child: Image(
-                    image: AssetImage(image), fit: BoxFit.fitHeight, height: LANDING_IMAGE_HEIGHT),
+              _buildDecoratedBoxWithImage(
+                  AssetImage(image),
               ),
               ListTile(
                   title: Text(

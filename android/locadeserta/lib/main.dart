@@ -27,7 +27,7 @@ class _LocaDesertaAppState extends State<LocaDesertaApp> {
     fontFamily: 'Montserrat',
     textTheme: TextTheme(
       title: TextStyle(
-        color: Colors.white
+        color: Colors.black
       )
     )
   );
