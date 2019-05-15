@@ -25,6 +25,11 @@ class _LocaDesertaAppState extends State<LocaDesertaApp> {
     backgroundColor: Colors.white,
     accentColor: Colors.black,
     fontFamily: 'Montserrat',
+    textTheme: TextTheme(
+      title: TextStyle(
+        color: Colors.white
+      )
+    )
   );
 
   @override
@@ -40,7 +45,7 @@ class _LocaDesertaAppState extends State<LocaDesertaApp> {
             FlatButton(
               child: Icon(
                 Icons.exit_to_app,
-                color: Colors.white,
+                color: theme.backgroundColor,
               ),
               onPressed: () {
                 setState(() {
@@ -52,24 +57,7 @@ class _LocaDesertaAppState extends State<LocaDesertaApp> {
           ],
         ),
         backgroundColor: theme.backgroundColor,
-        body: userLoggedIn
-            ? LandingView(auth: auth)
-            : Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(top: 8.0),
-                    child: LoginView(
-                      auth: auth,
-                      onContinue: onContinue,
-                    ),
-                  ),
-                  Container(
-                    child: _buildLocaleSelection(),
-                  )
-                ],
-              ),
+        body: _buildBody(),
       ),
       localizationsDelegates: [
         const LDLocalizationsDelegate(),
@@ -82,6 +70,27 @@ class _LocaDesertaAppState extends State<LocaDesertaApp> {
         Locale('pl'),
       ],
     );
+  }
+
+  Widget _buildBody() {
+    return userLoggedIn
+          ? LandingView(auth: auth)
+          : Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(top: 8.0),
+                  child: LoginView(
+                    auth: auth,
+                    onContinue: onContinue,
+                  ),
+                ),
+                Container(
+                  child: _buildLocaleSelection(),
+                )
+              ],
+            );
   }
 
   Widget _buildLocaleSelection() {

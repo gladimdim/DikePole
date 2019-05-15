@@ -22,11 +22,11 @@ class _SlideableButtonState extends State<SlideableButton>
       vsync: this,
       duration: Duration(milliseconds: 400),
     )..addStatusListener((state) {
-      if (state == AnimationStatus.completed) {
-        widget.onPress();
-        controller.reverse();
-      }
-    });
+        if (state == AnimationStatus.completed) {
+          widget.onPress();
+          controller.reverse();
+        }
+      });
   }
 
   @override
@@ -51,10 +51,12 @@ class _SlideableButtonState extends State<SlideableButton>
             child: SizedBox(
               height: 100.0,
               child: FlatButton(
-                  color: Colors.black87,
+                  color: Theme.of(context).primaryColor,
                   child: Text(
                     widget.buttonText,
-                    style: TextStyle(fontSize: 20.0, color: Colors.white),
+                    style: TextStyle(
+                        fontSize: 20.0,
+                        color: Theme.of(context).textTheme.title.color),
                   ),
                   onPressed: () {
                     controller.forward();

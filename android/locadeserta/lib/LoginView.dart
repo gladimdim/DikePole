@@ -9,6 +9,7 @@ class LoginView extends StatelessWidget {
   final Auth auth;
   final GoogleSignIn _googleSignIn = GoogleSignIn();
   VoidCallback onContinue;
+
   LoginView({this.auth, this.onContinue});
 
   @override
@@ -32,13 +33,15 @@ class LoginView extends StatelessWidget {
             snapshot.data == null
                 ? Padding(
                     padding: const EdgeInsets.only(
-                        top: 8.0, left: 12.0, right: 12.0),
+                        top: 8.0),
                     child: RaisedButton(
-                        color: Colors.blue[300],
+                        color: Theme.of(context).primaryColor,
+                        textColor: Theme.of(context).textTheme.title.color,
                         onPressed: _onSignInPressed,
                         child: Text(
                           LDLocalizations.of(context).signInWithGoogle,
                           textAlign: TextAlign.center,
+                          style: Theme.of(context).textTheme.title,
                         )),
                   )
                 : _buildLoginedView(user, context),
@@ -49,23 +52,26 @@ class LoginView extends StatelessWidget {
   }
 
   Widget _buildLoginedView(User user, BuildContext context) {
-    return Column(children: [
+    return Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
       _buildTextDisplayName(user.displayName, context),
       RaisedButton(
-        color: Colors.green,
         onPressed: onContinue,
+        color: Theme.of(context).primaryColor,
         child: Text(
           LDLocalizations.of(context).start,
           textAlign: TextAlign.center,
+          style: Theme.of(context).textTheme.title
         ),
       )
     ]);
   }
 
-  Padding _buildTextDisplayName(String displayName, context) {
-    return Padding(
-      padding: const EdgeInsets.only(top: 16.0),
-      child: Text(LDLocalizations.of(context).greetUserByName(displayName)),
+  Widget _buildTextDisplayName(String displayName, context) {
+    return Center(
+      child: Padding(
+        padding: const EdgeInsets.only(top: 16.0),
+        child: Text(LDLocalizations.of(context).greetUserByName(displayName)),
+      ),
     );
   }
 

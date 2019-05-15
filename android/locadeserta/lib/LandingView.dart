@@ -8,6 +8,8 @@ import 'package:locadeserta/models/catalogs.dart';
 
 import 'models/Localizations.dart';
 
+const LANDING_IMAGE_HEIGHT = 200.0;
+
 class LandingView extends StatefulWidget {
   final Auth auth;
   LandingView({this.auth});
@@ -100,7 +102,7 @@ class _LandingViewState extends State<LandingView> {
               Padding(
                 padding: const EdgeInsets.only(top: 16.0),
                 child: Image(
-                    image: AssetImage(image), fit: BoxFit.fitHeight, height: 250.0),
+                    image: AssetImage(image), fit: BoxFit.fitHeight, height: LANDING_IMAGE_HEIGHT),
               ),
               ListTile(
                   title: Text(
