@@ -21,7 +21,6 @@ class LandingView extends StatefulWidget {
 
 class _LandingViewState extends State<LandingView> {
   String userUid;
-
   @override
   Widget build(BuildContext context) {
     return _buildLandingListView(context);

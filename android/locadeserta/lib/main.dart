@@ -17,7 +17,7 @@ class LocaDesertaApp extends StatefulWidget {
 
 class _LocaDesertaAppState extends State<LocaDesertaApp> {
   Locale locale = Locale('en');
-  String _selectedLocale = 'en';
+
   bool userLoggedIn = false;
   final ThemeData theme = ThemeData(
     brightness: Brightness.light,
@@ -27,7 +27,7 @@ class _LocaDesertaAppState extends State<LocaDesertaApp> {
     fontFamily: 'Montserrat',
     textTheme: TextTheme(
       title: TextStyle(
-        color: Colors.black
+        color: Colors.white
       )
     )
   );
@@ -75,55 +75,16 @@ class _LocaDesertaAppState extends State<LocaDesertaApp> {
   Widget _buildBody() {
     return userLoggedIn
           ? LandingView(auth: auth)
-          : Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(top: 8.0),
-                  child: LoginView(
-                    auth: auth,
-                    onContinue: onContinue,
-                  ),
-                ),
-                Container(
-                  child: _buildLocaleSelection(),
-                )
-              ],
-            );
-  }
-
-  Widget _buildLocaleSelection() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Radio(
-          value: 'uk',
-          groupValue: _selectedLocale,
-          onChanged: _setNewLocale,
-        ),
-        Text('🇺🇦'),
-        Radio(
-          value: 'pl',
-          groupValue: _selectedLocale,
-          onChanged: _setNewLocale,
-        ),
-        Text('🇵🇱'),
-        Radio(
-          value: 'en',
-          groupValue: _selectedLocale,
-          onChanged: _setNewLocale,
-        ),
-        Text('🇺🇸'),
-      ],
-    );
-  }
-
-  _setNewLocale(String newLocale) {
-    setState(() {
-      _selectedLocale = newLocale;
-      locale = Locale(newLocale);
-    });
+          : Padding(
+            padding: const EdgeInsets.only(top: 8.0),
+            child: LoginView(
+              auth: auth,
+              onContinue: onContinue,
+              onSetLocale: (Locale newLocale) => setState(() {
+                locale = newLocale;
+              }),
+            ),
+          );
   }
 
   void onContinue() {

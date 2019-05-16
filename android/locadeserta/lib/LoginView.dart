@@ -5,65 +5,77 @@ import 'package:locadeserta/animations/TweenImage.dart';
 import 'package:locadeserta/models/Auth.dart';
 import 'package:locadeserta/models/Localizations.dart';
 
-class LoginView extends StatelessWidget {
-  final Auth auth;
-  final GoogleSignIn _googleSignIn = GoogleSignIn();
-  VoidCallback onContinue;
+var version = "1.44";
 
-  LoginView({this.auth, this.onContinue});
+class LoginView extends StatefulWidget {
+  final Auth auth;
+  VoidCallback onContinue;
+  Function onSetLocale;
+
+  LoginView({this.auth, this.onContinue, this.onSetLocale});
+
+  @override
+  _LoginViewState createState() => _LoginViewState();
+}
+
+class _LoginViewState extends State<LoginView> {
+  final GoogleSignIn _googleSignIn = GoogleSignIn();
+  String _selectedLocale = 'en';
 
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<User>(
-      stream: auth.onAuthStateChange,
+      stream: widget.auth.onAuthStateChange,
       initialData: null,
       builder: (context, snapshot) {
         User user = snapshot.data;
         return Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
-            Center(
-              child: TweenImage(
-                last: AssetImage("images/background/cossack_0.jpg"),
-                first: AssetImage("images/background/c_cossack_0.jpg"),
-                height: 500.0,
+            Expanded(
+              child: Center(
+                child: TweenImage(
+                  last: AssetImage("images/background/cossack_0.jpg"),
+                  first: AssetImage("images/background/c_cossack_0.jpg"),
+                ),
               ),
             ),
-            snapshot.data == null
-                ? Padding(
-                    padding: const EdgeInsets.only(
-                        top: 8.0),
-                    child: RaisedButton(
-                        color: Theme.of(context).primaryColor,
-                        textColor: Theme.of(context).textTheme.title.color,
-                        onPressed: _onSignInPressed,
-                        child: Text(
-                          LDLocalizations.of(context).signInWithGoogle,
-                          textAlign: TextAlign.center,
-                          style: Theme.of(context).textTheme.title,
-                        )),
-                  )
-                : _buildLoginedView(user, context),
+            if (snapshot.data == null)
+              Padding(
+                padding: const EdgeInsets.only(top: 8.0),
+                child: RaisedButton(
+                    color: Theme.of(context).primaryColor,
+                    textColor: Theme.of(context).textTheme.title.color,
+                    onPressed: _onSignInPressed,
+                    child: Text(
+                      LDLocalizations.of(context).signInWithGoogle,
+                      textAlign: TextAlign.center,
+                      style: Theme.of(context).textTheme.title,
+                    )),
+              ),
+            if (snapshot.data != null) ..._buildLoginedView(user, context),
+            _buildLocaleSelection(),
+            Center(
+              child: Text("Version: $version"),
+            ),
           ],
         );
       },
     );
   }
 
-  Widget _buildLoginedView(User user, BuildContext context) {
-    return Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
+  List<Widget> _buildLoginedView(User user, BuildContext context) {
+    return [
       _buildTextDisplayName(user.displayName, context),
       RaisedButton(
-        onPressed: onContinue,
+        onPressed: widget.onContinue,
         color: Theme.of(context).primaryColor,
-        child: Text(
-          LDLocalizations.of(context).start,
-          textAlign: TextAlign.center,
-          style: Theme.of(context).textTheme.title
-        ),
-      )
-    ]);
+        child: Text(LDLocalizations.of(context).start,
+            textAlign: TextAlign.center,
+            style: Theme.of(context).textTheme.title),
+      ),
+    ];
   }
 
   Widget _buildTextDisplayName(String displayName, context) {
@@ -84,6 +96,40 @@ class LoginView extends StatelessWidget {
       idToken: googleAuth.idToken,
     );
 
-    await auth.signInWithCredentials(credential);
+    await widget.auth.signInWithCredentials(credential);
+  }
+
+  Widget _buildLocaleSelection() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Radio(
+          value: 'uk',
+          groupValue: _selectedLocale,
+          onChanged: _setNewLocale,
+        ),
+        Text('🇺🇦'),
+        Radio(
+          value: 'pl',
+          groupValue: _selectedLocale,
+          onChanged: _setNewLocale,
+        ),
+        Text('🇵🇱'),
+        Radio(
+          value: 'en',
+          groupValue: _selectedLocale,
+          onChanged: _setNewLocale,
+        ),
+        Text('🇺🇸'),
+      ],
+    );
+  }
+
+  _setNewLocale(String newLocale) {
+    var locale = Locale(newLocale);
+    setState(() {
+      _selectedLocale = newLocale;
+    });
+    widget.onSetLocale(locale);
   }
 }

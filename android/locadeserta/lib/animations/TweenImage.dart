@@ -9,7 +9,7 @@ class TweenImage extends StatefulWidget {
   final int duration;
   final double height;
 
-  TweenImage({this.first, this.last, this.duration = 1, this.height = 500});
+  TweenImage({this.first, this.last, this.duration = 1, this.height});
 }
 
 class _TweenImageState extends State<TweenImage>
