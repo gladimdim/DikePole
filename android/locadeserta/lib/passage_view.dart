@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:locadeserta/animations/TweenImage.dart';
 import 'package:locadeserta/models/story_bridge.dart';
@@ -91,8 +93,11 @@ class PassageState extends State<Passage> with TickerProviderStateMixin {
   Widget _buildTextRow(BuildContext context) {
     print(widget.currentStory.currentTags);
     var currentTags = widget.currentStory.currentTags;
-    // TODO: Forest is the default variable
-    var firstTag = currentTags.isEmpty ? "image forest" : currentTags[0];
+    var random = Random();
+    var randomTypes = ["image steppe", "image boat", "image bulrush", "image forest"];
+    var randomTypeIndex = random.nextInt(randomTypes.length);
+
+    var firstTag = currentTags.isEmpty ? randomTypes[randomTypeIndex] : currentTags[0];
     return Expanded(
       child: SingleChildScrollView(
         scrollDirection: Axis.horizontal,
