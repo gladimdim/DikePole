@@ -9,8 +9,8 @@ var version = "1.44";
 
 class LoginView extends StatefulWidget {
   final Auth auth;
-  VoidCallback onContinue;
-  Function onSetLocale;
+  final VoidCallback onContinue;
+  final Function onSetLocale;
 
   LoginView({this.auth, this.onContinue, this.onSetLocale});
 

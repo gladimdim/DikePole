@@ -4,14 +4,30 @@ import 'package:flutter/material.dart';
 
 class BackgroundImage {
   static final BackgroundImage _bgImage = BackgroundImage._internal();
+
   BackgroundImage._internal();
+
+  static ImageType variableToImageType(String variable) {
+    var imageType = variable.split(" ")[1];
+    switch (imageType) {
+      case "forest":
+        return ImageType.FOREST;
+      case "bulrush":
+        return ImageType.BULRUSH;
+      case "boat":
+        return ImageType.BOAT;
+      default:
+        return ImageType.BOAT;
+    }
+  }
+
   factory BackgroundImage() => _bgImage;
   static Map<ImageType, RandomImage> images = {
-        ImageType.BOAT: BoatImages(),
-        ImageType.STEPPE: BoatImages()
-      };
-
-  static final boatImage = BoatImages();
+    ImageType.BOAT: RandomImage(ImageType.BOAT),
+    ImageType.STEPPE: RandomImage(ImageType.FOREST),
+    ImageType.FOREST: RandomImage(ImageType.FOREST),
+    ImageType.BULRUSH: RandomImage(ImageType.BULRUSH),
+  };
 
   static AssetImage getAssetImageForType(ImageType type) {
     return images[type].getAssetImage();
@@ -30,25 +46,49 @@ class BackgroundImage {
   }
 }
 
-class BoatImages implements RandomImage {
+class RandomImage {
   Random _random = Random();
   int _currentRandom;
-  static const _MAX = 12;
+  int _MAX;
   List<int> _usedRandomNumbers;
+  final ImageType type;
 
-  BoatImages() {
+  Map<ImageType, String> _imagePrefix = {
+    ImageType.BULRUSH: "bulrush",
+    ImageType.FOREST: "forest",
+    ImageType.STEPPE: "steppe",
+    ImageType.BOAT: "boat",
+  };
+
+  RandomImage(this.type) {
+    switch (type) {
+      case ImageType.BOAT:
+        _MAX = 15;
+        break;
+      case ImageType.FOREST:
+        _MAX = 10;
+        break;
+      case ImageType.BULRUSH:
+        _MAX = 12;
+        break;
+      default:
+        throw "Not implemented";
+        break;
+    }
+
     _currentRandom = _random.nextInt(_MAX);
     _usedRandomNumbers = [];
   }
 
   AssetImage getAssetImage() {
     return AssetImage(
-        "images/background/bulrush/${_currentRandom.toString()}.jpg");
+      "images/background/${_imagePrefix[type]}/${_currentRandom.toString()}.jpg",
+    );
   }
 
   AssetImage getAssetImageColored() {
     return AssetImage(
-        "images/background/bulrush/c_${_currentRandom.toString()}.resized.jpg"
+      "images/background/${_imagePrefix[type]}/c_${_currentRandom.toString()}.jpg",
     );
   }
 
@@ -67,19 +107,6 @@ class BoatImages implements RandomImage {
   void resetUsedRandomNumbers() {
     _usedRandomNumbers = [];
   }
-
 }
 
-abstract class RandomImage {
-  Random _random;
-  int _currentRandom;
-  static const _MAX = 0;
-  List<int> _usedRandomNumbers;
-  AssetImage getAssetImage();
-  AssetImage getAssetImageColored();
-  void nextRandom();
-
-  void resetUsedRandomNumbers();
-}
-
-enum ImageType {BOAT, STEPPE}
+enum ImageType { BOAT, STEPPE, FOREST, BULRUSH }

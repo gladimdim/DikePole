@@ -1,6 +1,6 @@
 name: locadeserta
 description: Loca Deserta. The life of struggle.
-version: 1.0.44-arm64
+version: 1.0.45-arm64
 # The following defines the version and build number for your application.
 # A version number is three numbers separated by dots, like 1.2.43
 # followed by an optional build number separated by a +.
@@ -57,60 +57,82 @@ flutter:
     - stories/LocaDeserta.json
     - stories/locadeserta.ink.json
     # bulrush images
-    - images/background/bulrush/c_0.resized.jpg
+    - images/background/bulrush/c_0.jpg
     - images/background/bulrush/0.jpg
-    - images/background/bulrush/c_1.resized.jpg
+    - images/background/bulrush/c_1.jpg
     - images/background/bulrush/1.jpg
-    - images/background/bulrush/c_2.resized.jpg
+    - images/background/bulrush/c_2.jpg
     - images/background/bulrush/2.jpg
-    - images/background/bulrush/c_3.resized.jpg
+    - images/background/bulrush/c_3.jpg
     - images/background/bulrush/3.jpg
-    - images/background/bulrush/c_4.resized.jpg
+    - images/background/bulrush/c_4.jpg
     - images/background/bulrush/4.jpg
-    - images/background/bulrush/c_5.resized.jpg
+    - images/background/bulrush/c_5.jpg
     - images/background/bulrush/5.jpg
-    - images/background/bulrush/c_6.resized.jpg
+    - images/background/bulrush/c_6.jpg
     - images/background/bulrush/6.jpg
-    - images/background/bulrush/c_7.resized.jpg
+    - images/background/bulrush/c_7.jpg
     - images/background/bulrush/7.jpg
-    - images/background/bulrush/c_8.resized.jpg
+    - images/background/bulrush/c_8.jpg
     - images/background/bulrush/8.jpg
-    - images/background/bulrush/c_9.resized.jpg
+    - images/background/bulrush/c_9.jpg
     - images/background/bulrush/9.jpg
-    - images/background/bulrush/c_10.resized.jpg
+    - images/background/bulrush/c_10.jpg
     - images/background/bulrush/10.jpg
-    - images/background/bulrush/c_11.resized.jpg
+    - images/background/bulrush/c_11.jpg
     - images/background/bulrush/11.jpg
-    - images/background/boat_0.jpg
-    - images/background/boat_1.jpg
-    - images/background/boat_2.jpg
-    - images/background/boat_3.jpg
-    - images/background/boat_4.jpg
-    - images/background/boat_5.jpg
-    - images/background/boat_6.jpg
-    - images/background/boat_7.jpg
-    - images/background/boat_8.jpg
-    - images/background/boat_9.jpg
-    - images/background/boat_10.jpg
-    - images/background/boat_11.jpg
-    - images/background/boat_12.jpg
-    - images/background/boat_13.jpg
-    - images/background/boat_14.jpg
-    - images/background/c_boat_0.jpg
-    - images/background/c_boat_1.jpg
-    - images/background/c_boat_2.jpg
-    - images/background/c_boat_3.jpg
-    - images/background/c_boat_4.jpg
-    - images/background/c_boat_5.jpg
-    - images/background/c_boat_6.jpg
-    - images/background/c_boat_7.jpg
-    - images/background/c_boat_8.jpg
-    - images/background/c_boat_9.jpg
-    - images/background/c_boat_10.jpg
-    - images/background/c_boat_11.jpg
-    - images/background/c_boat_12.jpg
-    - images/background/c_boat_13.jpg
-    - images/background/c_boat_14.jpg
+    # BOAT IMAGES
+    - images/background/boat/0.jpg
+    - images/background/boat/1.jpg
+    - images/background/boat/2.jpg
+    - images/background/boat/3.jpg
+    - images/background/boat/4.jpg
+    - images/background/boat/5.jpg
+    - images/background/boat/6.jpg
+    - images/background/boat/7.jpg
+    - images/background/boat/8.jpg
+    - images/background/boat/9.jpg
+    - images/background/boat/10.jpg
+    - images/background/boat/11.jpg
+    - images/background/boat/12.jpg
+    - images/background/boat/13.jpg
+    - images/background/boat/14.jpg
+    - images/background/boat/c_0.jpg
+    - images/background/boat/c_1.jpg
+    - images/background/boat/c_2.jpg
+    - images/background/boat/c_3.jpg
+    - images/background/boat/c_4.jpg
+    - images/background/boat/c_5.jpg
+    - images/background/boat/c_6.jpg
+    - images/background/boat/c_7.jpg
+    - images/background/boat/c_8.jpg
+    - images/background/boat/c_9.jpg
+    - images/background/boat/c_10.jpg
+    - images/background/boat/c_11.jpg
+    - images/background/boat/c_12.jpg
+    - images/background/boat/c_13.jpg
+    - images/background/boat/c_14.jpg
+    # FOREST IMAGES
+    - images/background/forest/0.jpg
+    - images/background/forest/1.jpg
+    - images/background/forest/2.jpg
+    - images/background/forest/3.jpg
+    - images/background/forest/4.jpg
+    - images/background/forest/5.jpg
+    - images/background/forest/6.jpg
+    - images/background/forest/7.jpg
+    - images/background/forest/8.jpg
+    - images/background/forest/9.jpg
+    - images/background/forest/c_0.jpg
+    - images/background/forest/c_1.jpg
+    - images/background/forest/c_2.jpg
+    - images/background/forest/c_3.jpg
+    - images/background/forest/c_4.jpg
+    - images/background/forest/c_5.jpg
+    - images/background/forest/c_6.jpg
+    - images/background/forest/c_7.jpg
+    - images/background/forest/c_8.jpg
+    - images/background/forest/c_9.jpg
     - images/background/cossack_0.jpg
     - images/background/c_cossack_0.jpg
     - images/landing/landing_0.jpg

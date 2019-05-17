@@ -20,6 +20,25 @@ class Passage extends StatefulWidget {
 class PassageState extends State<Passage> with TickerProviderStateMixin {
   ScrollController _passageScrollController = new ScrollController();
 
+  @override
+  Widget build(BuildContext context) {
+    List<Widget> list = new List();
+
+    list.addAll(
+      [_buildTextRow(context)],
+    );
+
+    final buttons = widget.currentStory.canContinue == true
+        ? [createContinue(context)]
+        : createOptionList(widget.currentStory.currentChoices);
+    list.addAll(buttons);
+
+    return Column(
+      children: list,
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+    );
+  }
+
   Widget createButton(String text, int i) {
     return Padding(
       padding: EdgeInsets.all(8.0),
@@ -69,27 +88,11 @@ class PassageState extends State<Passage> with TickerProviderStateMixin {
     }
   }
 
-  @override
-  Widget build(BuildContext context) {
-    List<Widget> list = new List();
-
-    list.addAll(
-      [_buildTextRow(context)],
-    );
-
-    final buttons = widget.currentStory.canContinue == true
-        ? [createContinue(context)]
-        : createOptionList(widget.currentStory.currentChoices);
-    list.addAll(buttons);
-
-    return Column(
-      children: list,
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-    );
-  }
-
   Widget _buildTextRow(BuildContext context) {
     print(widget.currentStory.currentTags);
+    var currentTags = widget.currentStory.currentTags;
+    // TODO: Forest is the default variable
+    var firstTag = currentTags.isEmpty ? "image forest" : currentTags[0];
     return Expanded(
       child: SingleChildScrollView(
         scrollDirection: Axis.horizontal,
@@ -120,8 +123,8 @@ class PassageState extends State<Passage> with TickerProviderStateMixin {
             ),
             TweenImage(
               duration: 1,
-              first:  BackgroundImage.getAssetImageForType(ImageType.BOAT),
-              last:  BackgroundImage.getColoredAssetImageForType(ImageType.BOAT),
+              first:  BackgroundImage.getAssetImageForType(BackgroundImage.variableToImageType(firstTag)),
+              last:  BackgroundImage.getColoredAssetImageForType(BackgroundImage.variableToImageType(firstTag)),
               height: 800.0
             )
           ],
