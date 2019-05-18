@@ -6,6 +6,7 @@ import 'package:locadeserta/story_view.dart';
 import 'package:locadeserta/models/Auth.dart';
 import 'package:locadeserta/models/catalogs.dart';
 
+import 'animations/TweenImage.dart';
 import 'models/Localizations.dart';
 
 const LANDING_IMAGE_HEIGHT = 200.0;
@@ -21,6 +22,7 @@ class LandingView extends StatefulWidget {
 
 class _LandingViewState extends State<LandingView> {
   String userUid;
+
   @override
   Widget build(BuildContext context) {
     return _buildLandingListView(context);
@@ -45,7 +47,8 @@ class _LandingViewState extends State<LandingView> {
     return ListView(
       children: <Widget>[
         _buildCardWithImage(
-            image: "images/landing/landing_3.jpg",
+            image: "images/background/landing/landing_3.jpg",
+            coloredImage: 'images/background/landing/c_landing_3.jpg',
             mainText: LDLocalizations.of(context).youHaveSavedGame,
             buttonText: LDLocalizations.of(context).Continue,
             onButtonPress: () => _goToStory(null),
@@ -54,7 +57,8 @@ class _LandingViewState extends State<LandingView> {
           height: 20.0,
         ),
         _buildCardWithImage(
-            image: "images/landing/landing_2.jpg",
+            image: "images/background/landing/landing_2.jpg",
+            coloredImage: 'images/background/landing/c_landing_2.jpg',
             mainText: LDLocalizations.of(context).bookCatalog,
             buttonText: LDLocalizations.of(context).view,
             onButtonPress: () => _onViewCatalogPressed(context),
@@ -90,10 +94,7 @@ class _LandingViewState extends State<LandingView> {
             image: image,
             fit: BoxFit.fitWidth,
           ),
-          borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(20.0),
-            topRight: Radius.circular(20.0),
-          ),
+          borderRadius: _getTopRoundedBorderRadius(),
         ),
       ),
     );
@@ -101,6 +102,7 @@ class _LandingViewState extends State<LandingView> {
 
   Widget _buildCardWithImage(
       {String image,
+      String coloredImage,
       String mainText,
       String buttonText,
       Function onButtonPress,
@@ -110,16 +112,24 @@ class _LandingViewState extends State<LandingView> {
       child: Container(
         decoration: BoxDecoration(
             border: Border.all(color: Colors.black, width: 2.0),
-            borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(20.0),
-                topRight: Radius.circular(20.0))),
+            borderRadius: _getTopRoundedBorderRadius()),
         child: Card(
           elevation: 0.0,
           color: Theme.of(context).backgroundColor,
           child: Column(
             children: <Widget>[
-              _buildDecoratedBoxWithImage(
-                  AssetImage(image),
+              Container(
+                decoration: BoxDecoration(
+                  borderRadius: _getTopRoundedBorderRadius(),
+                ),
+                child: ClipRRect(
+                  borderRadius: _getTopRoundedBorderRadius(),
+                  child: TweenImage(
+                    first: AssetImage(image),
+                    last: AssetImage(coloredImage),
+                    duration: 2,
+                  ),
+                ),
               ),
               ListTile(
                   title: Text(
@@ -143,5 +153,10 @@ class _LandingViewState extends State<LandingView> {
         ),
       ),
     );
+  }
+
+  BorderRadius _getTopRoundedBorderRadius() {
+    return BorderRadius.only(
+        topLeft: Radius.circular(20.0), topRight: Radius.circular(20.0));
   }
 }

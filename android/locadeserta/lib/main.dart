@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:locadeserta/LandingView.dart';
+import 'package:locadeserta/main_menu.dart';
 import 'package:locadeserta/LoginView.dart';
 import 'package:locadeserta/models/Auth.dart';
 import 'package:locadeserta/models/Localizations.dart';
