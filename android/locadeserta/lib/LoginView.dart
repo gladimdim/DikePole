@@ -5,7 +5,7 @@ import 'package:locadeserta/animations/TweenImage.dart';
 import 'package:locadeserta/models/Auth.dart';
 import 'package:locadeserta/models/Localizations.dart';
 
-var version = "1.44";
+var version = "1.47";
 
 class LoginView extends StatefulWidget {
   final Auth auth;
@@ -41,20 +41,18 @@ class _LoginViewState extends State<LoginView> {
                 ),
               ),
             ),
+            _buildTextDisplayName(user, context),
             if (snapshot.data == null)
-              Padding(
-                padding: const EdgeInsets.only(top: 8.0),
-                child: RaisedButton(
-                    color: Theme.of(context).primaryColor,
-                    textColor: Theme.of(context).textTheme.title.color,
-                    onPressed: _onSignInPressed,
-                    child: Text(
-                      LDLocalizations.of(context).signInWithGoogle,
-                      textAlign: TextAlign.center,
-                      style: Theme.of(context).textTheme.title,
-                    )),
-              ),
-            if (snapshot.data != null) ..._buildLoginedView(user, context),
+              RaisedButton(
+                  color: Theme.of(context).primaryColor,
+                  textColor: Theme.of(context).textTheme.title.color,
+                  onPressed: _onSignInPressed,
+                  child: Text(
+                    LDLocalizations.of(context).signInWithGoogle,
+                    textAlign: TextAlign.center,
+                    style: Theme.of(context).textTheme.title,
+                  )),
+            if (snapshot.data != null) _buildLoginedView(user, context),
             _buildLocaleSelection(),
             Center(
               child: Text("Version: $version"),
@@ -65,24 +63,24 @@ class _LoginViewState extends State<LoginView> {
     );
   }
 
-  List<Widget> _buildLoginedView(User user, BuildContext context) {
-    return [
-      _buildTextDisplayName(user.displayName, context),
-      RaisedButton(
-        onPressed: widget.onContinue,
-        color: Theme.of(context).primaryColor,
-        child: Text(LDLocalizations.of(context).start,
-            textAlign: TextAlign.center,
-            style: Theme.of(context).textTheme.title),
-      ),
-    ];
+  Widget _buildLoginedView(User user, BuildContext context) {
+    return RaisedButton(
+      onPressed: widget.onContinue,
+      color: Theme.of(context).primaryColor,
+      child: Text(LDLocalizations.of(context).start,
+          textAlign: TextAlign.center,
+          style: Theme.of(context).textTheme.title),
+    );
   }
 
-  Widget _buildTextDisplayName(String displayName, context) {
+  Widget _buildTextDisplayName(User user, context) {
+    var userName = user == null
+        ? LDLocalizations.of(context).unregisteredUsername()
+        : user.displayName;
     return Center(
       child: Padding(
         padding: const EdgeInsets.only(top: 16.0),
-        child: Text(LDLocalizations.of(context).greetUserByName(displayName)),
+        child: Text(LDLocalizations.of(context).greetUserByName(userName)),
       ),
     );
   }

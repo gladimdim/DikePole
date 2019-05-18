@@ -25,6 +25,7 @@ class LDLocalizations {
       'view': 'View',
       'start': 'Start',
       'greet': 'Good day',
+      'unregisteredusername': 'Cossack'
     },
     'uk': {
       'continue': 'Продовжити',
@@ -38,6 +39,7 @@ class LDLocalizations {
       'view': 'Переглянути',
       'start': 'Почати',
       'greet': 'Добрий день',
+      'unregisteredusername': 'Козак'
     },
     'pl': {
       'continue': 'Dalej',
@@ -51,6 +53,7 @@ class LDLocalizations {
       'view': 'Widok',
       'start': 'Początek',
       'greet': 'Dobry dzień',
+      'unregisteredusername': 'Kozack'
     }
   };
 
@@ -96,6 +99,10 @@ class LDLocalizations {
 
   String greetUserByName(String name) {
     return '${_localizedValues[locale.languageCode]['greet']}, $name';
+  }
+
+  String unregisteredUsername() {
+    return _localizedValues[locale.languageCode]['unregisteredusername'];
   }
 }
 
