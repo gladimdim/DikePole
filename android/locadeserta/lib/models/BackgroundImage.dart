@@ -16,6 +16,8 @@ class BackgroundImage {
         return ImageType.BULRUSH;
       case "boat":
         return ImageType.BOAT;
+      case "river":
+        return ImageType.RIVER;
       default:
         return ImageType.BOAT;
     }
@@ -27,6 +29,7 @@ class BackgroundImage {
     ImageType.STEPPE: RandomImage(ImageType.FOREST),
     ImageType.FOREST: RandomImage(ImageType.FOREST),
     ImageType.BULRUSH: RandomImage(ImageType.BULRUSH),
+    ImageType.RIVER: RandomImage(ImageType.RIVER),
   };
 
   static AssetImage getAssetImageForType(ImageType type) {
@@ -58,6 +61,7 @@ class RandomImage {
     ImageType.FOREST: "forest",
     ImageType.STEPPE: "steppe",
     ImageType.BOAT: "boat",
+    ImageType.RIVER: "river",
   };
 
   RandomImage(this.type) {
@@ -70,6 +74,9 @@ class RandomImage {
         break;
       case ImageType.BULRUSH:
         _MAX = 12;
+        break;
+      case ImageType.RIVER:
+        _MAX = 15;
         break;
       default:
         throw "Not implemented";
@@ -109,4 +116,4 @@ class RandomImage {
   }
 }
 
-enum ImageType { BOAT, STEPPE, FOREST, BULRUSH }
+enum ImageType { BOAT, STEPPE, FOREST, BULRUSH, RIVER }

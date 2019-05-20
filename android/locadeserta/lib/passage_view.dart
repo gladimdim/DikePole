@@ -1,13 +1,9 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:locadeserta/animations/TweenImage.dart';
 import 'package:locadeserta/models/story_bridge.dart';
 import 'package:locadeserta/animations/SlideableButton.dart';
 import 'package:locadeserta/models/BackgroundImage.dart';
-
 import 'models/Localizations.dart';
-
 
 class Passage extends StatefulWidget {
   final Story currentStory;
@@ -21,6 +17,7 @@ class Passage extends StatefulWidget {
 
 class PassageState extends State<Passage> with TickerProviderStateMixin {
   ScrollController _passageScrollController = new ScrollController();
+  ImageType _lastImageType = ImageType.BULRUSH;
 
   @override
   Widget build(BuildContext context) {
@@ -45,22 +42,21 @@ class PassageState extends State<Passage> with TickerProviderStateMixin {
     return Padding(
       padding: EdgeInsets.all(8.0),
       child: SizedBox(
-          height: 100.0,
-          child: SlideableButton(
-            buttonText: text,
-            onPress: () {
-              _nextWithChoice(i);
-            },
-          ),
+        height: 100.0,
+        child: SlideableButton(
+          buttonText: text,
+          onPress: () {
+            _nextWithChoice(i);
+          },
+        ),
       ),
     );
   }
 
   void _nextWithChoice(int i) {
     _passageScrollController.animateTo(0,
-        duration: Duration(milliseconds: 50),
-        curve: Curves.fastOutSlowIn);
-    BackgroundImage.nextRandomForType(ImageType.BOAT);
+        duration: Duration(milliseconds: 50), curve: Curves.fastOutSlowIn);
+    BackgroundImage.nextRandomForType(_lastImageType);
     widget.onNextOptionSelected(null, i);
   }
 
@@ -91,13 +87,14 @@ class PassageState extends State<Passage> with TickerProviderStateMixin {
   }
 
   Widget _buildTextRow(BuildContext context) {
-    print(widget.currentStory.currentTags);
+    print("current tags: ${widget.currentStory.currentTags}");
     var currentTags = widget.currentStory.currentTags;
-    var random = Random();
-    var randomTypes = ["image steppe", "image boat", "image bulrush", "image forest"];
-    var randomTypeIndex = random.nextInt(randomTypes.length);
-
-    var firstTag = currentTags.isEmpty ? randomTypes[randomTypeIndex] : currentTags[0];
+    var randomImageType = _lastImageType;
+    if (currentTags.isNotEmpty) {
+      randomImageType = BackgroundImage.variableToImageType(currentTags[0]);
+      _lastImageType = randomImageType;
+    }
+    print("Random image type: $randomImageType");
     return Expanded(
       child: SingleChildScrollView(
         scrollDirection: Axis.horizontal,
@@ -121,21 +118,20 @@ class PassageState extends State<Passage> with TickerProviderStateMixin {
                     style: TextStyle(
                       fontFamily: "Raleway-Bold",
                       fontSize: 18,
-                    ) //Theme.of(context).textTheme.title,
+                    ),
                   ),
                 ),
               ),
             ),
             TweenImage(
-              duration: 1,
-              first:  BackgroundImage.getAssetImageForType(BackgroundImage.variableToImageType(firstTag)),
-              last:  BackgroundImage.getColoredAssetImageForType(BackgroundImage.variableToImageType(firstTag)),
-              height: 800.0
-            )
+                duration: 1,
+                first: BackgroundImage.getAssetImageForType(randomImageType),
+                last: BackgroundImage.getColoredAssetImageForType(
+                    randomImageType),
+                height: 800.0)
           ],
         ),
       ),
     );
   }
 }
-
