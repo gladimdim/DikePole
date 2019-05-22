@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:locadeserta/catalog_view.dart';
@@ -21,8 +22,6 @@ class LandingView extends StatefulWidget {
 }
 
 class _LandingViewState extends State<LandingView> {
-  String userUid;
-
   @override
   Widget build(BuildContext context) {
     return _buildLandingListView(context);
@@ -51,7 +50,17 @@ class _LandingViewState extends State<LandingView> {
             coloredImage: 'images/background/landing/c_landing_3.jpg',
             mainText: LDLocalizations.of(context).youHaveSavedGame,
             buttonText: LDLocalizations.of(context).Continue,
-            onButtonPress: () => _goToStory(null),
+            onButtonPress: () async {
+              var user = await widget.auth.currentUser();
+              DocumentReference userState = Firestore.instance
+                  .collection("user_states")
+                  .document(user.uid);
+              DocumentSnapshot possibleStories = await userState.get();
+              if (possibleStories.data != null) {
+                var catalogStory = await CatalogStory.getStoryById(possibleStories["catalogidreference"]);
+                _goToStory(catalogStory);
+              }
+            },
             context: context),
         SizedBox(
           height: 20.0,
@@ -81,22 +90,6 @@ class _LandingViewState extends State<LandingView> {
           ),
         ),
       ],
-    );
-  }
-
-  Widget _buildDecoratedBoxWithImage(AssetImage image) {
-    return SizedBox(
-      height: LANDING_IMAGE_HEIGHT,
-      width: 400,
-      child: DecoratedBox(
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            image: image,
-            fit: BoxFit.fitWidth,
-          ),
-          borderRadius: _getTopRoundedBorderRadius(),
-        ),
-      ),
     );
   }
 

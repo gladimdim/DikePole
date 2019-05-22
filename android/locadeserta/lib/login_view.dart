@@ -5,7 +5,7 @@ import 'package:locadeserta/animations/TweenImage.dart';
 import 'package:locadeserta/models/Auth.dart';
 import 'package:locadeserta/models/Localizations.dart';
 
-var version = "1.47";
+import 'locale_selection.dart';
 
 class LoginView extends StatefulWidget {
   final Auth auth;
@@ -20,7 +20,6 @@ class LoginView extends StatefulWidget {
 
 class _LoginViewState extends State<LoginView> {
   final GoogleSignIn _googleSignIn = GoogleSignIn();
-  String _selectedLocale = 'en';
 
   @override
   Widget build(BuildContext context) {
@@ -53,9 +52,12 @@ class _LoginViewState extends State<LoginView> {
                     style: Theme.of(context).textTheme.title,
                   )),
             if (snapshot.data != null) _buildLoginedView(user, context),
-            _buildLocaleSelection(),
+            LocaleSelection(
+              onLocaleChanged: _setNewLocale,
+              locale: Localizations.localeOf(context),
+            ),
             Center(
-              child: Text("Version: $version"),
+              child: Text(LDLocalizations.of(context).versionLabel),
             ),
           ],
         );
@@ -97,37 +99,7 @@ class _LoginViewState extends State<LoginView> {
     await widget.auth.signInWithCredentials(credential);
   }
 
-  Widget _buildLocaleSelection() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Radio(
-          value: 'uk',
-          groupValue: _selectedLocale,
-          onChanged: _setNewLocale,
-        ),
-        Text('🇺🇦'),
-        Radio(
-          value: 'pl',
-          groupValue: _selectedLocale,
-          onChanged: _setNewLocale,
-        ),
-        Text('🇵🇱'),
-        Radio(
-          value: 'en',
-          groupValue: _selectedLocale,
-          onChanged: _setNewLocale,
-        ),
-        Text('🇺🇸'),
-      ],
-    );
-  }
-
-  _setNewLocale(String newLocale) {
-    var locale = Locale(newLocale);
-    setState(() {
-      _selectedLocale = newLocale;
-    });
+  _setNewLocale(Locale locale) {
     widget.onSetLocale(locale);
   }
 }

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:locadeserta/models/catalogs.dart';
-
 import 'models/Localizations.dart';
 
 class CatalogView extends StatefulWidget {
@@ -46,11 +45,11 @@ class _CatalogViewState extends State<CatalogView> {
   }
 
   Widget _buildCatalogItem(DocumentSnapshot data) {
-    final story = CatalogStory.fromSnapshot(data);
+    final catalogStory = CatalogStory.fromSnapshot(data);
     return ListTile(
-      onTap: () => onStorySelected(story),
-      title: Text(story.title),
-      subtitle: Text(story.description),
+      onTap: () => onStorySelected(catalogStory),
+      title: Text(catalogStory.title),
+      subtitle: Text(catalogStory.description),
     );
   }
 }

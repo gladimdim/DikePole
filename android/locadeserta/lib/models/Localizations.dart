@@ -3,6 +3,8 @@ import 'dart:core';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart' show SynchronousFuture;
 
+var version = "1.49";
+
 class LDLocalizations {
   LDLocalizations(this.locale);
 
@@ -25,7 +27,8 @@ class LDLocalizations {
       'view': 'View',
       'start': 'Start',
       'greet': 'Good day',
-      'unregisteredusername': 'Cossack'
+      'unregisteredusername': 'Cossack',
+      'version': 'Version',
     },
     'uk': {
       'continue': 'Продовжити',
@@ -39,7 +42,8 @@ class LDLocalizations {
       'view': 'Переглянути',
       'start': 'Почати',
       'greet': 'Добрий день',
-      'unregisteredusername': 'Козак'
+      'unregisteredusername': 'Козак',
+      'version': 'Версія',
     },
     'pl': {
       'continue': 'Dalej',
@@ -53,7 +57,8 @@ class LDLocalizations {
       'view': 'Widok',
       'start': 'Początek',
       'greet': 'Dobry dzień',
-      'unregisteredusername': 'Kozack'
+      'unregisteredusername': 'Kozack',
+      'version': 'Wersja',
     }
   };
 
@@ -103,6 +108,10 @@ class LDLocalizations {
 
   String unregisteredUsername() {
     return _localizedValues[locale.languageCode]['unregisteredusername'];
+  }
+
+  String get versionLabel {
+    return "${_localizedValues[locale.languageCode]['version']}: $version";
   }
 }
 

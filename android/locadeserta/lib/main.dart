@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:locadeserta/main_menu.dart';
-import 'package:locadeserta/LoginView.dart';
+import 'package:locadeserta/login_view.dart';
 import 'package:locadeserta/models/Auth.dart';
 import 'package:locadeserta/models/Localizations.dart';
 
@@ -18,7 +18,7 @@ class LocaDesertaApp extends StatefulWidget {
 class _LocaDesertaAppState extends State<LocaDesertaApp> {
   Locale locale = Locale('en');
 
-  bool userLoggedIn = false;
+  bool userPressedContinue = false;
   final ThemeData theme = ThemeData(
     brightness: Brightness.light,
     primaryColor: Colors.black,
@@ -49,7 +49,7 @@ class _LocaDesertaAppState extends State<LocaDesertaApp> {
               ),
               onPressed: () {
                 setState(() {
-                  userLoggedIn = false;
+                  userPressedContinue = false;
                 });
                 auth.signOut();
               },
@@ -73,7 +73,7 @@ class _LocaDesertaAppState extends State<LocaDesertaApp> {
   }
 
   Widget _buildBody() {
-    return userLoggedIn
+    return userPressedContinue
           ? LandingView(auth: auth)
           : Padding(
             padding: const EdgeInsets.only(top: 8.0),
@@ -89,7 +89,7 @@ class _LocaDesertaAppState extends State<LocaDesertaApp> {
 
   void onContinue() {
     setState(() {
-      userLoggedIn = true;
+      userPressedContinue = true;
     });
   }
 }

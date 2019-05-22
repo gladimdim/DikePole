@@ -10,7 +10,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class StoryView extends StatefulWidget {
   final CatalogStory catalogStory;
 
-  // final String storyJson;
   final String uid;
 
   StoryView({this.uid, this.catalogStory});
@@ -21,14 +20,10 @@ class StoryView extends StatefulWidget {
 
 class _StoryViewState extends State<StoryView> {
   StoryBridge storyBridge;
-  String storyJson;
 
   @override
   void initState() {
     _initStoryBridge();
-    if (widget.catalogStory != null) {
-      storyJson = widget.catalogStory.inkJson;
-    }
     super.initState();
   }
 
@@ -36,22 +31,19 @@ class _StoryViewState extends State<StoryView> {
     if (storyBridge == null) {
       storyBridge = StoryBridge();
       String state;
-      if (widget.catalogStory != null && widget.catalogStory.inkJson != null) {
-        await storyBridge.initStory(
-            storyJson: widget.catalogStory.inkJson, state: null);
-        return storyBridge;
-      }
       try {
         DocumentReference userState =
             Firestore.instance.collection("user_states").document(widget.uid);
         var snapshot = await userState.get();
-        print(snapshot);
-        state = snapshot.data["statejson"];
-        storyJson = snapshot.data["inkjson"];
+        if (snapshot.data != null) {
+          state = snapshot.data['statejson'];
+        }
       } catch (e) {
         print(e.toString());
       }
-      await storyBridge.initStory(storyJson: storyJson, state: state);
+
+      await storyBridge.initStory(
+          storyJson: widget.catalogStory.inkJson, state: state);
     }
     return storyBridge;
   }
@@ -81,9 +73,17 @@ class _StoryViewState extends State<StoryView> {
                       DocumentReference userState = Firestore.instance
                           .collection("user_states")
                           .document(widget.uid);
-
-                      await userState.setData(
-                          {"inkjson": storyJson, "statejson": stateJson});
+                      DocumentSnapshot doc = await userState.get();
+                      if (doc.data == null) {
+                        await userState.setData({
+                          "catalogidreference": widget.catalogStory.id,
+                          "statejson": stateJson,
+                        });
+                      } else {
+                        userState.updateData({
+                          "statejson": stateJson,
+                        });
+                      }
                     },
                   ),
                   IconButton(
@@ -94,9 +94,7 @@ class _StoryViewState extends State<StoryView> {
                   )
                 ],
                 // TODO: Read book title from firebase
-                title: Text(widget.catalogStory == null
-                    ? "Цецора"
-                    : widget.catalogStory.title),
+                title: Text(widget.catalogStory.title),
               ),
               body: snapshot.hasData
                   ? Passage(

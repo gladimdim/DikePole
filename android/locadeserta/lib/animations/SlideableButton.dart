@@ -37,7 +37,8 @@ class _SlideableButtonState extends State<SlideableButton>
 
   @override
   Widget build(BuildContext context) {
-    final animation = Tween(begin: 0.0, end: 1000.0).animate(CurvedAnimation(
+    final width = MediaQuery.of(context).size.width * 2;
+    final animation = Tween(begin: 0.0, end: width).animate(CurvedAnimation(
       parent: controller,
       curve: Curves.easeInOut,
     ));
