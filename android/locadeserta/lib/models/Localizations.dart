@@ -29,6 +29,7 @@ class LDLocalizations {
       'greet': 'Good day',
       'unregisteredusername': 'Cossack',
       'version': 'Version',
+      'loadingstory': 'Loading Story',
     },
     'uk': {
       'continue': 'Продовжити',
@@ -44,6 +45,7 @@ class LDLocalizations {
       'greet': 'Добрий день',
       'unregisteredusername': 'Козак',
       'version': 'Версія',
+      'loadingstory': 'Завантаження історії',
     },
     'pl': {
       'continue': 'Dalej',
@@ -59,6 +61,7 @@ class LDLocalizations {
       'greet': 'Dobry dzień',
       'unregisteredusername': 'Kozack',
       'version': 'Wersja',
+      'loadingstory': 'Historia ładowania',
     }
   };
 
@@ -112,6 +115,10 @@ class LDLocalizations {
 
   String get versionLabel {
     return "${_localizedValues[locale.languageCode]['version']}: $version";
+  }
+
+  String get loadingStory {
+    return _localizedValues[locale.languageCode]['loadingstory'];
   }
 }
 

@@ -1,5 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+import 'Auth.dart';
+
 class Catalog {
   List<CatalogStory> stories;
 }
@@ -22,5 +24,16 @@ class CatalogStory {
     var possibleStory = Firestore.instance.collection('catalog').document(id);
     var document = await possibleStory.get();
     return CatalogStory.fromSnapshot(document);
+  }
+
+  static Future<CatalogStory> getCatalogStoryForUser(User user) async {
+    QuerySnapshot a = await Firestore.instance
+        .collection("user_states")
+        .document(user.uid)
+        .collection("states").getDocuments();
+
+    String s = a.documents[0]["catalogidreference"];
+
+    return await CatalogStory.getStoryById(s);
   }
 }

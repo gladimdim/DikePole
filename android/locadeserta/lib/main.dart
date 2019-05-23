@@ -10,7 +10,6 @@ void main() => runApp(LocaDesertaApp());
 final Auth auth = Auth();
 
 class LocaDesertaApp extends StatefulWidget {
-  // This widget is the root of your application.
   @override
   _LocaDesertaAppState createState() => _LocaDesertaAppState();
 }
@@ -74,7 +73,7 @@ class _LocaDesertaAppState extends State<LocaDesertaApp> {
 
   Widget _buildBody() {
     return userPressedContinue
-          ? LandingView(auth: auth)
+          ? MainMenu(auth: auth)
           : Padding(
             padding: const EdgeInsets.only(top: 8.0),
             child: LoginView(

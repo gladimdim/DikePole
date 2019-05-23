@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:locadeserta/catalog_view.dart';
@@ -12,34 +11,42 @@ import 'models/Localizations.dart';
 
 const LANDING_IMAGE_HEIGHT = 200.0;
 
-class LandingView extends StatefulWidget {
+class MainMenu extends StatefulWidget {
   final Auth auth;
 
-  LandingView({this.auth});
+  MainMenu({this.auth});
 
   @override
-  _LandingViewState createState() => _LandingViewState();
+  _MainMenuState createState() => _MainMenuState();
 }
 
-class _LandingViewState extends State<LandingView> {
+class _MainMenuState extends State<MainMenu> {
+  bool loadingStory = false;
+
   @override
   Widget build(BuildContext context) {
     return _buildLandingListView(context);
   }
 
-  _goToStory(CatalogStory story) async {
+  _goToStory(CatalogStory story, bool loadState) async {
     var user = await widget.auth.currentUser();
+    setState(() {
+      loadingStory = false;
+    });
     Navigator.push(
         context,
         MaterialPageRoute(
-            builder: (context) =>
-                StoryView(uid: user.uid, catalogStory: story)));
+            builder: (context) => StoryView(
+                  user: user,
+                  catalogStory: story,
+                  loadState: loadState,
+                )));
   }
 
   _onViewCatalogPressed(BuildContext context) async {
     final selectedStory = await Navigator.push(
         context, MaterialPageRoute(builder: (context) => CatalogView()));
-    _goToStory(selectedStory);
+    _goToStory(selectedStory, false);
   }
 
   ListView _buildLandingListView(BuildContext context) {
@@ -50,17 +57,7 @@ class _LandingViewState extends State<LandingView> {
             coloredImage: 'images/background/landing/c_landing_3.jpg',
             mainText: LDLocalizations.of(context).youHaveSavedGame,
             buttonText: LDLocalizations.of(context).Continue,
-            onButtonPress: () async {
-              var user = await widget.auth.currentUser();
-              DocumentReference userState = Firestore.instance
-                  .collection("user_states")
-                  .document(user.uid);
-              DocumentSnapshot possibleStories = await userState.get();
-              if (possibleStories.data != null) {
-                var catalogStory = await CatalogStory.getStoryById(possibleStories["catalogidreference"]);
-                _goToStory(catalogStory);
-              }
-            },
+            onButtonPress: _onContinuePressed,
             context: context),
         SizedBox(
           height: 20.0,
@@ -91,6 +88,15 @@ class _LandingViewState extends State<LandingView> {
         ),
       ],
     );
+  }
+
+  _onContinuePressed() async {
+    setState(() {
+      loadingStory = true;
+    });
+    var user = await widget.auth.currentUser();
+    var catalogStory = await CatalogStory.getCatalogStoryForUser(user);
+    _goToStory(catalogStory, true);
   }
 
   Widget _buildCardWithImage(
@@ -130,17 +136,22 @@ class _LandingViewState extends State<LandingView> {
                 style: TextStyle(fontSize: 20.0),
               )),
               ButtonTheme.bar(
-                  child: ButtonBar(
-                children: <Widget>[
-                  FlatButton(
-                      onPressed: onButtonPress,
-                      child: Text(
-                        buttonText,
-                        style: TextStyle(
-                            fontSize: 16.0, fontWeight: FontWeight.bold),
-                      ))
-                ],
-              ))
+                child: ButtonBar(
+                  children: <Widget>[
+                    if (loadingStory)
+                      Text(LDLocalizations.of(context).loadingStory),
+                    if (!loadingStory)
+                      FlatButton(
+                        onPressed: onButtonPress,
+                        child: Text(
+                          buttonText,
+                          style: TextStyle(
+                              fontSize: 16.0, fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                  ],
+                ),
+              ),
             ],
           ),
         ),

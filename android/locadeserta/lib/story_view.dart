@@ -7,12 +7,15 @@ import 'package:locadeserta/persistence.dart';
 import 'package:locadeserta/models/story_bridge.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+import 'models/Auth.dart';
+
 class StoryView extends StatefulWidget {
   final CatalogStory catalogStory;
+  Persistence persistence;
+  final User user;
+  final bool loadState;
 
-  final String uid;
-
-  StoryView({this.uid, this.catalogStory});
+  StoryView({@required this.user, @required this.catalogStory, this.loadState});
 
   @override
   _StoryViewState createState() => _StoryViewState();
@@ -30,20 +33,18 @@ class _StoryViewState extends State<StoryView> {
   Future<StoryBridge> _initStoryBridge() async {
     if (storyBridge == null) {
       storyBridge = StoryBridge();
-      String state;
+      widget.persistence =
+          Persistence(bridge: storyBridge, storage: Firestore.instance);
+      String stateJson;
       try {
-        DocumentReference userState =
-            Firestore.instance.collection("user_states").document(widget.uid);
-        var snapshot = await userState.get();
-        if (snapshot.data != null) {
-          state = snapshot.data['statejson'];
-        }
+        stateJson = await widget.persistence.getStateJsonForUserAndCatalog(
+            widget.user, widget.catalogStory);
       } catch (e) {
         print(e.toString());
       }
 
       await storyBridge.initStory(
-          storyJson: widget.catalogStory.inkJson, state: state);
+          storyJson: widget.catalogStory.inkJson, state: stateJson);
     }
     return storyBridge;
   }
@@ -68,22 +69,8 @@ class _StoryViewState extends State<StoryView> {
                   IconButton(
                     icon: Icon(Icons.save),
                     onPressed: () async {
-                      Persistence pers = Persistence(bridge: storyBridge);
-                      String stateJson = await pers.getStateJson();
-                      DocumentReference userState = Firestore.instance
-                          .collection("user_states")
-                          .document(widget.uid);
-                      DocumentSnapshot doc = await userState.get();
-                      if (doc.data == null) {
-                        await userState.setData({
-                          "catalogidreference": widget.catalogStory.id,
-                          "statejson": stateJson,
-                        });
-                      } else {
-                        userState.updateData({
-                          "statejson": stateJson,
-                        });
-                      }
+                      await widget.persistence.saveStateToStorageForUser(
+                          widget.user, widget.catalogStory);
                     },
                   ),
                   IconButton(
@@ -93,7 +80,6 @@ class _StoryViewState extends State<StoryView> {
                     },
                   )
                 ],
-                // TODO: Read book title from firebase
                 title: Text(widget.catalogStory.title),
               ),
               body: snapshot.hasData
