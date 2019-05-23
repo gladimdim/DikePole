@@ -23,11 +23,10 @@ class Persistence {
   Future<String> getStateJsonForUserAndCatalog(
       User user, CatalogStory catalogStory) async {
     CollectionReference collection = _getUserStateReferences(user);
-    QuerySnapshot query = await collection
-        .where("catalogidreference", isEqualTo: catalogStory.id)
-        .getDocuments();
-    if (query.documents.length > 0) {
-      return query.documents[0]["statejson"];
+    DocumentSnapshot doc = await collection.document(catalogStory.id).get();
+
+    if (doc.exists) {
+      return doc["statejson"];
     } else {
       return null;
     }
@@ -51,24 +50,21 @@ class Persistence {
   Future saveStateToStorageForUser(User user, CatalogStory catalogStory) async {
     String stateJson = await getStateJson();
 
-    QuerySnapshot a = await storage
+    DocumentSnapshot doc = await storage
         .collection("user_states")
         .document(user.uid)
         .collection("states")
-        .where("catalogidreference", isEqualTo: catalogStory.id)
-        .getDocuments();
-
-    var docs = a.documents;
+        .document(catalogStory.id)
+        .get();
 
     Map<String, dynamic> toAdd = {
       "catalogidreference": catalogStory.id,
       "statejson": stateJson,
     };
-    if (docs.isEmpty) {
-      await _getUserStateReferences(user).add(toAdd);
+    if (doc.exists) {
+      storage.document(doc.reference.path).updateData(toAdd);
     } else {
-      docs.forEach(
-          (doc) => storage.document(doc.reference.path).updateData(toAdd));
+      storage.document(doc.reference.path).setData(toAdd);
     }
   }
 }
