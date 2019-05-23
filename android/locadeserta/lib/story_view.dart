@@ -5,17 +5,14 @@ import 'package:locadeserta/models/catalogs.dart';
 import 'package:locadeserta/passage_view.dart';
 import 'package:locadeserta/persistence.dart';
 import 'package:locadeserta/models/story_bridge.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'models/Auth.dart';
 
 class StoryView extends StatefulWidget {
   final CatalogStory catalogStory;
-  Persistence persistence;
   final User user;
-  final bool loadState;
 
-  StoryView({@required this.user, @required this.catalogStory, this.loadState});
+  StoryView({@required this.user, @required this.catalogStory});
 
   @override
   _StoryViewState createState() => _StoryViewState();
@@ -33,11 +30,9 @@ class _StoryViewState extends State<StoryView> {
   Future<StoryBridge> _initStoryBridge() async {
     if (storyBridge == null) {
       storyBridge = StoryBridge();
-      widget.persistence =
-          Persistence(bridge: storyBridge, storage: Firestore.instance);
       String stateJson;
       try {
-        stateJson = await widget.persistence.getStateJsonForUserAndCatalog(
+        stateJson = await Persistence.getStateJsonForUserAndCatalog(
             widget.user, widget.catalogStory);
       } catch (e) {
         print(e.toString());
@@ -69,8 +64,8 @@ class _StoryViewState extends State<StoryView> {
                   IconButton(
                     icon: Icon(Icons.save),
                     onPressed: () async {
-                      await widget.persistence.saveStateToStorageForUser(
-                          widget.user, widget.catalogStory);
+                      await Persistence.saveStateToStorageForUser(
+                          widget.user, widget.catalogStory, storyBridge);
                     },
                   ),
                   IconButton(

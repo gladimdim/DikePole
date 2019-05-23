@@ -13,7 +13,6 @@ const LANDING_IMAGE_HEIGHT = 200.0;
 
 class MainMenu extends StatefulWidget {
   final Auth auth;
-
   MainMenu({this.auth});
 
   @override
@@ -38,8 +37,7 @@ class _MainMenuState extends State<MainMenu> {
         MaterialPageRoute(
             builder: (context) => StoryView(
                   user: user,
-                  catalogStory: story,
-                  loadState: loadState,
+                  catalogStory: story
                 )));
   }
 
@@ -95,8 +93,14 @@ class _MainMenuState extends State<MainMenu> {
       loadingStory = true;
     });
     var user = await widget.auth.currentUser();
-    var catalogStory = await CatalogStory.getCatalogStoryForUser(user);
-    _goToStory(catalogStory, true);
+    try {
+      var catalogStory = await CatalogStory.getCatalogStoryForUser(user);
+      _goToStory(catalogStory, true);
+    } catch (e) {
+      setState(() {
+        loadingStory = false;
+      });
+    }
   }
 
   Widget _buildCardWithImage(
