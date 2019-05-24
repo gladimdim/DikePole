@@ -166,14 +166,10 @@ flutter:
     - images/background/river/c_14.jpg
     - images/background/cossack_0.jpg
     - images/background/c_cossack_0.jpg
-    - images/background/landing/landing_2.jpg
-    - images/background/landing/landing_3.jpg
-    - images/background/landing/c_landing_2.jpg
-    - images/background/landing/c_landing_3.jpg
-    - images/landing/landing_3.jpg
-#    - images/background/cossack_0.jpg
-  #  - images/a_dot_burr.jpeg
-  #  - images/a_dot_ham.jpeg
+    - images/background/landing/0.jpg
+    - images/background/landing/1.jpg
+    - images/background/landing/c_0.jpg
+    - images/background/landing/c_1.jpg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.io/assets-and-images/#resolution-aware.

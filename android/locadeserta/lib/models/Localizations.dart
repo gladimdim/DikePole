@@ -30,6 +30,7 @@ class LDLocalizations {
       'unregisteredusername': 'Cossack',
       'version': 'Version',
       'loadingstory': 'Loading Story',
+      'startstory': 'Read',
     },
     'uk': {
       'continue': 'Продовжити',
@@ -46,6 +47,7 @@ class LDLocalizations {
       'unregisteredusername': 'Козак',
       'version': 'Версія',
       'loadingstory': 'Завантаження історії',
+      'startstory': 'Читати'
     },
     'pl': {
       'continue': 'Dalej',
@@ -62,6 +64,7 @@ class LDLocalizations {
       'unregisteredusername': 'Kozack',
       'version': 'Wersja',
       'loadingstory': 'Historia ładowania',
+      'startstory': 'Сzytać',
     }
   };
 
@@ -119,6 +122,10 @@ class LDLocalizations {
 
   String get loadingStory {
     return _localizedValues[locale.languageCode]['loadingstory'];
+  }
+
+  String get startStory {
+    return _localizedValues[locale.languageCode]['startstory'];
   }
 }
 

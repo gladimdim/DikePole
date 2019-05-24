@@ -2,21 +2,25 @@ import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import "package:locadeserta/models/story_bridge.dart";
 
-import 'models/Auth.dart';
-import 'models/catalogs.dart';
+import 'Auth.dart';
+import 'catalogs.dart';
 
 final Firestore storage = Firestore.instance;
 
 class Persistence {
-  static Future<String> getStateJsonFromBridge(StoryBridge bridge) async {
+  Persistence._internal();
+
+  static final Persistence instance = Persistence._internal();
+
+  Future<String> getStateJsonFromBridge(StoryBridge bridge) async {
     return await bridge.getStateJson();
   }
 
-  static Future<CatalogStory> getCatalogStoryById(String id) async {
+  Future<CatalogStory> getCatalogStoryById(String id) async {
     return await CatalogStory.getStoryById(id);
   }
 
-  static Future<String> getStateJsonForUserAndCatalog(
+  Future<String> getStateJsonForUserAndCatalog(
       User user, CatalogStory catalogStory) async {
     CollectionReference collection = _getUserStateReferences(user);
     DocumentSnapshot doc = await collection.document(catalogStory.id).get();
@@ -28,22 +32,20 @@ class Persistence {
     }
   }
 
-  static CollectionReference _getUserStateReferences(User user) {
+  CollectionReference _getUserStateReferences(User user) {
     return storage
         .collection("user_states")
         .document(user.uid)
         .collection("states");
   }
 
-  static Future<DocumentReference> _getUserStatesForCatalog(
-      User user, CatalogStory catalogStory) async {
-    Query query = _getUserStateReferences(user)
-        .where("catalogidreference", isEqualTo: catalogStory.id);
-    QuerySnapshot qs = await query.getDocuments();
-    return qs.documents[0].reference;
+  Future<List<CatalogStory>> getAvailableCatalogStories() async {
+    QuerySnapshot stories = await storage.collection("catalog").getDocuments();
+
+    return stories.documents.map((snapshot) => CatalogStory.fromSnapshot(snapshot)).toList();
   }
 
-  static Future saveStateToStorageForUser(User user, CatalogStory catalogStory, StoryBridge bridge) async {
+  Future saveStateToStorageForUser(User user, CatalogStory catalogStory, StoryBridge bridge) async {
     String stateJson = await getStateJsonFromBridge(bridge);
 
     DocumentSnapshot doc = await storage

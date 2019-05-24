@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:locadeserta/models/catalogs.dart';
 import 'package:locadeserta/passage_view.dart';
-import 'package:locadeserta/persistence.dart';
+import 'package:locadeserta/models/persistence.dart';
 import 'package:locadeserta/models/story_bridge.dart';
 
 import 'models/Auth.dart';
@@ -32,7 +32,7 @@ class _StoryViewState extends State<StoryView> {
       storyBridge = StoryBridge();
       String stateJson;
       try {
-        stateJson = await Persistence.getStateJsonForUserAndCatalog(
+        stateJson = await Persistence.instance.getStateJsonForUserAndCatalog(
             widget.user, widget.catalogStory);
       } catch (e) {
         print(e.toString());
@@ -64,7 +64,7 @@ class _StoryViewState extends State<StoryView> {
                   IconButton(
                     icon: Icon(Icons.save),
                     onPressed: () async {
-                      await Persistence.saveStateToStorageForUser(
+                      await Persistence.instance.saveStateToStorageForUser(
                           widget.user, widget.catalogStory, storyBridge);
                     },
                   ),

@@ -18,6 +18,8 @@ class BackgroundImage {
         return ImageType.BOAT;
       case "river":
         return ImageType.RIVER;
+      case 'landing':
+        return ImageType.LANDING;
       default:
         return ImageType.BOAT;
     }
@@ -30,6 +32,7 @@ class BackgroundImage {
     ImageType.FOREST: RandomImage(ImageType.FOREST),
     ImageType.BULRUSH: RandomImage(ImageType.BULRUSH),
     ImageType.RIVER: RandomImage(ImageType.RIVER),
+    ImageType.LANDING: RandomImage(ImageType.LANDING),
   };
 
   static AssetImage getAssetImageForType(ImageType type) {
@@ -62,6 +65,7 @@ class RandomImage {
     ImageType.STEPPE: "steppe",
     ImageType.BOAT: "boat",
     ImageType.RIVER: "river",
+    ImageType.LANDING: 'landing',
   };
 
   RandomImage(this.type) {
@@ -78,6 +82,9 @@ class RandomImage {
       case ImageType.RIVER:
         _MAX = 15;
         break;
+      case ImageType.LANDING:
+        _MAX = 2;
+        break;
       default:
         throw "Not implemented";
         break;
@@ -88,9 +95,17 @@ class RandomImage {
   }
 
   AssetImage getAssetImage() {
-    return AssetImage(
+    var returnValue = AssetImage(
       "images/background/${_imagePrefix[type]}/${_currentRandom.toString()}.jpg",
     );
+
+    // TODO: landing image must be always randomized
+    if (type == ImageType.LANDING) {
+      print("randomizing");
+      nextRandom();
+    }
+
+    return returnValue;
   }
 
   AssetImage getAssetImageColored() {
@@ -116,4 +131,4 @@ class RandomImage {
   }
 }
 
-enum ImageType { BOAT, STEPPE, FOREST, BULRUSH, RIVER }
+enum ImageType { BOAT, STEPPE, FOREST, BULRUSH, RIVER, LANDING }
