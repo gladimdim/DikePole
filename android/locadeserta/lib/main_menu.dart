@@ -24,7 +24,13 @@ class _MainMenuState extends State<MainMenu> {
 
   @override
   Widget build(BuildContext context) {
-    return _buildLandingListView(context);
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Loca Deserta'),
+      ),
+      backgroundColor: Theme.of(context).backgroundColor,
+      body: _buildLandingListView(context),
+    );
   }
 
   Widget _buildLandingListView(BuildContext context) {
@@ -35,7 +41,12 @@ class _MainMenuState extends State<MainMenu> {
           case ConnectionState.none:
           case ConnectionState.active:
           case ConnectionState.waiting:
-            return _buildLoadingCatalogView(context);
+            return Center(
+              child: TweenImage(
+                last: AssetImage("images/background/cossack_0.jpg"),
+                first: AssetImage("images/background/c_cossack_0.jpg"),
+              ),
+            );
             break;
           case ConnectionState.done:
             return _buildCatalogView(context, snapshot.data);
@@ -45,24 +56,22 @@ class _MainMenuState extends State<MainMenu> {
     );
   }
 
-  _buildLoadingCatalogView(BuildContext context) {
-    return Center(
-      child: Text(LDLocalizations.of(context).loadingStory),
-    );
-  }
-
   _buildCatalogView(BuildContext context, List<CatalogStory> stories) {
     var images = [
-      [BackgroundImage.getAssetImageForType(ImageType.LANDING),
+      [
+        BackgroundImage.getAssetImageForType(ImageType.LANDING),
         BackgroundImage.getColoredAssetImageForType(ImageType.LANDING),
       ],
     ];
 
     BackgroundImage.nextRandomForType(ImageType.LANDING);
 
-    images.add([BackgroundImage.getAssetImageForType(ImageType.LANDING),
-      BackgroundImage.getColoredAssetImageForType(ImageType.LANDING),
-    ],);
+    images.add(
+      [
+        BackgroundImage.getAssetImageForType(ImageType.LANDING),
+        BackgroundImage.getColoredAssetImageForType(ImageType.LANDING),
+      ],
+    );
 
     return ListView.builder(
         itemCount: stories.length,
@@ -72,21 +81,20 @@ class _MainMenuState extends State<MainMenu> {
             image: images[index][0],
             coloredImage: images[index][1],
             mainText: story.title,
-            buttonText: LDLocalizations
-                .of(context)
-                .startStory,
+            buttonText: LDLocalizations.of(context).startStory,
             onButtonPress: () => _goToStory(story),
             context: context,
           );
         });
   }
 
-  Widget _buildCardWithImage({AssetImage image,
-    AssetImage coloredImage,
-    String mainText,
-    String buttonText,
-    Function onButtonPress,
-    @required BuildContext context}) {
+  Widget _buildCardWithImage(
+      {AssetImage image,
+      AssetImage coloredImage,
+      String mainText,
+      String buttonText,
+      Function onButtonPress,
+      @required BuildContext context}) {
     return Padding(
       padding: const EdgeInsets.all(4.0),
       child: Container(
@@ -95,9 +103,7 @@ class _MainMenuState extends State<MainMenu> {
             borderRadius: _getTopRoundedBorderRadius()),
         child: Card(
           elevation: 0.0,
-          color: Theme
-              .of(context)
-              .backgroundColor,
+          color: Theme.of(context).backgroundColor,
           child: Column(
             children: <Widget>[
               Container(
@@ -115,20 +121,18 @@ class _MainMenuState extends State<MainMenu> {
               ),
               ListTile(
                   title: Text(
-                    mainText,
-                    style: TextStyle(
-                      fontSize: 20.0,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  )),
+                mainText,
+                style: TextStyle(
+                  fontSize: 20.0,
+                  fontWeight: FontWeight.bold,
+                ),
+              )),
               ButtonTheme.bar(
                 child: ButtonBar(
                   children: <Widget>[
                     if (loadingStory)
                       Text(
-                        LDLocalizations
-                            .of(context)
-                            .loadingStory,
+                        LDLocalizations.of(context).loadingStory,
                       ),
                     if (!loadingStory)
                       FlatButton(

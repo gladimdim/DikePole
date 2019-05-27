@@ -24,6 +24,27 @@ class _LoginViewState extends State<LoginView> {
 
   @override
   Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Loca Deserta'),
+        actions: [
+          FlatButton(
+            child: Icon(
+              Icons.exit_to_app,
+              color: Theme.of(context).backgroundColor,
+            ),
+            onPressed: () {
+              widget.auth.signOut();
+            },
+          ),
+        ],
+      ),
+      backgroundColor: Theme.of(context).backgroundColor,
+      body: _buildBody(context),
+    );
+  }
+
+  Widget _buildBody(BuildContext context) {
     return StreamBuilder<User>(
       stream: widget.auth.onAuthStateChange,
       initialData: null,
@@ -61,21 +82,24 @@ class _LoginViewState extends State<LoginView> {
               child: Text(LDLocalizations.of(context).versionLabel),
             ),
             Center(
-              child: InkWell(
-                child: Padding(
-                  padding: const EdgeInsets.only(top: 8.0),
-                  child: Text(
-                    "For Privacy Policy Tap here.",
-                    style: TextStyle(
-                        fontSize: 15.0, fontWeight: FontWeight.bold),
+              child: Material(
+                child: InkWell(
+                  child: Padding(
+                    padding: const EdgeInsets.only(top: 8.0),
+                    child: Text(
+                      "For Privacy Policy Tap here.",
+                      style: TextStyle(
+                          fontSize: 15.0, fontWeight: FontWeight.bold),
+                    ),
                   ),
+                  onTap: () async {
+                    if (await canLaunch(
+                        "https://locadeserta.com/privacy_policy.html")) {
+                      await launch(
+                          "https://locadeserta.com/privacy_policy.html");
+                    }
+                  },
                 ),
-                onTap: () async {
-                  if (await canLaunch(
-                      "https://locadeserta.com/privacy_policy.html")) {
-                    await launch("https://locadeserta.com/privacy_policy.html");
-                  }
-                },
               ),
             ),
           ],

@@ -17,7 +17,6 @@ class LocaDesertaApp extends StatefulWidget {
 class _LocaDesertaAppState extends State<LocaDesertaApp> {
   Locale locale = Locale('en');
 
-  bool userPressedContinue = false;
   final ThemeData theme = ThemeData(
       brightness: Brightness.light,
       primaryColor: Colors.black,
@@ -32,29 +31,17 @@ class _LocaDesertaAppState extends State<LocaDesertaApp> {
       locale: locale,
       title: 'Loca Deserta',
       theme: theme,
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text('Loca Deserta'),
-          actions: [
-            FlatButton(
-              child: Icon(
-                userPressedContinue ? Icons.table_chart : Icons.exit_to_app,
-                color: theme.backgroundColor,
-              ),
-              onPressed: () {
-                if (!userPressedContinue) {
-                  auth.signOut();
-                }
-                setState(() {
-                  userPressedContinue = false;
-                });
-              },
+      initialRoute: "/",
+      routes: {
+        "/": (context) => LoginView(
+              auth: auth,
+              onContinue: () => Navigator.pushNamed(context, "/main_menu"),
+              onSetLocale: _onLocaleSet,
             ),
-          ],
-        ),
-        backgroundColor: theme.backgroundColor,
-        body: _buildBody(),
-      ),
+        "/main_menu": (context) => MainMenu(
+              auth: auth,
+            )
+      },
       localizationsDelegates: [
         const LDLocalizationsDelegate(),
         GlobalMaterialLocalizations.delegate,
@@ -68,24 +55,52 @@ class _LocaDesertaAppState extends State<LocaDesertaApp> {
     );
   }
 
-  Widget _buildBody() {
-    return userPressedContinue
-        ? MainMenu(auth: auth)
-        : Padding(
-            padding: const EdgeInsets.only(top: 8.0),
-            child: LoginView(
-              auth: auth,
-              onContinue: onContinue,
-              onSetLocale: (Locale newLocale) => setState(() {
-                    locale = newLocale;
-                  }),
+  void _onLocaleSet(Locale newLocale) {
+    setState(() {
+      locale = newLocale;
+    });
+  }
+}
+
+class MyHome extends StatefulWidget {
+  final Function onLocaleSet;
+
+  @override
+  _MyHomeState createState() => _MyHomeState();
+
+  MyHome({@required this.onLocaleSet});
+}
+
+class _MyHomeState extends State<MyHome> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Loca Deserta'),
+        actions: [
+          FlatButton(
+            child: Icon(
+              Icons.exit_to_app,
+              color: Theme.of(context).backgroundColor,
             ),
-          );
+            onPressed: () {
+              auth.signOut();
+            },
+          ),
+        ],
+      ),
+      backgroundColor: Theme.of(context).backgroundColor,
+      body: _buildBody(context),
+    );
   }
 
-  void onContinue() {
-    setState(() {
-      userPressedContinue = true;
-    });
+  Widget _buildBody(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(top: 8.0),
+      child: LoginView(
+          auth: auth,
+          onContinue: () => Navigator.pushNamed(context, "/main_menu"),
+          onSetLocale: widget.onLocaleSet),
+    );
   }
 }
