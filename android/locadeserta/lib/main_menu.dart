@@ -116,6 +116,7 @@ class _MainMenuState extends State<MainMenu> {
                     first: image,
                     last: coloredImage,
                     duration: 2,
+                    repeat: true,
                   ),
                 ),
               ),

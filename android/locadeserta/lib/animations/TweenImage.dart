@@ -8,8 +8,9 @@ class TweenImage extends StatefulWidget {
   final AssetImage last;
   final int duration;
   final double height;
+  final bool repeat;
 
-  TweenImage({this.first, this.last, this.duration = 1, this.height});
+  TweenImage({@required this.first, @required this.last, this.duration = 1, this.height, this.repeat=false});
 }
 
 class _TweenImageState extends State<TweenImage>
