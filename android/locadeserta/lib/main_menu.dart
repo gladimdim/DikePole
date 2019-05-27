@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:url_launcher/url_launcher.dart';
 import 'package:locadeserta/story_view.dart';
 import 'package:locadeserta/models/Auth.dart';
 import 'package:locadeserta/models/catalogs.dart';
@@ -36,7 +35,7 @@ class _MainMenuState extends State<MainMenu> {
           case ConnectionState.none:
           case ConnectionState.active:
           case ConnectionState.waiting:
-            return _buildLoadingCatalogView();
+            return _buildLoadingCatalogView(context);
             break;
           case ConnectionState.done:
             return _buildCatalogView(context, snapshot.data);
@@ -46,52 +45,48 @@ class _MainMenuState extends State<MainMenu> {
     );
   }
 
-  _buildLoadingCatalogView() {
+  _buildLoadingCatalogView(BuildContext context) {
     return Center(
-      child: Text("Requesting new stories..."),
+      child: Text(LDLocalizations.of(context).loadingStory),
     );
   }
 
   _buildCatalogView(BuildContext context, List<CatalogStory> stories) {
-    return ListView(
-      children: <Widget>[
-        ...stories.map(
-          (story) => _buildCardWithImage(
-              image: BackgroundImage.getAssetImageForType((ImageType.LANDING)),
-              coloredImage: BackgroundImage.getColoredAssetImageForType(ImageType.LANDING),
-              mainText: story.title,
-              buttonText: LDLocalizations.of(context).startStory,
-              onButtonPress: () => _goToStory(story),
-              context: context),
-        ),
-        Center(
-          child: InkWell(
-            child: Padding(
-              padding: const EdgeInsets.only(top: 8.0),
-              child: Text(
-                "For Privacy Policy Tap here.",
-                style: TextStyle(fontSize: 15.0, fontWeight: FontWeight.bold),
-              ),
-            ),
-            onTap: () async {
-              if (await canLaunch(
-                  "https://locadeserta.com/privacy_policy.html")) {
-                await launch("https://locadeserta.com/privacy_policy.html");
-              }
-            },
-          ),
-        ),
+    var images = [
+      [BackgroundImage.getAssetImageForType(ImageType.LANDING),
+        BackgroundImage.getColoredAssetImageForType(ImageType.LANDING),
       ],
-    );
+    ];
+
+    BackgroundImage.nextRandomForType(ImageType.LANDING);
+
+    images.add([BackgroundImage.getAssetImageForType(ImageType.LANDING),
+      BackgroundImage.getColoredAssetImageForType(ImageType.LANDING),
+    ],);
+
+    return ListView.builder(
+        itemCount: stories.length,
+        itemBuilder: (BuildContext context, int index) {
+          var story = stories[index];
+          return _buildCardWithImage(
+            image: images[index][0],
+            coloredImage: images[index][1],
+            mainText: story.title,
+            buttonText: LDLocalizations
+                .of(context)
+                .startStory,
+            onButtonPress: () => _goToStory(story),
+            context: context,
+          );
+        });
   }
 
-  Widget _buildCardWithImage(
-      {AssetImage image,
-      AssetImage coloredImage,
-      String mainText,
-      String buttonText,
-      Function onButtonPress,
-      @required BuildContext context}) {
+  Widget _buildCardWithImage({AssetImage image,
+    AssetImage coloredImage,
+    String mainText,
+    String buttonText,
+    Function onButtonPress,
+    @required BuildContext context}) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Container(
@@ -100,7 +95,9 @@ class _MainMenuState extends State<MainMenu> {
             borderRadius: _getTopRoundedBorderRadius()),
         child: Card(
           elevation: 0.0,
-          color: Theme.of(context).backgroundColor,
+          color: Theme
+              .of(context)
+              .backgroundColor,
           child: Column(
             children: <Widget>[
               Container(
@@ -118,17 +115,19 @@ class _MainMenuState extends State<MainMenu> {
               ),
               ListTile(
                   title: Text(
-                mainText,
-                style: TextStyle(
-                  fontSize: 20.0,
-                ),
-              )),
+                    mainText,
+                    style: TextStyle(
+                      fontSize: 20.0,
+                    ),
+                  )),
               ButtonTheme.bar(
                 child: ButtonBar(
                   children: <Widget>[
                     if (loadingStory)
                       Text(
-                        LDLocalizations.of(context).loadingStory,
+                        LDLocalizations
+                            .of(context)
+                            .loadingStory,
                       ),
                     if (!loadingStory)
                       FlatButton(

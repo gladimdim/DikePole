@@ -3,9 +3,19 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 
 class BackgroundImage {
+  factory BackgroundImage() => _bgImage;
   static final BackgroundImage _bgImage = BackgroundImage._internal();
-
   BackgroundImage._internal();
+
+  static Map<ImageType, RandomImage> _images = {
+    ImageType.BOAT: RandomImage(ImageType.BOAT),
+    ImageType.STEPPE: RandomImage(ImageType.FOREST),
+    ImageType.FOREST: RandomImage(ImageType.FOREST),
+    ImageType.BULRUSH: RandomImage(ImageType.BULRUSH),
+    ImageType.RIVER: RandomImage(ImageType.RIVER),
+    ImageType.LANDING: RandomImage(ImageType.LANDING),
+  };
+
 
   static ImageType variableToImageType(String variable) {
     var imageType = variable.split(" ")[1];
@@ -25,30 +35,20 @@ class BackgroundImage {
     }
   }
 
-  factory BackgroundImage() => _bgImage;
-  static Map<ImageType, RandomImage> images = {
-    ImageType.BOAT: RandomImage(ImageType.BOAT),
-    ImageType.STEPPE: RandomImage(ImageType.FOREST),
-    ImageType.FOREST: RandomImage(ImageType.FOREST),
-    ImageType.BULRUSH: RandomImage(ImageType.BULRUSH),
-    ImageType.RIVER: RandomImage(ImageType.RIVER),
-    ImageType.LANDING: RandomImage(ImageType.LANDING),
-  };
-
   static AssetImage getAssetImageForType(ImageType type) {
-    return images[type].getAssetImage();
+    return _images[type].getAssetImage();
   }
 
   static AssetImage getColoredAssetImageForType(ImageType type) {
-    return images[type].getAssetImageColored();
+    return _images[type].getAssetImageColored();
   }
 
   static void nextRandomForType(ImageType type) {
-    return images[type].nextRandom();
+    return _images[type].nextRandom();
   }
 
   static void resetRandomForType(ImageType type) {
-    return images[type].resetUsedRandomNumbers();
+    return _images[type].resetUsedRandomNumbers();
   }
 }
 
@@ -91,20 +91,13 @@ class RandomImage {
     }
 
     _currentRandom = _random.nextInt(_MAX);
-    _usedRandomNumbers = [];
+    _usedRandomNumbers = [_currentRandom];
   }
 
   AssetImage getAssetImage() {
     var returnValue = AssetImage(
       "images/background/${_imagePrefix[type]}/${_currentRandom.toString()}.jpg",
     );
-
-    // TODO: landing image must be always randomized
-    if (type == ImageType.LANDING) {
-      print("randomizing");
-      nextRandom();
-    }
-
     return returnValue;
   }
 
@@ -121,9 +114,11 @@ class RandomImage {
     var temp = _random.nextInt(_MAX);
     if (_usedRandomNumbers.indexOf(temp) >= 0) {
       nextRandom();
+      return;
     } else {
       _currentRandom = temp;
     }
+    _usedRandomNumbers.add(_currentRandom);
   }
 
   void resetUsedRandomNumbers() {

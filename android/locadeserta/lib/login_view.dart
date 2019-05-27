@@ -4,6 +4,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:locadeserta/animations/TweenImage.dart';
 import 'package:locadeserta/models/Auth.dart';
 import 'package:locadeserta/models/Localizations.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import 'locale_selection.dart';
 
@@ -58,6 +59,24 @@ class _LoginViewState extends State<LoginView> {
             ),
             Center(
               child: Text(LDLocalizations.of(context).versionLabel),
+            ),
+            Center(
+              child: InkWell(
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 8.0),
+                  child: Text(
+                    "For Privacy Policy Tap here.",
+                    style: TextStyle(
+                        fontSize: 15.0, fontWeight: FontWeight.bold),
+                  ),
+                ),
+                onTap: () async {
+                  if (await canLaunch(
+                      "https://locadeserta.com/privacy_policy.html")) {
+                    await launch("https://locadeserta.com/privacy_policy.html");
+                  }
+                },
+              ),
             ),
           ],
         );
