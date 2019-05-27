@@ -19,17 +19,12 @@ class _LocaDesertaAppState extends State<LocaDesertaApp> {
 
   bool userPressedContinue = false;
   final ThemeData theme = ThemeData(
-    brightness: Brightness.light,
-    primaryColor: Colors.black,
-    backgroundColor: Colors.white,
-    accentColor: Colors.black,
-    fontFamily: 'Montserrat',
-    textTheme: TextTheme(
-      title: TextStyle(
-        color: Colors.white
-      )
-    )
-  );
+      brightness: Brightness.light,
+      primaryColor: Colors.black,
+      backgroundColor: Colors.white,
+      accentColor: Colors.black,
+      fontFamily: 'Montserrat',
+      textTheme: TextTheme(title: TextStyle(color: Colors.white)));
 
   @override
   Widget build(BuildContext context) {
@@ -43,14 +38,16 @@ class _LocaDesertaAppState extends State<LocaDesertaApp> {
           actions: [
             FlatButton(
               child: Icon(
-                Icons.exit_to_app,
+                userPressedContinue ? Icons.table_chart : Icons.exit_to_app,
                 color: theme.backgroundColor,
               ),
               onPressed: () {
+                if (!userPressedContinue) {
+                  auth.signOut();
+                }
                 setState(() {
                   userPressedContinue = false;
                 });
-                auth.signOut();
               },
             ),
           ],
@@ -73,15 +70,15 @@ class _LocaDesertaAppState extends State<LocaDesertaApp> {
 
   Widget _buildBody() {
     return userPressedContinue
-          ? MainMenu(auth: auth)
-          : Padding(
+        ? MainMenu(auth: auth)
+        : Padding(
             padding: const EdgeInsets.only(top: 8.0),
             child: LoginView(
               auth: auth,
               onContinue: onContinue,
               onSetLocale: (Locale newLocale) => setState(() {
-                locale = newLocale;
-              }),
+                    locale = newLocale;
+                  }),
             ),
           );
   }

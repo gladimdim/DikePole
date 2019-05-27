@@ -88,7 +88,7 @@ class _MainMenuState extends State<MainMenu> {
     Function onButtonPress,
     @required BuildContext context}) {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.all(4.0),
       child: Container(
         decoration: BoxDecoration(
             border: Border.all(color: Colors.black, width: 2.0),
@@ -118,6 +118,7 @@ class _MainMenuState extends State<MainMenu> {
                     mainText,
                     style: TextStyle(
                       fontSize: 20.0,
+                      fontWeight: FontWeight.bold,
                     ),
                   )),
               ButtonTheme.bar(
@@ -135,7 +136,7 @@ class _MainMenuState extends State<MainMenu> {
                         child: Text(
                           buttonText,
                           style: TextStyle(
-                            fontSize: 16.0,
+                            fontSize: 22.0,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
