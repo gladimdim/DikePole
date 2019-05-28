@@ -33,7 +33,7 @@ class _TweenImageState extends State<TweenImage>
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
+    return GestureDetector(
       onTap: _opaque,
       child: Stack(
         children: <Widget>[

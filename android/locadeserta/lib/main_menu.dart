@@ -42,9 +42,13 @@ class _MainMenuState extends State<MainMenu> {
           case ConnectionState.active:
           case ConnectionState.waiting:
             return Center(
-              child: TweenImage(
-                last: AssetImage("images/background/cossack_0.jpg"),
-                first: AssetImage("images/background/c_cossack_0.jpg"),
+              child: Hero(
+                tag: "CossackHero",
+                child: TweenImage(
+                  last: AssetImage("images/background/cossack_0.jpg"),
+                  first: AssetImage("images/background/c_cossack_0.jpg"),
+                  height: 300,
+                ),
               ),
             );
             break;

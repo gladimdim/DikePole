@@ -56,10 +56,13 @@ class _LoginViewState extends State<LoginView> {
           children: <Widget>[
             Expanded(
               child: Center(
-                child: TweenImage(
-                  repeat: true,
-                  last: AssetImage("images/background/cossack_0.jpg"),
-                  first: AssetImage("images/background/c_cossack_0.jpg"),
+                child: Hero(
+                  tag: "CossackHero",
+                  child: TweenImage(
+                    repeat: true,
+                    last: AssetImage("images/background/cossack_0.jpg"),
+                    first: AssetImage("images/background/c_cossack_0.jpg"),
+                  ),
                 ),
               ),
             ),
