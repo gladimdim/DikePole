@@ -33,9 +33,18 @@ class PassageState extends State<Passage> with TickerProviderStateMixin {
     list.addAll(buttons);
 
     return Column(
-      children: list,
+      children: [
+        _buildTextRow(context),
+        ..._createButtons(context),
+      ],
       crossAxisAlignment: CrossAxisAlignment.stretch,
     );
+  }
+
+  List<Widget> _createButtons(BuildContext context) {
+    return widget.currentStory.canContinue == true
+        ? [createContinue(context)]
+        : createOptionList(widget.currentStory.currentChoices);
   }
 
   Widget createButton(String text, int i) {
@@ -123,12 +132,15 @@ class PassageState extends State<Passage> with TickerProviderStateMixin {
                 ),
               ),
             ),
-            TweenImage(
-                duration: 1,
-                first: BackgroundImage.getAssetImageForType(randomImageType),
-                last: BackgroundImage.getColoredAssetImageForType(
-                    randomImageType),
-                height: 800.0)
+            Hero(
+              tag: "ImageView",
+              child: TweenImage(
+                  duration: 1,
+                  first: BackgroundImage.getAssetImageForType(randomImageType),
+                  last: BackgroundImage.getColoredAssetImageForType(
+                      randomImageType),
+                  height: 800.0),
+            )
           ],
         ),
       ),

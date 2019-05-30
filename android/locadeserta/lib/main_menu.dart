@@ -1,3 +1,4 @@
+import 'package:async/async.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:locadeserta/story_view.dart';
@@ -21,6 +22,7 @@ class MainMenu extends StatefulWidget {
 
 class _MainMenuState extends State<MainMenu> {
   bool loadingStory = false;
+  final AsyncMemoizer _catalogListMemo = AsyncMemoizer();
 
   @override
   Widget build(BuildContext context) {
@@ -33,22 +35,44 @@ class _MainMenuState extends State<MainMenu> {
     );
   }
 
+  _fetchData() {
+    return _catalogListMemo.runOnce(() async {
+      List<CatalogStory> catalogStories =
+          await Persistence.instance.getAvailableCatalogStories();
+      return catalogStories;
+    });
+  }
+
   Widget _buildLandingListView(BuildContext context) {
-    return FutureBuilder<List<CatalogStory>>(
-      future: Persistence.instance.getAvailableCatalogStories(),
+    return FutureBuilder(
+      future: _fetchData(),
       builder: (BuildContext context, snapshot) {
         switch (snapshot.connectionState) {
           case ConnectionState.none:
           case ConnectionState.active:
           case ConnectionState.waiting:
             return Center(
-              child: Hero(
-                tag: "CossackHero",
-                child: TweenImage(
-                  last: AssetImage("images/background/cossack_0.jpg"),
-                  first: AssetImage("images/background/c_cossack_0.jpg"),
-                  height: 300,
-                ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: <Widget>[
+                  Text(
+                    LDLocalizations.of(context).lookingForHeroes,
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                  SizedBox(
+                    height: 100,
+                  ),
+                  Center(
+                    child: Hero(
+                      tag: "CossackHero",
+                      child: TweenImage(
+                        last: AssetImage("images/background/cossack_0.jpg"),
+                        first: AssetImage("images/background/c_cossack_0.jpg"),
+                        height: 500,
+                      ),
+                    ),
+                  ),
+                ],
               ),
             );
             break;
@@ -92,13 +116,14 @@ class _MainMenuState extends State<MainMenu> {
         });
   }
 
-  Widget _buildCardWithImage(
-      {AssetImage image,
-      AssetImage coloredImage,
-      String mainText,
-      String buttonText,
-      Function onButtonPress,
-      @required BuildContext context}) {
+  Widget _buildCardWithImage({
+    AssetImage image,
+    AssetImage coloredImage,
+    String mainText,
+    String buttonText,
+    Function onButtonPress,
+    @required BuildContext context,
+  }) {
     return Padding(
       padding: const EdgeInsets.all(4.0),
       child: Container(
@@ -115,14 +140,13 @@ class _MainMenuState extends State<MainMenu> {
                   borderRadius: _getTopRoundedBorderRadius(),
                 ),
                 child: ClipRRect(
-                  borderRadius: _getTopRoundedBorderRadius(),
-                  child: TweenImage(
-                    first: image,
-                    last: coloredImage,
-                    duration: 2,
-                    repeat: true,
-                  ),
-                ),
+                    borderRadius: _getTopRoundedBorderRadius(),
+                    child: TweenImage(
+                      first: image,
+                      last: coloredImage,
+                      duration: 2,
+                      repeat: true,
+                    )),
               ),
               ListTile(
                   title: Text(

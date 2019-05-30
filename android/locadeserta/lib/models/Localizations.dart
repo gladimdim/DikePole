@@ -31,6 +31,7 @@ class LDLocalizations {
       'version': 'Version',
       'loadingstory': 'Loading Story',
       'startstory': 'Read',
+      'lookingforheroes': 'Looking for heroes in Loca Deserta lands...',
     },
     'uk': {
       'continue': 'Продовжити',
@@ -47,7 +48,8 @@ class LDLocalizations {
       'unregisteredusername': 'Козак',
       'version': 'Версія',
       'loadingstory': 'Завантаження історії',
-      'startstory': 'Читати'
+      'startstory': 'Читати',
+      'lookingforheroes': 'Шукаємо героїв в землях Дикого Поля...',
     },
     'pl': {
       'continue': 'Dalej',
@@ -65,6 +67,7 @@ class LDLocalizations {
       'version': 'Wersja',
       'loadingstory': 'Historia ładowania',
       'startstory': 'Сzytać',
+      'lookingforheroes': 'poszukuje bohaterów w Dzikie Pole ziemia...',
     }
   };
 
@@ -126,6 +129,10 @@ class LDLocalizations {
 
   String get startStory {
     return _localizedValues[locale.languageCode]['startstory'];
+  }
+
+  String get lookingForHeroes {
+    return _localizedValues[locale.languageCode]['lookingforheroes'];
   }
 }
 
