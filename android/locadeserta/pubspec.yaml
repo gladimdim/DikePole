@@ -17,7 +17,6 @@ dependencies:
     sdk: flutter
   flutter:
     sdk: flutter
-  splashscreen:
   path_provider: ^0.5.0+1
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -27,9 +26,7 @@ dependencies:
   url_launcher: ^3.0.3
   firebase_auth: 0.8.3
   google_sign_in: 4.0.1+3
-  shared_preferences: 0.5.1+2
   simple_animations: ^1.0.0
-  swipedetector: 1.2.0
 
 dev_dependencies:
   flutter_launcher_icons: "^0.7.0"

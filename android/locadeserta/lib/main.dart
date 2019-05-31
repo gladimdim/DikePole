@@ -32,6 +32,7 @@ class _LocaDesertaAppState extends State<LocaDesertaApp> {
       title: 'Loca Deserta',
       theme: theme,
       initialRoute: "/",
+      debugShowCheckedModeBanner: false,
       routes: {
         "/": (context) => LoginView(
               auth: auth,

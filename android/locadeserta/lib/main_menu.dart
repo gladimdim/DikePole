@@ -5,6 +5,7 @@ import 'package:locadeserta/story_view.dart';
 import 'package:locadeserta/models/Auth.dart';
 import 'package:locadeserta/models/catalogs.dart';
 import 'package:locadeserta/models/BackgroundImage.dart';
+import 'animations/SlideRightNavigation.dart';
 import 'animations/TweenImage.dart';
 import 'models/Localizations.dart';
 import 'package:locadeserta/models/persistence.dart';
@@ -194,9 +195,7 @@ class _MainMenuState extends State<MainMenu> {
     setState(() {
       loadingStory = false;
     });
-    Navigator.push(
-        context,
-        MaterialPageRoute(
-            builder: (context) => StoryView(user: user, catalogStory: story)));
+    Navigator.push(context,
+        SlideRightNavigation(widget: StoryView(user: user, catalogStory: story)));
   }
 }

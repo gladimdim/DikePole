@@ -132,15 +132,12 @@ class PassageState extends State<Passage> with TickerProviderStateMixin {
                 ),
               ),
             ),
-            Hero(
-              tag: "ImageView",
-              child: TweenImage(
-                  duration: 1,
-                  first: BackgroundImage.getAssetImageForType(randomImageType),
-                  last: BackgroundImage.getColoredAssetImageForType(
-                      randomImageType),
-                  height: 800.0),
-            )
+            TweenImage(
+                duration: 1,
+                first: BackgroundImage.getAssetImageForType(randomImageType),
+                last: BackgroundImage.getColoredAssetImageForType(
+                    randomImageType),
+                height: 700.0)
           ],
         ),
       ),
