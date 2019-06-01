@@ -21,7 +21,8 @@ class MainMenu extends StatefulWidget {
   _MainMenuState createState() => _MainMenuState();
 }
 
-class _MainMenuState extends State<MainMenu> {
+class _MainMenuState extends State<MainMenu>
+    with TickerProviderStateMixin {
   bool loadingStory = false;
   final AsyncMemoizer _catalogListMemo = AsyncMemoizer();
 
@@ -52,30 +53,7 @@ class _MainMenuState extends State<MainMenu> {
           case ConnectionState.none:
           case ConnectionState.active:
           case ConnectionState.waiting:
-            return Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: <Widget>[
-                  Text(
-                    LDLocalizations.of(context).lookingForHeroes,
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                  SizedBox(
-                    height: 100,
-                  ),
-                  Center(
-                    child: Hero(
-                      tag: "CossackHero",
-                      child: TweenImage(
-                        last: AssetImage("images/background/cossack_0.jpg"),
-                        first: AssetImage("images/background/c_cossack_0.jpg"),
-                        height: 500,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            );
+            return _buildWaitingScreen(context);
             break;
           case ConnectionState.done:
             return _buildCatalogView(context, snapshot.data);
@@ -85,7 +63,35 @@ class _MainMenuState extends State<MainMenu> {
     );
   }
 
+  Center _buildWaitingScreen(BuildContext context) {
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: <Widget>[
+          Text(
+            LDLocalizations.of(context).lookingForHeroes,
+            style: TextStyle(fontWeight: FontWeight.bold),
+          ),
+          SizedBox(
+            height: 100,
+          ),
+          Center(
+            child: Hero(
+              tag: "CossackHero",
+              child: TweenImage(
+                last: AssetImage("images/background/cossack_0.jpg"),
+                first: AssetImage("images/background/c_cossack_0.jpg"),
+                height: 500,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
   _buildCatalogView(BuildContext context, List<CatalogStory> stories) {
+    var width = MediaQuery.of(context).size.width;
     var images = [
       [
         BackgroundImage.getAssetImageForType(ImageType.LANDING),
@@ -102,7 +108,7 @@ class _MainMenuState extends State<MainMenu> {
       ],
     );
 
-    return ListView.builder(
+    var child = ListView.builder(
         itemCount: stories.length,
         itemBuilder: (BuildContext context, int index) {
           var story = stories[index];
@@ -115,6 +121,23 @@ class _MainMenuState extends State<MainMenu> {
             context: context,
           );
         });
+
+    var controller = AnimationController(vsync: this, duration: Duration(milliseconds: 250));
+    var animation = Tween(begin: width, end: 0.0).animate(CurvedAnimation(
+        parent: controller, curve: Curves.linear));
+    controller.forward();
+    return AnimatedBuilder(
+      animation: animation,
+      builder: (BuildContext context, Widget child) {
+        return Transform.translate(
+          offset: Offset(animation.value, 0.0),
+          child: Container(
+            child: child,
+          ),
+        );
+      },
+      child: child,
+    );
   }
 
   Widget _buildCardWithImage({
@@ -195,7 +218,9 @@ class _MainMenuState extends State<MainMenu> {
     setState(() {
       loadingStory = false;
     });
-    Navigator.push(context,
-        SlideRightNavigation(widget: StoryView(user: user, catalogStory: story)));
+    Navigator.push(
+        context,
+        SlideRightNavigation(
+            widget: StoryView(user: user, catalogStory: story)));
   }
 }
