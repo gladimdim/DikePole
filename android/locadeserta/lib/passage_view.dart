@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:locadeserta/animations/TweenImage.dart';
+import 'package:locadeserta/animations/slide_widget.dart';
 import 'package:locadeserta/models/story_bridge.dart';
-import 'package:locadeserta/animations/SlideableButton.dart';
+import 'package:locadeserta/animations/slideable_button.dart';
 import 'package:locadeserta/models/BackgroundImage.dart';
 import 'models/Localizations.dart';
 
@@ -21,17 +22,6 @@ class PassageState extends State<Passage> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    List<Widget> list = new List();
-
-    list.addAll(
-      [_buildTextRow(context)],
-    );
-
-    final buttons = widget.currentStory.canContinue == true
-        ? [createContinue(context)]
-        : createOptionList(widget.currentStory.currentChoices);
-    list.addAll(buttons);
-
     return Column(
       children: [
         _buildTextRow(context),
@@ -111,22 +101,26 @@ class PassageState extends State<Passage> with TickerProviderStateMixin {
         padding: EdgeInsets.all(8.0),
         child: Row(
           children: <Widget>[
-            Container(
-              alignment: Alignment.topCenter,
-              width: MediaQuery.of(context).size.width * 0.79,
-              decoration: BoxDecoration(
-                color: Theme.of(context).backgroundColor,
-                border: Border.all(color: Colors.black, width: 3.0),
-              ),
-              child: SingleChildScrollView(
-                scrollDirection: Axis.vertical,
-                child: Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: Text(
-                    widget.currentStory.currentText,
-                    style: TextStyle(
-                      fontFamily: "Raleway-Bold",
-                      fontSize: 18,
+            SlideWidget(
+              slide: true,
+              direction: SlideDirection.Right,
+              child: Container(
+                alignment: Alignment.topCenter,
+                width: MediaQuery.of(context).size.width * 0.79,
+                decoration: BoxDecoration(
+                  color: Theme.of(context).backgroundColor,
+                  border: Border.all(color: Colors.black, width: 3.0),
+                ),
+                child: SingleChildScrollView(
+                  scrollDirection: Axis.vertical,
+                  child: Padding(
+                    padding: EdgeInsets.all(8.0),
+                    child: Text(
+                      widget.currentStory.currentText,
+                      style: TextStyle(
+                        fontFamily: "Raleway-Bold",
+                        fontSize: 18,
+                      ),
                     ),
                   ),
                 ),
