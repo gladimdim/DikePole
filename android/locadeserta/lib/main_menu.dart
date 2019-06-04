@@ -81,6 +81,7 @@ class _MainMenuState extends State<MainMenu>
               child: TweenImage(
                 last: AssetImage("images/background/cossack_0.jpg"),
                 first: AssetImage("images/background/c_cossack_0.jpg"),
+                duration: 2,
                 height: 500,
               ),
             ),
@@ -168,7 +169,7 @@ class _MainMenuState extends State<MainMenu>
                     child: TweenImage(
                       first: image,
                       last: coloredImage,
-                      duration: 2,
+                      duration: 4,
                       repeat: true,
                     )),
               ),
