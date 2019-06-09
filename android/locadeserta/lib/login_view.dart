@@ -29,9 +29,9 @@ class _LoginViewState extends State<LoginView> {
         title: Text('Loca Deserta'),
         actions: [
           FlatButton(
-            child: Icon(
-              Icons.exit_to_app,
-              color: Theme.of(context).backgroundColor,
+            textColor: Theme.of(context).textTheme.title.color,
+            child: Text(
+              LDLocalizations.of(context).signOut,
             ),
             onPressed: () {
               widget.auth.signOut();
@@ -56,13 +56,16 @@ class _LoginViewState extends State<LoginView> {
           children: <Widget>[
             Expanded(
               child: Center(
-                child: Hero(
-                  tag: "CossackHero",
-                  child: TweenImage(
-                    repeat: true,
-                    last: AssetImage("images/background/cossack_0.jpg"),
-                    first: AssetImage("images/background/c_cossack_0.jpg"),
-                    duration: 4,
+                child: Padding(
+                  padding: EdgeInsets.only(top: 10.0),
+                  child: Hero(
+                    tag: "CossackHero",
+                    child: TweenImage(
+                      repeat: true,
+                      last: AssetImage("images/background/cossack_0.jpg"),
+                      first: AssetImage("images/background/c_cossack_0.jpg"),
+                      duration: 4,
+                    ),
                   ),
                 ),
               ),

@@ -57,6 +57,7 @@ class _MainMenuState extends State<MainMenu>
             break;
           case ConnectionState.done:
             return _buildCatalogView(context, snapshot.data);
+//            return _buildWaitingScreen(context);
             break;
         }
       },
@@ -66,14 +67,17 @@ class _MainMenuState extends State<MainMenu>
   Center _buildWaitingScreen(BuildContext context) {
     return Center(
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
-          Text(
-            LDLocalizations.of(context).lookingForHeroes,
-            style: TextStyle(fontWeight: FontWeight.bold),
+          Padding(
+            padding: EdgeInsets.only(top: 10.0),
+            child: Text(
+              LDLocalizations.of(context).lookingForHeroes,
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
           ),
           SizedBox(
-            height: 100,
+            height: 50,
           ),
           Center(
             child: Hero(

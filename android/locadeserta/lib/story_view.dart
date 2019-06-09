@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
+import 'package:locadeserta/models/Localizations.dart';
 import 'package:locadeserta/models/catalogs.dart';
 import 'package:locadeserta/passage_view.dart';
 import 'package:locadeserta/models/persistence.dart';
@@ -32,8 +33,8 @@ class _StoryViewState extends State<StoryView> {
       storyBridge = StoryBridge();
       String stateJson;
       try {
-        stateJson = await Persistence.instance.getStateJsonForUserAndCatalog(
-            widget.user, widget.catalogStory);
+        stateJson = await Persistence.instance
+            .getStateJsonForUserAndCatalog(widget.user, widget.catalogStory);
       } catch (e) {
         print(e.toString());
       }
@@ -61,15 +62,19 @@ class _StoryViewState extends State<StoryView> {
               backgroundColor: Theme.of(context).backgroundColor,
               appBar: AppBar(
                 actions: <Widget>[
-                  IconButton(
-                    icon: Icon(Icons.save),
+                  FlatButton(
+                    textColor: Theme.of(context).textTheme.title.color,
+                    child: Text(
+                      LDLocalizations.of(context).save,
+                    ),
                     onPressed: () async {
                       await Persistence.instance.saveStateToStorageForUser(
                           widget.user, widget.catalogStory, storyBridge);
                     },
                   ),
-                  IconButton(
-                    icon: Icon(Icons.clear_all),
+                  FlatButton(
+                    textColor: Theme.of(context).textTheme.title.color,
+                    child: Text(LDLocalizations.of(context).reset),
                     onPressed: () async {
                       await storyBridge.resetStory();
                     },

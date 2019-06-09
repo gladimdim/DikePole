@@ -32,6 +32,8 @@ class LDLocalizations {
       'loadingstory': 'Loading Story',
       'startstory': 'Read',
       'lookingforheroes': 'Looking for heroes in Loca Deserta lands...',
+      'save': 'Save',
+      'reset': 'Reset',
     },
     'uk': {
       'continue': 'Продовжити',
@@ -50,6 +52,9 @@ class LDLocalizations {
       'loadingstory': 'Завантаження історії',
       'startstory': 'Читати',
       'lookingforheroes': 'Шукаємо героїв в землях Дикого Поля...',
+      'save': 'Зберегти',
+      'reset': 'З початку',
+
     },
     'pl': {
       'continue': 'Dalej',
@@ -68,6 +73,8 @@ class LDLocalizations {
       'loadingstory': 'Historia ładowania',
       'startstory': 'Сzytać',
       'lookingforheroes': 'poszukuje bohaterów w Dzikie Pole ziemia...',
+      'save': 'Zapisać',
+      'reset': 'Nastawić',
     }
   };
 
@@ -134,6 +141,14 @@ class LDLocalizations {
   String get lookingForHeroes {
     return _localizedValues[locale.languageCode]['lookingforheroes'];
   }
+
+  String get save {
+    return _localizedValues[locale.languageCode]['save'];
+  }
+  String get reset {
+    return _localizedValues[locale.languageCode]['reset'];
+  }
+
 }
 
 class LDLocalizationsDelegate extends LocalizationsDelegate<LDLocalizations> {

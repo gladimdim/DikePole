@@ -78,17 +78,7 @@ class _MyHomeState extends State<MyHome> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Loca Deserta'),
-        actions: [
-          FlatButton(
-            child: Icon(
-              Icons.exit_to_app,
-              color: Theme.of(context).backgroundColor,
-            ),
-            onPressed: () {
-              auth.signOut();
-            },
-          ),
-        ],
+
       ),
       backgroundColor: Theme.of(context).backgroundColor,
       body: _buildBody(context),
