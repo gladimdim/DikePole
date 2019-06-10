@@ -41,9 +41,12 @@
             result([self.inkStory currentText]);
         } else if ([@"restoreState" isEqualToString:call.method]) {
             NSDictionary *dict = call.arguments;
-            NSString *str = [NSString stringWithFormat:@"%@", dict];
+            NSString *str = [NSString stringWithFormat:@"%@", [dict valueForKey:@"text"]];
             [self.inkStory loadJson:str];
             result(@"success");
+        } else if ([@"saveState" isEqualToString:call.method]) {
+            NSString *state =  [self.inkStory toJson];
+            return result(state);
         } else {
             result(FlutterMethodNotImplemented);
         }

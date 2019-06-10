@@ -94,28 +94,14 @@ class StoryBridge {
   }
 
   Future<void> initStory({String storyJson, String state}) async {
-    if (storyJson == null) {
-      try {
-        final inkyText =
-            await rootBundle.loadString("stories/locadeserta.ink.json");
-        await platform.invokeMethod("Init", inkyText);
-        if (state != null) {
-          await platform.invokeMethod("restoreState", {"text": state});
-          await doContinue();
-        }
-      } catch (e) {
-        print(e.toString());
+    try {
+      await platform.invokeMethod("Init", storyJson);
+      if (state != null) {
+        await platform.invokeMethod("restoreState", {"text": state});
       }
-    } else {
-      try {
-        await platform.invokeMethod("Init", storyJson);
-        if (state != null) {
-          await platform.invokeMethod("restoreState", {"text": state});
-        }
-        await doContinue();
-      } catch (e) {
-        print(e.toString());
-      }
+      await doContinue();
+    } catch (e) {
+      print(e.toString());
     }
   }
 

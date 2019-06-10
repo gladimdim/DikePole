@@ -70,11 +70,14 @@ class PassageState extends State<Passage> with TickerProviderStateMixin {
   }
 
   Widget createContinue(BuildContext context) {
-    return SlideableButton(
-        buttonText: LDLocalizations.of(context).Continue,
-        onPress: () {
-          _next();
-        });
+    return Padding(
+      padding: EdgeInsets.all(8.0),
+      child: SlideableButton(
+          buttonText: LDLocalizations.of(context).Continue,
+          onPress: () {
+            _next();
+          }),
+    );
   }
 
   void _next() {
@@ -90,7 +93,7 @@ class PassageState extends State<Passage> with TickerProviderStateMixin {
     var currentTags = widget.currentStory.currentTags;
     var randomImageType = _lastImageType;
     if (currentTags.isNotEmpty) {
-      randomImageType = BackgroundImage.variableToImageType(currentTags[0]);
+      randomImageType = BackgroundImage.imageTypeFromCurrentTags(currentTags);
       _lastImageType = randomImageType;
     }
     print("Random image type: $randomImageType");

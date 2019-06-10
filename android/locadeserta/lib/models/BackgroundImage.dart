@@ -9,12 +9,25 @@ class BackgroundImage {
 
   static Map<ImageType, RandomImage> _images = {
     ImageType.BOAT: RandomImage(ImageType.BOAT),
-    ImageType.STEPPE: RandomImage(ImageType.FOREST),
-    ImageType.FOREST: RandomImage(ImageType.FOREST),
+    ImageType.STEPPE: RandomImage(ImageType.RIVER),
+    ImageType.FOREST: RandomImage(ImageType.BOAT),
     ImageType.BULRUSH: RandomImage(ImageType.BULRUSH),
     ImageType.RIVER: RandomImage(ImageType.RIVER),
     ImageType.LANDING: RandomImage(ImageType.LANDING),
   };
+
+  static ImageType imageTypeFromCurrentTags(List<String> variables) {
+    var images = variables.where((variable) {
+      var tagName = variable.split(" ")[0];
+      return tagName == 'image';
+    }).toList();
+
+    var random = Random();
+
+    var tagToTake = images[random.nextInt(images.length)];
+
+    return  BackgroundImage.variableToImageType(tagToTake);
+  }
 
 
   static ImageType variableToImageType(String variable) {
