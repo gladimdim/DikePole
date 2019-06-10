@@ -5,6 +5,7 @@ import 'package:locadeserta/story_view.dart';
 import 'package:locadeserta/models/Auth.dart';
 import 'package:locadeserta/models/catalogs.dart';
 import 'package:locadeserta/models/BackgroundImage.dart';
+import 'package:locadeserta/waiting_screen.dart';
 import 'animations/SlideRightNavigation.dart';
 import 'animations/TweenImage.dart';
 import 'models/Localizations.dart';
@@ -53,45 +54,13 @@ class _MainMenuState extends State<MainMenu>
           case ConnectionState.none:
           case ConnectionState.active:
           case ConnectionState.waiting:
-            return _buildWaitingScreen(context);
+            return WaitingScreen();
             break;
           case ConnectionState.done:
             return _buildCatalogView(context, snapshot.data);
-//            return _buildWaitingScreen(context);
             break;
         }
       },
-    );
-  }
-
-  Center _buildWaitingScreen(BuildContext context) {
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: <Widget>[
-          Padding(
-            padding: EdgeInsets.only(top: 10.0),
-            child: Text(
-              LDLocalizations.of(context).lookingForHeroes,
-              style: TextStyle(fontWeight: FontWeight.bold),
-            ),
-          ),
-          SizedBox(
-            height: 50,
-          ),
-          Center(
-            child: Hero(
-              tag: "CossackHero",
-              child: TweenImage(
-                last: AssetImage("images/background/cossack_0.jpg"),
-                first: AssetImage("images/background/c_cossack_0.jpg"),
-                duration: 2,
-                height: 500,
-              ),
-            ),
-          ),
-        ],
-      ),
     );
   }
 

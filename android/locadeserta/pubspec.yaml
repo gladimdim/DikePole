@@ -94,6 +94,10 @@ flutter:
     - images/background/boat/12.jpg
     - images/background/boat/13.jpg
     - images/background/boat/14.jpg
+    - images/background/boat/15.jpg
+    - images/background/boat/16.jpg
+    - images/background/boat/17.jpg
+    - images/background/boat/18.jpg
     - images/background/boat/c_0.jpg
     - images/background/boat/c_1.jpg
     - images/background/boat/c_2.jpg
@@ -109,6 +113,11 @@ flutter:
     - images/background/boat/c_12.jpg
     - images/background/boat/c_13.jpg
     - images/background/boat/c_14.jpg
+    - images/background/boat/c_15.jpg
+    - images/background/boat/c_16.jpg
+    - images/background/boat/c_17.jpg
+    - images/background/boat/c_18.jpg
+
     # FOREST IMAGES
     - images/background/forest/0.jpg
     - images/background/forest/1.jpg
@@ -146,6 +155,13 @@ flutter:
     - images/background/river/12.jpg
     - images/background/river/13.jpg
     - images/background/river/14.jpg
+    - images/background/river/15.jpg
+    - images/background/river/16.jpg
+    - images/background/river/17.jpg
+    - images/background/river/18.jpg
+    - images/background/river/19.jpg
+    - images/background/river/20.jpg
+    - images/background/river/21.jpg
     - images/background/river/c_0.jpg
     - images/background/river/c_1.jpg
     - images/background/river/c_2.jpg
@@ -161,6 +177,13 @@ flutter:
     - images/background/river/c_12.jpg
     - images/background/river/c_13.jpg
     - images/background/river/c_14.jpg
+    - images/background/river/c_15.jpg
+    - images/background/river/c_16.jpg
+    - images/background/river/c_17.jpg
+    - images/background/river/c_18.jpg
+    - images/background/river/c_19.jpg
+    - images/background/river/c_20.jpg
+    - images/background/river/c_21.jpg
     - images/background/cossack_0.jpg
     - images/background/c_cossack_0.jpg
     - images/background/landing/0.jpg

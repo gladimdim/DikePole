@@ -71,7 +71,7 @@ class RandomImage {
   RandomImage(this.type) {
     switch (type) {
       case ImageType.BOAT:
-        _MAX = 15;
+        _MAX = 18;
         break;
       case ImageType.FOREST:
         _MAX = 10;
@@ -80,7 +80,7 @@ class RandomImage {
         _MAX = 12;
         break;
       case ImageType.RIVER:
-        _MAX = 15;
+        _MAX = 21;
         break;
       case ImageType.LANDING:
         _MAX = 2;

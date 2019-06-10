@@ -50,8 +50,8 @@ class StoryBridge {
       }
       currentTags = List.from(dynamicTags);
 
-      var tempInventory = await platform.invokeMethod("getInventory");
-      inventory = List.from(tempInventory);
+//      var tempInventory = await platform.invokeMethod("getInventory");
+//      inventory = List.from(tempInventory);
     } catch (e) {
       print("Error: ${e.toString()}");
     }
@@ -60,7 +60,7 @@ class StoryBridge {
       currentChoices: choices,
       canContinue: canContinue,
       currentTags: currentTags,
-      inventory: inventory,
+      inventory: [],
     );
     streamStory.sink.add(story);
   }
