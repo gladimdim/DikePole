@@ -10,3 +10,8 @@ BorderRadius getTopRoundedBorderRadius() {
   return BorderRadius.only(
       topLeft: Radius.circular(20.0), topRight: Radius.circular(20.0));
 }
+
+BorderRadius getBottomRoundedBorderRadius() {
+  return BorderRadius.only(
+      bottomLeft: Radius.circular(20.0), bottomRight: Radius.circular(20.0));
+}

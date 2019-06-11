@@ -23,10 +23,50 @@ class MainMenu extends StatefulWidget {
   _MainMenuState createState() => _MainMenuState();
 }
 
-class _MainMenuState extends State<MainMenu>
-    with TickerProviderStateMixin {
+class _MainMenuState extends State<MainMenu> with TickerProviderStateMixin {
   bool loadingStory = false;
   final AsyncMemoizer _catalogListMemo = AsyncMemoizer();
+
+  AnimationController gradientController;
+  var gradientAnimation;
+  var appearanceController;
+  var appearanceAnimation;
+
+  @override
+  void initState() {
+    var width = 1000.0;
+
+    appearanceController = AnimationController(
+      vsync: this,
+      duration: Duration(milliseconds: 2000),
+    );
+    appearanceAnimation = Tween(begin: width, end: 0.0).animate(
+      CurvedAnimation(
+          parent: appearanceController, curve: Curves.linearToEaseOut),
+    );
+    appearanceController.forward();
+
+    gradientController = AnimationController(
+      vsync: this,
+      duration: Duration(milliseconds: 4000),
+    );
+    gradientAnimation = Tween(begin: 1.0, end: 0.0).animate(
+      CurvedAnimation(parent: gradientController, curve: Curves.linear),
+    );
+
+    gradientController.addStatusListener((status) {
+      if (status == AnimationStatus.completed) {
+        gradientController.reverse();
+      }
+      if (status == AnimationStatus.dismissed) {
+        gradientController.forward();
+      }
+    });
+
+    gradientController.forward();
+
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -66,7 +106,6 @@ class _MainMenuState extends State<MainMenu>
   }
 
   _buildCatalogView(BuildContext context, List<CatalogStory> stories) {
-    var width = MediaQuery.of(context).size.width;
     var images = [
       [
         BackgroundImage.getAssetImageForType(ImageType.LANDING),
@@ -87,7 +126,7 @@ class _MainMenuState extends State<MainMenu>
         itemCount: stories.length,
         itemBuilder: (BuildContext context, int index) {
           var story = stories[index];
-          return _buildCardWithImage(
+          return _buildStoryItem(
             image: images[index][0],
             coloredImage: images[index][1],
             mainText: story.title,
@@ -97,15 +136,11 @@ class _MainMenuState extends State<MainMenu>
           );
         });
 
-    var controller = AnimationController(vsync: this, duration: Duration(milliseconds: 250));
-    var animation = Tween(begin: width, end: 0.0).animate(CurvedAnimation(
-        parent: controller, curve: Curves.linear));
-    controller.forward();
     return AnimatedBuilder(
-      animation: animation,
+      animation: appearanceAnimation,
       builder: (BuildContext context, Widget child) {
         return Transform.translate(
-          offset: Offset(animation.value, 0.0),
+          offset: Offset(appearanceAnimation.value, 0.0),
           child: Container(
             child: child,
           ),
@@ -115,7 +150,7 @@ class _MainMenuState extends State<MainMenu>
     );
   }
 
-  Widget _buildCardWithImage({
+  Widget _buildStoryItem({
     AssetImage image,
     AssetImage coloredImage,
     String mainText,
@@ -127,14 +162,14 @@ class _MainMenuState extends State<MainMenu>
       padding: const EdgeInsets.all(4.0),
       child: Container(
         decoration: BoxDecoration(
-            border: Border.all(color: Colors.black, width: 2.0),
-            borderRadius: getTopRoundedBorderRadius()),
-        child: Card(
-          elevation: 0.0,
-          color: Theme.of(context).backgroundColor,
-          child: Column(
-            children: <Widget>[
-              ClipRRect(
+            border: Border.all(color: Colors.black, width: 0.5),
+            borderRadius: getAllRoundedBorderRadius()),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: <Widget>[
+            Padding(
+              padding: EdgeInsets.all(0.0),
+              child: ClipRRect(
                   borderRadius: getTopRoundedBorderRadius(),
                   child: TweenImage(
                     first: image,
@@ -142,37 +177,56 @@ class _MainMenuState extends State<MainMenu>
                     duration: 4,
                     repeat: true,
                   )),
-              ListTile(
-                  title: Text(
-                mainText,
-                style: TextStyle(
-                  fontSize: 20.0,
-                  fontWeight: FontWeight.bold,
-                ),
-              )),
-              ButtonTheme.bar(
-                child: ButtonBar(
-                  children: <Widget>[
-                    if (loadingStory)
+            ),
+            AnimatedBuilder(
+              animation: gradientAnimation,
+              builder: (context, widget) {
+                return Container(
+                  decoration: BoxDecoration(
+                    borderRadius: getBottomRoundedBorderRadius(),
+                    gradient: LinearGradient(
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                        stops: [
+                          gradientAnimation.value,
+                          1 -  gradientAnimation.value,
+                        ],
+                        colors: [
+                          Colors.grey,
+                          Colors.white,
+                        ]),
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
                       Text(
-                        LDLocalizations.of(context).loadingStory,
-                      ),
-                    if (!loadingStory)
-                      FlatButton(
-                        onPressed: onButtonPress,
-                        child: Text(
-                          buttonText,
-                          style: TextStyle(
-                            fontSize: 22.0,
-                            fontWeight: FontWeight.bold,
-                          ),
+                        mainText,
+                        style: TextStyle(
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.bold,
                         ),
                       ),
-                  ],
-                ),
-              ),
-            ],
-          ),
+                      if (loadingStory)
+                        Text(
+                          LDLocalizations.of(context).loadingStory,
+                        ),
+                      if (!loadingStory)
+                        FlatButton(
+                          onPressed: onButtonPress,
+                          child: Text(
+                            buttonText,
+                            style: TextStyle(
+                              fontSize: 22.0,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                    ],
+                  ),
+                );
+              },
+            ),
+          ],
         ),
       ),
     );
@@ -187,5 +241,12 @@ class _MainMenuState extends State<MainMenu>
         context,
         SlideRightNavigation(
             widget: StoryView(user: user, catalogStory: story)));
+  }
+
+  @override
+  void dispose() {
+    appearanceController.dispose();
+    gradientController.dispose();
+    super.dispose();
   }
 }
