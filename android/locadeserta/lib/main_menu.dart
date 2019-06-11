@@ -1,6 +1,7 @@
 import 'package:async/async.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:locadeserta/radiuses.dart';
 import 'package:locadeserta/story_view.dart';
 import 'package:locadeserta/models/Auth.dart';
 import 'package:locadeserta/models/catalogs.dart';
@@ -127,25 +128,20 @@ class _MainMenuState extends State<MainMenu>
       child: Container(
         decoration: BoxDecoration(
             border: Border.all(color: Colors.black, width: 2.0),
-            borderRadius: _getTopRoundedBorderRadius()),
+            borderRadius: getTopRoundedBorderRadius()),
         child: Card(
           elevation: 0.0,
           color: Theme.of(context).backgroundColor,
           child: Column(
             children: <Widget>[
-              Container(
-                decoration: BoxDecoration(
-                  borderRadius: _getTopRoundedBorderRadius(),
-                ),
-                child: ClipRRect(
-                    borderRadius: _getTopRoundedBorderRadius(),
-                    child: TweenImage(
-                      first: image,
-                      last: coloredImage,
-                      duration: 4,
-                      repeat: true,
-                    )),
-              ),
+              ClipRRect(
+                  borderRadius: getTopRoundedBorderRadius(),
+                  child: TweenImage(
+                    first: image,
+                    last: coloredImage,
+                    duration: 4,
+                    repeat: true,
+                  )),
               ListTile(
                   title: Text(
                 mainText,
@@ -180,11 +176,6 @@ class _MainMenuState extends State<MainMenu>
         ),
       ),
     );
-  }
-
-  BorderRadius _getTopRoundedBorderRadius() {
-    return BorderRadius.only(
-        topLeft: Radius.circular(20.0), topRight: Radius.circular(20.0));
   }
 
   _goToStory(CatalogStory story) async {

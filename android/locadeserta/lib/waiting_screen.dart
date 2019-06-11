@@ -1,6 +1,7 @@
 import 'package:flutter/widgets.dart';
 import 'package:locadeserta/animations/TweenImage.dart';
 import 'package:locadeserta/models/Localizations.dart';
+import 'package:locadeserta/radiuses.dart';
 
 class WaitingScreen extends StatelessWidget {
   @override
@@ -21,15 +22,19 @@ class WaitingScreen extends StatelessWidget {
             height: 50,
           ),
           Center(
-              child: Hero(
-            tag: "CossackHero",
-            child: TweenImage(
-              last: AssetImage("images/background/cossack_0.jpg"),
-              first: AssetImage("images/background/c_cossack_0.jpg"),
-              duration: 2,
-              height: height,
+            child: Hero(
+              tag: "CossackHero",
+              child: ClipRRect(
+                borderRadius: getAllRoundedBorderRadius(),
+                child: TweenImage(
+                  last: AssetImage("images/background/cossack_0.jpg"),
+                  first: AssetImage("images/background/c_cossack_0.jpg"),
+                  duration: 2,
+                  height: height,
+                ),
+              ),
             ),
-          )),
+          ),
         ],
       ),
     );

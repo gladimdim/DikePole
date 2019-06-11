@@ -4,6 +4,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:locadeserta/animations/TweenImage.dart';
 import 'package:locadeserta/models/Auth.dart';
 import 'package:locadeserta/models/Localizations.dart';
+import 'package:locadeserta/radiuses.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import 'locale_selection.dart';
@@ -58,13 +59,16 @@ class _LoginViewState extends State<LoginView> {
               child: Center(
                 child: Padding(
                   padding: EdgeInsets.only(top: 10.0),
-                  child: Hero(
-                    tag: "CossackHero",
-                    child: TweenImage(
-                      repeat: true,
-                      last: AssetImage("images/background/cossack_0.jpg"),
-                      first: AssetImage("images/background/c_cossack_0.jpg"),
-                      duration: 4,
+                  child: ClipRRect(
+                    borderRadius: getAllRoundedBorderRadius(),
+                    child: Hero(
+                      tag: "CossackHero",
+                      child: TweenImage(
+                        repeat: true,
+                        last: AssetImage("images/background/cossack_0.jpg"),
+                        first: AssetImage("images/background/c_cossack_0.jpg"),
+                        duration: 4,
+                      ),
                     ),
                   ),
                 ),

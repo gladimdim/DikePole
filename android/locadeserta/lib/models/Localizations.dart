@@ -53,7 +53,7 @@ class LDLocalizations {
       'startstory': 'Читати',
       'lookingforheroes': 'Шукаємо героїв в землях Дикого Поля...',
       'save': 'Зберегти',
-      'reset': 'З початку',
+      'reset': 'Заново',
 
     },
     'pl': {
