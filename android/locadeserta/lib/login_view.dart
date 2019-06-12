@@ -75,16 +75,7 @@ class _LoginViewState extends State<LoginView> {
               ),
             ),
             _buildTextDisplayName(user, context),
-            if (snapshot.data == null)
-              RaisedButton(
-                  color: Theme.of(context).primaryColor,
-                  textColor: Theme.of(context).textTheme.title.color,
-                  onPressed: _onSignInPressed,
-                  child: Text(
-                    LDLocalizations.of(context).signInWithGoogle,
-                    textAlign: TextAlign.center,
-                    style: Theme.of(context).textTheme.title,
-                  )),
+            if (snapshot.data == null) _buildLoginButtons(context),
             if (snapshot.data != null) _buildLoginedView(user, context),
             LocaleSelection(
               onLocaleChanged: _setNewLocale,
@@ -120,6 +111,37 @@ class _LoginViewState extends State<LoginView> {
     );
   }
 
+  Widget _buildLoginButtons(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Expanded(
+          flex: 2,
+          child: RaisedButton(
+            color: Theme.of(context).primaryColor,
+            textColor: Theme.of(context).textTheme.title.color,
+            onPressed: _onSignInPressed,
+            child: Text(
+              LDLocalizations.of(context).signInWithGoogle,
+              textAlign: TextAlign.center,
+              style: Theme.of(context).textTheme.title,
+            ),
+          ),
+        ),
+        Expanded(
+          flex: 2,
+          child: RaisedButton(
+            onPressed: _onSignInAnonPressed,
+            color: Theme.of(context).primaryColor,
+            child: Text(LDLocalizations.of(context).anonLogin,
+                textAlign: TextAlign.center,
+                style: Theme.of(context).textTheme.title),
+          ),
+        ),
+      ],
+    );
+  }
+
   Widget _buildLoginedView(User user, BuildContext context) {
     return RaisedButton(
       onPressed: widget.onContinue,
@@ -152,6 +174,10 @@ class _LoginViewState extends State<LoginView> {
     );
 
     await widget.auth.signInWithCredentials(credential);
+  }
+
+  _onSignInAnonPressed() async {
+    return await widget.auth.signInAnonymously();
   }
 
   _setNewLocale(Locale locale) {

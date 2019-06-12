@@ -19,7 +19,7 @@ class LDLocalizations {
       'continue': 'Continue',
       'signout': 'Signout',
       'next': 'Next',
-      'signinwithgoogle': "Sign in with Google",
+      'signinwithgoogle': "With Google",
       'apptitle': 'Loca Deserta',
       'availablestories': 'Available stories',
       'youhavesavedgame': 'You have a saved game',
@@ -34,12 +34,13 @@ class LDLocalizations {
       'lookingforheroes': 'Looking for heroes in Loca Deserta lands...',
       'save': 'Save',
       'reset': 'Reset',
+      'anonlogin': 'Guest',
     },
     'uk': {
       'continue': 'Продовжити',
       'signout': 'Вийти',
       'next': 'Далі',
-      'signinwithgoogle': "Зайти з Google",
+      'signinwithgoogle': "З Google",
       'apptitle': 'Дике Поле',
       'availablestories': 'Доступні історії',
       'youhavesavedgame': 'У вас є збережена гра',
@@ -54,13 +55,13 @@ class LDLocalizations {
       'lookingforheroes': 'Шукаємо героїв в землях Дикого Поля...',
       'save': 'Зберегти',
       'reset': 'Заново',
-
+      'anonlogin': 'Гість',
     },
     'pl': {
       'continue': 'Dalej',
       'signout': 'Wyloguj się',
       'next': 'Kolejny',
-      'signinwithgoogle': "Zaloguj się za pomocą Google",
+      'signinwithgoogle': "Z google",
       'apptitle': 'Dzikie Pole',
       'availablestories': 'Dostępne historie',
       'youhavesavedgame': 'Masz zapisaną grę',
@@ -75,6 +76,7 @@ class LDLocalizations {
       'lookingforheroes': 'poszukuje bohaterów w Dzikie Pole ziemia...',
       'save': 'Zapisać',
       'reset': 'Nastawić',
+      'anonlogin': 'Gość',
     }
   };
 
@@ -147,6 +149,9 @@ class LDLocalizations {
   }
   String get reset {
     return _localizedValues[locale.languageCode]['reset'];
+  }
+  String get anonLogin {
+    return _localizedValues[locale.languageCode]['anonlogin'];
   }
 
 }

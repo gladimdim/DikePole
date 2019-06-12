@@ -5,7 +5,7 @@ class User {
   final String uid;
   final String displayName;
   static User fromFirebaseUser(FirebaseUser user) {
-    return User(uid: user.uid, displayName: user.displayName);
+    return User(uid: user.uid, displayName: user.displayName != null ? user.displayName : "Cossack");
   }
   User({this.uid, this.displayName});
 }
@@ -29,5 +29,9 @@ class Auth {
 
   Future<void> signOut() async {
     await _auth.signOut();
+  }
+
+  Future<void> signInAnonymously() async {
+    await _auth.signInAnonymously();
   }
 }
