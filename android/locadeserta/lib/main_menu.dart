@@ -48,7 +48,7 @@ class _MainMenuState extends State<MainMenu> with TickerProviderStateMixin {
 
     gradientController = AnimationController(
       vsync: this,
-      duration: Duration(milliseconds: 4000),
+      duration: Duration(milliseconds: 2000),
     );
     gradientAnimation = Tween(begin: 1.0, end: 0.0).animate(
       CurvedAnimation(parent: gradientController, curve: Curves.linear),
@@ -186,38 +186,52 @@ class _MainMenuState extends State<MainMenu> with TickerProviderStateMixin {
                     borderRadius: getBottomRoundedBorderRadius(),
                     gradient: LinearGradient(
                         begin: Alignment.topLeft,
-                        end: Alignment.bottomRight,
+                        end: Alignment.topRight,
                         stops: [
-                          gradientAnimation.value,
-                          1 -  gradientAnimation.value,
+                          0,
+                          0.5 - gradientAnimation.value,
+                          0.7,
                         ],
                         colors: [
+                          Colors.black,
                           Colors.grey,
-                          Colors.white,
+                          Colors.black,
                         ]),
                   ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      Text(
-                        mainText,
-                        style: TextStyle(
-                          fontSize: 20.0,
-                          fontWeight: FontWeight.bold,
+                      Flexible(
+                        flex: 4,
+                        child: Text(
+                          mainText,
+                          style: TextStyle(
+                            color: Theme.of(context).textTheme.title.color,
+                            fontSize: 20.0,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ),
                       if (loadingStory)
-                        Text(
-                          LDLocalizations.of(context).loadingStory,
+                        Flexible(
+                          flex: 5,
+                          child: Text(
+                            LDLocalizations.of(context).loadingStory,
+                          ),
                         ),
                       if (!loadingStory)
-                        FlatButton(
-                          onPressed: onButtonPress,
-                          child: Text(
-                            buttonText,
-                            style: TextStyle(
-                              fontSize: 22.0,
-                              fontWeight: FontWeight.bold,
+                        Flexible(
+                          flex: 5,
+                          child: FlatButton(
+                            color: Theme.of(context).primaryColor,
+                            onPressed: onButtonPress,
+                            child: Text(
+                              buttonText,
+                              style: TextStyle(
+                                color: Theme.of(context).textTheme.title.color,
+                                fontSize: 22.0,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
                           ),
                         ),
