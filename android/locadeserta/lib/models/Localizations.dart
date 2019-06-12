@@ -27,7 +27,6 @@ class LDLocalizations {
       'view': 'View',
       'start': 'Start',
       'greet': 'Good day',
-      'unregisteredusername': 'Cossack',
       'version': 'Version',
       'loadingstory': 'Loading Story',
       'startstory': 'Read',
@@ -35,6 +34,7 @@ class LDLocalizations {
       'save': 'Save',
       'reset': 'Reset',
       'anonlogin': 'Guest',
+      'welcometext': 'Select login method',
     },
     'uk': {
       'continue': 'Продовжити',
@@ -48,7 +48,6 @@ class LDLocalizations {
       'view': 'Переглянути',
       'start': 'Почати',
       'greet': 'Добрий день',
-      'unregisteredusername': 'Козак',
       'version': 'Версія',
       'loadingstory': 'Завантаження історії',
       'startstory': 'Читати',
@@ -56,6 +55,7 @@ class LDLocalizations {
       'save': 'Зберегти',
       'reset': 'Заново',
       'anonlogin': 'Гість',
+      'welcometext': 'Виберіть метод входу в гру'
     },
     'pl': {
       'continue': 'Dalej',
@@ -69,7 +69,6 @@ class LDLocalizations {
       'view': 'Widok',
       'start': 'Początek',
       'greet': 'Dobry dzień',
-      'unregisteredusername': 'Kozack',
       'version': 'Wersja',
       'loadingstory': 'Historia ładowania',
       'startstory': 'Сzytać',
@@ -77,6 +76,7 @@ class LDLocalizations {
       'save': 'Zapisać',
       'reset': 'Nastawić',
       'anonlogin': 'Gość',
+      'welcometext': 'Wybierz metodę logowania',
     }
   };
 
@@ -123,11 +123,6 @@ class LDLocalizations {
   String greetUserByName(String name) {
     return '${_localizedValues[locale.languageCode]['greet']}, $name';
   }
-
-  String unregisteredUsername() {
-    return _localizedValues[locale.languageCode]['unregisteredusername'];
-  }
-
   String get versionLabel {
     return "${_localizedValues[locale.languageCode]['version']}: $version";
   }
@@ -152,6 +147,9 @@ class LDLocalizations {
   }
   String get anonLogin {
     return _localizedValues[locale.languageCode]['anonlogin'];
+  }
+  String get welcomeText {
+    return _localizedValues[locale.languageCode]['welcometext'];
   }
 
 }

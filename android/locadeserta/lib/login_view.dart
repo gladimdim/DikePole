@@ -74,7 +74,7 @@ class _LoginViewState extends State<LoginView> {
                 ),
               ),
             ),
-            _buildTextDisplayName(user, context),
+            _buildWelcomeText(user, context),
             if (snapshot.data == null) _buildLoginButtons(context),
             if (snapshot.data != null) _buildLoginedView(user, context),
             LocaleSelection(
@@ -152,14 +152,15 @@ class _LoginViewState extends State<LoginView> {
     );
   }
 
-  Widget _buildTextDisplayName(User user, context) {
-    var userName = user == null
-        ? LDLocalizations.of(context).unregisteredUsername()
-        : user.displayName;
+  Widget _buildWelcomeText(User user, context) {
+    var text = user == null
+        ? LDLocalizations.of(context).welcomeText
+        : LDLocalizations.of(context).greetUserByName(user.displayName);
+
     return Center(
       child: Padding(
         padding: const EdgeInsets.only(top: 16.0),
-        child: Text(LDLocalizations.of(context).greetUserByName(userName)),
+        child: Text(text),
       ),
     );
   }
