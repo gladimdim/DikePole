@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:locadeserta/animations/TweenImage.dart';
 import 'package:locadeserta/animations/slide_widget.dart';
+import 'package:locadeserta/components.dart';
 import 'package:locadeserta/models/story_bridge.dart';
 import 'package:locadeserta/animations/slideable_button.dart';
 import 'package:locadeserta/models/BackgroundImage.dart';
@@ -43,10 +44,13 @@ class PassageState extends State<Passage> with TickerProviderStateMixin {
       child: SizedBox(
         height: 100.0,
         child: SlideableButton(
-          buttonText: text,
           onPress: () {
             _nextWithChoice(i);
           },
+          child: optionBox(
+            context,
+            text,
+          ),
         ),
       ),
     );
@@ -73,7 +77,10 @@ class PassageState extends State<Passage> with TickerProviderStateMixin {
     return Padding(
       padding: EdgeInsets.all(8.0),
       child: SlideableButton(
-          buttonText: LDLocalizations.of(context).Continue,
+          child: optionBox(
+            context,
+            LDLocalizations.of(context).Continue,
+          ),
           onPress: () {
             _next();
           }),
@@ -92,7 +99,7 @@ class PassageState extends State<Passage> with TickerProviderStateMixin {
     print("current tags: ${widget.currentStory.currentTags}");
     var currentTags = widget.currentStory.currentTags;
     var randomImageType = _lastImageType;
-    if (currentTags.isNotEmpty) {
+    if (currentTags != null && currentTags.isNotEmpty) {
       randomImageType = BackgroundImage.imageTypeFromCurrentTags(currentTags);
       _lastImageType = randomImageType;
     }

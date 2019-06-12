@@ -68,8 +68,8 @@ class StoryBridge {
   Future<void> doContinue() async {
     try {
       await platform.invokeMethod("Continue");
-    } on PlatformException {
-      print("Error");
+    } catch (e) {
+      print("Error, could not continue: ${e.toString()}");
     }
     await _refreshStory();
   }
@@ -105,9 +105,9 @@ class StoryBridge {
     }
   }
 
-  Future<void> resetStory() async {
-    await this.initStory();
-    await this._refreshStory();
+  Future<void> resetStory({String storyJson}) async {
+    await this.initStory(storyJson: storyJson);
+    return await this._refreshStory();
   }
 
   Future<List<String>> getInventory() async {

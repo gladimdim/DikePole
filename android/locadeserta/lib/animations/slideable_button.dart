@@ -3,9 +3,11 @@ import 'package:flutter/material.dart';
 class SlideableButton extends StatefulWidget {
   final Widget child;
   final Function onPress;
-  final String buttonText;
 
-  SlideableButton({this.child, this.onPress, this.buttonText});
+  SlideableButton({
+    @required this.child,
+    @required this.onPress,
+  });
 
   @override
   _SlideableButtonState createState() => _SlideableButtonState();
@@ -44,26 +46,18 @@ class _SlideableButtonState extends State<SlideableButton>
     ));
 
     return AnimatedBuilder(
-        animation: animation,
-        child: widget.child,
-        builder: (context, child) {
-          return Transform.translate(
-            offset: Offset(animation.value, 0.0),
-            child: SizedBox(
-              height: 100.0,
-              child: FlatButton(
-                  color: Theme.of(context).primaryColor,
-                  child: Text(
-                    widget.buttonText,
-                    style: TextStyle(
-                        fontSize: 20.0,
-                        color: Theme.of(context).textTheme.title.color),
-                  ),
-                  onPressed: () {
-                    controller.forward();
-                  }),
-            ),
-          );
-        });
+      animation: animation,
+      child: widget.child,
+      builder: (context, child) {
+        return Transform.translate(
+          offset: Offset(animation.value, 0.0),
+          child: InkWell(
+              child: child,
+              onTap: () {
+                controller.forward();
+              }),
+        );
+      },
+    );
   }
 }

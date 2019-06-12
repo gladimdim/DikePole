@@ -1,6 +1,7 @@
 import 'package:async/async.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:locadeserta/animations/slideable_button.dart';
 import 'package:locadeserta/radiuses.dart';
 import 'package:locadeserta/story_view.dart';
 import 'package:locadeserta/models/Auth.dart';
@@ -157,61 +158,62 @@ class _MainMenuState extends State<MainMenu> with TickerProviderStateMixin {
                     repeat: true,
                   )),
             ),
-            Container(
-              decoration: BoxDecoration(
-                color: Colors.black,
-                borderRadius: getBottomRoundedBorderRadius(),
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Flexible(
-                    flex: 4,
-                    child: Text(
-                      mainText,
-                      style: TextStyle(
-                        color: Theme.of(context).textTheme.title.color,
-                        fontSize: 18.0,
-                        fontWeight: FontWeight.bold,
-                      ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Flexible(
+                  flex: 4,
+                  child: Text(
+                    mainText,
+                    style: TextStyle(
+                      fontSize: 18.0,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
-                  Flexible(
-                    flex: 1,
-                    child: SizedBox(
-                      width: 1.0,
+                ),
+                Flexible(
+                  flex: 1,
+                  child: SizedBox(
+                      width: 5.0,
                       height: 50.0,
                       child: Container(
                         color: Colors.white,
-                      )
+                      )),
+                ),
+                if (loadingStory)
+                  Flexible(
+                    flex: 5,
+                    child: Text(
+                      LDLocalizations.of(context).loadingStory,
                     ),
                   ),
-                  if (loadingStory)
-                    Flexible(
-                      flex: 5,
-                      child: Text(
-                        LDLocalizations.of(context).loadingStory,
-                      ),
-                    ),
-                  if (!loadingStory)
-                    Flexible(
-                      flex: 5,
-                      child: FlatButton(
-                        splashColor: Colors.white,
-                        color: Theme.of(context).primaryColor,
-                        onPressed: onButtonPress,
-                        child: Text(
-                          buttonText,
-                          style: TextStyle(
-                            color: Theme.of(context).textTheme.title.color,
-                            fontSize: 22.0,
-                            fontWeight: FontWeight.bold,
+                if (!loadingStory)
+                  Flexible(
+                    flex: 6,
+                    child: SlideableButton(
+                      onPress: onButtonPress,
+                      child: Container(
+                        height: 50,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.only(
+                              bottomRight: Radius.circular(20.0)),
+                          color: Colors.black,
+                        ),
+                        child: Align(
+                          alignment: Alignment.center,
+                          child: Text(
+                            buttonText,
+                            style: TextStyle(
+                              color: Theme.of(context).textTheme.title.color,
+                              fontSize: 22.0,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                         ),
                       ),
                     ),
-                ],
-              ),
+                  ),
+              ],
             ),
           ],
         ),

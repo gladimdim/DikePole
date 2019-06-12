@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:locadeserta/animations/TweenImage.dart';
+import 'package:locadeserta/animations/slideable_button.dart';
 import 'package:locadeserta/models/Auth.dart';
 import 'package:locadeserta/models/Localizations.dart';
 import 'package:locadeserta/radiuses.dart';
@@ -143,12 +144,20 @@ class _LoginViewState extends State<LoginView> {
   }
 
   Widget _buildLoginedView(User user, BuildContext context) {
-    return RaisedButton(
-      onPressed: widget.onContinue,
-      color: Theme.of(context).primaryColor,
-      child: Text(LDLocalizations.of(context).start,
-          textAlign: TextAlign.center,
-          style: Theme.of(context).textTheme.title),
+    return SlideableButton(
+      onPress: widget.onContinue,
+      child: Container(
+        height: 30.0,
+        color: Theme.of(context).primaryColor,
+        child: Align(
+          alignment: Alignment.center,
+          child: Text(
+            LDLocalizations.of(context).start,
+            textAlign: TextAlign.center,
+            style: Theme.of(context).textTheme.title,
+          ),
+        ),
+      ),
     );
   }
 

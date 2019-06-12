@@ -76,7 +76,7 @@ class _StoryViewState extends State<StoryView> {
                     textColor: Theme.of(context).textTheme.title.color,
                     child: Text(LDLocalizations.of(context).reset),
                     onPressed: () async {
-                      await storyBridge.resetStory();
+                      await storyBridge.resetStory(storyJson: widget.catalogStory.inkJson,);
                     },
                   )
                 ],
