@@ -27,8 +27,6 @@ class _MainMenuState extends State<MainMenu> with TickerProviderStateMixin {
   bool loadingStory = false;
   final AsyncMemoizer _catalogListMemo = AsyncMemoizer();
 
-  AnimationController gradientController;
-  var gradientAnimation;
   var appearanceController;
   var appearanceAnimation;
 
@@ -45,25 +43,6 @@ class _MainMenuState extends State<MainMenu> with TickerProviderStateMixin {
           parent: appearanceController, curve: Curves.linearToEaseOut),
     );
     appearanceController.forward();
-
-    gradientController = AnimationController(
-      vsync: this,
-      duration: Duration(milliseconds: 2000),
-    );
-    gradientAnimation = Tween(begin: 1.0, end: 0.0).animate(
-      CurvedAnimation(parent: gradientController, curve: Curves.linear),
-    );
-
-    gradientController.addStatusListener((status) {
-      if (status == AnimationStatus.completed) {
-        gradientController.reverse();
-      }
-      if (status == AnimationStatus.dismissed) {
-        gradientController.forward();
-      }
-    });
-
-    gradientController.forward();
 
     super.initState();
   }
@@ -178,67 +157,61 @@ class _MainMenuState extends State<MainMenu> with TickerProviderStateMixin {
                     repeat: true,
                   )),
             ),
-            AnimatedBuilder(
-              animation: gradientAnimation,
-              builder: (context, widget) {
-                return Container(
-                  decoration: BoxDecoration(
-                    borderRadius: getBottomRoundedBorderRadius(),
-                    gradient: LinearGradient(
-                        begin: Alignment.topLeft,
-                        end: Alignment.topRight,
-                        stops: [
-                          0,
-                          0.5 - gradientAnimation.value,
-                          0.7,
-                        ],
-                        colors: [
-                          Colors.black,
-                          Colors.grey,
-                          Colors.black,
-                        ]),
+            Container(
+              decoration: BoxDecoration(
+                color: Colors.black,
+                borderRadius: getBottomRoundedBorderRadius(),
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Flexible(
+                    flex: 4,
+                    child: Text(
+                      mainText,
+                      style: TextStyle(
+                        color: Theme.of(context).textTheme.title.color,
+                        fontSize: 18.0,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
                   ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      Flexible(
-                        flex: 4,
+                  Flexible(
+                    flex: 1,
+                    child: SizedBox(
+                      width: 1.0,
+                      height: 50.0,
+                      child: Container(
+                        color: Colors.white,
+                      )
+                    ),
+                  ),
+                  if (loadingStory)
+                    Flexible(
+                      flex: 5,
+                      child: Text(
+                        LDLocalizations.of(context).loadingStory,
+                      ),
+                    ),
+                  if (!loadingStory)
+                    Flexible(
+                      flex: 5,
+                      child: FlatButton(
+                        splashColor: Colors.white,
+                        color: Theme.of(context).primaryColor,
+                        onPressed: onButtonPress,
                         child: Text(
-                          mainText,
+                          buttonText,
                           style: TextStyle(
                             color: Theme.of(context).textTheme.title.color,
-                            fontSize: 20.0,
+                            fontSize: 22.0,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
                       ),
-                      if (loadingStory)
-                        Flexible(
-                          flex: 5,
-                          child: Text(
-                            LDLocalizations.of(context).loadingStory,
-                          ),
-                        ),
-                      if (!loadingStory)
-                        Flexible(
-                          flex: 5,
-                          child: FlatButton(
-                            color: Theme.of(context).primaryColor,
-                            onPressed: onButtonPress,
-                            child: Text(
-                              buttonText,
-                              style: TextStyle(
-                                color: Theme.of(context).textTheme.title.color,
-                                fontSize: 22.0,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ),
-                        ),
-                    ],
-                  ),
-                );
-              },
+                    ),
+                ],
+              ),
             ),
           ],
         ),
@@ -260,7 +233,6 @@ class _MainMenuState extends State<MainMenu> with TickerProviderStateMixin {
   @override
   void dispose() {
     appearanceController.dispose();
-    gradientController.dispose();
     super.dispose();
   }
 }
