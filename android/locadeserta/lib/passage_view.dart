@@ -23,18 +23,31 @@ class PassageState extends State<Passage> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    if (widget.currentStory.theEnd) {
-      return Text("THE END");
-    } else if (widget.currentStory.toBeContinued) {
-      return Text("To Be Continued");
+    if (widget.currentStory.theEnd || widget.currentStory.toBeContinued) {
+      return Column(
+        children: <Widget>[
+          Text("THE END",
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 40.0)),
+          SizedBox(
+            height: 100,
+          ),
+          TweenImage(
+            first: BackgroundImage.getAssetImageForType(ImageType.LANDING),
+            duration: 5,
+            repeat: true,
+            last: BackgroundImage.getAssetImageForType(ImageType.LANDING),
+          )
+        ],
+      );
+    } else {
+      return Column(
+        children: [
+          _buildTextRow(context),
+          ..._createButtons(context),
+        ],
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+      );
     }
-    return Column(
-      children: [
-        _buildTextRow(context),
-        ..._createButtons(context),
-      ],
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-    );
   }
 
   List<Widget> _createButtons(BuildContext context) {

@@ -9,6 +9,7 @@ var optionBox = (BuildContext context, String text) => SizedBox(
           alignment: Alignment.center,
           child: Text(
             text,
+            textAlign: TextAlign.center,
             style: TextStyle(
                 fontFamily: 'Montserrat',
                 fontSize: 20.0,

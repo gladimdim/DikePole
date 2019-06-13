@@ -142,32 +142,32 @@ class _MainMenuState extends State<MainMenu> with TickerProviderStateMixin {
       padding: const EdgeInsets.all(4.0),
       child: Container(
         decoration: BoxDecoration(
-            border: Border.all(color: Colors.black, width: 0.5),
+            border: Border.all(color: Colors.black, width: 1),
             borderRadius: getAllRoundedBorderRadius()),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            Padding(
-              padding: EdgeInsets.all(0.0),
-              child: ClipRRect(
-                  borderRadius: getTopRoundedBorderRadius(),
-                  child: TweenImage(
-                    first: image,
-                    last: coloredImage,
-                    duration: 4,
-                    repeat: true,
-                  )),
-            ),
+            ClipRRect(
+                borderRadius: getTopRoundedBorderRadius(),
+                child: TweenImage(
+                  first: image,
+                  last: coloredImage,
+                  duration: 4,
+                  repeat: true,
+                )),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Flexible(
                   flex: 4,
-                  child: Text(
-                    mainText,
-                    style: TextStyle(
-                      fontSize: 18.0,
-                      fontWeight: FontWeight.bold,
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 10.0),
+                    child: Text(
+                      mainText,
+                      style: TextStyle(
+                        fontSize: 18.0,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
                 ),

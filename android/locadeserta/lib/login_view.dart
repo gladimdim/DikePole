@@ -76,6 +76,9 @@ class _LoginViewState extends State<LoginView> {
               ),
             ),
             _buildWelcomeText(user, context),
+            SizedBox(
+              height: 20,
+            ),
             if (snapshot.data == null) _buildLoginButtons(context),
             if (snapshot.data != null) _buildLoginedView(user, context),
             LocaleSelection(
@@ -147,7 +150,7 @@ class _LoginViewState extends State<LoginView> {
     return SlideableButton(
       onPress: widget.onContinue,
       child: Container(
-        height: 30.0,
+        height: 50.0,
         color: Theme.of(context).primaryColor,
         child: Align(
           alignment: Alignment.center,
