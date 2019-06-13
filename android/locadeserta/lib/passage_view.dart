@@ -24,18 +24,30 @@ class PassageState extends State<Passage> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     if (widget.currentStory.theEnd || widget.currentStory.toBeContinued) {
+      var text = widget.currentStory.theEnd
+          ? LDLocalizations.of(context).theEnd
+          : LDLocalizations.of(context).toBeContinued;
       return Column(
         children: <Widget>[
-          Text("THE END",
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 40.0)),
-          SizedBox(
-            height: 100,
+          Text(
+            text,
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 25.0,
+            ),
           ),
-          TweenImage(
-            first: BackgroundImage.getAssetImageForType(ImageType.LANDING),
-            duration: 5,
-            repeat: true,
-            last: BackgroundImage.getAssetImageForType(ImageType.LANDING),
+          SizedBox(
+            height: 50,
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: TweenImage(
+              first: BackgroundImage.getAssetImageForType(ImageType.LANDING),
+              duration: 3,
+              repeat: true,
+              last: BackgroundImage.getColoredAssetImageForType(ImageType.LANDING),
+            ),
           )
         ],
       );

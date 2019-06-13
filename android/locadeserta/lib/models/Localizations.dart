@@ -3,7 +3,7 @@ import 'dart:core';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart' show SynchronousFuture;
 
-var version = "1.63";
+var version = "1.64";
 
 class LDLocalizations {
   LDLocalizations(this.locale);
@@ -35,6 +35,8 @@ class LDLocalizations {
       'reset': 'Reset',
       'anonlogin': 'Guest',
       'welcometext': 'Select login method',
+      'theend': 'THE END',
+      'tobecontinued': 'To be continued. Wait on the story update.'
     },
     'uk': {
       'continue': 'Продовжити',
@@ -55,7 +57,9 @@ class LDLocalizations {
       'save': 'Зберегти',
       'reset': 'Заново',
       'anonlogin': 'Гість',
-      'welcometext': 'Виберіть метод входу в гру'
+      'welcometext': 'Виберіть метод входу в гру',
+      'theend': "Кінець",
+      'tobecontinued': 'Далі буде. Чекайте на оновлення.',
     },
     'pl': {
       'continue': 'Dalej',
@@ -77,6 +81,8 @@ class LDLocalizations {
       'reset': 'Nastawić',
       'anonlogin': 'Gość',
       'welcometext': 'Wybierz metodę logowania',
+      'theend': 'Koniec',
+      'tobecontinued': 'Ciąg dalszy nastąpi. Poczekaj na aktualizację historii',
     }
   };
 
@@ -151,7 +157,12 @@ class LDLocalizations {
   String get welcomeText {
     return _localizedValues[locale.languageCode]['welcometext'];
   }
-
+  String get theEnd {
+    return _localizedValues[locale.languageCode]['theend'];
+  }
+  String get toBeContinued {
+    return _localizedValues[locale.languageCode]['tobecontinued'];
+  }
 }
 
 class LDLocalizationsDelegate extends LocalizationsDelegate<LDLocalizations> {
