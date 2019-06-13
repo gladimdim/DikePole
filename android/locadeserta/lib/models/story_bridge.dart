@@ -8,13 +8,18 @@ class Story {
   final bool canContinue;
   final List<String> inventory;
   final List<String> currentTags;
+  final bool theEnd;
+  final bool toBeContinued;
 
-  Story(
-      {this.currentText,
-      this.currentChoices,
-      this.canContinue,
-      this.inventory,
-      this.currentTags});
+  Story({
+    this.currentText,
+    this.currentChoices,
+    this.canContinue,
+    this.inventory,
+    this.currentTags,
+    this.theEnd = false,
+    this.toBeContinued = false,
+  });
 }
 
 class StoryBridge {
@@ -55,12 +60,18 @@ class StoryBridge {
     } catch (e) {
       print("Error: ${e.toString()}");
     }
+
+    bool toBeContinued =
+        (currentTags.isNotEmpty == 1 && currentTags[0] == "image tobecontinued");
+    bool theEnd = (currentTags.isNotEmpty == 1 && currentTags[0] == "image theend");
     story = new Story(
       currentText: currentText,
       currentChoices: choices,
       canContinue: canContinue,
       currentTags: currentTags,
       inventory: [],
+      toBeContinued: toBeContinued,
+      theEnd: theEnd,
     );
     streamStory.sink.add(story);
   }

@@ -23,6 +23,11 @@ class PassageState extends State<Passage> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
+    if (widget.currentStory.theEnd) {
+      return Text("THE END");
+    } else if (widget.currentStory.toBeContinued) {
+      return Text("To Be Continued");
+    }
     return Column(
       children: [
         _buildTextRow(context),

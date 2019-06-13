@@ -62,36 +62,3 @@ class _LocaDesertaAppState extends State<LocaDesertaApp> {
     });
   }
 }
-
-class MyHome extends StatefulWidget {
-  final Function onLocaleSet;
-
-  @override
-  _MyHomeState createState() => _MyHomeState();
-
-  MyHome({@required this.onLocaleSet});
-}
-
-class _MyHomeState extends State<MyHome> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Loca Deserta'),
-
-      ),
-      backgroundColor: Theme.of(context).backgroundColor,
-      body: _buildBody(context),
-    );
-  }
-
-  Widget _buildBody(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(top: 8.0),
-      child: LoginView(
-          auth: auth,
-          onContinue: () => Navigator.pushNamed(context, "/main_menu"),
-          onSetLocale: widget.onLocaleSet),
-    );
-  }
-}
