@@ -62,8 +62,8 @@ class StoryBridge {
     }
 
     bool toBeContinued =
-        (currentTags.isNotEmpty == 1 && currentTags[0] == "image tobecontinued");
-    bool theEnd = (currentTags.isNotEmpty == 1 && currentTags[0] == "image theend");
+        (currentTags.isNotEmpty && currentTags[0] == "image tobecontinued");
+    bool theEnd = (currentTags.isNotEmpty && currentTags[0] == "image theend");
     story = new Story(
       currentText: currentText,
       currentChoices: choices,
