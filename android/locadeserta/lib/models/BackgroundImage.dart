@@ -2,18 +2,24 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 
+// from inkle:
+// image: bulrush; image boat; image river; image cossacks, image fight, image steppe, image forest
 class BackgroundImage {
   factory BackgroundImage() => _bgImage;
   static final BackgroundImage _bgImage = BackgroundImage._internal();
+
   BackgroundImage._internal();
 
   static Map<ImageType, RandomImage> _images = {
     ImageType.BOAT: RandomImage(ImageType.BOAT),
-    ImageType.STEPPE: RandomImage(ImageType.RIVER),
+    ImageType.STEPPE: RandomImage(ImageType.RIVER), // shadowed
     ImageType.FOREST: RandomImage(ImageType.BOAT),
     ImageType.BULRUSH: RandomImage(ImageType.BULRUSH),
     ImageType.RIVER: RandomImage(ImageType.RIVER),
     ImageType.LANDING: RandomImage(ImageType.LANDING),
+    ImageType.CAMP: RandomImage(ImageType.CAMP),
+    ImageType.COSSACKS: RandomImage(ImageType.CAMP), // shadowed
+
   };
 
   static ImageType imageTypeFromCurrentTags(List<String> variables) {
@@ -26,9 +32,8 @@ class BackgroundImage {
 
     var tagToTake = images[random.nextInt(images.length)];
 
-    return  BackgroundImage.variableToImageType(tagToTake);
+    return BackgroundImage.variableToImageType(tagToTake);
   }
-
 
   static ImageType variableToImageType(String variable) {
     var imageType = variable.split(" ")[1];
@@ -43,8 +48,12 @@ class BackgroundImage {
         return ImageType.RIVER;
       case 'landing':
         return ImageType.LANDING;
+      case 'camp':
+        return ImageType.CAMP;
+      case 'cossacks':
+        return ImageType.COSSACKS;
       default:
-        return ImageType.BOAT;
+        return ImageType.CAMP;
     }
   }
 
@@ -79,6 +88,8 @@ class RandomImage {
     ImageType.BOAT: "boat",
     ImageType.RIVER: "river",
     ImageType.LANDING: 'landing',
+    ImageType.CAMP: "camp",
+    ImageType.COSSACKS: "cossacks",
   };
 
   RandomImage(this.type) {
@@ -97,6 +108,9 @@ class RandomImage {
         break;
       case ImageType.LANDING:
         _MAX = 2;
+        break;
+      case ImageType.CAMP:
+        _MAX= 15;
         break;
       default:
         throw "Not implemented";
@@ -139,4 +153,4 @@ class RandomImage {
   }
 }
 
-enum ImageType { BOAT, STEPPE, FOREST, BULRUSH, RIVER, LANDING }
+enum ImageType { BOAT, STEPPE, FOREST, BULRUSH, RIVER, LANDING, CAMP, COSSACKS }

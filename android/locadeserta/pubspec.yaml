@@ -190,6 +190,37 @@ flutter:
     - images/background/landing/1.jpg
     - images/background/landing/c_0.jpg
     - images/background/landing/c_1.jpg
+    # CAMP IMAGES
+    - images/background/camp/0.jpg
+    - images/background/camp/1.jpg
+    - images/background/camp/2.jpg
+    - images/background/camp/3.jpg
+    - images/background/camp/4.jpg
+    - images/background/camp/5.jpg
+    - images/background/camp/6.jpg
+    - images/background/camp/7.jpg
+    - images/background/camp/8.jpg
+    - images/background/camp/9.jpg
+    - images/background/camp/10.jpg
+    - images/background/camp/11.jpg
+    - images/background/camp/12.jpg
+    - images/background/camp/13.jpg
+    - images/background/camp/14.jpg
+    - images/background/camp/c_0.jpg
+    - images/background/camp/c_1.jpg
+    - images/background/camp/c_2.jpg
+    - images/background/camp/c_3.jpg
+    - images/background/camp/c_4.jpg
+    - images/background/camp/c_5.jpg
+    - images/background/camp/c_6.jpg
+    - images/background/camp/c_7.jpg
+    - images/background/camp/c_8.jpg
+    - images/background/camp/c_9.jpg
+    - images/background/camp/c_10.jpg
+    - images/background/camp/c_11.jpg
+    - images/background/camp/c_12.jpg
+    - images/background/camp/c_13.jpg
+    - images/background/camp/c_14.jpg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.io/assets-and-images/#resolution-aware.
