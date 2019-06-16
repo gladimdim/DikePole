@@ -1,6 +1,6 @@
 name: locadeserta
 description: Loca Deserta. The life of struggle.
-version: 1.0.65-arm64
+version: 1.0.66-arm64
 # The following defines the version and build number for your application.
 # A version number is three numbers separated by dots, like 1.2.43
 # followed by an optional build number separated by a +.
@@ -186,10 +186,23 @@ flutter:
     - images/background/river/c_21.jpg
     - images/background/cossack_0.jpg
     - images/background/c_cossack_0.jpg
+    # LANDING IMAGES
     - images/background/landing/0.jpg
     - images/background/landing/1.jpg
+    - images/background/landing/2.jpg
+    - images/background/landing/3.jpg
+    - images/background/landing/4.jpg
+    - images/background/landing/5.jpg
+    - images/background/landing/6.jpg
+    - images/background/landing/7.jpg
     - images/background/landing/c_0.jpg
     - images/background/landing/c_1.jpg
+    - images/background/landing/c_2.jpg
+    - images/background/landing/c_3.jpg
+    - images/background/landing/c_4.jpg
+    - images/background/landing/c_5.jpg
+    - images/background/landing/c_6.jpg
+    - images/background/landing/c_7.jpg
     # CAMP IMAGES
     - images/background/camp/0.jpg
     - images/background/camp/1.jpg
