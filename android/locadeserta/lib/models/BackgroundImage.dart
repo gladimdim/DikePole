@@ -107,7 +107,7 @@ class RandomImage {
         _MAX = 21;
         break;
       case ImageType.LANDING:
-        _MAX = 2;
+        _MAX = 8;
         break;
       case ImageType.CAMP:
         _MAX= 15;
