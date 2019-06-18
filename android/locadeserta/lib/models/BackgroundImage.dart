@@ -77,7 +77,7 @@ class BackgroundImage {
 class RandomImage {
   Random _random = Random();
   int _currentRandom;
-  int _MAX;
+  int _max;
   List<int> _usedRandomNumbers;
   final ImageType type;
 
@@ -95,29 +95,29 @@ class RandomImage {
   RandomImage(this.type) {
     switch (type) {
       case ImageType.BOAT:
-        _MAX = 18;
+        _max = 18;
         break;
       case ImageType.FOREST:
-        _MAX = 10;
+        _max = 10;
         break;
       case ImageType.BULRUSH:
-        _MAX = 12;
+        _max = 12;
         break;
       case ImageType.RIVER:
-        _MAX = 21;
+        _max = 21;
         break;
       case ImageType.LANDING:
-        _MAX = 8;
+        _max = 8;
         break;
       case ImageType.CAMP:
-        _MAX= 15;
+        _max= 15;
         break;
       default:
         throw "Not implemented";
         break;
     }
 
-    _currentRandom = _random.nextInt(_MAX);
+    _currentRandom = _random.nextInt(_max);
     _usedRandomNumbers = [_currentRandom];
   }
 
@@ -135,10 +135,10 @@ class RandomImage {
   }
 
   void nextRandom() {
-    if (_usedRandomNumbers.length == _MAX) {
+    if (_usedRandomNumbers.length == _max) {
       _usedRandomNumbers = [];
     }
-    var temp = _random.nextInt(_MAX);
+    var temp = _random.nextInt(_max);
     if (_usedRandomNumbers.indexOf(temp) >= 0) {
       nextRandom();
       return;

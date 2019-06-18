@@ -22,7 +22,7 @@ class _LocaDesertaAppState extends State<LocaDesertaApp> {
       primaryColor: Colors.black,
       backgroundColor: Colors.white,
       accentColor: Colors.black,
-      fontFamily: 'Montserrat',
+      fontFamily: 'Roboto',
       textTheme: TextTheme(title: TextStyle(color: Colors.white)));
 
   @override

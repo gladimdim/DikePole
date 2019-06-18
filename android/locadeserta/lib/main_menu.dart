@@ -1,16 +1,12 @@
 import 'package:async/async.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:locadeserta/animations/slideable_button.dart';
-import 'package:locadeserta/radiuses.dart';
+import 'package:locadeserta/CatalogView.dart';
 import 'package:locadeserta/story_view.dart';
 import 'package:locadeserta/models/Auth.dart';
 import 'package:locadeserta/models/catalogs.dart';
-import 'package:locadeserta/models/BackgroundImage.dart';
 import 'package:locadeserta/waiting_screen.dart';
 import 'animations/SlideRightNavigation.dart';
-import 'animations/TweenImage.dart';
-import 'models/Localizations.dart';
 import 'package:locadeserta/models/persistence.dart';
 
 const LANDING_IMAGE_HEIGHT = 200.0;
@@ -86,33 +82,13 @@ class _MainMenuState extends State<MainMenu> with TickerProviderStateMixin {
   }
 
   _buildCatalogView(BuildContext context, List<CatalogStory> stories) {
-    var images = [
-      [
-        BackgroundImage.getAssetImageForType(ImageType.LANDING),
-        BackgroundImage.getColoredAssetImageForType(ImageType.LANDING),
-      ],
-    ];
-
-    BackgroundImage.nextRandomForType(ImageType.LANDING);
-
-    images.add(
-      [
-        BackgroundImage.getAssetImageForType(ImageType.LANDING),
-        BackgroundImage.getColoredAssetImageForType(ImageType.LANDING),
-      ],
-    );
-
     var child = ListView.builder(
         itemCount: stories.length,
         itemBuilder: (BuildContext context, int index) {
           var story = stories[index];
-          return _buildStoryItem(
-            image: images[index][0],
-            coloredImage: images[index][1],
-            mainText: story.title,
-            buttonText: LDLocalizations.of(context).startStory,
-            onButtonPress: () => _goToStory(story),
-            context: context,
+          return CatalogView(
+            catalogStory: story,
+            onPressed: () => _goToStory(story),
           );
         });
 
@@ -127,97 +103,6 @@ class _MainMenuState extends State<MainMenu> with TickerProviderStateMixin {
         );
       },
       child: child,
-    );
-  }
-
-  Widget _buildStoryItem({
-    AssetImage image,
-    AssetImage coloredImage,
-    String mainText,
-    String buttonText,
-    Function onButtonPress,
-    @required BuildContext context,
-  }) {
-    return Padding(
-      padding: const EdgeInsets.all(4.0),
-      child: Container(
-        decoration: BoxDecoration(
-            border: Border.all(color: Colors.black, width: 1),
-            borderRadius: getAllRoundedBorderRadius()),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: <Widget>[
-            ClipRRect(
-                borderRadius: getTopRoundedBorderRadius(),
-                child: TweenImage(
-                  first: image,
-                  last: coloredImage,
-                  duration: 4,
-                  repeat: true,
-                )),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Flexible(
-                  flex: 4,
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 10.0),
-                    child: Text(
-                      mainText,
-                      style: TextStyle(
-                        fontSize: 18.0,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                ),
-                Flexible(
-                  flex: 1,
-                  child: SizedBox(
-                      width: 5.0,
-                      height: 50.0,
-                      child: Container(
-                        color: Colors.white,
-                      )),
-                ),
-                if (loadingStory)
-                  Flexible(
-                    flex: 5,
-                    child: Text(
-                      LDLocalizations.of(context).loadingStory,
-                    ),
-                  ),
-                if (!loadingStory)
-                  Flexible(
-                    flex: 6,
-                    child: SlideableButton(
-                      onPress: onButtonPress,
-                      child: Container(
-                        height: 50,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.only(
-                              bottomRight: Radius.circular(20.0)),
-                          color: Colors.black,
-                        ),
-                        child: Align(
-                          alignment: Alignment.center,
-                          child: Text(
-                            buttonText,
-                            style: TextStyle(
-                              color: Theme.of(context).textTheme.title.color,
-                              fontSize: 22.0,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-              ],
-            ),
-          ],
-        ),
-      ),
     );
   }
 

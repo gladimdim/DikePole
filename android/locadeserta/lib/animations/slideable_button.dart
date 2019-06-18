@@ -3,10 +3,14 @@ import 'package:flutter/material.dart';
 class SlideableButton extends StatefulWidget {
   final Widget child;
   final Function onPress;
+  final Direction direction;
+  final Duration duration;
 
   SlideableButton({
     @required this.child,
     @required this.onPress,
+    this.direction = Direction.Right,
+    this.duration = const Duration(milliseconds: 200),
   });
 
   @override
@@ -22,7 +26,7 @@ class _SlideableButtonState extends State<SlideableButton>
     super.initState();
     controller = AnimationController(
       vsync: this,
-      duration: Duration(milliseconds: 400),
+      duration: widget.duration,
     )..addStatusListener((state) {
         if (state == AnimationStatus.completed) {
           widget.onPress();
@@ -39,8 +43,9 @@ class _SlideableButtonState extends State<SlideableButton>
 
   @override
   Widget build(BuildContext context) {
-    final width = MediaQuery.of(context).size.width * 2;
-    final animation = Tween(begin: 0.0, end: width).animate(CurvedAnimation(
+    var width = MediaQuery.of(context).size.width * 2;
+    final end = widget.direction == Direction.Right ? width : -width;
+    final animation = Tween(begin: 0.0, end: end).animate(CurvedAnimation(
       parent: controller,
       curve: Curves.easeInOut,
     ));
@@ -60,4 +65,9 @@ class _SlideableButtonState extends State<SlideableButton>
       },
     );
   }
+}
+
+enum Direction {
+  Left,
+  Right,
 }
