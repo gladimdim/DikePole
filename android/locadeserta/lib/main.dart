@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:locadeserta/CatalogView.dart';
 import 'package:locadeserta/main_menu.dart';
 import 'package:locadeserta/login_view.dart';
 import 'package:locadeserta/models/Auth.dart';
@@ -41,7 +42,9 @@ class _LocaDesertaAppState extends State<LocaDesertaApp> {
             ),
         "/main_menu": (context) => MainMenu(
               auth: auth,
-            )
+            ),
+        ExtractCatalogViewArguments.routeName: (context) =>
+            ExtractCatalogViewArguments(),
       },
       localizationsDelegates: [
         const LDLocalizationsDelegate(),
