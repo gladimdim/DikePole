@@ -86,25 +86,22 @@ class _MainMenuState extends State<MainMenu> with TickerProviderStateMixin {
         itemCount: stories.length,
         itemBuilder: (BuildContext context, int index) {
           var story = stories[index];
-          return Hero(
-            tag: "CatalogView/" + story.title,
-            child: CatalogView(
-              catalogStory: story,
-              onReadPressed: () => _goToStory(story),
-              onDetailPressed: () {
-                Navigator.pushNamed(
-                  context,
-                  "/story_details",
-                  arguments: CatalogViewArguments(
-                      expanded: true,
-                      catalogStory: story,
-                      onReadPressed: () => _goToStory(story),
-                      onDetailPressed: () {
-                        Navigator.pop(context);
-                      }),
-                );
-              },
-            ),
+          return CatalogView(
+            catalogStory: story,
+            onReadPressed: () => _goToStory(story),
+            onDetailPressed: () {
+              Navigator.pushNamed(
+                context,
+                "/story_details",
+                arguments: CatalogViewArguments(
+                    expanded: true,
+                    catalogStory: story,
+                    onReadPressed: () => _goToStory(story),
+                    onDetailPressed: () {
+                      Navigator.pop(context);
+                    }),
+              );
+            },
           );
         });
 
