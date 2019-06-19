@@ -27,19 +27,6 @@ class _LocaDesertaAppState extends State<LocaDesertaApp> {
       fontFamily: 'Roboto',
       textTheme: TextTheme(title: TextStyle(color: Colors.white)));
 
-
-  @override
-  void didChangeDependencies() {
-    List<AssetImage> allImages =
-    BackgroundImage.getRandomImageForType(ImageType.LANDING)
-        .getAllAvailableImages();
-    allImages.forEach((AssetImage image) {
-      print('precaching: $image');
-      precacheImage(image, context);
-    });
-    super.didChangeDependencies();
-  }
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
