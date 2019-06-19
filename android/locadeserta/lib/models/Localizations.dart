@@ -33,7 +33,8 @@ class LDLocalizations {
       'anonlogin': 'Guest',
       'welcometext': 'Select login method',
       'theend': 'THE END',
-      'tobecontinued': 'To be continued. Wait on the story update.'
+      'tobecontinued': 'To be continued. Wait on the story update.',
+      'showstorydetails': 'More Details',
     },
     'uk': {
       'continue': 'Продовжити',
@@ -54,6 +55,7 @@ class LDLocalizations {
       'welcometext': 'Виберіть метод входу в гру',
       'theend': "Кінець",
       'tobecontinued': 'Далі буде. Чекайте на оновлення.',
+      'showstorydetails': 'Детальніше',
     },
     'pl': {
       'continue': 'Dalej',
@@ -74,6 +76,7 @@ class LDLocalizations {
       'welcometext': 'Wybierz metodę logowania',
       'theend': 'Koniec',
       'tobecontinued': 'Ciąg dalszy nastąpi. Poczekaj na aktualizację historii',
+      'showstorydetails': 'Więcej szczegółów',
     }
   };
 
@@ -141,6 +144,10 @@ class LDLocalizations {
   }
   String get toBeContinued {
     return _localizedValues[locale.languageCode]['tobecontinued'];
+  }
+
+  String get showStoryDetails {
+    return _localizedValues[locale.languageCode]['showstorydetails'];
   }
 }
 

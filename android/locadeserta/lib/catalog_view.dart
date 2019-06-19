@@ -92,7 +92,7 @@ class _CatalogViewState extends State<CatalogView>
                               child: Align(
                                 alignment: Alignment.center,
                                 child: Text(
-                                  "Детальніше",
+                                  LDLocalizations.of(context).showStoryDetails,
                                   style: TextStyle(
                                     color:
                                         Theme.of(context).textTheme.title.color,
