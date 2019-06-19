@@ -21,9 +21,6 @@ class LDLocalizations {
       'next': 'Next',
       'signinwithgoogle': "With Google",
       'apptitle': 'Loca Deserta',
-      'availablestories': 'Available stories',
-      'youhavesavedgame': 'You have a saved game',
-      'bookcatalog': 'Catalog of books',
       'view': 'View',
       'start': 'Start',
       'greet': 'Good day',
@@ -44,12 +41,9 @@ class LDLocalizations {
       'next': 'Далі',
       'signinwithgoogle': "З Google",
       'apptitle': 'Дике Поле',
-      'availablestories': 'Доступні історії',
-      'youhavesavedgame': 'У вас є збережена гра',
-      'bookcatalog': ' Каталог книжок',
       'view': 'Переглянути',
       'start': 'Почати',
-      'greet': 'Добрий день',
+      'greet': 'Доброго дня',
       'version': 'Версія',
       'loadingstory': 'Завантаження історії',
       'startstory': 'Читати',
@@ -67,9 +61,6 @@ class LDLocalizations {
       'next': 'Kolejny',
       'signinwithgoogle': "Z google",
       'apptitle': 'Dzikie Pole',
-      'availablestories': 'Dostępne historie',
-      'youhavesavedgame': 'Masz zapisaną grę',
-      'bookcatalog': 'Katalog książek',
       'view': 'Widok',
       'start': 'Początek',
       'greet': 'Dobry dzień',
@@ -104,18 +95,6 @@ class LDLocalizations {
 
   String get appTitle {
     return _localizedValues[locale.languageCode]['apptitle'];
-  }
-
-  String get availableStories {
-    return _localizedValues[locale.languageCode]['availablestories'];
-  }
-
-  String get youHaveSavedGame {
-    return _localizedValues[locale.languageCode]['youhavesavedgame'];
-  }
-
-  String get bookCatalog {
-    return _localizedValues[locale.languageCode]['bookcatalog'];
   }
 
   String get view {

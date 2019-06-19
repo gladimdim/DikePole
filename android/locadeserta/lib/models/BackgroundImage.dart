@@ -57,6 +57,10 @@ class BackgroundImage {
     }
   }
 
+  static RandomImage getRandomImageForType(ImageType type) {
+    return _images[type];
+  }
+
   static AssetImage getAssetImageForType(ImageType type) {
     return _images[type].getAssetImage();
   }
@@ -80,6 +84,18 @@ class RandomImage {
   int _max;
   List<int> _usedRandomNumbers;
   final ImageType type;
+
+  List<AssetImage> getAllAvailableImages() {
+    var counter = 0;
+    List<AssetImage> list = [];
+    while (counter++ < _max) {
+      list.add(getAssetImage());
+      list.add(getAssetImageColored());
+      counter++;
+    }
+
+    return list;
+  }
 
   Map<ImageType, String> _imagePrefix = {
     ImageType.BULRUSH: "bulrush",
