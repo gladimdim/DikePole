@@ -19,7 +19,6 @@ class BackgroundImage {
     ImageType.LANDING: RandomImage(ImageType.LANDING),
     ImageType.CAMP: RandomImage(ImageType.CAMP),
     ImageType.COSSACKS: RandomImage(ImageType.CAMP), // shadowed
-
   };
 
   static ImageType imageTypeFromCurrentTags(List<String> variables) {
@@ -85,18 +84,6 @@ class RandomImage {
   List<int> _usedRandomNumbers;
   final ImageType type;
 
-  List<AssetImage> getAllAvailableImages() {
-    var counter = 0;
-    List<AssetImage> list = [];
-    while (counter++ < _max) {
-      list.add(getAssetImage());
-      list.add(getAssetImageColored());
-      counter++;
-    }
-
-    return list;
-  }
-
   Map<ImageType, String> _imagePrefix = {
     ImageType.BULRUSH: "bulrush",
     ImageType.FOREST: "forest",
@@ -126,7 +113,7 @@ class RandomImage {
         _max = 8;
         break;
       case ImageType.CAMP:
-        _max= 15;
+        _max = 15;
         break;
       default:
         throw "Not implemented";
@@ -135,6 +122,25 @@ class RandomImage {
 
     _currentRandom = _random.nextInt(_max);
     _usedRandomNumbers = [_currentRandom];
+  }
+
+  List<AssetImage> getAllAvailableImages() {
+    var counter = -1;
+    List<AssetImage> list = [];
+    while (++counter < _max) {
+      list.add(
+        AssetImage(
+          "images/background/${_imagePrefix[type]}/${counter.toString()}.jpg",
+        ),
+      );
+      list.add(
+        AssetImage(
+          "images/background/${_imagePrefix[type]}/c_${counter.toString()}.jpg",
+        ),
+      );
+    }
+
+    return list;
   }
 
   AssetImage getAssetImage() {

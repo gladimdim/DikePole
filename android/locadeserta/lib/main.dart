@@ -4,6 +4,7 @@ import 'package:locadeserta/catalog_view.dart';
 import 'package:locadeserta/main_menu.dart';
 import 'package:locadeserta/login_view.dart';
 import 'package:locadeserta/models/Auth.dart';
+import 'package:locadeserta/models/BackgroundImage.dart';
 import 'package:locadeserta/models/Localizations.dart';
 
 void main() => runApp(LocaDesertaApp());
@@ -25,6 +26,19 @@ class _LocaDesertaAppState extends State<LocaDesertaApp> {
       accentColor: Colors.black,
       fontFamily: 'Roboto',
       textTheme: TextTheme(title: TextStyle(color: Colors.white)));
+
+
+  @override
+  void didChangeDependencies() {
+    List<AssetImage> allImages =
+    BackgroundImage.getRandomImageForType(ImageType.LANDING)
+        .getAllAvailableImages();
+    allImages.forEach((AssetImage image) {
+      print('precaching: $image');
+      precacheImage(image, context);
+    });
+    super.didChangeDependencies();
+  }
 
   @override
   Widget build(BuildContext context) {

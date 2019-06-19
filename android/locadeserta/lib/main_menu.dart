@@ -2,7 +2,6 @@ import 'package:async/async.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:locadeserta/catalog_view.dart';
-import 'package:locadeserta/models/BackgroundImage.dart';
 import 'package:locadeserta/story_view.dart';
 import 'package:locadeserta/models/Auth.dart';
 import 'package:locadeserta/models/catalogs.dart';
@@ -43,17 +42,6 @@ class _MainMenuState extends State<MainMenu> with TickerProviderStateMixin {
     appearanceController.forward();
 
     super.initState();
-  }
-
-  @override
-  void didChangeDependencies() {
-    List<AssetImage> allImages =
-        BackgroundImage.getRandomImageForType(ImageType.LANDING)
-            .getAllAvailableImages();
-    allImages.forEach((AssetImage image) {
-      precacheImage(image, context);
-    });
-    super.didChangeDependencies();
   }
 
   @override
