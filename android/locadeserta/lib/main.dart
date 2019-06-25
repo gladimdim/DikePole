@@ -4,7 +4,6 @@ import 'package:locadeserta/catalog_view.dart';
 import 'package:locadeserta/main_menu.dart';
 import 'package:locadeserta/login_view.dart';
 import 'package:locadeserta/models/Auth.dart';
-import 'package:locadeserta/models/BackgroundImage.dart';
 import 'package:locadeserta/models/Localizations.dart';
 
 void main() => runApp(LocaDesertaApp());

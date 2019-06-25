@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/widgets.dart';
 import "package:locadeserta/models/story_bridge.dart";
 
 import 'Auth.dart';
@@ -39,8 +40,8 @@ class Persistence {
         .collection("states");
   }
 
-  Future<List<CatalogStory>> getAvailableCatalogStories() async {
-    QuerySnapshot stories = await storage.collection("catalog").getDocuments();
+  Future<List<CatalogStory>> getAvailableCatalogStories(String locale) async {
+    QuerySnapshot stories = await storage.collection("catalogs/$locale/stories").getDocuments();
 
     return stories.documents.map((snapshot) => CatalogStory.fromSnapshot(snapshot)).toList();
   }

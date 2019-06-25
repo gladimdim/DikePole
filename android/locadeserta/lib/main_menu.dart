@@ -67,17 +67,19 @@ class _MainMenuState extends State<MainMenu> with TickerProviderStateMixin {
     );
   }
 
-  _fetchData() {
+  _fetchData(BuildContext context) {
+    var locale = Localizations.localeOf(context);
+  print('locale: ${locale.languageCode}');
     return _catalogListMemo.runOnce(() async {
       List<CatalogStory> catalogStories =
-          await Persistence.instance.getAvailableCatalogStories();
+          await Persistence.instance.getAvailableCatalogStories(locale.languageCode);
       return catalogStories;
     });
   }
 
   Widget _buildLandingListView(BuildContext context) {
     return FutureBuilder(
-      future: _fetchData(),
+      future: _fetchData(context),
       builder: (BuildContext context, snapshot) {
         switch (snapshot.connectionState) {
           case ConnectionState.none:
