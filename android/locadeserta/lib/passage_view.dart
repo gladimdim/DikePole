@@ -4,7 +4,7 @@ import 'package:locadeserta/animations/slide_widget.dart';
 import 'package:locadeserta/components.dart';
 import 'package:locadeserta/models/story_bridge.dart';
 import 'package:locadeserta/animations/slideable_button.dart';
-import 'package:locadeserta/models/BackgroundImage.dart';
+import 'package:locadeserta/models/background_image.dart';
 import 'models/Localizations.dart';
 
 class Passage extends StatefulWidget {

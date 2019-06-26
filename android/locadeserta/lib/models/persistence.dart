@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/widgets.dart';
 import "package:locadeserta/models/story_bridge.dart";
 
 import 'Auth.dart';

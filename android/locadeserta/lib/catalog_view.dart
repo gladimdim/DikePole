@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:locadeserta/animations/TweenImage.dart';
 import 'package:locadeserta/animations/slideable_button.dart';
-import 'package:locadeserta/models/BackgroundImage.dart';
+import 'package:locadeserta/models/background_image.dart';
 import 'package:locadeserta/models/Localizations.dart';
 import 'package:locadeserta/models/catalogs.dart';
 import 'package:locadeserta/radiuses.dart';
@@ -54,21 +54,37 @@ class _CatalogViewState extends State<CatalogView>
             padding: const EdgeInsets.all(4.0),
             child: Container(
               decoration: BoxDecoration(
-                  border: Border.all(color: Colors.black, width: 1),
+                  border: Border.all(
+                      color: Theme.of(context).primaryColor, width: 1),
                   borderRadius: getAllRoundedBorderRadius()),
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: <Widget>[
+                  Container(
+                    width: 500,
+                    height: 75,
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                      color: Theme.of(context).primaryColor,
+                      borderRadius: getTopRoundedBorderRadius(),
+                    ),
+                    child: Text(
+                      widget.catalogStory.title,
+                      style: TextStyle(
+                        fontSize: 32.0,
+                        fontWeight: FontWeight.bold,
+                        color: Theme.of(context).textTheme.title.color,
+                        backgroundColor: Theme.of(context).primaryColor,
+                      ),
+                    ),
+                  ),
                   Hero(
                     tag: "CatalogView" + widget.catalogStory.title,
-                    child: ClipRRect(
-                        borderRadius: getTopRoundedBorderRadius(),
-                        child: TweenImage(
-                          first: image,
-                          last: coloredImage,
-                          duration: 4,
-                          repeat: true,
-                        )),
+                    child: TweenImage(
+                      first: image,
+                      last: coloredImage,
+                      duration: 4,
+                      repeat: true,
+                    ),
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -79,7 +95,7 @@ class _CatalogViewState extends State<CatalogView>
                           child: Container(
                             height: 50,
                             decoration: BoxDecoration(
-                              color: Colors.black,
+                              color: Theme.of(context).primaryColor,
                               borderRadius: BorderRadius.only(
                                 bottomLeft: Radius.circular(20.0),
                               ),
@@ -108,10 +124,10 @@ class _CatalogViewState extends State<CatalogView>
                         Flexible(
                           flex: 1,
                           child: SizedBox(
-                              width: 5.0,
+//                              width: 1.0,
                               height: 50.0,
                               child: Container(
-                                color: Colors.white,
+                                color: Theme.of(context).backgroundColor,
                               )),
                         ),
                       Flexible(
