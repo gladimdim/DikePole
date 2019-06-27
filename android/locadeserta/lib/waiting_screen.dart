@@ -1,5 +1,5 @@
 import 'package:flutter/widgets.dart';
-import 'package:locadeserta/animations/TweenImage.dart';
+import 'package:locadeserta/animations/fade_images.dart';
 import 'package:locadeserta/models/Localizations.dart';
 import 'package:locadeserta/radiuses.dart';
 

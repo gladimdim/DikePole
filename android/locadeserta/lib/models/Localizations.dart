@@ -3,7 +3,7 @@ import 'dart:core';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart' show SynchronousFuture;
 
-var version = "1.67";
+var version = "1.68";
 
 class LDLocalizations {
   LDLocalizations(this.locale);
@@ -35,6 +35,7 @@ class LDLocalizations {
       'theend': 'THE END',
       'tobecontinued': 'To be continued. Wait on the story update.',
       'showstorydetails': 'More Details',
+      'translationnotready': 'Translations are not yet ready for your language.'
     },
     'uk': {
       'continue': 'Продовжити',
@@ -56,6 +57,7 @@ class LDLocalizations {
       'theend': "Кінець",
       'tobecontinued': 'Далі буде. Чекайте на оновлення.',
       'showstorydetails': 'Детальніше',
+      'translationnotready': 'Переклад історії на вашу мову ще не готовий.',
     },
     'pl': {
       'continue': 'Dalej',
@@ -77,56 +79,46 @@ class LDLocalizations {
       'theend': 'Koniec',
       'tobecontinued': 'Ciąg dalszy nastąpi. Poczekaj na aktualizację historii',
       'showstorydetails': 'Więcej szczegółów',
+      'translationnotready': 'Tłumaczenie opowiadań dla twojego języka nie jest jeszcze gotowe.'
     }
   };
 
   String get Continue {
     return _localizedValues[locale.languageCode]['continue'];
   }
-
   String get signInWithGoogle {
     return _localizedValues[locale.languageCode]['signinwithgoogle'];
   }
-
   String get signOut {
     return _localizedValues[locale.languageCode]['signout'];
   }
-
   String get next {
     return _localizedValues[locale.languageCode]['next'];
   }
-
   String get appTitle {
     return _localizedValues[locale.languageCode]['apptitle'];
   }
-
   String get view {
     return _localizedValues[locale.languageCode]['view'];
   }
-
   String get start {
     return _localizedValues[locale.languageCode]['start'];
   }
-
   String greetUserByName(String name) {
     return '${_localizedValues[locale.languageCode]['greet']}, $name';
   }
   String get versionLabel {
     return "${_localizedValues[locale.languageCode]['version']}: $version";
   }
-
   String get loadingStory {
     return _localizedValues[locale.languageCode]['loadingstory'];
   }
-
   String get startStory {
     return _localizedValues[locale.languageCode]['startstory'];
   }
-
   String get lookingForHeroes {
     return _localizedValues[locale.languageCode]['lookingforheroes'];
   }
-
   String get save {
     return _localizedValues[locale.languageCode]['save'];
   }
@@ -145,9 +137,11 @@ class LDLocalizations {
   String get toBeContinued {
     return _localizedValues[locale.languageCode]['tobecontinued'];
   }
-
   String get showStoryDetails {
     return _localizedValues[locale.languageCode]['showstorydetails'];
+  }
+  String get translationNotYetReady {
+    return _localizedValues[locale.languageCode]['translationnotready'];
   }
 }
 

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:locadeserta/animations/TweenImage.dart';
+import 'package:locadeserta/animations/fade_images.dart';
 import 'package:locadeserta/animations/slide_widget.dart';
 import 'package:locadeserta/components.dart';
 import 'package:locadeserta/models/story_bridge.dart';
