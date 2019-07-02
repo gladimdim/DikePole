@@ -35,7 +35,9 @@ class LDLocalizations {
       'theend': 'THE END',
       'tobecontinued': 'To be continued. Wait on the story update.',
       'showstorydetails': 'More Details',
-      'translationnotready': 'Translations are not yet ready for your language.'
+      'translationnotready': 'Translations are not yet ready for your language.',
+      'storysaved': 'Story saved',
+      'storynotsaved': 'Story not saved',
     },
     'uk': {
       'continue': 'Продовжити',
@@ -58,6 +60,8 @@ class LDLocalizations {
       'tobecontinued': 'Далі буде. Чекайте на оновлення.',
       'showstorydetails': 'Детальніше',
       'translationnotready': 'Переклад історії на вашу мову ще не готовий.',
+      'storysaved': 'Гру збережено',
+      'storynotsaved': 'Гру не було збережено'
     },
     'pl': {
       'continue': 'Dalej',
@@ -79,7 +83,9 @@ class LDLocalizations {
       'theend': 'Koniec',
       'tobecontinued': 'Ciąg dalszy nastąpi. Poczekaj na aktualizację historii',
       'showstorydetails': 'Więcej szczegółów',
-      'translationnotready': 'Tłumaczenie opowiadań dla twojego języka nie jest jeszcze gotowe.'
+      'translationnotready': 'Tłumaczenie opowiadań dla twojego języka nie jest jeszcze gotowe.',
+      'storysaved': 'Gra jest zapisana',
+      'storynotsaved': 'Gra nie została zapisana',
     }
   };
 
@@ -142,6 +148,12 @@ class LDLocalizations {
   }
   String get translationNotYetReady {
     return _localizedValues[locale.languageCode]['translationnotready'];
+  }
+  String get storySaved {
+    return _localizedValues[locale.languageCode]['storysaved'];
+  }
+  String get storyNotSaved {
+    return _localizedValues[locale.languageCode]['storyNotSaved'];
   }
 }
 

@@ -9,9 +9,8 @@ import 'package:locadeserta/story_view.dart';
 import 'package:locadeserta/models/Auth.dart';
 import 'package:locadeserta/models/catalogs.dart';
 import 'package:locadeserta/waiting_screen.dart';
-import 'animations/SlideRightNavigation.dart';
+import 'package:locadeserta/animations/SlideRightNavigation.dart';
 import 'package:locadeserta/models/persistence.dart';
-
 import 'package:locadeserta/radiuses.dart';
 
 const LANDING_IMAGE_HEIGHT = 200.0;

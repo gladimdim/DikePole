@@ -40,7 +40,7 @@ class StoryBridge {
     List<String> choices;
     bool canContinue;
     List<String> currentTags;
-    List<String> inventory;
+//    List<String> inventory;
     try {
       currentText = await platform.invokeMethod("getCurrentText");
       var temp = await platform.invokeMethod("getCurrentChoices");

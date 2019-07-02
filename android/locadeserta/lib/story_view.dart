@@ -6,7 +6,7 @@ import 'package:locadeserta/models/catalogs.dart';
 import 'package:locadeserta/passage_view.dart';
 import 'package:locadeserta/models/persistence.dart';
 import 'package:locadeserta/models/story_bridge.dart';
-
+import 'package:toast/toast.dart';
 import 'models/Auth.dart';
 
 class StoryView extends StatefulWidget {
@@ -59,24 +59,36 @@ class _StoryViewState extends State<StoryView> {
 
           currentStory = storyBridge.story;
           return Scaffold(
-              backgroundColor: Theme.of(context).backgroundColor,
+              backgroundColor: Theme
+                  .of(context)
+                  .backgroundColor,
               appBar: AppBar(
                 actions: <Widget>[
                   FlatButton(
-                    textColor: Theme.of(context).textTheme.title.color,
+                    textColor: Theme
+                        .of(context)
+                        .textTheme
+                        .title
+                        .color,
                     child: Text(
-                      LDLocalizations.of(context).save,
+                      LDLocalizations
+                          .of(context)
+                          .save,
                     ),
-                    onPressed: () async {
-                      await Persistence.instance.saveStateToStorageForUser(
-                          widget.user, widget.catalogStory, storyBridge);
-                    },
+                    onPressed: () => _onSavePressed(context, Persistence.instance),
                   ),
                   FlatButton(
-                    textColor: Theme.of(context).textTheme.title.color,
-                    child: Text(LDLocalizations.of(context).reset),
+                    textColor: Theme
+                        .of(context)
+                        .textTheme
+                        .title
+                        .color,
+                    child: Text(LDLocalizations
+                        .of(context)
+                        .reset),
                     onPressed: () async {
-                      await storyBridge.resetStory(storyJson: widget.catalogStory.inkJson,);
+                      await storyBridge.resetStory(
+                        storyJson: widget.catalogStory.inkJson,);
                     },
                   )
                 ],
@@ -84,15 +96,26 @@ class _StoryViewState extends State<StoryView> {
               ),
               body: snapshot.hasData
                   ? Passage(
-                      currentStory: currentStory,
-                      onNextOptionSelected: (s, i) async {
-                        if (s == "Next") {
-                          await storyBridge.doContinue();
-                        } else {
-                          await storyBridge.chooseChoiceIndex(i);
-                        }
-                      })
+                  currentStory: currentStory,
+                  onNextOptionSelected: (s, i) async {
+                    if (s == "Next") {
+                      await storyBridge.doContinue();
+                    } else {
+                      await storyBridge.chooseChoiceIndex(i);
+                    }
+                  })
                   : Center(child: CircularProgressIndicator()));
         });
+  }
+
+
+  _onSavePressed(BuildContext context, Persistence instance) async {
+    try {
+      await instance.saveStateToStorageForUser(
+          widget.user, widget.catalogStory, storyBridge);
+      Toast.show(LDLocalizations.of(context).storySaved, context);
+    } catch (e) {
+      Toast.show(LDLocalizations.of(context).storyNotSaved, context, duration: Toast.LENGTH_LONG, gravity: Toast.CENTER);
+    }
   }
 }
