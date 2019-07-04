@@ -29,49 +29,55 @@ class _MainViewState extends State<MainView> {
   }
 
   Widget _buildBody(BuildContext context) {
+    var size = MediaQuery.of(context).size;
     return Column(
       children: <Widget>[
         LocaleSelection(
           onLocaleChanged: _setNewLocale,
           locale: widget.locale,
         ),
-        ClipRRect(
-          borderRadius: getAllRoundedBorderRadius(),
-          child: Hero(
-            tag: "CossackHero",
-            child: TweenImage(
-              repeat: true,
-              last: AssetImage("images/background/cossack_0.jpg"),
-              first: AssetImage("images/background/c_cossack_0.jpg"),
-              duration: 2,
-              height: 300,
+        Center(
+          child: ClipRRect(
+            borderRadius: getAllRoundedBorderRadius(),
+            child: Hero(
+              tag: "CossackHero",
+              child: TweenImage(
+                repeat: true,
+                last: AssetImage("images/background/cossack_0.jpg"),
+                first: AssetImage("images/background/c_cossack_0.jpg"),
+                duration: 4,
+                height: 200,
+              ),
             ),
           ),
         ),
-        SizedBox(
-          height: 50.0,
-        ),
-        SlideableButton(
-          onPress: () {},
-          child: Container(
-            height: 50.0,
-            color: Theme.of(context).primaryColor,
-            child: Align(
-              alignment: Alignment.center,
-              child: Text(
-                widget.localization.start,
-                textAlign: TextAlign.center,
-                style: Theme.of(context).textTheme.title,
+        Padding(
+          padding: const EdgeInsets.only(
+            top: 8.0,
+            bottom: 8.0,
+          ),
+          child: SlideableButton(
+            onPress: () {},
+            child: Container(
+              height: 50.0,
+              color: Theme.of(context).primaryColor,
+              child: Align(
+                alignment: Alignment.center,
+                child: Text(
+                  widget.localization.start,
+                  textAlign: TextAlign.center,
+                  style: Theme.of(context).textTheme.title,
+                ),
               ),
             ),
           ),
         ),
         LimitedBox(
-          maxHeight: 300,
+          maxHeight: size.height / 2,
           child: GridView.count(
-            crossAxisCount: 5,
+            crossAxisCount: 3,
             children: List.generate(
-              20,
+              6,
               (index) {
                 var b1 = BackgroundImage.getRandomImageForType(ImageType.CAMP);
                 b1.nextRandom();
@@ -84,7 +90,7 @@ class _MainViewState extends State<MainView> {
                       last: b1.getAssetImageColored(),
                       first: b1.getAssetImage(),
                       duration: 5,
-                      height: 300,
+                      height: size.height / 3,
                     ),
                   ),
                 );
