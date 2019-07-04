@@ -1,9 +1,7 @@
 import 'package:flutter_web/material.dart';
-import 'package:locadeserta_web/login_view.dart';
-import 'package:locadeserta_web/models/Auth.dart';
+import 'package:locadeserta_web/main_view_web.dart';
 
 void main() => runApp(MyApp());
-final Auth auth = Auth();
 
 class MyApp extends StatefulWidget {
   @override
@@ -27,15 +25,21 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      initialRoute: "/",
+      routes: {
+        "/": (context) => MainView(
+            onContinue: () => Navigator.pushNamed(context, "/main_menu"),
+            onSetLocale: _onLocaleSet,
+            locale: locale),
+      },
       locale: locale,
       title: 'Loca Deserta',
       theme: theme,
       debugShowCheckedModeBanner: false,
-      home: LoginView(
-        auth: auth,
-        onSetLocale: _onLocaleSet,
-        locale: locale,
-      ),
+//      home: MainView(
+//        onSetLocale: _onLocaleSet,
+//        locale: locale,
+//      ),
     );
   }
 

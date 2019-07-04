@@ -8,6 +8,8 @@ class TweenImage extends StatefulWidget {
   final AssetImage last;
   final int duration;
   final double height;
+  final double width;
+  final BoxFit imageFit;
   final bool repeat;
 
   TweenImage(
@@ -15,6 +17,8 @@ class TweenImage extends StatefulWidget {
       @required this.last,
       this.duration = 2,
       this.height,
+      this.width,
+      this.imageFit = BoxFit.fitHeight,
       this.repeat = false});
 }
 
@@ -89,14 +93,14 @@ class _TweenImageState extends State<TweenImage>
             },
             child: Image(
               image: widget.first,
-              fit: BoxFit.fitHeight,
+              fit: widget.imageFit,
               height: widget.height,
             ),
           ),
           AnimatedBuilder(
             child: Image(
               image: widget.last,
-              fit: BoxFit.fitHeight,
+              fit: widget.imageFit,
               height: widget.height,
             ),
             animation: _controller,
