@@ -37,8 +37,6 @@ class _MainViewState extends State<MainView> {
           locale: widget.locale,
         ),
         Center(
-          child: ClipRRect(
-            borderRadius: getAllRoundedBorderRadius(),
             child: Hero(
               tag: "CossackHero",
               child: TweenImage(
@@ -46,10 +44,9 @@ class _MainViewState extends State<MainView> {
                 last: AssetImage("images/background/cossack_0.jpg"),
                 first: AssetImage("images/background/c_cossack_0.jpg"),
                 duration: 4,
-                height: 200,
+                height: size.height / 5,
               ),
             ),
-          ),
         ),
         Padding(
           padding: const EdgeInsets.only(
@@ -72,12 +69,15 @@ class _MainViewState extends State<MainView> {
             ),
           ),
         ),
+        Text(
+          widget.localization.aboutGame,
+        ),
         LimitedBox(
           maxHeight: size.height / 2,
           child: GridView.count(
             crossAxisCount: 3,
             children: List.generate(
-              6,
+              3,
               (index) {
                 var b1 = BackgroundImage.getRandomImageForType(ImageType.CAMP);
                 b1.nextRandom();

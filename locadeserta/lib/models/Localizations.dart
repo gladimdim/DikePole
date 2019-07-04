@@ -38,6 +38,7 @@ class LDLocalizations {
       'translationnotready': 'Translations are not yet ready for your language.',
       'storysaved': 'Story saved',
       'storynotsaved': 'Story not saved',
+      'aboutgame': 'Interactive Fiction. This game allows to dive into heroic epoch in XVII century, which took part in the southern part of Ukraine, at Loca Deserta. You not only read the story but you can select how it proceeds further! Depending on your selections you can get absolutely different events, encounters. Or you can even die.',
     },
     'uk': {
       'continue': 'Продовжити',
@@ -61,7 +62,8 @@ class LDLocalizations {
       'showstorydetails': 'Детальніше',
       'translationnotready': 'Переклад історії на вашу мову ще не готовий.',
       'storysaved': 'Гру збережено',
-      'storynotsaved': 'Гру не було збережено'
+      'storynotsaved': 'Гру не було збережено',
+      'aboutgame': 'Інтерактивна гра-книга (Interactive Fiction). Гра дозволяє зануритись в бурхливі події 1620х років, які відбувалися на Дикому Полі. Але ви не тільки читаєте історію, а ще і можете вибирати подальший розвиток подій. В залежності від вашого вибору, історія продовжується в різних напрямах, або ж і просто обривається назавжди.',
     },
     'pl': {
       'continue': 'Dalej',
@@ -86,6 +88,7 @@ class LDLocalizations {
       'translationnotready': 'Tłumaczenie opowiadań dla twojego języka nie jest jeszcze gotowe.',
       'storysaved': 'Gra jest zapisana',
       'storynotsaved': 'Gra nie została zapisana',
+      'aboutgame': 'Interaktywna fikcja. Ta gra pozwala zanurzyć się w heroicznej epoce w XVII wieku, która odbyła się w południowej części Ukrainy, w Loca Deserta. Nie tylko czytasz historię, ale możesz wybrać, jak dalej będzie postępować! W zależności od wyboru możesz uzyskać zupełnie inne wydarzenia, spotkania. Albo możesz nawet umrzeć.'
     }
   };
 
@@ -153,7 +156,10 @@ class LDLocalizations {
     return _localizedValues[locale.languageCode]['storysaved'];
   }
   String get storyNotSaved {
-    return _localizedValues[locale.languageCode]['storyNotSaved'];
+    return _localizedValues[locale.languageCode]['storynotsaved'];
+  }
+  String get aboutGame {
+    return _localizedValues[locale.languageCode]['aboutgame'];
   }
 }
 
