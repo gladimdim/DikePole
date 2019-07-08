@@ -4,7 +4,7 @@ import 'package:flutter/widgets.dart';
 var optionBox = (BuildContext context, String text) => SizedBox(
       height: 100.0,
       child: Container(
-        color: Colors.black,
+        color: Theme.of(context).primaryColor,
         child: Align(
           alignment: Alignment.center,
           child: Text(

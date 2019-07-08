@@ -46,7 +46,8 @@ class PassageState extends State<Passage> with TickerProviderStateMixin {
               first: BackgroundImage.getAssetImageForType(ImageType.LANDING),
               duration: 3,
               repeat: true,
-              last: BackgroundImage.getColoredAssetImageForType(ImageType.LANDING),
+              last: BackgroundImage.getColoredAssetImageForType(
+                  ImageType.LANDING),
             ),
           )
         ],
@@ -149,7 +150,10 @@ class PassageState extends State<Passage> with TickerProviderStateMixin {
                 width: MediaQuery.of(context).size.width * 0.79,
                 decoration: BoxDecoration(
                   color: Theme.of(context).backgroundColor,
-                  border: Border.all(color: Colors.black, width: 3.0),
+                  border: Border.all(
+                    color: Theme.of(context).primaryColor,
+                    width: 3.0,
+                  ),
                 ),
                 child: SingleChildScrollView(
                   scrollDirection: Axis.vertical,
@@ -167,11 +171,12 @@ class PassageState extends State<Passage> with TickerProviderStateMixin {
               ),
             ),
             TweenImage(
-                duration: 3,
-                first: BackgroundImage.getAssetImageForType(randomImageType),
-                last: BackgroundImage.getColoredAssetImageForType(
-                    randomImageType),
-                height: 700.0)
+              duration: 3,
+              first: BackgroundImage.getAssetImageForType(randomImageType),
+              last:
+                  BackgroundImage.getColoredAssetImageForType(randomImageType),
+              height: 700.0,
+            )
           ],
         ),
       ),

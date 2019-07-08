@@ -21,6 +21,7 @@ class StoryView extends StatefulWidget {
 
 class _StoryViewState extends State<StoryView> {
   StoryBridge storyBridge;
+  bool expanded = false;
 
   @override
   void initState() {
@@ -59,55 +60,75 @@ class _StoryViewState extends State<StoryView> {
 
           currentStory = storyBridge.story;
           return Scaffold(
-              backgroundColor: Theme
-                  .of(context)
-                  .backgroundColor,
-              appBar: AppBar(
-                actions: <Widget>[
-                  FlatButton(
-                    textColor: Theme
-                        .of(context)
-                        .textTheme
-                        .title
-                        .color,
-                    child: Text(
-                      LDLocalizations
-                          .of(context)
-                          .save,
+              backgroundColor: Theme.of(context).backgroundColor,
+              body: SafeArea(
+                child: Stack(
+                  children: <Widget>[
+                    Padding(
+                      padding: const EdgeInsets.only(top: 32),
+                      child: snapshot.hasData
+                          ? Passage(
+                              currentStory: currentStory,
+                              onNextOptionSelected: (s, i) async {
+                                if (s == "Next") {
+                                  await storyBridge.doContinue();
+                                } else {
+                                  await storyBridge.chooseChoiceIndex(i);
+                                }
+                              })
+                          : Center(child: CircularProgressIndicator()),
                     ),
-                    onPressed: () => _onSavePressed(context, Persistence.instance),
-                  ),
-                  FlatButton(
-                    textColor: Theme
-                        .of(context)
-                        .textTheme
-                        .title
-                        .color,
-                    child: Text(LDLocalizations
-                        .of(context)
-                        .reset),
-                    onPressed: () async {
-                      await storyBridge.resetStory(
-                        storyJson: widget.catalogStory.inkJson,);
-                    },
-                  )
-                ],
-                title: Text(widget.catalogStory.title),
-              ),
-              body: snapshot.hasData
-                  ? Passage(
-                  currentStory: currentStory,
-                  onNextOptionSelected: (s, i) async {
-                    if (s == "Next") {
-                      await storyBridge.doContinue();
-                    } else {
-                      await storyBridge.chooseChoiceIndex(i);
-                    }
-                  })
-                  : Center(child: CircularProgressIndicator()));
+                    Positioned(
+                      top: 0,
+                      left: 0.0,
+                      right: 0,
+                      child: Container(
+                        color: Theme.of(context).primaryColor,
+                        height: expanded ? 64 : 32,
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: <Widget>[
+                            Padding(
+                              padding: EdgeInsets.only(left: 10),
+                              child: Center(
+                                child: Text(
+                                  widget.catalogStory.title,
+                                  style: TextStyle(
+                                    fontFamily: 'Montserrat',
+                                    fontSize: Theme.of(context)
+                                        .textTheme
+                                        .title
+                                        .fontSize,
+                                    color:
+                                        Theme.of(context).textTheme.title.color,
+                                  ),
+                                  textAlign: TextAlign.center,
+                                ),
+                              ),
+                            ),
+                            FlatButton(
+                              color: Theme.of(context).primaryColor,
+                              child: Row(
+                                children: <Widget>[
+                                  Text("Menu"),
+                                  Icon(
+                                    expanded ? Icons.arrow_drop_down : Icons.arrow_drop_up,
+                                  )
+                                ],
+                              ),
+                              textColor: Colors.white,
+                              onPressed: _toggleExpandedMenu,
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ));
         });
   }
-
 
   _onSavePressed(BuildContext context, Persistence instance) async {
     try {
@@ -115,7 +136,14 @@ class _StoryViewState extends State<StoryView> {
           widget.user, widget.catalogStory, storyBridge);
       Toast.show(LDLocalizations.of(context).storySaved, context);
     } catch (e) {
-      Toast.show(LDLocalizations.of(context).storyNotSaved, context, duration: Toast.LENGTH_LONG, gravity: Toast.CENTER);
+      Toast.show(LDLocalizations.of(context).storyNotSaved, context,
+          duration: Toast.LENGTH_LONG, gravity: Toast.CENTER);
     }
+  }
+
+  _toggleExpandedMenu() {
+    setState(() {
+      expanded = !expanded;
+    });
   }
 }

@@ -137,7 +137,7 @@ class _CatalogViewState extends State<CatalogView>
                           child: Container(
                             height: 50,
                             decoration: BoxDecoration(
-                              color: Colors.black,
+                              color: Theme.of(context).primaryColor,
                               borderRadius: widget.expanded
                                   ? null
                                   : BorderRadius.only(
