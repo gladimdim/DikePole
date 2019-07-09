@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
+import 'package:locadeserta/components/AppBarCustom.dart';
 import 'package:locadeserta/models/Localizations.dart';
 import 'package:locadeserta/models/catalogs.dart';
 import 'package:locadeserta/passage_view.dart';
@@ -21,7 +22,6 @@ class StoryView extends StatefulWidget {
 
 class _StoryViewState extends State<StoryView> {
   StoryBridge storyBridge;
-  bool expanded = false;
 
   @override
   void initState() {
@@ -52,82 +52,55 @@ class _StoryViewState extends State<StoryView> {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
-        stream: storyBridge.streamStory.stream,
-        builder: (context, snapshot) {
-          if (snapshot.hasError) {
-            return Text("Failed to load assets: ${snapshot.error}");
-          }
+      stream: storyBridge.streamStory.stream,
+      builder: (context, snapshot) {
+        if (snapshot.hasError) {
+          return Text("Failed to load assets: ${snapshot.error}");
+        }
 
-          currentStory = storyBridge.story;
-          return Scaffold(
-              backgroundColor: Theme.of(context).backgroundColor,
-              body: SafeArea(
-                child: Stack(
-                  children: <Widget>[
-                    Padding(
-                      padding: const EdgeInsets.only(top: 32),
-                      child: snapshot.hasData
-                          ? Passage(
-                              currentStory: currentStory,
-                              onNextOptionSelected: (s, i) async {
-                                if (s == "Next") {
-                                  await storyBridge.doContinue();
-                                } else {
-                                  await storyBridge.chooseChoiceIndex(i);
-                                }
-                              })
-                          : Center(child: CircularProgressIndicator()),
+        currentStory = storyBridge.story;
+        return Scaffold(
+          backgroundColor: Theme.of(context).backgroundColor,
+          body: SafeArea(
+            child: Stack(
+              children: <Widget>[
+                Padding(
+                  padding: const EdgeInsets.only(top: 32),
+                  child: snapshot.hasData
+                      ? Passage(
+                          currentStory: currentStory,
+                          onNextOptionSelected: (s, i) async {
+                            if (s == "Next") {
+                              await storyBridge.doContinue();
+                            } else {
+                              await storyBridge.chooseChoiceIndex(i);
+                            }
+                          })
+                      : Center(child: CircularProgressIndicator()),
+                ),
+                AppBarCustom(
+                  title: widget.catalogStory.title,
+                  appBarButtons: [
+                    AppBarObject(
+                        onTap: () =>
+                            _onSavePressed(context, Persistence.instance),
+                        text: LDLocalizations.of(context).save),
+                    AppBarObject(
+                      onTap: () => Navigator.pop(context),
+                      text: LDLocalizations.of(context).backToStories,
                     ),
-                    Positioned(
-                      top: 0,
-                      left: 0.0,
-                      right: 0,
-                      child: Container(
-                        color: Theme.of(context).primaryColor,
-                        height: expanded ? 64 : 32,
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: <Widget>[
-                            Padding(
-                              padding: EdgeInsets.only(left: 10),
-                              child: Center(
-                                child: Text(
-                                  widget.catalogStory.title,
-                                  style: TextStyle(
-                                    fontFamily: 'Montserrat',
-                                    fontSize: Theme.of(context)
-                                        .textTheme
-                                        .title
-                                        .fontSize,
-                                    color:
-                                        Theme.of(context).textTheme.title.color,
-                                  ),
-                                  textAlign: TextAlign.center,
-                                ),
-                              ),
-                            ),
-                            FlatButton(
-                              color: Theme.of(context).primaryColor,
-                              child: Row(
-                                children: <Widget>[
-                                  Text("Menu"),
-                                  Icon(
-                                    expanded ? Icons.arrow_drop_down : Icons.arrow_drop_up,
-                                  )
-                                ],
-                              ),
-                              textColor: Colors.white,
-                              onPressed: _toggleExpandedMenu,
-                            )
-                          ],
-                        ),
-                      ),
-                    ),
+                    AppBarObject(
+                      onTap: _resetStory,
+                      text: LDLocalizations.of(context).reset,
+                    )
                   ],
                 ),
-              ));
-        });
+              ],
+            ),
+          ),
+        );
+      },
+    );
   }
 
   _onSavePressed(BuildContext context, Persistence instance) async {
@@ -141,9 +114,9 @@ class _StoryViewState extends State<StoryView> {
     }
   }
 
-  _toggleExpandedMenu() {
-    setState(() {
-      expanded = !expanded;
-    });
+  _resetStory() async {
+    await storyBridge.resetStory(
+      storyJson: widget.catalogStory.inkJson,
+    );
   }
 }

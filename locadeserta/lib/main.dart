@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:locadeserta/catalog_view.dart';
 import 'package:locadeserta/main_menu.dart';
@@ -28,6 +29,7 @@ class _LocaDesertaAppState extends State<LocaDesertaApp> {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(statusBarColor: Colors.black));
     return MaterialApp(
       locale: locale,
       title: 'Loca Deserta',
