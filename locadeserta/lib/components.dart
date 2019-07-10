@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 var optionBox = (BuildContext context, String text) => SizedBox(
-      height: 100.0,
+      height: MediaQuery.of(context).size.height*0.075,
       child: Container(
         color: Theme.of(context).primaryColor,
         child: Align(

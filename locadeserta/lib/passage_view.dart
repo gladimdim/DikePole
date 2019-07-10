@@ -73,7 +73,7 @@ class PassageState extends State<Passage> with TickerProviderStateMixin {
     return Padding(
       padding: EdgeInsets.all(8.0),
       child: SizedBox(
-        height: 100.0,
+        height: MediaQuery.of(context).size.height * 0.075,
         child: SlideableButton(
           onPress: () {
             _nextWithChoice(i);
