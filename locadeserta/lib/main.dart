@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -6,8 +7,18 @@ import 'package:locadeserta/main_menu.dart';
 import 'package:locadeserta/login_view.dart';
 import 'package:locadeserta/models/Auth.dart';
 import 'package:locadeserta/models/Localizations.dart';
+import 'package:flutter_statusbarcolor/flutter_statusbarcolor.dart';
 
-void main() => runApp(LocaDesertaApp());
+void main() async {
+  try {
+    await FlutterStatusbarcolor.setStatusBarColor(Colors.black);
+    await FlutterStatusbarcolor.setNavigationBarColor(Colors.black);
+    await FlutterStatusbarcolor.setNavigationBarWhiteForeground(true);
+  } catch(e) {
+    print(e);
+  }
+  runApp(LocaDesertaApp());
+}
 
 final Auth auth = Auth();
 
@@ -29,7 +40,6 @@ class _LocaDesertaAppState extends State<LocaDesertaApp> {
 
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(statusBarColor: Colors.black));
     return MaterialApp(
       locale: locale,
       title: 'Loca Deserta',

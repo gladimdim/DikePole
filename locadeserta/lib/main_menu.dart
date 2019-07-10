@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:locadeserta/animations/fade_images.dart';
 import 'package:locadeserta/catalog_view.dart';
+import 'package:locadeserta/components/AppBarCustom.dart';
 import 'package:locadeserta/models/Localizations.dart';
 import 'package:locadeserta/models/background_image.dart';
 import 'package:locadeserta/story_view.dart';
@@ -62,29 +63,43 @@ class _MainMenuState extends State<MainMenu> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Loca Deserta'),
-      ),
-      backgroundColor: Theme.of(context).backgroundColor,
-      body: FutureBuilder(
-        future: _fetchData(context),
-        builder: (BuildContext context, snapshot) {
-          switch (snapshot.connectionState) {
-            case ConnectionState.none:
-            case ConnectionState.active:
-            case ConnectionState.waiting:
-              return WaitingScreen();
-              break;
-            case ConnectionState.done:
-              if (snapshot.data.length == 0) {
-                return _buildEmptyCatalogListView(context);
-              } else {
-                return _buildCatalogView(context, snapshot.data);
-              }
-              break;
-          }
-          return null;
-        },
+      body: SafeArea(
+        child: Stack(
+          children: <Widget>[
+            Padding(
+              padding: const EdgeInsets.only(top: 32),
+              child: FutureBuilder(
+                future: _fetchData(context),
+                builder: (BuildContext context, snapshot) {
+                  switch (snapshot.connectionState) {
+                    case ConnectionState.none:
+                    case ConnectionState.active:
+                    case ConnectionState.waiting:
+                      return WaitingScreen();
+                      break;
+                    case ConnectionState.done:
+                      if (snapshot.data.length == 0) {
+                        return _buildEmptyCatalogListView(context);
+                      } else {
+                        return _buildCatalogView(context, snapshot.data);
+                      }
+                      break;
+                  }
+                  return null;
+                },
+              ),
+            ),
+            AppBarCustom(
+              title: LDLocalizations.of(context).appTitle,
+              appBarButtons: [
+                AppBarObject(
+                  onTap: () => Navigator.of(context).pop(),
+                  text: LDLocalizations.of(context).backToMenu,
+                )
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -148,12 +163,13 @@ class _MainMenuState extends State<MainMenu> with TickerProviderStateMixin {
                 context,
                 "/story_details",
                 arguments: CatalogViewArguments(
-                    expanded: true,
-                    catalogStory: story,
-                    onReadPressed: () => _goToStory(story),
-                    onDetailPressed: () {
-                      Navigator.pop(context);
-                    }),
+                  expanded: true,
+                  catalogStory: story,
+                  onReadPressed: () => _goToStory(story),
+                  onDetailPressed: () {
+                    Navigator.pop(context);
+                  },
+                ),
               );
             },
           );
@@ -181,7 +197,10 @@ class _MainMenuState extends State<MainMenu> with TickerProviderStateMixin {
     Navigator.push(
       context,
       SlideRightNavigation(
-        widget: StoryView(user: user, catalogStory: story),
+        widget: StoryView(
+          user: user,
+          catalogStory: story,
+        ),
       ),
     );
   }

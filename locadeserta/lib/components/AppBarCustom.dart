@@ -93,5 +93,5 @@ class AppBarObject {
   final VoidCallback onTap;
   final String text;
 
-  AppBarObject({this.text, this.onTap});
+  AppBarObject({@required this.text, @required this.onTap});
 }

@@ -60,7 +60,6 @@ class _CatalogViewState extends State<CatalogView>
               child: Column(
                 children: <Widget>[
                   Container(
-                    width: 500,
                     height: 75,
                     alignment: Alignment.center,
                     decoration: BoxDecoration(

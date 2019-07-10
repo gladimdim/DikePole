@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:locadeserta/animations/fade_images.dart';
 import 'package:locadeserta/animations/slideable_button.dart';
+import 'package:locadeserta/components/AppBarCustom.dart';
 import 'package:locadeserta/models/Auth.dart';
 import 'package:locadeserta/models/Localizations.dart';
 import 'package:locadeserta/radiuses.dart';
@@ -27,22 +28,25 @@ class _LoginViewState extends State<LoginView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Loca Deserta'),
-        actions: [
-          FlatButton(
-            textColor: Theme.of(context).textTheme.title.color,
-            child: Text(
-              LDLocalizations.of(context).signOut,
+        body: SafeArea(
+        child: Stack(
+          children: <Widget>[
+            Padding(
+              padding: const EdgeInsets.only(top: 32),
+              child: _buildBody(context),
             ),
-            onPressed: () {
-              widget.auth.signOut();
-            },
-          ),
-        ],
+            AppBarCustom(
+              title: LDLocalizations.of(context).appTitle,
+              appBarButtons: [
+                AppBarObject(
+                  onTap: () => widget.auth.signOut(),
+                  text: LDLocalizations.of(context).signOut,
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
-      backgroundColor: Theme.of(context).backgroundColor,
-      body: _buildBody(context),
     );
   }
 
