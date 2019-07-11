@@ -4,7 +4,6 @@ import 'package:locadeserta_web/models/background_image_web.dart';
 import 'package:locadeserta_web/models/localizations_web.dart';
 import 'package:locadeserta_web/animations/fade_images_web.dart';
 import 'package:locadeserta_web/locale_selection_web.dart';
-import 'package:locadeserta_web/radiuses_web.dart';
 
 class MainView extends StatefulWidget {
   final VoidCallback onContinue;
