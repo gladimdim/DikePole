@@ -78,7 +78,7 @@ class _MainMenuState extends State<MainMenu> with TickerProviderStateMixin {
                       return WaitingScreen();
                       break;
                     case ConnectionState.done:
-                      if (snapshot.data.length == 0) {
+                      if (snapshot.data == null || snapshot.data.length == 0) {
                         return _buildEmptyCatalogListView(context);
                       } else {
                         return _buildCatalogView(context, snapshot.data);

@@ -13,12 +13,12 @@ if (flutterRoot == null) {
 
 def flutterVersionCode = localProperties.getProperty('flutter.versionCode')
 if (flutterVersionCode == null) {
-    flutterVersionCode = '69'
+    flutterVersionCode = '2071'
 }
 
 def flutterVersionName = localProperties.getProperty('flutter.versionName')
 if (flutterVersionName == null) {
-    flutterVersionName = '1.0.69'
+    flutterVersionName = '1.0.2071'
 }
 
 apply plugin: 'com.android.application'
@@ -38,7 +38,7 @@ android {
     defaultConfig {
         applicationId "gladimdim.locadeserta"
         minSdkVersion 16
-        targetSdkVersion 27
+        targetSdkVersion 28
         multiDexEnabled true
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
