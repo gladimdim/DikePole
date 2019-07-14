@@ -22,6 +22,7 @@ class StoryView extends StatefulWidget {
 
 class _StoryViewState extends State<StoryView> {
   StoryBridge storyBridge;
+  List _previousPassages = List();
 
   @override
   void initState() {
@@ -69,7 +70,9 @@ class _StoryViewState extends State<StoryView> {
                   child: snapshot.hasData
                       ? Passage(
                           currentStory: currentStory,
+                          previousPassages: _previousPassages,
                           onNextOptionSelected: (s, i) async {
+                            _previousPassages.add(storyBridge.story.currentText);
                             if (s == "Next") {
                               await storyBridge.doContinue();
                             } else {

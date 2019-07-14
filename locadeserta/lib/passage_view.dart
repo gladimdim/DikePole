@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:locadeserta/animations/fade_images.dart';
-import 'package:locadeserta/animations/slide_widget.dart';
 import 'package:locadeserta/components.dart';
 import 'package:locadeserta/models/story_bridge.dart';
 import 'package:locadeserta/animations/slideable_button.dart';
@@ -10,8 +9,10 @@ import 'models/Localizations.dart';
 class Passage extends StatefulWidget {
   final Story currentStory;
   final Function(String pid, int i) onNextOptionSelected;
+  final List previousPassages;
 
-  Passage({this.currentStory, this.onNextOptionSelected});
+  Passage(
+      {this.currentStory, this.onNextOptionSelected, this.previousPassages});
 
   @override
   State<StatefulWidget> createState() => PassageState();
@@ -88,8 +89,6 @@ class PassageState extends State<Passage> with TickerProviderStateMixin {
   }
 
   void _nextWithChoice(int i) {
-    _passageScrollController.animateTo(0,
-        duration: Duration(milliseconds: 50), curve: Curves.fastOutSlowIn);
     BackgroundImage.nextRandomForType(_lastImageType);
     widget.onNextOptionSelected(null, i);
   }
@@ -120,8 +119,6 @@ class PassageState extends State<Passage> with TickerProviderStateMixin {
 
   void _next() {
     if (widget.currentStory.canContinue == true) {
-      _passageScrollController.animateTo(0,
-          duration: Duration(milliseconds: 50), curve: Curves.fastOutSlowIn);
       widget.onNextOptionSelected("Next", -1);
     }
   }
@@ -135,32 +132,33 @@ class PassageState extends State<Passage> with TickerProviderStateMixin {
       _lastImageType = randomImageType;
     }
     print("Random image type: $randomImageType");
+
+    Future.delayed(Duration(milliseconds: 100), _scrollDown);
+
     return Expanded(
-      child: SingleChildScrollView(
-        scrollDirection: Axis.horizontal,
-        controller: _passageScrollController,
-        padding: EdgeInsets.all(8.0),
-        child: Row(
-          children: <Widget>[
-            SlideWidget(
-              slide: true,
-              direction: SlideDirection.Right,
-              child: Container(
-                alignment: Alignment.topCenter,
-                width: MediaQuery.of(context).size.width * 0.79,
-                decoration: BoxDecoration(
-                  color: Theme.of(context).backgroundColor,
-                  border: Border.all(
-                    color: Theme.of(context).primaryColor,
-                    width: 3.0,
-                  ),
-                ),
-                child: SingleChildScrollView(
-                  scrollDirection: Axis.vertical,
-                  child: Padding(
+      child: Align(
+        alignment: Alignment.bottomCenter,
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: SingleChildScrollView(
+            controller: _passageScrollController,
+            child: Column(
+              children: [
+                ...widget.previousPassages.map(
+                  (a) => Container(
+                    alignment: Alignment.topCenter,
                     padding: EdgeInsets.all(8.0),
+                    margin: EdgeInsets.all(8.0),
+                    width: MediaQuery.of(context).size.width * 0.95,
+                    decoration: BoxDecoration(
+                      color: Theme.of(context).backgroundColor,
+                      border: Border.all(
+                        color: Theme.of(context).primaryColor,
+                        width: 3.0,
+                      ),
+                    ),
                     child: Text(
-                      widget.currentStory.currentText,
+                      a,
                       style: TextStyle(
                         fontFamily: "Raleway-Bold",
                         fontSize: 18,
@@ -168,18 +166,42 @@ class PassageState extends State<Passage> with TickerProviderStateMixin {
                     ),
                   ),
                 ),
-              ),
+                Container(
+                  alignment: Alignment.topCenter,
+                  padding: EdgeInsets.all(8.0),
+                  margin: EdgeInsets.all(8.0),
+                  width: MediaQuery.of(context).size.width * 0.95,
+                  decoration: BoxDecoration(
+                    color: Theme.of(context).backgroundColor,
+                    border: Border.all(
+                      color: Theme.of(context).primaryColor,
+                      width: 3.0,
+                    ),
+                  ),
+                  child: Text(
+                    widget.currentStory.currentText,
+                    style: TextStyle(
+                      fontFamily: "Raleway-Bold",
+                      fontSize: 18,
+                    ),
+                  ),
+                ),
+              ],
             ),
-            TweenImage(
-              duration: 3,
-              first: BackgroundImage.getAssetImageForType(randomImageType),
-              last:
-                  BackgroundImage.getColoredAssetImageForType(randomImageType),
-              height: 700.0,
-            )
-          ],
+          ),
         ),
       ),
     );
+  }
+
+  _scrollDown() {
+    if (_passageScrollController.hasClients) {
+      var position = _passageScrollController.position;
+      _passageScrollController.animateTo(
+        position.maxScrollExtent,
+        duration: Duration(milliseconds: 100),
+        curve: Curves.easeOutBack,
+      );
+    }
   }
 }
