@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:locadeserta/animations/fade_images.dart';
 import 'package:locadeserta/components.dart';
-import 'package:locadeserta/models/PassageItem.dart';
+import 'package:locadeserta/models/passage_item.dart';
 import 'package:locadeserta/models/story_bridge.dart';
 import 'package:locadeserta/animations/slideable_button.dart';
 import 'package:locadeserta/models/background_image.dart';
@@ -21,8 +21,7 @@ class Passage extends StatefulWidget {
 
 class PassageState extends State<Passage> with TickerProviderStateMixin {
   ScrollController _passageScrollController = new ScrollController();
-  ImageType _lastImageType = ImageType.BULRUSH;
-  ImageType _randomImageType;
+  ImageType _imageType = ImageType.BULRUSH;
 
   @override
   Widget build(BuildContext context) {
@@ -91,12 +90,12 @@ class PassageState extends State<Passage> with TickerProviderStateMixin {
   }
 
   void _nextWithChoice(int i) {
-    var passageItem = PassageItemFactory.fromType(
-      PassageTypes.IMAGE,
-      image: _lastImageType,
+    var passageItem = PassageItem(
+      type: PassageTypes.IMAGE,
+      value: _imageType,
     );
     BackgroundImage.nextRandomForType(
-      _lastImageType,
+      _imageType,
     );
     widget.onNextOptionSelected(passageItem, i);
   }
@@ -128,8 +127,8 @@ class PassageState extends State<Passage> with TickerProviderStateMixin {
   void _next() {
     if (widget.currentStory.canContinue == true) {
       widget.onNextOptionSelected(
-          PassageItemFactory.fromType(PassageTypes.TEXT,
-              text: widget.currentStory.currentText),
+          PassageItem(
+              type: PassageTypes.TEXT, value: widget.currentStory.currentText),
           -1);
     }
   }
@@ -137,12 +136,10 @@ class PassageState extends State<Passage> with TickerProviderStateMixin {
   Widget _buildTextRow(BuildContext context) {
     print("current tags: ${widget.currentStory.currentTags}");
     var currentTags = widget.currentStory.currentTags;
-    var randomImageType = _lastImageType;
     if (currentTags != null && currentTags.isNotEmpty) {
-      randomImageType = BackgroundImage.imageTypeFromCurrentTags(currentTags);
-      _lastImageType = randomImageType;
+      _imageType = BackgroundImage.imageTypeFromCurrentTags(currentTags);
     }
-    print("Random image type: $randomImageType");
+    print("Random image type: $_imageType");
 
     Future.delayed(Duration(milliseconds: 100), _scrollDown);
 
@@ -154,17 +151,27 @@ class PassageState extends State<Passage> with TickerProviderStateMixin {
           child: ListView(
             controller: _passageScrollController,
             children: [
-              ...widget.previousPassages.map((PassageItem a) {
+              ...widget.previousPassages.map((PassageItem passageItem) {
                 Widget container;
-                switch (a.type) {
+                switch (passageItem.type) {
                   case PassageTypes.IMAGE:
-                    container = TweenImage(
-                      duration: 3,
-                      first:
-                          BackgroundImage.getAssetImageForType(a.value),
-                      last: BackgroundImage.getColoredAssetImageForType(
-                          a.value),
-                      imageFit: BoxFit.fitWidth,
+                    container = Container(
+                      decoration: BoxDecoration(
+                        color: Theme.of(context).backgroundColor,
+                        border: Border.all(
+                          color: Theme.of(context).primaryColor,
+                          width: 3.0,
+                        ),
+                      ),
+                      child: TweenImage(
+                        repeat: true,
+                        duration: 3,
+                        first: BackgroundImage.getAssetImageForType(
+                            passageItem.value),
+                        last: BackgroundImage.getColoredAssetImageForType(
+                            passageItem.value),
+                        imageFit: BoxFit.fitWidth,
+                      ),
                     );
                     break;
                   case PassageTypes.TEXT:
@@ -181,7 +188,7 @@ class PassageState extends State<Passage> with TickerProviderStateMixin {
                         ),
                       ),
                       child: Text(
-                        a.value,
+                        passageItem.value,
                         style: TextStyle(
                           fontFamily: "Raleway-Bold",
                           fontSize: 18,

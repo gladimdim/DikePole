@@ -27,14 +27,6 @@ class StoryBridge {
   static const platform = const MethodChannel('gladimdim.locadeserta/Ink');
   Story story;
 
-  void playSound(String fileName) async {
-    try {
-      await platform.invokeMethod("playSound", {"fileName": fileName});
-    } on PlatformException {
-      print("Error");
-    }
-  }
-
   Future<void> _refreshStory() async {
     String currentText;
     List<String> choices;

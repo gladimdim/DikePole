@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:locadeserta/components/AppBarCustom.dart';
 import 'package:locadeserta/models/Localizations.dart';
-import 'package:locadeserta/models/PassageItem.dart';
+import 'package:locadeserta/models/passage_item.dart';
 import 'package:locadeserta/models/catalogs.dart';
 import 'package:locadeserta/passage_view.dart';
 import 'package:locadeserta/models/persistence.dart';
