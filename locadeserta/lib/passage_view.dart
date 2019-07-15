@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:locadeserta/animations/fade_images.dart';
 import 'package:locadeserta/components.dart';
+import 'package:locadeserta/models/PassageItem.dart';
 import 'package:locadeserta/models/story_bridge.dart';
 import 'package:locadeserta/animations/slideable_button.dart';
 import 'package:locadeserta/models/background_image.dart';
@@ -8,8 +9,8 @@ import 'models/Localizations.dart';
 
 class Passage extends StatefulWidget {
   final Story currentStory;
-  final Function(String pid, int i) onNextOptionSelected;
-  final List previousPassages;
+  final Function(PassageItem, int i) onNextOptionSelected;
+  final List<PassageItem> previousPassages;
 
   Passage(
       {this.currentStory, this.onNextOptionSelected, this.previousPassages});
@@ -21,6 +22,7 @@ class Passage extends StatefulWidget {
 class PassageState extends State<Passage> with TickerProviderStateMixin {
   ScrollController _passageScrollController = new ScrollController();
   ImageType _lastImageType = ImageType.BULRUSH;
+  ImageType _randomImageType;
 
   @override
   Widget build(BuildContext context) {
@@ -89,8 +91,14 @@ class PassageState extends State<Passage> with TickerProviderStateMixin {
   }
 
   void _nextWithChoice(int i) {
-    BackgroundImage.nextRandomForType(_lastImageType);
-    widget.onNextOptionSelected(null, i);
+    var passageItem = PassageItemFactory.fromType(
+      PassageTypes.IMAGE,
+      image: _lastImageType,
+    );
+    BackgroundImage.nextRandomForType(
+      _lastImageType,
+    );
+    widget.onNextOptionSelected(passageItem, i);
   }
 
   List<Widget> createOptionList(List<String> options) {
@@ -119,7 +127,10 @@ class PassageState extends State<Passage> with TickerProviderStateMixin {
 
   void _next() {
     if (widget.currentStory.canContinue == true) {
-      widget.onNextOptionSelected("Next", -1);
+      widget.onNextOptionSelected(
+          PassageItemFactory.fromType(PassageTypes.TEXT,
+              text: widget.currentStory.currentText),
+          -1);
     }
   }
 
@@ -140,54 +151,67 @@ class PassageState extends State<Passage> with TickerProviderStateMixin {
         alignment: Alignment.bottomCenter,
         child: Padding(
           padding: const EdgeInsets.all(8.0),
-          child: SingleChildScrollView(
+          child: ListView(
             controller: _passageScrollController,
-            child: Column(
-              children: [
-                ...widget.previousPassages.map(
-                  (a) => Container(
-                    alignment: Alignment.topCenter,
-                    padding: EdgeInsets.all(8.0),
-                    margin: EdgeInsets.all(8.0),
-                    width: MediaQuery.of(context).size.width * 0.95,
-                    decoration: BoxDecoration(
-                      color: Theme.of(context).backgroundColor,
-                      border: Border.all(
-                        color: Theme.of(context).primaryColor,
-                        width: 3.0,
+            children: [
+              ...widget.previousPassages.map((PassageItem a) {
+                Widget container;
+                switch (a.type) {
+                  case PassageTypes.IMAGE:
+                    container = TweenImage(
+                      duration: 3,
+                      first:
+                          BackgroundImage.getAssetImageForType(a.value),
+                      last: BackgroundImage.getColoredAssetImageForType(
+                          a.value),
+                      imageFit: BoxFit.fitWidth,
+                    );
+                    break;
+                  case PassageTypes.TEXT:
+                    container = Container(
+                      alignment: Alignment.topCenter,
+                      padding: EdgeInsets.all(8.0),
+                      margin: EdgeInsets.all(8.0),
+                      width: MediaQuery.of(context).size.width * 0.95,
+                      decoration: BoxDecoration(
+                        color: Theme.of(context).backgroundColor,
+                        border: Border.all(
+                          color: Theme.of(context).primaryColor,
+                          width: 3.0,
+                        ),
                       ),
-                    ),
-                    child: Text(
-                      a,
-                      style: TextStyle(
-                        fontFamily: "Raleway-Bold",
-                        fontSize: 18,
+                      child: Text(
+                        a.value,
+                        style: TextStyle(
+                          fontFamily: "Raleway-Bold",
+                          fontSize: 18,
+                        ),
                       ),
-                    ),
+                    );
+                }
+                return container;
+              }),
+              Container(
+                alignment: Alignment.topCenter,
+                padding: EdgeInsets.all(8.0),
+                margin: EdgeInsets.all(8.0),
+                width: MediaQuery.of(context).size.width * 0.95,
+                decoration: BoxDecoration(
+                  color: Theme.of(context).backgroundColor,
+                  border: Border.all(
+                    color: Theme.of(context).primaryColor,
+                    width: 3.0,
                   ),
                 ),
-                Container(
-                  alignment: Alignment.topCenter,
-                  padding: EdgeInsets.all(8.0),
-                  margin: EdgeInsets.all(8.0),
-                  width: MediaQuery.of(context).size.width * 0.95,
-                  decoration: BoxDecoration(
-                    color: Theme.of(context).backgroundColor,
-                    border: Border.all(
-                      color: Theme.of(context).primaryColor,
-                      width: 3.0,
-                    ),
-                  ),
-                  child: Text(
-                    widget.currentStory.currentText,
-                    style: TextStyle(
-                      fontFamily: "Raleway-Bold",
-                      fontSize: 18,
-                    ),
+                child: Text(
+                  widget.currentStory.currentText,
+                  style: TextStyle(
+                    fontFamily: "Raleway-Bold",
+                    fontSize: 18,
                   ),
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),

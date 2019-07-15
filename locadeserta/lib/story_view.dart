@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:locadeserta/components/AppBarCustom.dart';
 import 'package:locadeserta/models/Localizations.dart';
+import 'package:locadeserta/models/PassageItem.dart';
 import 'package:locadeserta/models/catalogs.dart';
 import 'package:locadeserta/passage_view.dart';
 import 'package:locadeserta/models/persistence.dart';
@@ -22,7 +23,7 @@ class StoryView extends StatefulWidget {
 
 class _StoryViewState extends State<StoryView> {
   StoryBridge storyBridge;
-  List _previousPassages = List();
+  List<PassageItem> _previousPassages = List();
 
   @override
   void initState() {
@@ -72,11 +73,13 @@ class _StoryViewState extends State<StoryView> {
                           currentStory: currentStory,
                           previousPassages: _previousPassages,
                           onNextOptionSelected: (s, i) async {
-                            _previousPassages.add(storyBridge.story.currentText);
-                            if (s == "Next") {
-                              await storyBridge.doContinue();
-                            } else {
-                              await storyBridge.chooseChoiceIndex(i);
+                            _previousPassages.add(s);
+                            switch (s.type) {
+                              case PassageTypes.TEXT:
+                                await storyBridge.doContinue();
+                                break;
+                              case PassageTypes.IMAGE:
+                                await storyBridge.chooseChoiceIndex(i);
                             }
                           })
                       : Center(child: CircularProgressIndicator()),
