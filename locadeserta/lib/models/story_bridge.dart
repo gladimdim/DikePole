@@ -74,30 +74,32 @@ class StoryBridge {
       theEnd: theEnd,
       history: story == null ? [] : story.history,
     );
-    if (story.history.isEmpty) {
-      if (!story.canContinue && story.currentChoices.isNotEmpty) {
-        story.history
-            .add(PassageItem(type: PassageTypes.TEXT, value: story.currentText));
-      }
-//      story.history
-//          .add(_createPassage(story.currentText, _createImageType(story)));
-    }
+
     streamStory.sink.add(story);
   }
 
-  Future<void> doContinue() async {
+  Future<void> _doContinue() async {
     try {
       await platform.invokeMethod("Continue");
-      story.history.add(
-        _createPassage(
-          story.currentText,
-          _createImageType(story),
-        ),
-      );
     } catch (e) {
       print("Error, could not continue: ${e.toString()}");
     }
+
     await _refreshStory();
+  }
+
+  Future<void> doContinue() async {
+    if (story != null) {
+      if (story.history.last.value != story.currentText) {
+        story.history.add(
+          _createPassage(
+            story.currentText,
+            _createImageType(story),
+          ),
+        );
+      }
+    }
+    await _doContinue();
   }
 
   PassageItem _createPassage(String text, ImageType type) {
@@ -120,9 +122,16 @@ class StoryBridge {
     BackgroundImage.nextRandomForType(
       imageType,
     );
+
+    story.history.add(
+      PassageItem(type: PassageTypes.IMAGE, value: imageType),
+    );
+
+    story.history.add(
+        PassageItem(type: PassageTypes.TEXT, value: story.currentChoices[i]));
     try {
       await platform.invokeMethod("chooseChoiceIndex", i);
-      await doContinue();
+      await _doContinue();
       await _refreshStory();
     } catch (e) {
       throw e;
@@ -144,7 +153,13 @@ class StoryBridge {
       if (state != null) {
         await platform.invokeMethod("restoreState", {"text": state});
       }
-      await doContinue();
+      await _doContinue();
+      story.history
+          .add(_createPassage(story.currentText, _createImageType(story)));
+      if (!story.canContinue) {
+        story.history.add(
+            PassageItem(type: PassageTypes.TEXT, value: story.currentText));
+      }
     } catch (e) {
       print(e.toString());
     }
@@ -153,7 +168,7 @@ class StoryBridge {
   Future<void> resetStory({String storyJson}) async {
     story.history.clear();
     await this.initStory(storyJson: storyJson);
-    return await this._refreshStory();
+    await doContinue();
   }
 
   Future<List<String>> getInventory() async {

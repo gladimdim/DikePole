@@ -67,9 +67,14 @@ public class MainActivity extends FlutterActivity {
                                 canContinue = story.canContinue();
                                 result.success(canContinue);
                             } catch (Exception e) {
-                                result.error("EXCEPTION", e.toString(), null);
+                                result.error("EXCEPTION on canContinue", e.toString(), null);
                             }
                         } else if (methodCall.method.equals("Continue")) {
+                            boolean canContinue = story.canContinue();
+                            if (!canContinue) {
+                                result.success("");
+                                return;
+                            }
                             String currentNext;
                             try {
                                 currentNext = story.Continue();

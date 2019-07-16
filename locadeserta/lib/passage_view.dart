@@ -161,7 +161,7 @@ class PassageState extends State<Passage> with TickerProviderStateMixin {
                         ),
                       ),
                       child: Text(
-                        passageItem.value,
+                        passageItem.value == "" ? "Початок" : passageItem.value,
                         style: TextStyle(
                           fontFamily: "Raleway-Bold",
                           fontSize: 18,
@@ -171,26 +171,6 @@ class PassageState extends State<Passage> with TickerProviderStateMixin {
                 }
                 return container;
               }),
-//              Container(
-//                alignment: Alignment.topCenter,
-//                padding: EdgeInsets.all(8.0),
-//                margin: EdgeInsets.all(8.0),
-//                width: MediaQuery.of(context).size.width * 0.95,
-//                decoration: BoxDecoration(
-//                  color: Theme.of(context).backgroundColor,
-//                  border: Border.all(
-//                    color: Theme.of(context).primaryColor,
-//                    width: 3.0,
-//                  ),
-//                ),
-//                child: Text(
-//                  widget.currentStory.currentText,
-//                  style: TextStyle(
-//                    fontFamily: "Raleway-Bold",
-//                    fontSize: 18,
-//                  ),
-//                ),
-//              ),
             ],
           ),
         ),
