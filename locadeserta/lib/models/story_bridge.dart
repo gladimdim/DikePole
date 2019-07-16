@@ -1,6 +1,9 @@
 import 'dart:core';
 import 'package:flutter/services.dart';
+import 'package:locadeserta/models/background_image.dart';
 import 'dart:async';
+
+import 'package:locadeserta/models/passage_item.dart';
 
 class Story {
   final String currentText;
@@ -10,6 +13,8 @@ class Story {
   final List<String> currentTags;
   final bool theEnd;
   final bool toBeContinued;
+  final PassageItem passage;
+  final List<PassageItem> history;
 
   Story({
     this.currentText,
@@ -19,6 +24,8 @@ class Story {
     this.currentTags,
     this.theEnd = false,
     this.toBeContinued = false,
+    this.passage,
+    this.history = const [],
   });
 }
 
@@ -56,6 +63,7 @@ class StoryBridge {
     bool toBeContinued =
         (currentTags.isNotEmpty && currentTags[0] == "image tobecontinued");
     bool theEnd = (currentTags.isNotEmpty && currentTags[0] == "image theend");
+
     story = new Story(
       currentText: currentText,
       currentChoices: choices,
@@ -64,20 +72,54 @@ class StoryBridge {
       inventory: [],
       toBeContinued: toBeContinued,
       theEnd: theEnd,
+      history: story == null ? [] : story.history,
     );
+    if (story.history.isEmpty) {
+      if (!story.canContinue && story.currentChoices.isNotEmpty) {
+        story.history
+            .add(PassageItem(type: PassageTypes.TEXT, value: story.currentText));
+      }
+//      story.history
+//          .add(_createPassage(story.currentText, _createImageType(story)));
+    }
     streamStory.sink.add(story);
   }
 
   Future<void> doContinue() async {
     try {
       await platform.invokeMethod("Continue");
+      story.history.add(
+        _createPassage(
+          story.currentText,
+          _createImageType(story),
+        ),
+      );
     } catch (e) {
       print("Error, could not continue: ${e.toString()}");
     }
     await _refreshStory();
   }
 
-  Future<void> chooseChoiceIndex(int i) async {
+  PassageItem _createPassage(String text, ImageType type) {
+    return story.canContinue
+        ? PassageItem(type: PassageTypes.TEXT, value: text)
+        : PassageItem(type: PassageTypes.IMAGE, value: type);
+  }
+
+  ImageType _createImageType(Story story) {
+    print("current tags: ${story.currentTags}");
+    var currentTags = story.currentTags;
+    if (currentTags != null && currentTags.isNotEmpty) {
+      return BackgroundImage.imageTypeFromCurrentTags(currentTags);
+    } else {
+      return ImageType.FOREST;
+    }
+  }
+
+  Future<void> chooseChoiceIndex(int i, ImageType imageType) async {
+    BackgroundImage.nextRandomForType(
+      imageType,
+    );
     try {
       await platform.invokeMethod("chooseChoiceIndex", i);
       await doContinue();
@@ -109,6 +151,7 @@ class StoryBridge {
   }
 
   Future<void> resetStory({String storyJson}) async {
+    story.history.clear();
     await this.initStory(storyJson: storyJson);
     return await this._refreshStory();
   }

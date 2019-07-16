@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:locadeserta/animations/fade_images.dart';
 import 'package:locadeserta/components.dart';
+import 'package:locadeserta/components/BorderedRandomImageForType.dart';
 import 'package:locadeserta/models/passage_item.dart';
 import 'package:locadeserta/models/story_bridge.dart';
 import 'package:locadeserta/animations/slideable_button.dart';
@@ -10,10 +10,11 @@ import 'models/Localizations.dart';
 class Passage extends StatefulWidget {
   final Story currentStory;
   final Function(PassageItem, int i) onNextOptionSelected;
-  final List<PassageItem> previousPassages;
 
-  Passage(
-      {this.currentStory, this.onNextOptionSelected, this.previousPassages});
+  Passage({
+    this.currentStory,
+    this.onNextOptionSelected,
+  });
 
   @override
   State<StatefulWidget> createState() => PassageState();
@@ -25,44 +26,38 @@ class PassageState extends State<Passage> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    if (widget.currentStory.theEnd || widget.currentStory.toBeContinued) {
-      var text = widget.currentStory.theEnd
-          ? LDLocalizations.of(context).theEnd
-          : LDLocalizations.of(context).toBeContinued;
-      return Column(
-        children: <Widget>[
-          Text(
-            text,
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 25.0,
-            ),
-          ),
-          SizedBox(
-            height: 50,
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: TweenImage(
-              first: BackgroundImage.getAssetImageForType(ImageType.LANDING),
-              duration: 3,
-              repeat: true,
-              last: BackgroundImage.getColoredAssetImageForType(
-                  ImageType.LANDING),
-            ),
-          )
-        ],
-      );
-    } else {
-      return Column(
-        children: [
-          _buildTextRow(context),
-          ..._createButtons(context),
-        ],
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-      );
-    }
+    return Column(
+      children: [
+        _buildTextRow(context),
+        if (widget.currentStory.theEnd || widget.currentStory.toBeContinued)
+          ..._buildTheEnd(context),
+        ..._createButtons(context),
+      ],
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+    );
+  }
+
+  List<Widget> _buildTheEnd(BuildContext context) {
+    var text = widget.currentStory.theEnd
+        ? LDLocalizations.of(context).theEnd
+        : LDLocalizations.of(context).toBeContinued;
+    return <Widget>[
+      Text(
+        text,
+        textAlign: TextAlign.center,
+        style: TextStyle(
+          fontWeight: FontWeight.bold,
+          fontSize: 25.0,
+        ),
+      ),
+      SizedBox(
+        height: 50,
+      ),
+      Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: BorderedRandomImageByType(ImageType.LANDING),
+      )
+    ];
   }
 
   List<Widget> _createButtons(BuildContext context) {
@@ -134,15 +129,7 @@ class PassageState extends State<Passage> with TickerProviderStateMixin {
   }
 
   Widget _buildTextRow(BuildContext context) {
-    print("current tags: ${widget.currentStory.currentTags}");
-    var currentTags = widget.currentStory.currentTags;
-    if (currentTags != null && currentTags.isNotEmpty) {
-      _imageType = BackgroundImage.imageTypeFromCurrentTags(currentTags);
-    }
-    print("Random image type: $_imageType");
-
     Future.delayed(Duration(milliseconds: 100), _scrollDown);
-
     return Expanded(
       child: Align(
         alignment: Alignment.bottomCenter,
@@ -151,28 +138,14 @@ class PassageState extends State<Passage> with TickerProviderStateMixin {
           child: ListView(
             controller: _passageScrollController,
             children: [
-              ...widget.previousPassages.map((PassageItem passageItem) {
+              ...widget.currentStory.history.map((PassageItem passageItem) {
+                if (passageItem == null) {
+                  return Container();
+                }
                 Widget container;
                 switch (passageItem.type) {
                   case PassageTypes.IMAGE:
-                    container = Container(
-                      decoration: BoxDecoration(
-                        color: Theme.of(context).backgroundColor,
-                        border: Border.all(
-                          color: Theme.of(context).primaryColor,
-                          width: 3.0,
-                        ),
-                      ),
-                      child: TweenImage(
-                        repeat: true,
-                        duration: 3,
-                        first: BackgroundImage.getAssetImageForType(
-                            passageItem.value),
-                        last: BackgroundImage.getColoredAssetImageForType(
-                            passageItem.value),
-                        imageFit: BoxFit.fitWidth,
-                      ),
-                    );
+                    container = BorderedRandomImageByType(passageItem.value);
                     break;
                   case PassageTypes.TEXT:
                     container = Container(
@@ -198,26 +171,26 @@ class PassageState extends State<Passage> with TickerProviderStateMixin {
                 }
                 return container;
               }),
-              Container(
-                alignment: Alignment.topCenter,
-                padding: EdgeInsets.all(8.0),
-                margin: EdgeInsets.all(8.0),
-                width: MediaQuery.of(context).size.width * 0.95,
-                decoration: BoxDecoration(
-                  color: Theme.of(context).backgroundColor,
-                  border: Border.all(
-                    color: Theme.of(context).primaryColor,
-                    width: 3.0,
-                  ),
-                ),
-                child: Text(
-                  widget.currentStory.currentText,
-                  style: TextStyle(
-                    fontFamily: "Raleway-Bold",
-                    fontSize: 18,
-                  ),
-                ),
-              ),
+//              Container(
+//                alignment: Alignment.topCenter,
+//                padding: EdgeInsets.all(8.0),
+//                margin: EdgeInsets.all(8.0),
+//                width: MediaQuery.of(context).size.width * 0.95,
+//                decoration: BoxDecoration(
+//                  color: Theme.of(context).backgroundColor,
+//                  border: Border.all(
+//                    color: Theme.of(context).primaryColor,
+//                    width: 3.0,
+//                  ),
+//                ),
+//                child: Text(
+//                  widget.currentStory.currentText,
+//                  style: TextStyle(
+//                    fontFamily: "Raleway-Bold",
+//                    fontSize: 18,
+//                  ),
+//                ),
+//              ),
             ],
           ),
         ),

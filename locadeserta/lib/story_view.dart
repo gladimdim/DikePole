@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:locadeserta/components/AppBarCustom.dart';
+import 'package:locadeserta/models/Auth.dart';
 import 'package:locadeserta/models/Localizations.dart';
 import 'package:locadeserta/models/passage_item.dart';
 import 'package:locadeserta/models/catalogs.dart';
@@ -9,7 +10,6 @@ import 'package:locadeserta/passage_view.dart';
 import 'package:locadeserta/models/persistence.dart';
 import 'package:locadeserta/models/story_bridge.dart';
 import 'package:toast/toast.dart';
-import 'models/Auth.dart';
 
 class StoryView extends StatefulWidget {
   final CatalogStory catalogStory;
@@ -71,7 +71,6 @@ class _StoryViewState extends State<StoryView> {
                   child: snapshot.hasData
                       ? Passage(
                           currentStory: currentStory,
-                          previousPassages: _previousPassages,
                           onNextOptionSelected: (s, i) async {
                             _previousPassages.add(s);
                             switch (s.type) {
@@ -79,7 +78,7 @@ class _StoryViewState extends State<StoryView> {
                                 await storyBridge.doContinue();
                                 break;
                               case PassageTypes.IMAGE:
-                                await storyBridge.chooseChoiceIndex(i);
+                                await storyBridge.chooseChoiceIndex(i, s.value);
                             }
                           })
                       : Center(child: CircularProgressIndicator()),
