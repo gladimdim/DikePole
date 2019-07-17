@@ -129,63 +129,62 @@ class PassageState extends State<Passage> with TickerProviderStateMixin {
   }
 
   Widget _buildTextRow(BuildContext context) {
-    Future.delayed(Duration(milliseconds: 100), _scrollDown);
+    Future.delayed(Duration(milliseconds: 200), _scroll(context));
     return Expanded(
-      child: Align(
-        alignment: Alignment.bottomCenter,
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: ListView(
-            controller: _passageScrollController,
-            children: [
-              ...widget.currentStory.history.map((PassageItem passageItem) {
-                if (passageItem == null) {
-                  return Container();
-                }
-                Widget container;
-                switch (passageItem.type) {
-                  case PassageTypes.IMAGE:
-                    container = BorderedRandomImageByType(passageItem.value);
-                    break;
-                  case PassageTypes.TEXT:
-                    container = Container(
-                      alignment: Alignment.topCenter,
-                      padding: EdgeInsets.all(8.0),
-                      margin: EdgeInsets.all(8.0),
-                      width: MediaQuery.of(context).size.width * 0.95,
-                      decoration: BoxDecoration(
-                        color: Theme.of(context).backgroundColor,
-                        border: Border.all(
-                          color: Theme.of(context).primaryColor,
-                          width: 3.0,
-                        ),
+      child: SingleChildScrollView(
+        controller: _passageScrollController,
+        child: Column(
+          children: [
+            ...widget.currentStory.history.map((PassageItem passageItem) {
+              if (passageItem == null) {
+                return Container();
+              }
+              Widget container;
+              switch (passageItem.type) {
+                case PassageTypes.IMAGE:
+                  container = BorderedRandomImageByType(passageItem.value);
+                  break;
+                case PassageTypes.TEXT:
+                  container = Container(
+                    alignment: Alignment.topCenter,
+                    padding: EdgeInsets.all(8.0),
+                    margin: EdgeInsets.all(8.0),
+                    width: MediaQuery.of(context).size.width * 0.95,
+                    decoration: BoxDecoration(
+                      color: Theme.of(context).backgroundColor,
+                      border: Border.all(
+                        color: Theme.of(context).primaryColor,
+                        width: 3.0,
                       ),
-                      child: Text(
-                        passageItem.value == "" ? "Початок" : passageItem.value,
-                        style: TextStyle(
-                          fontFamily: "Raleway-Bold",
-                          fontSize: 18,
-                        ),
+                    ),
+                    child: Text(
+                      passageItem.value == "" ? "Початок" : passageItem.value,
+                      style: TextStyle(
+                        fontFamily: "Raleway-Bold",
+                        fontSize: 18,
                       ),
-                    );
-                }
-                return container;
-              }),
-            ],
-          ),
+                    ),
+                  );
+              }
+              return container;
+            }),
+          ],
         ),
       ),
     );
   }
 
-  _scrollDown() {
-    if (_passageScrollController.hasClients) {
-      var position = _passageScrollController.position;
-      _passageScrollController.animateTo(
-        position.maxScrollExtent,
-        duration: Duration(milliseconds: 100),
-        curve: Curves.easeOutBack,
-      );
-    }
+  _scroll(BuildContext context) {
+    return () {
+      if (_passageScrollController.hasClients) {
+        var position = _passageScrollController.position;
+        print("TRYING TO SCROLL DOWN");
+        _passageScrollController.animateTo(
+          position.maxScrollExtent,
+          duration: Duration(milliseconds: 50),
+          curve: Curves.easeOutBack,
+        );
+      }
+    };
   }
 }

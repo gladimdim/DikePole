@@ -131,6 +131,13 @@ public class MainActivity extends FlutterActivity {
                             } catch (Exception e) {
                                 result.error("EXCEPTION", e.toString(), null);
                             }
+                        } else if (methodCall.method.equals("resetState")) {
+                            try {
+                                story.resetState();
+                                result.success("success");
+                            } catch (Exception e) {
+                                result.error("EXCEPTION in resetState", e.toString(), null);
+                            }
                         } else {
                             result.notImplemented();
                         }

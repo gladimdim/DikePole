@@ -90,13 +90,8 @@ class StoryBridge {
 
   Future<void> doContinue() async {
     if (story != null) {
-      if (story.history.last.value != story.currentText) {
-        story.history.add(
-          _createPassage(
-            story.currentText,
-            _createImageType(story),
-          ),
-        );
+      if (story.history.isNotEmpty && story.history.last.value != story.currentText) {
+        _addCurrentPassage();
       }
     }
     await _doContinue();
@@ -165,10 +160,15 @@ class StoryBridge {
     }
   }
 
-  Future<void> resetStory({String storyJson}) async {
+  Future<void> resetState() async {
     story.history.clear();
-    await this.initStory(storyJson: storyJson);
-    await doContinue();
+    try {
+      await platform.invokeMethod("resetState");
+    } catch (e) {
+      print("resetState failed with error : ${e.toString()}");
+    }
+    await _doContinue();
+    _addCurrentPassage();
   }
 
   Future<List<String>> getInventory() async {
@@ -179,5 +179,14 @@ class StoryBridge {
       print(e.toString());
     }
     return null;
+  }
+
+  void _addCurrentPassage() {
+    story.history.add(
+      _createPassage(
+        story.currentText,
+        _createImageType(story),
+      ),
+    );
   }
 }

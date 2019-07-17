@@ -120,8 +120,6 @@ class _StoryViewState extends State<StoryView> {
   }
 
   _resetStory() async {
-    await storyBridge.resetStory(
-      storyJson: widget.catalogStory.inkJson,
-    );
+    await storyBridge.resetState();
   }
 }
