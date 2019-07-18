@@ -4,4 +4,5 @@
 
 @interface AppDelegate : FlutterAppDelegate
 @property (strong) InkStory *inkStory;
+@property (strong) NSString *storyString;
 @end

@@ -106,6 +106,10 @@
     [self evaluateScriptInContext:[NSString stringWithFormat:@"story.state.LoadJson(\"%@\");", json]];
 }
 
+- (void) resetState {
+    [self evaluateScriptInContext:@"story.resetState;"];
+}
+
 - (BOOL)canContinue
 {
     return [[self evaluateScriptInContext:@"story.canContinue;"] toBool];

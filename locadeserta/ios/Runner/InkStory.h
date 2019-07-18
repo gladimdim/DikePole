@@ -25,6 +25,7 @@
 - (NSArray *)globalTags;
 - (NSArray *)tagsForContentAtPath:(NSString *)path;
 - (void)choosePathString:(NSString *)path;
+- (void) resetState;
 
 - (JSValue *)evaluateScriptInContext:(NSString *)jsToRun;
 

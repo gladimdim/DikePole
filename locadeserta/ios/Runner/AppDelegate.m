@@ -7,13 +7,14 @@
 
 - (BOOL)application:(UIApplication *)application
     didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    
+
     FlutterViewController* controller = (FlutterViewController *) self.window.rootViewController;
     
     FlutterMethodChannel *inkChannel = [FlutterMethodChannel methodChannelWithName:@"gladimdim.locadeserta/Ink" binaryMessenger:controller];
-    
+    NSString *storyString;
     [inkChannel setMethodCallHandler:^(FlutterMethodCall * _Nonnull call, FlutterResult result) {
         if ([@"Init" isEqualToString:call.method]) {
+            self.storyString = call.arguments;
             self.inkStory = [[[InkStory alloc] init] initWithJsonString:call.arguments];
             result(@"success");
         } else if ([@"canContinue" isEqualToString:call.method]) {
@@ -47,6 +48,9 @@
         } else if ([@"saveState" isEqualToString:call.method]) {
             NSString *state =  [self.inkStory toJson];
             return result(state);
+        } else if ([@"resetState" isEqualToString:call.method]) {
+            self.inkStory = [[[InkStory alloc] init] initWithJsonString:self.storyString];
+            result(@"success");
         } else {
             result(FlutterMethodNotImplemented);
         }

@@ -29,8 +29,6 @@ class PassageState extends State<Passage> with TickerProviderStateMixin {
     return Column(
       children: [
         _buildTextRow(context),
-        if (widget.currentStory.theEnd || widget.currentStory.toBeContinued)
-          ..._buildTheEnd(context),
         ..._createButtons(context),
       ],
       crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -173,6 +171,8 @@ class PassageState extends State<Passage> with TickerProviderStateMixin {
               }
               return container;
             }),
+            if (widget.currentStory.theEnd || widget.currentStory.toBeContinued)
+              ..._buildTheEnd(context),
           ],
         ),
       ),
