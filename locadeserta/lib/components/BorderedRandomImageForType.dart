@@ -28,3 +28,29 @@ class BorderedRandomImageByType extends StatelessWidget {
     );
   }
 }
+
+class BorderedRandomImageByPath extends StatelessWidget {
+  final List imagePaths;
+
+  BorderedRandomImageByPath(this.imagePaths);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        color: Theme.of(context).backgroundColor,
+        border: Border.all(
+          color: Theme.of(context).primaryColor,
+          width: 3.0,
+        ),
+      ),
+      child: TweenImage(
+        repeat: true,
+        duration: 3,
+        first: AssetImage(imagePaths[0]),
+        last: AssetImage(imagePaths[1]),
+        imageFit: BoxFit.fitWidth,
+      ),
+    );
+  }
+}

@@ -98,12 +98,14 @@ class StoryBridge {
   }
 
   PassageItem _createPassage(String text, ImageType type) {
+    var randomImage = BackgroundImage.getRandomImageForType(type);
+
     return story.canContinue
         ? PassageItem(type: PassageTypes.TEXT, value: text)
-        : PassageItem(type: PassageTypes.IMAGE, value: type);
+        : PassageItem(type: PassageTypes.IMAGE, imageType: type, value: [randomImage.getImagePathColored(), randomImage.getImagePath()]);
   }
 
-  ImageType _createImageType(Story story) {
+  ImageType createImageType() {
     print("current tags: ${story.currentTags}");
     var currentTags = story.currentTags;
     if (currentTags != null && currentTags.isNotEmpty) {
@@ -113,13 +115,9 @@ class StoryBridge {
     }
   }
 
-  Future<void> chooseChoiceIndex(int i, ImageType imageType) async {
-    BackgroundImage.nextRandomForType(
-      imageType,
-    );
-
+  Future<void> chooseChoiceIndex(int i, PassageItem passage) async {
     story.history.add(
-      PassageItem(type: PassageTypes.IMAGE, value: imageType),
+      passage
     );
 
     story.history.add(
@@ -150,7 +148,7 @@ class StoryBridge {
       }
       await _doContinue();
       story.history
-          .add(_createPassage(story.currentText, _createImageType(story)));
+          .add(_createPassage(story.currentText, createImageType()));
       if (!story.canContinue) {
         story.history.add(
             PassageItem(type: PassageTypes.TEXT, value: story.currentText));
@@ -185,7 +183,7 @@ class StoryBridge {
     story.history.add(
       _createPassage(
         story.currentText,
-        _createImageType(story),
+        createImageType(),
       ),
     );
   }

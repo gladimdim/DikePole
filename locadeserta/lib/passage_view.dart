@@ -85,13 +85,18 @@ class PassageState extends State<Passage> with TickerProviderStateMixin {
   }
 
   void _nextWithChoice(int i) {
+    _imageType = _createImageType(widget.currentStory);
+    var randomImage = BackgroundImage.getRandomImageForType(_imageType);
     var passageItem = PassageItem(
       type: PassageTypes.IMAGE,
-      value: _imageType,
+      imageType: _imageType,
+      value: [randomImage.getImagePath(), randomImage.getImagePathColored()],
     );
+
     BackgroundImage.nextRandomForType(
       _imageType,
     );
+
     widget.onNextOptionSelected(passageItem, i);
   }
 
@@ -142,7 +147,7 @@ class PassageState extends State<Passage> with TickerProviderStateMixin {
               Widget container;
               switch (passageItem.type) {
                 case PassageTypes.IMAGE:
-                  container = BorderedRandomImageByType(passageItem.value);
+                  container = BorderedRandomImageByPath(passageItem.value);
                   break;
                 case PassageTypes.TEXT:
                   container = Container(
@@ -172,6 +177,16 @@ class PassageState extends State<Passage> with TickerProviderStateMixin {
         ),
       ),
     );
+  }
+
+  ImageType _createImageType(Story story) {
+    print("current tags: ${story.currentTags}");
+    var currentTags = story.currentTags;
+    if (currentTags != null && currentTags.isNotEmpty) {
+      return BackgroundImage.imageTypeFromCurrentTags(currentTags);
+    } else {
+      return ImageType.FOREST;
+    }
   }
 
   _scroll(BuildContext context) {

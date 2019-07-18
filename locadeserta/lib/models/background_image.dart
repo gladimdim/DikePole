@@ -143,16 +143,24 @@ class RandomImage {
     return list;
   }
 
+  String getImagePath() {
+    return "images/background/${_imagePrefix[type]}/${_currentRandom.toString()}.jpg";
+  }
+
+  String getImagePathColored() {
+    return "images/background/${_imagePrefix[type]}/c_${_currentRandom.toString()}.jpg";
+  }
+
   AssetImage getAssetImage() {
     var returnValue = AssetImage(
-      "images/background/${_imagePrefix[type]}/${_currentRandom.toString()}.jpg",
+      getImagePath()
     );
     return returnValue;
   }
 
   AssetImage getAssetImageColored() {
     return AssetImage(
-      "images/background/${_imagePrefix[type]}/c_${_currentRandom.toString()}.jpg",
+      getImagePathColored()
     );
   }
 

@@ -78,7 +78,7 @@ class _StoryViewState extends State<StoryView> {
                                 await storyBridge.doContinue();
                                 break;
                               case PassageTypes.IMAGE:
-                                await storyBridge.chooseChoiceIndex(i, s.value);
+                                await storyBridge.chooseChoiceIndex(i, s);
                             }
                           })
                       : Center(child: CircularProgressIndicator()),
