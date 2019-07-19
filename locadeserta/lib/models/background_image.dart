@@ -13,7 +13,7 @@ class BackgroundImage {
   static Map<ImageType, RandomImage> _images = {
     ImageType.BOAT: RandomImage(ImageType.BOAT),
     ImageType.STEPPE: RandomImage(ImageType.RIVER), // shadowed
-    ImageType.FOREST: RandomImage(ImageType.BOAT),
+    ImageType.FOREST: RandomImage(ImageType.FOREST),
     ImageType.BULRUSH: RandomImage(ImageType.BULRUSH),
     ImageType.RIVER: RandomImage(ImageType.RIVER),
     ImageType.LANDING: RandomImage(ImageType.LANDING),

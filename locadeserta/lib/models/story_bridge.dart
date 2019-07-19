@@ -120,7 +120,7 @@ class StoryBridge {
   }
 
   Future<void> chooseChoiceIndex(int i, PassageItem passage) async {
-//    story.history.add(passage);
+    story.history.add(passage);
 
     story.history.add(
         PassageItem(type: PassageTypes.TEXT, value: story.currentChoices[i]));
@@ -128,6 +128,7 @@ class StoryBridge {
       await platform.invokeMethod("chooseChoiceIndex", i);
       await _doContinue();
       await _refreshStory();
+      _addCurrentPassage();
     } catch (e) {
       throw e;
     }
