@@ -89,12 +89,13 @@ class StoryBridge {
   }
 
   Future<void> doContinue() async {
+    await _doContinue();
     if (story != null) {
-      if (story.history.isNotEmpty && story.history.last.value != story.currentText) {
+      if (story.history.isNotEmpty &&
+          story.history.last.value != story.currentText) {
         _addCurrentPassage();
       }
     }
-    await _doContinue();
   }
 
   PassageItem _createPassage(String text, ImageType type) {
@@ -102,7 +103,10 @@ class StoryBridge {
 
     return story.canContinue
         ? PassageItem(type: PassageTypes.TEXT, value: text)
-        : PassageItem(type: PassageTypes.IMAGE, imageType: type, value: [randomImage.getImagePathColored(), randomImage.getImagePath()]);
+        : PassageItem(type: PassageTypes.IMAGE, imageType: type, value: [
+            randomImage.getImagePathColored(),
+            randomImage.getImagePath()
+          ]);
   }
 
   ImageType createImageType() {
@@ -116,9 +120,7 @@ class StoryBridge {
   }
 
   Future<void> chooseChoiceIndex(int i, PassageItem passage) async {
-    story.history.add(
-      passage
-    );
+//    story.history.add(passage);
 
     story.history.add(
         PassageItem(type: PassageTypes.TEXT, value: story.currentChoices[i]));
@@ -147,8 +149,7 @@ class StoryBridge {
         await platform.invokeMethod("restoreState", {"text": state});
       }
       await _doContinue();
-      story.history
-          .add(_createPassage(story.currentText, createImageType()));
+      story.history.add(_createPassage(story.currentText, createImageType()));
       if (!story.canContinue) {
         story.history.add(
             PassageItem(type: PassageTypes.TEXT, value: story.currentText));
