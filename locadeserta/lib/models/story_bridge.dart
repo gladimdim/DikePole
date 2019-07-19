@@ -99,6 +99,7 @@ class StoryBridge {
   }
 
   PassageItem _createPassage(String text, ImageType type) {
+    BackgroundImage.nextRandomForType(type);
     var randomImage = BackgroundImage.getRandomImageForType(type);
 
     return story.canContinue
@@ -120,7 +121,7 @@ class StoryBridge {
   }
 
   Future<void> chooseChoiceIndex(int i, PassageItem passage) async {
-    story.history.add(passage);
+//    story.history.add(passage);
 
     story.history.add(
         PassageItem(type: PassageTypes.TEXT, value: story.currentChoices[i]));

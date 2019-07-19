@@ -84,15 +84,14 @@ class PassageState extends State<Passage> with TickerProviderStateMixin {
 
   void _nextWithChoice(int i) {
     _imageType = _createImageType(widget.currentStory);
+    BackgroundImage.nextRandomForType(
+      _imageType,
+    );
     var randomImage = BackgroundImage.getRandomImageForType(_imageType);
     var passageItem = PassageItem(
       type: PassageTypes.IMAGE,
       imageType: _imageType,
       value: [randomImage.getImagePath(), randomImage.getImagePathColored()],
-    );
-
-    BackgroundImage.nextRandomForType(
-      _imageType,
     );
 
     widget.onNextOptionSelected(passageItem, i);
