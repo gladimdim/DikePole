@@ -48,136 +48,165 @@ class _CatalogViewState extends State<CatalogView>
     var image = BackgroundImage.getAssetImageForType(ImageType.LANDING);
     var coloredImage =
         BackgroundImage.getColoredAssetImageForType(ImageType.LANDING);
+    var decoration = widget.expanded
+        ? null
+        : BoxDecoration(
+            border: Border.all(color: Theme.of(context).primaryColor, width: 1),
+            borderRadius: getAllRoundedBorderRadius());
     return FutureBuilder(
       future: _future,
       builder: (context, snapshot) => Padding(
-            padding: const EdgeInsets.all(4.0),
-            child: Container(
-              decoration: BoxDecoration(
-                  border: Border.all(
-                      color: Theme.of(context).primaryColor, width: 1),
-                  borderRadius: getAllRoundedBorderRadius()),
-              child: Column(
-                children: <Widget>[
-                  Container(
-                    height: 75,
-                    alignment: Alignment.center,
-                    decoration: BoxDecoration(
-                      color: Theme.of(context).primaryColor,
-                      borderRadius: getTopRoundedBorderRadius(),
-                    ),
-                    child: Text(
-                      widget.catalogStory.title,
-                      style: TextStyle(
-                        fontSize: 32.0,
-                        fontWeight: FontWeight.bold,
-                        color: Theme.of(context).textTheme.title.color,
-                        backgroundColor: Theme.of(context).primaryColor,
-                      ),
+        padding: const EdgeInsets.all(4.0),
+        child: Container(
+          decoration: decoration,
+          child: Column(
+            children: <Widget>[
+              if (!widget.expanded)
+                Container(
+                  height: 75,
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                    color: Theme.of(context).primaryColor,
+                    borderRadius: getTopRoundedBorderRadius(),
+                  ),
+                  child: Text(
+                    widget.catalogStory.title,
+                    style: TextStyle(
+                      fontSize: 32.0,
+                      fontWeight: FontWeight.bold,
+                      color: Theme.of(context).textTheme.title.color,
+                      backgroundColor: Theme.of(context).primaryColor,
                     ),
                   ),
-                  Hero(
-                    tag: "CatalogView" + widget.catalogStory.title,
-                    child: TweenImage(
-                      first: image,
-                      last: coloredImage,
-                      duration: 4,
-                      repeat: true,
-                    ),
+                ),
+              if (!widget.expanded)
+                Hero(
+                  tag: "CatalogView" + widget.catalogStory.title,
+                  child: TweenImage(
+                    first: image,
+                    last: coloredImage,
+                    duration: 4,
+                    repeat: true,
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      if (!widget.expanded)
-                        Flexible(
-                          flex: 10,
-                          child: Container(
-                            height: 50,
-                            decoration: BoxDecoration(
-                              color: Theme.of(context).primaryColor,
-                              borderRadius: BorderRadius.only(
-                                bottomLeft: Radius.circular(20.0),
-                              ),
-                            ),
-                            child: InkWell(
-                              borderRadius: BorderRadius.only(
-                                bottomLeft: Radius.circular(20.0),
-                              ),
-                              onTap: widget.onDetailPressed,
-                              child: Align(
-                                alignment: Alignment.center,
-                                child: Text(
-                                  LDLocalizations.of(context).showStoryDetails,
-                                  style: TextStyle(
-                                    color:
-                                        Theme.of(context).textTheme.title.color,
-                                    fontSize: 22.0,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ),
-                            ),
+                ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  if (!widget.expanded)
+                    Flexible(
+                      flex: 10,
+                      child: Container(
+                        height: 50,
+                        decoration: BoxDecoration(
+                          color: Theme.of(context).primaryColor,
+                          borderRadius: BorderRadius.only(
+                            bottomLeft: Radius.circular(20.0),
                           ),
                         ),
-                      if (!widget.expanded)
-                        Flexible(
-                          flex: 1,
-                          child: SizedBox(
-//                              width: 1.0,
-                              height: 50.0,
-                              child: Container(
-                                color: Theme.of(context).backgroundColor,
-                              )),
-                        ),
-                      Flexible(
-                        flex: 10,
-                        child: SlideableButton(
-                          onPress: widget.onReadPressed,
-                          child: Container(
-                            height: 50,
-                            decoration: BoxDecoration(
-                              color: Theme.of(context).primaryColor,
-                              borderRadius: widget.expanded
-                                  ? null
-                                  : BorderRadius.only(
-                                      bottomRight: Radius.circular(20.0),
-                                    ),
-                            ),
-                            child: Align(
-                              alignment: Alignment.center,
-                              child: Text(
-                                LDLocalizations.of(context).startStory,
-                                style: TextStyle(
-                                  color:
-                                      Theme.of(context).textTheme.title.color,
-                                  fontSize: 22.0,
-                                  fontWeight: FontWeight.bold,
-                                ),
+                        child: InkWell(
+                          borderRadius: BorderRadius.only(
+                            bottomLeft: Radius.circular(20.0),
+                          ),
+                          onTap: widget.onDetailPressed,
+                          child: Align(
+                            alignment: Alignment.center,
+                            child: Text(
+                              LDLocalizations.of(context).showStoryDetails,
+                              style: TextStyle(
+                                color: Theme.of(context).textTheme.title.color,
+                                fontSize: 22.0,
+                                fontWeight: FontWeight.bold,
                               ),
                             ),
                           ),
                         ),
                       ),
-                    ],
+                    ),
+                  if (!widget.expanded)
+                    Flexible(
+                      flex: 1,
+                      child: SizedBox(
+                          height: 50.0,
+                          child: Container(
+                            color: Theme.of(context).backgroundColor,
+                          )),
+                    ),
+                  Flexible(
+                    flex: 10,
+                    child: SlideableButton(
+                      onPress: widget.onReadPressed,
+                      child: Container(
+                        height: 50,
+                        decoration: BoxDecoration(
+                          color: Theme.of(context).primaryColor,
+                          borderRadius: widget.expanded
+                              ? null
+                              : BorderRadius.only(
+                                  bottomRight: Radius.circular(20.0),
+                                ),
+                        ),
+                        child: Align(
+                          alignment: Alignment.center,
+                          child: Text(
+                            LDLocalizations.of(context).startStory,
+                            style: TextStyle(
+                              color: Theme.of(context).textTheme.title.color,
+                              fontSize: 22.0,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
                   ),
-                  if (widget.expanded) _showDetails(widget.catalogStory),
                 ],
               ),
-            ),
+              if (widget.expanded) _showDetails(widget.catalogStory, context),
+            ],
           ),
+        ),
+      ),
     );
   }
 
-  Widget _showDetails(CatalogStory story) {
+  Widget _showDetails(CatalogStory story, BuildContext context) {
     return Expanded(
       child: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Text(
-            story.description,
-            style: TextStyle(
-              fontSize: 15.0,
-            ),
+          padding: EdgeInsets.all(8.0),
+          child: Column(
+            children: <Widget>[
+              SizedBox(
+                height: 30,
+                child: ListView(
+                  scrollDirection: Axis.horizontal,
+                  children: [
+                    Text(
+                      "Автори: ",
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold, fontSize: 18.0),
+                    ),
+                    Text(
+                      story.author,
+                      style: TextStyle(
+                          fontWeight: FontWeight.normal, fontSize: 18.0),
+                    )
+                  ],
+                ),
+              ),
+              SizedBox(
+                child: Container(
+                  color: Theme.of(context).primaryColor,
+                ),
+                height: 2,
+              ),
+              Text(
+                story.description,
+                style: TextStyle(
+                  fontSize: 15.0,
+                ),
+              ),
+            ],
           ),
         ),
       ),
