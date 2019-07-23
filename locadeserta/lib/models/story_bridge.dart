@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:locadeserta/models/background_image.dart';
 import 'dart:async';
 
-import 'package:locadeserta/models/passage_item.dart';
+import 'package:locadeserta/models/story_history.dart';
 
 class Story {
   final String currentText;
@@ -13,8 +13,7 @@ class Story {
   final List<String> currentTags;
   final bool theEnd;
   final bool toBeContinued;
-  final PassageItem passage;
-  final List<PassageItem> history;
+  StoryHistory storyHistory;
 
   Story({
     this.currentText,
@@ -24,8 +23,7 @@ class Story {
     this.currentTags,
     this.theEnd = false,
     this.toBeContinued = false,
-    this.passage,
-    this.history = const [],
+    this.storyHistory,
   });
 }
 
@@ -72,7 +70,7 @@ class StoryBridge {
       inventory: [],
       toBeContinued: toBeContinued,
       theEnd: theEnd,
-      history: story == null ? [] : story.history,
+      storyHistory: story == null ? StoryHistory([]) : story.storyHistory,
     );
 
     streamStory.sink.add(story);
@@ -91,23 +89,23 @@ class StoryBridge {
   Future<void> doContinue() async {
     await _doContinue();
     if (story != null) {
-      if (story.history.isNotEmpty &&
-          story.history.last.value != story.currentText) {
+      if (!story.storyHistory.isEmpty() &&
+          story.storyHistory.getLast().value != story.currentText) {
         _addCurrentPassage();
       }
     }
   }
 
-  PassageItem _createPassage(String text, ImageType type) {
+  _createPassage(String text, ImageType type) {
     BackgroundImage.nextRandomForType(type);
     var randomImage = BackgroundImage.getRandomImageForType(type);
 
     return story.canContinue
-        ? PassageItem(type: PassageTypes.TEXT, value: text)
-        : PassageItem(type: PassageTypes.IMAGE, imageType: type, value: [
+        ? StoryItemText(text)
+        : StoryItemImage([
             randomImage.getImagePathColored(),
-            randomImage.getImagePath()
-          ]);
+            randomImage.getImagePath(),
+          ], type);
   }
 
   ImageType createImageType() {
@@ -120,11 +118,10 @@ class StoryBridge {
     }
   }
 
-  Future<void> chooseChoiceIndex(int i, PassageItem passage) async {
+  Future<void> chooseChoiceIndex(int i, passage) async {
 //    story.history.add(passage);
 
-    story.history.add(
-        PassageItem(type: PassageTypes.TEXT, value: story.currentChoices[i]));
+    story.storyHistory.addItem(StoryItemText(story.currentChoices[i]));
     try {
       await platform.invokeMethod("chooseChoiceIndex", i);
       await _doContinue();
@@ -151,10 +148,10 @@ class StoryBridge {
         await platform.invokeMethod("restoreState", {"text": state});
       }
       await _doContinue();
-      story.history.add(_createPassage(story.currentText, createImageType()));
+      story.storyHistory
+          .addItem(_createPassage(story.currentText, createImageType()));
       if (!story.canContinue) {
-        story.history.add(
-            PassageItem(type: PassageTypes.TEXT, value: story.currentText));
+        story.storyHistory.addItem(StoryItemText(story.currentText));
       }
     } catch (e) {
       print(e.toString());
@@ -162,7 +159,7 @@ class StoryBridge {
   }
 
   Future<void> resetState() async {
-    story.history.clear();
+    story.storyHistory.clear();
     try {
       await platform.invokeMethod("resetState");
     } catch (e) {
@@ -183,7 +180,7 @@ class StoryBridge {
   }
 
   void _addCurrentPassage() {
-    story.history.add(
+    story.storyHistory.addItem(
       _createPassage(
         story.currentText,
         createImageType(),

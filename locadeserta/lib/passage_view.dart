@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:locadeserta/components.dart';
 import 'package:locadeserta/components/BorderedRandomImageForType.dart';
-import 'package:locadeserta/models/passage_item.dart';
+import 'package:locadeserta/models/story_history.dart';
 import 'package:locadeserta/models/story_bridge.dart';
 import 'package:locadeserta/animations/slideable_button.dart';
 import 'package:locadeserta/models/background_image.dart';
@@ -9,7 +9,7 @@ import 'models/Localizations.dart';
 
 class Passage extends StatefulWidget {
   final Story currentStory;
-  final Function(PassageItem, int i) onNextOptionSelected;
+  final Function(dynamic passage, int i) onNextOptionSelected;
 
   Passage({
     this.currentStory,
@@ -88,10 +88,9 @@ class PassageState extends State<Passage> with TickerProviderStateMixin {
       _imageType,
     );
     var randomImage = BackgroundImage.getRandomImageForType(_imageType);
-    var passageItem = PassageItem(
-      type: PassageTypes.IMAGE,
-      imageType: _imageType,
-      value: [randomImage.getImagePath(), randomImage.getImagePathColored()],
+    var passageItem = StoryItemImage(
+      [randomImage.getImagePath(), randomImage.getImagePathColored()],
+      _imageType,
     );
 
     widget.onNextOptionSelected(passageItem, i);
@@ -124,9 +123,7 @@ class PassageState extends State<Passage> with TickerProviderStateMixin {
   void _next() {
     if (widget.currentStory.canContinue == true) {
       widget.onNextOptionSelected(
-          PassageItem(
-              type: PassageTypes.TEXT, value: widget.currentStory.currentText),
-          -1);
+          StoryItemText(widget.currentStory.currentText), -1);
     }
   }
 
@@ -137,7 +134,7 @@ class PassageState extends State<Passage> with TickerProviderStateMixin {
         controller: _passageScrollController,
         child: Column(
           children: [
-            ...widget.currentStory.history.map((PassageItem passageItem) {
+            ...widget.currentStory.storyHistory.getHistory().map((var passageItem) {
               if (passageItem == null) {
                 return Container();
               }

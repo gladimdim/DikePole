@@ -4,7 +4,7 @@ import 'package:flutter/widgets.dart';
 import 'package:locadeserta/components/AppBarCustom.dart';
 import 'package:locadeserta/models/Auth.dart';
 import 'package:locadeserta/models/Localizations.dart';
-import 'package:locadeserta/models/passage_item.dart';
+import 'package:locadeserta/models/story_history.dart';
 import 'package:locadeserta/models/catalogs.dart';
 import 'package:locadeserta/passage_view.dart';
 import 'package:locadeserta/models/persistence.dart';
@@ -23,7 +23,7 @@ class StoryView extends StatefulWidget {
 
 class _StoryViewState extends State<StoryView> {
   StoryBridge storyBridge;
-  List<PassageItem> _previousPassages = List();
+  List _previousPassages = List();
 
   @override
   void initState() {
