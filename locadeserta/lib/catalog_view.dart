@@ -182,7 +182,7 @@ class _CatalogViewState extends State<CatalogView>
                   scrollDirection: Axis.horizontal,
                   children: [
                     Text(
-                      "Автори: ",
+                      LDLocalizations.of(context).authors,
                       style: TextStyle(
                           fontWeight: FontWeight.bold, fontSize: 18.0),
                     ),
