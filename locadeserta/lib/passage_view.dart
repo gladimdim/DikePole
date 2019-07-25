@@ -157,7 +157,7 @@ class PassageState extends State<Passage> with TickerProviderStateMixin {
                       ),
                     ),
                     child: Text(
-                      passageItem.value == "" ? "Початок" : passageItem.value,
+                      passageItem.value == "" ? LDLocalizations.of(context).storyBegin : passageItem.value,
                       style: TextStyle(
                         fontFamily: "Raleway-Bold",
                         fontSize: 18,

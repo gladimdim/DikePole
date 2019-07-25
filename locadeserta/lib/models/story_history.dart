@@ -1,36 +1,51 @@
+import 'dart:convert';
+
 import 'package:locadeserta/models/background_image.dart';
 
 class StoryHistory {
   List _history;
+
   StoryHistory(List history) {
-    this._history = history;
+    _history = history;
   }
 
   static createItem(PassageTypes type, value, ImageType imageType) {
     switch (type) {
-      case PassageTypes.TEXT: return StoryItemText(value);
-      case PassageTypes.IMAGE: return StoryItemImage(value, imageType);
+      case PassageTypes.TEXT:
+        return StoryItemText(value);
+      case PassageTypes.IMAGE:
+        return StoryItemImage(value, imageType);
     }
   }
 
   addItem(passage) {
-    this._history.add(passage);
+    _history.add(passage);
   }
 
   isEmpty() {
-    return this._history.isEmpty;
+    return _history.isEmpty;
   }
 
   getLast() {
-    return this._history.last;
+    return _history.last;
   }
 
   clear() {
-    this._history.clear();
+    _history.clear();
   }
 
   List getHistory() {
-    return this._history;
+    return _history;
+  }
+
+  toString() {
+    var result;
+    try {
+      result = JsonEncoder.withIndent("  ").convert(_history);
+    } catch (e) {
+      print(e);
+    }
+    return result;
   }
 }
 
@@ -40,6 +55,15 @@ class StoryItemImage {
   final List<String> value;
 
   StoryItemImage(this.value, this.imageType);
+
+  @override
+  String toJson() {
+    return JsonEncoder.withIndent("  ").convert({
+      "imageType": imageType.toString(),
+      "value": value.toString(),
+      "type": type.toString()
+    });
+  }
 }
 
 class StoryItemText {
@@ -47,6 +71,14 @@ class StoryItemText {
   final String value;
 
   StoryItemText(this.value);
+
+  @override
+  String toJson() {
+    return JsonEncoder.withIndent("  ").convert({
+      "value": value,
+      "type": type.toString()
+    });
+  }
 }
 
 enum PassageTypes { IMAGE, TEXT }

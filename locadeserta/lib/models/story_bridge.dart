@@ -141,6 +141,10 @@ class StoryBridge {
     }
   }
 
+  String getHistoryJson() {
+    return this.story.storyHistory.toString();
+  }
+
   Future<void> initStory({String storyJson, String state}) async {
     try {
       await platform.invokeMethod("Init", storyJson);

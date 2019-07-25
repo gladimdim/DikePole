@@ -55,9 +55,11 @@ class Persistence {
         .document(catalogStory.id)
         .get();
 
+    var history = bridge.getHistoryJson();
     Map<String, dynamic> toAdd = {
       "catalogidreference": catalogStory.id,
       "statejson": stateJson,
+      "history": history,
     };
     if (doc.exists) {
       storage.document(doc.reference.path).updateData(toAdd);
