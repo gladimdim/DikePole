@@ -189,7 +189,6 @@ class PassageState extends State<Passage> with TickerProviderStateMixin {
     return () {
       if (_passageScrollController.hasClients) {
         var position = _passageScrollController.position;
-        print("TRYING TO SCROLL DOWN");
         _passageScrollController.animateTo(
           position.maxScrollExtent,
           duration: Duration(milliseconds: 50),

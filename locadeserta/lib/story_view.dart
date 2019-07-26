@@ -9,7 +9,6 @@ import 'package:locadeserta/models/catalogs.dart';
 import 'package:locadeserta/passage_view.dart';
 import 'package:locadeserta/models/persistence.dart';
 import 'package:locadeserta/models/story_bridge.dart';
-import 'package:toast/toast.dart';
 
 class StoryView extends StatefulWidget {
   final CatalogStory catalogStory;
@@ -84,17 +83,17 @@ class _StoryViewState extends State<StoryView> {
                                 break;
                               case PassageTypes.IMAGE:
                                 await storyBridge.chooseChoiceIndex(i, s);
+                                break;
                             }
+                            await Persistence.instance
+                                .saveStateToStorageForUser(widget.user,
+                                widget.catalogStory, storyBridge);
                           })
                       : Center(child: CircularProgressIndicator()),
                 ),
                 AppBarCustom(
                   title: widget.catalogStory.title,
                   appBarButtons: [
-                    AppBarObject(
-                        onTap: () =>
-                            _onSavePressed(context, Persistence.instance),
-                        text: LDLocalizations.of(context).save),
                     AppBarObject(
                       onTap: () => Navigator.pop(context),
                       text: LDLocalizations.of(context).backToStories,
@@ -111,17 +110,6 @@ class _StoryViewState extends State<StoryView> {
         );
       },
     );
-  }
-
-  _onSavePressed(BuildContext context, Persistence instance) async {
-    try {
-      await instance.saveStateToStorageForUser(
-          widget.user, widget.catalogStory, storyBridge);
-      Toast.show(LDLocalizations.of(context).storySaved, context);
-    } catch (e) {
-      Toast.show(LDLocalizations.of(context).storyNotSaved, context,
-          duration: Toast.LENGTH_LONG, gravity: Toast.CENTER);
-    }
   }
 
   _resetStory() async {
