@@ -47,6 +47,22 @@ class StoryHistory {
     }
     return result;
   }
+
+  static fromString(String s) {
+    var map = JsonDecoder().convert(s);
+    var items = map.map((m) {
+      var m1 = JsonDecoder().convert(m);
+      if (m1["type"] == "PassageTypes.IMAGE") {
+        return StoryItemImage.fromString(m);
+      }
+      if (m1["type"] == "PassageTypes.TEXT") {
+        return StoryItemText.fromString(m);
+      }
+
+      return m1;
+    }).toList();
+    return StoryHistory(items);
+  }
 }
 
 class StoryItemImage {
@@ -60,9 +76,43 @@ class StoryItemImage {
   String toJson() {
     return JsonEncoder.withIndent("  ").convert({
       "imageType": imageType.toString(),
-      "value": value.toString(),
+      "value": JsonCodec().encode(value),
       "type": type.toString()
     });
+  }
+
+  static StoryItemImage fromString(String s) {
+    var map = JsonDecoder().convert(s);
+    var value = JsonDecoder().convert(map["value"]);
+    var value2 = List<String>.from(value.map((v) => v.toString()).toList());
+    var imageType = imageTypeFromString(map["imageType"]);
+    return StoryItemImage(
+      value2,
+      imageType,
+    );
+  }
+}
+
+ImageType imageTypeFromString(String s) {
+  switch (s) {
+    case "ImageType.FOREST":
+      return ImageType.FOREST;
+    case "ImageType.RIVER":
+      return ImageType.RIVER;
+    case "ImageType.CAMP":
+      return ImageType.CAMP;
+    case "ImageType.LANDING":
+      return ImageType.LANDING;
+    case "ImageType.BULRUSH":
+      return ImageType.BULRUSH;
+    case "ImageType.COSSACKS":
+      return ImageType.COSSACKS;
+    case "ImageType.BOAT":
+      return ImageType.BOAT;
+    case "ImageType.STEPPE":
+      return ImageType.STEPPE;
+    default:
+      return null;
   }
 }
 
@@ -74,10 +124,15 @@ class StoryItemText {
 
   @override
   String toJson() {
-    return JsonEncoder.withIndent("  ").convert({
-      "value": value,
-      "type": type.toString()
-    });
+    return JsonEncoder.withIndent("  ")
+        .convert({"value": value, "type": type.toString()});
+  }
+
+  static StoryItemText fromString(String s) {
+    var map = JsonDecoder().convert(s);
+    return StoryItemText(
+      map["value"],
+    );
   }
 }
 

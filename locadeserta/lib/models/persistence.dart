@@ -32,6 +32,17 @@ class Persistence {
     }
   }
 
+  Future<String> getHistoryJsonForUserAndCatalog(User user, CatalogStory catalogStory) async {
+    CollectionReference collection = _getUserStateReferences(user);
+    DocumentSnapshot doc = await collection.document(catalogStory.id).get();
+
+    if (doc.exists) {
+      return doc["history"];
+    } else {
+      return null;
+    }
+  }
+
   CollectionReference _getUserStateReferences(User user) {
     return storage
         .collection("user_states")

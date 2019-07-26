@@ -31,6 +31,7 @@ class StoryBridge {
   final StreamController<Story> streamStory = StreamController<Story>();
   static const platform = const MethodChannel('gladimdim.locadeserta/Ink');
   Story story;
+  StoryHistory savedStoryHistory;
 
   Future<void> _refreshStory() async {
     String currentText;
@@ -62,6 +63,18 @@ class StoryBridge {
         (currentTags.isNotEmpty && currentTags[0] == "image tobecontinued");
     bool theEnd = (currentTags.isNotEmpty && currentTags[0] == "image theend");
 
+    var history;
+    if (savedStoryHistory == null) {
+      if (story == null) {
+        history = StoryHistory([]);
+      } else {
+        history = story.storyHistory;
+      }
+    } else {
+      history = savedStoryHistory;
+      savedStoryHistory = null;
+    }
+
     story = new Story(
       currentText: currentText,
       currentChoices: choices,
@@ -70,7 +83,7 @@ class StoryBridge {
       inventory: [],
       toBeContinued: toBeContinued,
       theEnd: theEnd,
-      storyHistory: story == null ? StoryHistory([]) : story.storyHistory,
+      storyHistory: history,
     );
 
     streamStory.sink.add(story);
@@ -119,8 +132,6 @@ class StoryBridge {
   }
 
   Future<void> chooseChoiceIndex(int i, passage) async {
-//    story.history.add(passage);
-
     story.storyHistory.addItem(StoryItemText(story.currentChoices[i]));
     try {
       await platform.invokeMethod("chooseChoiceIndex", i);
@@ -145,7 +156,16 @@ class StoryBridge {
     return this.story.storyHistory.toString();
   }
 
-  Future<void> initStory({String storyJson, String state}) async {
+  Future<void> initStory(
+      {String storyJson, String state, String historyJson}) async {
+    try {
+      if (historyJson != null) {
+        savedStoryHistory = StoryHistory.fromString(historyJson);
+      }
+    } catch (e) {
+      print(
+          "Failed at parsing history, continuing without initialization of it: ${e.toString()}");
+    }
     try {
       await platform.invokeMethod("Init", storyJson);
       if (state != null) {
@@ -158,7 +178,7 @@ class StoryBridge {
         story.storyHistory.addItem(StoryItemText(story.currentText));
       }
     } catch (e) {
-      print(e.toString());
+      print("Failed at initStory with error: ${e.toString()}");
     }
   }
 

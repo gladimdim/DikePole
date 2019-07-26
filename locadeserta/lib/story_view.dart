@@ -35,15 +35,20 @@ class _StoryViewState extends State<StoryView> {
     if (storyBridge == null) {
       storyBridge = StoryBridge();
       String stateJson;
+      String historyJson;
       try {
         stateJson = await Persistence.instance
             .getStateJsonForUserAndCatalog(widget.user, widget.catalogStory);
+        historyJson = await Persistence.instance
+            .getHistoryJsonForUserAndCatalog(widget.user, widget.catalogStory);
       } catch (e) {
         print(e.toString());
       }
 
       await storyBridge.initStory(
-          storyJson: widget.catalogStory.inkJson, state: stateJson);
+          storyJson: widget.catalogStory.inkJson,
+          state: stateJson,
+          historyJson: historyJson);
     }
     return storyBridge;
   }
