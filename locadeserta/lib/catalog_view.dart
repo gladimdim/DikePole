@@ -5,7 +5,6 @@ import 'package:locadeserta/animations/slideable_button.dart';
 import 'package:locadeserta/models/background_image.dart';
 import 'package:locadeserta/models/Localizations.dart';
 import 'package:locadeserta/models/catalogs.dart';
-import 'package:locadeserta/radiuses.dart';
 
 class CatalogViewArguments {
   final CatalogStory catalogStory;
@@ -51,8 +50,8 @@ class _CatalogViewState extends State<CatalogView>
     var decoration = widget.expanded
         ? null
         : BoxDecoration(
-            border: Border.all(color: Theme.of(context).primaryColor, width: 1),
-            borderRadius: getAllRoundedBorderRadius());
+            border: Border.all(color: Theme.of(context).primaryColor, width: 1),);
+
     return FutureBuilder(
       future: _future,
       builder: (context, snapshot) => Padding(
@@ -67,7 +66,6 @@ class _CatalogViewState extends State<CatalogView>
                   alignment: Alignment.center,
                   decoration: BoxDecoration(
                     color: Theme.of(context).primaryColor,
-                    borderRadius: getTopRoundedBorderRadius(),
                   ),
                   child: Text(
                     widget.catalogStory.title,
@@ -79,14 +77,17 @@ class _CatalogViewState extends State<CatalogView>
                     ),
                   ),
                 ),
-              if (!widget.expanded)
-                Hero(
-                  tag: "CatalogView" + widget.catalogStory.title,
-                  child: TweenImage(
-                    first: image,
-                    last: coloredImage,
-                    duration: 4,
-                    repeat: true,
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 8.0),
+                  child: Hero(
+                    tag: "CatalogView" + widget.catalogStory.title,
+                    child: TweenImage(
+                      first: image,
+                      last: coloredImage,
+                      duration: 4,
+                      repeat: true,
+                      height: widget.expanded ? 200 : null,
+                    ),
                   ),
                 ),
               Row(
@@ -99,14 +100,8 @@ class _CatalogViewState extends State<CatalogView>
                         height: 50,
                         decoration: BoxDecoration(
                           color: Theme.of(context).primaryColor,
-                          borderRadius: BorderRadius.only(
-                            bottomLeft: Radius.circular(20.0),
-                          ),
                         ),
                         child: InkWell(
-                          borderRadius: BorderRadius.only(
-                            bottomLeft: Radius.circular(20.0),
-                          ),
                           onTap: widget.onDetailPressed,
                           child: Align(
                             alignment: Alignment.center,
@@ -139,11 +134,6 @@ class _CatalogViewState extends State<CatalogView>
                         height: 50,
                         decoration: BoxDecoration(
                           color: Theme.of(context).primaryColor,
-                          borderRadius: widget.expanded
-                              ? null
-                              : BorderRadius.only(
-                                  bottomRight: Radius.circular(20.0),
-                                ),
                         ),
                         child: Align(
                           alignment: Alignment.center,
