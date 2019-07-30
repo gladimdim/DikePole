@@ -27,18 +27,23 @@ class _MainViewState extends State<MainView> {
   }
 
   Widget _buildBody(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: <Widget>[
-        LocaleSelection(
-          onLocaleChanged: _setNewLocale,
-          locale: widget.locale,
-        ),
-        About(widget.localization),
-        Center(
-          child: Text("1.69"),
-        ),
-      ],
+    return SingleChildScrollView(
+      child: Column(
+        children: <Widget>[
+          LocaleSelection(
+            onLocaleChanged: _setNewLocale,
+            locale: widget.locale,
+          ),
+          About(
+            widget.localization,
+          ),
+          Center(
+            child: Text(
+              widget.localization.versionLabel,
+            ),
+          ),
+        ],
+      ),
     );
   }
 

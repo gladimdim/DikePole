@@ -1,5 +1,4 @@
 import 'dart:math';
-
 import 'package:flutter_web/material.dart';
 
 // from inkle:
@@ -13,7 +12,7 @@ class BackgroundImage {
   static Map<ImageType, RandomImage> _images = {
     ImageType.BOAT: RandomImage(ImageType.BOAT),
     ImageType.STEPPE: RandomImage(ImageType.RIVER), // shadowed
-    ImageType.FOREST: RandomImage(ImageType.BOAT),
+    ImageType.FOREST: RandomImage(ImageType.FOREST),
     ImageType.BULRUSH: RandomImage(ImageType.BULRUSH),
     ImageType.RIVER: RandomImage(ImageType.RIVER),
     ImageType.LANDING: RandomImage(ImageType.LANDING),
@@ -69,11 +68,11 @@ class BackgroundImage {
   }
 
   static void nextRandomForType(ImageType type) {
-    _images[type].nextRandom();
+    return _images[type].nextRandom();
   }
 
   static void resetRandomForType(ImageType type) {
-    _images[type].resetUsedRandomNumbers();
+    return _images[type].resetUsedRandomNumbers();
   }
 }
 
@@ -143,16 +142,24 @@ class RandomImage {
     return list;
   }
 
+  String getImagePath() {
+    return "images/background/${_imagePrefix[type]}/${_currentRandom.toString()}.jpg";
+  }
+
+  String getImagePathColored() {
+    return "images/background/${_imagePrefix[type]}/c_${_currentRandom.toString()}.jpg";
+  }
+
   AssetImage getAssetImage() {
     var returnValue = AssetImage(
-      "images/background/${_imagePrefix[type]}/${_currentRandom.toString()}.jpg",
+        getImagePath()
     );
     return returnValue;
   }
 
   AssetImage getAssetImageColored() {
     return AssetImage(
-      "images/background/${_imagePrefix[type]}/c_${_currentRandom.toString()}.jpg",
+        getImagePathColored()
     );
   }
 
@@ -161,7 +168,7 @@ class RandomImage {
       _usedRandomNumbers = [];
     }
     var temp = _random.nextInt(_max);
-    if (_usedRandomNumbers.contains(temp)) {
+    if (_usedRandomNumbers.indexOf(temp) >= 0) {
       nextRandom();
       return;
     } else {

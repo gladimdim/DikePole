@@ -1,3 +1,5 @@
+
+
 import 'package:flutter_web/material.dart';
 
 class TweenImage extends StatefulWidget {
@@ -9,8 +11,8 @@ class TweenImage extends StatefulWidget {
   final int duration;
   final double height;
   final double width;
+  final BoxFit imageFit;
   final bool repeat;
-  final BoxFit fitImage;
 
   TweenImage(
       {@required this.first,
@@ -18,7 +20,7 @@ class TweenImage extends StatefulWidget {
         this.duration = 2,
         this.height,
         this.width,
-        this.fitImage = BoxFit.fitHeight,
+        this.imageFit = BoxFit.fitHeight,
         this.repeat = false});
 }
 
@@ -93,14 +95,14 @@ class _TweenImageState extends State<TweenImage>
             },
             child: Image(
               image: widget.first,
-              fit: widget.fitImage,
+              fit: widget.imageFit,
               height: widget.height,
             ),
           ),
           AnimatedBuilder(
             child: Image(
               image: widget.last,
-              fit: widget.fitImage,
+              fit: widget.imageFit,
               height: widget.height,
             ),
             animation: _controller,
