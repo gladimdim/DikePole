@@ -27,6 +27,7 @@ dependency_overrides:
 
 flutter:
   assets:
+    - web/assets/images/appstore.svg
     # bulrush images
     - web/assets/images/background/bulrush/c_0.jpg
     - web/assets/images/background/bulrush/0.jpg
@@ -208,6 +209,7 @@ flutter:
     - web/assets/images/background/camp/c_12.jpg
     - web/assets/images/background/camp/c_13.jpg
     - web/assets/images/background/camp/c_14.jpg
+
 
   fonts:
     - family: Roboto

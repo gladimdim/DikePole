@@ -78,7 +78,7 @@ class _CatalogViewState extends State<CatalogView>
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(bottom: 8.0),
+                  padding: const EdgeInsets.only(bottom: 1.0),
                   child: Hero(
                     tag: "CatalogView" + widget.catalogStory.title,
                     child: TweenImage(

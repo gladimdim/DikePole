@@ -16,9 +16,11 @@ class _MyAppState extends State<MyApp> {
     primaryColor: Colors.black,
     backgroundColor: Colors.white,
     accentColor: Colors.black,
-    fontFamily: 'Roboto',
+    fontFamily: 'Monaco',
+    toggleableActiveColor: Colors.black,
     textTheme: TextTheme(
-      title: TextStyle(color: Colors.white),
+      title: TextStyle(color: Colors.black, fontFamily: 'Monaco', fontSize: 24.0),
+      button: TextStyle(color: Colors.white, fontFamily: 'Monaco', fontSize: 32.0),
     ),
   );
 
@@ -36,10 +38,6 @@ class _MyAppState extends State<MyApp> {
       title: 'Loca Deserta',
       theme: theme,
       debugShowCheckedModeBanner: false,
-//      home: MainView(
-//        onSetLocale: _onLocaleSet,
-//        locale: locale,
-//      ),
     );
   }
 
