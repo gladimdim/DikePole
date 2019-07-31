@@ -15,6 +15,7 @@ class About extends StatelessWidget {
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     var landing = BackgroundImage.getRandomImageForType(ImageType.LANDING);
+    print("max height: ${heightThird(size)}");
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
@@ -34,7 +35,7 @@ class About extends StatelessWidget {
           )
         else if (!isSmall(size))
           LimitedBox(
-            maxHeight: widthThird(size),
+            maxHeight: heightThird(size),
             child: Center(
               child: Center(
                 child: GridView.count(

@@ -11,6 +11,17 @@ class BorderedRandomImageByPath extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var tweenImage = TweenImage(
+      repeat: true,
+      last: AssetImage(imagePaths[0]),
+      first: AssetImage(imagePaths[1]),
+      duration: 3,
+      height: isPortrait(size) ? heightThird(size) : widthThird(size),
+      imageFit: !isPortrait(size) ? BoxFit.fitHeight : BoxFit.fitWidth,
+    );
+    var container = isSmall(size) ? tweenImage : Center(
+      child: tweenImage,
+    );
     return Container(
       decoration: BoxDecoration(
         color: Theme.of(context).backgroundColor,
@@ -19,14 +30,7 @@ class BorderedRandomImageByPath extends StatelessWidget {
           width: 3.0,
         ),
       ),
-      child: TweenImage(
-        repeat: true,
-        last: AssetImage(imagePaths[0]),
-        first: AssetImage(imagePaths[1]),
-        duration: 3,
-        height: isPortrait(size) ? heightThird(size) : widthThird(size),
-        imageFit: !isPortrait(size) ? BoxFit.fitHeight : BoxFit.fitWidth,
-      ),
+      child: container,
     );
   }
 }
