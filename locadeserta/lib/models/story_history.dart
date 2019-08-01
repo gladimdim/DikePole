@@ -72,7 +72,6 @@ class StoryItemImage {
 
   StoryItemImage(this.value, this.imageType);
 
-  @override
   String toJson() {
     return JsonEncoder.withIndent("  ").convert({
       "imageType": imageType.toString(),
@@ -122,7 +121,6 @@ class StoryItemText {
 
   StoryItemText(this.value);
 
-  @override
   String toJson() {
     return JsonEncoder.withIndent("  ")
         .convert({"value": value, "type": type.toString()});
