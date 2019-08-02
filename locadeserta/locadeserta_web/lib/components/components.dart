@@ -13,7 +13,7 @@ var optionBox = (BuildContext context, String text) => SizedBox(
                 fontFamily: 'Montserrat',
                 fontSize: 20.0,
                 fontWeight: FontWeight.bold,
-                color: Theme.of(context).textTheme.title.color),
+                color: Theme.of(context).textTheme.button.color),
           ),
         ),
       ),

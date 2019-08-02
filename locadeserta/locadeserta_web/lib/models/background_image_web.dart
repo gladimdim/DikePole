@@ -168,7 +168,7 @@ class RandomImage {
       _usedRandomNumbers = [];
     }
     var temp = _random.nextInt(_max);
-    if (_usedRandomNumbers.indexOf(temp) >= 0) {
+    if (_usedRandomNumbers.contains(temp)) {
       nextRandom();
       return;
     } else {

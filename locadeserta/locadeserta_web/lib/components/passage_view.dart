@@ -4,11 +4,11 @@ import 'package:locadeserta_web/story/Story.dart';
 import 'package:locadeserta_web/components/components.dart';
 import 'package:tuple/tuple.dart';
 
-class Passage extends StatefulWidget {
+class PassageView extends StatefulWidget {
   final Story currentStory;
   final Function(int i) onNextOptionSelected;
 
-  Passage({
+  PassageView({
     this.currentStory,
     this.onNextOptionSelected,
   });
@@ -17,8 +17,8 @@ class Passage extends StatefulWidget {
   State<StatefulWidget> createState() => PassageState();
 }
 
-class PassageState extends State<Passage> with TickerProviderStateMixin {
-  ScrollController _passageScrollController = new ScrollController();
+class PassageState extends State<PassageView> with TickerProviderStateMixin {
+  ScrollController _passageScrollController = ScrollController();
 
   @override
   Widget build(BuildContext context) {
@@ -33,13 +33,19 @@ class PassageState extends State<Passage> with TickerProviderStateMixin {
 
   List<Widget> _createButtons(BuildContext context) {
     switch (widget.currentStory.currentPassage.type) {
-      case ContinueTypes.Continue: return [createContinue(context)];
-      case ContinueTypes.Random: return [createContinue(context)];
-      case ContinueTypes.Option: {
-        PassageOption option = widget.currentStory.currentPassage as PassageOption;
-        return createOptionList(option.options);
-      }
+      case ContinueTypes.Continue:
+        return [createContinue(context)];
+      case ContinueTypes.Random:
+        return [createContinue(context)];
+      case ContinueTypes.Option:
+        {
+          PassageOption option =
+              widget.currentStory.currentPassage as PassageOption;
+          return createOptionList(option.options);
+        }
     }
+
+    return [];
   }
 
   Widget createButton(String text, int i) {
@@ -65,7 +71,7 @@ class PassageState extends State<Passage> with TickerProviderStateMixin {
   }
 
   List<Widget> createOptionList(List<Tuple2<int, String>> options) {
-    List<Widget> optionButtons = new List();
+    List<Widget> optionButtons = List();
     int index = 0;
     optionButtons.addAll(options.map((value) {
       return createButton(value.item2, index++);
@@ -93,10 +99,7 @@ class PassageState extends State<Passage> with TickerProviderStateMixin {
     return Expanded(
       child: SingleChildScrollView(
         controller: _passageScrollController,
-        child: Column(
-          children: [
-          ],
-        ),
+        child: Text(widget.currentStory.currentPassage.text),
       ),
     );
   }

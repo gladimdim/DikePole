@@ -1,7 +1,6 @@
 import 'package:flutter_web_ui/ui.dart';
 
 double widthThird(Size size) {
-  var dim = smallestDimension(size);
   return isSmall(size) ? size.width / 3 : size.height / 3;
 }
 

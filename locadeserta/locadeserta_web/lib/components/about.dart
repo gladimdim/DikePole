@@ -62,11 +62,8 @@ class About extends StatelessWidget {
               ),
             ),
           ),
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Text(
-            localization.aboutGame,
-          ),
+        Text(
+          localization.aboutGame,
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
