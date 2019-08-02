@@ -6,11 +6,9 @@ import 'package:tuple/tuple.dart';
 
 class PassageView extends StatefulWidget {
   final Story currentStory;
-  final Function(int i) onNextOptionSelected;
 
   PassageView({
     this.currentStory,
-    this.onNextOptionSelected,
   });
 
   @override
@@ -55,7 +53,7 @@ class PassageState extends State<PassageView> with TickerProviderStateMixin {
         height: MediaQuery.of(context).size.height * 0.075,
         child: SlideableButton(
           onPress: () {
-            _nextWithChoice(i);
+            _next(i);
           },
           child: optionBox(
             context,
@@ -66,8 +64,10 @@ class PassageState extends State<PassageView> with TickerProviderStateMixin {
     );
   }
 
-  void _nextWithChoice(int i) {
-    widget.onNextOptionSelected(i);
+  void _next(int i) {
+    setState(() {
+      widget.currentStory.next(i);
+    });
   }
 
   List<Widget> createOptionList(List<Tuple2<int, String>> options) {
@@ -89,7 +89,7 @@ class PassageState extends State<PassageView> with TickerProviderStateMixin {
             "Далі",
           ),
           onPress: () {
-            print("next");
+            _next(null);
           }),
     );
   }

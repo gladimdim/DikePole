@@ -18,8 +18,14 @@ class Story {
     currentPassage = passages[0];
   }
 
-  next() {
-    var next = currentPassage.getNext(-1);
+  next(int option) {
+    var next;
+    if (option == null) {
+      next = currentPassage.getNext(-1);
+    } else {
+      next = currentPassage.getNext(option);
+    }
+
     currentPassage = passages.firstWhere((p) => p.id == next);
   }
 
@@ -44,13 +50,17 @@ class Story {
       next: 3,
     );
 
-
+    var p4 = PassageOption(
+      id: 3,
+      text: "У нечастих спалахах місячного сяйва можна було розгледіти силуети людей та коней. Двоє, схоже, спали на землі, один навпроти одного. Третій сидів ближче до вогню, спираючись на короткого списа, і, здавалося, теж заснув. Коней було видно гірше, вони дрімали десь з іншого боку багаття і їх, на перший погляд, було не менше п’яти.",
+      options: [Tuple2(0, "Забрати торбинку та лук з сагайдаком"), Tuple2(1, "Пошукати татарську шаблю")]
+    );
 
     return Story(
       title: "Після битви",
       description: "Тест",
       authors: ["Костя"],
-      passages: [p1, p2, p3],
+      passages: [p1, p2, p3, p4],
     );
   }
 }
