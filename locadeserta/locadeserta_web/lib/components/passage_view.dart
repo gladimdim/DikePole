@@ -1,5 +1,7 @@
 import 'package:flutter_web/material.dart';
 import 'package:locadeserta_web/animations/slideable_button_web.dart';
+import 'package:locadeserta_web/components/bordered_random_image.dart';
+import 'package:locadeserta_web/models/background_image_web.dart';
 import 'package:locadeserta_web/story/Story.dart';
 import 'package:locadeserta_web/components/components.dart';
 import 'package:tuple/tuple.dart';
@@ -42,7 +44,6 @@ class PassageState extends State<PassageView> with TickerProviderStateMixin {
           return createOptionList(option.options);
         }
     }
-
     return [];
   }
 
@@ -99,7 +100,7 @@ class PassageState extends State<PassageView> with TickerProviderStateMixin {
     return Expanded(
       child: SingleChildScrollView(
         controller: _passageScrollController,
-        child: Text(widget.currentStory.currentPassage.text),
+        child: PassageItemView(widget.currentStory.currentPassage),
       ),
     );
   }
@@ -115,5 +116,26 @@ class PassageState extends State<PassageView> with TickerProviderStateMixin {
         );
       }
     };
+  }
+}
+
+class PassageItemView extends StatelessWidget {
+  final PassageBase passage;
+
+  PassageItemView(this.passage);
+
+  @override
+  Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
+    return Column(
+      children: <Widget>[
+        if (passage.imagePath != null)
+          BorderedRandomImageByPath(
+            getImagesForType(passage.imagePath),
+            size,
+          ),
+        Text(passage.text),
+      ],
+    );
   }
 }

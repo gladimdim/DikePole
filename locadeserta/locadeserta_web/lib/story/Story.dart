@@ -30,37 +30,66 @@ class Story {
   }
 
   static generate() {
-    var p1 = PassageContinue(
-      id: 0,
-      text:
-          "Сонце сідало за рікою, заливаючи все навколо багряним сяйвом. Стрімка течія несла темну воду на південь, до моря. Вітерець стиха колихав очерет, розносячи запах ранньої осені та дим від вогнища. Поступово сутеніло",
-      next: 1,
-    );
+    var p1 = PassageRandom(
+        id: 0,
+        text:
+            "Сонце сідало за рікою, заливаючи все навколо багряним сяйвом. Стрімка течія несла темну воду на південь, до моря. Вітерець стиха колихав очерет, розносячи запах ранньої осені та дим від вогнища. Поступово сутеніло",
+        next: [1, 2, 3],
+        imagePath: "images/background/river/");
     var p2 = PassageContinue(
-      id: 1,
-      text:
-          "Дмитро нерухомо лежав у прибережних заростях далеко від води, прислухаючись до навколишніх звуків. Надокучлива комашня гризла обличчя та шию. Десь там, трохи далі на березі, де очерет поступається степовій траві та поодиноким деревцям, розташувалися навколо вогню троє чоловіків. Утікачу їх не було видно, однак інколи вітер приносив уривки розмови та брязкіт реманенту. Це були татари. Дмитро прислухався, намагаючись зрозуміти, чи вони тут по його душу.",
-      next: 2,
-    );
+        id: 1,
+        text:
+            "Дмитро нерухомо лежав у прибережних заростях далеко від води, прислухаючись до навколишніх звуків. Надокучлива комашня гризла обличчя та шию. Десь там, трохи далі на березі, де очерет поступається степовій траві та поодиноким деревцям, розташувалися навколо вогню троє чоловіків. Утікачу їх не було видно, однак інколи вітер приносив уривки розмови та брязкіт реманенту. Це були татари. Дмитро прислухався, намагаючись зрозуміти, чи вони тут по його душу.",
+        next: 2,
+        imagePath: "images/background/bulrush/");
 
     var p3 = PassageContinue(
-      id: 2,
+        id: 2,
+        text:
+            "Втікачу знову довелося повзти, бо берег піднімався все вище, аж ось незабаром з’явилося вогнище, яке ще жевріло самотньо у степу.",
+        next: 3,
+        imagePath: "images/background/river/");
+
+    var p4 = PassageContinue(
+      id: 3,
       text:
-          "Втікачу знову довелося повзти, бо берег піднімався все вище, аж ось незабаром з’явилося вогнище, яке ще жевріло самотньо у степу.",
-      next: 3,
+          "У нечастих спалахах місячного сяйва можна було розгледіти силуети людей та коней. Двоє, схоже, спали на землі, один навпроти одного. Третій сидів ближче до вогню, спираючись на короткого списа, і, здавалося, теж заснув. Коней було видно гірше, вони дрімали десь з іншого боку багаття і їх, на перший погляд, було не менше п’яти.",
+      next: 4,
+        imagePath: "images/background/camp/"
     );
 
-    var p4 = PassageOption(
-      id: 3,
-      text: "У нечастих спалахах місячного сяйва можна було розгледіти силуети людей та коней. Двоє, схоже, спали на землі, один навпроти одного. Третій сидів ближче до вогню, спираючись на короткого списа, і, здавалося, теж заснув. Коней було видно гірше, вони дрімали десь з іншого боку багаття і їх, на перший погляд, було не менше п’яти.",
-      options: [Tuple2(0, "Забрати торбинку та лук з сагайдаком"), Tuple2(1, "Пошукати татарську шаблю")]
+    var p5 = PassageOption(
+      id: 4,
+      text:
+          "Дмитро підповз до найближчого сплячого татарина та тихо підвівся на коліна, підготувавшись встромити ножа йому в око, якщо той ворухнеться. Поруч лежав лук з сагайдаком та якась торбинка.",
+      options: [
+        Tuple2(5, "Забрати торбинку та лук з сагайдаком"),
+        Tuple2(6, "Пошукати татарську шаблю")
+      ],
+      imagePath: "images/background/camp/",
+    );
+
+    var p6 = PassageRandom(
+      id: 5,
+      text:
+          "Козак більше нічого не ризикнув чіпати і зі своєю здобиччю обережно повернувся до очерету та почав поступово віддалятися від вершників, прямуючи вздовж річки вверх за течією.",
+      next: [8, 9, 10],
+      imagePath: "images/background/river/",
+    );
+
+    var p7 = PassageContinue(
+      id: 6,
+      text:
+          "Обережно відклавши ці речі ближче до себе, Дмитро нишпорив оком у пошуках шаблі. Вона теж лежала поруч, відчеплена з гаку, але сплячий обіймав її, як дитина - улюблену ляльку.",
+      next: 7,
+      imagePath: "images/background/camp/",
     );
 
     return Story(
       title: "Після битви",
       description: "Тест",
       authors: ["Костя"],
-      passages: [p1, p2, p3, p4],
+      passages: [p1, p2, p3, p4, p5, p6, p7],
     );
   }
 }
@@ -78,7 +107,7 @@ class Passage {
       case ContinueTypes.Option:
         return PassageOption(id: id, text: text, options: options);
       case ContinueTypes.Random:
-        return PassageRandom(id: id, text: text, options: options);
+        return PassageRandom(id: id, text: text, next: options);
     }
   }
 }
@@ -90,12 +119,16 @@ class PassageContinue extends PassageBase {
   final String imagePath;
   final int next;
 
-  PassageContinue(
-      {@required this.id,
-      @required this.text,
-      this.imagePath,
-      @required this.next})
-      : super(id: id, text: text, type: ContinueTypes.Continue);
+  PassageContinue({
+    @required this.id,
+    @required this.text,
+    this.imagePath,
+    @required this.next,
+  }) : super(
+            id: id,
+            text: text,
+            type: ContinueTypes.Continue,
+            imagePath: imagePath);
 
   int getNext(int option) {
     return next;
@@ -106,14 +139,26 @@ class PassageRandom extends PassageBase {
   final ContinueTypes type = ContinueTypes.Random;
   final int id;
   final String text;
-  final List<int> options;
+  final List<int> next;
+  final String imagePath;
 
-  PassageRandom({this.id, this.text, this.options})
-      : super(id: id, text: text, type: ContinueTypes.Random);
+  PassageRandom({
+    @required this.id,
+    @required this.text,
+    @required this.next,
+    this.imagePath,
+  }) : super(
+          id: id,
+          text: text,
+          type: ContinueTypes.Random,
+          imagePath: imagePath,
+        );
 
   int getNext(int option) {
     var random = Random();
-    return random.nextInt(options.length);
+    var nextRandom = random.nextInt(next.length);
+    print("Next random: $nextRandom");
+    return next[nextRandom];
   }
 }
 
@@ -122,14 +167,23 @@ class PassageOption extends PassageBase {
   final int id;
   final String text;
   final List<Tuple2<int, String>> options;
+  final String imagePath;
 
-  PassageOption(
-      {@required this.id, @required this.text, @required this.options})
-      : super(id: id, text: text, type: ContinueTypes.Option);
+  PassageOption({
+    @required this.id,
+    @required this.text,
+    @required this.options,
+    this.imagePath,
+  }) : super(
+          id: id,
+          text: text,
+          type: ContinueTypes.Option,
+          imagePath: imagePath,
+        );
 
   int getNext(int option) {
     if (option >= options.length) {
-      throw "Option number $option is bigger than maxium amouint of options: ${options.length}";
+      throw "Option number $option is bigger than maxium amount of options: ${options.length}";
     }
     return options[option].item1;
   }
@@ -140,8 +194,14 @@ abstract class PassageBase {
   final int id;
   final String text;
   final bool canContinue = true;
+  final String imagePath;
 
-  PassageBase({@required this.type, @required this.id, @required this.text});
+  PassageBase({
+    @required this.type,
+    @required this.id,
+    @required this.text,
+    this.imagePath,
+  });
 
   int getNext(int option);
 }

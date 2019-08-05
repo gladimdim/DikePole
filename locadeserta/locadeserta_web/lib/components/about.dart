@@ -15,6 +15,7 @@ class About extends StatelessWidget {
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     var landing = BackgroundImage.getRandomImageForType(ImageType.LANDING);
+    print(landing.getImagePath());
     print("max height: ${heightThird(size)}");
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
