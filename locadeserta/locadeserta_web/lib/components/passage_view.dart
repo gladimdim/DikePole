@@ -98,11 +98,18 @@ class PassageState extends State<PassageView> with TickerProviderStateMixin {
   Widget _buildTextRow(BuildContext context) {
     Future.delayed(Duration(milliseconds: 200), _scroll(context));
     return Expanded(
-      child: SingleChildScrollView(
-        controller: _passageScrollController,
-        child: PassageItemView(widget.currentStory.currentPassage),
+        child: SingleChildScrollView(
+      controller: _passageScrollController,
+      child: Column(
+        children: widget.currentStory.history
+            .map(
+              (HistoryItem historyItem) => PassageItemView(
+                historyItem,
+              ),
+            )
+            .toList(),
       ),
-    );
+    ));
   }
 
   _scroll(BuildContext context) {
@@ -120,21 +127,40 @@ class PassageState extends State<PassageView> with TickerProviderStateMixin {
 }
 
 class PassageItemView extends StatelessWidget {
-  final PassageBase passage;
+  final HistoryItem historyItem;
 
-  PassageItemView(this.passage);
+  PassageItemView(this.historyItem);
 
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Column(
       children: <Widget>[
-        if (passage.imagePath != null)
-          BorderedRandomImageByPath(
-            getImagesForType(passage.imagePath),
+        if (historyItem.imagePath != null)
+          BorderedTweenImageByPath(
+            getImagesForType(historyItem.imagePath),
             size,
           ),
-        Text(passage.text),
+        Container(
+          alignment: Alignment.topCenter,
+          padding: EdgeInsets.all(8.0),
+          margin: EdgeInsets.all(8.0),
+          width: MediaQuery.of(context).size.width * 0.95,
+          decoration: BoxDecoration(
+            color: Theme.of(context).backgroundColor,
+            border: Border.all(
+              color: Theme.of(context).primaryColor,
+              width: 3.0,
+            ),
+          ),
+          child: Text(
+            historyItem.text == "" ? "Кінець" : historyItem.text,
+            style: TextStyle(
+              fontFamily: "Raleway-Bold",
+              fontSize: 18,
+            ),
+          ),
+        ),
       ],
     );
   }

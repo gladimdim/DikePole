@@ -4,11 +4,11 @@ import 'package:locadeserta_web/animations/fade_images_web.dart';
 import 'package:locadeserta_web/models/background_image_web.dart';
 import 'package:locadeserta_web/utils/utils.dart';
 
-class BorderedRandomImageByPath extends StatelessWidget {
+class BorderedTweenImageByPath extends StatelessWidget {
   final List imagePaths;
   final Size size;
 
-  BorderedRandomImageByPath(this.imagePaths, this.size);
+  BorderedTweenImageByPath(this.imagePaths, this.size);
 
   @override
   Widget build(BuildContext context) {
@@ -17,8 +17,7 @@ class BorderedRandomImageByPath extends StatelessWidget {
       last: AssetImage(imagePaths[0]),
       first: AssetImage(imagePaths[1]),
       duration: 3,
-      height: isPortrait(size) ? heightThird(size) : widthThird(size),
-      imageFit: !isPortrait(size) ? BoxFit.fitHeight : BoxFit.fitWidth,
+      imageFit: BoxFit.fitHeight,
     );
     var container = isSmall(size) ? tweenImage : Center(
       child: tweenImage,

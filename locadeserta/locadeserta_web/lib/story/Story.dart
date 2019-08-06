@@ -7,6 +7,8 @@ class Story {
   final String description;
   final List<String> authors;
   final List<PassageBase> passages;
+  final List<HistoryItem> history = [];
+
   PassageBase currentPassage;
 
   Story({
@@ -16,6 +18,7 @@ class Story {
     @required this.passages,
   }) {
     currentPassage = passages[0];
+    _addCurrentPassage();
   }
 
   next(int option) {
@@ -26,7 +29,22 @@ class Story {
       next = currentPassage.getNext(option);
     }
 
-    currentPassage = passages.firstWhere((p) => p.id == next);
+    try {
+      currentPassage = passages.firstWhere((p) => p.id == next);
+    } catch (e) {
+      currentPassage = passages[0];
+    }
+
+    _addCurrentPassage();
+  }
+
+  _addCurrentPassage() {
+    history.add(
+      HistoryItem(
+        text: currentPassage.text,
+        imagePath: currentPassage.imagePath,
+      ),
+    );
   }
 
   static generate() {
@@ -51,12 +69,11 @@ class Story {
         imagePath: "images/background/river/");
 
     var p4 = PassageContinue(
-      id: 3,
-      text:
-          "У нечастих спалахах місячного сяйва можна було розгледіти силуети людей та коней. Двоє, схоже, спали на землі, один навпроти одного. Третій сидів ближче до вогню, спираючись на короткого списа, і, здавалося, теж заснув. Коней було видно гірше, вони дрімали десь з іншого боку багаття і їх, на перший погляд, було не менше п’яти.",
-      next: 4,
-        imagePath: "images/background/camp/"
-    );
+        id: 3,
+        text:
+            "У нечастих спалахах місячного сяйва можна було розгледіти силуети людей та коней. Двоє, схоже, спали на землі, один навпроти одного. Третій сидів ближче до вогню, спираючись на короткого списа, і, здавалося, теж заснув. Коней було видно гірше, вони дрімали десь з іншого боку багаття і їх, на перший погляд, було не менше п’яти.",
+        next: 4,
+        imagePath: "images/background/camp/");
 
     var p5 = PassageOption(
       id: 4,
@@ -133,6 +150,13 @@ class PassageContinue extends PassageBase {
   int getNext(int option) {
     return next;
   }
+}
+
+class HistoryItem {
+  final String text;
+  final String imagePath;
+
+  HistoryItem({@required this.text, this.imagePath});
 }
 
 class PassageRandom extends PassageBase {
