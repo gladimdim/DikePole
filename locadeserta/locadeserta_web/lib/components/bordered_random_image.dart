@@ -13,7 +13,7 @@ class BorderedTweenImageByPath extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var tweenImage = TweenImage(
-      repeat: true,
+      repeat: false,
       last: AssetImage(imagePaths[0]),
       first: AssetImage(imagePaths[1]),
       duration: 3,
