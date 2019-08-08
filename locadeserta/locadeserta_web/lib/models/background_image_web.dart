@@ -184,9 +184,11 @@ class RandomImage {
 
 enum ImageType { BOAT, STEPPE, FOREST, BULRUSH, RIVER, LANDING, CAMP, COSSACKS }
 
-List<String> getImagesForType(String prefix) {
+List<String> getImagesForType(String blackWhiteImagPath) {
+  var split = blackWhiteImagPath.split("/");
+  split.last = "c_${split.last}";
   return [
-    "$prefix/0.jpg",
-    "$prefix/c_0.jpg",
+    blackWhiteImagPath,
+    split.join("/"),
   ];
 }
