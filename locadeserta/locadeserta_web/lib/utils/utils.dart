@@ -18,6 +18,5 @@ bool isPortrait(Size size) {
 }
 
 double smallestDimension(Size size) {
-  print(size);
   return size.height > size.width ? size.width : size.height;
 }
