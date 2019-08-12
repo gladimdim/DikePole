@@ -1,4 +1,6 @@
 import 'package:flutter_web/material.dart';
+import 'package:locadeserta_web/animations/slideable_button_web.dart';
+import 'package:locadeserta_web/components/components.dart';
 import 'package:locadeserta_web/story/Story.dart';
 
 class CreateView extends StatefulWidget {
@@ -79,13 +81,22 @@ class StoryViewHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: <Widget>[
-        Text(story.title),
-        Text(story.authors[0]),
-        RaisedButton(
-          onPressed: onEdit,
-          child: Text("Редагувати"),
-        )
+        Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: <Widget>[
+            Text("Назва: "),
+            Text(story.title),
+          ],
+        ),
+        SizedBox(
+          width: 40,
+        ),
+        SlideableButton(
+          child: styledButton(context, "Редагувати"),
+          onPress: onEdit,
+        ),
       ],
     );
   }

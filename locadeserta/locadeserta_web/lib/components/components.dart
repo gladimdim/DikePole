@@ -1,7 +1,7 @@
 import 'package:flutter_web/material.dart';
 
-var optionBox = (BuildContext context, String text) => SizedBox(
-      height: MediaQuery.of(context).size.height * 0.075,
+var optionBox = (BuildContext context, String text, double height) => SizedBox(
+      height: height != 0 ? height : MediaQuery.of(context).size.height * 0.075,
       child: Container(
         color: Theme.of(context).primaryColor,
         child: Align(
@@ -18,3 +18,5 @@ var optionBox = (BuildContext context, String text) => SizedBox(
         ),
       ),
     );
+
+var styledButton = (BuildContext context, String text) => optionBox(context, text, 50.0);

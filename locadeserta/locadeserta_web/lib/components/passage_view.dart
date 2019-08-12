@@ -59,6 +59,7 @@ class PassageState extends State<PassageView> with TickerProviderStateMixin {
           child: optionBox(
             context,
             text,
+            0,
           ),
         ),
       ),
@@ -88,6 +89,7 @@ class PassageState extends State<PassageView> with TickerProviderStateMixin {
           child: optionBox(
             context,
             "Далі",
+            0,
           ),
           onPress: () {
             _next(null);

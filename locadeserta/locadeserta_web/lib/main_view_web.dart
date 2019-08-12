@@ -46,6 +46,7 @@ class _MainViewState extends State<MainView> {
             child: optionBox(
               context,
               "Почати",
+              0,
             ),
             onPress: () {
               Navigator.pushNamed(context, "/play");
@@ -58,6 +59,7 @@ class _MainViewState extends State<MainView> {
             child: optionBox(
               context,
               "Створити свою",
+              0,
             ),
             onPress: () {
               Navigator.pushNamed(context, "/create");
