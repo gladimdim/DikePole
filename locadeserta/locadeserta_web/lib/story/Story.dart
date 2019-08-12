@@ -4,9 +4,9 @@ import 'package:flutter_web/foundation.dart';
 import 'dart:convert';
 
 class Story {
-  final String title;
-  final String description;
-  final List<String> authors;
+  String title;
+  String description;
+  List<String> authors;
   final List<PassageBase> passages;
   final List<HistoryItem> history = [];
   final List<String> variables = [];

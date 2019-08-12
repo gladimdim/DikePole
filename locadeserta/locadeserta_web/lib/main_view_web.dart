@@ -40,14 +40,29 @@ class _MainViewState extends State<MainView> {
             widget.localization,
           ),
         ),
-        SlideableButton(
-          child: optionBox(
-            context,
-            "Почати",
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: SlideableButton(
+            child: optionBox(
+              context,
+              "Почати",
+            ),
+            onPress: () {
+              Navigator.pushNamed(context, "/play");
+            },
           ),
-          onPress: () {
-            Navigator.pushNamed(context, "/play");
-          },
+        ),
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: SlideableButton(
+            child: optionBox(
+              context,
+              "Створити свою",
+            ),
+            onPress: () {
+              Navigator.pushNamed(context, "/create");
+            },
+          ),
         ),
         Center(
           child: Text(

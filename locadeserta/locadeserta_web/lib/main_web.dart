@@ -1,4 +1,5 @@
 import 'package:flutter_web/material.dart';
+import 'package:locadeserta_web/components/create_view.dart';
 import 'package:locadeserta_web/main_view_web.dart';
 import 'package:locadeserta_web/components/game_view.dart';
 
@@ -34,6 +35,7 @@ class _MyAppState extends State<MyApp> {
       routes: {
         "/": (context) => MainView(onSetLocale: _onLocaleSet, locale: locale),
         "/play": (context) => GameView(locale: locale),
+        "/create": (context) => CreateView(locale: locale),
       },
       locale: locale,
       title: 'Loca Deserta',
