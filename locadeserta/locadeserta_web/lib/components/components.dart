@@ -19,4 +19,4 @@ var optionBox = (BuildContext context, String text, double height) => SizedBox(
       ),
     );
 
-var styledButton = (BuildContext context, String text) => optionBox(context, text, 50.0);
+var styledContainerForButton = (BuildContext context, String text) => optionBox(context, text, 50.0);

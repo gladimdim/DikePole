@@ -33,11 +33,11 @@ class PassageState extends State<PassageView> with TickerProviderStateMixin {
 
   List<Widget> _createButtons(BuildContext context) {
     switch (widget.currentStory.currentPassage.type) {
-      case ContinueTypes.Continue:
+      case PassageTypes.Continue:
         return [createContinue(context)];
-      case ContinueTypes.Random:
+      case PassageTypes.Random:
         return [createContinue(context)];
-      case ContinueTypes.Option:
+      case PassageTypes.Option:
         {
           PassageOption option =
               widget.currentStory.currentPassage as PassageOption;

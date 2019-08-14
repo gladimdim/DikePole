@@ -154,24 +154,24 @@ class Story {
 
 class Passage {
   final String text;
-  final ContinueTypes continueType;
+  final PassageTypes continueType;
 
   Passage({this.text, this.continueType});
 
-  static createWithType(ContinueTypes continueType, {text, id, options, next}) {
+  static createWithType(PassageTypes continueType, {text, id, options, next}) {
     switch (continueType) {
-      case ContinueTypes.Continue:
+      case PassageTypes.Continue:
         return PassageContinue(text: text, id: id, next: next);
-      case ContinueTypes.Option:
+      case PassageTypes.Option:
         return PassageOption(id: id, text: text, options: options);
-      case ContinueTypes.Random:
+      case PassageTypes.Random:
         return PassageRandom(id: id, text: text, next: options);
     }
   }
 }
 
 class PassageContinue extends PassageBase {
-  final ContinueTypes type = ContinueTypes.Continue;
+  final PassageTypes type = PassageTypes.Continue;
   final int id;
   final String text;
   final String imagePath;
@@ -185,7 +185,7 @@ class PassageContinue extends PassageBase {
   }) : super(
             id: id,
             text: text,
-            type: ContinueTypes.Continue,
+            type: PassageTypes.Continue,
             imagePath: imagePath);
 
   int getNext(int option) {
@@ -222,7 +222,7 @@ class HistoryItem {
 }
 
 class PassageRandom extends PassageBase {
-  final ContinueTypes type = ContinueTypes.Random;
+  final PassageTypes type = PassageTypes.Random;
   final int id;
   final String text;
   final List<int> next;
@@ -236,7 +236,7 @@ class PassageRandom extends PassageBase {
   }) : super(
           id: id,
           text: text,
-          type: ContinueTypes.Random,
+          type: PassageTypes.Random,
           imagePath: imagePath,
         );
 
@@ -271,7 +271,7 @@ class PassageRandom extends PassageBase {
 }
 
 class PassageOption extends PassageBase {
-  final ContinueTypes type = ContinueTypes.Option;
+  final PassageTypes type = PassageTypes.Option;
   final int id;
   final String text;
   final List<Tuple2<int, String>> options;
@@ -285,7 +285,7 @@ class PassageOption extends PassageBase {
   }) : super(
           id: id,
           text: text,
-          type: ContinueTypes.Option,
+          type: PassageTypes.Option,
           imagePath: imagePath,
         );
 
@@ -332,7 +332,7 @@ class PassageOption extends PassageBase {
 }
 
 abstract class PassageBase {
-  final ContinueTypes type;
+  final PassageTypes type;
   final int id;
   final String text;
   final bool canContinue = true;
@@ -350,4 +350,21 @@ abstract class PassageBase {
   int getNext(int option);
 }
 
-enum ContinueTypes { Continue, Random, Option }
+enum PassageTypes { Continue, Random, Option }
+
+PassageTypes stringToPassageType(String input) {
+  switch (input) {
+    case "Option": return PassageTypes.Option;
+    case "Continue": return PassageTypes.Continue;
+    case "Random": return PassageTypes.Random;
+    default: throw "Passage type string not recognized: $input";
+  }
+}
+
+String passageTypeToString(PassageTypes type) {
+  switch (type) {
+    case PassageTypes.Option: return "Option";
+    case PassageTypes.Continue: return "Continue";
+    case PassageTypes.Random: return "Random";
+  }
+}
