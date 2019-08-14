@@ -5,9 +5,11 @@ import 'package:tuple/tuple.dart';
 class StoryBuilder {
   String title;
   String description;
-  String authors;
+  List<String> authors;
 
-  List passages;
+  List<PassageBuilderBase> passages;
+
+  StoryBuilder({this.title, this.description, this.authors, this.passages});
 }
 
 class PassageBuilderContinue extends PassageBuilderBase {
@@ -41,10 +43,11 @@ class PassageBuilderRandom extends PassageBuilderBase {
 
   PassageBuilderRandom({this.text, this.next, this.imagePath, this.id})
       : super(
-            text: text,
-            id: id,
-            imagePath: imagePath,
-            type: PassageTypes.Random);
+          text: text,
+          id: id,
+          imagePath: imagePath,
+          type: PassageTypes.Random,
+        );
 
   PassageRandom toModel() {
     return PassageRandom(
@@ -64,10 +67,11 @@ class PassageBuilderOption extends PassageBuilderBase {
 
   PassageBuilderOption({this.text, this.next, this.imagePath, this.id})
       : super(
-            text: text,
-            id: id,
-            imagePath: imagePath,
-            type: PassageTypes.Option);
+          text: text,
+          id: id,
+          imagePath: imagePath,
+          type: PassageTypes.Option,
+        );
 
   PassageOption toModel() {
     return PassageOption(
@@ -88,8 +92,16 @@ abstract class PassageBuilderBase {
   PassageBuilderBase({this.text, this.imagePath, this.id, @required this.type});
 
   Widget toWidget() {
-    return Text(text);
+    return Text(passageTypeToString(type));
   }
 
   PassageBase toModel();
+}
+
+PassageBuilderBase passageBuilderFromType(PassageTypes type) {
+  switch (type) {
+    case PassageTypes.Continue: return PassageBuilderContinue();
+    case PassageTypes.Option: return PassageBuilderOption();
+    case PassageTypes.Random: return PassageBuilderRandom();
+  }
 }

@@ -4,8 +4,8 @@ import 'package:locadeserta_web/components/passage_view.dart';
 import 'package:locadeserta_web/story/Story.dart';
 
 class GameView extends StatefulWidget {
-  Story story = Story.generate();
-  Locale locale;
+  final Story story = Story.generate();
+  final Locale locale;
 
   GameView({this.locale});
 

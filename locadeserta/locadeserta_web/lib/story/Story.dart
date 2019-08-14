@@ -366,5 +366,6 @@ String passageTypeToString(PassageTypes type) {
     case PassageTypes.Option: return "Option";
     case PassageTypes.Continue: return "Continue";
     case PassageTypes.Random: return "Random";
+    default: throw "PassageType $type was not recognized";
   }
 }

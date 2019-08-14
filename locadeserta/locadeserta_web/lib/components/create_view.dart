@@ -3,6 +3,7 @@ import 'package:locadeserta_web/animations/slideable_button_web.dart';
 import 'package:locadeserta_web/components/components.dart';
 import 'package:locadeserta_web/components/create_passage.dart';
 import 'package:locadeserta_web/story/Story.dart';
+import 'package:locadeserta_web/story/story_builder.dart';
 
 class CreateView extends StatefulWidget {
   final Locale locale;
@@ -15,7 +16,7 @@ class CreateView extends StatefulWidget {
 
 class _CreateViewState extends State<CreateView> {
   bool showCreateMeta = true;
-  Story story;
+  StoryBuilder story;
 
   @override
   Widget build(BuildContext context) {
@@ -34,12 +35,11 @@ class _CreateViewState extends State<CreateView> {
                       const ListTile(
                         leading: Icon(Icons.album),
                         title: Text('Створення нової історії'),
-                        subtitle:
-                            Text('Введіть основні поля про вашу історію.'),
+                        subtitle: Text('Додайте більше деталей.'),
                       ),
                       CreateMetaStoryView(
                         story: story,
-                        onSave: (Story newStory) {
+                        onSave: (StoryBuilder newStory) {
                           setState(() {
                             if (story == null) {
                               story = newStory;
@@ -66,7 +66,17 @@ class _CreateViewState extends State<CreateView> {
                 },
               ),
             if (!showCreateMeta)
-              CreatePassage(),
+              CreatePassage(
+                onAdd: (PassageTypes type) {
+                  setState(() {
+                    story.passages.add(passageBuilderFromType(type));
+                  });
+                },
+              ),
+            if (!showCreateMeta && story != null)
+              ...story.passages.map(
+                    (passageBuilderBase) => passageBuilderBase.toWidget(),
+              ),
           ],
         ),
       ),
@@ -75,7 +85,7 @@ class _CreateViewState extends State<CreateView> {
 }
 
 class StoryViewHeader extends StatelessWidget {
-  final Story story;
+  final StoryBuilder story;
 
   final VoidCallback onEdit;
 
@@ -105,78 +115,82 @@ class StoryViewHeader extends StatelessWidget {
   }
 }
 
-class CreateMetaStoryView extends StatelessWidget {
-  final _formKey = GlobalKey<FormState>();
-  String _title;
-  String _description;
-  String _authors;
-  Function(Story story) onSave;
-  Story story;
+class CreateMetaStoryView extends StatefulWidget {
+  final Function(StoryBuilder story) onSave;
+  final StoryBuilder story;
 
   CreateMetaStoryView({@required this.onSave, this.story});
 
   @override
+  _CreateMetaStoryViewState createState() => _CreateMetaStoryViewState();
+}
+
+class _CreateMetaStoryViewState extends State<CreateMetaStoryView> {
+  final _formKey = GlobalKey<FormState>();
+
+  String _title;
+
+  String _description;
+
+  String _authors;
+
+  @override
   Widget build(BuildContext context) {
     return Form(
-        key: _formKey,
-        child: Column(
-          children: <Widget>[
-            TextFormField(
-              decoration: InputDecoration(
-                icon: Icon(Icons.title),
-                hintText: "Введіть назву історії",
-                labelText: "Назва: ",
-              ),
-              initialValue: story == null ? "" : story.title,
-              onSaved: (value) {
-                _title = value;
-              },
+      key: _formKey,
+      child: Column(
+        children: <Widget>[
+          TextFormField(
+            decoration: InputDecoration(
+              icon: Icon(Icons.title),
+              hintText: "Введіть назву історії",
+              labelText: "Назва: ",
             ),
-            TextFormField(
-              decoration: InputDecoration(
-                icon: Icon(Icons.description),
-                hintText: "Введіть описання історії",
-                labelText: "Описання: ",
-              ),
-              onSaved: (value) {
-                _description = value;
-              },
-              initialValue: story == null ? "" : story.description,
+            initialValue: widget.story == null ? "" : widget.story.title,
+            onSaved: (value) {
+              _title = value;
+            },
+          ),
+          TextFormField(
+            decoration: InputDecoration(
+              icon: Icon(Icons.description),
+              hintText: "Введіть описання історії",
+              labelText: "Описання: ",
             ),
-            TextFormField(
-              decoration: InputDecoration(
-                icon: Icon(Icons.title),
-                hintText: "Список авторів через кому",
-                labelText: "Автори: ",
-              ),
-              onSaved: (value) {
-                _authors = value;
-              },
-              initialValue: story == null ? "" : story.authors[0],
+            onSaved: (value) {
+              _description = value;
+            },
+            initialValue: widget.story == null ? "" : widget.story.description,
+          ),
+          TextFormField(
+            decoration: InputDecoration(
+              icon: Icon(Icons.title),
+              hintText: "Список авторів через кому",
+              labelText: "Автори: ",
             ),
-            Padding(
-              padding: EdgeInsets.all(4.0),
-              child: RaisedButton(
-                onPressed: () {
-                  _formKey.currentState.save();
-                  var story = Story(
-                    title: _title,
-                    description: _description,
-                    authors: [_authors],
-                    passages: [
-                      PassageContinue(
-                        text: "test",
-                        id: 0,
-                        next: 1,
-                      ),
-                    ],
-                  );
-                  onSave(story);
-                },
-                child: Text("Зберегти"),
-              ),
-            )
-          ],
-        ));
+            onSaved: (value) {
+              _authors = value;
+            },
+            initialValue: widget.story == null ? "" : widget.story.authors[0],
+          ),
+          Padding(
+            padding: EdgeInsets.all(4.0),
+            child: RaisedButton(
+              onPressed: () {
+                _formKey.currentState.save();
+                var story = StoryBuilder(
+                  title: _title,
+                  description: _description,
+                  authors: [_authors],
+                  passages: [],
+                );
+                widget.onSave(story);
+              },
+              child: Text("Зберегти"),
+            ),
+          )
+        ],
+      ),
+    );
   }
 }
