@@ -69,14 +69,23 @@ class _CreateViewState extends State<CreateView> {
               CreatePassage(
                 onAdd: (PassageTypes type) {
                   setState(() {
-                    story.passages.add(passageBuilderFromType(type));
+                    story.addPassage(passageBuilderFromType(type));
                   });
                 },
               ),
             if (!showCreateMeta && story != null)
-              ...story.passages.map(
-                    (passageBuilderBase) => passageBuilderBase.toWidget(),
+              ...story.getPassages().map(
+                    (passageBuilderBase) => passageBuilderBase.toWidget(story),
               ),
+            if (!showCreateMeta)
+              SlideableButton(
+                child: styledContainerForButton(
+                  context, "Export"
+                ),
+                onPress: () {
+                  print(story.toModel().toJson());
+                },
+              )
           ],
         ),
       ),
@@ -182,7 +191,6 @@ class _CreateMetaStoryViewState extends State<CreateMetaStoryView> {
                   title: _title,
                   description: _description,
                   authors: [_authors],
-                  passages: [],
                 );
                 widget.onSave(story);
               },
