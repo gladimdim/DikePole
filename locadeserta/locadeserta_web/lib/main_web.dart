@@ -34,8 +34,8 @@ class _MyAppState extends State<MyApp> {
       initialRoute: "/",
       routes: {
         "/": (context) => MainView(onSetLocale: _onLocaleSet, locale: locale),
-        "/play": (context) => GameView(locale: locale),
         "/create": (context) => CreateView(locale: locale),
+        ExtractArgumentsGameView.routeName: (context) => ExtractArgumentsGameView(),
       },
       locale: locale,
       title: 'Loca Deserta',

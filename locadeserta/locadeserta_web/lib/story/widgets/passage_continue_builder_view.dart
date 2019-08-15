@@ -38,9 +38,10 @@ class _PassageContinueBuilderViewState
         Expanded(
           child: TextField(
             controller: _controller,
-            onSubmitted: (newValue) {
+            onChanged: (newValue) {
               setState(() {
                 widget.passage.text = newValue;
+                print(widget.passage.text);
               });
             },
           ),

@@ -2,6 +2,7 @@ import 'package:flutter_web/material.dart';
 import 'package:locadeserta_web/animations/slideable_button_web.dart';
 import 'package:locadeserta_web/components/components.dart';
 import 'package:locadeserta_web/components/create_passage.dart';
+import 'package:locadeserta_web/components/game_view.dart';
 import 'package:locadeserta_web/story/Story.dart';
 import 'package:locadeserta_web/story/story_builder.dart';
 
@@ -76,13 +77,19 @@ class _CreateViewState extends State<CreateView> {
             if (!showCreateMeta && story != null)
               ...story.getPassages().map(
                     (passageBuilderBase) => passageBuilderBase.toWidget(story),
-              ),
+                  ),
             if (!showCreateMeta)
               SlideableButton(
-                child: styledContainerForButton(
-                  context, "Export"
-                ),
+                child: styledContainerForButton(context, "Play"),
                 onPress: () {
+                  Navigator.pushNamed(
+                    context,
+                    ExtractArgumentsGameView.routeName,
+                    arguments: GameViewArguments(
+                      locale: widget.locale,
+                      story: story.toModel(),
+                    ),
+                  );
                   print(story.toModel().toJson());
                 },
               )
