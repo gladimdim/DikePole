@@ -1,19 +1,18 @@
 import 'package:flutter_web/material.dart';
 import 'package:locadeserta_web/story/story_builder.dart';
 
-class PassageContinueBuilderView extends StatefulWidget {
-  final PassageBuilderContinue passage;
+class PassageRandomBuilderView extends StatefulWidget {
+  final PassageBuilderRandom passage;
   final StoryBuilder storyBuilder;
 
   @override
-  _PassageContinueBuilderViewState createState() =>
-      _PassageContinueBuilderViewState();
+  _PassageRandomBuilderViewState createState() =>
+      _PassageRandomBuilderViewState();
 
-  PassageContinueBuilderView({this.passage, this.storyBuilder});
+  PassageRandomBuilderView({this.passage, this.storyBuilder});
 }
 
-class _PassageContinueBuilderViewState
-    extends State<PassageContinueBuilderView> {
+class _PassageRandomBuilderViewState extends State<PassageRandomBuilderView> {
   TextEditingController _controller = TextEditingController();
 
   @override
@@ -65,10 +64,10 @@ class _PassageContinueBuilderViewState
                 child: DropdownButton(
                   onChanged: (int newValue) {
                     setState(() {
-                      widget.passage.next = newValue;
+                      widget.passage.next = [newValue];
                     });
                   },
-                  value: widget.passage.next,
+                  value: 1,
                   items: widget.storyBuilder.getPassages().map((passage) {
                     var hasText = passage.text != null;
                     var takeMax10 = 10;
@@ -79,11 +78,25 @@ class _PassageContinueBuilderViewState
                           : passage.text.length;
                       substract = passage.text.substring(0, takeMax10);
                     }
-
+                    print("next: ${widget.passage.next}, passage.id: ${passage.id}");
+                    print(widget.passage.next.contains(passage.id));
                     return DropdownMenuItem(
                       value: passage.id,
                       child: Row(
                         children: <Widget>[
+                          Checkbox(
+                            value: widget.passage.next.contains(passage.id),
+                            onChanged: (newValue) {
+                              setState(() {
+                                if (newValue && !widget.passage.next.contains(passage.id)) {
+                                  widget.passage.next.add(passage.id);
+                                } else {
+                                  widget.passage.next
+                                      .removeWhere((i) => i == passage.id);
+                                }
+                              });
+                            },
+                          ),
                           Text("${passage.id.toString()}: "),
                           SizedBox(width: 3),
                           if (passage.text != null) Text(substract),

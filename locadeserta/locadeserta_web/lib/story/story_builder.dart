@@ -1,6 +1,7 @@
 import 'package:flutter_web/material.dart';
 import 'package:locadeserta_web/story/Story.dart';
 import 'package:locadeserta_web/story/widgets/passage_continue_builder_view.dart';
+import 'package:locadeserta_web/story/widgets/passage_random_builder_view.dart';
 import 'package:tuple/tuple.dart';
 
 class StoryBuilder {
@@ -10,7 +11,6 @@ class StoryBuilder {
   int count = 0;
 
   List<PassageBuilderBase> _passages = [];
-
 
   StoryBuilder({this.title, this.description, this.authors});
 
@@ -28,11 +28,10 @@ class StoryBuilder {
 
   Story toModel() {
     return Story(
-      title: title,
-      description: description,
-      authors: authors,
-      passages: _passages.map((passage) => passage.toModel()).toList()
-    );
+        title: title,
+        description: description,
+        authors: authors,
+        passages: _passages.map((passage) => passage.toModel()).toList());
   }
 }
 
@@ -61,7 +60,8 @@ class PassageBuilderContinue extends PassageBuilderBase {
   @override
   Widget toWidget(StoryBuilder storyBuilder) {
     return PassageContinueBuilderView(
-      passage: this, storyBuilder: storyBuilder,
+      passage: this,
+      storyBuilder: storyBuilder,
     );
   }
 }
@@ -88,13 +88,20 @@ class PassageBuilderRandom extends PassageBuilderBase {
       next: next,
     );
   }
+
+  Widget toWidget(StoryBuilder storyBuilder) {
+    return PassageRandomBuilderView(
+      passage: this,
+      storyBuilder: storyBuilder,
+    );
+  }
 }
 
 class PassageBuilderOption extends PassageBuilderBase {
   String text;
   int id;
   String imagePath;
-  List<Tuple2<int, String>> next;
+  List<Tuple2<int, String>> next = [];
 
   PassageBuilderOption({this.text, this.next, this.imagePath, this.id})
       : super(
@@ -131,9 +138,13 @@ abstract class PassageBuilderBase {
 
 PassageBuilderBase passageBuilderFromType(PassageTypes type) {
   switch (type) {
-    case PassageTypes.Continue: return PassageBuilderContinue();
-    case PassageTypes.Option: return PassageBuilderOption();
-    case PassageTypes.Random: return PassageBuilderRandom();
-    default: throw "PassageType $type is not recognized";
+    case PassageTypes.Continue:
+      return PassageBuilderContinue();
+    case PassageTypes.Option:
+      return PassageBuilderOption(next: List());
+    case PassageTypes.Random:
+      return PassageBuilderRandom(next: List());
+    default:
+      throw "PassageType $type is not recognized";
   }
 }

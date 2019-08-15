@@ -81,8 +81,8 @@ class _CreateViewState extends State<CreateView> {
             if (!showCreateMeta)
               SlideableButton(
                 child: styledContainerForButton(context, "Play"),
-                onPress: () {
-                  Navigator.pushNamed(
+                onPress: () async {
+                  await Navigator.pushNamed(
                     context,
                     ExtractArgumentsGameView.routeName,
                     arguments: GameViewArguments(
