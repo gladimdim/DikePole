@@ -35,7 +35,8 @@ class _PassageContinueBuilderViewState
       child: Column(
         children: <Widget>[
           ListTile(
-            title: Text(firstNCharsFromString(widget.passage.text, 15)),
+            title: Text(firstNCharsFromString(widget.passage.text, 35)),
+            subtitle: Text("Тип: ${widget.passage.type.toString()}"),
           ),
           EditableText(
             cursorColor: Colors.black,
@@ -56,7 +57,7 @@ class _PassageContinueBuilderViewState
               Text("Linked to: "),
               SizedBox(
                 height: 100,
-                width: 280,
+                width: MediaQuery.of(context).size.width * 0.4,
                 child: DropdownButton(
                   onChanged: (int newValue) {
                     setState(() {
@@ -65,20 +66,11 @@ class _PassageContinueBuilderViewState
                   },
                   value: widget.passage.next,
                   items: widget.storyBuilder.getPassages().map((passage) {
-                    var hasText = passage.text != null;
-                    var takeMax10 = 10;
-                    var substract = "";
-                    if (hasText) {
-                      takeMax10 = passage.text.length > 10
-                          ? takeMax10
-                          : passage.text.length;
-                      substract = passage.text.substring(0, takeMax10);
-                    }
                     return DropdownMenuItem(
                       value: passage.id,
                       child: Row(
                         children: <Widget>[
-                          if (passage.text != null) Text(substract),
+                          if (passage.text != null) Text(firstNCharsFromString(passage.text, 25)),
                         ],
                       ),
                     );
