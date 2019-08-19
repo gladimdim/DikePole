@@ -70,13 +70,13 @@ class _PassageRandomBuilderViewState extends State<PassageRandomBuilderView> {
                   value: 1,
                   items: widget.storyBuilder.getPassages().map((passage) {
                     var hasText = passage.text != null;
-                    var takeMax10 = 10;
+                    var takeMax4 = 4;
                     var substract = "";
                     if (hasText) {
-                      takeMax10 = passage.text.length > 10
-                          ? takeMax10
+                      takeMax4 = passage.text.length > 4
+                          ? takeMax4
                           : passage.text.length;
-                      substract = passage.text.substring(0, takeMax10);
+                      substract = passage.text.substring(0, takeMax4);
                     }
                     print("next: ${widget.passage.next}, passage.id: ${passage.id}");
                     print(widget.passage.next.contains(passage.id));

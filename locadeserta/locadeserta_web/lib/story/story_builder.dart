@@ -33,6 +33,20 @@ class StoryBuilder {
         authors: authors,
         passages: _passages.map((passage) => passage.toModel()).toList());
   }
+
+  static fromStory(Story story) {
+    var sb = StoryBuilder(
+      title: story.title,
+      description: story.description,
+      authors: story.authors,
+    );
+
+    story.passages.forEach((passage) {
+      sb.addPassage(PassageBuilderBase.fromStoryPassage(passage));
+    });
+
+    return sb;
+  }
 }
 
 class PassageBuilderContinue extends PassageBuilderBase {
@@ -62,6 +76,15 @@ class PassageBuilderContinue extends PassageBuilderBase {
     return PassageContinueBuilderView(
       passage: this,
       storyBuilder: storyBuilder,
+    );
+  }
+
+  static PassageBuilderContinue fromStoryPassage(PassageBase base) {
+    return PassageBuilderContinue(
+      id: base.id,
+      imagePath: base.imagePath,
+      next: base.getNexts(),
+      text: base.text,
     );
   }
 }
@@ -95,6 +118,15 @@ class PassageBuilderRandom extends PassageBuilderBase {
       storyBuilder: storyBuilder,
     );
   }
+
+  static PassageBuilderRandom fromStoryPassage(PassageBase base) {
+    return PassageBuilderRandom(
+      id: base.id,
+      imagePath: base.imagePath,
+      next: base.getNexts(),
+      text: base.text,
+    );
+  }
 }
 
 class PassageBuilderOption extends PassageBuilderBase {
@@ -119,6 +151,15 @@ class PassageBuilderOption extends PassageBuilderBase {
       options: next,
     );
   }
+
+  static PassageBuilderOption fromStoryPassage(PassageBase base) {
+    return PassageBuilderOption(
+      id: base.id,
+      imagePath: base.imagePath,
+      next: base.getNexts(),
+      text: base.text,
+    );
+  }
 }
 
 abstract class PassageBuilderBase {
@@ -134,6 +175,19 @@ abstract class PassageBuilderBase {
   }
 
   PassageBase toModel();
+
+  static fromStoryPassage(PassageBase base) {
+    switch (base.type) {
+      case PassageTypes.Continue:
+        return PassageBuilderContinue.fromStoryPassage(base);
+      case PassageTypes.Option:
+        return PassageBuilderOption.fromStoryPassage(base);
+      case PassageTypes.Random:
+        return PassageBuilderRandom.fromStoryPassage(base);
+      default:
+        throw "PassageType ${base.type} is not recognized";
+    }
+  }
 }
 
 PassageBuilderBase passageBuilderFromType(PassageTypes type) {

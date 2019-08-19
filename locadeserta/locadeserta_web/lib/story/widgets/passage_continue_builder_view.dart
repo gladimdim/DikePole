@@ -1,5 +1,6 @@
 import 'package:flutter_web/material.dart';
 import 'package:locadeserta_web/story/story_builder.dart';
+import 'package:locadeserta_web/utils/utils.dart';
 
 class PassageContinueBuilderView extends StatefulWidget {
   final PassageBuilderContinue passage;
@@ -30,22 +31,18 @@ class _PassageContinueBuilderViewState
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: <Widget>[
-        Column(
-          children: <Widget>[
-            Text("Id"),
-            Text(
-              widget.passage.id.toString(),
-            ),
-          ],
-        ),
-        SizedBox(width: 10),
-        Expanded(
-          child: TextField(
-            decoration: InputDecoration(
-              labelText: "Input text of the passage",
-            ),
+    return Card(
+      child: Column(
+        children: <Widget>[
+          ListTile(
+            title: Text(firstNCharsFromString(widget.passage.text, 15)),
+          ),
+          EditableText(
+            cursorColor: Colors.black,
+            backgroundCursorColor: Colors.white,
+            focusNode: FocusNode(),
+            maxLines: 5,
+            style: Theme.of(context).textTheme.title,
             controller: _controller,
             onChanged: (newValue) {
               setState(() {
@@ -54,14 +51,12 @@ class _PassageContinueBuilderViewState
               });
             },
           ),
-        ),
-        SizedBox(width: 10),
-        Column(
-          children: <Widget>[
-            Text("Next"),
-            SizedBox(
+          Row(
+            children: <Widget>[
+              Text("Linked to: "),
+              SizedBox(
                 height: 100,
-                width: 100,
+                width: 280,
                 child: DropdownButton(
                   onChanged: (int newValue) {
                     setState(() {
@@ -79,22 +74,21 @@ class _PassageContinueBuilderViewState
                           : passage.text.length;
                       substract = passage.text.substring(0, takeMax10);
                     }
-
                     return DropdownMenuItem(
                       value: passage.id,
                       child: Row(
                         children: <Widget>[
-                          Text("${passage.id.toString()}: "),
-                          SizedBox(width: 3),
                           if (passage.text != null) Text(substract),
                         ],
                       ),
                     );
                   }).toList(),
-                )),
-          ],
-        ),
-      ],
+                ),
+              )
+            ],
+          ),
+        ],
+      ),
     );
   }
 }

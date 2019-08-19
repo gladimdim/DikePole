@@ -20,3 +20,14 @@ bool isPortrait(Size size) {
 double smallestDimension(Size size) {
   return size.height > size.width ? size.width : size.height;
 }
+
+String firstNCharsFromString(String input, int n) {
+  if (input == null) {
+    return "";
+  }
+  if (input.length < n) {
+    return input;
+  }
+
+  return input.substring(0, n);
+}

@@ -128,7 +128,7 @@ class Story {
       id: 5,
       text:
           "Козак більше нічого не ризикнув чіпати і зі своєю здобиччю обережно повернувся до очерету та почав поступово віддалятися від вершників, прямуючи вздовж річки вверх за течією.",
-      next: [8, 9, 10],
+      next: [0, 1, 2],
       imagePath: "images/background/river/2.jpg",
     );
 
@@ -136,7 +136,7 @@ class Story {
       id: 6,
       text:
           "Обережно відклавши ці речі ближче до себе, Дмитро нишпорив оком у пошуках шаблі. Вона теж лежала поруч, відчеплена з гаку, але сплячий обіймав її, як дитина - улюблену ляльку.",
-      next: 7,
+      next: 2,
       imagePath: "images/background/camp/3.jpg",
     );
 
@@ -212,6 +212,10 @@ class PassageContinue extends PassageBase {
       next: map["next"],
     );
   }
+
+  int getNexts() {
+    return next;
+  }
 }
 
 class HistoryItem {
@@ -268,6 +272,10 @@ class PassageRandom extends PassageBase {
       "next": next,
     };
   }
+
+  List<int> getNexts() {
+    return next;
+  }
 }
 
 class PassageOption extends PassageBase {
@@ -311,6 +319,10 @@ class PassageOption extends PassageBase {
     };
   }
 
+  List<Tuple2<int, String>> getNexts() {
+    return options;
+  }
+
   static PassageOption fromJson(String input) {
     var map = jsonDecode(input);
     List options = map["options"];
@@ -348,6 +360,8 @@ abstract class PassageBase {
   });
 
   int getNext(int option);
+
+  getNexts();
 }
 
 enum PassageTypes { Continue, Random, Option }

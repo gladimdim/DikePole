@@ -17,7 +17,7 @@ class CreateView extends StatefulWidget {
 
 class _CreateViewState extends State<CreateView> {
   bool showCreateMeta = true;
-  StoryBuilder story;
+  StoryBuilder story = StoryBuilder.fromStory(Story.generate());
 
   @override
   Widget build(BuildContext context) {
@@ -75,9 +75,15 @@ class _CreateViewState extends State<CreateView> {
                 },
               ),
             if (!showCreateMeta && story != null)
-              ...story.getPassages().map(
-                    (passageBuilderBase) => passageBuilderBase.toWidget(story),
-                  ),
+              SizedBox(
+                height: MediaQuery.of(context).size.height * 0.7,
+                width: MediaQuery.of(context).size.width,
+                child: ListView.builder(
+                  itemCount: story.getPassages().length,
+                  itemBuilder: (context, index) =>
+                      story.getPassages()[index].toWidget(story),
+                ),
+              ),
             if (!showCreateMeta)
               SlideableButton(
                 child: styledContainerForButton(context, "Play"),
