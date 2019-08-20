@@ -105,36 +105,35 @@ class _PassageContinueBuilderViewState
     return PassageBuilderView(
       passage: widget.passage,
       storyBuilder: widget.storyBuilder,
-      nextBlock: Expanded(
-        flex: 1,
-        child: Row(
-          children: <Widget>[
-            Text("Next:"),
-            SizedBox(
-              height: 100,
-              width: MediaQuery.of(context).size.width * 0.4,
-              child: DropdownButton(
-                onChanged: (int newValue) {
-                  setState(() {
-                    widget.passage.next = newValue;
-                  });
-                },
-                value: widget.passage.next,
-                items: widget.storyBuilder.getPassages().map((passage) {
-                  return DropdownMenuItem(
-                    value: passage.id,
-                    child: Row(
-                      children: <Widget>[
-                        if (passage.text != null)
-                          Text(firstNCharsFromString(passage.text, 25)),
-                      ],
-                    ),
-                  );
-                }).toList(),
-              ),
-            )
-          ],
-        ),
+      nextBlock: Row(
+        children: <Widget>[
+          Expanded(
+            flex: 2,
+            child: Text("Next:"),
+          ),
+          Expanded(
+            flex: 8,
+            child: DropdownButton(
+              onChanged: (int newValue) {
+                setState(() {
+                  widget.passage.next = newValue;
+                });
+              },
+              value: widget.passage.next,
+              items: widget.storyBuilder.getPassages().map((passage) {
+                return DropdownMenuItem(
+                  value: passage.id,
+                  child: Row(
+                    children: <Widget>[
+                      if (passage.text != null)
+                        Text(firstNCharsFromString(passage.text, 25)),
+                    ],
+                  ),
+                );
+              }).toList(),
+            ),
+          )
+        ],
       ),
     );
   }
