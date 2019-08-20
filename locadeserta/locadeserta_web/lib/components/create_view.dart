@@ -6,6 +6,7 @@ import 'package:locadeserta_web/components/edit_passage_view.dart';
 import 'package:locadeserta_web/components/game_view.dart';
 import 'package:locadeserta_web/story/Story.dart';
 import 'package:locadeserta_web/story/story_builder.dart';
+import 'package:locadeserta_web/utils/utils.dart';
 
 class CreateView extends StatefulWidget {
   final Locale locale;
@@ -23,15 +24,17 @@ class _CreateViewState extends State<CreateView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          "PRE ALPHA",
+          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0),
+        ),
+      ),
       backgroundColor: Theme.of(context).backgroundColor,
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(
           children: <Widget>[
-            Text(
-              "PRE ALPHA",
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0),
-            ),
             if (showCreateMeta) ...[
               Center(
                 child: Card(
@@ -102,31 +105,28 @@ class _CreateViewState extends State<CreateView> {
               ),
             if (!showCreateMeta && story != null)
               SizedBox(
-                height: MediaQuery.of(context).size.height * 0.7,
+                height: MediaQuery.of(context).size.height * 0.8,
                 width: MediaQuery.of(context).size.width,
                 child: ListView.builder(
                     itemCount: story.getPassages().length,
                     itemBuilder: (context, index) {
                       var passageBuilder = story.getPassages()[index];
-                      return Container(
-                        decoration: BoxDecoration(
-                          color: Theme.of(context).backgroundColor,
-                          border: Border.all(
-                            color: Theme.of(context).primaryColor,
-                            width: 3.0,
-                          ),
+                      return Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Container(
+                          decoration: getDecorationForContainer(context),
+                          child: ListTile(
+                              title: Text(passageBuilder.text),
+                              onTap: () async {
+                                await Navigator.pushNamed(
+                                  context,
+                                  "/editPassage",
+                                  arguments: EditPassageViewArguments(
+                                      story: story,
+                                      passageBuilder: passageBuilder),
+                                );
+                              }),
                         ),
-                        child: ListTile(
-                            title: Text(passageBuilder.text),
-                            onTap: () async {
-                              await Navigator.pushNamed(
-                                context,
-                                "/editPassage",
-                                arguments: EditPassageViewArguments(
-                                    story: story,
-                                    passageBuilder: passageBuilder),
-                              );
-                            }),
                       );
                     }),
               ),
@@ -142,7 +142,6 @@ class _CreateViewState extends State<CreateView> {
                       story: story.toModel(),
                     ),
                   );
-                  print(story.toModel().toJson());
                 },
               )
           ],

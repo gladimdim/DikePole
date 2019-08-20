@@ -4,6 +4,7 @@ import 'package:locadeserta_web/components/bordered_random_image.dart';
 import 'package:locadeserta_web/models/background_image_web.dart';
 import 'package:locadeserta_web/story/Story.dart';
 import 'package:locadeserta_web/components/components.dart';
+import 'package:locadeserta_web/utils/utils.dart';
 import 'package:tuple/tuple.dart';
 
 class PassageView extends StatefulWidget {
@@ -88,7 +89,7 @@ class PassageState extends State<PassageView> with TickerProviderStateMixin {
       child: SlideableButton(
           child: optionBox(
             context,
-            "Далі",
+            "Next",
             0,
           ),
           onPress: () {
@@ -148,15 +149,9 @@ class PassageItemView extends StatelessWidget {
           padding: EdgeInsets.all(8.0),
           margin: EdgeInsets.all(8.0),
           width: MediaQuery.of(context).size.width * 0.95,
-          decoration: BoxDecoration(
-            color: Theme.of(context).backgroundColor,
-            border: Border.all(
-              color: Theme.of(context).primaryColor,
-              width: 3.0,
-            ),
-          ),
+          decoration: getDecorationForContainer(context),
           child: Text(
-            historyItem.text == "" ? "Кінець" : historyItem.text,
+            historyItem.text == "" ? "The End" : historyItem.text,
             style: TextStyle(
               fontFamily: "Raleway-Bold",
               fontSize: 18,

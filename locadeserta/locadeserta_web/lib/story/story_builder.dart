@@ -1,7 +1,6 @@
 import 'package:flutter_web/material.dart';
 import 'package:locadeserta_web/story/Story.dart';
 import 'package:locadeserta_web/story/widgets/passage_continue_builder_view.dart';
-import 'package:locadeserta_web/story/widgets/passage_random_builder_view.dart';
 import 'package:tuple/tuple.dart';
 
 class StoryBuilder {
