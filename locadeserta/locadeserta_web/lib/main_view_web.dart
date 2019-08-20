@@ -45,19 +45,6 @@ class _MainViewState extends State<MainView> {
           child: SlideableButton(
             child: optionBox(
               context,
-              "Почати",
-              0,
-            ),
-            onPress: () {
-              Navigator.pushNamed(context, "/play");
-            },
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: SlideableButton(
-            child: optionBox(
-              context,
               "Створити свою",
               0,
             ),

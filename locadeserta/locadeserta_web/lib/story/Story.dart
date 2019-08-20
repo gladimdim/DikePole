@@ -89,61 +89,62 @@ class Story {
     var p1 = PassageRandom(
         id: 0,
         text:
-            "Сонце сідало за рікою, заливаючи все навколо багряним сяйвом. Стрімка течія несла темну воду на південь, до моря. Вітерець стиха колихав очерет, розносячи запах ранньої осені та дим від вогнища. Поступово сутеніло",
+            "The sun was setting over the river, casting a crimson glow over everything. A swift current swept the dark water south to the sea while the wind quietly rustled the reeds, carrying the scent of autumn and smoke from the fire. Twilight was settling in.",
         next: [1, 2, 3],
         imagePath: "images/background/river/10.jpg");
     var p2 = PassageContinue(
         id: 1,
         text:
-            "Дмитро нерухомо лежав у прибережних заростях далеко від води, прислухаючись до навколишніх звуків. Надокучлива комашня гризла обличчя та шию. Десь там, трохи далі на березі, де очерет поступається степовій траві та поодиноким деревцям, розташувалися навколо вогню троє чоловіків. Утікачу їх не було видно, однак інколи вітер приносив уривки розмови та брязкіт реманенту. Це були татари. Дмитро прислухався, намагаючись зрозуміти, чи вони тут по його душу.",
+            "Dmytro lay hidden in the thicket far from the water, listening carefully to the nearby sounds. Pesky gnats needled his face and neck. A little further off on the shore, where the reeds gave place to steppe grass and sparsely growing trees, three men had settled near a fire. The runaway couldn’t see them, but he could sometimes hear fragments of their conversation and the clatter of provisions passed on by the wind. They were Tatars. Dmytro was trying to hear whether they were there for him.",
         next: 2,
         imagePath: "images/background/bulrush/5.jpg");
 
     var p3 = PassageContinue(
         id: 2,
         text:
-            "Втікачу знову довелося повзти, бо берег піднімався все вище, аж ось незабаром з’явилося вогнище, яке ще жевріло самотньо у степу.",
+            "The Cossack lay like this for a long time, covering his head with his hands until it was completely dark. The wind increased, blocking out all other sounds except for the haunting song of the rustling reeds. The wispy clouds were driven westward, creating a covering for the weak light of the crescent moon. Dmytro couldn’t wait any longer. He had to do something. Gripping tightly a good combat knife, the only thing he managed to take from the boat when running away, he slowly crawled to the path that led to the river. He waited a while before getting up and, trying to step as lightly as possible, made his way to the river. There was no one on the dark path. He squatted and started to drink the cold river water, cupping it in his hand. From time to time, the moon and the thick clouds reflected on the river’s service. Suddenly, a girl’s face was seen. The man sprang back and stared at the spot where he had seen the bright eyes of a young girl. But there was nothing there – only the moonlight that sometimes shone through the clouds. He crossed himself and went back, whispering a prayer. Then he turned and made his way to where the wall of reeds ended.",
         next: 3,
         imagePath: "images/background/river/0.jpg");
 
     var p4 = PassageContinue(
         id: 3,
         text:
-            "У нечастих спалахах місячного сяйва можна було розгледіти силуети людей та коней. Двоє, схоже, спали на землі, один навпроти одного. Третій сидів ближче до вогню, спираючись на короткого списа, і, здавалося, теж заснув. Коней було видно гірше, вони дрімали десь з іншого боку багаття і їх, на перший погляд, було не менше п’яти.",
+            "The runaway had to crawl once again since the river bank had risen. Suddenly, he spotted a solitary fire glowing in the dark sea of the steppe.",
         next: 4,
-        imagePath: "images/background/camp/3.jpg");
+        imagePath: "images/background/forest/3.jpg");
 
-    var p5 = PassageOption(
-      id: 4,
+    var p5 = PassageContinue(
+        id: 4,
+        text:
+            "In the rare times the moonlight was visible, it was possible to glimpse the silhouettes of people and horses. Two were sleeping on the ground facing each other. A third was sitting closer to the fire, leaning against a short spear and, seemingly, also sleeping. It was harder to make out the horses as they slept on the other side of the fire, but there appeared to be at least five of them.",
+        next: 5,
+        imagePath: "images/background/forest/3.jpg");
+
+    var p6 = PassageContinue(
+        id: 5,
+        text:
+            "In the rare times the moonlight was visible, it was possible to glimpse the silhouettes of people and horses. Two were sleeping on the ground facing each other. A third was sitting closer to the fire, leaning against a short spear and, seemingly, also sleeping. It was harder to make out the horses as they slept on the other side of the fire, but there appeared to be at least five of them.",
+        next: 6,
+        imagePath: "images/background/forest/3.jpg");
+
+    var p7 = PassageOption(
+      id: 6,
       text:
-          "Дмитро підповз до найближчого сплячого татарина та тихо підвівся на коліна, підготувавшись встромити ножа йому в око, якщо той ворухнеться. Поруч лежав лук з сагайдаком та якась торбинка.",
+          "Dmytro crawled to the nearest Tatar and quietly rose to his knees, ready to stick the knife in the Tatar’s eye if he moved. Nearby was a bow, a quiver with arrows, and a knapsack.",
       options: [
-        Tuple2(5, "Забрати торбинку та лук з сагайдаком"),
-        Tuple2(6, "Пошукати татарську шаблю")
+        Tuple2(0, "Take the bow, quiver and knapsack"),
+        Tuple2(0, "Look for a Tatar saber")
       ],
       imagePath: "images/background/camp/2.jpg",
     );
 
-    var p6 = PassageRandom(
-      id: 5,
-      text:
-          "Козак більше нічого не ризикнув чіпати і зі своєю здобиччю обережно повернувся до очерету та почав поступово віддалятися від вершників, прямуючи вздовж річки вверх за течією.",
-      next: [0, 1, 2],
-      imagePath: "images/background/river/2.jpg",
-    );
 
-    var p7 = PassageContinue(
-      id: 6,
-      text:
-          "Обережно відклавши ці речі ближче до себе, Дмитро нишпорив оком у пошуках шаблі. Вона теж лежала поруч, відчеплена з гаку, але сплячий обіймав її, як дитина - улюблену ляльку.",
-      next: 2,
-      imagePath: "images/background/camp/3.jpg",
-    );
 
     var story = Story(
-      title: "Після битви",
-      description: "Тест",
-      authors: ["Костя"],
+      title: "After the battle",
+      description:
+          "At the beginning of XVII century a confrontation flares up between Polish-Lithuanian Commonwealth and Ottoman Empire. As a result of a devastating defeat in the Battle of Cecora, a lot of noblemen, cossacks and soldiers perished or were captured by Turks and Tatars. A fate of a young cossack, wayfaring through the Wild FIelds in a desperate attempt to escape from captivity, depends on a reader of this interactive fiction. All challenges are equally hard: survive in a steppe, avoid the revenge of Tatars, win the trust of cossack fishermen and return home. But the time of the final battle that will change history is coming. Will the main character be able to participate in it and stay alive and where his life will go from there - only You know the answer.",
+      authors: ["Konstantin Boytsov", "Anastasiia Tsapenko"],
       passages: [p1, p2, p3, p4, p5, p6, p7],
     );
 
@@ -368,18 +369,26 @@ enum PassageTypes { Continue, Random, Option }
 
 PassageTypes stringToPassageType(String input) {
   switch (input) {
-    case "Option": return PassageTypes.Option;
-    case "Continue": return PassageTypes.Continue;
-    case "Random": return PassageTypes.Random;
-    default: throw "Passage type string not recognized: $input";
+    case "Option":
+      return PassageTypes.Option;
+    case "Continue":
+      return PassageTypes.Continue;
+    case "Random":
+      return PassageTypes.Random;
+    default:
+      throw "Passage type string not recognized: $input";
   }
 }
 
 String passageTypeToString(PassageTypes type) {
   switch (type) {
-    case PassageTypes.Option: return "Option";
-    case PassageTypes.Continue: return "Continue";
-    case PassageTypes.Random: return "Random";
-    default: throw "PassageType $type was not recognized";
+    case PassageTypes.Option:
+      return "Option";
+    case PassageTypes.Continue:
+      return "Continue";
+    case PassageTypes.Random:
+      return "Random";
+    default:
+      throw "PassageType $type was not recognized";
   }
 }

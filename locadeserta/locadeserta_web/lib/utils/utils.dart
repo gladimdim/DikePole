@@ -1,3 +1,4 @@
+import 'package:flutter_web/material.dart';
 import 'package:flutter_web_ui/ui.dart';
 
 double widthThird(Size size) {
@@ -31,3 +32,11 @@ String firstNCharsFromString(String input, int n) {
 
   return input.substring(0, n);
 }
+
+BoxDecoration getDecorationForContainer(BuildContext context) => BoxDecoration(
+  color: Theme.of(context).backgroundColor,
+  border: Border.all(
+    color: Theme.of(context).primaryColor,
+    width: 3.0,
+  ),
+);

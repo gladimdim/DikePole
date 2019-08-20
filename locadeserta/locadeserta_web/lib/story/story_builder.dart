@@ -16,7 +16,6 @@ class StoryBuilder {
 
   void addPassage(PassageBuilderBase passage) {
     passage.id = count++;
-    print("passage: ${passage.id}");
     _passages.add(passage);
   }
 
@@ -79,6 +78,14 @@ class PassageBuilderContinue extends PassageBuilderBase {
     );
   }
 
+  @override
+  Widget toEditWidget(StoryBuilder storyBuilder) {
+    return PassageContinueBuilderView(
+      passage: this,
+      storyBuilder: storyBuilder,
+    );
+  }
+
   static PassageBuilderContinue fromStoryPassage(PassageBase base) {
     return PassageBuilderContinue(
       id: base.id,
@@ -113,9 +120,9 @@ class PassageBuilderRandom extends PassageBuilderBase {
   }
 
   Widget toWidget(StoryBuilder storyBuilder) {
-    return PassageRandomBuilderView(
-      passage: this,
-      storyBuilder: storyBuilder,
+    return ListTile(
+      title: Text(this.text),
+      subtitle: Text(this.next.toString()),
     );
   }
 
@@ -174,6 +181,10 @@ abstract class PassageBuilderBase {
     return Text(passageTypeToString(type));
   }
 
+  Widget toEditWidget(StoryBuilder storyBuilder) {
+    return Text(passageTypeToString(type));
+  }
+
   PassageBase toModel();
 
   static fromStoryPassage(PassageBase base) {
@@ -191,13 +202,14 @@ abstract class PassageBuilderBase {
 }
 
 PassageBuilderBase passageBuilderFromType(PassageTypes type) {
+  var defaultText = "<<Enter passage text>>";
   switch (type) {
     case PassageTypes.Continue:
-      return PassageBuilderContinue();
+      return PassageBuilderContinue(text: defaultText);
     case PassageTypes.Option:
-      return PassageBuilderOption(next: List());
+      return PassageBuilderOption(text: defaultText, next: List());
     case PassageTypes.Random:
-      return PassageBuilderRandom(next: List());
+      return PassageBuilderRandom(text: defaultText, next: List());
     default:
       throw "PassageType $type is not recognized";
   }

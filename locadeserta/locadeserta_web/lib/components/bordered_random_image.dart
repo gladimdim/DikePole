@@ -23,13 +23,7 @@ class BorderedTweenImageByPath extends StatelessWidget {
       child: tweenImage,
     );
     return Container(
-      decoration: BoxDecoration(
-        color: Theme.of(context).backgroundColor,
-        border: Border.all(
-          color: Theme.of(context).primaryColor,
-          width: 3.0,
-        ),
-      ),
+      decoration: getDecorationForContainer(context),
       child: container,
     );
   }
@@ -43,13 +37,7 @@ class BorderedRandomImageByType extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(
-        color: Theme.of(context).backgroundColor,
-        border: Border.all(
-          color: Theme.of(context).primaryColor,
-          width: 3.0,
-        ),
-      ),
+      decoration: getDecorationForContainer(context),
       child: TweenImage(
         repeat: true,
         duration: 3,

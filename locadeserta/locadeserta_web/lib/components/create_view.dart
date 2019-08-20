@@ -2,6 +2,7 @@ import 'package:flutter_web/material.dart';
 import 'package:locadeserta_web/animations/slideable_button_web.dart';
 import 'package:locadeserta_web/components/components.dart';
 import 'package:locadeserta_web/components/create_passage.dart';
+import 'package:locadeserta_web/components/edit_passage_view.dart';
 import 'package:locadeserta_web/components/game_view.dart';
 import 'package:locadeserta_web/story/Story.dart';
 import 'package:locadeserta_web/story/story_builder.dart';
@@ -17,7 +18,7 @@ class CreateView extends StatefulWidget {
 
 class _CreateViewState extends State<CreateView> {
   bool showCreateMeta = true;
-  StoryBuilder story = StoryBuilder.fromStory(Story.generate());
+  StoryBuilder story;
 
   @override
   Widget build(BuildContext context) {
@@ -27,27 +28,27 @@ class _CreateViewState extends State<CreateView> {
         padding: const EdgeInsets.all(8.0),
         child: Column(
           children: <Widget>[
-            if (showCreateMeta)
+            Text(
+              "PRE ALPHA",
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0),
+            ),
+            if (showCreateMeta) ...[
               Center(
                 child: Card(
                   elevation: 10.0,
                   child: Column(
                     children: <Widget>[
                       const ListTile(
-                        leading: Icon(Icons.album),
-                        title: Text('Створення нової історії'),
-                        subtitle: Text('Додайте більше деталей.'),
+                        leading: Icon(Icons.book),
+                        title: Text('Reuse existing story'),
                       ),
                       CreateMetaStoryView(
-                        story: story,
+                        story: StoryBuilder.fromStory(Story.generate()),
                         onSave: (StoryBuilder newStory) {
                           setState(() {
+                            print(newStory.getPassages().length);
                             if (story == null) {
                               story = newStory;
-                            } else {
-                              story.title = newStory.title;
-                              story.description = newStory.description;
-                              story.authors = newStory.authors;
                             }
                             showCreateMeta = false;
                           });
@@ -57,6 +58,31 @@ class _CreateViewState extends State<CreateView> {
                   ),
                 ),
               ),
+              Center(
+                child: Card(
+                  elevation: 10.0,
+                  child: Column(
+                    children: <Widget>[
+                      const ListTile(
+                        leading: Icon(Icons.book),
+                        title: Text('Create new Story from scratch'),
+                      ),
+                      CreateMetaStoryView(
+                        story: null,
+                        onSave: (StoryBuilder newStory) {
+                          setState(() {
+                            if (story == null) {
+                              story = newStory;
+                            }
+                            showCreateMeta = false;
+                          });
+                        },
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
             if (!showCreateMeta)
               StoryViewHeader(
                 story: story,
@@ -79,10 +105,30 @@ class _CreateViewState extends State<CreateView> {
                 height: MediaQuery.of(context).size.height * 0.7,
                 width: MediaQuery.of(context).size.width,
                 child: ListView.builder(
-                  itemCount: story.getPassages().length,
-                  itemBuilder: (context, index) =>
-                      story.getPassages()[index].toWidget(story),
-                ),
+                    itemCount: story.getPassages().length,
+                    itemBuilder: (context, index) {
+                      var passageBuilder = story.getPassages()[index];
+                      return Container(
+                        decoration: BoxDecoration(
+                          color: Theme.of(context).backgroundColor,
+                          border: Border.all(
+                            color: Theme.of(context).primaryColor,
+                            width: 3.0,
+                          ),
+                        ),
+                        child: ListTile(
+                            title: Text(passageBuilder.text),
+                            onTap: () async {
+                              await Navigator.pushNamed(
+                                context,
+                                "/editPassage",
+                                arguments: EditPassageViewArguments(
+                                    story: story,
+                                    passageBuilder: passageBuilder),
+                              );
+                            }),
+                      );
+                    }),
               ),
             if (!showCreateMeta)
               SlideableButton(
@@ -121,7 +167,7 @@ class StoryViewHeader extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
-            Text("Назва: "),
+            Text("Title: "),
             Text(story.title),
           ],
         ),
@@ -129,7 +175,7 @@ class StoryViewHeader extends StatelessWidget {
           width: 40,
         ),
         SlideableButton(
-          child: styledContainerForButton(context, "Редагувати"),
+          child: styledContainerForButton(context, "Edit"),
           onPress: onEdit,
         ),
       ],
@@ -165,8 +211,8 @@ class _CreateMetaStoryViewState extends State<CreateMetaStoryView> {
           TextFormField(
             decoration: InputDecoration(
               icon: Icon(Icons.title),
-              hintText: "Введіть назву історії",
-              labelText: "Назва: ",
+              hintText: "Enter story title",
+              labelText: "Title: ",
             ),
             initialValue: widget.story == null ? "" : widget.story.title,
             onSaved: (value) {
@@ -176,8 +222,8 @@ class _CreateMetaStoryViewState extends State<CreateMetaStoryView> {
           TextFormField(
             decoration: InputDecoration(
               icon: Icon(Icons.description),
-              hintText: "Введіть описання історії",
-              labelText: "Описання: ",
+              hintText: "Enter story description",
+              labelText: "Description: ",
             ),
             onSaved: (value) {
               _description = value;
@@ -187,8 +233,8 @@ class _CreateMetaStoryViewState extends State<CreateMetaStoryView> {
           TextFormField(
             decoration: InputDecoration(
               icon: Icon(Icons.title),
-              hintText: "Список авторів через кому",
-              labelText: "Автори: ",
+              hintText: "List of authors separated by comma",
+              labelText: "Authors: ",
             ),
             onSaved: (value) {
               _authors = value;
@@ -200,14 +246,14 @@ class _CreateMetaStoryViewState extends State<CreateMetaStoryView> {
             child: RaisedButton(
               onPressed: () {
                 _formKey.currentState.save();
-                var story = StoryBuilder(
-                  title: _title,
-                  description: _description,
-                  authors: [_authors],
-                );
-                widget.onSave(story);
+                var newStory =
+                    widget.story == null ? StoryBuilder() : widget.story;
+                newStory.title = _title;
+                newStory.description = _description;
+                newStory.authors = [_authors];
+                widget.onSave(newStory);
               },
-              child: Text("Зберегти"),
+              child: Text("Save"),
             ),
           )
         ],
