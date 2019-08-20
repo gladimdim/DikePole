@@ -16,7 +16,6 @@ class GameView extends StatefulWidget {
 class _MainViewState extends State<GameView> {
   @override
   Widget build(BuildContext context) {
-    print(widget.story.passages);
     return Scaffold(
       body: PassageView(currentStory: widget.story),
     );

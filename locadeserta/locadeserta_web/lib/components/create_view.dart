@@ -49,7 +49,6 @@ class _CreateViewState extends State<CreateView> {
                         story: StoryBuilder.fromStory(Story.generate()),
                         onSave: (StoryBuilder newStory) {
                           setState(() {
-                            print(newStory.getPassages().length);
                             if (story == null) {
                               story = newStory;
                             }
@@ -86,7 +85,7 @@ class _CreateViewState extends State<CreateView> {
                 ),
               ),
             ],
-            if (!showCreateMeta)
+            if (!showCreateMeta) ...[
               StoryViewHeader(
                 story: story,
                 onEdit: () {
@@ -95,7 +94,6 @@ class _CreateViewState extends State<CreateView> {
                   });
                 },
               ),
-            if (!showCreateMeta)
               CreatePassage(
                 onAdd: (PassageTypes type) {
                   setState(() {
@@ -103,9 +101,8 @@ class _CreateViewState extends State<CreateView> {
                   });
                 },
               ),
-            if (!showCreateMeta && story != null)
               SizedBox(
-                height: MediaQuery.of(context).size.height * 0.8,
+                height: MediaQuery.of(context).size.height * 0.7,
                 width: MediaQuery.of(context).size.width,
                 child: ListView.builder(
                     itemCount: story.getPassages().length,
@@ -130,7 +127,6 @@ class _CreateViewState extends State<CreateView> {
                       );
                     }),
               ),
-            if (!showCreateMeta)
               SlideableButton(
                 child: styledContainerForButton(context, "Play"),
                 onPress: () async {
@@ -144,6 +140,7 @@ class _CreateViewState extends State<CreateView> {
                   );
                 },
               )
+            ],
           ],
         ),
       ),

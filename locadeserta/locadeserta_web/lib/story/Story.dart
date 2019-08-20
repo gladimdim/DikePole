@@ -248,7 +248,6 @@ class PassageRandom extends PassageBase {
   int getNext(int option) {
     var random = Random();
     var nextRandom = random.nextInt(next.length);
-    print("Next random: $nextRandom");
     return next[nextRandom];
   }
 

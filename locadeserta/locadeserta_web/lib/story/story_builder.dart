@@ -1,6 +1,6 @@
 import 'package:flutter_web/material.dart';
 import 'package:locadeserta_web/story/Story.dart';
-import 'package:locadeserta_web/story/widgets/passage_continue_builder_view.dart';
+import 'package:locadeserta_web/story/widgets/passage_builder_view.dart';
 import 'package:tuple/tuple.dart';
 
 class StoryBuilder {
@@ -122,6 +122,13 @@ class PassageBuilderRandom extends PassageBuilderBase {
     return ListTile(
       title: Text(this.text),
       subtitle: Text(this.next.toString()),
+    );
+  }
+
+  Widget toEditWidget(StoryBuilder storyBuilder) {
+    return PassageRandomBuilderView(
+      passage: this,
+      storyBuilder: storyBuilder,
     );
   }
 
