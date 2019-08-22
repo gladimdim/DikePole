@@ -98,15 +98,23 @@ class PassageState extends State<PassageView> with TickerProviderStateMixin {
     );
   }
 
+  List<HistoryItem> _getLastFiveItems(List list) {
+    var amountOfPassages = list.length;
+    if (amountOfPassages > 5) {
+      return list.sublist(amountOfPassages - 5, amountOfPassages);
+    } else {
+      return list;
+    }
+  }
+
   Widget _buildTextSection(BuildContext context) {
     Future.delayed(Duration(milliseconds: 300), _scroll(context));
-    var amountOfPassages = widget.currentStory.history.length;
+
     return Expanded(
         child: SingleChildScrollView(
       controller: _passageScrollController,
       child: Column(
-        children: widget.currentStory.history
-            .sublist(amountOfPassages - 5, amountOfPassages)
+        children: _getLastFiveItems(widget.currentStory.history)
             .map(
               (HistoryItem historyItem) => PassageItemView(
                 historyItem,
