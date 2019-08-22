@@ -25,7 +25,7 @@ class PassageState extends State<PassageView> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        _buildTextRow(context),
+        _buildTextSection(context),
         ..._createButtons(context),
       ],
       crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -98,13 +98,15 @@ class PassageState extends State<PassageView> with TickerProviderStateMixin {
     );
   }
 
-  Widget _buildTextRow(BuildContext context) {
-    Future.delayed(Duration(milliseconds: 200), _scroll(context));
+  Widget _buildTextSection(BuildContext context) {
+    Future.delayed(Duration(milliseconds: 300), _scroll(context));
+    var amountOfPassages = widget.currentStory.history.length;
     return Expanded(
         child: SingleChildScrollView(
       controller: _passageScrollController,
       child: Column(
         children: widget.currentStory.history
+            .sublist(amountOfPassages - 5, amountOfPassages)
             .map(
               (HistoryItem historyItem) => PassageItemView(
                 historyItem,

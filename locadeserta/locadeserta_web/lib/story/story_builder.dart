@@ -70,14 +70,6 @@ class PassageBuilderContinue extends PassageBuilderBase {
   }
 
   @override
-  Widget toWidget(StoryBuilder storyBuilder) {
-    return PassageContinueBuilderView(
-      passage: this,
-      storyBuilder: storyBuilder,
-    );
-  }
-
-  @override
   Widget toEditWidget(StoryBuilder storyBuilder) {
     return PassageContinueBuilderView(
       passage: this,
@@ -115,13 +107,6 @@ class PassageBuilderRandom extends PassageBuilderBase {
       text: text,
       imagePath: imagePath,
       next: next,
-    );
-  }
-
-  Widget toWidget(StoryBuilder storyBuilder) {
-    return ListTile(
-      title: Text(this.text),
-      subtitle: Text(this.next.toString()),
     );
   }
 
@@ -183,8 +168,18 @@ abstract class PassageBuilderBase {
 
   PassageBuilderBase({this.text, this.imagePath, this.id, @required this.type});
 
-  Widget toWidget(StoryBuilder storyBuilder) {
-    return Text(passageTypeToString(type));
+  Widget toWidget() {
+    return Row(
+      children: [
+        Image(
+          image: AssetImage(this.imagePath),
+          width: 48,
+          height: 48,
+          fit: BoxFit.fill,
+        ),
+        Text(text, overflow: TextOverflow.ellipsis,),
+      ],
+    );
   }
 
   Widget toEditWidget(StoryBuilder storyBuilder) {

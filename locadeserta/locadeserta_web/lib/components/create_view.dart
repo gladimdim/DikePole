@@ -6,7 +6,6 @@ import 'package:locadeserta_web/components/edit_passage_view.dart';
 import 'package:locadeserta_web/components/game_view.dart';
 import 'package:locadeserta_web/story/Story.dart';
 import 'package:locadeserta_web/story/story_builder.dart';
-import 'package:locadeserta_web/utils/utils.dart';
 
 class CreateView extends StatefulWidget {
   final Locale locale;
@@ -20,6 +19,7 @@ class CreateView extends StatefulWidget {
 class _CreateViewState extends State<CreateView> {
   bool showCreateMeta = true;
   StoryBuilder story;
+  Map<int, bool> expandedIndexes = Map();
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +32,7 @@ class _CreateViewState extends State<CreateView> {
       ),
       backgroundColor: Theme.of(context).backgroundColor,
       body: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(2.0),
         child: Column(
           children: <Widget>[
             if (showCreateMeta) ...[
@@ -104,28 +104,52 @@ class _CreateViewState extends State<CreateView> {
               SizedBox(
                 height: MediaQuery.of(context).size.height * 0.7,
                 width: MediaQuery.of(context).size.width,
-                child: ListView.builder(
-                    itemCount: story.getPassages().length,
-                    itemBuilder: (context, index) {
-                      var passageBuilder = story.getPassages()[index];
-                      return Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Container(
-                          decoration: getDecorationForContainer(context),
-                          child: ListTile(
-                              title: Text(passageBuilder.text),
-                              onTap: () async {
-                                await Navigator.pushNamed(
-                                  context,
-                                  "/editPassage",
-                                  arguments: EditPassageViewArguments(
-                                      story: story,
-                                      passageBuilder: passageBuilder),
-                                );
-                              }),
-                        ),
-                      );
-                    }),
+                child: ExpansionPanelList(
+                  expansionCallback: (index, expanded) {
+                    print("index: $index, expanded: $expanded");
+                    setState(() {
+                      expandedIndexes[index] = !expanded;
+                      print("selected index: $expandedIndexes");
+                    });
+                  },
+                  children: story.getPassages().map((passage) {
+                    var expandedElement =
+                        expandedIndexes[story.getPassages().indexOf(passage)];
+                    var expanded = false;
+                    if (expandedElement != null) {
+                      expanded = expandedElement;
+                    }
+                    print("is expanded: $expanded. $expandedElement");
+                    return ExpansionPanel(
+                      isExpanded: expanded,
+                      headerBuilder: (context, expanded) => passage.toWidget(),
+                      body: Row(
+                        children: <Widget>[
+                          FlatButton(
+                            child: Text("Edit"),
+                            onPressed: () async {
+                              await Navigator.pushNamed(
+                                context,
+                                "/editPassage",
+                                arguments: EditPassageViewArguments(
+                                    story: story, passageBuilder: passage),
+                              );
+                            },
+                          ),
+                          FlatButton(
+                            child: Text("Remove"),
+                            color: Colors.red,
+                            onPressed: () {
+                              setState(() {
+                                story.getPassages().remove(passage);
+                              });
+                            },
+                          )
+                        ],
+                      ),
+                    );
+                  }).toList(),
+                ),
               ),
               SlideableButton(
                 child: styledContainerForButton(context, "Play"),
