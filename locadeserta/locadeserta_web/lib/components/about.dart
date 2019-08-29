@@ -25,7 +25,7 @@ class About extends StatelessWidget {
             style: Theme.of(context).textTheme.title,
           ),
         ),
-        if (isPortrait(size))
+        if (isSmall(size) && isPortrait(size))
           Hero(
             tag: "CossackHero",
             child: BorderedRandomImageByPath(
@@ -33,15 +33,15 @@ class About extends StatelessWidget {
               size,
             ),
           )
-        else if (!isSmall(size))
+        else
           LimitedBox(
             maxHeight: heightThird(size),
             child: Center(
               child: Center(
                 child: GridView.count(
-                  crossAxisCount: 3,
+                  crossAxisCount: smallestDimension(size) < 500 ? 2 : 3,
                   children: List.generate(
-                    3,
+                    smallestDimension(size) < 500 ? 2 : 3,
                     (index) {
                       var b1 = BackgroundImage.getRandomImageForType(
                           ImageType.RIVER);
