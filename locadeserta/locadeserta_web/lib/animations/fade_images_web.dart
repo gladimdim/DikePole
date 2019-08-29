@@ -39,6 +39,7 @@ class _TweenImageState extends State<TweenImage>
     _animation = Tween(begin: 0.0, end: 1.0).animate(_controller);
     _innerRepeat = widget.repeat;
     _initRepeat(_innerRepeat);
+    _controller.forward();
   }
 
   void _initRepeat(bool repeat) {

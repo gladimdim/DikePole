@@ -168,7 +168,7 @@ class RandomImage {
       _usedRandomNumbers = [];
     }
     var temp = _random.nextInt(_max);
-    if (_usedRandomNumbers.indexOf(temp) >= 0) {
+    if (_usedRandomNumbers.contains(temp)) {
       nextRandom();
       return;
     } else {
@@ -183,3 +183,12 @@ class RandomImage {
 }
 
 enum ImageType { BOAT, STEPPE, FOREST, BULRUSH, RIVER, LANDING, CAMP, COSSACKS }
+
+List<String> getImagesForType(String blackWhiteImagPath) {
+  var split = blackWhiteImagPath.split("/");
+  split.last = "c_${split.last}";
+  return [
+    blackWhiteImagPath,
+    split.join("/"),
+  ];
+}

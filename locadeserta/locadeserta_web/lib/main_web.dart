@@ -1,5 +1,8 @@
 import 'package:flutter_web/material.dart';
+import 'package:locadeserta_web/components/create_view.dart';
+import 'package:locadeserta_web/components/edit_passage_view.dart';
 import 'package:locadeserta_web/main_view_web.dart';
+import 'package:locadeserta_web/components/game_view.dart';
 
 void main() => runApp(MyApp());
 
@@ -19,8 +22,10 @@ class _MyAppState extends State<MyApp> {
     fontFamily: 'Monaco',
     toggleableActiveColor: Colors.black,
     textTheme: TextTheme(
-      title: TextStyle(color: Colors.black, fontFamily: 'Monaco', fontSize: 24.0),
-      button: TextStyle(color: Colors.white, fontFamily: 'Monaco', fontSize: 32.0),
+      title:
+          TextStyle(color: Colors.black, fontFamily: 'Monaco', fontSize: 24.0),
+      button:
+          TextStyle(color: Colors.white, fontFamily: 'Monaco', fontSize: 32.0),
     ),
   );
 
@@ -29,10 +34,10 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       initialRoute: "/",
       routes: {
-        "/": (context) => MainView(
-            onContinue: () => Navigator.pushNamed(context, "/main_menu"),
-            onSetLocale: _onLocaleSet,
-            locale: locale),
+        "/": (context) => MainView(onSetLocale: _onLocaleSet, locale: locale),
+        "/create": (context) => CreateView(locale: locale),
+        ExtractArgumentsGameView.routeName: (context) => ExtractArgumentsGameView(),
+        ExtractEditPassageView.routeName: (context) => ExtractEditPassageView(),
       },
       locale: locale,
       title: 'Loca Deserta',
