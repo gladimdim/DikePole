@@ -28,7 +28,7 @@ class About extends StatelessWidget {
         if (isSmall(size) && isPortrait(size))
           Hero(
             tag: "CossackHero",
-            child: BorderedRandomImageByPath(
+            child: BorderedTweenImageByPath(
               [landing.getImagePathColored(), landing.getImagePath()],
               size,
             ),
@@ -50,7 +50,7 @@ class About extends StatelessWidget {
                         padding: const EdgeInsets.all(2.0),
                         child: Hero(
                           tag: "CossackHero",
-                          child: BorderedRandomImageByPath(
+                          child: BorderedTweenImageByPath(
                             [b1.getImagePath(), b1.getImagePathColored()],
                             size,
                           ),
