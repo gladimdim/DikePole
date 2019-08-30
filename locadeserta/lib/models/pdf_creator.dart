@@ -5,16 +5,16 @@ import 'story_history.dart';
 import 'package:image/image.dart' as ImageUI;
 
 class PdfCreator {
-  final StoryHistory storyHistory;
+  final StoryHistory story;
   var _images = Map<String, ByteData>();
 
-  PdfCreator({this.storyHistory}) {
+  PdfCreator({this.story}) {
     _loadImages();
   }
 
   _loadImages() async {
     var imageItems = this
-        .storyHistory
+        .story
         .getHistory()
         .where((historyItem) => historyItem.type == PassageTypes.IMAGE);
     imageItems.forEach((imageItem) async {
@@ -26,7 +26,7 @@ class PdfCreator {
   Future<Widget> toPdfWidget(Font ttf, Document pdf) async {
     return Center(
       child: Column(
-        children: storyHistory
+        children: story
             .getHistory()
             .map((historyItem) => historyToPdf(historyItem, ttf, pdf))
             .toList(),
@@ -34,15 +34,51 @@ class PdfCreator {
     ); // Center
   }
 
-  Future<Document> toPdfDocument() async {
+  Future<Document> toPdfDocument(String title, String author) async {
     ByteData font = await rootBundle.load("fonts/Raleway/Raleway-Bold.ttf");
     final ttf = Font.ttf(font.buffer.asByteData());
     final pdf = Document();
+    pdf.addPage(
+      Page(
+          pageFormat: PdfPageFormat.a4,
+          build: (Context context) {
+            return Column(
+              children: [
+                Row(
+                  children: [
+                    Text(
+                      "Title: ",
+                      style: TextStyle(
+                          font: ttf, fontSize: 38, fontWeight: FontWeight.bold),
+                    ),
+                    Text(
+                      title,
+                      style: TextStyle(font: ttf, fontSize: 28),
+                    ),
+                  ],
+                ),
+                Row(
+                  children: [
+                    Text(
+                      "Authors: ",
+                      style: TextStyle(
+                          font: ttf, fontSize: 38, fontWeight: FontWeight.bold),
+                    ),
+                    Text(
+                      author,
+                      style: TextStyle(font: ttf, fontSize: 28),
+                    ),
+                  ],
+                ),
+              ],
+            );
+          }),
+    );
     var child = await toPdfWidget(ttf, pdf);
     pdf.addPage(
       Page(
         pageFormat: PdfPageFormat(21.0 * PdfPageFormat.cm,
-            storyHistory.getHistory().length / 3 * 29.7 * PdfPageFormat.cm,
+            story.getHistory().length / 3 * 29.7 * PdfPageFormat.cm,
             marginAll: 2.0 * PdfPageFormat.cm),
         build: (Context context) {
           return child;
@@ -57,21 +93,17 @@ class PdfCreator {
     switch (historyItem.type) {
       case PassageTypes.TEXT:
         return Container(
-          padding: EdgeInsets.all(8.0),
-          decoration: BoxDecoration(
-            border: BoxBorder(
-              width: 2.0,
-              left: true,
-              right: true,
-              bottom: true,
-              top: true,
+            padding: EdgeInsets.all(8.0),
+            decoration: BoxDecoration(
+              border: BoxBorder(
+                width: 2.0,
+                left: true,
+                right: true,
+                bottom: true,
+                top: true,
+              ),
             ),
-          ),
-          child: Text(
-            historyItem.value,
-            style: TextStyle(font: ttf, fontSize: 18),
-          ),
-        );
+            child: _trueTypeText(historyItem.value, ttf));
       case PassageTypes.IMAGE:
         var imageFile = _images[historyItem.value[1]];
         final img = ImageUI.decodeImage(imageFile.buffer.asUint8List());
@@ -99,5 +131,12 @@ class PdfCreator {
       default:
         throw 'Unsupported type: ${historyItem.type}';
     }
+  }
+
+  Widget _trueTypeText(String text, Font ttf) {
+    return Text(
+      text,
+      style: TextStyle(font: ttf, fontSize: 18),
+    );
   }
 }

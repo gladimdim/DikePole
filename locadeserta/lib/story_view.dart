@@ -108,8 +108,12 @@ class _StoryViewState extends State<StoryView> {
                     ),
                     AppBarObject(
                       onTap: () async {
-                        final creator = PdfCreator(storyHistory: currentStory.storyHistory);
-                        final pdf = await creator.toPdfDocument();
+                        final creator =
+                            PdfCreator(story: currentStory.storyHistory);
+                        final pdf = await creator.toPdfDocument(
+                          widget.catalogStory.title,
+                          widget.catalogStory.description,
+                        );
 
                         final file = await _localFile;
                         await file.writeAsBytes(pdf.save());
