@@ -114,8 +114,8 @@ class StoryBridge {
     var randomImage = BackgroundImage.getRandomImageForType(type);
 
     return story.canContinue
-        ? StoryItemText(text)
-        : StoryItemImage([
+        ? HistoryItemText(text)
+        : HistoryItemImage([
             randomImage.getImagePathColored(),
             randomImage.getImagePath(),
           ], type);
@@ -132,7 +132,7 @@ class StoryBridge {
   }
 
   Future<void> chooseChoiceIndex(int i, passage) async {
-    story.storyHistory.addItem(StoryItemText(story.currentChoices[i]));
+    story.storyHistory.addItem(HistoryItemText(story.currentChoices[i]));
     try {
       await platform.invokeMethod("chooseChoiceIndex", i);
       await _doContinue();
@@ -175,7 +175,7 @@ class StoryBridge {
       story.storyHistory
           .addItem(_createPassage(story.currentText, createImageType()));
       if (!story.canContinue) {
-        story.storyHistory.addItem(StoryItemText(story.currentText));
+        story.storyHistory.addItem(HistoryItemText(story.currentText));
       }
     } catch (e) {
       print("Failed at initStory with error: ${e.toString()}");

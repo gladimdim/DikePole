@@ -1,14 +1,18 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:locadeserta/components/app_bar_custom.dart';
 import 'package:locadeserta/models/Auth.dart';
 import 'package:locadeserta/models/Localizations.dart';
+import 'package:locadeserta/models/pdf_creator.dart';
 import 'package:locadeserta/models/story_history.dart';
 import 'package:locadeserta/models/catalogs.dart';
 import 'package:locadeserta/passage_view.dart';
 import 'package:locadeserta/models/persistence.dart';
 import 'package:locadeserta/models/story_bridge.dart';
+import 'package:path_provider/path_provider.dart';
 
 class StoryView extends StatefulWidget {
   final CatalogStory catalogStory;
@@ -87,7 +91,7 @@ class _StoryViewState extends State<StoryView> {
                             }
                             await Persistence.instance
                                 .saveStateToStorageForUser(widget.user,
-                                widget.catalogStory, storyBridge);
+                                    widget.catalogStory, storyBridge);
                           })
                       : Center(child: CircularProgressIndicator()),
                 ),
@@ -101,7 +105,18 @@ class _StoryViewState extends State<StoryView> {
                     AppBarObject(
                       onTap: _resetStory,
                       text: LDLocalizations.of(context).reset,
-                    )
+                    ),
+                    AppBarObject(
+                      onTap: () async {
+                        final creator = PdfCreator(storyHistory: currentStory.storyHistory);
+                        final pdf = await creator.toPdfDocument();
+
+                        final file = await _localFile;
+                        await file.writeAsBytes(pdf.save());
+                        print("DONE");
+                      },
+                      text: LDLocalizations.of(context).shareStory,
+                    ),
                   ],
                 ),
               ],
@@ -110,6 +125,17 @@ class _StoryViewState extends State<StoryView> {
         );
       },
     );
+  }
+
+  Future<String> get _localPath async {
+    final directory = await getApplicationDocumentsDirectory();
+
+    return directory.path;
+  }
+
+  Future<File> get _localFile async {
+    final path = await _localPath;
+    return File('$path/screen1.pdf');
   }
 
   _resetStory() async {

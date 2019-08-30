@@ -9,15 +9,6 @@ class StoryHistory {
     _history = history;
   }
 
-  static createItem(PassageTypes type, value, ImageType imageType) {
-    switch (type) {
-      case PassageTypes.TEXT:
-        return StoryItemText(value);
-      case PassageTypes.IMAGE:
-        return StoryItemImage(value, imageType);
-    }
-  }
-
   addItem(passage) {
     _history.add(passage);
   }
@@ -53,10 +44,10 @@ class StoryHistory {
     var items = map.map((m) {
       var m1 = JsonDecoder().convert(m);
       if (m1["type"] == "PassageTypes.IMAGE") {
-        return StoryItemImage.fromString(m);
+        return HistoryItemImage.fromString(m);
       }
       if (m1["type"] == "PassageTypes.TEXT") {
-        return StoryItemText.fromString(m);
+        return HistoryItemText.fromString(m);
       }
 
       return m1;
@@ -65,12 +56,12 @@ class StoryHistory {
   }
 }
 
-class StoryItemImage {
+class HistoryItemImage extends HistoryItemBase {
   final PassageTypes type = PassageTypes.IMAGE;
   final ImageType imageType;
   final List<String> value;
 
-  StoryItemImage(this.value, this.imageType);
+  HistoryItemImage(this.value, this.imageType);
 
   String toJson() {
     return JsonEncoder.withIndent("  ").convert({
@@ -80,12 +71,12 @@ class StoryItemImage {
     });
   }
 
-  static StoryItemImage fromString(String s) {
+  static HistoryItemImage fromString(String s) {
     var map = JsonDecoder().convert(s);
     var value = JsonDecoder().convert(map["value"]);
     var value2 = List<String>.from(value.map((v) => v.toString()).toList());
     var imageType = imageTypeFromString(map["imageType"]);
-    return StoryItemImage(
+    return HistoryItemImage(
       value2,
       imageType,
     );
@@ -115,22 +106,31 @@ ImageType imageTypeFromString(String s) {
   }
 }
 
-class StoryItemText {
+class HistoryItemText extends HistoryItemBase {
   final PassageTypes type = PassageTypes.TEXT;
   final String value;
 
-  StoryItemText(this.value);
+  HistoryItemText(this.value);
 
   String toJson() {
     return JsonEncoder.withIndent("  ")
         .convert({"value": value, "type": type.toString()});
   }
 
-  static StoryItemText fromString(String s) {
+  static HistoryItemText fromString(String s) {
     var map = JsonDecoder().convert(s);
-    return StoryItemText(
+    return HistoryItemText(
       map["value"],
     );
+  }
+}
+
+abstract class HistoryItemBase {
+  PassageTypes type;
+  var value;
+  String toJson();
+  static fromString(String s) {
+
   }
 }
 

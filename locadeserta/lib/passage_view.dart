@@ -88,7 +88,7 @@ class PassageState extends State<Passage> with TickerProviderStateMixin {
       _imageType,
     );
     var randomImage = BackgroundImage.getRandomImageForType(_imageType);
-    var passageItem = StoryItemImage(
+    var passageItem = HistoryItemImage(
       [randomImage.getImagePath(), randomImage.getImagePathColored()],
       _imageType,
     );
@@ -123,7 +123,7 @@ class PassageState extends State<Passage> with TickerProviderStateMixin {
   void _next() {
     if (widget.currentStory.canContinue == true) {
       widget.onNextOptionSelected(
-          StoryItemText(widget.currentStory.currentText), -1);
+          HistoryItemText(widget.currentStory.currentText), -1);
     }
   }
 
