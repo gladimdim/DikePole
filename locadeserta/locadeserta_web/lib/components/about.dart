@@ -15,85 +15,87 @@ class About extends StatelessWidget {
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     var landing = BackgroundImage.getRandomImageForType(ImageType.LANDING);
-    return SingleChildScrollView(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          Center(
-            child: Text(
-              localization.appTitle,
-              style: Theme.of(context).textTheme.title,
-            ),
+    print("max height: ${heightThird(size)}");
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: [
+        Center(
+          child: Text(
+            localization.appTitle,
+            style: Theme.of(context).textTheme.title,
           ),
-          if (isPortrait(size))
-            Hero(
-              tag: "CossackHero",
-              child: BorderedTweenImageByPath(
-                [landing.getImagePathColored(), landing.getImagePath()],
-                size,
-              ),
-            )
-          else if (!isSmall(size))
-            LimitedBox(
-              maxHeight: heightThird(size),
+        ),
+        if (isSmall(size) && isPortrait(size))
+          Hero(
+            tag: "CossackHero",
+            child: BorderedTweenImageByPath(
+              [landing.getImagePathColored(), landing.getImagePath()],
+              size,
+            ),
+          )
+        else
+          LimitedBox(
+            maxHeight: heightThird(size),
+            child: Center(
               child: Center(
-                child: Center(
-                  child: GridView.count(
-                    crossAxisCount: 3,
-                    children: List.generate(
-                      3,
-                      (index) {
-                        var b1 = BackgroundImage.getRandomImageForType(
-                            ImageType.RIVER);
-                        b1.nextRandom();
-                        return Padding(
-                          padding: const EdgeInsets.all(2.0),
-                          child: Hero(
-                            tag: "CossackHero",
-                            child: BorderedTweenImageByPath(
-                              [b1.getImagePath(), b1.getImagePathColored()],
-                              size,
-                            ),
+                child: GridView.count(
+                  crossAxisCount: smallestDimension(size) < 500 ? 2 : 3,
+                  children: List.generate(
+                    smallestDimension(size) < 500 ? 2 : 3,
+                    (index) {
+                      var b1 = BackgroundImage.getRandomImageForType(
+                          ImageType.RIVER);
+                      b1.nextRandom();
+                      return Padding(
+                        padding: const EdgeInsets.all(2.0),
+                        child: Hero(
+                          tag: "CossackHero",
+                          child: BorderedTweenImageByPath(
+                            [b1.getImagePath(), b1.getImagePathColored()],
+                            size,
                           ),
-                        );
-                      },
-                    ),
+                        ),
+                      );
+                    },
                   ),
                 ),
               ),
             ),
-          Text(
+          ),
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Text(
             localization.aboutGame,
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: <Widget>[
-              InkWell(
-                onTap: () => html.window.open(
-                    "https://play.google.com/store/apps/details?id=gladimdim.locadeserta",
-                    "Google Play Link"),
-                child: Image(
-                  width: widthThird(size),
-                  image: AssetImage(
-                    "images/play_store_badge.png",
-                  ),
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: <Widget>[
+            InkWell(
+              onTap: () => html.window.open(
+                  "https://play.google.com/store/apps/details?id=gladimdim.locadeserta",
+                  "Google Play Link"),
+              child: Image(
+                width: widthThird(size),
+                image: AssetImage(
+                  "images/play_store_badge.png",
                 ),
               ),
-              InkWell(
-                onTap: () => html.window.open(
-                    "https://apps.apple.com/ua/app/дике-поле/id1468068398",
-                    "App Store Link"),
-                child: Image(
-                  width: widthThird(size),
-                  image: AssetImage(
-                    "images/appstore.png",
-                  ),
+            ),
+            InkWell(
+              onTap: () => html.window.open(
+                  "https://apps.apple.com/ua/app/дике-поле/id1468068398",
+                  "App Store Link"),
+              child: Image(
+                width: widthThird(size),
+                image: AssetImage(
+                  "images/appstore.png",
                 ),
               ),
-            ],
-          )
-        ],
-      ),
+            ),
+          ],
+        )
+      ],
     );
   }
 }
