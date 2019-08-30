@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
-import 'package:locadeserta/components/AppBarCustom.dart';
+import 'package:locadeserta/components/app_bar_custom.dart';
 import 'package:locadeserta/models/Auth.dart';
 import 'package:locadeserta/models/Localizations.dart';
 import 'package:locadeserta/models/story_history.dart';

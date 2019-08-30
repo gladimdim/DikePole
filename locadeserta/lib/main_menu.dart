@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:locadeserta/animations/fade_images.dart';
 import 'package:locadeserta/catalog_view.dart';
-import 'package:locadeserta/components/AppBarCustom.dart';
+import 'package:locadeserta/components/app_bar_custom.dart';
 import 'package:locadeserta/models/Localizations.dart';
 import 'package:locadeserta/models/background_image.dart';
 import 'package:locadeserta/story_view.dart';

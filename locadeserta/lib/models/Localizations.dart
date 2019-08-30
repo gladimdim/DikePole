@@ -46,6 +46,7 @@ class LDLocalizations {
       'backtomenu': 'Back to menu',
       'authors': 'Authors: ',
       'storybegin': 'The Beginning',
+      'sharestory': 'Share story',
     },
     'uk': {
       'continue': 'Продовжити',
@@ -77,6 +78,7 @@ class LDLocalizations {
       'backtomenu': 'Назад до меню',
       'authors': 'Автори: ',
       'storybegin': 'Початок',
+      'sharestory': 'Поділитися історією',
     },
     'pl': {
       'continue': 'Dalej',
@@ -109,6 +111,7 @@ class LDLocalizations {
       'backtomenu': 'Powrót do menu',
       'authors': 'Autorzy: ',
       'storybegin': 'Początek',
+      'sharestory': 'Podziel się historią',
     }
   };
 
@@ -222,6 +225,10 @@ class LDLocalizations {
 
   String get storyBegin {
     return _localizedValues[locale.languageCode]['storybegin'];
+  }
+
+  String get shareStory {
+    return _localizedValues[locale.languageCode]['sharestory'];
   }
 }
 

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:locadeserta/animations/fade_images.dart';
 import 'package:locadeserta/animations/slideable_button.dart';
-import 'package:locadeserta/components/AppBarCustom.dart';
+import 'package:locadeserta/components/app_bar_custom.dart';
 import 'package:locadeserta/models/Auth.dart';
 import 'package:locadeserta/models/Localizations.dart';
 import 'package:locadeserta/radiuses.dart';
