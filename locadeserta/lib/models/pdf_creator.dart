@@ -24,15 +24,13 @@ class PdfCreator {
   }
 
   Future<Widget> toPdfWidget(Font ttf, Document pdf) async {
-    return Center(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: story
-            .getHistory()
-            .map((historyItem) => historyToPdf(historyItem, ttf, pdf))
-            .toList(),
-      ),
-    ); // Center
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: story
+          .getHistory()
+          .map((historyItem) => historyToPdf(historyItem, ttf, pdf))
+          .toList(),
+    );
   }
 
   Future<Document> toPdfDocument(String title, String author) async {
@@ -94,7 +92,7 @@ class PdfCreator {
     pdf.addPage(
       Page(
         pageFormat: PdfPageFormat(21.0 * PdfPageFormat.cm,
-            story.getHistory().length / 3 * 29.7 * PdfPageFormat.cm,
+            story.getHistory().length * 29.7 * PdfPageFormat.cm,
             marginAll: 2.0 * PdfPageFormat.cm),
         build: (Context context) {
           return child;
@@ -105,21 +103,24 @@ class PdfCreator {
     return pdf;
   }
 
-  Container historyToPdf(HistoryItemBase historyItem, Font ttf, Document pdf) {
+  Widget historyToPdf(HistoryItemBase historyItem, Font ttf, Document pdf) {
     switch (historyItem.type) {
       case PassageTypes.TEXT:
         return Container(
-            padding: EdgeInsets.all(8.0),
-            decoration: BoxDecoration(
-              border: BoxBorder(
-                width: 2.0,
-                left: true,
-                right: true,
-                bottom: true,
-                top: true,
-              ),
+          padding: EdgeInsets.all(8.0),
+          decoration: BoxDecoration(
+            border: BoxBorder(
+              width: 2.0,
+              left: true,
+              right: true,
+              bottom: true,
+              top: true,
             ),
-            child: _trueTypeText(historyItem.value, ttf));
+          ),
+          child: Center(
+            child: _trueTypeText(historyItem.value, ttf),
+          ),
+        );
       case PassageTypes.IMAGE:
         var imageFile = _images[historyItem.value[1]];
         final img = ImageUI.decodeImage(imageFile.buffer.asUint8List());
