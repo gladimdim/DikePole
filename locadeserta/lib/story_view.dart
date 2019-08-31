@@ -3,6 +3,8 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
+import 'package:wc_flutter_share/wc_flutter_share.dart';
+
 import 'package:locadeserta/components/app_bar_custom.dart';
 import 'package:locadeserta/models/Auth.dart';
 import 'package:locadeserta/models/Localizations.dart';
@@ -112,12 +114,17 @@ class _StoryViewState extends State<StoryView> {
                             PdfCreator(story: currentStory.storyHistory);
                         final pdf = await creator.toPdfDocument(
                           widget.catalogStory.title,
-                          widget.catalogStory.description,
+                          widget.catalogStory.author,
                         );
 
                         final file = await _localFile;
                         await file.writeAsBytes(pdf.save());
-                        print("DONE");
+                        var result =  file.readAsBytesSync();
+                        await WcFlutterShare.share(
+                            sharePopupTitle: LDLocalizations.of(context).shareStory,
+                            fileName: '${widget.catalogStory.title}.pdf',
+                            mimeType: 'application/pdf',
+                            bytesOfFile: result);
                       },
                       text: LDLocalizations.of(context).shareStory,
                     ),

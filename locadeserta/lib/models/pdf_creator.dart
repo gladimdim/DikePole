@@ -26,6 +26,7 @@ class PdfCreator {
   Future<Widget> toPdfWidget(Font ttf, Document pdf) async {
     return Center(
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: story
             .getHistory()
             .map((historyItem) => historyToPdf(historyItem, ttf, pdf))
@@ -42,35 +43,50 @@ class PdfCreator {
       Page(
           pageFormat: PdfPageFormat.a4,
           build: (Context context) {
-            return Column(
-              children: [
-                Row(
-                  children: [
-                    Text(
-                      "Title: ",
-                      style: TextStyle(
-                          font: ttf, fontSize: 38, fontWeight: FontWeight.bold),
-                    ),
-                    Text(
-                      title,
-                      style: TextStyle(font: ttf, fontSize: 28),
-                    ),
-                  ],
+            return Container(
+              decoration: BoxDecoration(
+                border: BoxBorder(
+                  width: 2.0,
+                  left: true,
+                  right: true,
+                  bottom: true,
+                  top: true,
                 ),
-                Row(
-                  children: [
-                    Text(
-                      "Authors: ",
-                      style: TextStyle(
-                          font: ttf, fontSize: 38, fontWeight: FontWeight.bold),
-                    ),
-                    Text(
-                      author,
-                      style: TextStyle(font: ttf, fontSize: 28),
-                    ),
-                  ],
-                ),
-              ],
+              ),
+              child: Column(
+                children: [
+                  Row(
+                    children: [
+                      Text(
+                        "Title: ",
+                        style: TextStyle(
+                            font: ttf,
+                            fontSize: 48,
+                            fontWeight: FontWeight.bold),
+                      ),
+                      Text(
+                        title,
+                        style: TextStyle(font: ttf, fontSize: 30),
+                      ),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      Text(
+                        "Authors: ",
+                        style: TextStyle(
+                            font: ttf,
+                            fontSize: 38,
+                            fontWeight: FontWeight.bold),
+                      ),
+                      Text(
+                        author,
+                        style: TextStyle(font: ttf, fontSize: 28),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             );
           }),
     );
