@@ -127,7 +127,7 @@ class _StoryViewState extends State<StoryView> {
   _onExportPressed(BuildContext context) async {
     final creator = PdfCreator(story: currentStory.storyHistory);
 
-    Toast.show(LDLocalizations.of(context).preparingExport, context,
+    Toast.show(LDLocalizations.of(context).warningLongProcess, context,
         duration: Toast.LENGTH_SHORT, gravity: Toast.BOTTOM);
 
     final pdf = await creator.toPdfDocument(widget.catalogStory.title, widget.catalogStory.author);

@@ -49,6 +49,7 @@ class LDLocalizations {
       'sharestory': 'Share story',
       'preparingexport': 'Preparing export of the story',
       'openingsharedialog': 'Sending story to share dialog',
+      'warninglongprocess': 'This feature takes some time to finish, please wait.'
     },
     'uk': {
       'continue': 'Продовжити',
@@ -82,7 +83,8 @@ class LDLocalizations {
       'storybegin': 'Початок',
       'sharestory': 'Поділитися історією',
       'preparingexport': 'Підготовка до експорту історії',
-      'openingsharedialog': 'Передаю дані до діалогу поширення'
+      'openingsharedialog': 'Передаю дані до діалогу поширення',
+      'warninglongprocess': 'Ця функція займає деякий час, будь ласка, почекайте.'
     },
     'pl': {
       'continue': 'Dalej',
@@ -118,6 +120,7 @@ class LDLocalizations {
       'sharestory': 'Podziel się historią',
       'preparingexport': 'Przygotowanie historii na eksport',
       'openingsharedialog': 'Wysyłanie danych do okna dialogowego udostępniania',
+      'warninglongprocess': 'Ta funkcja wymaga trochę czasu, proszę czekać.'
     }
   };
 
@@ -241,6 +244,9 @@ class LDLocalizations {
   }
   String get openingShareDialog {
     return _localizedValues[locale.languageCode]['openingsharedialog'];
+  }
+  String get warningLongProcess {
+    return _localizedValues[locale.languageCode]['warninglongprocess'];
   }
 }
 
