@@ -1,9 +1,8 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:wc_flutter_share/wc_flutter_share.dart';
+import 'package:toast/toast.dart';
 
 import 'package:locadeserta/components/app_bar_custom.dart';
 import 'package:locadeserta/models/Auth.dart';
@@ -14,7 +13,6 @@ import 'package:locadeserta/models/catalogs.dart';
 import 'package:locadeserta/passage_view.dart';
 import 'package:locadeserta/models/persistence.dart';
 import 'package:locadeserta/models/story_bridge.dart';
-import 'package:path_provider/path_provider.dart';
 
 class StoryView extends StatefulWidget {
   final CatalogStory catalogStory;
@@ -109,23 +107,7 @@ class _StoryViewState extends State<StoryView> {
                       text: LDLocalizations.of(context).reset,
                     ),
                     AppBarObject(
-                      onTap: () async {
-                        final creator =
-                            PdfCreator(story: currentStory.storyHistory);
-                        final pdf = await creator.toPdfDocument(
-                          widget.catalogStory.title,
-                          widget.catalogStory.author,
-                        );
-
-                        final file = await _localFile;
-                        await file.writeAsBytes(pdf.save());
-                        var result =  file.readAsBytesSync();
-                        await WcFlutterShare.share(
-                            sharePopupTitle: LDLocalizations.of(context).shareStory,
-                            fileName: '${widget.catalogStory.title}.pdf',
-                            mimeType: 'application/pdf',
-                            bytesOfFile: result);
-                      },
+                      onTap: () => _onExportPressed(context),
                       text: LDLocalizations.of(context).shareStory,
                     ),
                   ],
@@ -138,18 +120,26 @@ class _StoryViewState extends State<StoryView> {
     );
   }
 
-  Future<String> get _localPath async {
-    final directory = await getApplicationDocumentsDirectory();
-
-    return directory.path;
-  }
-
-  Future<File> get _localFile async {
-    final path = await _localPath;
-    return File('$path/screen1.pdf');
-  }
-
   _resetStory() async {
     await storyBridge.resetState();
+  }
+
+  _onExportPressed(BuildContext context) async {
+    final creator = PdfCreator(story: currentStory.storyHistory);
+
+    Toast.show(LDLocalizations.of(context).preparingExport, context,
+        duration: Toast.LENGTH_SHORT, gravity: Toast.BOTTOM);
+
+    final pdf = await creator.toPdfDocument(widget.catalogStory.title, widget.catalogStory.author);
+
+    Toast.show(LDLocalizations.of(context).openingShareDialog, context,
+        duration: Toast.LENGTH_SHORT, gravity: Toast.BOTTOM);
+
+    await WcFlutterShare.share(
+      sharePopupTitle: LDLocalizations.of(context).shareStory,
+      fileName: '${widget.catalogStory.title}.pdf',
+      mimeType: 'application/pdf',
+      bytesOfFile: pdf.save(),
+    );
   }
 }

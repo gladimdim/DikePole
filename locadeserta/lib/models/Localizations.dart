@@ -47,6 +47,8 @@ class LDLocalizations {
       'authors': 'Authors: ',
       'storybegin': 'The Beginning',
       'sharestory': 'Share story',
+      'preparingexport': 'Preparing export of the story',
+      'openingsharedialog': 'Sending story to share dialog',
     },
     'uk': {
       'continue': 'Продовжити',
@@ -79,6 +81,8 @@ class LDLocalizations {
       'authors': 'Автори: ',
       'storybegin': 'Початок',
       'sharestory': 'Поділитися історією',
+      'preparingexport': 'Підготовка до експорту історії',
+      'openingsharedialog': 'Передаю дані до діалогу поширення'
     },
     'pl': {
       'continue': 'Dalej',
@@ -112,6 +116,8 @@ class LDLocalizations {
       'authors': 'Autorzy: ',
       'storybegin': 'Początek',
       'sharestory': 'Podziel się historią',
+      'preparingexport': 'Przygotowanie historii na eksport',
+      'openingsharedialog': 'Wysyłanie danych do okna dialogowego udostępniania',
     }
   };
 
@@ -229,6 +235,12 @@ class LDLocalizations {
 
   String get shareStory {
     return _localizedValues[locale.languageCode]['sharestory'];
+  }
+  String get preparingExport {
+    return _localizedValues[locale.languageCode]['preparingexport'];
+  }
+  String get openingShareDialog {
+    return _localizedValues[locale.languageCode]['openingsharedialog'];
   }
 }
 
