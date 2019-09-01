@@ -92,7 +92,7 @@ class PdfCreator {
     pdf.addPage(
       Page(
         pageFormat: PdfPageFormat(21.0 * PdfPageFormat.cm,
-            story.getHistory().length * 29.7 * PdfPageFormat.cm,
+            story.getHistory().length / 4 * 29.7 * PdfPageFormat.cm,
             marginAll: 2.0 * PdfPageFormat.cm),
         build: (Context context) {
           return child;
