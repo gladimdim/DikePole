@@ -1,8 +1,10 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
-import 'package:wc_flutter_share/wc_flutter_share.dart';
-import 'package:toast/toast.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:share_extend/share_extend.dart';
 
 import 'package:locadeserta/components/app_bar_custom.dart';
 import 'package:locadeserta/models/Auth.dart';
@@ -125,21 +127,66 @@ class _StoryViewState extends State<StoryView> {
   }
 
   _onExportPressed(BuildContext context) async {
+    var dialog = await _showDialog(context);
+    if (dialog == "NO") {
+      return;
+    }
     final creator = PdfCreator(story: currentStory.storyHistory);
+    print("before topdfdocument");
+    final pdf = await creator.toPdfDocument(
+        widget.catalogStory.title, widget.catalogStory.author);
+    print("after topdfdocument");
 
-    Toast.show(LDLocalizations.of(context).warningLongProcess, context,
-        duration: Toast.LENGTH_SHORT, gravity: Toast.BOTTOM);
+    final file = await _localFile;
+    await file.writeAsBytes(pdf.save());
+    ShareExtend.share(file.path, "pdf");
+  }
 
-    final pdf = await creator.toPdfDocument(widget.catalogStory.title, widget.catalogStory.author);
+  Future<String> get _localPath async {
+    final directory = await getApplicationDocumentsDirectory();
 
-    Toast.show(LDLocalizations.of(context).openingShareDialog, context,
-        duration: Toast.LENGTH_SHORT, gravity: Toast.BOTTOM);
+    return directory.path;
+  }
 
-    await WcFlutterShare.share(
-      sharePopupTitle: LDLocalizations.of(context).shareStory,
-      fileName: '${widget.catalogStory.title}.pdf',
-      mimeType: 'application/pdf',
-      bytesOfFile: pdf.save(),
+  Future<File> get _localFile async {
+    final path = await _localPath;
+    return File('$path/story.pdf');
+  }
+
+  Future<String> _showDialog(BuildContext context) async {
+    return showDialog<String>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          content: SizedBox(
+            height: MediaQuery.of(context).size.height * 0.5,
+            child: Column(children: [
+              Text(
+                LDLocalizations.of(context).dialogLongProcessWarning,
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+              Text(
+                LDLocalizations.of(context).dialogLongProcessDescription,
+              )
+            ]),
+          ),
+          actions: <Widget>[
+            FlatButton(
+              child: Text(LDLocalizations.of(context).createPdfDocument),
+              onPressed: () {
+                Navigator.of(context).pop("YES");
+              },
+            ),
+            FlatButton(
+              child: Text(LDLocalizations.of(context).cancel),
+              onPressed: () {
+                Navigator.of(context).pop("NO");
+              },
+            ),
+          ],
+        );
+      },
     );
   }
 }

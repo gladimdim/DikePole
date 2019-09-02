@@ -3,7 +3,7 @@ import 'dart:core';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart' show SynchronousFuture;
 
-var version = "1.74";
+var version = "1.75";
 
 class LDLocalizations {
   LDLocalizations(this.locale);
@@ -36,11 +36,11 @@ class LDLocalizations {
       'tobecontinued': 'To be continued. Wait on the story update.',
       'showstorydetails': 'More Details',
       'translationnotready':
-      'Translations are not yet ready for your language.',
+          'Translations are not yet ready for your language.',
       'storysaved': 'Story saved',
       'storynotsaved': 'Story not saved',
       'aboutgame':
-      'Interactive Fiction. This game allows to dive into heroic epoch in XVII century, which took part in the southern part of Ukraine, at Loca Deserta. You not only read the story but you can select how it proceeds further! Depending on your selections you can get absolutely different events, encounters. Or you can even die.',
+          'Interactive Fiction. This game allows to dive into heroic epoch in XVII century, which took part in the southern part of Ukraine, at Loca Deserta. You not only read the story but you can select how it proceeds further! Depending on your selections you can get absolutely different events, encounters. Or you can even die.',
       'menu': 'Menu',
       'backtostories': 'Back to stories',
       'backtomenu': 'Back to menu',
@@ -49,7 +49,13 @@ class LDLocalizations {
       'sharestory': 'Share story',
       'preparingexport': 'Preparing export of the story',
       'openingsharedialog': 'Sending story to share dialog',
-      'warninglongprocess': 'This feature takes some time to finish, please wait.'
+      'warninglongprocess':
+          'This feature takes some time to finish, please wait.',
+      'dialoglongprocesswarning': 'Operation might take up to 30 seconds.',
+      'dialoglongprocessdescription':
+          'We have to compile your story into passages, add pictures and create PDF file. This is why is takes so much.',
+      'createpdfdocument': 'Create',
+      'cancel': 'Cancel',
     },
     'uk': {
       'continue': 'Продовжити',
@@ -75,7 +81,7 @@ class LDLocalizations {
       'storysaved': 'Гру збережено',
       'storynotsaved': 'Гру не було збережено',
       'aboutgame':
-      'Інтерактивна гра-книга (Interactive Fiction). Гра дозволяє зануритись в бурхливі події 1620х років, які відбувалися на Дикому Полі. Але ви не тільки читаєте історію, а ще і можете вибирати подальший розвиток подій. В залежності від вашого вибору, історія продовжується в різних напрямах, або ж і просто обривається назавжди.',
+          'Інтерактивна гра-книга (Interactive Fiction). Гра дозволяє зануритись в бурхливі події 1620х років, які відбувалися на Дикому Полі. Але ви не тільки читаєте історію, а ще і можете вибирати подальший розвиток подій. В залежності від вашого вибору, історія продовжується в різних напрямах, або ж і просто обривається назавжди.',
       'menu': 'Меню',
       'backtostories': 'Назад до історій',
       'backtomenu': 'Назад до меню',
@@ -84,7 +90,13 @@ class LDLocalizations {
       'sharestory': 'Поділитися історією',
       'preparingexport': 'Підготовка до експорту історії',
       'openingsharedialog': 'Передаю дані до діалогу поширення',
-      'warninglongprocess': 'Ця функція займає деякий час, будь ласка, почекайте.'
+      'warninglongprocess':
+          'Ця функція займає деякий час, будь ласка, почекайте.',
+      'dialoglongprocesswarning': 'Операція може зайняти до 30 секунд.',
+      'dialoglongprocessdescription':
+          'Нам необхідно обробити вашу пройдену історію, сформувати абзаци і додати картинки. Тому це так довго.',
+      'createpdfdocument': 'Сформувати документ',
+      'cancel': 'Скасувати',
     },
     'pl': {
       'continue': 'Dalej',
@@ -107,11 +119,11 @@ class LDLocalizations {
       'tobecontinued': 'Ciąg dalszy nastąpi. Poczekaj na aktualizację historii',
       'showstorydetails': 'Więcej szczegółów',
       'translationnotready':
-      'Tłumaczenie opowiadań dla twojego języka nie jest jeszcze gotowe.',
+          'Tłumaczenie opowiadań dla twojego języka nie jest jeszcze gotowe.',
       'storysaved': 'Gra jest zapisana',
       'storynotsaved': 'Gra nie została zapisana',
       'aboutgame':
-      'Interaktywna fikcja. Ta gra pozwala zanurzyć się w heroicznej epoce w XVII wieku, która odbyła się w południowej części Ukrainy, w Loca Deserta. Nie tylko czytasz historię, ale możesz wybrać, jak dalej będzie postępować! W zależności od wyboru możesz uzyskać zupełnie inne wydarzenia, spotkania. Albo możesz nawet umrzeć.',
+          'Interaktywna fikcja. Ta gra pozwala zanurzyć się w heroicznej epoce w XVII wieku, która odbyła się w południowej części Ukrainy, w Loca Deserta. Nie tylko czytasz historię, ale możesz wybrać, jak dalej będzie postępować! W zależności od wyboru możesz uzyskać zupełnie inne wydarzenia, spotkania. Albo możesz nawet umrzeć.',
       'menu': 'Menu',
       'backtostories': 'Powrót do historii',
       'backtomenu': 'Powrót do menu',
@@ -119,8 +131,14 @@ class LDLocalizations {
       'storybegin': 'Początek',
       'sharestory': 'Podziel się historią',
       'preparingexport': 'Przygotowanie historii na eksport',
-      'openingsharedialog': 'Wysyłanie danych do okna dialogowego udostępniania',
-      'warninglongprocess': 'Ta funkcja wymaga trochę czasu, proszę czekać.'
+      'openingsharedialog':
+          'Wysyłanie danych do okna dialogowego udostępniania',
+      'warninglongprocess': 'Ta funkcja wymaga trochę czasu, proszę czekać.',
+      'dialoglongprocesswarning': 'Operacja może potrwać do 30 sekund.',
+      'dialoglongprocessdescription':
+          'Musimy przetworzyć twoją historię, utworzyć akapity i dodać zdjęcia. Dlatego tak długo to trwało.',
+      'createpdfdocument': 'Utwórz dokument',
+      'cancel': 'Anuluj',
     }
   };
 
@@ -239,14 +257,29 @@ class LDLocalizations {
   String get shareStory {
     return _localizedValues[locale.languageCode]['sharestory'];
   }
+
   String get preparingExport {
     return _localizedValues[locale.languageCode]['preparingexport'];
   }
+
   String get openingShareDialog {
     return _localizedValues[locale.languageCode]['openingsharedialog'];
   }
-  String get warningLongProcess {
-    return _localizedValues[locale.languageCode]['warninglongprocess'];
+
+  String get dialogLongProcessWarning {
+    return _localizedValues[locale.languageCode]['dialoglongprocesswarning'];
+  }
+
+  String get dialogLongProcessDescription {
+    return _localizedValues[locale.languageCode]['dialoglongprocessdescription'];
+  }
+
+  String get createPdfDocument {
+    return _localizedValues[locale.languageCode]['createpdfdocument'];
+  }
+
+  String get cancel {
+    return _localizedValues[locale.languageCode]['cancel'];
   }
 }
 
