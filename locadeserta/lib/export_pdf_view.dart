@@ -6,6 +6,7 @@ import 'package:locadeserta/models/pdf_creator.dart';
 import 'package:locadeserta/models/story_history.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:share_extend/share_extend.dart';
+import 'package:tuple/tuple.dart';
 
 class ExportToPDF extends StatefulWidget {
   final StoryHistory storyHistory;
@@ -27,13 +28,30 @@ class _ExportToPDFState extends State<ExportToPDF> {
       appBar: AppBar(
         title: Text("Export"),
       ),
-      body: StreamBuilder<String>(
+      body: StreamBuilder<Tuple2<double, String>>(
           stream: widget.creator.decodeProgress,
           builder: (context, snapshot) {
             print(snapshot.hasData);
             if (snapshot.hasData) {
-              return Center(
-                child: Text(snapshot.data),
+              return Padding(
+                padding: EdgeInsets.only(top: 12.0),
+                child: Center(
+                  child: Column(
+                    children: <Widget>[
+                      Text(
+                        "Processing image",
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 20.0),
+                      ),
+                      Image(
+                        image: AssetImage(snapshot.data.item2),
+                      ),
+                      LinearProgressIndicator(
+                        value: snapshot.data.item1,
+                      ),
+                    ],
+                  ),
+                ),
               );
             } else {
               return Center(
@@ -62,7 +80,8 @@ class _ExportToPDFState extends State<ExportToPDF> {
   }
 
   Future<File> get _localFile async {
-    return File('$_localPath/story.pdf');
+    var fileName = await _localPath;
+    return File('$fileName/story.pdf');
   }
 }
 

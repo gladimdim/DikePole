@@ -6,16 +6,17 @@ import 'package:pdf/widgets.dart';
 import 'story_history.dart';
 import 'package:image/image.dart' as ImageUI;
 import 'package:flutter/foundation.dart';
+import 'package:tuple/tuple.dart';
 
 class PdfCreator {
   final StoryHistory story;
   var _images = Map<String, ImageUI.Image>();
-  StreamController<String> _decodeProgress;
+  StreamController<Tuple2<double, String>> _decodeProgress;
   Stream decodeProgress;
 
   PdfCreator({this.story}) {
-   _decodeProgress = StreamController<String>();
-   decodeProgress = _decodeProgress.stream;
+    _decodeProgress = StreamController<Tuple2<double, String>>();
+    decodeProgress = _decodeProgress.stream;
   }
 
   loadImages() async {
@@ -23,13 +24,15 @@ class PdfCreator {
         .story
         .getHistory()
         .where((historyItem) => historyItem.type == PassageTypes.IMAGE);
+    var counter = 0.0;
     var futuresCompleted = await Future.forEach(imageItems, ((imageItem) async {
       if (_images.containsKey(imageItem.value[1])) {
         return;
       }
       var file = await rootBundle.load(imageItem.value[1]);
+      counter += 0.3;
       print("decoding image: ${imageItem.value[1]}");
-      _decodeProgress.sink.add("decoding image: ${imageItem.value[1]}");
+      _decodeProgress.sink.add(Tuple2(counter, imageItem.value[1]));
       var uiImage = await compute(decodeImage, file.buffer.asUint8List());
       _images[imageItem.value[1]] = uiImage;
     }));
@@ -105,9 +108,7 @@ class PdfCreator {
     pdf.addPage(
       Page(
         pageFormat: PdfPageFormat(21.0 * PdfPageFormat.cm,
-            story
-                .getHistory()
-                .length / 4 * 29.7 * PdfPageFormat.cm,
+            story.getHistory().length / 4 * 29.7 * PdfPageFormat.cm,
             marginAll: 2.0 * PdfPageFormat.cm),
         build: (Context context) {
           return child;
