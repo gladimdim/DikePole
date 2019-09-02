@@ -10,8 +10,12 @@ import 'package:share_extend/share_extend.dart';
 class ExportToPDF extends StatefulWidget {
   final StoryHistory storyHistory;
   final CatalogStory catalogStory;
+  PdfCreator creator;
 
-  ExportToPDF({this.catalogStory, this.storyHistory});
+  ExportToPDF({this.catalogStory, this.storyHistory}) {
+    creator = PdfCreator(story: storyHistory);
+  }
+
   @override
   _ExportToPDFState createState() => _ExportToPDFState();
 }
@@ -23,25 +27,30 @@ class _ExportToPDFState extends State<ExportToPDF> {
       appBar: AppBar(
         title: Text("Export"),
       ),
-      body: Center(
-        child: RaisedButton(
-          child: Text("Export"),
-          onPressed: () => _onExportPressed(context),
-        )
-      ),
+      body: StreamBuilder<String>(
+          stream: widget.creator.decodeProgress,
+          builder: (context, snapshot) {
+            print(snapshot.hasData);
+            if (snapshot.hasData) {
+              return Center(
+                child: Text(snapshot.data),
+              );
+            } else {
+              return Center(
+                  child: RaisedButton(
+                child: Text("Export"),
+                onPressed: () => _onExportPressed(context),
+              ));
+            }
+          }),
     );
   }
 
   _onExportPressed(BuildContext context) async {
-    final creator = PdfCreator(story: widget.storyHistory);
-    print("creator start async");
+    final creator = widget.creator;
     await creator.loadImages();
-    print('creator end async"');
-    print("before topdfdocument");
     final pdf = await creator.toPdfDocument(
         widget.catalogStory.title, widget.catalogStory.author);
-    print("after topdfdocument");
-
     final file = await _localFile;
     await file.writeAsBytes(pdf.save());
     ShareExtend.share(file.path, "pdf");
@@ -49,16 +58,13 @@ class _ExportToPDFState extends State<ExportToPDF> {
 
   Future<String> get _localPath async {
     final directory = await getApplicationDocumentsDirectory();
-
     return directory.path;
   }
 
   Future<File> get _localFile async {
-    final path = await _localPath;
-    return File('$path/story.pdf');
+    return File('$_localPath/story.pdf');
   }
 }
-
 
 class ExportPdfViewArguments {
   final StoryHistory storyHistory;

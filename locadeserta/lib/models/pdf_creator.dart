@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/services.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart';
@@ -8,23 +10,31 @@ import 'package:flutter/foundation.dart';
 class PdfCreator {
   final StoryHistory story;
   var _images = Map<String, ImageUI.Image>();
+  StreamController<String> _decodeProgress;
+  Stream decodeProgress;
 
-  PdfCreator({this.story});
+  PdfCreator({this.story}) {
+   _decodeProgress = StreamController<String>();
+   decodeProgress = _decodeProgress.stream;
+  }
 
   loadImages() async {
     var imageItems = this
         .story
         .getHistory()
         .where((historyItem) => historyItem.type == PassageTypes.IMAGE);
-    return Future.forEach(imageItems, ((imageItem) async {
+    var futuresCompleted = await Future.forEach(imageItems, ((imageItem) async {
       if (_images.containsKey(imageItem.value[1])) {
         return;
       }
       var file = await rootBundle.load(imageItem.value[1]);
       print("decoding image: ${imageItem.value[1]}");
+      _decodeProgress.sink.add("decoding image: ${imageItem.value[1]}");
       var uiImage = await compute(decodeImage, file.buffer.asUint8List());
       _images[imageItem.value[1]] = uiImage;
     }));
+
+    return futuresCompleted;
   }
 
   Widget toPdfWidget(Font ttf, Document pdf) {
@@ -95,7 +105,9 @@ class PdfCreator {
     pdf.addPage(
       Page(
         pageFormat: PdfPageFormat(21.0 * PdfPageFormat.cm,
-            story.getHistory().length / 4 * 29.7 * PdfPageFormat.cm,
+            story
+                .getHistory()
+                .length / 4 * 29.7 * PdfPageFormat.cm,
             marginAll: 2.0 * PdfPageFormat.cm),
         build: (Context context) {
           return child;
