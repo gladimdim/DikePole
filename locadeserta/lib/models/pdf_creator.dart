@@ -3,34 +3,37 @@ import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart';
 import 'story_history.dart';
 import 'package:image/image.dart' as ImageUI;
+import 'package:flutter/foundation.dart';
 
 class PdfCreator {
   final StoryHistory story;
-  var _images = Map<String, ByteData>();
+  var _images = Map<String, ImageUI.Image>();
 
-  PdfCreator({this.story}) {
-    _loadImages();
-  }
+  PdfCreator({this.story});
 
-  _loadImages() async {
+  loadImages() async {
     var imageItems = this
         .story
         .getHistory()
         .where((historyItem) => historyItem.type == PassageTypes.IMAGE);
-    imageItems.forEach((imageItem) async {
+    return Future.forEach(imageItems, ((imageItem) async {
+      if (_images.containsKey(imageItem.value[1])) {
+        return;
+      }
       var file = await rootBundle.load(imageItem.value[1]);
-      _images[imageItem.value[1]] = file;
-    });
+      print("decoding image: ${imageItem.value[1]}");
+      var uiImage = await compute(decodeImage, file.buffer.asUint8List());
+      _images[imageItem.value[1]] = uiImage;
+    }));
   }
 
-  Future<Widget> toPdfWidget(Font ttf, Document pdf) async {
+  Widget toPdfWidget(Font ttf, Document pdf) {
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: story
-          .getHistory()
-          .map((historyItem) => historyToPdf(historyItem, ttf, pdf))
-          .toList(),
-    );
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: story
+            .getHistory()
+            .map((historyItem) => historyToPdf(historyItem, ttf, pdf))
+            .toList());
   }
 
   Future<Document> toPdfDocument(String title, String author) async {
@@ -88,7 +91,7 @@ class PdfCreator {
             );
           }),
     );
-    var child = await toPdfWidget(ttf, pdf);
+    var child = toPdfWidget(ttf, pdf);
     pdf.addPage(
       Page(
         pageFormat: PdfPageFormat(21.0 * PdfPageFormat.cm,
@@ -122,15 +125,16 @@ class PdfCreator {
           ),
         );
       case PassageTypes.IMAGE:
-        var imageFile = _images[historyItem.value[1]];
-        final img = ImageUI.decodeImage(imageFile.buffer.asUint8List());
+        var img = _images[historyItem.value[1]];
+
         final image = PdfImage(
           pdf.document,
           image: img.data.buffer.asUint8List(),
           width: img.width,
           height: img.height,
         );
-        return Container(
+
+        var result = Container(
           padding: EdgeInsets.all(8.0),
           decoration: BoxDecoration(
             border: BoxBorder(
@@ -145,6 +149,8 @@ class PdfCreator {
             image,
           ),
         );
+
+        return result;
       default:
         throw 'Unsupported type: ${historyItem.type}';
     }
@@ -156,4 +162,9 @@ class PdfCreator {
       style: TextStyle(font: ttf, fontSize: 18),
     );
   }
+}
+
+ImageUI.Image decodeImage(List<int> input) {
+  print("yes");
+  return ImageUI.decodeImage(input);
 }

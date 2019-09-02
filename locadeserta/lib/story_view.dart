@@ -132,6 +132,9 @@ class _StoryViewState extends State<StoryView> {
       return;
     }
     final creator = PdfCreator(story: currentStory.storyHistory);
+    print("creator start async");
+    await creator.loadImages();
+    print('creator end async"');
     print("before topdfdocument");
     final pdf = await creator.toPdfDocument(
         widget.catalogStory.title, widget.catalogStory.author);
