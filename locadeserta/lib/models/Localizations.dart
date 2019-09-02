@@ -3,7 +3,7 @@ import 'dart:core';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart' show SynchronousFuture;
 
-var version = "1.76";
+var version = "1.77";
 
 class LDLocalizations {
   LDLocalizations(this.locale);
@@ -54,7 +54,7 @@ class LDLocalizations {
           'We have to compile your story into passages, add pictures and create PDF file. It might take some time.',
       'createpdfdocument': 'Create',
       'cancel': 'Cancel',
-      'processingimage': "Processing image",
+      'processingimage': "Processing image, please wait",
       'savingexportdocument': 'Saving exported file'
     },
     'uk': {
@@ -95,7 +95,7 @@ class LDLocalizations {
           'Нам необхідно обробити вашу пройдену історію, сформувати абзаци і додати картинки. Тому це може заняти деякий час.',
       'createpdfdocument': 'Сформувати документ',
       'cancel': 'Скасувати',
-      'processingimage': 'Обробляємо картинку',
+      'processingimage': 'Обробляємо картинку, будь ласка, почекайте',
       'savingexportdocument': 'Зберігаємо експортований файл',
     },
     'pl': {

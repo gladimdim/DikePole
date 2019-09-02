@@ -43,7 +43,7 @@ class _ExportToPDFState extends State<ExportToPDF> {
                   Text(
                     LDLocalizations.of(context).savingExportFile,
                     style:
-                        TextStyle(fontSize: 48.0, fontWeight: FontWeight.bold),
+                        TextStyle(fontSize: 30.0, fontWeight: FontWeight.bold),
                   )
                 ],
               )
@@ -60,7 +60,7 @@ class _ExportToPDFState extends State<ExportToPDF> {
                             Text(
                               LDLocalizations.of(context).processingImage,
                               style: TextStyle(
-                                  fontWeight: FontWeight.bold, fontSize: 48.0),
+                                  fontWeight: FontWeight.bold, fontSize: 30.0),
                             ),
                             Image(
                               image: AssetImage(snapshot.data.item2),
