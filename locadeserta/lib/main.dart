@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:locadeserta/catalog_view.dart';
+import 'package:locadeserta/export_pdf_view.dart';
 import 'package:locadeserta/main_menu.dart';
 import 'package:locadeserta/login_view.dart';
 import 'package:locadeserta/models/Auth.dart';
@@ -14,7 +15,7 @@ void main() async {
     await FlutterStatusbarcolor.setStatusBarColor(Colors.black);
     await FlutterStatusbarcolor.setNavigationBarColor(Colors.black);
     await FlutterStatusbarcolor.setNavigationBarWhiteForeground(true);
-  } catch(e) {
+  } catch (e) {
     print(e);
   }
   runApp(LocaDesertaApp());
@@ -57,6 +58,8 @@ class _LocaDesertaAppState extends State<LocaDesertaApp> {
             ),
         ExtractCatalogViewArguments.routeName: (context) =>
             ExtractCatalogViewArguments(),
+        ExtractExportPdfViewArguments.routeName: (context) =>
+            ExtractExportPdfViewArguments(),
       },
       localizationsDelegates: [
         const LDLocalizationsDelegate(),

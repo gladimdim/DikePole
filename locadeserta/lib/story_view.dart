@@ -1,20 +1,17 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
-import 'package:path_provider/path_provider.dart';
-import 'package:share_extend/share_extend.dart';
+import 'package:locadeserta/export_pdf_view.dart';
 
 import 'package:locadeserta/components/app_bar_custom.dart';
 import 'package:locadeserta/models/Auth.dart';
 import 'package:locadeserta/models/Localizations.dart';
-import 'package:locadeserta/models/pdf_creator.dart';
 import 'package:locadeserta/models/story_history.dart';
 import 'package:locadeserta/models/catalogs.dart';
 import 'package:locadeserta/passage_view.dart';
 import 'package:locadeserta/models/persistence.dart';
 import 'package:locadeserta/models/story_bridge.dart';
+import 'package:locadeserta/export_pdf_view.dart';
 
 class StoryView extends StatefulWidget {
   final CatalogStory catalogStory;
@@ -109,7 +106,14 @@ class _StoryViewState extends State<StoryView> {
                       text: LDLocalizations.of(context).reset,
                     ),
                     AppBarObject(
-                      onTap: () => _onExportPressed(context),
+                      onTap: () => Navigator.pushNamed(
+                        context,
+                        ExtractExportPdfViewArguments.routeName,
+                        arguments: ExportPdfViewArguments(
+                          catalogStory: widget.catalogStory,
+                          storyHistory: currentStory.storyHistory,
+                        ),
+                      ),
                       text: LDLocalizations.of(context).shareStory,
                     ),
                   ],
@@ -124,72 +128,5 @@ class _StoryViewState extends State<StoryView> {
 
   _resetStory() async {
     await storyBridge.resetState();
-  }
-
-  _onExportPressed(BuildContext context) async {
-    var dialog = await _showDialog(context);
-    if (dialog == "NO") {
-      return;
-    }
-    final creator = PdfCreator(story: currentStory.storyHistory);
-    print("creator start async");
-    await creator.loadImages();
-    print('creator end async"');
-    print("before topdfdocument");
-    final pdf = await creator.toPdfDocument(
-        widget.catalogStory.title, widget.catalogStory.author);
-    print("after topdfdocument");
-
-    final file = await _localFile;
-    await file.writeAsBytes(pdf.save());
-    ShareExtend.share(file.path, "pdf");
-  }
-
-  Future<String> get _localPath async {
-    final directory = await getApplicationDocumentsDirectory();
-
-    return directory.path;
-  }
-
-  Future<File> get _localFile async {
-    final path = await _localPath;
-    return File('$path/story.pdf');
-  }
-
-  Future<String> _showDialog(BuildContext context) async {
-    return showDialog<String>(
-      context: context,
-      barrierDismissible: false, // user must tap button!
-      builder: (BuildContext context) {
-        return AlertDialog(
-          content: SizedBox(
-            height: MediaQuery.of(context).size.height * 0.5,
-            child: Column(children: [
-              Text(
-                LDLocalizations.of(context).dialogLongProcessWarning,
-                style: TextStyle(fontWeight: FontWeight.bold),
-              ),
-              Text(
-                LDLocalizations.of(context).dialogLongProcessDescription,
-              )
-            ]),
-          ),
-          actions: <Widget>[
-            FlatButton(
-              child: Text(LDLocalizations.of(context).createPdfDocument),
-              onPressed: () {
-                Navigator.of(context).pop("YES");
-              },
-            ),
-            FlatButton(
-              child: Text(LDLocalizations.of(context).cancel),
-              onPressed: () {
-                Navigator.of(context).pop("NO");
-              },
-            ),
-          ],
-        );
-      },
-    );
   }
 }
