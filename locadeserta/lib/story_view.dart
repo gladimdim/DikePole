@@ -11,7 +11,6 @@ import 'package:locadeserta/models/catalogs.dart';
 import 'package:locadeserta/passage_view.dart';
 import 'package:locadeserta/models/persistence.dart';
 import 'package:locadeserta/models/story_bridge.dart';
-import 'package:locadeserta/export_pdf_view.dart';
 
 class StoryView extends StatefulWidget {
   final CatalogStory catalogStory;

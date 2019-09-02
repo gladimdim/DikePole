@@ -49,11 +49,13 @@ class LDLocalizations {
       'openingsharedialog': 'Sending story to share dialog',
       'warninglongprocess':
           'This feature takes some time to finish, please wait.',
-      'dialoglongprocesswarning': 'Operation might take up to 30 seconds.',
-      'dialoglongprocessdescription':
-          'We have to compile your story into passages, add pictures and create PDF file. This is why it takes so much.',
+      'longprocesswarning': 'Operation might take up to 30 seconds.',
+      'longprocessdescription':
+          'We have to compile your story into passages, add pictures and create PDF file. It might take some time.',
       'createpdfdocument': 'Create',
       'cancel': 'Cancel',
+      'processingimage': "Processing image",
+      'savingexportdocument': 'Saving exported file'
     },
     'uk': {
       'continue': 'Продовжити',
@@ -88,11 +90,13 @@ class LDLocalizations {
       'openingsharedialog': 'Передаю дані до діалогу поширення',
       'warninglongprocess':
           'Ця функція займає деякий час, будь ласка, почекайте.',
-      'dialoglongprocesswarning': 'Операція може зайняти до 30 секунд.',
-      'dialoglongprocessdescription':
-          'Нам необхідно обробити вашу пройдену історію, сформувати абзаци і додати картинки. Тому це так довго.',
+      'longprocesswarning': 'Операція може зайняти до 30 секунд.',
+      'longprocessdescription':
+          'Нам необхідно обробити вашу пройдену історію, сформувати абзаци і додати картинки. Тому це може заняти деякий час.',
       'createpdfdocument': 'Сформувати документ',
       'cancel': 'Скасувати',
+      'processingimage': 'Обробляємо картинку',
+      'savingexportdocument': 'Зберігаємо експортований файл',
     },
     'pl': {
       'continue': 'Dalej',
@@ -128,11 +132,13 @@ class LDLocalizations {
       'openingsharedialog':
           'Wysyłanie danych do okna dialogowego udostępniania',
       'warninglongprocess': 'Ta funkcja wymaga trochę czasu, proszę czekać.',
-      'dialoglongprocesswarning': 'Operacja może potrwać do 30 sekund.',
-      'dialoglongprocessdescription':
+      'longprocesswarning': 'Operacja może potrwać do 30 sekund.',
+      'longprocessdescription':
           'Musimy przetworzyć twoją historię, utworzyć akapity i dodać zdjęcia. Dlatego tak długo to trwało.',
       'createpdfdocument': 'Utwórz dokument',
       'cancel': 'Anuluj',
+      'processingimage': 'Przetwarzanie obrazu',
+      'savingexportdocument': 'Zapisywanie wyeksportowanego pliku',
     }
   };
 
@@ -252,12 +258,12 @@ class LDLocalizations {
     return _localizedValues[locale.languageCode]['openingsharedialog'];
   }
 
-  String get dialogLongProcessWarning {
-    return _localizedValues[locale.languageCode]['dialoglongprocesswarning'];
+  String get longProcessWarning {
+    return _localizedValues[locale.languageCode]['longprocesswarning'];
   }
 
-  String get dialogLongProcessDescription {
-    return _localizedValues[locale.languageCode]['dialoglongprocessdescription'];
+  String get longProcessDescription {
+    return _localizedValues[locale.languageCode]['longprocessdescription'];
   }
 
   String get createPdfDocument {
@@ -266,6 +272,13 @@ class LDLocalizations {
 
   String get cancel {
     return _localizedValues[locale.languageCode]['cancel'];
+  }
+
+  String get processingImage {
+    return _localizedValues[locale.languageCode]['processingimage'];
+  }
+  String get savingExportFile {
+    return _localizedValues[locale.languageCode]['savingexportdocument'];
   }
 }
 

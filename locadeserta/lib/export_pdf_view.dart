@@ -41,7 +41,7 @@ class _ExportToPDFState extends State<ExportToPDF> {
                     size: 150,
                   ),
                   Text(
-                    "Saving to file",
+                    LDLocalizations.of(context).savingExportFile,
                     style:
                         TextStyle(fontSize: 48.0, fontWeight: FontWeight.bold),
                   )
@@ -58,7 +58,7 @@ class _ExportToPDFState extends State<ExportToPDF> {
                         child: Column(
                           children: <Widget>[
                             Text(
-                              "Processing image",
+                              LDLocalizations.of(context).processingImage,
                               style: TextStyle(
                                   fontWeight: FontWeight.bold, fontSize: 48.0),
                             ),
@@ -67,6 +67,7 @@ class _ExportToPDFState extends State<ExportToPDF> {
                             ),
                             LinearProgressIndicator(
                               value: snapshot.data.item1,
+                              semanticsValue: snapshot.data.item1.toString(),
                             ),
                           ],
                         ),
@@ -74,25 +75,29 @@ class _ExportToPDFState extends State<ExportToPDF> {
                     );
                   } else {
                     return Center(
-                        child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Text(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Text(
                             LDLocalizations.of(context)
-                                .dialogLongProcessDescription,
+                                .longProcessDescription,
                             style: TextStyle(
-                                fontWeight: FontWeight.bold, fontSize: 20.0), textAlign: TextAlign.center,),
-                        SizedBox(
-                          height: 150,
-                        ),
-                        RaisedButton(
-                          child: Text(LDLocalizations.of(context).start,
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold, fontSize: 20.0)),
-                          onPressed: () => _onExportPressed(context),
-                        ),
-                      ],
-                    ));
+                                fontWeight: FontWeight.bold, fontSize: 20.0),
+                            textAlign: TextAlign.center,
+                          ),
+                          SizedBox(
+                            height: 150,
+                          ),
+                          RaisedButton(
+                            child: Text(LDLocalizations.of(context).start,
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 20.0)),
+                            onPressed: () => _onExportPressed(context),
+                          ),
+                        ],
+                      ),
+                    );
                   }
                 }),
       ),
