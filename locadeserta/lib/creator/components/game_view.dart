@@ -17,6 +17,9 @@ class _MainViewState extends State<GameView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text("Preview"),
+      ),
       body: PassageView(currentStory: widget.story),
     );
   }
