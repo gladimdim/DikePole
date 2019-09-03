@@ -3,6 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:locadeserta/catalog_view.dart';
+import 'package:locadeserta/creator/components/create_view.dart';
+import 'package:locadeserta/creator/components/edit_passage_view.dart';
+import 'package:locadeserta/creator/components/edit_story.dart';
+import 'package:locadeserta/creator/components/game_view.dart';
 import 'package:locadeserta/export_pdf_view.dart';
 import 'package:locadeserta/main_menu.dart';
 import 'package:locadeserta/login_view.dart';
@@ -60,6 +64,12 @@ class _LocaDesertaAppState extends State<LocaDesertaApp> {
             ExtractCatalogViewArguments(),
         ExtractExportPdfViewArguments.routeName: (context) =>
             ExtractExportPdfViewArguments(),
+        "/create": (context) => CreateView(locale: locale),
+        ExtractEditStoryViewArguments.routeName: (context) =>
+            ExtractEditStoryViewArguments(),
+        ExtractArgumentsGameView.routeName: (context) =>
+            ExtractArgumentsGameView(),
+        ExtractEditPassageView.routeName: (context) => ExtractEditPassageView()
       },
       localizationsDelegates: [
         const LDLocalizationsDelegate(),

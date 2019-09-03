@@ -10,7 +10,7 @@ import 'package:locadeserta/story_view.dart';
 import 'package:locadeserta/models/Auth.dart';
 import 'package:locadeserta/models/catalogs.dart';
 import 'package:locadeserta/waiting_screen.dart';
-import 'package:locadeserta/animations/SlideRightNavigation.dart';
+import 'package:locadeserta/animations/slide_right_navigation.dart';
 import 'package:locadeserta/models/persistence.dart';
 import 'package:locadeserta/radiuses.dart';
 
@@ -95,6 +95,10 @@ class _MainMenuState extends State<MainMenu> with TickerProviderStateMixin {
                 AppBarObject(
                   onTap: () => Navigator.of(context).pop(),
                   text: LDLocalizations.of(context).backToMenu,
+                ),
+                AppBarObject(
+                    onTap: () => Navigator.pushNamed(context, "/create"),
+                    text: "Create story"
                 )
               ],
             ),
