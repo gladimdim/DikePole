@@ -25,7 +25,7 @@ class _AppBarCustomState extends State<AppBarCustom> {
       right: 0,
       child: Container(
         color: Theme.of(context).primaryColor,
-        height: expanded ? 80 : 32,
+        height: expanded ? 230 : 32,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.end,
           children: <Widget>[
@@ -58,10 +58,10 @@ class _AppBarCustomState extends State<AppBarCustom> {
             ),
             if (expanded)
               SizedBox(
-                height: 48,
+                height: 200,
                 width: MediaQuery.of(context).size.width,
                 child: ListView(
-                  scrollDirection: Axis.horizontal,
+                  scrollDirection: Axis.vertical,
                   children:
                       widget.appBarButtons.map(_appBarObjectToButton).toList(),
                 ),

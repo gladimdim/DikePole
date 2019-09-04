@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
+import 'package:locadeserta/components/game_app_bar.dart';
+import 'package:locadeserta/components/game_component.dart';
 import 'package:locadeserta/export_pdf_view.dart';
 
-import 'package:locadeserta/components/app_bar_custom.dart';
 import 'package:locadeserta/models/Auth.dart';
-import 'package:locadeserta/models/Localizations.dart';
 import 'package:locadeserta/models/story_history.dart';
 import 'package:locadeserta/models/catalogs.dart';
 import 'package:locadeserta/passage_view.dart';
@@ -67,58 +67,40 @@ class _StoryViewState extends State<StoryView> {
         }
 
         currentStory = storyBridge.story;
-        return Scaffold(
-          backgroundColor: Theme.of(context).backgroundColor,
-          body: SafeArea(
-            child: Stack(
-              children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.only(top: 32),
-                  child: snapshot.hasData
-                      ? Passage(
-                          currentStory: currentStory,
-                          onNextOptionSelected: (s, i) async {
-                            _previousPassages.add(s);
-                            switch (s.type) {
-                              case PassageTypes.TEXT:
-                                await storyBridge.doContinue();
-                                break;
-                              case PassageTypes.IMAGE:
-                                await storyBridge.chooseChoiceIndex(i, s);
-                                break;
-                            }
-                            await Persistence.instance
-                                .saveStateToStorageForUser(widget.user,
-                                    widget.catalogStory, storyBridge);
-                          })
-                      : Center(child: CircularProgressIndicator()),
+        return GameViewScaffold(
+          child: Padding(
+            padding: const EdgeInsets.only(top: 32),
+            child: snapshot.hasData
+                ? Passage(
+                    currentStory: currentStory,
+                    onNextOptionSelected: (s, i) async {
+                      _previousPassages.add(s);
+                      switch (s.type) {
+                        case PassageTypes.TEXT:
+                          await storyBridge.doContinue();
+                          break;
+                        case PassageTypes.IMAGE:
+                          await storyBridge.chooseChoiceIndex(i, s);
+                          break;
+                      }
+                      await Persistence.instance.saveStateToStorageForUser(
+                          widget.user, widget.catalogStory, storyBridge);
+                    })
+                : Center(child: CircularProgressIndicator()),
+          ),
+          appBar: GameAppBar(
+            title: widget.catalogStory.title,
+            onResetStory: _resetStory,
+            onExportStory: () {
+              Navigator.pushNamed(
+                context,
+                ExtractExportPdfViewArguments.routeName,
+                arguments: ExportPdfViewArguments(
+                  catalogStory: widget.catalogStory,
+                  storyHistory: currentStory.storyHistory,
                 ),
-                AppBarCustom(
-                  title: widget.catalogStory.title,
-                  appBarButtons: [
-                    AppBarObject(
-                      onTap: () => Navigator.pop(context),
-                      text: LDLocalizations.of(context).backToStories,
-                    ),
-                    AppBarObject(
-                      onTap: _resetStory,
-                      text: LDLocalizations.of(context).reset,
-                    ),
-                    AppBarObject(
-                      onTap: () => Navigator.pushNamed(
-                        context,
-                        ExtractExportPdfViewArguments.routeName,
-                        arguments: ExportPdfViewArguments(
-                          catalogStory: widget.catalogStory,
-                          storyHistory: currentStory.storyHistory,
-                        ),
-                      ),
-                      text: LDLocalizations.of(context).shareStory,
-                    ),
-                  ],
-                ),
-              ],
-            ),
+              );
+            },
           ),
         );
       },

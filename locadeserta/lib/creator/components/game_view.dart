@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:locadeserta/components/game_app_bar.dart';
+import 'package:locadeserta/components/game_component.dart';
 import 'package:locadeserta/creator/components/passage_view.dart';
 import 'package:locadeserta/creator/story/Story.dart';
 
@@ -16,11 +18,13 @@ class GameView extends StatefulWidget {
 class _MainViewState extends State<GameView> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Preview"),
+    return GameViewScaffold(
+      appBar: GameAppBar(
+        title: "Preview",
+        onResetStory: () {},
+        onExportStory: () {},
       ),
-      body: PassageView(currentStory: widget.story),
+      child: PassageView(currentStory: widget.story),
     );
   }
 }
