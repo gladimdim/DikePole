@@ -200,4 +200,10 @@ class _LoginViewState extends State<LoginView> {
   _setNewLocale(Locale locale) {
     widget.onSetLocale(locale);
   }
+
+  @override
+  void dispose() {
+    super.dispose();
+    print("disposing login view");
+  }
 }
