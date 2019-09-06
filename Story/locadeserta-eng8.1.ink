@@ -442,8 +442,8 @@ After a quick meal, the old man asked: “Will you spend the night in my home? I
 
 “Maybe one of you will stay to help me? My strength is not as it was before. It would be good to have a second pair of hands to look after the boys,” continued the hermit. The Cossacks exchanged glances. “There are few people in the camp, we must return. Maybe Dmytro could stay? He has just joined us,” Ustym replied. Dmytro thought what to do. 
         
-        +[Погодитись залишитися з відлюдником] -> staywithhermit
-        +[Відмовитись і повертатись до козаків] -> decline
+        +[Stay with the hermit] -> staywithhermit
+        +[Decline and return with the others] -> decline
         
     = decline
     # image cossacks # image forest
@@ -486,39 +486,146 @@ When the greater part of the Cossacks had gathered near the edge of the forest, 
 
 
 === nightchase
-# image tobecontinued
-       TO BE CONTINUED...
-        
-       -> DONE
-       
-       
+       # image steppe # image forest
+
+     
+The rain quickly became a real downpour. Heavy cold drops forcefully hit the ground, shrubbery and the nearby cliffs. The wind howled, rattling tree branches and scattering leaves on the ground. {hide.tree: Dmytro shivered from the cold and exhaustion when he carefully, like a cat, climbed down to the ground. He managed to get back to the rocky outcropping. | Dmytro slowly got up, trying his best not to shiver.} He turned back to the forest under the cover of rain and darkness, following the path he took yesterday, walking around open clearings and keeping away from the stream. Close to the very edge of the forest he caught a glimpse of a fire up ahead. Dmytro turned in another direction, away from danger, until he made his way to a cluster of thickets on the edge of the open steppe. He was drenched to the skin and rivulets of water ran down his body. His clothing was heavy from moisture and his body – from exhaustion and hunger. At the same time, he was terribly thirsty. He squatted beside a shrub and greedily drank the droplets of water running down one of the branches. He then got up and grimly walked straight into the dark sea of cold steppe grasses. The rain continued falling. Dmytro completely lost track of time, slowly making his way forward through the Wild Fields. A small part of the steppe, which he saw in front of him, seemed to always look the same. At last, he began to see some small potholes, filled with water, and in time, behind the veil of rain and darkness, he glimpsed the downward slope of a valley. Walking downward, Dmytro slipped and tumbled to the very bottom of the valley. For a while he lay in the mud without moving. His head was spinning. The runaway tried to get up. It seemed that his bones weren’t broken, but he was quickly losing strength. The Cossack limped further down the valley, staggering like a drunk man. The stream near his feet had soon become a muddy and fast-running broad current that bubbled like a mountain river. Dmytro seemed to make out a tiny trail that led up the valley. When he had climbed up the slope to a landing, the downpour had subsided somewhat. However, the wind seemed to become stronger, blowing towards Dmytro moisture from the storm and heavy swaths of fog. It was starting to get lighter and Dmytro made out a dark shape on the hillock ahead of him. He used his last strength to trudge to the spot, his legs almost giving out. The shape turned out to be a small cave on a rocky outcropping. The entrance to the cave was wide but rather low. Not analyzing what he was doing, Dmytro fell onto the earth and crawled into the cave. Inside, it was surprisingly dry, but the space inside was small and narrow like a coffin, the ground covered in a thick layer of dry grass. Dmytro turned on his back and either fell asleep or lost consciousness.
+      
+      {hide.tree: -> wakehermit | -> captured}
+      
+=== wakehermit
+      # image forest  # image tobecontinued
+      
+
+{captured: He realized that he was alive when he regained consciousness and felt a sharp pain in his legs. The hellish pain was slowly subsiding. | The Cossack woke from the smell of food. His head was aching, as if after a night of revelry. His felt as if every bone in his body was broken.} He tried to open his eyes, but he saw only a mixture of colors. Dmytro felt his head spin from the warped image, but he kept on looking until his sight slowly focused. Gradually he saw where he was. It was a small room with a low smoke-stained ceiling. Dmytro tilted his head to the side to get a better look at his surroundings. Suffering from another spell of dizziness, he made out a table close to the bed, covered with a variety of bottles and cups. {captured: Suddenly, his legs were again needled with pain. | A candle was burning down on the table and steam rose from a clay bowl, spreading the pleasant aroma of fish soup. Dmytro tried to get up, but he couldn’t even move his hand.} He wanted to scream from despair, but he could only manage a low moan. The door creaked and a tall elderly man entered the room. He had a long beard, worn clothing, and a large wooden cross on his neck. 
+    
+    To be continued…
+     ->DONE
+     
+
 === encouner
-# image tobecontinued
-TO BE CONTINUED...
-        
-       -> DONE
+    # image steppe
+   Dmytro noticed that something was moving towards him through the inky darkness. He stopped and raised his bows, peering at the ghostly silhouettes. There were five to six wolves running through the steppe straight towards the Cossack. They were almost invisible, only dark stains on the background of dry russet grass. Only their eyes, as they approached Dmytro, betrayed their real nature, glittering in the weak light of the moon. 
+
+    The wolves were about forty paces away from Dmytro when they stopped, formed a line, and surveyed the newcomer. 
+    
+    + [Shoot the nearest wolf]->fight
+    +[Talk loudly]->talk
+->DONE
+
+=== talk
+   # image steppe # image forest
+   
+   Dmytro spoke to the shaggy beasts in a loud yet calm voice, urging them to move on. He added some shamanic proverbs and proclaimed that he had no bad blood with the wolves in this steppe. The wolves seemed to listen attentively but continued to stand their ground. When everything was completely silent, the biggest wolf approached Dmytro. Two others joined him. The Cossack slowly made a few steps backwards without turning, lowering his bow. The wolves slowly loped past him and disappeared in the darkness. The three who had stayed behind, ligered a little, but then also took off into the distance.
+
+  Dmytro crossed himself and caught his breath. His heart was beating like crazy. Very soon, however, he had calmed down and continued his journey in the direction from which the wolf pack had come from.
+    
+    { not stay: ->forest}
+    
+    ->fail
+    
+->DONE
+
+=== fight
+    # image fight # image steppe
+    
+Without thinking too long, Dmytro shot the shot the closest wolf, but the arrow only slipped through the wolf’s fur and landed in the tall steppe grass. In two leaps, the wolf was very close to Dmytro, baring his long fangs. Dmytro grabbed his knife, but another wolf was already biting his leg. Then both wolves slightly retreaded. The pack circled around the runaway, making advances to bite him again. The second time, Dmytro managed to shoot down one of the wolves and, immediately, the whole pack attacked him.
+
+A Tartar cavalry unit was making its way through the morning steppe. There were several horsemen in front of the rest of the cavalry, riding forward and gathering the cold morning dew. They moved slowly, surveying the terrain for any tracks. Suddenly, they stopped. One of the warriors dismounted from his horse and walked to side to take a closer look at the grass. For a while he looked at his finding and then picked something up and returned to the others. Back in the saddle, the tartar called out to one of his companions and, having reached him, showed him a knife, covered in a thick crust of blood. His companion was surprised to see the familiar knife and turned the weapon in his hands until the cavalry unit once more set off.
+# image theend
+
+The End
+
+->DONE
+
+=== skiptreasure
+
+    = main
+   # image bulrush # image boat # image river # image cossacks # image camp
+
+    Mulling over for a while, Dmytro decided to not waste time on the mysterious island and continued his journey.
+    
+   The runaway entered another tributary of the river, incredibly long, like a river or a channel. It gradually became narrower, making a sharp bend at the end, and becoming hardly big enough for the boat to move through. On the left side, there was a fairly large plot of land with a good smattering of trees and reeds. The reed thickets stretched for at least ten paces between the trees and the water. Dmytro couldn’t find a clearing by which he could approach the island. Suddenly, from behind him came a long shadow and he heard water splash. The Cossack immediately understood that another boat was approaching through the thickets behind him. Dmytro paddled with all his strength, not even looking back, but far ahead of him another boat emerged from the reeds and blocked the tributary. It was then that Dmytro noticed a clearing in the reeds that led to the island. He directed his boat that way and soon landed in the shallows. Several armed men immediately appeared on the shore. One of them told Dmytro to get out of the boat and come on land.
+    
+    {avoidfight: -> samecossacks | -> meetingcossacks }
+    
+    = samecossacks
+    # image bulrush # image boat # image river # image cossacks # image camp
+   
+   He wasn’t even surprised that he recognized some of them. Fate had once again led him to the Cossack fishermen. After battle, they had left their camp on the Tartar coast and retreated to this island. Their boats were hidden along the perimeter of the island. It appeared that the whole unit had settled on this island. 
+  The runaway was again brought before the leader of the group. Dmytro had a feeling that he wouldn’t be able to escape the second time but help arrived from an unexpected place. A large boat approached the island. The Cossacks in this boat looked refreshed and full of energy. They also had better weapons. They embarked ashore, carrying a large oaken chest among them. Dmytro was escorted away from this new group, but, suddenly, one of the newcomers stopped. “Dmytro?” He asked, surprised, “Dmytro from Bila Tserkva? I though you had died at Yasy! What a meeting!” Dmytro cast a glance at his guards. “How do you do? I also remember you, Stepan! As you see, I ran away from the Tartars, but my Christian brothers almost drowned me.” He clearly remembered this young man who had once persuaded him to leave behind the registered Cossacks and set off for the Wild Fields. They were from the same region, from the Bila Tserkva subdivision. They had met during service and had good relations, but Stepan quickly disappeared after taking something from the treasury. “Good God!” Proclaimed Stepan and went to the center of the island with the others without saying anything more. Dmytro, however, wasn’t led any further but left to sit on the ground under the watchful eye of one of the Cossacks. Soon, Stepan returned and, smiling, said: “I put in a word for you. No one will try to drown you anymore – you can be sure. But come with us to the winter camp. There will be a big war with the Turks. We need manpower.”
+        -> staywcossacks.winterstay
+    
+    -> DONE
+    
+    = meetingcossacks
+    # image bulrush # image boat # image river # image cossacks # image camp
+  
+   He was brought into a small tent under some willows in the middle of the island. In the tent there was a man {avoidfight: already familiar} sitting on a barrel. He was short and simply dressed, with a scar covering half his face. A pipe rested between his lips. There were two Cossacks sitting near the entrance on a bedding of hay, talking energetically among themselves and smoking their pipes. Aromatic smoke rose to the top of the tent, winding in fanciful loops and pouring out in swaths from the open entrance of the tent.
+   
+    {avoidfight:->meetagain} {not treasureisland: To Dmytro’s surprise, he recognized in one of the Cossacks that sat at the entrance a warrior who had once disappeared from his unit. He remembered that the warrior had once urged him to leave behind the registered Cossacks and set off as an independent Cossack in the Wild Fields. The young man also seemed to have recognized Dmytro and immediately got up: “Dmytro from the Wild Fields? What a reunion! Which wind brought you here?”} The runaway explained his story. “Yes, it was our camp on the Tartar coast,” affirmed the Cossack sitting on the barrel. “We fought them off, but we had to leave. More of them will come shortly now that they know where our camp is.” The man pondered: “Listen, if you are a registered Cossack, as Stepan claims, then stay with us. We lost several of our brothers-in-arms this summer. We lack manpower. Either way, you have nowhere to go. It’s a long road to Kyiv,” the leader smiled through his moustache, letting out another cloud of smoke. “We are moving further downstream for the winter. We have space in the camp,” he concluded his offer.
+    -> staywcossacks.winterstay
+    
+    = meetagain
+    # image cossacks # image camp
+   
+   The conversation turned out to be more pleasant this time. Since Stepan had vouched for the runaway, Dmytro was permitted to stay with the Cossacks and spend the winter with them. On the other hand, he didn’t have any better options. 
+    
+    -> staywcossacks.winterstay
+    
+-> DONE
+
+
+-> DONE
+
+=== stealth
+# image steppe
+   
+  The runaway fell to the ground, trying to hide from view, but also trying to see what was happening up ahead. The Tartar continued to survey the tracks, but he didn’t risk going into the forest by himself. He ran from the burnt forest to a hill where a horse was neighing. Then the Tartar rode off into the distance. Dmytro understood that the pursuer could return with others at any moment, so he immediately set off westward towards the horizon. He walked towards a distant hill where a lone tree grew, stretching its branches towards the sky.
+    -> coldnight.hill
+
+    
+=== treasureisland
+    = intro
+    # image bulrush # image boat # image river # image cossacks
+   
+Dmytro reached the shore, jumped out of the boat into the shallow water and pulled the boat ashore, trying to hide it as well as possible. Having finished this, he went towards the trees where the he had glimpsed something light-colored. He quickly found someone’s makeshift bedding under some willows. It seemed that the place had been left in haste a long time ago. The abandoned tent had been displaced by the wind and there were no ashes in the firepit. However, he couldn’t find any belongings, only a decaying sack and a wooden shovel that had fallen apart due to the moisture. Dmytro walked around a little more, taking a good look at the area. He was ready to return to the boat when he heard a noise from the other side of the island. He listened carefully. It seemed somebody had landed on the other side of the island. He heard low voices but couldn’t decipher what they were saying. The runaway hardly had the time to hide in the nearest thickets when several Cossacks emerged from the opposite side, their bows at the ready. They quickly made their way to the remnants of the abandoned tent. Two others followed right after them. To Dmytro’s surprise, he recognized one of the Cossacks. The young man had once persuaded him to run off to the Wild Fields before disappearing himself.
+    
+   
+    The newcomers carefully surveyed the island. One of the Cossacks moved towards the shore where Dmytro had left his boat. Soon, they had gathered near the tent once again, looking around. Then one of them called out: “Come out in the clearing or we will find you!” Dmytro hesitated a bit, but then he replied, still hidden in the thickets: “Stepan! Stepan from Bila Tserkva? Ask the men not to shoot and I will come out.” The Cossacks started to talk quietly among themselves, somewhat surprised. Then the one whom Dmytro had recognized, proclaimed: “Come out, show yourself.” Dmytro slowly got up and came out of the thickets. Stepan also recognized him and couldn’t hide his surprise: “Which wind brought you here? What a meeting! So you also decided to join the Zaporozhians?” 
+  
+    {avoidfight: It turned out that Stepan belonged to the very same group of Cossacks that had captured Dmytro previously, but he was away when this happened. “Listen, we can’t let you go, but I will do the best I can,” Stepan promised and smiled, adding, “We won’t try to drown you anymore.”}
+
+   
+   {not avoidfight: After the runaway had told about his adventures, his old acquaintance said: “I will vouch for you before the otaman. Maybe he will allow you to join us.” Dmytro agreed.} Stepan stayed with the rest of the Cossacks and they sent Dmytro in the company of two Cossacks to their camp on another island. Soon they joined him and Dmytro {avoidfight: again} was sent to the otaman. 
+    
+    -> skiptreasure.meetingcossacks
+            
+-> DONE
+
+=== captured
+
+    = exec
+    # image steppe
+    
+    He woke up from being dragged on the ground by his feet. He heard unintelligible calls and laughter. Dmytro couldn’t understand what was happening. Finally, he was left on the ground and for a moment everything seemed to have subsided. He lay in the grass with his legs tied together by a rope and surrounded by several dozen Tartars. Dmytro couldn’t move a finger; he was completely exhausted. He was shivering from a high fever and all his joints were aching. He couldn’t see clearly due to red spots clouding his vision. Suddenly, he felt an acute pain in his right leg as though somebody had touched it with a piece of red-hot iron. Dmytro twitched but couldn’t make a sound. One of the Tartars lowered his bow, satisfied. Now another Tartar took a shot, bringing agonizing pain to Dmytro’s second leg. They continued to shoot until Dmytro had lost consciousness. 
+    {~ -> wakehermit | -> wakehermit | -> death}
+    
+    = death
+     # image theend
+    THE END
+    -> DONE
 
 === wolves
 # image tobecontinued
- TO BE CONTINUED...
+   TO BE CONTINUED...
     ->DONE
     
     
 === loosehorse
 # image tobecontinued
-   TO BE CONTINUED...
+    TO BE CONTINUED...
     ->DONE
-    
-=== treasureisland
-# image tobecontinued
-TO BE CONTINUED...
-        
-       -> DONE
-       
-=== skiptreasure
-TO BE CONTINUED...
-        
-       -> DONE
 
 === coldnest
 # image tobecontinued
@@ -533,11 +640,6 @@ TO BE CONTINUED...
 === staywithhermit
 # image tobecontinued
     TO BE CONTINUED...
--> DONE
-
-=== stealth
-# image tobecontinued
-TO BE CONTINUED ...
 -> DONE
 
 //# image bulrush # image boat # image river # image cossacks # image fight # image steppe # image forest # image camp
