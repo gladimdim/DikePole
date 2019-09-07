@@ -129,7 +129,7 @@ class _PassageContinueBuilderViewState
                   child: Row(
                     children: <Widget>[
                       if (passage.text != null)
-                        Text(firstNCharsFromString(passage.text, 25)),
+                        Text(firstNCharsFromString(passage.text, 20)),
                     ],
                   ),
                 );
@@ -211,7 +211,7 @@ class _PassageRandomBuilderViewState extends State<PassageRandomBuilderView> {
                       Text("${passage.id.toString()}: "),
                       SizedBox(width: 3),
                       if (passage.text != null)
-                        Text(firstNCharsFromString(passage.text, 25)),
+                        Text(firstNCharsFromString(passage.text, 20)),
                     ],
                   ),
                 );

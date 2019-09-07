@@ -178,7 +178,7 @@ abstract class PassageBuilderBase {
           height: 48,
           fit: BoxFit.fill,
         ),
-        Text(firstNCharsFromString(text, 40), overflow: TextOverflow.ellipsis,),
+        Text(firstNCharsFromString(text, 35), overflow: TextOverflow.ellipsis,),
       ],
     );
   }

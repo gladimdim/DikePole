@@ -37,7 +37,7 @@ class _PassageBuilderViewState extends State<PassageBuilderView> {
           Expanded(
             flex: 1,
             child: ListTile(
-              title: Text(firstNCharsFromString(widget.passage.text, 35)),
+              title: Text(firstNCharsFromString(widget.passage.text, 20)),
               subtitle: Text("Type: ${widget.passage.type.toString()}"),
             ),
           ),
@@ -126,7 +126,7 @@ class _PassageContinueBuilderViewState
                   child: Row(
                     children: <Widget>[
                       if (passage.text != null)
-                        Text(firstNCharsFromString(passage.text, 25)),
+                        Text(firstNCharsFromString(passage.text, 20)),
                     ],
                   ),
                 );
@@ -208,7 +208,7 @@ class _PassageRandomBuilderViewState extends State<PassageRandomBuilderView> {
                       Text("${passage.id.toString()}: "),
                       SizedBox(width: 3),
                       if (passage.text != null)
-                        Text(firstNCharsFromString(passage.text, 25)),
+                        Text(firstNCharsFromString(passage.text, 20)),
                     ],
                   ),
                 );

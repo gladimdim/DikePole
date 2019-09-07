@@ -7,6 +7,7 @@ import 'package:locadeserta/creator/components/edit_passage_view.dart';
 import 'package:locadeserta/creator/components/game_view.dart';
 import 'package:locadeserta/creator/story/Story.dart';
 import 'package:locadeserta/creator/story/story_builder.dart';
+import 'package:locadeserta/creator/utils/utils.dart';
 
 class EditStoryView extends StatefulWidget {
   final StoryBuilder story;
@@ -29,7 +30,6 @@ class _EditStoryViewState extends State<EditStoryView> {
         title: Text("Create story"),
       ),
       body: ListView(
-
         children: <Widget>[
           StoryViewHeader(
             story: story,
@@ -44,51 +44,22 @@ class _EditStoryViewState extends State<EditStoryView> {
               });
             },
           ),
-          ExpansionPanelList(
-            expansionCallback: (index, expanded) {
-              print("index: $index, expanded: $expanded");
-              setState(() {
-                expandedIndexes[index] = !expanded;
-                print("selected index: $expandedIndexes");
-              });
-            },
-            children: story.getPassages().map((passage) {
-              var expandedElement =
-                  expandedIndexes[story.getPassages().indexOf(passage)];
-              var expanded = false;
-              if (expandedElement != null) {
-                expanded = expandedElement;
-              }
-              return ExpansionPanel(
-                isExpanded: expanded,
-                headerBuilder: (context, expanded) => passage.toWidget(),
-                body: Row(
-                  children: <Widget>[
-                    FlatButton(
-                      child: Text("Edit"),
-                      onPressed: () async {
-                        await Navigator.pushNamed(
-                          context,
-                          ExtractEditPassageView.routeName,
-                          arguments: EditPassageViewArguments(
-                              story: story, passageBuilder: passage),
-                        );
-                      },
-                    ),
-                    FlatButton(
-                      child: Text("Remove"),
-                      color: Colors.red,
-                      onPressed: () {
-                        setState(() {
-                          story.getPassages().remove(passage);
-                        });
-                      },
-                    )
-                  ],
-                ),
-              );
-            }).toList(),
-          ),
+          ...story.getPassages().map((passage) {
+            return ListTile(
+              title: Text(firstNCharsFromString(passage.text, 60)),
+              leading: Image(
+                image: AssetImage(passage.imagePath),
+              ),
+              onTap: () async {
+                await Navigator.pushNamed(
+                  context,
+                  ExtractEditPassageView.routeName,
+                  arguments: EditPassageViewArguments(
+                      story: story, passageBuilder: passage),
+                );
+              },
+            );
+          }),
           SlideableButton(
             child: optionBox(context, "Play"),
             onPress: () async {
