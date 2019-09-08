@@ -35,14 +35,7 @@ class _PassageBuilderViewState extends State<PassageBuilderView> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
           Expanded(
-            flex: 1,
-            child: ListTile(
-              title: Text(firstNCharsFromString(widget.passage.text, 35)),
-              subtitle: Text("Type: ${widget.passage.type.toString()}"),
-            ),
-          ),
-          Expanded(
-            flex: 8,
+            flex: 6,
             child: Container(
               decoration: BoxDecoration(
                 color: Theme
@@ -73,7 +66,10 @@ class _PassageBuilderViewState extends State<PassageBuilderView> {
               ),
             ),
           ),
-          widget.nextBlock,
+          Expanded(
+            flex: 4,
+            child: widget.nextBlock,
+          ),
         ],
       ),
     );
@@ -97,7 +93,7 @@ class _PassageOptionBuilderViewState extends State<PassageOptionBuilderView> {
     return PassageBuilderView(
       storyBuilder: widget.storyBuilder,
       passage: widget.passage,
-      nextBlock: Row(
+      nextBlock: Column(
         children:
         widget.passage.next.map((next) {
           return Text(

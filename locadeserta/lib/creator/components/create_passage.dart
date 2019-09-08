@@ -26,7 +26,7 @@ class _CreatePassageState extends State<CreatePassage> {
                 _selectedType = newValue;
               });
             },
-            items: ["Continue", "Random", "Option"]
+            items: ["Continue", "Option"]
                 .map(stringToPassageType)
                 .map(
                   (option) => DropdownMenuItem(

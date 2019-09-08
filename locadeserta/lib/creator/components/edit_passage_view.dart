@@ -12,7 +12,7 @@ class EditPassageView extends StatelessWidget {
     return Scaffold(
       body: passageBuilder.toEditWidget(story),
       appBar: AppBar(
-        title: Text("Editing passage"),
+        title: const Text("Editing passage"),
       ),
     );
   }
