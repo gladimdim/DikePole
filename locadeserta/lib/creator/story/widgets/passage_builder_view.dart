@@ -45,9 +45,13 @@ class _PassageBuilderViewState extends State<PassageBuilderView> {
             flex: 8,
             child: Container(
               decoration: BoxDecoration(
-                color: Theme.of(context).backgroundColor,
+                color: Theme
+                    .of(context)
+                    .backgroundColor,
                 border: Border.all(
-                  color: Theme.of(context).primaryColor,
+                  color: Theme
+                      .of(context)
+                      .primaryColor,
                   width: 3.0,
                 ),
               ),
@@ -75,6 +79,37 @@ class _PassageBuilderViewState extends State<PassageBuilderView> {
     );
   }
 }
+
+class PassageOptionBuilderView extends StatefulWidget {
+  @override
+  _PassageOptionBuilderViewState createState() =>
+      _PassageOptionBuilderViewState();
+
+  final PassageBuilderOption passage;
+  final StoryBuilder storyBuilder;
+
+  PassageOptionBuilderView({this.passage, this.storyBuilder});
+}
+
+class _PassageOptionBuilderViewState extends State<PassageOptionBuilderView> {
+  @override
+  Widget build(BuildContext context) {
+    return PassageBuilderView(
+      storyBuilder: widget.storyBuilder,
+      passage: widget.passage,
+      nextBlock: Row(
+        children:
+        widget.passage.next.map((next) {
+          return Text(
+          "${next.item1}: ${next.item2}",
+          );
+        }).toList()
+        ,
+      ),
+    );
+  }
+}
+
 
 class PassageContinueBuilderView extends StatefulWidget {
   final PassageBuilderContinue passage;
@@ -136,88 +171,6 @@ class _PassageContinueBuilderViewState
               }).toList(),
             ),
           )
-        ],
-      ),
-    );
-  }
-}
-
-class PassageRandomBuilderView extends StatefulWidget {
-  final PassageBuilderRandom passage;
-  final StoryBuilder storyBuilder;
-
-  @override
-  _PassageRandomBuilderViewState createState() =>
-      _PassageRandomBuilderViewState();
-
-  PassageRandomBuilderView({this.passage, this.storyBuilder});
-}
-
-class _PassageRandomBuilderViewState extends State<PassageRandomBuilderView> {
-  TextEditingController _controller = TextEditingController();
-
-  @override
-  void initState() {
-    _controller.text = widget.passage.text;
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return PassageBuilderView(
-      storyBuilder: widget.storyBuilder,
-      passage: widget.passage,
-      nextBlock: Row(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: <Widget>[
-          Expanded(
-            flex: 2,
-            child: Text("Next:"),
-          ),
-          Expanded(
-            flex: 9,
-            child: DropdownButton(
-              onChanged: (int newValue) {
-                setState(() {
-                  widget.passage.next = [newValue];
-                });
-              },
-              value: 1,
-              items: widget.storyBuilder.getPassages().map((passage) {
-                return DropdownMenuItem(
-                  value: passage.id,
-                  child: Row(
-                    children: <Widget>[
-                      Checkbox(
-                        value: widget.passage.next.contains(passage.id),
-                        onChanged: (newValue) {
-                          setState(() {
-                            if (newValue &&
-                                !widget.passage.next.contains(passage.id)) {
-                              widget.passage.next.add(passage.id);
-                            } else {
-                              widget.passage.next
-                                  .removeWhere((i) => i == passage.id);
-                            }
-                          });
-                        },
-                      ),
-                      Text("${passage.id.toString()}: "),
-                      SizedBox(width: 3),
-                      if (passage.text != null)
-                        Text(firstNCharsFromString(passage.text, 20)),
-                    ],
-                  ),
-                );
-              }).toList(),
-            ),
-          ),
         ],
       ),
     );

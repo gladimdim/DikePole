@@ -1,4 +1,3 @@
-import 'dart:math';
 import 'package:tuple/tuple.dart';
 import 'package:flutter/foundation.dart';
 import 'dart:convert';
@@ -63,8 +62,6 @@ class Story {
     List passages = jsonDecode(map["passages"]);
     List<PassageBase> parsedPassages = passages.map((p) {
       switch (p["type"]) {
-        case "Random":
-          return PassageRandom.fromJson(jsonEncode(p));
         case "Continue":
           return PassageContinue.fromJson(jsonEncode(p));
         case "Option":
@@ -86,11 +83,11 @@ class Story {
   }
 
   static generate() {
-    var p1 = PassageRandom(
+    var p1 = PassageContinue(
         id: 0,
         text:
             "The sun was setting over the river, casting a crimson glow over everything. A swift current swept the dark water south to the sea while the wind quietly rustled the reeds, carrying the scent of autumn and smoke from the fire. Twilight was settling in.",
-        next: [1, 2, 3],
+        next: 1,
         imagePath: "images/background/river/10.jpg");
     var p2 = PassageContinue(
         id: 1,
@@ -133,12 +130,10 @@ class Story {
           "Dmytro crawled to the nearest Tatar and quietly rose to his knees, ready to stick the knife in the Tatar’s eye if he moved. Nearby was a bow, a quiver with arrows, and a knapsack.",
       options: [
         Tuple2(0, "Take the bow, quiver and knapsack"),
-        Tuple2(0, "Look for a Tatar saber")
+        Tuple2(1, "Look for a Tatar saber")
       ],
       imagePath: "images/background/camp/2.jpg",
     );
-
-
 
     var story = Story(
       title: "After the battle",
@@ -163,8 +158,6 @@ class Passage {
         return PassageContinue(text: text, id: id, next: next);
       case PassageTypes.Option:
         return PassageOption(id: id, text: text, options: options);
-      case PassageTypes.Random:
-        return PassageRandom(id: id, text: text, next: options);
     }
   }
 }
@@ -222,58 +215,6 @@ class HistoryItem {
   final String imagePath;
 
   HistoryItem({@required this.text, this.imagePath});
-}
-
-class PassageRandom extends PassageBase {
-  final PassageTypes type = PassageTypes.Random;
-  final int id;
-  final String text;
-  final List<int> next;
-  final String imagePath;
-
-  PassageRandom({
-    @required this.id,
-    @required this.text,
-    @required this.next,
-    this.imagePath,
-  }) : super(
-          id: id,
-          text: text,
-          type: PassageTypes.Random,
-          imagePath: imagePath,
-        );
-
-  int getNext(int option) {
-    var random = Random();
-    var nextRandom = random.nextInt(next.length);
-    return next[nextRandom];
-  }
-
-  static PassageRandom fromJson(String input) {
-    var map = jsonDecode(input);
-    List nexts = jsonDecode(map["next"]);
-    List<int> parsedNext = nexts.map((n) => n as int).toList();
-    return PassageRandom(
-      id: map["id"],
-      text: map["text"],
-      next: parsedNext,
-      imagePath: map["imagePath"],
-    );
-  }
-
-  Map<String, dynamic> toJson() {
-    return {
-      "type": "Random",
-      "id": id,
-      "text": text,
-      "imagePath": imagePath,
-      "next": next,
-    };
-  }
-
-  List<int> getNexts() {
-    return next;
-  }
 }
 
 class PassageOption extends PassageBase {
@@ -362,7 +303,7 @@ abstract class PassageBase {
   getNexts();
 }
 
-enum PassageTypes { Continue, Random, Option }
+enum PassageTypes { Continue, Option }
 
 PassageTypes stringToPassageType(String input) {
   switch (input) {
@@ -370,8 +311,6 @@ PassageTypes stringToPassageType(String input) {
       return PassageTypes.Option;
     case "Continue":
       return PassageTypes.Continue;
-    case "Random":
-      return PassageTypes.Random;
     default:
       throw "Passage type string not recognized: $input";
   }
@@ -383,8 +322,6 @@ String passageTypeToString(PassageTypes type) {
       return "Option";
     case PassageTypes.Continue:
       return "Continue";
-    case PassageTypes.Random:
-      return "Random";
     default:
       throw "PassageType $type was not recognized";
   }

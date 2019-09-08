@@ -36,8 +36,6 @@ class PassageState extends State<PassageView> with TickerProviderStateMixin {
     switch (widget.currentStory.currentPassage.type) {
       case PassageTypes.Continue:
         return [createContinue(context)];
-      case PassageTypes.Random:
-        return [createContinue(context)];
       case PassageTypes.Option:
         {
           PassageOption option =
