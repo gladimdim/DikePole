@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:locadeserta/creator/story/Story.dart';
 import 'package:locadeserta/creator/story/widgets/passage_builder_view.dart';
 import 'package:locadeserta/creator/utils/utils.dart';
-import 'package:tuple/tuple.dart';
-
 class StoryBuilder {
   String title;
   String description;
@@ -31,6 +29,15 @@ class StoryBuilder {
         description: description,
         authors: authors,
         passages: _passages.map((passage) => passage.toModel()).toList());
+  }
+
+  Map<String, dynamic> toMap() {
+    return {
+      "title": title,
+      "description": description,
+      "passages": getPassages().map((passage) => passage.toMap()).toList(),
+      "authors": authors,
+    };
   }
 
   static fromStory(Story story) {
@@ -71,6 +78,16 @@ class PassageBuilderContinue extends PassageBuilderBase {
   }
 
   @override
+  Map<String, dynamic> toMap() {
+    return {
+      "id": id,
+      "text": "text",
+      "imagePath": imagePath,
+      "next": next
+    };
+  }
+
+  @override
   Widget toEditWidget(StoryBuilder storyBuilder) {
     return PassageContinueBuilderView(
       passage: this,
@@ -92,7 +109,7 @@ class PassageBuilderOption extends PassageBuilderBase {
   String text;
   int id;
   String imagePath;
-  List<Tuple2<int, String>> next = [];
+  List<NextOption> next = [];
 
   PassageBuilderOption({this.text, this.next, this.imagePath, this.id})
       : super(
@@ -111,6 +128,7 @@ class PassageBuilderOption extends PassageBuilderBase {
     );
   }
 
+
   static PassageBuilderOption fromStoryPassage(PassageBase base) {
     return PassageBuilderOption(
       id: base.id,
@@ -118,6 +136,16 @@ class PassageBuilderOption extends PassageBuilderBase {
       next: base.getNexts(),
       text: base.text,
     );
+  }
+
+  @override
+  Map<String, dynamic> toMap() {
+    return {
+      "id": id,
+      "text": "text",
+      "imagePath": imagePath,
+      "next": next.map((next) => {"target": next.target, "text": next.text}).toList(),
+    };
   }
 
   @override
@@ -167,6 +195,8 @@ abstract class PassageBuilderBase {
         throw "PassageType ${base.type} is not recognized";
     }
   }
+
+  Map<String, dynamic> toMap();
 }
 
 PassageBuilderBase passageBuilderFromType(PassageTypes type) {

@@ -97,7 +97,7 @@ class _PassageOptionBuilderViewState extends State<PassageOptionBuilderView> {
         children:
         widget.passage.next.map((next) {
           return Text(
-          "${next.item1}: ${next.item2}",
+          "${next.target}: ${next.text}",
           );
         }).toList()
         ,

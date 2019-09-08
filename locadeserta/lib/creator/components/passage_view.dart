@@ -5,7 +5,6 @@ import 'package:locadeserta/creator/story/Story.dart';
 import 'package:locadeserta/components.dart';
 import 'package:locadeserta/creator/utils/utils.dart';
 import 'package:locadeserta/models/background_image.dart';
-import 'package:tuple/tuple.dart';
 
 class PassageView extends StatefulWidget {
   final Story currentStory;
@@ -70,11 +69,11 @@ class PassageState extends State<PassageView> with TickerProviderStateMixin {
     });
   }
 
-  List<Widget> createOptionList(List<Tuple2<int, String>> options) {
+  List<Widget> createOptionList(List<NextOption> options) {
     List<Widget> optionButtons = List();
     int index = 0;
     optionButtons.addAll(options.map((value) {
-      return createButton(value.item2, index++);
+      return createButton(value.text, index++);
     }));
 
     return optionButtons;

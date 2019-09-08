@@ -6,14 +6,17 @@ import 'package:locadeserta/creator/components/create_view.dart';
 import 'package:locadeserta/creator/components/edit_passage_view.dart';
 import 'package:locadeserta/creator/components/game_view.dart';
 import 'package:locadeserta/creator/story/Story.dart';
+import 'package:locadeserta/creator/story/persistence.dart';
 import 'package:locadeserta/creator/story/story_builder.dart';
 import 'package:locadeserta/creator/utils/utils.dart';
+import 'package:locadeserta/models/Auth.dart';
 
 class EditStoryView extends StatefulWidget {
   final StoryBuilder story;
   final Locale locale;
+  final Auth auth;
 
-  EditStoryView({this.story, this.locale});
+  EditStoryView({@required this.story, @required this.locale, @required this.auth});
 
   @override
   _EditStoryViewState createState() => _EditStoryViewState();
@@ -28,6 +31,19 @@ class _EditStoryViewState extends State<EditStoryView> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Create story"),
+        actions: <Widget>[
+          FlatButton(
+            child: Text(
+              "Save",
+              style: Theme.of(context).textTheme.title,
+            ),
+            onPressed: () async {
+              var user = await widget.auth.currentUser();
+              var db = await StoryPersistence.instance.writeStory(user, widget.story);
+              print("done $db");
+            },
+          )
+        ],
       ),
       body: ListView(
         children: <Widget>[
@@ -79,7 +95,6 @@ class _EditStoryViewState extends State<EditStoryView> {
   }
 }
 
-
 class EditStoryViewArguments {
   final StoryBuilder story;
   final Locale locale;
@@ -89,12 +104,16 @@ class EditStoryViewArguments {
 
 class ExtractEditStoryViewArguments extends StatelessWidget {
   static const routeName = "/edit_story";
+  final Auth auth;
+
+  ExtractEditStoryViewArguments({@required this.auth});
 
   Widget build(BuildContext context) {
     final EditStoryViewArguments args =
         ModalRoute.of(context).settings.arguments;
 
     return EditStoryView(
+      auth: auth,
       story: args.story,
       locale: args.locale,
     );

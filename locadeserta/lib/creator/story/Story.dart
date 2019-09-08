@@ -1,4 +1,3 @@
-import 'package:tuple/tuple.dart';
 import 'package:flutter/foundation.dart';
 import 'dart:convert';
 
@@ -8,8 +7,6 @@ class Story {
   List<String> authors;
   final List<PassageBase> passages;
   final List<HistoryItem> history = [];
-  final List<String> variables = [];
-
   PassageBase currentPassage;
 
   Story({
@@ -129,8 +126,8 @@ class Story {
       text:
           "Dmytro crawled to the nearest Tatar and quietly rose to his knees, ready to stick the knife in the Tatar’s eye if he moved. Nearby was a bow, a quiver with arrows, and a knapsack.",
       options: [
-        Tuple2(0, "Take the bow, quiver and knapsack"),
-        Tuple2(1, "Look for a Tatar saber")
+        NextOption(target: 0, text: "Take the bow, quiver and knapsack"),
+        NextOption(target: 1, text: "Look for a Tatar saber")
       ],
       imagePath: "images/background/camp/2.jpg",
     );
@@ -221,7 +218,7 @@ class PassageOption extends PassageBase {
   final PassageTypes type = PassageTypes.Option;
   final int id;
   final String text;
-  final List<Tuple2<int, String>> options;
+  final List<NextOption> options;
   final String imagePath;
 
   PassageOption({
@@ -240,7 +237,7 @@ class PassageOption extends PassageBase {
     if (option >= options.length) {
       throw "Option number $option is bigger than maxium amount of options: ${options.length}";
     }
-    return options[option].item1;
+    return options[option].target;
   }
 
   Map<String, dynamic> toJson() {
@@ -250,26 +247,26 @@ class PassageOption extends PassageBase {
       "text": text,
       "options": options
           .map((option) => {
-                "id": option.item1,
-                "text": option.item2,
+                "id": option.target,
+                "text": option.text,
               })
           .toList(),
       "imagePath": imagePath,
     };
   }
 
-  List<Tuple2<int, String>> getNexts() {
+  List<NextOption> getNexts() {
     return options;
   }
 
   static PassageOption fromJson(String input) {
     var map = jsonDecode(input);
     List options = map["options"];
-    List<Tuple2<int, String>> parsedOptions = options
+    List<NextOption> parsedOptions = options
         .map(
-          (mapOption) => Tuple2(
-            mapOption["id"] as int,
-            mapOption["text"] as String,
+          (mapOption) => NextOption(
+            target: mapOption["id"] as int,
+            text: mapOption["text"] as String,
           ),
         )
         .toList();
@@ -325,4 +322,11 @@ String passageTypeToString(PassageTypes type) {
     default:
       throw "PassageType $type was not recognized";
   }
+}
+
+class NextOption {
+  final int target;
+  final String text;
+
+  NextOption({this.target, this.text});
 }
