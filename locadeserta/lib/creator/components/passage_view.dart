@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:locadeserta/animations/slideable_button.dart';
 import 'package:locadeserta/components/BorderedRandomImageForType.dart';
-import 'package:locadeserta/creator/story/Story.dart';
+import 'package:locadeserta/creator/story/story.dart';
 import 'package:locadeserta/components.dart';
 import 'package:locadeserta/creator/utils/utils.dart';
 import 'package:locadeserta/models/background_image.dart';

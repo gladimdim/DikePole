@@ -3,7 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'package:locadeserta/components/game_app_bar.dart';
 import 'package:locadeserta/components/game_component.dart';
 import 'package:locadeserta/creator/components/passage_view.dart';
-import 'package:locadeserta/creator/story/Story.dart';
+import 'package:locadeserta/creator/story/story.dart';
 
 class GameView extends StatefulWidget {
   final Story story;

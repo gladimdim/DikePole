@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:locadeserta/creator/story/Story.dart';
+import 'package:locadeserta/creator/story/story.dart';
 
 class CreatePassage extends StatefulWidget {
 

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:locadeserta/creator/story/Story.dart';
+import 'package:locadeserta/creator/story/story.dart';
 import 'package:locadeserta/creator/story/widgets/passage_builder_view.dart';
 import 'package:locadeserta/creator/utils/utils.dart';
 class StoryBuilder {

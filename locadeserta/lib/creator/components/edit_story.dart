@@ -5,7 +5,7 @@ import 'package:locadeserta/creator/components/create_passage.dart';
 import 'package:locadeserta/creator/components/create_view.dart';
 import 'package:locadeserta/creator/components/edit_passage_view.dart';
 import 'package:locadeserta/creator/components/game_view.dart';
-import 'package:locadeserta/creator/story/Story.dart';
+import 'package:locadeserta/creator/story/story.dart';
 import 'package:locadeserta/creator/story/persistence.dart';
 import 'package:locadeserta/creator/story/story_builder.dart';
 import 'package:locadeserta/creator/utils/utils.dart';
@@ -16,7 +16,8 @@ class EditStoryView extends StatefulWidget {
   final Locale locale;
   final Auth auth;
 
-  EditStoryView({@required this.story, @required this.locale, @required this.auth});
+  EditStoryView(
+      {@required this.story, @required this.locale, @required this.auth});
 
   @override
   _EditStoryViewState createState() => _EditStoryViewState();
@@ -39,13 +40,14 @@ class _EditStoryViewState extends State<EditStoryView> {
             ),
             onPressed: () async {
               var user = await widget.auth.currentUser();
-              var db = await StoryPersistence.instance.writeStory(user, widget.story);
+              var db = await StoryPersistence.instance
+                  .writeStory(user, widget.story);
               print("done $db");
             },
           )
         ],
       ),
-      body: ListView(
+      body: Column(
         children: <Widget>[
           StoryViewHeader(
             story: story,
@@ -60,22 +62,29 @@ class _EditStoryViewState extends State<EditStoryView> {
               });
             },
           ),
-          ...story.getPassages().map((passage) {
-            return ListTile(
-              title: Text(firstNCharsFromString(passage.text, 60)),
-              leading: Image(
-                image: AssetImage(passage.imagePath),
+          Expanded(
+            child: SingleChildScrollView(
+              child: Column(
+                children:
+                  story.getPassages().map((passage) {
+                    return ListTile(
+                      title: Text(firstNCharsFromString(passage.text, 60)),
+                      leading: Image(
+                        image: AssetImage(passage.imagePath),
+                      ),
+                      onTap: () async {
+                        await Navigator.pushNamed(
+                          context,
+                          ExtractEditPassageView.routeName,
+                          arguments: EditPassageViewArguments(
+                              story: story, passageBuilder: passage),
+                        );
+                      },
+                    );
+                  }).toList(),
               ),
-              onTap: () async {
-                await Navigator.pushNamed(
-                  context,
-                  ExtractEditPassageView.routeName,
-                  arguments: EditPassageViewArguments(
-                      story: story, passageBuilder: passage),
-                );
-              },
-            );
-          }),
+            )
+          ),
           SlideableButton(
             child: optionBox(context, "Play"),
             onPress: () async {

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:locadeserta/animations/slideable_button.dart';
 import 'package:locadeserta/components.dart';
 import 'package:locadeserta/creator/components/edit_story.dart';
-import 'package:locadeserta/creator/story/Story.dart';
+import 'package:locadeserta/creator/story/story.dart';
 import 'package:locadeserta/creator/story/story_builder.dart';
 
 class CreateView extends StatefulWidget {
