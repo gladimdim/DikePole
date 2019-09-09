@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:locadeserta/creator/story/story.dart';
 import 'package:locadeserta/creator/story/story_builder.dart';
 import 'package:locadeserta/models/Auth.dart';
 
@@ -9,8 +10,15 @@ class StoryPersistence {
 
   static final StoryPersistence instance = StoryPersistence._internal();
 
-  getUserStories(User user) async {
-    return await storage.collection("user_stories").document(user.uid).collection("stories").getDocuments();
+  Future<List<StoryBuilder>> getUserStories(User user) async {
+    var stories = await storage.collection("user_stories").document(user.uid).collection("stories").getDocuments();
+    List<Story> parsedStories = stories.documents.map((document) {
+      Story story = Story.fromJson(document.data["storyjson"]);
+      return story;
+    }).toList();
+
+    List<StoryBuilder> result = parsedStories.map((story) => StoryBuilder.fromStory(story)).toList();
+    return result;
   }
 
   writeStory(User user, StoryBuilder storyBuilder) async {

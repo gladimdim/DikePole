@@ -40,7 +40,7 @@ class StoryBuilder {
     };
   }
 
-  static fromStory(Story story) {
+  static StoryBuilder fromStory(Story story) {
     var sb = StoryBuilder(
       title: story.title,
       description: story.description,

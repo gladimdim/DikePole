@@ -2,20 +2,26 @@ import 'package:flutter/material.dart';
 import 'package:locadeserta/animations/slideable_button.dart';
 import 'package:locadeserta/components.dart';
 import 'package:locadeserta/creator/components/edit_story.dart';
+import 'package:locadeserta/creator/story/persistence.dart';
 import 'package:locadeserta/creator/story/story.dart';
 import 'package:locadeserta/creator/story/story_builder.dart';
+import 'package:locadeserta/models/Auth.dart';
+import 'package:locadeserta/waiting_screen.dart';
+import 'package:async/async.dart';
 
 class CreateView extends StatefulWidget {
   final Locale locale;
+  final Auth auth;
 
   @override
   _CreateViewState createState() => _CreateViewState();
 
-  CreateView({this.locale});
+  CreateView({this.locale, @required this.auth});
 }
 
 class _CreateViewState extends State<CreateView> {
   StoryBuilder story;
+  final AsyncMemoizer _storyBuilderCatalogMemo = AsyncMemoizer();
 
   @override
   Widget build(BuildContext context) {
@@ -27,59 +33,110 @@ class _CreateViewState extends State<CreateView> {
         ),
       ),
       backgroundColor: Theme.of(context).backgroundColor,
-      body: Padding(
-        padding: const EdgeInsets.all(2.0),
-        child: SingleChildScrollView(
+      body: FutureBuilder(
+        future: widget.auth.currentUser(),
+        builder: (context, snapshot) {
+          switch (snapshot.connectionState) {
+            case ConnectionState.none:
+            case ConnectionState.active:
+            case ConnectionState.waiting:
+              return WaitingScreen();
+              break;
+            case ConnectionState.done:
+              if (snapshot.data == null) {
+                return Container();
+              } else {
+                return _buildStoryView(context, snapshot.data);
+              }
+              break;
+          }
+          return null;
+        },
+      ),
+    );
+  }
+
+  _buildStoryView(BuildContext context, User user) {
+    return Padding(
+      padding: const EdgeInsets.all(2.0),
+      child: SingleChildScrollView(
           child: Column(
-            children: <Widget>[
-              Center(
-                child: Card(
-                  elevation: 10.0,
-                  child: Column(
-                    children: <Widget>[
-                      const ListTile(
-                        leading: Icon(Icons.book),
-                        title: Text('Reuse existing story'),
-                      ),
-                      CreateMetaStoryView(
-                        story: StoryBuilder.fromStory(Story.generate()),
-                        onSave: (StoryBuilder newStory) {
-                          setState(() {
-                            _goToEditStoryView(newStory);
-                          });
-                        },
-                      ),
-                    ],
+        children: <Widget>[
+          Center(
+            child: Card(
+              elevation: 10.0,
+              child: Column(
+                children: <Widget>[
+                  const ListTile(
+                    leading: Icon(Icons.book),
+                    title: Text('Create new Story from scratch'),
                   ),
-                ),
-              ),
-              Center(
-                child: Card(
-                  elevation: 10.0,
-                  child: Column(
-                    children: <Widget>[
-                      const ListTile(
-                        leading: Icon(Icons.book),
-                        title: Text('Create new Story from scratch'),
-                      ),
-                      CreateMetaStoryView(
-                        story: null,
-                        onSave: (StoryBuilder newStory) {
-                          setState(() {
-                            _goToEditStoryView(newStory);
-                          });
-                        },
-                      ),
-                    ],
+                  CreateMetaStoryView(
+                    story: null,
+                    onSave: (StoryBuilder newStory) {
+                      setState(() {
+                        _goToEditStoryView(newStory);
+                      });
+                    },
                   ),
-                ),
+                ],
               ),
-            ],
+            ),
           ),
+          FutureBuilder(
+            future: _fetchData(user),
+            builder: (context, snapshot) {
+              switch (snapshot.connectionState) {
+                case ConnectionState.none:
+                case ConnectionState.active:
+                case ConnectionState.waiting:
+                  return WaitingScreen();
+                  break;
+                case ConnectionState.done:
+                  if (snapshot.data == null) {
+                    return Container();
+                  } else {
+                    List<StoryBuilder> storyBuilders = snapshot.data;
+                    return Column(
+                      children: _createStoryCards(storyBuilders),
+                    );
+                  }
+                  break;
+              }
+              return Container();
+            },
+          )
+        ],
+      )),
+    );
+  }
+
+  Future _fetchData(User user) {
+    return _storyBuilderCatalogMemo.runOnce(() async {
+      return StoryPersistence.instance.getUserStories(user);
+    });
+  }
+
+  List<Widget> _createStoryCards(List<StoryBuilder> storyBuilders) {
+    return storyBuilders.map((storyBuilder) => _createStoryCard(storyBuilder)).toList();
+  }
+
+  Widget _createStoryCard(StoryBuilder storyBuilder) {
+    return Center(
+      child: Card(
+        elevation: 10.0,
+        child: CreateMetaStoryView(
+          story: storyBuilder,
+          onSave: (StoryBuilder newStory) {
+            setState(() {
+              _goToEditStoryView(newStory);
+            });
+          },
         ),
       ),
     );
   }
+
 
   _goToEditStoryView(StoryBuilder story) {
     Navigator.pushNamed(context, ExtractEditStoryViewArguments.routeName,

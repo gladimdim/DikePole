@@ -56,7 +56,7 @@ class Story {
 
   static Story fromJson(String input) {
     Map map = jsonDecode(input);
-    List passages = jsonDecode(map["passages"]);
+    List passages = map["passages"];
     List<PassageBase> parsedPassages = passages.map((p) {
       switch (p["type"]) {
         case "Continue":
@@ -68,7 +68,7 @@ class Story {
       }
     }).toList();
 
-    List authors = jsonDecode(map["authors"]);
+    List authors = map["authors"];
     List<String> parsedAuthors = authors.map((a) => a.toString()).toList();
 
     return Story(
