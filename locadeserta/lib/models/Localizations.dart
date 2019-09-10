@@ -64,6 +64,7 @@ class LDLocalizations {
       'edit': 'Edit',
       'description': 'Description',
       'hintdescription': 'Enter story description',
+      'remove': 'Remove',
     },
     'uk': {
       'continue': 'Продовжити',
@@ -113,6 +114,7 @@ class LDLocalizations {
       'edit': 'Редагувати',
       'description': 'Описання',
       'hintdescription': 'Введіть описання історії',
+      'remove': 'Видалити',
     },
     'pl': {
       'continue': 'Dalej',
@@ -163,6 +165,7 @@ class LDLocalizations {
       'edit': 'Edytować',
       'description': 'Opis',
       'hintdescription': 'Wpisz opis historii',
+      'remove': 'Usunąć',
     }
   };
 
@@ -336,6 +339,9 @@ class LDLocalizations {
 
   String get hintDescription {
     return _localizedValues[locale.languageCode]['hintDescription'];
+  }
+  String get remove {
+    return _localizedValues[locale.languageCode]['remove'];
   }
 }
 

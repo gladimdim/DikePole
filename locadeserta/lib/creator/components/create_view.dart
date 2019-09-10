@@ -21,7 +21,7 @@ class CreateView extends StatefulWidget {
 
 class _CreateViewState extends State<CreateView> {
   StoryBuilder story;
-  final AsyncMemoizer _storyBuilderCatalogMemo = AsyncMemoizer();
+  AsyncMemoizer _storyBuilderCatalogMemo = AsyncMemoizer();
   final AsyncMemoizer _currentUserMemo = AsyncMemoizer();
 
   @override
@@ -75,6 +75,7 @@ class _CreateViewState extends State<CreateView> {
                         _goToEditStoryView(newStory);
                       });
                     },
+                    onDelete: null,
                   ),
                 ],
               ),
@@ -95,7 +96,7 @@ class _CreateViewState extends State<CreateView> {
                   } else {
                     List<StoryBuilder> storyBuilders = snapshot.data;
                     return Column(
-                      children: _createStoryCards(storyBuilders),
+                      children: _createStoryCards(storyBuilders, user),
                     );
                   }
                   break;
@@ -120,13 +121,13 @@ class _CreateViewState extends State<CreateView> {
     });
   }
 
-  List<Widget> _createStoryCards(List<StoryBuilder> storyBuilders) {
+  List<Widget> _createStoryCards(List<StoryBuilder> storyBuilders, User user) {
     return storyBuilders
-        .map((storyBuilder) => _createStoryCard(storyBuilder))
+        .map((storyBuilder) => _createStoryCard(storyBuilder, user))
         .toList();
   }
 
-  Widget _createStoryCard(StoryBuilder storyBuilder) {
+  Widget _createStoryCard(StoryBuilder storyBuilder, User user) {
     return Center(
       child: Card(
         elevation: 10.0,
@@ -137,6 +138,12 @@ class _CreateViewState extends State<CreateView> {
               _goToEditStoryView(newStory);
             });
           },
+          onDelete: (StoryBuilder story) async {
+            await _deleteStory(user, story);
+            setState(() {
+              _storyBuilderCatalogMemo = AsyncMemoizer();
+            });
+          },
         ),
       ),
     );
@@ -145,6 +152,10 @@ class _CreateViewState extends State<CreateView> {
   _goToEditStoryView(StoryBuilder story) {
     Navigator.pushNamed(context, ExtractEditStoryViewArguments.routeName,
         arguments: EditStoryViewArguments(story: story, locale: widget.locale));
+  }
+
+  _deleteStory(User user, StoryBuilder story) async {
+    return await StoryPersistence.instance.deleteStory(user, story);
   }
 }
 
@@ -182,8 +193,9 @@ class StoryViewHeader extends StatelessWidget {
 class CreateMetaStoryView extends StatefulWidget {
   final Function(StoryBuilder story) onSave;
   final StoryBuilder story;
+  final Function(StoryBuilder story) onDelete;
 
-  CreateMetaStoryView({@required this.onSave, this.story});
+  CreateMetaStoryView({this.onDelete, @required this.onSave, this.story});
 
   @override
   _CreateMetaStoryViewState createState() => _CreateMetaStoryViewState();
@@ -237,21 +249,35 @@ class _CreateMetaStoryViewState extends State<CreateMetaStoryView> {
             },
             initialValue: widget.story == null ? "" : widget.story.authors[0],
           ),
-          Padding(
-            padding: EdgeInsets.all(4.0),
-            child: RaisedButton(
-              onPressed: () {
-                _formKey.currentState.save();
-                var newStory =
-                    widget.story == null ? StoryBuilder() : widget.story;
-                newStory.title = _title;
-                newStory.description = _description;
-                newStory.authors = [_authors];
-                widget.onSave(newStory);
-              },
-              child: Text(LDLocalizations.of(context).save),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+            Padding(
+              padding: EdgeInsets.all(4.0),
+              child: RaisedButton(
+                onPressed: () {
+                  _formKey.currentState.save();
+                  var newStory =
+                      widget.story == null ? StoryBuilder() : widget.story;
+                  newStory.title = _title;
+                  newStory.description = _description;
+                  newStory.authors = [_authors];
+                  widget.onSave(newStory);
+                },
+                child: Text(LDLocalizations.of(context).edit),
+              ),
             ),
-          )
+            if (widget.onDelete != null)
+              Padding(
+                padding: EdgeInsets.all(4.0),
+                child: RaisedButton(
+                  onPressed: () {
+                    widget.onDelete(widget.story);
+                  },
+                  child: Text(LDLocalizations.of(context).remove),
+                ),
+              ),
+          ]),
         ],
       ),
     );

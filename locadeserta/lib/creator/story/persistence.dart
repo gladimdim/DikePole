@@ -30,6 +30,15 @@ class StoryPersistence {
     return result;
   }
 
+  deleteStory(User user, StoryBuilder storyBuilder) async {
+    return await storage
+        .collection("user_stories")
+        .document(user.uid)
+        .collection("stories")
+        .document(storyBuilder.title)
+        .delete();
+  }
+
   writeStory(User user, StoryBuilder storyBuilder) async {
     DocumentSnapshot doc = await storage
         .collection("user_stories")
