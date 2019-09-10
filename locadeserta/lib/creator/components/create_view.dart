@@ -3,9 +3,9 @@ import 'package:locadeserta/animations/slideable_button.dart';
 import 'package:locadeserta/components.dart';
 import 'package:locadeserta/creator/components/edit_story.dart';
 import 'package:locadeserta/creator/story/persistence.dart';
-import 'package:locadeserta/creator/story/story.dart';
 import 'package:locadeserta/creator/story/story_builder.dart';
 import 'package:locadeserta/models/Auth.dart';
+import 'package:locadeserta/models/Localizations.dart';
 import 'package:locadeserta/waiting_screen.dart';
 import 'package:async/async.dart';
 
@@ -22,37 +22,34 @@ class CreateView extends StatefulWidget {
 class _CreateViewState extends State<CreateView> {
   StoryBuilder story;
   final AsyncMemoizer _storyBuilderCatalogMemo = AsyncMemoizer();
+  final AsyncMemoizer _currentUserMemo = AsyncMemoizer();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          "PRE ALPHA",
+          "ALPHA VERSION",
           style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0),
         ),
       ),
       backgroundColor: Theme.of(context).backgroundColor,
       body: FutureBuilder(
-        future: widget.auth.currentUser(),
-        builder: (context, snapshot) {
-          switch (snapshot.connectionState) {
-            case ConnectionState.none:
-            case ConnectionState.active:
-            case ConnectionState.waiting:
-              return WaitingScreen();
-              break;
-            case ConnectionState.done:
-              if (snapshot.data == null) {
-                return Container();
-              } else {
-                return _buildStoryView(context, snapshot.data);
-              }
-              break;
-          }
-          return null;
-        },
-      ),
+          future: _currentUser(),
+          builder: (context, snapshot) {
+            User user = snapshot.data;
+            switch (snapshot.connectionState) {
+              case ConnectionState.none:
+              case ConnectionState.active:
+              case ConnectionState.waiting:
+                return WaitingScreen();
+                break;
+              case ConnectionState.done:
+                return _buildStoryView(context, user);
+              default:
+                return WaitingScreen();
+            }
+          }),
     );
   }
 
@@ -67,9 +64,9 @@ class _CreateViewState extends State<CreateView> {
               elevation: 10.0,
               child: Column(
                 children: <Widget>[
-                  const ListTile(
+                  ListTile(
                     leading: Icon(Icons.book),
-                    title: Text('Create new Story from scratch'),
+                    title: Text(LDLocalizations.of(context).createStory),
                   ),
                   CreateMetaStoryView(
                     story: null,
@@ -117,8 +114,16 @@ class _CreateViewState extends State<CreateView> {
     });
   }
 
+  Future _currentUser() {
+    return _currentUserMemo.runOnce(() async {
+      return await widget.auth.currentUser();
+    });
+  }
+
   List<Widget> _createStoryCards(List<StoryBuilder> storyBuilders) {
-    return storyBuilders.map((storyBuilder) => _createStoryCard(storyBuilder)).toList();
+    return storyBuilders
+        .map((storyBuilder) => _createStoryCard(storyBuilder))
+        .toList();
   }
 
   Widget _createStoryCard(StoryBuilder storyBuilder) {
@@ -136,7 +141,6 @@ class _CreateViewState extends State<CreateView> {
       ),
     );
   }
-
 
   _goToEditStoryView(StoryBuilder story) {
     Navigator.pushNamed(context, ExtractEditStoryViewArguments.routeName,
@@ -167,7 +171,7 @@ class StoryViewHeader extends StatelessWidget {
           width: 40,
         ),
         SlideableButton(
-          child: optionBox(context, "Edit"),
+          child: optionBox(context, LDLocalizations.of(context).edit),
           onPress: onEdit,
         ),
       ],
@@ -203,8 +207,8 @@ class _CreateMetaStoryViewState extends State<CreateMetaStoryView> {
           TextFormField(
             decoration: InputDecoration(
               icon: Icon(Icons.title),
-              hintText: "Enter story title",
-              labelText: "Title: ",
+              hintText: LDLocalizations.of(context).enterStoryTitle,
+              labelText: LDLocalizations.of(context).labelStoryTitle,
             ),
             initialValue: widget.story == null ? "" : widget.story.title,
             onSaved: (value) {
@@ -214,8 +218,8 @@ class _CreateMetaStoryViewState extends State<CreateMetaStoryView> {
           TextFormField(
             decoration: InputDecoration(
               icon: Icon(Icons.description),
-              hintText: "Enter story description",
-              labelText: "Description: ",
+              hintText: LDLocalizations.of(context).hintDescription,
+              labelText: LDLocalizations.of(context).description,
             ),
             onSaved: (value) {
               _description = value;
@@ -225,8 +229,8 @@ class _CreateMetaStoryViewState extends State<CreateMetaStoryView> {
           TextFormField(
             decoration: InputDecoration(
               icon: Icon(Icons.title),
-              hintText: "List of authors separated by comma",
-              labelText: "Authors: ",
+              hintText: LDLocalizations.of(context).listOfAuthors,
+              labelText: LDLocalizations.of(context).labelAuthors,
             ),
             onSaved: (value) {
               _authors = value;
@@ -245,7 +249,7 @@ class _CreateMetaStoryViewState extends State<CreateMetaStoryView> {
                 newStory.authors = [_authors];
                 widget.onSave(newStory);
               },
-              child: Text("Save"),
+              child: Text(LDLocalizations.of(context).save),
             ),
           )
         ],

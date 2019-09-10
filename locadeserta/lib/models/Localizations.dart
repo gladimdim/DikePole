@@ -3,7 +3,7 @@ import 'dart:core';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart' show SynchronousFuture;
 
-var version = "1.77";
+var version = "1.78";
 
 class LDLocalizations {
   LDLocalizations(this.locale);
@@ -55,7 +55,15 @@ class LDLocalizations {
       'createpdfdocument': 'Create',
       'cancel': 'Cancel',
       'processingimage': "Processing image, please wait",
-      'savingexportdocument': 'Saving exported file'
+      'savingexportdocument': 'Saving exported file',
+      'enterstorytitle': 'Enter story title',
+      'labelStoryTitle': 'Title: ',
+      'listofauthors': 'List of authors',
+      'labelauthors': 'Authors:',
+      'createstory': 'Create story',
+      'edit': 'Edit',
+      'description': 'Description',
+      'hintdescription': 'Enter story description',
     },
     'uk': {
       'continue': 'Продовжити',
@@ -97,6 +105,14 @@ class LDLocalizations {
       'cancel': 'Скасувати',
       'processingimage': 'Обробляємо картинку, будь ласка, почекайте',
       'savingexportdocument': 'Зберігаємо експортований файл',
+      'enterstorytitle': 'Введіть назву історії',
+      'labelStoryTitle': 'Назва: ',
+      'listofauthors': 'Список авторів',
+      'labelauthors': 'Автори:',
+      'createstory': 'Створити історію',
+      'edit': 'Редагувати',
+      'description': 'Описання',
+      'hintdescription': 'Введіть описання історії',
     },
     'pl': {
       'continue': 'Dalej',
@@ -139,6 +155,14 @@ class LDLocalizations {
       'cancel': 'Anuluj',
       'processingimage': 'Przetwarzanie obrazu',
       'savingexportdocument': 'Zapisywanie wyeksportowanego pliku',
+      'enterstorytitle': 'Wpisz tytuł opowieści',
+      'labelStoryTitle': 'Tytuł:',
+      'listofauthors': 'Lista autorów',
+      'labelauthors': 'Autorski:',
+      'createstory': 'Utwórz historię',
+      'edit': 'Edytować',
+      'description': 'Opis',
+      'hintdescription': 'Wpisz opis historii',
     }
   };
 
@@ -277,8 +301,41 @@ class LDLocalizations {
   String get processingImage {
     return _localizedValues[locale.languageCode]['processingimage'];
   }
+
   String get savingExportFile {
     return _localizedValues[locale.languageCode]['savingexportdocument'];
+  }
+
+  String get enterStoryTitle {
+    return _localizedValues[locale.languageCode]['enterstorytitle'];
+  }
+
+  String get labelStoryTitle {
+    return _localizedValues[locale.languageCode]['labelStoryTitle'];
+  }
+
+  String get listOfAuthors {
+    return _localizedValues[locale.languageCode]['listofauthors'];
+  }
+
+  String get labelAuthors {
+    return _localizedValues[locale.languageCode]['labelauthors'];
+  }
+
+  String get createStory {
+    return _localizedValues[locale.languageCode]['createstory'];
+  }
+
+  String get edit {
+    return _localizedValues[locale.languageCode]['edit'];
+  }
+
+  String get description {
+    return _localizedValues[locale.languageCode]['description'];
+  }
+
+  String get hintDescription {
+    return _localizedValues[locale.languageCode]['hintDescription'];
   }
 }
 

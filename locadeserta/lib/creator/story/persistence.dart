@@ -11,18 +11,26 @@ class StoryPersistence {
   static final StoryPersistence instance = StoryPersistence._internal();
 
   Future<List<StoryBuilder>> getUserStories(User user) async {
-    var stories = await storage.collection("user_stories").document(user.uid).collection("stories").getDocuments();
-    List<Story> parsedStories = stories.documents.map((document) {
-      Story story = Story.fromJson(document.data["storyjson"]);
-      return story;
-    }).toList();
+    var stories;
+    List<StoryBuilder> result;
+    try {
+      stories =
+      await storage.collection("user_stories").document(user.uid).collection(
+          "stories").getDocuments();
+      List parsedStories = stories.documents.map((document) {
+        Story story = Story.fromJson(document.data["storyjson"]);
+        return story;
+      }).toList();
 
-    List<StoryBuilder> result = parsedStories.map((story) => StoryBuilder.fromStory(story)).toList();
+      result = parsedStories.map((story) =>
+          StoryBuilder.fromStory(story)).toList();
+    } catch (e) {
+      print('Exception while calling getUserStories: $e');
+    }
     return result;
   }
 
   writeStory(User user, StoryBuilder storyBuilder) async {
-
     DocumentSnapshot doc = await storage
         .collection("user_stories")
         .document(user.uid)
