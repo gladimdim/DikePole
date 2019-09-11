@@ -64,7 +64,7 @@ class _PassageBuilderViewState extends State<PassageBuilderView> {
             ),
           ),
           Expanded(
-            flex: 1,
+            flex: 3,
             child: widget.nextBlock,
           ),
         ],
@@ -90,7 +90,6 @@ class _PassageOptionBuilderViewState extends State<PassageOptionBuilderView> {
 
   @override
   Widget build(BuildContext context) {
-    print("amonunt of passages: ${widget.storyBuilder.getPassages().length}");
     return PassageBuilderView(
       storyBuilder: widget.storyBuilder,
       passage: widget.passage,
@@ -98,7 +97,7 @@ class _PassageOptionBuilderViewState extends State<PassageOptionBuilderView> {
         Row(
           children: <Widget>[
             Expanded(
-              flex: 3,
+              flex: 2,
               child: TextField(
                 onChanged: (value) {
                   newOptionValue = value;
@@ -106,7 +105,7 @@ class _PassageOptionBuilderViewState extends State<PassageOptionBuilderView> {
               ),
             ),
             Expanded(
-              flex: 8,
+              flex: 3,
               child: DropdownButton(
                 onChanged: (id) {
                   newNextValue = id;
@@ -142,11 +141,29 @@ class _PassageOptionBuilderViewState extends State<PassageOptionBuilderView> {
             )
           ],
         ),
-        ...widget.passage.next.map((next) {
-          return Text(
-            "${next.target}: ${next.text}",
-          );
-        }).toList(),
+        Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: widget.passage.next.map((next) {
+              return Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: <Widget>[
+                  Text(
+                    "Option: ${next.text} -> ",
+                  ),
+                  Text(
+                    "${widget.storyBuilder.passageById(next.target).text}",
+                  ),
+                  InkWell(
+                    child: Icon(Icons.delete),
+                    onTap: () {
+                      setState(() {
+                        widget.passage.next.remove(next);
+                      });
+                    },
+                  )
+                ],
+              );
+            }).toList()),
       ]),
     );
   }
@@ -181,7 +198,6 @@ class _PassageContinueBuilderViewState
 
   @override
   Widget build(BuildContext context) {
-    print("amount of passages: ${widget.storyBuilder.getPassages().length}");
     return PassageBuilderView(
       passage: widget.passage,
       storyBuilder: widget.storyBuilder,

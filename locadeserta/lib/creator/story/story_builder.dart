@@ -58,6 +58,10 @@ class StoryBuilder {
   void removePassage(PassageBuilderBase passage) {
     _passages.remove(passage);
   }
+
+  PassageBuilderBase passageById(int id) {
+    return _passages.firstWhere((passage) => passage.id == id);
+  }
 }
 
 class PassageBuilderContinue extends PassageBuilderBase {
