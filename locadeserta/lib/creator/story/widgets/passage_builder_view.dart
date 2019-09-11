@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:locadeserta/creator/story/story.dart';
 import 'package:locadeserta/creator/story/story_builder.dart';
 import 'package:locadeserta/creator/utils/utils.dart';
 
@@ -38,13 +39,9 @@ class _PassageBuilderViewState extends State<PassageBuilderView> {
             flex: 6,
             child: Container(
               decoration: BoxDecoration(
-                color: Theme
-                    .of(context)
-                    .backgroundColor,
+                color: Theme.of(context).backgroundColor,
                 border: Border.all(
-                  color: Theme
-                      .of(context)
-                      .primaryColor,
+                  color: Theme.of(context).primaryColor,
                   width: 3.0,
                 ),
               ),
@@ -88,20 +85,69 @@ class PassageOptionBuilderView extends StatefulWidget {
 }
 
 class _PassageOptionBuilderViewState extends State<PassageOptionBuilderView> {
+  String newOptionValue = "";
+  int newNextValue = 0;
+
   @override
   Widget build(BuildContext context) {
+    print("amonunt of passages: ${widget.storyBuilder.getPassages().length}");
     return PassageBuilderView(
       storyBuilder: widget.storyBuilder,
       passage: widget.passage,
-      nextBlock: Column(
-        children:
-        widget.passage.next.map((next) {
+      nextBlock: Column(children: [
+        Row(
+          children: <Widget>[
+            Expanded(
+              flex: 3,
+              child: TextField(
+                onChanged: (value) {
+                  newOptionValue = value;
+                },
+              ),
+            ),
+            Expanded(
+              flex: 8,
+              child: DropdownButton(
+                onChanged: (id) {
+                  newNextValue = id;
+                },
+                value: newNextValue,
+                items: widget.storyBuilder.getPassages().map((passage) {
+                  return DropdownMenuItem(
+                    value: passage.id,
+                    child: Row(
+                      children: <Widget>[
+                        if (passage.text != null)
+                          Text(firstNCharsFromString(passage.text, 20)),
+                      ],
+                    ),
+                  );
+                }).toList(),
+              ),
+            ),
+            Expanded(
+              flex: 1,
+              child: InkWell(
+                child: Icon(Icons.add),
+                onTap: () {
+                  setState(
+                    () {
+                      widget.passage.next.add(
+                        NextOption(text: newOptionValue, target: newNextValue),
+                      );
+                    },
+                  );
+                },
+              ),
+            )
+          ],
+        ),
+        ...widget.passage.next.map((next) {
           return Text(
-          "${next.target}: ${next.text}",
+            "${next.target}: ${next.text}",
           );
-        }).toList()
-        ,
-      ),
+        }).toList(),
+      ]),
     );
   }
 }
@@ -135,6 +181,7 @@ class _PassageContinueBuilderViewState
 
   @override
   Widget build(BuildContext context) {
+    print("amount of passages: ${widget.storyBuilder.getPassages().length}");
     return PassageBuilderView(
       passage: widget.passage,
       storyBuilder: widget.storyBuilder,
@@ -152,14 +199,13 @@ class _PassageContinueBuilderViewState
                   widget.passage.next = newValue;
                 });
               },
-              value: widget.passage.next,
+              value: widget.passage.next == null ? 0 : widget.passage.next,
               items: widget.storyBuilder.getPassages().map((passage) {
                 return DropdownMenuItem(
                   value: passage.id,
                   child: Row(
                     children: <Widget>[
-                      if (widget.passage.next == passage.id)
-                        Icon(Icons.check),
+                      if (widget.passage.next == passage.id) Icon(Icons.check),
                       if (passage.text != null)
                         Text(firstNCharsFromString(passage.text, 20)),
                     ],
