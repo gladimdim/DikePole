@@ -18,7 +18,7 @@ void main() async {
   try {
     await FlutterStatusbarcolor.setStatusBarColor(Colors.black);
     await FlutterStatusbarcolor.setNavigationBarColor(Colors.black);
-    await FlutterStatusbarcolor.setNavigationBarWhiteForeground(true);
+    await FlutterStatusbarcolor.setNavigationBarWhiteForeground(false);
   } catch (e) {
     print(e);
   }

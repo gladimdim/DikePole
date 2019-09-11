@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:locadeserta/animations/slideable_button.dart';
-import 'package:locadeserta/components.dart';
 import 'package:locadeserta/creator/components/edit_story.dart';
 import 'package:locadeserta/creator/story/persistence.dart';
 import 'package:locadeserta/creator/story/story_builder.dart';
@@ -149,9 +147,9 @@ class _CreateViewState extends State<CreateView> {
     );
   }
 
-  _goToEditStoryView(StoryBuilder story) {
+  _goToEditStoryView(StoryBuilder storyBuilder) {
     Navigator.pushNamed(context, ExtractEditStoryViewArguments.routeName,
-        arguments: EditStoryViewArguments(story: story, locale: widget.locale));
+        arguments: EditStoryViewArguments(storyBuilder: storyBuilder, locale: widget.locale));
   }
 
   _deleteStory(User user, StoryBuilder story) async {
@@ -160,11 +158,11 @@ class _CreateViewState extends State<CreateView> {
 }
 
 class StoryViewHeader extends StatelessWidget {
-  final StoryBuilder story;
+  final StoryBuilder storyBuilder;
 
   final VoidCallback onEdit;
 
-  StoryViewHeader({this.story, this.onEdit});
+  StoryViewHeader({this.storyBuilder, this.onEdit});
 
   @override
   Widget build(BuildContext context) {
@@ -172,19 +170,19 @@ class StoryViewHeader extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: <Widget>[
         Row(
-          mainAxisAlignment: MainAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text("Title: "),
-            Text(story.title),
+            Text(LDLocalizations.of(context).labelStoryTitle, style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),),
+            Text(storyBuilder.title, style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),),
           ],
         ),
-        SizedBox(
-          width: 40,
-        ),
-        SlideableButton(
-          child: optionBox(context, LDLocalizations.of(context).edit),
-          onPress: onEdit,
-        ),
+//        SizedBox(
+//          width: 40,
+//        ),
+//        SlideableButton(
+//          child: optionBox(context, LDLocalizations.of(context).edit),
+//          onPress: onEdit,
+//        ),
       ],
     );
   }

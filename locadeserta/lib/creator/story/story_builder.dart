@@ -54,6 +54,10 @@ class StoryBuilder {
 
     return sb;
   }
+
+  void removePassage(PassageBuilderBase passage) {
+    _passages.remove(passage);
+  }
 }
 
 class PassageBuilderContinue extends PassageBuilderBase {
@@ -201,7 +205,7 @@ abstract class PassageBuilderBase {
 }
 
 PassageBuilderBase passageBuilderFromType(PassageTypes type) {
-  var defaultText = "<<Enter passage text>>";
+  var defaultText = "";
   switch (type) {
     case PassageTypes.Continue:
       return PassageBuilderContinue(text: defaultText);

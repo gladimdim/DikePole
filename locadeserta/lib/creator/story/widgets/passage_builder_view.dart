@@ -67,7 +67,7 @@ class _PassageBuilderViewState extends State<PassageBuilderView> {
             ),
           ),
           Expanded(
-            flex: 4,
+            flex: 1,
             child: widget.nextBlock,
           ),
         ],
@@ -105,7 +105,6 @@ class _PassageOptionBuilderViewState extends State<PassageOptionBuilderView> {
     );
   }
 }
-
 
 class PassageContinueBuilderView extends StatefulWidget {
   final PassageBuilderContinue passage;
@@ -159,6 +158,8 @@ class _PassageContinueBuilderViewState
                   value: passage.id,
                   child: Row(
                     children: <Widget>[
+                      if (widget.passage.next == passage.id)
+                        Icon(Icons.check),
                       if (passage.text != null)
                         Text(firstNCharsFromString(passage.text, 20)),
                     ],

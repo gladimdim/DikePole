@@ -14,12 +14,12 @@ import 'package:locadeserta/models/Localizations.dart';
 import 'package:locadeserta/models/background_image.dart';
 
 class EditStoryView extends StatefulWidget {
-  final StoryBuilder story;
+  final StoryBuilder storyBuilder;
   final Locale locale;
   final Auth auth;
 
   EditStoryView(
-      {@required this.story, @required this.locale, @required this.auth});
+      {@required this.storyBuilder, @required this.locale, @required this.auth});
 
   @override
   _EditStoryViewState createState() => _EditStoryViewState();
@@ -30,7 +30,7 @@ class _EditStoryViewState extends State<EditStoryView> {
 
   @override
   Widget build(BuildContext context) {
-    var story = widget.story;
+    var storyBuilder = widget.storyBuilder;
     return Scaffold(
       appBar: AppBar(
         title: Text(LDLocalizations.of(context).createStory),
@@ -42,8 +42,7 @@ class _EditStoryViewState extends State<EditStoryView> {
             ),
             onPressed: () async {
               var user = await widget.auth.currentUser();
-              await StoryPersistence.instance
-                  .writeStory(user, widget.story);
+              await StoryPersistence.instance.writeStory(user, widget.storyBuilder);
             },
           )
         ],
@@ -51,7 +50,7 @@ class _EditStoryViewState extends State<EditStoryView> {
       body: Column(
         children: <Widget>[
           StoryViewHeader(
-            story: story,
+            storyBuilder: storyBuilder,
             onEdit: () {
               Navigator.pop(context);
             },
@@ -59,27 +58,36 @@ class _EditStoryViewState extends State<EditStoryView> {
           CreatePassage(
             onAdd: (PassageTypes type) {
               setState(() {
-                story.addPassage(passageBuilderFromType(type));
+                storyBuilder.addPassage(passageBuilderFromType(type));
               });
             },
           ),
           Expanded(
               child: SingleChildScrollView(
             child: Column(
-              children: story.getPassages().map((passage) {
+              children: storyBuilder.getPassages().map((passage) {
                 return ListTile(
                   title: Text(firstNCharsFromString(passage.text, 60)),
                   leading: Image(
-                    image: BackgroundImage.getAssetImageForType(passage.imageType),
+                    image:
+                        BackgroundImage.getAssetImageForType(passage.imageType),
                   ),
                   onTap: () async {
                     await Navigator.pushNamed(
                       context,
                       ExtractEditPassageView.routeName,
                       arguments: EditPassageViewArguments(
-                          story: story, passageBuilder: passage),
+                          story: storyBuilder, passageBuilder: passage),
                     );
                   },
+                  trailing: InkWell(
+                    child: Icon(Icons.delete),
+                    onTap: () {
+                      setState(() {
+                        storyBuilder.removePassage(passage);
+                      });
+                    },
+                  ),
                 );
               }).toList(),
             ),
@@ -92,7 +100,7 @@ class _EditStoryViewState extends State<EditStoryView> {
                 ExtractArgumentsGameView.routeName,
                 arguments: GameViewArguments(
                   locale: widget.locale,
-                  story: story.toModel(),
+                  story: storyBuilder.toModel(),
                 ),
               );
             },
@@ -104,10 +112,10 @@ class _EditStoryViewState extends State<EditStoryView> {
 }
 
 class EditStoryViewArguments {
-  final StoryBuilder story;
+  final StoryBuilder storyBuilder;
   final Locale locale;
 
-  EditStoryViewArguments({this.story, this.locale});
+  EditStoryViewArguments({this.storyBuilder, this.locale});
 }
 
 class ExtractEditStoryViewArguments extends StatelessWidget {
@@ -122,7 +130,7 @@ class ExtractEditStoryViewArguments extends StatelessWidget {
 
     return EditStoryView(
       auth: auth,
-      story: args.story,
+      storyBuilder: args.storyBuilder,
       locale: args.locale,
     );
   }
