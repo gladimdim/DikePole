@@ -1,6 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'dart:convert';
 
+import 'package:locadeserta/models/background_image.dart';
+
 class Story {
   String title;
   String description;
@@ -40,7 +42,7 @@ class Story {
     history.add(
       HistoryItem(
         text: currentPassage.text,
-        imagePath: currentPassage.imagePath,
+        imageType: currentPassage.imageType,
       ),
     );
   }
@@ -85,41 +87,41 @@ class Story {
         text:
             "The sun was setting over the river, casting a crimson glow over everything. A swift current swept the dark water south to the sea while the wind quietly rustled the reeds, carrying the scent of autumn and smoke from the fire. Twilight was settling in.",
         next: 1,
-        imagePath: "images/background/river/10.jpg");
+        imageType: ImageType.RIVER);
     var p2 = PassageContinue(
         id: 1,
         text:
             "Dmytro lay hidden in the thicket far from the water, listening carefully to the nearby sounds. Pesky gnats needled his face and neck. A little further off on the shore, where the reeds gave place to steppe grass and sparsely growing trees, three men had settled near a fire. The runaway couldn’t see them, but he could sometimes hear fragments of their conversation and the clatter of provisions passed on by the wind. They were Tatars. Dmytro was trying to hear whether they were there for him.",
         next: 2,
-        imagePath: "images/background/bulrush/5.jpg");
+        imageType: ImageType.BULRUSH);
 
     var p3 = PassageContinue(
         id: 2,
         text:
             "The Cossack lay like this for a long time, covering his head with his hands until it was completely dark. The wind increased, blocking out all other sounds except for the haunting song of the rustling reeds. The wispy clouds were driven westward, creating a covering for the weak light of the crescent moon. Dmytro couldn’t wait any longer. He had to do something. Gripping tightly a good combat knife, the only thing he managed to take from the boat when running away, he slowly crawled to the path that led to the river. He waited a while before getting up and, trying to step as lightly as possible, made his way to the river. There was no one on the dark path. He squatted and started to drink the cold river water, cupping it in his hand. From time to time, the moon and the thick clouds reflected on the river’s service. Suddenly, a girl’s face was seen. The man sprang back and stared at the spot where he had seen the bright eyes of a young girl. But there was nothing there – only the moonlight that sometimes shone through the clouds. He crossed himself and went back, whispering a prayer. Then he turned and made his way to where the wall of reeds ended.",
         next: 3,
-        imagePath: "images/background/river/0.jpg");
+        imageType: ImageType.BULRUSH);
 
     var p4 = PassageContinue(
         id: 3,
         text:
             "The runaway had to crawl once again since the river bank had risen. Suddenly, he spotted a solitary fire glowing in the dark sea of the steppe.",
         next: 4,
-        imagePath: "images/background/forest/3.jpg");
+        imageType: ImageType.RIVER);
 
     var p5 = PassageContinue(
         id: 4,
         text:
             "In the rare times the moonlight was visible, it was possible to glimpse the silhouettes of people and horses. Two were sleeping on the ground facing each other. A third was sitting closer to the fire, leaning against a short spear and, seemingly, also sleeping. It was harder to make out the horses as they slept on the other side of the fire, but there appeared to be at least five of them.",
         next: 5,
-        imagePath: "images/background/forest/3.jpg");
+        imageType: ImageType.CAMP);
 
     var p6 = PassageContinue(
         id: 5,
         text:
             "In the rare times the moonlight was visible, it was possible to glimpse the silhouettes of people and horses. Two were sleeping on the ground facing each other. A third was sitting closer to the fire, leaning against a short spear and, seemingly, also sleeping. It was harder to make out the horses as they slept on the other side of the fire, but there appeared to be at least five of them.",
         next: 6,
-        imagePath: "images/background/forest/3.jpg");
+        imageType: ImageType.CAMP);
 
     var p7 = PassageOption(
       id: 6,
@@ -129,8 +131,10 @@ class Story {
         NextOption(target: 0, text: "Take the bow, quiver and knapsack"),
         NextOption(target: 1, text: "Look for a Tatar saber")
       ],
-      imagePath: "images/background/camp/2.jpg",
+      imageType: ImageType.CAMP
     );
+
+
 
     var story = Story(
       title: "After the battle",
@@ -163,19 +167,19 @@ class PassageContinue extends PassageBase {
   final PassageTypes type = PassageTypes.Continue;
   final int id;
   final String text;
-  final String imagePath;
+  final ImageType imageType;
   final int next;
 
   PassageContinue({
     @required this.id,
     @required this.text,
-    this.imagePath,
+    this.imageType,
     @required this.next,
   }) : super(
             id: id,
             text: text,
             type: PassageTypes.Continue,
-            imagePath: imagePath);
+            imageType: imageType);
 
   int getNext(int option) {
     return next;
@@ -186,7 +190,7 @@ class PassageContinue extends PassageBase {
       "type": "Continue",
       "id": id,
       "text": text,
-      "imagePath": imagePath,
+      "imageType": imageTypeToString(imageType),
       "next": next,
     };
   }
@@ -197,7 +201,7 @@ class PassageContinue extends PassageBase {
     return PassageContinue(
       id: map["id"],
       text: map["text"],
-      imagePath: map["imagePath"],
+      imageType: imageTypeFromString(map["imageType"]),
       next: map["next"],
     );
   }
@@ -209,9 +213,9 @@ class PassageContinue extends PassageBase {
 
 class HistoryItem {
   final String text;
-  final String imagePath;
+  final ImageType imageType;
 
-  HistoryItem({@required this.text, this.imagePath});
+  HistoryItem({@required this.text, this.imageType});
 }
 
 class PassageOption extends PassageBase {
@@ -219,18 +223,18 @@ class PassageOption extends PassageBase {
   final int id;
   final String text;
   final List<NextOption> options;
-  final String imagePath;
+  final ImageType imageType;
 
   PassageOption({
     @required this.id,
     @required this.text,
     @required this.options,
-    this.imagePath,
+    this.imageType,
   }) : super(
           id: id,
           text: text,
           type: PassageTypes.Option,
-          imagePath: imagePath,
+          imageType: imageType,
         );
 
   int getNext(int option) {
@@ -251,7 +255,7 @@ class PassageOption extends PassageBase {
                 "text": option.text,
               })
           .toList(),
-      "imagePath": imagePath,
+      "imageType": imageTypeToString(imageType),
     };
   }
 
@@ -273,7 +277,7 @@ class PassageOption extends PassageBase {
     return PassageOption(
       id: map["id"],
       text: map["text"],
-      imagePath: map["imagePath"],
+      imageType: imageTypeFromString(map["imageType"]),
       options: parsedOptions,
     );
   }
@@ -284,7 +288,7 @@ abstract class PassageBase {
   final int id;
   final String text;
   final bool canContinue = true;
-  final String imagePath;
+  final ImageType imageType;
 
   Map<String, dynamic> toJson();
 
@@ -292,7 +296,7 @@ abstract class PassageBase {
     @required this.type,
     @required this.id,
     @required this.text,
-    this.imagePath,
+    this.imageType,
   });
 
   int getNext(int option);

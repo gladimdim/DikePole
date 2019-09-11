@@ -4,7 +4,6 @@ import 'package:locadeserta/components/BorderedRandomImageForType.dart';
 import 'package:locadeserta/creator/story/story.dart';
 import 'package:locadeserta/components.dart';
 import 'package:locadeserta/creator/utils/utils.dart';
-import 'package:locadeserta/models/background_image.dart';
 
 class PassageView extends StatefulWidget {
   final Story currentStory;
@@ -143,10 +142,8 @@ class PassageItemView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
-        if (historyItem.imagePath != null)
-          BorderedRandomImageByPath(
-            getImagesForType(historyItem.imagePath),
-          ),
+        if (historyItem.imageType != null)
+          BorderedRandomImageByType(historyItem.imageType),
         Container(
           alignment: Alignment.topCenter,
           padding: EdgeInsets.all(8.0),

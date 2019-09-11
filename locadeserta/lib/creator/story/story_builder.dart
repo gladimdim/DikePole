@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:locadeserta/creator/story/story.dart';
 import 'package:locadeserta/creator/story/widgets/passage_builder_view.dart';
 import 'package:locadeserta/creator/utils/utils.dart';
+import 'package:locadeserta/models/background_image.dart';
 class StoryBuilder {
   String title;
   String description;
@@ -59,20 +60,20 @@ class PassageBuilderContinue extends PassageBuilderBase {
   int next;
   String text;
   int id;
-  String imagePath;
+  ImageType imageType;
 
-  PassageBuilderContinue({this.text, this.next, this.imagePath = "images/background/bulrush/3.jpg", this.id})
+  PassageBuilderContinue({this.text, this.next, this.imageType = ImageType.BULRUSH, this.id})
       : super(
             text: text,
             id: id,
-            imagePath: imagePath,
+            imageType: imageType,
             type: PassageTypes.Continue);
 
   PassageContinue toModel() {
     return PassageContinue(
       id: id,
       text: text,
-      imagePath: imagePath,
+      imageType: imageType,
       next: next,
     );
   }
@@ -82,7 +83,7 @@ class PassageBuilderContinue extends PassageBuilderBase {
     return {
       "id": id,
       "text": "text",
-      "imagePath": imagePath,
+      "imageType": imageType,
       "next": next
     };
   }
@@ -98,7 +99,7 @@ class PassageBuilderContinue extends PassageBuilderBase {
   static PassageBuilderContinue fromStoryPassage(PassageBase base) {
     return PassageBuilderContinue(
       id: base.id,
-      imagePath: base.imagePath,
+      imageType: base.imageType,
       next: base.getNexts(),
       text: base.text,
     );
@@ -108,14 +109,14 @@ class PassageBuilderContinue extends PassageBuilderBase {
 class PassageBuilderOption extends PassageBuilderBase {
   String text;
   int id;
-  String imagePath;
+  ImageType imageType;
   List<NextOption> next = [];
 
-  PassageBuilderOption({this.text, this.next, this.imagePath, this.id})
+  PassageBuilderOption({this.text, this.next, this.imageType = ImageType.BOAT, this.id})
       : super(
           text: text,
           id: id,
-          imagePath: imagePath,
+          imageType: imageType,
           type: PassageTypes.Option,
         );
 
@@ -123,7 +124,7 @@ class PassageBuilderOption extends PassageBuilderBase {
     return PassageOption(
       id: id,
       text: text,
-      imagePath: imagePath,
+      imageType: imageType,
       options: next,
     );
   }
@@ -132,7 +133,7 @@ class PassageBuilderOption extends PassageBuilderBase {
   static PassageBuilderOption fromStoryPassage(PassageBase base) {
     return PassageBuilderOption(
       id: base.id,
-      imagePath: base.imagePath,
+      imageType: base.imageType,
       next: base.getNexts(),
       text: base.text,
     );
@@ -143,7 +144,7 @@ class PassageBuilderOption extends PassageBuilderBase {
     return {
       "id": id,
       "text": "text",
-      "imagePath": imagePath,
+      "imageType": imageType,
       "next": next.map((next) => {"target": next.target, "text": next.text}).toList(),
     };
   }
@@ -159,17 +160,17 @@ class PassageBuilderOption extends PassageBuilderBase {
 
 abstract class PassageBuilderBase {
   String text;
-  String imagePath;
+  ImageType imageType;
   int id;
   PassageTypes type;
 
-  PassageBuilderBase({this.text, this.imagePath = "images/background/bulrush/3.jpg", this.id, @required this.type});
+  PassageBuilderBase({this.text, this.imageType = ImageType.BOAT, this.id, @required this.type});
 
   Widget toWidget() {
     return Row(
       children: [
         Image(
-          image: AssetImage(this.imagePath),
+          image: BackgroundImage.getAssetImageForType(imageType),
           width: 48,
           height: 48,
           fit: BoxFit.fill,

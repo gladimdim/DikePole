@@ -36,24 +36,7 @@ class BackgroundImage {
 
   static ImageType variableToImageType(String variable) {
     var imageType = variable.split(" ")[1];
-    switch (imageType) {
-      case "forest":
-        return ImageType.FOREST;
-      case "bulrush":
-        return ImageType.BULRUSH;
-      case "boat":
-        return ImageType.BOAT;
-      case "river":
-        return ImageType.RIVER;
-      case 'landing':
-        return ImageType.LANDING;
-      case 'camp':
-        return ImageType.CAMP;
-      case 'cossacks':
-        return ImageType.COSSACKS;
-      default:
-        return ImageType.CAMP;
-    }
+    return imageTypeFromString(imageType);
   }
 
   static RandomImage getRandomImageForType(ImageType type) {
@@ -152,16 +135,12 @@ class RandomImage {
   }
 
   AssetImage getAssetImage() {
-    var returnValue = AssetImage(
-      getImagePath()
-    );
+    var returnValue = AssetImage(getImagePath());
     return returnValue;
   }
 
   AssetImage getAssetImageColored() {
-    return AssetImage(
-      getImagePathColored()
-    );
+    return AssetImage(getImagePathColored());
   }
 
   void nextRandom() {
@@ -185,12 +164,48 @@ class RandomImage {
 
 enum ImageType { BOAT, STEPPE, FOREST, BULRUSH, RIVER, LANDING, CAMP, COSSACKS }
 
-
-List<String> getImagesForType(String blackWhiteImagPath) {
-  var split = blackWhiteImagPath.split("/");
+List<String> getImagesForType(String blackWhiteImagePath) {
+  var split = blackWhiteImagePath.split("/");
   split.last = "c_${split.last}";
   return [
-    blackWhiteImagPath,
+    blackWhiteImagePath,
     split.join("/"),
   ];
+}
+
+ImageType imageTypeFromString(String input) {
+  switch (input) {
+    case "forest":
+      return ImageType.FOREST;
+    case "bulrush":
+      return ImageType.BULRUSH;
+    case "boat":
+      return ImageType.BOAT;
+    case "river":
+      return ImageType.RIVER;
+    case 'landing':
+      return ImageType.LANDING;
+    case 'camp':
+      return ImageType.CAMP;
+    case 'cossacks':
+      return ImageType.COSSACKS;
+    case 'camp':
+      return ImageType.CAMP;
+    default:
+      return ImageType.CAMP;
+  }
+}
+
+String imageTypeToString(ImageType imageType) {
+  switch (imageType) {
+    case ImageType.FOREST: return "forest";
+    case ImageType.BOAT: return 'boat';
+    case ImageType.BULRUSH: return 'bulrush';
+    case ImageType.CAMP: return 'camp';
+    case ImageType.COSSACKS: return 'cossacks';
+    case ImageType.RIVER: return 'river';
+    case ImageType.LANDING: return 'landing';
+    case ImageType.STEPPE: return 'steppe';
+    default: return 'boat';
+  }
 }

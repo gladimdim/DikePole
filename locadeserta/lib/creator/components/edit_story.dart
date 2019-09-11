@@ -11,6 +11,7 @@ import 'package:locadeserta/creator/story/story_builder.dart';
 import 'package:locadeserta/creator/utils/utils.dart';
 import 'package:locadeserta/models/Auth.dart';
 import 'package:locadeserta/models/Localizations.dart';
+import 'package:locadeserta/models/background_image.dart';
 
 class EditStoryView extends StatefulWidget {
   final StoryBuilder story;
@@ -32,7 +33,7 @@ class _EditStoryViewState extends State<EditStoryView> {
     var story = widget.story;
     return Scaffold(
       appBar: AppBar(
-        title: Text("Create story"),
+        title: Text(LDLocalizations.of(context).createStory),
         actions: <Widget>[
           FlatButton(
             child: Text(
@@ -69,7 +70,7 @@ class _EditStoryViewState extends State<EditStoryView> {
                 return ListTile(
                   title: Text(firstNCharsFromString(passage.text, 60)),
                   leading: Image(
-                    image: AssetImage(passage.imagePath),
+                    image: BackgroundImage.getAssetImageForType(passage.imageType),
                   ),
                   onTap: () async {
                     await Navigator.pushNamed(
@@ -84,7 +85,7 @@ class _EditStoryViewState extends State<EditStoryView> {
             ),
           )),
           SlideableButton(
-            child: optionBox(context, "Play"),
+            child: optionBox(context, LDLocalizations.of(context).startStory),
             onPress: () async {
               await Navigator.pushNamed(
                 context,
