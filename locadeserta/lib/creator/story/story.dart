@@ -30,8 +30,8 @@ class Story {
   }
 
   next() {
+    _currentPage.nextNode();
     _logCurrentPassageToHistory();
-    _currentPage.moveNext();
   }
 
   toJson() {
@@ -133,9 +133,9 @@ class Page {
     return endType == null;
   }
 
-  void moveNext() {
+  void nextNode() {
     currentIndex++;
-    if (currentIndex >= next.length) {
+    if (currentIndex >= nodes.length) {
       currentIndex = 0;
     }
   }

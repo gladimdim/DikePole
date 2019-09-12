@@ -65,11 +65,10 @@ class _EditStoryViewState extends State<EditStoryView> {
               child: SingleChildScrollView(
             child: Column(
               children: story.root.nodes.map((node) {
-                var image = node == null ? Container() : Image(
-                    image: BackgroundImage.getAssetImageForType(node.imageType));
+                var imageType = node.imageType == null ? ImageType.BOAT : node.imageType;
                 return ListTile(
                   title: Text(firstNCharsFromString(node.text, 60)),
-                  leading: image,
+                  leading: Image(image: BackgroundImage.getAssetImageForType(imageType)),
                   onTap: () async {
                     await Navigator.pushNamed(
                       context,
