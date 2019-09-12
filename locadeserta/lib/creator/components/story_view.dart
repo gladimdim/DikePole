@@ -5,10 +5,10 @@ import 'package:locadeserta/creator/story/story.dart';
 import 'package:locadeserta/components.dart';
 import 'package:locadeserta/creator/utils/utils.dart';
 
-class PassageView extends StatefulWidget {
+class StoryView extends StatefulWidget {
   final Story currentStory;
 
-  PassageView({
+  StoryView({
     this.currentStory,
   });
 
@@ -16,7 +16,7 @@ class PassageView extends StatefulWidget {
   State<StatefulWidget> createState() => PassageState();
 }
 
-class PassageState extends State<PassageView> with TickerProviderStateMixin {
+class PassageState extends State<StoryView> with TickerProviderStateMixin {
   ScrollController _passageScrollController = ScrollController();
 
   @override
@@ -24,34 +24,23 @@ class PassageState extends State<PassageView> with TickerProviderStateMixin {
     return Column(
       children: [
         _buildTextSection(context),
-        ..._createButtons(context),
+        createContinue(context),
       ],
       crossAxisAlignment: CrossAxisAlignment.stretch,
     );
   }
 
-  List<Widget> _createButtons(BuildContext context) {
-    switch (widget.currentStory.currentPassage.type) {
-      case PassageTypes.Continue:
-        return [createContinue(context)];
-      case PassageTypes.Option:
-        {
-          PassageOption option =
-              widget.currentStory.currentPassage as PassageOption;
-          return createOptionList(option.options);
-        }
-    }
-    return [];
-  }
-
-  Widget createButton(String text, int i) {
+  Widget createButton(String text) {
     return Padding(
       padding: EdgeInsets.all(8.0),
       child: SizedBox(
-        height: MediaQuery.of(context).size.height * 0.075,
+        height: MediaQuery
+            .of(context)
+            .size
+            .height * 0.075,
         child: SlideableButton(
           onPress: () {
-            _next(i);
+
           },
           child: optionBox(
             context,
@@ -62,20 +51,16 @@ class PassageState extends State<PassageView> with TickerProviderStateMixin {
     );
   }
 
-  void _next(int i) {
+  void _next() {
     setState(() {
-      widget.currentStory.next(i);
+      widget.currentStory.next();
     });
   }
 
-  List<Widget> createOptionList(List<NextOption> options) {
-    List<Widget> optionButtons = List();
-    int index = 0;
-    optionButtons.addAll(options.map((value) {
-      return createButton(value.text, index++);
-    }));
-
-    return optionButtons;
+  List<Widget> createOptionList(List<Page> nextPages) {
+    return nextPages.map((page) {
+      return createButton("test----");
+    }).toList();
   }
 
   Widget createContinue(BuildContext context) {
@@ -87,7 +72,7 @@ class PassageState extends State<PassageView> with TickerProviderStateMixin {
             "Next",
           ),
           onPress: () {
-            _next(null);
+            _next();
           }),
     );
   }
@@ -106,17 +91,18 @@ class PassageState extends State<PassageView> with TickerProviderStateMixin {
 
     return Expanded(
         child: SingleChildScrollView(
-      controller: _passageScrollController,
-      child: Column(
-        children: _getLastFiveItems(widget.currentStory.history)
-            .map(
-              (HistoryItem historyItem) => PassageItemView(
-                historyItem,
-              ),
+          controller: _passageScrollController,
+          child: Column(
+            children: _getLastFiveItems(widget.currentStory.history)
+                .map(
+                  (HistoryItem historyItem) =>
+                  PassageItemView(
+                    historyItem,
+                  ),
             )
-            .toList(),
-      ),
-    ));
+                .toList(),
+          ),
+        ));
   }
 
   _scroll(BuildContext context) {
@@ -148,7 +134,10 @@ class PassageItemView extends StatelessWidget {
           alignment: Alignment.topCenter,
           padding: EdgeInsets.all(8.0),
           margin: EdgeInsets.all(8.0),
-          width: MediaQuery.of(context).size.width * 0.95,
+          width: MediaQuery
+              .of(context)
+              .size
+              .width * 0.95,
           decoration: getDecorationForContainer(context),
           child: Text(
             historyItem.text == "" ? "The End" : historyItem.text,

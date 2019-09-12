@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:locadeserta/creator/components/edit_story.dart';
 import 'package:locadeserta/creator/story/persistence.dart';
-import 'package:locadeserta/creator/story/story_builder.dart';
+import 'package:locadeserta/creator/story/story.dart';
 import 'package:locadeserta/models/Auth.dart';
 import 'package:locadeserta/models/Localizations.dart';
 import 'package:locadeserta/waiting_screen.dart';
@@ -18,7 +18,7 @@ class CreateView extends StatefulWidget {
 }
 
 class _CreateViewState extends State<CreateView> {
-  StoryBuilder story;
+  Story story;
   AsyncMemoizer _storyBuilderCatalogMemo = AsyncMemoizer();
   final AsyncMemoizer _currentUserMemo = AsyncMemoizer();
 
@@ -68,7 +68,7 @@ class _CreateViewState extends State<CreateView> {
                   ),
                   CreateMetaStoryView(
                     story: null,
-                    onSave: (StoryBuilder newStory) {
+                    onSave: (Story newStory) {
                       setState(() {
                         _goToEditStoryView(newStory);
                       });
@@ -92,7 +92,7 @@ class _CreateViewState extends State<CreateView> {
                   if (snapshot.data == null) {
                     return Container();
                   } else {
-                    List<StoryBuilder> storyBuilders = snapshot.data;
+                    List<Story> storyBuilders = snapshot.data;
                     return Column(
                       children: _createStoryCards(storyBuilders, user),
                     );
@@ -119,24 +119,24 @@ class _CreateViewState extends State<CreateView> {
     });
   }
 
-  List<Widget> _createStoryCards(List<StoryBuilder> storyBuilders, User user) {
+  List<Widget> _createStoryCards(List<Story> storyBuilders, User user) {
     return storyBuilders
         .map((storyBuilder) => _createStoryCard(storyBuilder, user))
         .toList();
   }
 
-  Widget _createStoryCard(StoryBuilder storyBuilder, User user) {
+  Widget _createStoryCard(Story story, User user) {
     return Center(
       child: Card(
         elevation: 10.0,
         child: CreateMetaStoryView(
-          story: storyBuilder,
-          onSave: (StoryBuilder newStory) {
+          story: story,
+          onSave: (Story newStory) {
             setState(() {
               _goToEditStoryView(newStory);
             });
           },
-          onDelete: (StoryBuilder story) async {
+          onDelete: (Story story) async {
             await _deleteStory(user, story);
             setState(() {
               _storyBuilderCatalogMemo = AsyncMemoizer();
@@ -147,22 +147,22 @@ class _CreateViewState extends State<CreateView> {
     );
   }
 
-  _goToEditStoryView(StoryBuilder storyBuilder) {
+  _goToEditStoryView(Story story) {
     Navigator.pushNamed(context, ExtractEditStoryViewArguments.routeName,
-        arguments: EditStoryViewArguments(storyBuilder: storyBuilder, locale: widget.locale));
+        arguments: EditStoryViewArguments(story: story, locale: widget.locale));
   }
 
-  _deleteStory(User user, StoryBuilder story) async {
+  _deleteStory(User user, Story story) async {
     return await StoryPersistence.instance.deleteStory(user, story);
   }
 }
 
 class StoryViewHeader extends StatelessWidget {
-  final StoryBuilder storyBuilder;
+  final Story story;
 
   final VoidCallback onEdit;
 
-  StoryViewHeader({this.storyBuilder, this.onEdit});
+  StoryViewHeader({this.story, this.onEdit});
 
   @override
   Widget build(BuildContext context) {
@@ -173,7 +173,7 @@ class StoryViewHeader extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(LDLocalizations.of(context).labelStoryTitle, style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),),
-            Text(storyBuilder.title, style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),),
+            Text(story.title, style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),),
           ],
         ),
 //        SizedBox(
@@ -189,9 +189,9 @@ class StoryViewHeader extends StatelessWidget {
 }
 
 class CreateMetaStoryView extends StatefulWidget {
-  final Function(StoryBuilder story) onSave;
-  final StoryBuilder story;
-  final Function(StoryBuilder story) onDelete;
+  final Function(Story story) onSave;
+  final Story story;
+  final Function(Story story) onDelete;
 
   CreateMetaStoryView({this.onDelete, @required this.onSave, this.story});
 
@@ -255,12 +255,21 @@ class _CreateMetaStoryViewState extends State<CreateMetaStoryView> {
               child: RaisedButton(
                 onPressed: () {
                   _formKey.currentState.save();
-                  var newStory =
-                      widget.story == null ? StoryBuilder() : widget.story;
-                  newStory.title = _title;
-                  newStory.description = _description;
-                  newStory.authors = [_authors];
-                  widget.onSave(newStory);
+                  var story;
+                  if (widget.story == null) {
+                    story = Story(
+                      title: _title,
+                      description: _description,
+                      authors: _authors,
+                      root: Page.generate(),
+                    );
+                  } else {
+                    story = widget.story;
+                    story.title = _title;
+                    story.description = _description;
+                    story.authors = _authors;
+                  }
+                  widget.onSave(story);
                 },
                 child: Text(LDLocalizations.of(context).edit),
               ),

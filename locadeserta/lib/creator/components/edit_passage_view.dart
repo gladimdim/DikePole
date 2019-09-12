@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:locadeserta/creator/story/story_builder.dart';
+import 'package:locadeserta/creator/story/story.dart';
 
 class EditPassageView extends StatelessWidget {
-  final StoryBuilder story;
-  final PassageBuilderBase passageBuilder;
+  final PageNode node;
 
-  EditPassageView({this.story, this.passageBuilder});
+  EditPassageView({this.node});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: passageBuilder.toEditWidget(story),
+      body: Text(node.text),
       appBar: AppBar(
         title: const Text("Editing passage"),
       ),
@@ -19,10 +18,9 @@ class EditPassageView extends StatelessWidget {
 }
 
 class EditPassageViewArguments {
-  final StoryBuilder story;
-  final PassageBuilderBase passageBuilder;
+  final PageNode node;
 
-  EditPassageViewArguments({this.story, this.passageBuilder});
+  EditPassageViewArguments({this.node});
 }
 
 class ExtractEditPassageView extends StatelessWidget {
@@ -33,8 +31,7 @@ class ExtractEditPassageView extends StatelessWidget {
         ModalRoute.of(context).settings.arguments;
 
     return EditPassageView(
-      story: args.story,
-      passageBuilder: args.passageBuilder,
+      node: args.node,
     );
   }
 }

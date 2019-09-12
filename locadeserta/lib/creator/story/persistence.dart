@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:locadeserta/creator/story/story.dart';
-import 'package:locadeserta/creator/story/story_builder.dart';
 import 'package:locadeserta/models/Auth.dart';
 
 final Firestore storage = Firestore.instance;
@@ -10,11 +9,9 @@ class StoryPersistence {
 
   static final StoryPersistence instance = StoryPersistence._internal();
 
-  Future<List<StoryBuilder>> getUserStories(User user) async {
-    var stories;
-    List<StoryBuilder> result;
+  Future<List<Story>> getUserStories(User user) async {
     try {
-      stories =
+      var stories =
       await storage.collection("user_stories").document(user.uid).collection(
           "stories").getDocuments();
       List parsedStories = stories.documents.map((document) {
@@ -22,32 +19,31 @@ class StoryPersistence {
         return story;
       }).toList();
 
-      result = parsedStories.map((story) =>
-          StoryBuilder.fromStory(story)).toList();
+      return parsedStories;
     } catch (e) {
       print('Exception while calling getUserStories: $e');
     }
-    return result;
+    return null;
   }
 
-  deleteStory(User user, StoryBuilder storyBuilder) async {
+  deleteStory(User user, Story story) async {
     return await storage
         .collection("user_stories")
         .document(user.uid)
         .collection("stories")
-        .document(storyBuilder.title)
+        .document(story.title)
         .delete();
   }
 
-  writeStory(User user, StoryBuilder storyBuilder) async {
+  writeStory(User user, Story story) async {
     DocumentSnapshot doc = await storage
         .collection("user_stories")
         .document(user.uid)
         .collection("stories")
-        .document(storyBuilder.title)
+        .document(story.title)
         .get();
 
-    var data = {"storyjson": storyBuilder.toModel().toJson()};
+    var data = {"storyjson": story.toJson()};
     if (doc.exists) {
       storage.document(doc.reference.path).updateData(data);
     } else {
