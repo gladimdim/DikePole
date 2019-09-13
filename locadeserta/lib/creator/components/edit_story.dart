@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:locadeserta/animations/slideable_button.dart';
+import 'package:locadeserta/components/bordered_container.dart';
 import 'package:locadeserta/creator/components/create_view.dart';
 import 'package:locadeserta/creator/components/edit_node_view.dart';
 import 'package:locadeserta/creator/components/fat_button.dart';
@@ -65,26 +66,28 @@ class _EditStoryViewState extends State<EditStoryView> {
               child: SingleChildScrollView(
             child: Column(
               children: story.root.nodes.map((node) {
-                var imageType = node.imageType == null ? ImageType.BOAT : node.imageType;
-                return ListTile(
-                  title: Text(firstNCharsFromString(node.text, 60)),
-                  leading: Image(image: BackgroundImage.getAssetImageForType(imageType)),
-                  onTap: () async {
-                    await Navigator.pushNamed(
-                      context,
-                      ExtractEditPassageView.routeName,
-                      arguments: EditPassageViewArguments(
-                        node: node,
-                      ),
-                    );
-                  },
-                  trailing: InkWell(
-                    child: Icon(Icons.delete),
-                    onTap: () {
-                      setState(() {
-                        story.root.removeNode(node);
-                      });
+                var imageType = node.imageType;
+                return BorderedContainer(
+                  child: ListTile(
+                    title: Text(firstNCharsFromString(node.text, 60)),
+                    leading: imageType == null ? Icon(Icons.texture) : Image(image: BackgroundImage.getAssetImageForType(imageType)),
+                    onTap: () async {
+                      await Navigator.pushNamed(
+                        context,
+                        ExtractEditPassageView.routeName,
+                        arguments: EditPassageViewArguments(
+                          node: node,
+                        ),
+                      );
                     },
+                    trailing: InkWell(
+                      child: Icon(Icons.delete),
+                      onTap: () {
+                        setState(() {
+                          story.root.removeNode(node);
+                        });
+                      },
+                    ),
                   ),
                 );
               }).toList(),

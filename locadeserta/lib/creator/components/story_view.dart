@@ -5,6 +5,7 @@ import 'package:locadeserta/creator/components/fat_button.dart';
 import 'package:locadeserta/creator/story/story.dart';
 import 'package:locadeserta/creator/utils/utils.dart';
 import 'package:locadeserta/models/Localizations.dart';
+import 'package:locadeserta/models/background_image.dart';
 
 class StoryView extends StatefulWidget {
   final Story currentStory;
@@ -35,14 +36,9 @@ class PassageState extends State<StoryView> with TickerProviderStateMixin {
     return Padding(
       padding: EdgeInsets.all(8.0),
       child: SizedBox(
-        height: MediaQuery
-            .of(context)
-            .size
-            .height * 0.075,
+        height: MediaQuery.of(context).size.height * 0.075,
         child: SlideableButton(
-          onPress: () {
-
-          },
+          onPress: () {},
           child: FatButton(
             text: text,
           ),
@@ -53,6 +49,10 @@ class PassageState extends State<StoryView> with TickerProviderStateMixin {
 
   void _next() {
     setState(() {
+      var currentImageType = widget.currentStory.currentPage.getCurrentNode().imageType;
+      if (currentImageType != null) {
+        BackgroundImage.nextRandomForType(currentImageType);
+      }
       widget.currentStory.next();
     });
   }
@@ -76,32 +76,22 @@ class PassageState extends State<StoryView> with TickerProviderStateMixin {
     );
   }
 
-  List<HistoryItem> _getLastFiveItems(List list) {
-    var amountOfPassages = list.length;
-    if (amountOfPassages > 5) {
-      return list.sublist(amountOfPassages - 5, amountOfPassages);
-    } else {
-      return list;
-    }
-  }
-
   Widget _buildTextSection(BuildContext context) {
     Future.delayed(Duration(milliseconds: 300), _scroll(context));
 
     return Expanded(
         child: SingleChildScrollView(
-          controller: _passageScrollController,
-          child: Column(
-            children: _getLastFiveItems(widget.currentStory.history)
-                .map(
-                  (HistoryItem historyItem) =>
-                  PassageItemView(
-                    historyItem,
-                  ),
+      controller: _passageScrollController,
+      child: Column(
+        children: widget.currentStory.history
+            .map(
+              (HistoryItem historyItem) => PassageItemView(
+                historyItem,
+              ),
             )
-                .toList(),
-          ),
-        ));
+            .toList(),
+      ),
+    ));
   }
 
   _scroll(BuildContext context) {
@@ -133,10 +123,7 @@ class PassageItemView extends StatelessWidget {
           alignment: Alignment.topCenter,
           padding: EdgeInsets.all(8.0),
           margin: EdgeInsets.all(8.0),
-          width: MediaQuery
-              .of(context)
-              .size
-              .width * 0.95,
+          width: MediaQuery.of(context).size.width * 0.95,
           decoration: getDecorationForContainer(context),
           child: Text(
             historyItem.text == "" ? "The End" : historyItem.text,
