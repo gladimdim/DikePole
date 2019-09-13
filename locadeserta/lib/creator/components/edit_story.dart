@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:locadeserta/animations/slideable_button.dart';
 import 'package:locadeserta/creator/components/create_view.dart';
-import 'package:locadeserta/creator/components/edit_passage_view.dart';
+import 'package:locadeserta/creator/components/edit_node_view.dart';
 import 'package:locadeserta/creator/components/fat_button.dart';
 import 'package:locadeserta/creator/components/game_view.dart';
 import 'package:locadeserta/creator/story/persistence.dart';

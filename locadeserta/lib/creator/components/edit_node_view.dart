@@ -5,10 +5,10 @@ import 'package:locadeserta/creator/components/fat_button.dart';
 import 'package:locadeserta/creator/story/story.dart';
 import 'package:locadeserta/models/Localizations.dart';
 
-class EditPassageView extends StatelessWidget {
+class EditNodeView extends StatelessWidget {
   final PageNode node;
 
-  EditPassageView({this.node});
+  EditNodeView({this.node});
 
   @override
   Widget build(BuildContext context) {
@@ -99,7 +99,7 @@ class ExtractEditPassageView extends StatelessWidget {
     final EditPassageViewArguments args =
         ModalRoute.of(context).settings.arguments;
 
-    return EditPassageView(
+    return EditNodeView(
       node: args.node,
     );
   }
