@@ -1,8 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
-var optionBox = (BuildContext context, String text) => SizedBox(
-      height: MediaQuery.of(context).size.height*0.075,
+class FatButton extends StatelessWidget {
+  final String text;
+
+  FatButton({@required this.text});
+
+  @override
+  Widget build(BuildContext context) {
+    var height = MediaQuery.of(context).size.height*0.075;
+    return SizedBox(
+      height: height,
       child: Container(
         color: Theme.of(context).primaryColor,
         child: Align(
@@ -19,4 +26,5 @@ var optionBox = (BuildContext context, String text) => SizedBox(
         ),
       ),
     );
-
+  }
+}

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:locadeserta/components.dart';
 import 'package:locadeserta/components/BorderedRandomImageForType.dart';
+import 'package:locadeserta/creator/components/fat_button.dart';
 import 'package:locadeserta/models/story_history.dart';
 import 'package:locadeserta/models/story_bridge.dart';
 import 'package:locadeserta/animations/slideable_button.dart';
@@ -73,9 +73,8 @@ class PassageState extends State<Passage> with TickerProviderStateMixin {
           onPress: () {
             _nextWithChoice(i);
           },
-          child: optionBox(
-            context,
-            text,
+          child: FatButton(
+            text: text,
           ),
         ),
       ),
@@ -110,9 +109,8 @@ class PassageState extends State<Passage> with TickerProviderStateMixin {
     return Padding(
       padding: EdgeInsets.all(8.0),
       child: SlideableButton(
-          child: optionBox(
-            context,
-            LDLocalizations.of(context).Continue,
+          child: FatButton(
+            text: LDLocalizations.of(context).Continue,
           ),
           onPress: () {
             _next();

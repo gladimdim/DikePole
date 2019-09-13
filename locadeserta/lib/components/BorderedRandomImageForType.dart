@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:locadeserta/animations/fade_images.dart';
+import 'package:locadeserta/components/bordered_container.dart';
 import 'package:locadeserta/models/background_image.dart';
 
 class BorderedRandomImageByType extends StatelessWidget {
@@ -36,14 +37,7 @@ class BorderedRandomImageByPath extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        color: Theme.of(context).backgroundColor,
-        border: Border.all(
-          color: Theme.of(context).primaryColor,
-          width: 3.0,
-        ),
-      ),
+    return BorderedContainer(
       child: TweenImage(
         repeat: true,
         duration: 3,

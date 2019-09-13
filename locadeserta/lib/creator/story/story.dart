@@ -215,7 +215,7 @@ class Page {
 
 enum EndType { DEAD, ALIVE }
 
-String endTypeToString(EndType endType) {
+String endTypeToString(EndType endType)    {
   switch (endType) {
     case EndType.ALIVE:
       return "ALIVE";

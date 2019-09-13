@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:locadeserta/animations/slideable_button.dart';
-import 'package:locadeserta/components.dart';
 import 'package:locadeserta/creator/components/create_view.dart';
 import 'package:locadeserta/creator/components/edit_passage_view.dart';
+import 'package:locadeserta/creator/components/fat_button.dart';
 import 'package:locadeserta/creator/components/game_view.dart';
 import 'package:locadeserta/creator/story/persistence.dart';
 import 'package:locadeserta/creator/story/story.dart';
@@ -91,7 +91,7 @@ class _EditStoryViewState extends State<EditStoryView> {
             ),
           )),
           SlideableButton(
-            child: optionBox(context, LDLocalizations.of(context).startStory),
+            child: FatButton(text: LDLocalizations.of(context).startStory),
             onPress: () async {
               await Navigator.pushNamed(
                 context,

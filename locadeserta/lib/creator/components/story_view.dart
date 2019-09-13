@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:locadeserta/animations/slideable_button.dart';
 import 'package:locadeserta/components/BorderedRandomImageForType.dart';
+import 'package:locadeserta/creator/components/fat_button.dart';
 import 'package:locadeserta/creator/story/story.dart';
-import 'package:locadeserta/components.dart';
 import 'package:locadeserta/creator/utils/utils.dart';
+import 'package:locadeserta/models/Localizations.dart';
 
 class StoryView extends StatefulWidget {
   final Story currentStory;
@@ -42,9 +43,8 @@ class PassageState extends State<StoryView> with TickerProviderStateMixin {
           onPress: () {
 
           },
-          child: optionBox(
-            context,
-            text,
+          child: FatButton(
+            text: text,
           ),
         ),
       ),
@@ -67,9 +67,8 @@ class PassageState extends State<StoryView> with TickerProviderStateMixin {
     return Padding(
       padding: EdgeInsets.all(8.0),
       child: SlideableButton(
-          child: optionBox(
-            context,
-            "Next",
+          child: FatButton(
+            text: LDLocalizations.of(context).next,
           ),
           onPress: () {
             _next();
