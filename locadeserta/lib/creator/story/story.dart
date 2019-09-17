@@ -7,7 +7,7 @@ class Story {
   String description;
   String authors;
   Page root;
-  final List<HistoryItem> history = [];
+  List<HistoryItem> history = [];
   Page currentPage;
 
   Story(
@@ -16,6 +16,13 @@ class Story {
       @required this.authors,
       @required this.root}) {
     currentPage = root;
+    _logCurrentPassageToHistory();
+  }
+
+  void reset() {
+    history = [];
+    currentPage = root;
+    currentPage.currentIndex = 0;
     _logCurrentPassageToHistory();
   }
 

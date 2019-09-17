@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:locadeserta/animations/slideable_button.dart';
 import 'package:locadeserta/components/bordered_container.dart';
 import 'package:locadeserta/creator/components/fat_button.dart';
+import 'package:locadeserta/creator/components/text_editor.dart';
 import 'package:locadeserta/creator/story/story.dart';
 import 'package:locadeserta/models/Localizations.dart';
 
@@ -30,17 +31,18 @@ class EditNodeView extends StatelessWidget {
   }
 }
 
-class TextEditor extends StatefulWidget {
+class TextEditorWithButton extends StatefulWidget {
   final String text;
+  final int maxLines;
   final Function(String) onSave;
 
-  TextEditor({this.text, this.onSave});
+  TextEditorWithButton({this.text, this.onSave, this.maxLines = 25});
 
   @override
   _TextEditorState createState() => _TextEditorState();
 }
 
-class _TextEditorState extends State<TextEditor> {
+class _TextEditorState extends State<TextEditorWithButton> {
   TextEditingController _controller = TextEditingController();
 
   initState() {
@@ -62,7 +64,7 @@ class _TextEditorState extends State<TextEditor> {
             cursorColor: Colors.black,
             backgroundCursorColor: Colors.white,
             focusNode: FocusNode(),
-            maxLines: 10,
+            maxLines: widget.maxLines,
             controller: _controller,
             style: TextStyle(
               fontSize: 20,

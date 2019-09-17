@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:locadeserta/animations/slideable_button.dart';
 import 'package:locadeserta/components/bordered_container.dart';
+import 'package:locadeserta/creator/components/text_editor.dart';
 import 'package:locadeserta/creator/components/create_view.dart';
 import 'package:locadeserta/creator/components/edit_node_view.dart';
 import 'package:locadeserta/creator/components/fat_button.dart';
@@ -83,8 +84,6 @@ class _EditStoryViewState extends State<EditStoryView> {
             child: SingleChildScrollView(
               child: Column(
                 children: story.currentPage.next.map((PageNext next) {
-                  var controller = TextEditingController();
-                  controller.text = next.text;
                   return BorderedContainer(
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -92,22 +91,15 @@ class _EditStoryViewState extends State<EditStoryView> {
                         SizedBox(
                           height: 50,
                           width: 200,
-                          child: EditableText(
-                            focusNode: FocusNode(),
-                            style: TextStyle(
-                              fontSize: 20,
-                              color: Colors.black,
-                            ),
+                          child: TextEditor(
                             maxLines: 1,
-                            controller: controller,
-                            cursorColor: Colors.black,
-                            backgroundCursorColor: Colors.white,
-                            onChanged: (newValue) {
+                            text: next.text,
+                            onSave: (String newText) {
                               setState(() {
-                                next.text = newValue;
+                                next.text = newText;
                               });
                             },
-                          ),
+                          )
                         ),
                         IconButton(
                           icon: Icon(
@@ -191,6 +183,7 @@ class _EditStoryViewState extends State<EditStoryView> {
           SlideableButton(
             child: FatButton(text: LDLocalizations.of(context).startStory),
             onPress: () async {
+              story.reset();
               await Navigator.pushNamed(
                 context,
                 ExtractArgumentsGameView.routeName,
