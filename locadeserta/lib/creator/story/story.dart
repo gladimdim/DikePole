@@ -29,9 +29,17 @@ class Story {
     );
   }
 
-  next() {
-    currentPage.nextNode();
-    _logCurrentPassageToHistory();
+  doContinue() {
+    if (canContinue()) {
+      currentPage.nextNode();
+      _logCurrentPassageToHistory();
+    } else {
+      throw "End of next options";
+    }
+  }
+
+  bool canContinue() {
+    return currentPage.hasNext();
   }
 
   toJson() {
@@ -79,24 +87,26 @@ class HistoryItem {
 class Page {
   List<PageNode> nodes;
   int currentIndex;
-  int id;
 
   Page parent;
 
-  List<Page> next;
+  List<PageNext> next;
 
   EndType endType;
 
   Page(
       {this.nodes = const [],
       this.currentIndex = 0,
-      @required this.id,
       this.parent,
       this.next = const [],
       this.endType});
 
   PageNode getCurrentNode() {
     return nodes.elementAt(currentIndex);
+  }
+
+  bool hasNext() {
+    return currentIndex + 1 < nodes.length;
   }
 
   String getCurrentText() {
@@ -136,8 +146,17 @@ class Page {
   void nextNode() {
     currentIndex++;
     if (currentIndex >= nodes.length) {
+      // TODO: this is a crunch
       currentIndex = 0;
     }
+  }
+
+  void addNextPageWithText(String text) {
+    next.add(PageNext(text: text, nextPage: Page()));
+  }
+
+  void removeNextPage(PageNext page) {
+    next.remove(page);
   }
 
   static Page fromJSON(String input) {
@@ -146,8 +165,7 @@ class Page {
     List nodes = map["nodes"];
 
     return Page(
-      id: map["id"],
-      next: next.map((n) => Page.fromJSON(n)).toList(),
+      next: next.map((n) => PageNext.fromMap(n)).toList(),
       endType: endTypeFromString(map["endType"]),
       nodes: nodes.map((n) => PageNode.fromJSON(n)).toList(),
     );
@@ -155,7 +173,6 @@ class Page {
 
   Map<String, dynamic> toMap() {
     return {
-      "id": id,
       "endType": endTypeToString(endType),
       "next": next.map((n) => n.toMap()).toList(),
       "nodes": nodes.map((n) => n.toMap()).toList(),
@@ -164,12 +181,12 @@ class Page {
 
   static Page fromMap(Map<String, dynamic> map) {
     List next = map["next"];
-    List<Page> parsedNext = List.from(next.map((n) => Page.fromMap(n)));
+    List<PageNext> parsedNext = List.from(next.map((n) => PageNext.fromMap(n)));
     List nodes = map["nodes"];
     List<PageNode> parsedNodes =
         List.from(nodes.map((n) => PageNode.fromMap(n)));
+
     return Page(
-      id: map["id"],
       next: parsedNext,
       endType: endTypeFromString(map["endType"]),
       nodes: parsedNodes,
@@ -207,10 +224,27 @@ class Page {
     );
 
     return Page(
-      id: 0,
       nodes: [p1, p2, p3, p4, p5, p6],
       endType: EndType.DEAD,
     );
+  }
+}
+
+class PageNext {
+  final String text;
+  final Page nextPage;
+
+  PageNext({this.text, this.nextPage});
+
+  static fromMap(Map<String, dynamic> map) {
+    return PageNext(text: map["text"], nextPage: Page.fromMap(map["nextPage"]));
+  }
+
+  toMap() {
+    return {
+      "text": text,
+      "nextPage": nextPage.toMap(),
+    };
   }
 }
 

@@ -32,34 +32,33 @@ class PassageState extends State<StoryView> with TickerProviderStateMixin {
     );
   }
 
-  Widget createButton(String text) {
-    return Padding(
-      padding: EdgeInsets.all(8.0),
-      child: SizedBox(
-        height: MediaQuery.of(context).size.height * 0.075,
-        child: SlideableButton(
-          onPress: () {},
-          child: FatButton(
-            text: text,
-          ),
-        ),
-      ),
-    );
-  }
-
   void _next() {
     setState(() {
       var currentImageType = widget.currentStory.currentPage.getCurrentNode().imageType;
       if (currentImageType != null) {
         BackgroundImage.nextRandomForType(currentImageType);
       }
-      widget.currentStory.next();
+      widget.currentStory.doContinue();
     });
   }
 
-  List<Widget> createOptionList(List<Page> nextPages) {
+  List<Widget> createOptionList(List<PageNext> nextPages) {
     return nextPages.map((page) {
-      return createButton("test----");
+      return Padding(
+        padding: EdgeInsets.all(8.0),
+        child: SizedBox(
+          height: MediaQuery.of(context).size.height * 0.075,
+          child: SlideableButton(
+            onPress: () {
+              // TODO: change to option
+              widget.currentStory.doContinue();
+            },
+            child: FatButton(
+              text: page.text,
+            ),
+          ),
+        ),
+      );
     }).toList();
   }
 

@@ -62,37 +62,109 @@ class _EditStoryViewState extends State<EditStoryView> {
               });
             },
           ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text("Options: "),
+              IconButton(
+                onPressed: () {
+                  setState(() {
+                    story.currentPage.addNextPageWithText("Test");
+                  });
+                },
+                icon: Icon(Icons.add_box),
+              ),
+            ],
+          ),
           Expanded(
-              child: SingleChildScrollView(
-            child: Column(
-              children: story.root.nodes.map((node) {
-                var imageType = node.imageType;
-                return BorderedContainer(
-                  child: ListTile(
-                    title: Text(firstNCharsFromString(node.text, 60)),
-                    leading: imageType == null ? Icon(Icons.texture) : Image(image: BackgroundImage.getAssetImageForType(imageType)),
-                    onTap: () async {
-                      await Navigator.pushNamed(
-                        context,
-                        ExtractEditPassageView.routeName,
-                        arguments: EditPassageViewArguments(
-                          node: node,
+            flex: 2,
+            child: SingleChildScrollView(
+              child: Column(
+                children: story.currentPage.next.map((PageNext next) {
+                  var controller = TextEditingController();
+                  controller.text = next.text;
+                  return BorderedContainer(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: <Widget>[
+                        SizedBox(
+                          height: 50,
+                          width: 200,
+                          child: EditableText(
+                            focusNode: FocusNode(),
+                            style: TextStyle(
+                              fontSize: 20,
+                              color: Colors.black,
+                            ),
+                            maxLines: 1,
+                            controller: controller,
+                            cursorColor: Colors.black,
+                            backgroundCursorColor: Colors.white,
+                          ),
                         ),
-                      );
-                    },
-                    trailing: InkWell(
-                      child: Icon(Icons.delete),
-                      onTap: () {
-                        setState(() {
-                          story.root.removeNode(node);
-                        });
-                      },
+                        IconButton(
+                          icon: Icon(
+                            Icons.details,
+                          ),
+                          onPressed: () {
+                            // TODO: implement next page render
+                            print("todo");
+                          },
+                        ),
+                        IconButton(
+                          onPressed: () {
+                            setState(() {
+                              story.currentPage.removeNextPage(next);
+                            });
+                          },
+                          icon: Icon(Icons.remove_circle),
+                        )
+                      ],
                     ),
-                  ),
-                );
-              }).toList(),
+                  );
+                }).toList(),
+              ),
             ),
-          )),
+          ),
+          Expanded(
+              flex: 6,
+              child: SingleChildScrollView(
+                child: Column(
+                  children: story.root.nodes.map((node) {
+                    var imageType = node.imageType;
+                    return Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: BorderedContainer(
+                        child: ListTile(
+                          title: Text(firstNCharsFromString(node.text, 60)),
+                          leading: imageType == null
+                              ? Icon(Icons.texture)
+                              : Image(
+                                  image: BackgroundImage.getAssetImageForType(
+                                      imageType)),
+                          onTap: () async {
+                            await Navigator.pushNamed(
+                              context,
+                              ExtractEditPassageView.routeName,
+                              arguments: EditPassageViewArguments(
+                                node: node,
+                              ),
+                            );
+                          },
+                          trailing: IconButton(
+                            icon: Icon(Icons.delete),
+                            onPressed: () {
+                              setState(() {
+                                story.root.removeNode(node);
+                              });
+                            },
+                          ),
+                        ),
+                      ),
+                    );
+                  }).toList(),
+                ),
+              )),
           SlideableButton(
             child: FatButton(text: LDLocalizations.of(context).startStory),
             onPress: () async {
