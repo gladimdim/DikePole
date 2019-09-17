@@ -26,7 +26,9 @@ class PassageState extends State<StoryView> with TickerProviderStateMixin {
     return Column(
       children: [
         _buildTextSection(context),
-        createContinue(context),
+        if (widget.currentStory.canContinue()) createContinue(context),
+        if (!widget.currentStory.canContinue())
+          ...createOptionList(widget.currentStory.currentPage.next),
       ],
       crossAxisAlignment: CrossAxisAlignment.stretch,
     );
@@ -34,7 +36,8 @@ class PassageState extends State<StoryView> with TickerProviderStateMixin {
 
   void _next() {
     setState(() {
-      var currentImageType = widget.currentStory.currentPage.getCurrentNode().imageType;
+      var currentImageType =
+          widget.currentStory.currentPage.getCurrentNode().imageType;
       if (currentImageType != null) {
         BackgroundImage.nextRandomForType(currentImageType);
       }
@@ -51,7 +54,9 @@ class PassageState extends State<StoryView> with TickerProviderStateMixin {
           child: SlideableButton(
             onPress: () {
               // TODO: change to option
-              widget.currentStory.doContinue();
+              setState(() {
+                widget.currentStory.goToNextPage(page);
+              });
             },
             child: FatButton(
               text: page.text,

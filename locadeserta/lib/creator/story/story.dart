@@ -8,7 +8,6 @@ class Story {
   String authors;
   Page root;
   final List<HistoryItem> history = [];
-  int currentPageIndex;
   Page currentPage;
 
   Story(
@@ -38,6 +37,14 @@ class Story {
     }
   }
 
+  goToNextPage(PageNext next) {
+    history.add(
+      HistoryItem(text: next.text),
+    );
+
+    currentPage = next.nextPage;
+  }
+
   bool canContinue() {
     return currentPage.hasNext();
   }
@@ -48,7 +55,6 @@ class Story {
       "description": description,
       "authors": authors,
       "root": root.toMap(),
-      "currentPageIndex": currentPageIndex,
     });
   }
 
@@ -95,11 +101,17 @@ class Page {
   EndType endType;
 
   Page(
-      {this.nodes = const [],
+      {this.nodes,
       this.currentIndex = 0,
-      this.parent,
-      this.next = const [],
-      this.endType});
+      this.next,
+      this.endType}) {
+    if (next == null) {
+      next = List();
+    }
+    if (nodes == null) {
+      nodes = List();
+    }
+  }
 
   PageNode getCurrentNode() {
     return nodes.elementAt(currentIndex);
@@ -152,7 +164,8 @@ class Page {
   }
 
   void addNextPageWithText(String text) {
-    next.add(PageNext(text: text, nextPage: Page()));
+    var page = Page();
+    next.add(PageNext(text: text, nextPage: page));
   }
 
   void removeNextPage(PageNext page) {
@@ -231,8 +244,8 @@ class Page {
 }
 
 class PageNext {
-  final String text;
-  final Page nextPage;
+  String text;
+  Page nextPage;
 
   PageNext({this.text, this.nextPage});
 
