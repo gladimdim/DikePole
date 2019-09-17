@@ -12,16 +12,11 @@ import 'package:locadeserta/main_menu.dart';
 import 'package:locadeserta/login_view.dart';
 import 'package:locadeserta/models/Auth.dart';
 import 'package:locadeserta/models/Localizations.dart';
-import 'package:flutter_statusbarcolor/flutter_statusbarcolor.dart';
 
-void main() async {
-  try {
-    await FlutterStatusbarcolor.setStatusBarColor(Colors.black);
-    await FlutterStatusbarcolor.setNavigationBarColor(Colors.black);
-    await FlutterStatusbarcolor.setNavigationBarWhiteForeground(false);
-  } catch (e) {
-    print(e);
-  }
+void main() {
+  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+      statusBarColor: Colors.black
+  ));
   runApp(LocaDesertaApp());
 }
 
@@ -36,7 +31,7 @@ class _LocaDesertaAppState extends State<LocaDesertaApp> {
   Locale locale = Locale('en');
 
   final ThemeData theme = ThemeData(
-      brightness: Brightness.light,
+//      brightness: Brightness.light,
       primaryColor: Colors.black,
       backgroundColor: Colors.white,
       accentColor: Colors.black,

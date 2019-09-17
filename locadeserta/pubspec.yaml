@@ -13,7 +13,6 @@ environment:
   sdk: ">=2.2.2 <3.0.0"
 
 dependencies:
-  flutter_statusbarcolor:
   flutter_localizations:
     sdk: flutter
   flutter:
@@ -41,7 +40,7 @@ flutter_icons:
   image_path: "images/launcher.png"
 
 # For information on the generic Dart part of this file, see the
-# following page: https://www.dartlang.org/tools/pub/pubspec
+ # following page: https://www.dartlang.org/tools/pub/pubspec
 
 # The following section is specific to Flutter.
 flutter:
