@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:flutter/services.dart';
 import 'package:locadeserta/creator/story/story.dart' as StoryModel;
-import 'package:locadeserta/models/background_image.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart';
 import 'story_history.dart';

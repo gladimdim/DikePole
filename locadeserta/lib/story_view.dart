@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
+import 'package:locadeserta/components/constants.dart';
 import 'package:locadeserta/components/game_app_bar.dart';
 import 'package:locadeserta/components/game_component.dart';
 import 'package:locadeserta/export_pdf_view.dart';
@@ -69,7 +70,7 @@ class _StoryViewState extends State<StoryView> {
         currentStory = storyBridge.story;
         return GameViewScaffold(
           child: Padding(
-            padding: const EdgeInsets.only(top: 32),
+            padding: const EdgeInsets.only(top: APP_BAR_HEIGHT),
             child: snapshot.hasData
                 ? Passage(
                     currentStory: currentStory,

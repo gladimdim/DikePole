@@ -4,6 +4,7 @@ import 'package:flutter/widgets.dart';
 import 'package:locadeserta/animations/fade_images.dart';
 import 'package:locadeserta/catalog_view.dart';
 import 'package:locadeserta/components/app_bar_custom.dart';
+import 'package:locadeserta/components/constants.dart';
 import 'package:locadeserta/models/Localizations.dart';
 import 'package:locadeserta/models/background_image.dart';
 import 'package:locadeserta/story_view.dart';
@@ -67,7 +68,7 @@ class _MainMenuState extends State<MainMenu> with TickerProviderStateMixin {
         child: Stack(
           children: <Widget>[
             Padding(
-              padding: const EdgeInsets.only(top: 32),
+              padding: const EdgeInsets.only(top: APP_BAR_HEIGHT),
               child: FutureBuilder(
                 future: _fetchData(context),
                 builder: (BuildContext context, snapshot) {
@@ -96,10 +97,6 @@ class _MainMenuState extends State<MainMenu> with TickerProviderStateMixin {
                   onTap: () => Navigator.of(context).pop(),
                   text: LDLocalizations.of(context).backToMenu,
                 ),
-                AppBarObject(
-                    onTap: () => Navigator.pushNamed(context, "/create"),
-                    text: LDLocalizations.of(context).createStory,
-                )
               ],
             ),
           ],

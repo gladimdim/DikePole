@@ -27,7 +27,7 @@ class _CreateViewState extends State<CreateView> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          "ALPHA VERSION",
+          LDLocalizations.of(context).createStory,
           style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0),
         ),
       ),
