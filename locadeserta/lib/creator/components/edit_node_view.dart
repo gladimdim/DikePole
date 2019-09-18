@@ -2,37 +2,89 @@ import 'package:flutter/material.dart';
 import 'package:locadeserta/animations/slideable_button.dart';
 import 'package:locadeserta/components/bordered_container.dart';
 import 'package:locadeserta/creator/components/fat_button.dart';
+import 'package:locadeserta/creator/components/image_selector.dart';
 import 'package:locadeserta/creator/components/text_editor.dart';
 import 'package:locadeserta/creator/story/story.dart';
 import 'package:locadeserta/models/Localizations.dart';
+import 'package:locadeserta/models/background_image.dart';
 
-class EditNodeView extends StatelessWidget {
+class EditNodeView extends StatefulWidget {
   final PageNode node;
 
   EditNodeView({this.node});
 
   @override
+  _EditNodeViewState createState() => _EditNodeViewState();
+}
+
+class _EditNodeViewState extends State<EditNodeView> {
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Column(
-          children: <Widget>[
-            Expanded(
-              flex: 8,
-              child: TextEditor(
-                text: node.text,
-                onSave: (text) {
-                  node.text = text;
-                  Navigator.pop(context);
-                },
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: BorderedContainer(
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                children: <Widget>[
+                  Expanded(
+                    flex: 8,
+                    child: TextEditor(
+                      text: widget.node.text,
+                      maxLines: 20,
+                      onSave: (text) {
+                        widget.node.text = text;
+                        Navigator.pop(context);
+                      },
+                    ),
+                  ),
+                  Expanded(
+                    flex: 1,
+                    child: Row(
+                      children: <Widget>[
+                        Text("Passage has image"),
+                        Checkbox(
+                          value: widget.node.imageType != null,
+                          onChanged: (newValue) {
+                            setState(() {
+                              if (newValue) {
+                                widget.node.imageType = ImageType.BOAT;
+                              } else {
+                                widget.node.imageType = null;
+                              }
+                            });
+                          },
+                        ),
+                      ],
+                    ),
+                  ),
+                  if (widget.node.imageType != null)
+                    Expanded(
+                      flex: 1,
+                      child: Row(
+                        children: <Widget>[
+                          Text("Select image for the passage: "),
+                          SizedBox(
+                            width: 20,
+                          ),
+                          ImageSelector(
+                            imageType: widget.node.imageType,
+                            onSelected: (newImageType) {
+                              setState(() {
+                                widget.node.imageType = newImageType;
+                              });
+                            },
+                          ),
+                        ],
+                      ),
+                    ),
+                ],
               ),
             ),
-            Expanded(
-              flex: 2,
-              child: Text(""),
-            ),
-          ],
+          ),
         ),
       ),
       appBar: AppBar(
