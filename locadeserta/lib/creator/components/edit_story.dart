@@ -65,86 +65,85 @@ class _EditStoryViewState extends State<EditStoryView> {
                 });
               },
             ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(LDLocalizations.of(context).labelOptions),
-              IconButton(
-                onPressed: () {
-                  setState(() {
-                    story.currentPage.addNextPageWithText(LDLocalizations.of(context).optionPlaceHolder);
-                  });
-                },
-                icon: Icon(Icons.add_box),
-              ),
-            ],
+          Align(
+            alignment: Alignment.centerRight,
+            child: FlatButton.icon(
+              onPressed: () {
+                setState(() {
+                  story.currentPage.addNextPageWithText(
+                      LDLocalizations.of(context).optionPlaceHolder);
+                });
+              },
+              icon: Icon(Icons.add_box),
+              label: Text(LDLocalizations.of(context).labelOptions),
+            ),
           ),
           Expanded(
             flex: 2,
             child: SingleChildScrollView(
               child: Column(
                 children: story.currentPage.next.map((PageNext next) {
-                  return BorderedContainer(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: <Widget>[
-                        SizedBox(
-                          height: 50,
-                          width: 200,
-                          child: TextEditor(
-                            maxLines: 1,
-                            text: next.text,
-                            onSave: (String newText) {
+                  return Padding(
+                    padding: const EdgeInsets.all(2.0),
+                    child: BorderedContainer(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: <Widget>[
+                          SizedBox(
+                              height: 50,
+                              width: 200,
+                              child: TextEditor(
+                                maxLines: 1,
+                                text: next.text,
+                                onSave: (String newText) {
+                                  setState(() {
+                                    next.text = newText;
+                                  });
+                                },
+                              )),
+                          IconButton(
+                            icon: Icon(
+                              Icons.keyboard_arrow_right,
+                            ),
+                            onPressed: () {
                               setState(() {
-                                next.text = newText;
+                                story.goToNextPage(next);
                               });
                             },
-                          )
-                        ),
-                        IconButton(
-                          icon: Icon(
-                            Icons.keyboard_arrow_right,
                           ),
-                          onPressed: () {
-                            setState(() {
-                              story.goToNextPage(next);
-                            });
-                          },
-                        ),
-                        IconButton(
-                          onPressed: () {
-                            setState(() {
-                              story.currentPage.removeNextPage(next);
-                            });
-                          },
-                          icon: Icon(Icons.remove_circle),
-                        )
-                      ],
+                          IconButton(
+                            onPressed: () {
+                              setState(() {
+                                story.currentPage.removeNextPage(next);
+                              });
+                            },
+                            icon: Icon(Icons.remove_circle),
+                          )
+                        ],
+                      ),
                     ),
                   );
                 }).toList(),
               ),
             ),
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: <Widget>[
-              Text(LDLocalizations.of(context).addNewPassage),
-              RaisedButton(
-                child: Icon(Icons.add),
-                onPressed: () {
-                  setState(() {
-                    story.currentPage.addNodeWithText("");
-                  });
-                },
-              ),
-            ],
+          Align(
+            alignment: Alignment.centerRight,
+            child: FlatButton.icon(
+              onPressed: () {
+                setState(() {
+                  story.currentPage.addNodeWithText("");
+                });
+              },
+              icon: Icon(Icons.add_box),
+              label: Text(LDLocalizations.of(context).addNewPassage),
+            ),
           ),
           Expanded(
               flex: 6,
               child: SingleChildScrollView(
                 child: Column(
-                  children: story.currentPage.nodes.map((node) {
+                  children: story.currentPage.nodes.reversed.map((node) {
                     var imageType = node.imageType;
                     return Padding(
                       padding: const EdgeInsets.all(8.0),
