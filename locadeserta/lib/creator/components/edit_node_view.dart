@@ -16,12 +16,23 @@ class EditNodeView extends StatelessWidget {
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: TextEditor(
-          text: node.text,
-          onSave: (text) {
-            node.text = text;
-            Navigator.pop(context);
-          },
+        child: Column(
+          children: <Widget>[
+            Expanded(
+              flex: 8,
+              child: TextEditor(
+                text: node.text,
+                onSave: (text) {
+                  node.text = text;
+                  Navigator.pop(context);
+                },
+              ),
+            ),
+            Expanded(
+              flex: 2,
+              child: Text(""),
+            ),
+          ],
         ),
       ),
       appBar: AppBar(
