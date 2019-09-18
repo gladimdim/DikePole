@@ -103,7 +103,7 @@ class _EditStoryViewState extends State<EditStoryView> {
                         ),
                         IconButton(
                           icon: Icon(
-                            Icons.details,
+                            Icons.keyboard_arrow_right,
                           ),
                           onPressed: () {
                             setState(() {

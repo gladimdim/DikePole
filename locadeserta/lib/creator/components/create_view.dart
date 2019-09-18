@@ -176,13 +176,6 @@ class StoryViewHeader extends StatelessWidget {
             Text(story.title, style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),),
           ],
         ),
-//        SizedBox(
-//          width: 40,
-//        ),
-//        SlideableButton(
-//          child: optionBox(context, LDLocalizations.of(context).edit),
-//          onPress: onEdit,
-//        ),
       ],
     );
   }
@@ -245,7 +238,7 @@ class _CreateMetaStoryViewState extends State<CreateMetaStoryView> {
             onSaved: (value) {
               _authors = value;
             },
-            initialValue: widget.story == null ? "" : widget.story.authors[0],
+            initialValue: widget.story == null ? "" : widget.story.authors,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,

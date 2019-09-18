@@ -192,7 +192,7 @@ ImageType imageTypeFromString(String input) {
     case 'camp':
       return ImageType.CAMP;
     default:
-      return ImageType.CAMP;
+      return null;
   }
 }
 
@@ -206,6 +206,6 @@ String imageTypeToString(ImageType imageType) {
     case ImageType.RIVER: return 'river';
     case ImageType.LANDING: return 'landing';
     case ImageType.STEPPE: return 'steppe';
-    default: return 'boat';
+    default: return null;
   }
 }
