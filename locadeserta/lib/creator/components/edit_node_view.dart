@@ -45,7 +45,7 @@ class _EditNodeViewState extends State<EditNodeView> {
                     flex: 1,
                     child: Row(
                       children: <Widget>[
-                        Text("Passage has image"),
+                        Text(LDLocalizations.of(context).passageWillHaveImage),
                         Checkbox(
                           value: widget.node.imageType != null,
                           onChanged: (newValue) {
@@ -66,7 +66,7 @@ class _EditNodeViewState extends State<EditNodeView> {
                       flex: 1,
                       child: Row(
                         children: <Widget>[
-                          Text("Select image for the passage: "),
+                          Text(LDLocalizations.of(context).selectImageForPassage),
                           SizedBox(
                             width: 20,
                           ),
@@ -88,7 +88,7 @@ class _EditNodeViewState extends State<EditNodeView> {
         ),
       ),
       appBar: AppBar(
-        title: const Text("Editing passage"),
+        title: Text(LDLocalizations.of(context).editingPassage),
       ),
     );
   }

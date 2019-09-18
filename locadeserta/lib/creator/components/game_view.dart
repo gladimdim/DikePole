@@ -4,6 +4,8 @@ import 'package:locadeserta/components/game_app_bar.dart';
 import 'package:locadeserta/components/game_component.dart';
 import 'package:locadeserta/creator/components/story_view.dart';
 import 'package:locadeserta/creator/story/story.dart';
+import 'package:locadeserta/export_pdf_view.dart';
+import 'package:locadeserta/models/Localizations.dart';
 
 class GameView extends StatefulWidget {
   final Story story;
@@ -20,11 +22,26 @@ class _MainViewState extends State<GameView> {
   Widget build(BuildContext context) {
     return GameViewScaffold(
       appBar: GameAppBar(
-        title: "Preview",
-        onResetStory: () {},
-        onExportStory: () {},
+        title: LDLocalizations.of(context).previewStory,
+        onResetStory: () {
+          setState(() {
+            widget.story.reset();
+          });
+        },
+        onExportStory: () {
+          Navigator.pushNamed(
+            context,
+            ExtractExportGladStoriesPdfViewArguments.routeName,
+            arguments: ExportGladStoriesPdfViewArguments(
+              story: widget.story,
+            ),
+          );
+        },
       ),
-      child: StoryView(currentStory: widget.story),
+      child: Padding(
+        padding: const EdgeInsets.only(top: 32.0),
+        child: StoryView(currentStory: widget.story),
+      ),
     );
   }
 }

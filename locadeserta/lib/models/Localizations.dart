@@ -65,6 +65,14 @@ class LDLocalizations {
       'description': 'Description',
       'hintdescription': 'Enter story description',
       'remove': 'Remove',
+      'labeloptions': 'Add new option',
+      'optionplaceholder': 'Replace this',
+      'gotorootpage': 'Go to root page',
+      'addnewpassage': 'Add new passage',
+      'passagewillhaveimage': 'Passage will have image',
+      'selectimageforpassage': 'Select image for the passage: ',
+      'editingpassage': 'Editing passage',
+      'previewstory': 'Preview story',
     },
     'uk': {
       'continue': 'Продовжити',
@@ -115,6 +123,14 @@ class LDLocalizations {
       'description': 'Описання',
       'hintdescription': 'Введіть описання історії',
       'remove': 'Видалити',
+      'labeloptions': 'Додати вибір',
+      'optionplaceholder': 'Замініть це',
+      'gotorootpage': 'Назад на головну сторінку',
+      'addnewpassage': 'Додати новий абзац',
+      'passagewillhaveimage': 'Абзац буде з картинкою',
+      'selectimageforpassage': 'Виберіть картинку для абзацу: ',
+      'editingpassage': 'Редагування абзацу',
+      'previewstory': 'Перегляд історії',
     },
     'pl': {
       'continue': 'Dalej',
@@ -166,6 +182,14 @@ class LDLocalizations {
       'description': 'Opis',
       'hintdescription': 'Wpisz opis historii',
       'remove': 'Usunąć',
+      'labeloptions': 'Dodaj wybór',
+      'optionplaceholder': 'Zamień tę',
+      'gotorootpage': 'Idź do strony głównej',
+      'addnewpassage': 'Dodaj nowy fragment',
+      'passagewillhaveimage': 'Przejście będzie miało obraz',
+      'selectimageforpassage': 'Wybierz zdjęcie do przejścia: ',
+      'editingpassage': 'Edycja fragmentu',
+      'previewstory': 'Zobacz historię',
     }
   };
 
@@ -340,8 +364,41 @@ class LDLocalizations {
   String get hintDescription {
     return _localizedValues[locale.languageCode]['hintDescription'];
   }
+
   String get remove {
     return _localizedValues[locale.languageCode]['remove'];
+  }
+
+  String get labelOptions {
+    return _localizedValues[locale.languageCode]['labeloptions'];
+  }
+
+  String get optionPlaceHolder {
+    return _localizedValues[locale.languageCode]['optionplaceholder'];
+  }
+
+  String get goToRootPage {
+    return _localizedValues[locale.languageCode]['gotorootpage'];
+  }
+
+  String get addNewPassage {
+    return _localizedValues[locale.languageCode]['addnewpassage'];
+  }
+
+  String get passageWillHaveImage {
+    return _localizedValues[locale.languageCode]['passagewillhaveimage'];
+  }
+
+  String get selectImageForPassage {
+    return _localizedValues[locale.languageCode]['selectimageforpassage'];
+  }
+
+  String get editingPassage {
+    return _localizedValues[locale.languageCode]['editingpassage'];
+  }
+
+  String get previewStory {
+    return _localizedValues[locale.languageCode]['previewstory'];
   }
 }
 

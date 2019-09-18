@@ -58,7 +58,7 @@ class _EditStoryViewState extends State<EditStoryView> {
             ),
           if (story.root != story.currentPage)
             RaisedButton(
-              child: Text("Go to root"),
+              child: Text(LDLocalizations.of(context).goToRootPage),
               onPressed: () {
                 setState(() {
                   story.currentPage = story.root;
@@ -68,11 +68,11 @@ class _EditStoryViewState extends State<EditStoryView> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text("Options: "),
+              Text(LDLocalizations.of(context).labelOptions),
               IconButton(
                 onPressed: () {
                   setState(() {
-                    story.currentPage.addNextPageWithText("Test");
+                    story.currentPage.addNextPageWithText(LDLocalizations.of(context).optionPlaceHolder);
                   });
                 },
                 icon: Icon(Icons.add_box),
@@ -106,7 +106,6 @@ class _EditStoryViewState extends State<EditStoryView> {
                             Icons.details,
                           ),
                           onPressed: () {
-                            // TODO: implement next page render
                             setState(() {
                               story.goToNextPage(next);
                             });
@@ -130,7 +129,7 @@ class _EditStoryViewState extends State<EditStoryView> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: <Widget>[
-              Text("Add new text passage: "),
+              Text(LDLocalizations.of(context).addNewPassage),
               RaisedButton(
                 child: Icon(Icons.add),
                 onPressed: () {

@@ -27,12 +27,25 @@ class Story {
   }
 
   _logCurrentPassageToHistory() {
-    history.add(
-      HistoryItem(
-        text: currentPage.getCurrentText(),
-        imageType: currentPage.getCurrentNode().imageType,
-      ),
-    );
+    if (currentPage.getCurrentNode().imageType != null) {
+      var backgroundImage = BackgroundImage.getRandomImageForType(
+          currentPage.getCurrentNode().imageType);
+      history.add(
+        HistoryItem(
+          text: currentPage.getCurrentText(),
+          imagePath: [
+            backgroundImage.getImagePath(),
+            backgroundImage.getImagePathColored()
+          ],
+        ),
+      );
+    } else {
+      history.add(
+        HistoryItem(
+          text: currentPage.getCurrentText(),
+        ),
+      );
+    }
   }
 
   doContinue() {
@@ -92,9 +105,9 @@ class Story {
 
 class HistoryItem {
   final String text;
-  final ImageType imageType;
+  final List<String> imagePath;
 
-  HistoryItem({@required this.text, this.imageType});
+  HistoryItem({@required this.text, this.imagePath});
 }
 
 class Page {
@@ -107,11 +120,7 @@ class Page {
 
   EndType endType;
 
-  Page(
-      {this.nodes,
-      this.currentIndex = 0,
-      this.next,
-      this.endType}) {
+  Page({this.nodes, this.currentIndex = 0, this.next, this.endType}) {
     if (next == null) {
       next = List();
     }

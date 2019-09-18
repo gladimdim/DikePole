@@ -98,7 +98,7 @@ class _MainMenuState extends State<MainMenu> with TickerProviderStateMixin {
                 ),
                 AppBarObject(
                     onTap: () => Navigator.pushNamed(context, "/create"),
-                    text: "Create story"
+                    text: LDLocalizations.of(context).createStory,
                 )
               ],
             ),

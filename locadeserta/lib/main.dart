@@ -59,6 +59,8 @@ class _LocaDesertaAppState extends State<LocaDesertaApp> {
             ExtractCatalogViewArguments(),
         ExtractExportPdfViewArguments.routeName: (context) =>
             ExtractExportPdfViewArguments(),
+        ExtractExportGladStoriesPdfViewArguments.routeName: (context) =>
+            ExtractExportGladStoriesPdfViewArguments(),
         "/create": (context) => CreateView(
               locale: locale,
               auth: auth,
