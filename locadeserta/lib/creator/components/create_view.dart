@@ -172,8 +172,14 @@ class StoryViewHeader extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text(LDLocalizations.of(context).labelStoryTitle, style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),),
-            Text(story.title, style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),),
+            Text(
+              LDLocalizations.of(context).labelStoryTitle,
+              style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
+            ),
+            Text(
+              story.title,
+              style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
+            ),
           ],
         ),
       ],
@@ -240,12 +246,11 @@ class _CreateMetaStoryViewState extends State<CreateMetaStoryView> {
             },
             initialValue: widget.story == null ? "" : widget.story.authors,
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-              children: [
+          Row(mainAxisAlignment: MainAxisAlignment.center, children: [
             Padding(
               padding: EdgeInsets.all(4.0),
-              child: RaisedButton(
+              child: FlatButton.icon(
+                icon: Icon(Icons.edit),
                 onPressed: () {
                   _formKey.currentState.save();
                   var story;
@@ -264,17 +269,18 @@ class _CreateMetaStoryViewState extends State<CreateMetaStoryView> {
                   }
                   widget.onSave(story);
                 },
-                child: Text(LDLocalizations.of(context).edit),
+                label: Text(LDLocalizations.of(context).edit),
               ),
             ),
             if (widget.onDelete != null)
               Padding(
                 padding: EdgeInsets.all(4.0),
-                child: RaisedButton(
+                child: FlatButton.icon(
+                  icon: Icon(Icons.delete),
                   onPressed: () {
                     widget.onDelete(widget.story);
                   },
-                  child: Text(LDLocalizations.of(context).remove),
+                  label: Text(LDLocalizations.of(context).remove),
                 ),
               ),
           ]),

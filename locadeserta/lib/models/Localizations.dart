@@ -73,6 +73,8 @@ class LDLocalizations {
       'selectimageforpassage': 'Select image for the passage: ',
       'editingpassage': 'Editing passage',
       'previewstory': 'Preview story',
+      'optionslistempty': 'Options list is empty',
+      'passagelistempty': 'Passage list is empty',
     },
     'uk': {
       'continue': 'Продовжити',
@@ -131,6 +133,8 @@ class LDLocalizations {
       'selectimageforpassage': 'Виберіть картинку для абзацу: ',
       'editingpassage': 'Редагування абзацу',
       'previewstory': 'Перегляд історії',
+      'optionslistempty': 'Список опцій порожній',
+      'passagelistempty': 'Список абзаців порожній',
     },
     'pl': {
       'continue': 'Dalej',
@@ -190,6 +194,8 @@ class LDLocalizations {
       'selectimageforpassage': 'Wybierz zdjęcie do przejścia: ',
       'editingpassage': 'Edycja fragmentu',
       'previewstory': 'Zobacz historię',
+      'optionslistempty': 'Lista opcji jest pusta',
+      'passagelistempty': 'Lista pasaży jest pusta',
     }
   };
 
@@ -399,6 +405,14 @@ class LDLocalizations {
 
   String get previewStory {
     return _localizedValues[locale.languageCode]['previewstory'];
+  }
+
+  String get optionsListEmpty {
+    return _localizedValues[locale.languageCode]['optionslistempty'];
+  }
+
+  String get passageListEmpty {
+    return _localizedValues[locale.languageCode]['passagelistempty'];
   }
 }
 
