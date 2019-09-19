@@ -3,7 +3,7 @@ import 'dart:core';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart' show SynchronousFuture;
 
-var version = "1.78";
+var version = "1.79";
 
 class LDLocalizations {
   LDLocalizations(this.locale);
@@ -120,7 +120,7 @@ class LDLocalizations {
       'labelStoryTitle': 'Назва: ',
       'listofauthors': 'Список авторів',
       'labelauthors': 'Автори:',
-      'createstory': 'Створити ствою історію',
+      'createstory': 'Створити свою історію',
       'edit': 'Редагувати',
       'description': 'Описання',
       'hintdescription': 'Введіть описання історії',

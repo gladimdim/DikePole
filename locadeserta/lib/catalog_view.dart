@@ -227,7 +227,7 @@ class ExtractCatalogViewArguments extends StatelessWidget {
 
     return Scaffold(
         appBar: AppBar(
-          title: Text(args.catalogStory.title + '123'),
+          title: Text(args.catalogStory.title),
         ),
         body: CatalogView(
           catalogStory: args.catalogStory,

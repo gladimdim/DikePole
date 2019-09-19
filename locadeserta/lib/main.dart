@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_statusbarcolor/flutter_statusbarcolor.dart';
 import 'package:locadeserta/catalog_view.dart';
 import 'package:locadeserta/creator/components/create_view.dart';
 import 'package:locadeserta/creator/components/edit_node_view.dart';
@@ -13,10 +13,8 @@ import 'package:locadeserta/login_view.dart';
 import 'package:locadeserta/models/Auth.dart';
 import 'package:locadeserta/models/Localizations.dart';
 
-void main() {
-  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-      statusBarColor: Colors.black
-  ));
+void main() async {
+  await FlutterStatusbarcolor.setStatusBarColor(Colors.black);
   runApp(LocaDesertaApp());
 }
 
@@ -31,7 +29,6 @@ class _LocaDesertaAppState extends State<LocaDesertaApp> {
   Locale locale = Locale('en');
 
   final ThemeData theme = ThemeData(
-//      brightness: Brightness.light,
       primaryColor: Colors.black,
       backgroundColor: Colors.white,
       accentColor: Colors.black,
