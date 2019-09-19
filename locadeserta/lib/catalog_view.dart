@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:locadeserta/animations/fade_images.dart';
 import 'package:locadeserta/animations/slideable_button.dart';
+import 'package:locadeserta/creator/components/fat_button.dart';
 import 'package:locadeserta/models/background_image.dart';
 import 'package:locadeserta/models/Localizations.dart';
 import 'package:locadeserta/models/catalogs.dart';
@@ -50,7 +51,8 @@ class _CatalogViewState extends State<CatalogView>
     var decoration = widget.expanded
         ? null
         : BoxDecoration(
-            border: Border.all(color: Theme.of(context).primaryColor, width: 1),);
+            border: Border.all(color: Theme.of(context).primaryColor, width: 1),
+          );
 
     return FutureBuilder(
       future: _future,
@@ -77,19 +79,19 @@ class _CatalogViewState extends State<CatalogView>
                     ),
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 1.0),
-                  child: Hero(
-                    tag: "CatalogView" + widget.catalogStory.title,
-                    child: TweenImage(
-                      first: image,
-                      last: coloredImage,
-                      duration: 4,
-                      repeat: true,
-                      height: widget.expanded ? 200 : null,
-                    ),
+              Padding(
+                padding: const EdgeInsets.only(bottom: 1.0),
+                child: Hero(
+                  tag: "CatalogView" + widget.catalogStory.title,
+                  child: TweenImage(
+                    first: image,
+                    last: coloredImage,
+                    duration: 4,
+                    repeat: true,
+                    height: widget.expanded ? 200 : null,
                   ),
                 ),
+              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -151,6 +153,19 @@ class _CatalogViewState extends State<CatalogView>
                   ),
                 ],
               ),
+              if (!widget.expanded) ...[
+                SizedBox(
+                  height: 30,
+                ),
+                SlideableButton(
+                  onPress: () {
+                    Navigator.pushNamed(context, "/create");
+                  },
+                  child: FatButton(
+                    text: LDLocalizations.of(context).createStory,
+                  ),
+                )
+              ],
               if (widget.expanded) _showDetails(widget.catalogStory, context),
             ],
           ),
@@ -212,7 +227,7 @@ class ExtractCatalogViewArguments extends StatelessWidget {
 
     return Scaffold(
         appBar: AppBar(
-          title: Text(args.catalogStory.title),
+          title: Text(args.catalogStory.title + '123'),
         ),
         body: CatalogView(
           catalogStory: args.catalogStory,

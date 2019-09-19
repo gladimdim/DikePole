@@ -3,21 +3,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:locadeserta/catalog_view.dart';
+import 'package:locadeserta/creator/components/create_view.dart';
+import 'package:locadeserta/creator/components/edit_node_view.dart';
+import 'package:locadeserta/creator/components/edit_story.dart';
+import 'package:locadeserta/creator/components/game_view.dart';
 import 'package:locadeserta/export_pdf_view.dart';
 import 'package:locadeserta/main_menu.dart';
 import 'package:locadeserta/login_view.dart';
 import 'package:locadeserta/models/Auth.dart';
 import 'package:locadeserta/models/Localizations.dart';
-import 'package:flutter_statusbarcolor/flutter_statusbarcolor.dart';
 
-void main() async {
-  try {
-    await FlutterStatusbarcolor.setStatusBarColor(Colors.black);
-    await FlutterStatusbarcolor.setNavigationBarColor(Colors.black);
-    await FlutterStatusbarcolor.setNavigationBarWhiteForeground(true);
-  } catch (e) {
-    print(e);
-  }
+void main() {
+  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+      statusBarColor: Colors.black
+  ));
   runApp(LocaDesertaApp());
 }
 
@@ -32,7 +31,7 @@ class _LocaDesertaAppState extends State<LocaDesertaApp> {
   Locale locale = Locale('en');
 
   final ThemeData theme = ThemeData(
-      brightness: Brightness.light,
+//      brightness: Brightness.light,
       primaryColor: Colors.black,
       backgroundColor: Colors.white,
       accentColor: Colors.black,
@@ -60,6 +59,17 @@ class _LocaDesertaAppState extends State<LocaDesertaApp> {
             ExtractCatalogViewArguments(),
         ExtractExportPdfViewArguments.routeName: (context) =>
             ExtractExportPdfViewArguments(),
+        ExtractExportGladStoriesPdfViewArguments.routeName: (context) =>
+            ExtractExportGladStoriesPdfViewArguments(),
+        "/create": (context) => CreateView(
+              locale: locale,
+              auth: auth,
+            ),
+        ExtractEditStoryViewArguments.routeName: (context) =>
+            ExtractEditStoryViewArguments(auth: auth),
+        ExtractArgumentsGameView.routeName: (context) =>
+            ExtractArgumentsGameView(),
+        ExtractEditPassageView.routeName: (context) => ExtractEditPassageView()
       },
       localizationsDelegates: [
         const LDLocalizationsDelegate(),

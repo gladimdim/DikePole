@@ -4,6 +4,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:locadeserta/animations/fade_images.dart';
 import 'package:locadeserta/animations/slideable_button.dart';
 import 'package:locadeserta/components/app_bar_custom.dart';
+import 'package:locadeserta/components/constants.dart';
 import 'package:locadeserta/models/Auth.dart';
 import 'package:locadeserta/models/Localizations.dart';
 import 'package:locadeserta/radiuses.dart';
@@ -32,7 +33,7 @@ class _LoginViewState extends State<LoginView> {
         child: Stack(
           children: <Widget>[
             Padding(
-              padding: const EdgeInsets.only(top: 32),
+              padding: const EdgeInsets.only(top: APP_BAR_HEIGHT),
               child: _buildBody(context),
             ),
             AppBarCustom(
@@ -199,5 +200,11 @@ class _LoginViewState extends State<LoginView> {
 
   _setNewLocale(Locale locale) {
     widget.onSetLocale(locale);
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    print("disposing login view");
   }
 }

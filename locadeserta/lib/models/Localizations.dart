@@ -3,7 +3,7 @@ import 'dart:core';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart' show SynchronousFuture;
 
-var version = "1.77";
+var version = "1.78";
 
 class LDLocalizations {
   LDLocalizations(this.locale);
@@ -55,7 +55,26 @@ class LDLocalizations {
       'createpdfdocument': 'Create',
       'cancel': 'Cancel',
       'processingimage': "Processing image, please wait",
-      'savingexportdocument': 'Saving exported file'
+      'savingexportdocument': 'Saving exported file',
+      'enterstorytitle': 'Enter story title',
+      'labelStoryTitle': 'Title: ',
+      'listofauthors': 'List of authors',
+      'labelauthors': 'Authors:',
+      'createstory': 'Create your story',
+      'edit': 'Edit',
+      'description': 'Description',
+      'hintdescription': 'Enter story description',
+      'remove': 'Remove',
+      'labeloptions': 'Add new option',
+      'optionplaceholder': 'Replace this',
+      'gotorootpage': 'Go to root page',
+      'addnewpassage': 'Add new passage',
+      'passagewillhaveimage': 'Passage will have image',
+      'selectimageforpassage': 'Select image for the passage: ',
+      'editingpassage': 'Editing passage',
+      'previewstory': 'Preview story',
+      'optionslistempty': 'Options list is empty',
+      'passagelistempty': 'Passage list is empty',
     },
     'uk': {
       'continue': 'Продовжити',
@@ -97,6 +116,25 @@ class LDLocalizations {
       'cancel': 'Скасувати',
       'processingimage': 'Обробляємо картинку, будь ласка, почекайте',
       'savingexportdocument': 'Зберігаємо експортований файл',
+      'enterstorytitle': 'Введіть назву історії',
+      'labelStoryTitle': 'Назва: ',
+      'listofauthors': 'Список авторів',
+      'labelauthors': 'Автори:',
+      'createstory': 'Створити ствою історію',
+      'edit': 'Редагувати',
+      'description': 'Описання',
+      'hintdescription': 'Введіть описання історії',
+      'remove': 'Видалити',
+      'labeloptions': 'Додати вибір',
+      'optionplaceholder': 'Замініть це',
+      'gotorootpage': 'Назад на головну сторінку',
+      'addnewpassage': 'Додати новий абзац',
+      'passagewillhaveimage': 'Абзац буде з картинкою',
+      'selectimageforpassage': 'Виберіть картинку для абзацу: ',
+      'editingpassage': 'Редагування абзацу',
+      'previewstory': 'Перегляд історії',
+      'optionslistempty': 'Список опцій порожній',
+      'passagelistempty': 'Список абзаців порожній',
     },
     'pl': {
       'continue': 'Dalej',
@@ -139,6 +177,25 @@ class LDLocalizations {
       'cancel': 'Anuluj',
       'processingimage': 'Przetwarzanie obrazu',
       'savingexportdocument': 'Zapisywanie wyeksportowanego pliku',
+      'enterstorytitle': 'Wpisz tytuł opowieści',
+      'labelStoryTitle': 'Tytuł:',
+      'listofauthors': 'Lista autorów',
+      'labelauthors': 'Autorski:',
+      'createstory': 'Utwórz historię',
+      'edit': 'Edytować',
+      'description': 'Opis',
+      'hintdescription': 'Wpisz opis historii',
+      'remove': 'Usunąć',
+      'labeloptions': 'Dodaj wybór',
+      'optionplaceholder': 'Zamień tę',
+      'gotorootpage': 'Idź do strony głównej',
+      'addnewpassage': 'Dodaj nowy fragment',
+      'passagewillhaveimage': 'Przejście będzie miało obraz',
+      'selectimageforpassage': 'Wybierz zdjęcie do przejścia: ',
+      'editingpassage': 'Edycja fragmentu',
+      'previewstory': 'Zobacz historię',
+      'optionslistempty': 'Lista opcji jest pusta',
+      'passagelistempty': 'Lista pasaży jest pusta',
     }
   };
 
@@ -277,8 +334,85 @@ class LDLocalizations {
   String get processingImage {
     return _localizedValues[locale.languageCode]['processingimage'];
   }
+
   String get savingExportFile {
     return _localizedValues[locale.languageCode]['savingexportdocument'];
+  }
+
+  String get enterStoryTitle {
+    return _localizedValues[locale.languageCode]['enterstorytitle'];
+  }
+
+  String get labelStoryTitle {
+    return _localizedValues[locale.languageCode]['labelStoryTitle'];
+  }
+
+  String get listOfAuthors {
+    return _localizedValues[locale.languageCode]['listofauthors'];
+  }
+
+  String get labelAuthors {
+    return _localizedValues[locale.languageCode]['labelauthors'];
+  }
+
+  String get createStory {
+    return _localizedValues[locale.languageCode]['createstory'];
+  }
+
+  String get edit {
+    return _localizedValues[locale.languageCode]['edit'];
+  }
+
+  String get description {
+    return _localizedValues[locale.languageCode]['description'];
+  }
+
+  String get hintDescription {
+    return _localizedValues[locale.languageCode]['hintDescription'];
+  }
+
+  String get remove {
+    return _localizedValues[locale.languageCode]['remove'];
+  }
+
+  String get labelOptions {
+    return _localizedValues[locale.languageCode]['labeloptions'];
+  }
+
+  String get optionPlaceHolder {
+    return _localizedValues[locale.languageCode]['optionplaceholder'];
+  }
+
+  String get goToRootPage {
+    return _localizedValues[locale.languageCode]['gotorootpage'];
+  }
+
+  String get addNewPassage {
+    return _localizedValues[locale.languageCode]['addnewpassage'];
+  }
+
+  String get passageWillHaveImage {
+    return _localizedValues[locale.languageCode]['passagewillhaveimage'];
+  }
+
+  String get selectImageForPassage {
+    return _localizedValues[locale.languageCode]['selectimageforpassage'];
+  }
+
+  String get editingPassage {
+    return _localizedValues[locale.languageCode]['editingpassage'];
+  }
+
+  String get previewStory {
+    return _localizedValues[locale.languageCode]['previewstory'];
+  }
+
+  String get optionsListEmpty {
+    return _localizedValues[locale.languageCode]['optionslistempty'];
+  }
+
+  String get passageListEmpty {
+    return _localizedValues[locale.languageCode]['passagelistempty'];
   }
 }
 

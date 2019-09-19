@@ -4,13 +4,14 @@ import 'package:flutter/widgets.dart';
 import 'package:locadeserta/animations/fade_images.dart';
 import 'package:locadeserta/catalog_view.dart';
 import 'package:locadeserta/components/app_bar_custom.dart';
+import 'package:locadeserta/components/constants.dart';
 import 'package:locadeserta/models/Localizations.dart';
 import 'package:locadeserta/models/background_image.dart';
 import 'package:locadeserta/story_view.dart';
 import 'package:locadeserta/models/Auth.dart';
 import 'package:locadeserta/models/catalogs.dart';
 import 'package:locadeserta/waiting_screen.dart';
-import 'package:locadeserta/animations/SlideRightNavigation.dart';
+import 'package:locadeserta/animations/slide_right_navigation.dart';
 import 'package:locadeserta/models/persistence.dart';
 import 'package:locadeserta/radiuses.dart';
 
@@ -67,7 +68,7 @@ class _MainMenuState extends State<MainMenu> with TickerProviderStateMixin {
         child: Stack(
           children: <Widget>[
             Padding(
-              padding: const EdgeInsets.only(top: 32),
+              padding: const EdgeInsets.only(top: APP_BAR_HEIGHT),
               child: FutureBuilder(
                 future: _fetchData(context),
                 builder: (BuildContext context, snapshot) {
@@ -95,7 +96,7 @@ class _MainMenuState extends State<MainMenu> with TickerProviderStateMixin {
                 AppBarObject(
                   onTap: () => Navigator.of(context).pop(),
                   text: LDLocalizations.of(context).backToMenu,
-                )
+                ),
               ],
             ),
           ],
@@ -106,7 +107,6 @@ class _MainMenuState extends State<MainMenu> with TickerProviderStateMixin {
 
   _fetchData(BuildContext context) {
     var locale = Localizations.localeOf(context);
-    print('locale: ${locale.languageCode}');
     return _catalogListMemo.runOnce(() async {
       List<CatalogStory> catalogStories = await Persistence.instance
           .getAvailableCatalogStories(locale.languageCode);
