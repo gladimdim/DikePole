@@ -26,7 +26,7 @@ class LocaDesertaApp extends StatefulWidget {
 }
 
 class _LocaDesertaAppState extends State<LocaDesertaApp> {
-  Locale locale = Locale('en');
+  Locale locale = Locale('uk');
 
   final ThemeData theme = ThemeData(
       primaryColor: Colors.black,

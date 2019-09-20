@@ -37,7 +37,7 @@ class _EditNodeViewState extends State<EditNodeView> {
                       maxLines: 20,
                       onSave: (text) {
                         widget.node.text = text;
-                        Navigator.pop(context);
+//                        Navigator.pop(context);
                       },
                     ),
                   ),

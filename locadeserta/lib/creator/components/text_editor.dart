@@ -23,9 +23,11 @@ class _TextEditorState extends State<TextEditor> {
     _controller.dispose();
     super.dispose();
   }
+
   @override
   Widget build(BuildContext context) {
     return TextField(
+      keyboardType: TextInputType.multiline,
       cursorColor: Colors.black,
       focusNode: FocusNode(),
       maxLines: widget.maxLines,
@@ -34,9 +36,10 @@ class _TextEditorState extends State<TextEditor> {
         fontSize: 20,
         color: Colors.black,
       ),
+      textInputAction: TextInputAction.done,
       onSubmitted: (text) {
         widget.onSave(text);
-    },
+      }
     );
   }
 }
