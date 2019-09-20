@@ -3,7 +3,7 @@ import 'dart:core';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart' show SynchronousFuture;
 
-var version = "1.80";
+var version = "1.81";
 
 class LDLocalizations {
   LDLocalizations(this.locale);
