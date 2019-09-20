@@ -14,11 +14,6 @@ class TextEditor extends StatefulWidget {
 class _TextEditorState extends State<TextEditor> {
   TextEditingController _controller = TextEditingController();
 
-  initState() {
-    _controller.text = widget.text;
-    super.initState();
-  }
-
   dispose() {
     _controller.dispose();
     super.dispose();
@@ -26,6 +21,7 @@ class _TextEditorState extends State<TextEditor> {
 
   @override
   Widget build(BuildContext context) {
+    _controller.text = widget.text;
     return TextField(
       keyboardType: TextInputType.multiline,
       cursorColor: Colors.black,

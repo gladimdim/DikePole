@@ -175,6 +175,10 @@ class _EditStoryViewState extends State<EditStoryView> {
                                   node: node,
                                 ),
                               );
+
+                              var user = await widget.auth.currentUser();
+                              await StoryPersistence.instance
+                                  .writeStory(user, widget.story);
                             },
                             trailing: IconButton(
                               icon: Icon(Icons.delete),
