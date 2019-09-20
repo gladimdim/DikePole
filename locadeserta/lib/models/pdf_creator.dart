@@ -105,11 +105,15 @@ class PdfCreator {
             );
           }),
     );
+
     var child = toPdfWidget(ttf, pdf);
+    var amountOfImages = _images.length;
     pdf.addPage(
       Page(
-        pageFormat: PdfPageFormat(21.0 * PdfPageFormat.cm,
-            story.getHistory().length / 4 * 29.7 * PdfPageFormat.cm,
+        pageFormat: PdfPageFormat(
+            21.0 * PdfPageFormat.cm,
+            (story.getHistory().length / 2 * 29.7 + amountOfImages * 10.0) *
+                PdfPageFormat.cm,
             marginAll: 2.0 * PdfPageFormat.cm),
         build: (Context context) {
           return child;
@@ -279,10 +283,13 @@ class PdfGladStoriesCreator {
           }),
     );
     var child = toPdfWidget(ttf, pdf);
+    var amountOfImages = _images.length;
     pdf.addPage(
       Page(
-        pageFormat: PdfPageFormat(21.0 * PdfPageFormat.cm,
-            story.history.length / 2 * 29.7 * PdfPageFormat.cm,
+        pageFormat: PdfPageFormat(
+            21.0 * PdfPageFormat.cm,
+            (story.history.length / 2 * 29.7 + amountOfImages * 10.0) *
+                PdfPageFormat.cm,
             marginAll: 2.0 * PdfPageFormat.cm),
         build: (Context context) {
           return child;
