@@ -27,6 +27,7 @@ class EditStoryView extends StatefulWidget {
 
 class _EditStoryViewState extends State<EditStoryView> {
   Map<int, bool> expandedIndexes = Map();
+  Map<PageNext, TextEditingController> _textControllers = {};
 
   @override
   Widget build(BuildContext context) {
@@ -93,6 +94,10 @@ class _EditStoryViewState extends State<EditStoryView> {
               child: SingleChildScrollView(
                 child: Column(
                   children: story.currentPage.next.map((PageNext next) {
+                    if (_textControllers.containsKey(next)) {
+                      _textControllers[next] = TextEditingController();
+                      _textControllers[next].text = next.text;
+                    }
                     return Padding(
                       padding: const EdgeInsets.all(2.0),
                       child: BorderedContainer(
@@ -103,9 +108,10 @@ class _EditStoryViewState extends State<EditStoryView> {
                                 height: 50,
                                 width: 200,
                                 child: TextEditor(
+                                  controller: _textControllers[next],
                                   maxLines: 1,
                                   text: next.text,
-                                  onSave: (String newText) {
+                                  onSubmitted: (String newText) {
                                     setState(() {
                                       next.text = newText;
                                     });
@@ -211,6 +217,14 @@ class _EditStoryViewState extends State<EditStoryView> {
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _textControllers.forEach((key, controller) {
+      controller.dispose();
+    });
   }
 }
 

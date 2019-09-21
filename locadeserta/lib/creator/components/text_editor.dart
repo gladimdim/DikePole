@@ -5,8 +5,9 @@ class TextEditor extends StatefulWidget {
   final int maxLines;
   final Function(String) onSave;
   final Function(String) onSubmitted;
+  final TextEditingController controller;
 
-  TextEditor({this.text, this.maxLines = 1, this.onSave, this.onSubmitted});
+  TextEditor({this.text, this.maxLines = 1, this.onSave, this.onSubmitted, this.controller});
 
   @override
   _TextEditorState createState() => _TextEditorState();
@@ -21,14 +22,20 @@ class _TextEditorState extends State<TextEditor> {
   }
 
   @override
-  Widget build(BuildContext context) {
+  void initState() {
+    super.initState();
     _controller.text = widget.text;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+//    _controller.text = widget.text;
     return TextField(
         keyboardType: TextInputType.multiline,
         cursorColor: Colors.black,
         focusNode: FocusNode(),
         maxLines: widget.maxLines,
-        controller: _controller,
+        controller: widget.controller == null ? _controller : widget.controller,
         style: TextStyle(
           fontSize: 20,
           color: Colors.black,
@@ -38,9 +45,9 @@ class _TextEditorState extends State<TextEditor> {
           FocusScope.of(context).unfocus();
           widget.onSubmitted(text);
         },
-        onChanged: (text) {
-          widget.onSave(text);
-        }
+//        onChanged: (text) {
+//          widget.onSave(text);
+//        }
     );
   }
 }
