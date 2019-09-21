@@ -39,6 +39,10 @@ class _EditNodeViewState extends State<EditNodeView> {
                         widget.node.text = text;
 //                        Navigator.pop(context);
                       },
+                      onSubmitted: (text) {
+                        widget.node.text = text;
+
+                      },
                     ),
                   ),
                   Expanded(

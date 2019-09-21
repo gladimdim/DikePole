@@ -204,6 +204,7 @@ class _EditStoryViewState extends State<EditStoryView> {
                   arguments:
                       GameViewArguments(locale: widget.locale, story: story),
                 );
+                story.reset();
               },
             )
           ],

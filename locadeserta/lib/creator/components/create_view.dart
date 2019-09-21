@@ -68,10 +68,10 @@ class _CreateViewState extends State<CreateView> {
                   ),
                   CreateMetaStoryView(
                     story: null,
-                    onSave: (Story newStory) {
-                      setState(() {
-                        _goToEditStoryView(newStory);
-                      });
+                    onSave: (Story newStory) async {
+                      await StoryPersistence.instance
+                          .writeStory(user, newStory);
+                        _resetStoryBuilderFuture();
                     },
                     onDelete: null,
                   ),
@@ -113,6 +113,12 @@ class _CreateViewState extends State<CreateView> {
     });
   }
 
+  _resetStoryBuilderFuture() {
+    setState(() {
+      _storyBuilderCatalogMemo = AsyncMemoizer();
+    });
+  }
+
   Future _currentUser() {
     return _currentUserMemo.runOnce(() async {
       return await widget.auth.currentUser();
@@ -132,24 +138,21 @@ class _CreateViewState extends State<CreateView> {
         child: CreateMetaStoryView(
           story: story,
           onSave: (Story newStory) {
-            setState(() {
               _goToEditStoryView(newStory);
-            });
           },
           onDelete: (Story story) async {
             await _deleteStory(user, story);
-            setState(() {
-              _storyBuilderCatalogMemo = AsyncMemoizer();
-            });
+            _resetStoryBuilderFuture();
           },
         ),
       ),
     );
   }
 
-  _goToEditStoryView(Story story) {
-    Navigator.pushNamed(context, ExtractEditStoryViewArguments.routeName,
+  _goToEditStoryView(Story story) async {
+    await Navigator.pushNamed(context, ExtractEditStoryViewArguments.routeName,
         arguments: EditStoryViewArguments(story: story, locale: widget.locale));
+    _resetStoryBuilderFuture();
   }
 
   _deleteStory(User user, Story story) async {
@@ -209,6 +212,7 @@ class _CreateMetaStoryViewState extends State<CreateMetaStoryView> {
 
   @override
   Widget build(BuildContext context) {
+    var editMode = widget.onDelete != null;
     return Form(
       key: _formKey,
       child: Column(
@@ -267,9 +271,14 @@ class _CreateMetaStoryViewState extends State<CreateMetaStoryView> {
                     story.description = _description;
                     story.authors = _authors;
                   }
+                  if (!editMode) {
+                    setState(() {
+                      _formKey.currentState.reset();
+                    });
+                  }
                   widget.onSave(story);
                 },
-                label: Text(LDLocalizations.of(context).edit),
+                label: Text(editMode ? LDLocalizations.of(context).edit : LDLocalizations.of(context).createStory),
               ),
             ),
             if (widget.onDelete != null)
