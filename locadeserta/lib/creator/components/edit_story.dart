@@ -94,10 +94,11 @@ class _EditStoryViewState extends State<EditStoryView> {
               child: SingleChildScrollView(
                 child: Column(
                   children: story.currentPage.next.map((PageNext next) {
-                    if (_textControllers.containsKey(next)) {
+                    if (!_textControllers.containsKey(next)) {
                       _textControllers[next] = TextEditingController();
-                      _textControllers[next].text = next.text;
+
                     }
+                    _textControllers[next].text = next.text;
                     return Padding(
                       padding: const EdgeInsets.all(2.0),
                       child: BorderedContainer(
