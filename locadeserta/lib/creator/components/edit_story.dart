@@ -201,7 +201,10 @@ class _EditStoryViewState extends State<EditStoryView> {
                   ),
                 )),
             SlideableButton(
-              child: FatButton(text: LDLocalizations.of(context).startStory),
+              child: FatButton(
+                text: LDLocalizations.of(context).startStory,
+                backgroundColor: Theme.of(context).primaryColor,
+              ),
               onPress: () async {
                 story.reset();
                 await Navigator.pushNamed(

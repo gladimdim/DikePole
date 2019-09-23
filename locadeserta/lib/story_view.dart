@@ -66,7 +66,6 @@ class _StoryViewState extends State<StoryView> {
         if (snapshot.hasError) {
           return Text("Failed to load assets: ${snapshot.error}");
         }
-
         currentStory = storyBridge.story;
         return GameViewScaffold(
           child: Padding(

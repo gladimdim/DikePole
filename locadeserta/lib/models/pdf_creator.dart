@@ -76,7 +76,7 @@ class PdfCreator {
                         "Title: ",
                         style: TextStyle(
                             font: ttf,
-                            fontSize: 48,
+                            fontSize: 30,
                             fontWeight: FontWeight.bold),
                       ),
                       Text(
@@ -91,12 +91,12 @@ class PdfCreator {
                         "Authors: ",
                         style: TextStyle(
                             font: ttf,
-                            fontSize: 38,
+                            fontSize: 30,
                             fontWeight: FontWeight.bold),
                       ),
                       Text(
                         author,
-                        style: TextStyle(font: ttf, fontSize: 28),
+                        style: TextStyle(font: ttf, fontSize: 30),
                       ),
                     ],
                   ),

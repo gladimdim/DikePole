@@ -144,6 +144,7 @@ class _TextEditorState extends State<TextEditorWithButton> {
           child: SlideableButton(
             child: FatButton(
               text: LDLocalizations.of(context).save,
+              backgroundColor: Theme.of(context).primaryColor,
             ),
             onPress: () {
               widget.onSave(_controller.text);

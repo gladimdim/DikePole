@@ -2,9 +2,13 @@ import 'package:async/async.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:locadeserta/animations/fade_images.dart';
+import 'package:locadeserta/animations/slideable_button.dart';
 import 'package:locadeserta/catalog_view.dart';
 import 'package:locadeserta/components/app_bar_custom.dart';
 import 'package:locadeserta/components/constants.dart';
+import 'package:locadeserta/creator/components/fat_button.dart';
+import 'package:locadeserta/creator/components/game_view.dart';
+import 'package:locadeserta/creator/story/story.dart' as GladStory;
 import 'package:locadeserta/models/Localizations.dart';
 import 'package:locadeserta/models/background_image.dart';
 import 'package:locadeserta/story_view.dart';
@@ -68,7 +72,19 @@ class _MainMenuState extends State<MainMenu> with TickerProviderStateMixin {
         child: Stack(
           children: <Widget>[
             Padding(
-              padding: const EdgeInsets.only(top: APP_BAR_HEIGHT),
+              padding: const EdgeInsets.only(top: APP_BAR_HEIGHT * 1.2, left: 4.0, right: 4.0),
+              child: SlideableButton(
+                onPress: () {
+                  Navigator.pushNamed(context, "/create");
+                },
+                child: FatButton(
+                  text: LDLocalizations.of(context).createStory,
+                  backgroundColor: Colors.black87,
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: APP_BAR_HEIGHT * 3),
               child: FutureBuilder(
                 future: _fetchData(context),
                 builder: (BuildContext context, snapshot) {
@@ -155,23 +171,26 @@ class _MainMenuState extends State<MainMenu> with TickerProviderStateMixin {
         itemCount: stories.length,
         itemBuilder: (BuildContext context, int index) {
           var story = stories[index];
-          return CatalogView(
-            catalogStory: story,
-            onReadPressed: () => _goToStory(story),
-            onDetailPressed: () {
-              Navigator.pushNamed(
-                context,
-                "/story_details",
-                arguments: CatalogViewArguments(
-                  expanded: true,
-                  catalogStory: story,
-                  onReadPressed: () => _goToStory(story),
-                  onDetailPressed: () {
-                    Navigator.pop(context);
-                  },
-                ),
-              );
-            },
+          return Padding(
+            padding: const EdgeInsets.only(top: 8.0, bottom: 48.0),
+            child: CatalogView(
+              catalogStory: story,
+              onReadPressed: () => _goToStory(story),
+              onDetailPressed: () {
+                Navigator.pushNamed(
+                  context,
+                  "/story_details",
+                  arguments: CatalogViewArguments(
+                    expanded: true,
+                    catalogStory: story,
+                    onReadPressed: () => _goToStory(story),
+                    onDetailPressed: () {
+                      Navigator.pop(context);
+                    },
+                  ),
+                );
+              },
+            ),
           );
         });
 
@@ -194,15 +213,25 @@ class _MainMenuState extends State<MainMenu> with TickerProviderStateMixin {
     setState(() {
       loadingStory = false;
     });
-    Navigator.push(
-      context,
-      SlideRightNavigation(
-        widget: StoryView(
-          user: user,
-          catalogStory: story,
+    if (story.inkJson != null) {
+      Navigator.push(
+        context,
+        SlideRightNavigation(
+          widget: StoryView(
+            user: user,
+            catalogStory: story,
+          ),
         ),
-      ),
-    );
+      );
+    } else {
+      Navigator.push(
+          context,
+          SlideRightNavigation(
+              widget: GameView(
+            locale: Localizations.localeOf(context),
+            story: GladStory.Story.fromJson(story.gladJson),
+          )));
+    }
   }
 
   @override

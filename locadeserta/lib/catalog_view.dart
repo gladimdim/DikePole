@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:locadeserta/animations/fade_images.dart';
 import 'package:locadeserta/animations/slideable_button.dart';
-import 'package:locadeserta/creator/components/fat_button.dart';
 import 'package:locadeserta/models/background_image.dart';
 import 'package:locadeserta/models/Localizations.dart';
 import 'package:locadeserta/models/catalogs.dart';
@@ -153,19 +152,7 @@ class _CatalogViewState extends State<CatalogView>
                   ),
                 ],
               ),
-              if (!widget.expanded) ...[
-                SizedBox(
-                  height: 30,
-                ),
-                SlideableButton(
-                  onPress: () {
-                    Navigator.pushNamed(context, "/create");
-                  },
-                  child: FatButton(
-                    text: LDLocalizations.of(context).createStory,
-                  ),
-                )
-              ],
+
               if (widget.expanded) _showDetails(widget.catalogStory, context),
             ],
           ),

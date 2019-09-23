@@ -75,6 +75,7 @@ class PassageState extends State<Passage> with TickerProviderStateMixin {
           },
           child: FatButton(
             text: text,
+            backgroundColor: Theme.of(context).primaryColor,
           ),
         ),
       ),
@@ -111,6 +112,7 @@ class PassageState extends State<Passage> with TickerProviderStateMixin {
       child: SlideableButton(
           child: FatButton(
             text: LDLocalizations.of(context).Continue,
+            backgroundColor: Theme.of(context).primaryColor,
           ),
           onPress: () {
             _next();

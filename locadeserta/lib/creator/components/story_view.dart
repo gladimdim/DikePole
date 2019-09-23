@@ -60,6 +60,7 @@ class PassageState extends State<StoryView> with TickerProviderStateMixin {
             },
             child: FatButton(
               text: page.text,
+              backgroundColor: Theme.of(context).primaryColor,
             ),
           ),
         ),
@@ -73,6 +74,7 @@ class PassageState extends State<StoryView> with TickerProviderStateMixin {
       child: SlideableButton(
           child: FatButton(
             text: LDLocalizations.of(context).next,
+            backgroundColor: Theme.of(context).primaryColor,
           ),
           onPress: () {
             _next();

@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 class FatButton extends StatelessWidget {
   final String text;
-
-  FatButton({@required this.text});
+  final Color backgroundColor;
+  FatButton({@required this.text, this.backgroundColor = Colors.black});
 
   @override
   Widget build(BuildContext context) {
@@ -11,7 +11,7 @@ class FatButton extends StatelessWidget {
     return SizedBox(
       height: height,
       child: Container(
-        color: Theme.of(context).primaryColor,
+        color: backgroundColor,
         child: Align(
           alignment: Alignment.center,
           child: Text(

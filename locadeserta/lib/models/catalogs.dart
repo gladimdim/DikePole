@@ -13,11 +13,12 @@ class CatalogStory {
   final DocumentReference documentReference;
   final String id;
   final String author;
+  final String gladJson;
 
-  CatalogStory({this.title, this.description, this.inkJson, this.documentReference, this.id, this.author});
+  CatalogStory({this.title, this.description, this.inkJson, this.documentReference, this.id, this.author, this.gladJson});
 
   CatalogStory.fromMap(Map<String, dynamic> map, {this.documentReference})
-      : title = map['title'], description = map['description'], inkJson = map['inkjson'], id = documentReference.documentID, author = map["author"];
+      : title = map['title'], description = map['description'], inkJson = map['inkjson'], id = documentReference.documentID, author = map["author"], gladJson = map["gladJson"];
 
   CatalogStory.fromSnapshot(DocumentSnapshot snapshot) : this.fromMap(snapshot.data, documentReference: snapshot.reference);
 
