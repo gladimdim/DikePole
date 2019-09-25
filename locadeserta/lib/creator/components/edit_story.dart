@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:locadeserta/animations/slideable_button.dart';
 import 'package:locadeserta/components/bordered_container.dart';
 import 'package:locadeserta/creator/components/text_editor.dart';
@@ -51,57 +52,67 @@ class _EditStoryViewState extends State<EditStoryView> {
         padding: const EdgeInsets.all(8.0),
         child: Column(
           children: <Widget>[
-            if (story.root != story.currentPage)
-              Align(
-                alignment: Alignment.centerRight,
-                child: BorderedContainer(
-                  child: FlatButton.icon(
-                    icon: Icon(Icons.arrow_back),
-                    label: Text(LDLocalizations.of(context).goToRootPage),
-                    onPressed: () {
-                      setState(() {
-                        story.currentPage = story.root;
-                      });
-                    },
-                  ),
+            Expanded(
+              child: SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: <Widget>[
+                    if (story.root != story.currentPage)
+                      Align(
+                        alignment: Alignment.centerRight,
+                        child: BorderedContainer(
+                          child: FlatButton.icon(
+                            icon: Icon(Icons.arrow_back),
+                            label: Text(LDLocalizations.of(context).labelBack),
+                            onPressed: () {
+                              setState(() {
+                                var parent = story.findParentOfPage(story.currentPage);
+                                if (parent != null) {
+                                  story.currentPage = parent;
+                                } else {
+                                  story.currentPage = story.root;                                }
+
+                              });
+                            },
+                          ),
+                        ),
+                      ),
+                    Checkbox(
+                      value: story.currentPage.isTheEnd(),
+                      onChanged: (newValue) {
+                        setState(() {
+                          story.currentPage.endType =
+                              newValue ? EndType.ALIVE : null;
+                        });
+                      },
+                    ),
+                    Text(LDLocalizations.of(context).labelIsTheEnd),
+                    if (story.currentPage.isTheEnd()) ...[
+                      Radio(
+                        value: EndType.DEAD,
+                        groupValue: story.currentPage.endType,
+                        onChanged: (newValue) {
+                          setState(() {
+                            story.currentPage.endType = EndType.DEAD;
+                          });
+                        },
+                      ),
+                      Text(LDLocalizations.of(context).labelIsTheEndDead),
+                      Radio(
+                        value: EndType.ALIVE,
+                        groupValue: story.currentPage.endType,
+                        onChanged: (newValue) {
+                          setState(() {
+                            story.currentPage.endType = EndType.ALIVE;
+                          });
+                        },
+                      ),
+                      Text(LDLocalizations.of(context).labelIsTheEndAlive)
+                    ]
+                  ],
                 ),
               ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: <Widget>[
-                Checkbox(
-                  value: story.currentPage.isTheEnd(),
-                  onChanged: (newValue) {
-                    setState(() {
-                      story.currentPage.endType =
-                          newValue ? EndType.ALIVE : null;
-                    });
-                  },
-                ),
-                Text(LDLocalizations.of(context).labelIsTheEnd),
-                if (story.currentPage.isTheEnd()) ...[
-                  Radio(
-                    value: EndType.DEAD,
-                    groupValue: story.currentPage.endType,
-                    onChanged: (newValue) {
-                      setState(() {
-                        story.currentPage.endType = EndType.DEAD;
-                      });
-                    },
-                  ),
-                  Text(LDLocalizations.of(context).labelIsTheEndDead),
-                  Radio(
-                    value: EndType.ALIVE,
-                    groupValue: story.currentPage.endType,
-                    onChanged: (newValue) {
-                      setState(() {
-                        story.currentPage.endType = EndType.ALIVE;
-                      });
-                    },
-                  ),
-                  Text(LDLocalizations.of(context).labelIsTheEndAlive)
-                ]
-              ],
             ),
             Align(
               alignment: Alignment.centerRight,
@@ -119,7 +130,7 @@ class _EditStoryViewState extends State<EditStoryView> {
             if (story.currentPage.next.length == 0)
               Text(LDLocalizations.of(context).optionsListEmpty),
             Expanded(
-              flex: 2,
+              flex: 3,
               child: SingleChildScrollView(
                 child: Column(
                   children: story.currentPage.next.map((PageNext next) {
@@ -141,9 +152,10 @@ class _EditStoryViewState extends State<EditStoryView> {
                                   maxLines: 1,
                                   text: next.text,
                                   onSubmitted: (String newText) {
-                                    setState(() {
-                                      next.text = newText;
-                                    });
+                                    next.text = newText;
+                                  },
+                                  onSave: (newValue) {
+                                    next.text = newValue;
                                   },
                                 )),
                             IconButton(

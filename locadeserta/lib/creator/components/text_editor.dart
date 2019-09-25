@@ -29,7 +29,6 @@ class _TextEditorState extends State<TextEditor> {
 
   @override
   Widget build(BuildContext context) {
-//    _controller.text = widget.text;
     return TextField(
         keyboardType: TextInputType.multiline,
         cursorColor: Colors.black,
@@ -45,9 +44,9 @@ class _TextEditorState extends State<TextEditor> {
           FocusScope.of(context).unfocus();
           widget.onSubmitted(text);
         },
-//        onChanged: (text) {
-//          widget.onSave(text);
-//        }
+        onChanged: (text) {
+          widget.onSave(text);
+        }
     );
   }
 }

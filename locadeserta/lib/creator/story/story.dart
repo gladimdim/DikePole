@@ -1,3 +1,5 @@
+import 'dart:collection';
+
 import 'package:flutter/foundation.dart';
 import 'dart:convert';
 import 'package:locadeserta/models/background_image.dart';
@@ -100,6 +102,20 @@ class Story {
       root: Page.generate(),
     );
     return story;
+  }
+
+  Page findParentOfPage(Page page) {
+    var queue = Queue<Page>();
+    queue.add(root);
+    while (queue.isNotEmpty) {
+      var p = queue.removeFirst();
+      if (p.next.where((pageNext) => pageNext.nextPage == page).length == 1) {
+        return p;
+      } else {
+        queue.addAll(p.next.map((n) => n.nextPage));
+      }
+    }
+    return null;
   }
 }
 

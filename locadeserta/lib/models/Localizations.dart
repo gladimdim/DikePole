@@ -78,6 +78,7 @@ class LDLocalizations {
       'labelistheenddead': 'Dies',
       'labelistheendalive': 'Lives',
       'labelistheend': 'The End',
+      'labelback': 'Back'
     },
     'uk': {
       'continue': 'Продовжити',
@@ -141,6 +142,7 @@ class LDLocalizations {
       'labelistheenddead': 'Умирає',
       'labelistheendalive': 'Живе',
       'labelistheend': 'Це кінець',
+      'labelback': 'Назад'
     },
     'pl': {
       'continue': 'Dalej',
@@ -205,6 +207,7 @@ class LDLocalizations {
       'labelistheenddead': 'Bohater nie żyje',
       'labelistheendalive': 'Bohater żyje',
       'labelistheend': 'Koniec',
+      'labelback': 'Wróć'
     }
   };
 
@@ -434,6 +437,10 @@ class LDLocalizations {
 
   String get labelIsTheEnd {
     return _localizedValues[locale.languageCode]['labelistheend'];
+  }
+
+  String get labelBack {
+    return _localizedValues[locale.languageCode]['labelback'];
   }
 }
 
