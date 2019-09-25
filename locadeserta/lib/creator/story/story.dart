@@ -168,7 +168,7 @@ class Page {
   }
 
   isTheEnd() {
-    return endType == null;
+    return endType != null;
   }
 
   void nextNode() {
@@ -254,7 +254,7 @@ class Page {
 
     return Page(
       nodes: [p1, p2, p3, p4, p5, p6],
-      endType: EndType.DEAD,
+      endType: EndType.ALIVE,
     );
   }
 }
@@ -286,7 +286,7 @@ String endTypeToString(EndType endType) {
     case EndType.DEAD:
       return "DEAD";
     default:
-      return "";
+      return null;
   }
 }
 

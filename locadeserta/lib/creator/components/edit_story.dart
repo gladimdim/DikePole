@@ -52,13 +52,6 @@ class _EditStoryViewState extends State<EditStoryView> {
         padding: const EdgeInsets.all(8.0),
         child: Column(
           children: <Widget>[
-            if (story.root == story.currentPage)
-              StoryViewHeader(
-                story: story,
-                onEdit: () {
-                  Navigator.pop(context);
-                },
-              ),
             if (story.root != story.currentPage)
               Align(
                 alignment: Alignment.centerRight,
@@ -74,6 +67,41 @@ class _EditStoryViewState extends State<EditStoryView> {
                   ),
                 ),
               ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: <Widget>[
+                Radio(
+                  value: null,
+                  groupValue: story.currentPage.endType,
+                  onChanged: (newValue) {
+                    setState(() {
+                      story.currentPage.endType = null;
+                    });
+                  },
+                ),
+                Text(LDLocalizations.of(context).labelIsTheEnd),
+                Radio(
+                  value: EndType.DEAD,
+                  groupValue: story.currentPage.endType,
+                  onChanged: (newValue) {
+                    setState(() {
+                      story.currentPage.endType = EndType.DEAD;
+                    });
+                  },
+                ),
+                Text(LDLocalizations.of(context).labelIsTheEndDead),
+                Radio(
+                  value: EndType.ALIVE,
+                  groupValue: story.currentPage.endType,
+                  onChanged: (newValue) {
+                    setState(() {
+                      story.currentPage.endType = EndType.ALIVE;
+                    });
+                  },
+                ),
+                Text(LDLocalizations.of(context).labelIsTheEndAlive)
+              ],
+            ),
             Align(
               alignment: Alignment.centerRight,
               child: FlatButton.icon(

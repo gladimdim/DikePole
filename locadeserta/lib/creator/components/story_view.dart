@@ -53,7 +53,6 @@ class PassageState extends State<StoryView> with TickerProviderStateMixin {
           height: MediaQuery.of(context).size.height * 0.075,
           child: SlideableButton(
             onPress: () {
-              // TODO: change to option
               setState(() {
                 widget.currentStory.goToNextPage(page);
               });
@@ -89,13 +88,17 @@ class PassageState extends State<StoryView> with TickerProviderStateMixin {
         child: SingleChildScrollView(
       controller: _passageScrollController,
       child: Column(
-        children: widget.currentStory.history
-            .map(
-              (HistoryItem historyItem) => PassageItemView(
-                historyItem,
-              ),
-            )
-            .toList(),
+        children: [
+          ...widget.currentStory.history
+              .map(
+                (HistoryItem historyItem) => PassageItemView(
+                  historyItem,
+                ),
+              )
+              .toList(),
+          if (widget.currentStory.currentPage.isTheEnd())
+            Text("This is the end"),
+        ],
       ),
     ));
   }

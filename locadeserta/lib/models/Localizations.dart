@@ -75,6 +75,9 @@ class LDLocalizations {
       'previewstory': 'Preview story',
       'optionslistempty': 'Options list is empty',
       'passagelistempty': 'Passage list is empty',
+      'labelistheenddead': 'Dies',
+      'labelistheendalive': 'Lives',
+      'labelistheend': 'The End',
     },
     'uk': {
       'continue': 'Продовжити',
@@ -135,6 +138,9 @@ class LDLocalizations {
       'previewstory': 'Перегляд історії',
       'optionslistempty': 'Список опцій порожній',
       'passagelistempty': 'Список абзаців порожній',
+      'labelistheenddead': 'Умирає',
+      'labelistheendalive': 'Живе',
+      'labelistheend': 'Це кінець',
     },
     'pl': {
       'continue': 'Dalej',
@@ -196,6 +202,9 @@ class LDLocalizations {
       'previewstory': 'Zobacz historię',
       'optionslistempty': 'Lista opcji jest pusta',
       'passagelistempty': 'Lista pasaży jest pusta',
+      'labelistheenddead': 'Bohater nie żyje',
+      'labelistheendalive': 'Bohater żyje',
+      'labelistheend': 'Koniec',
     }
   };
 
@@ -413,6 +422,18 @@ class LDLocalizations {
 
   String get passageListEmpty {
     return _localizedValues[locale.languageCode]['passagelistempty'];
+  }
+
+  String get labelIsTheEndDead {
+    return _localizedValues[locale.languageCode]['labelistheenddead'];
+  }
+
+  String get labelIsTheEndAlive {
+    return _localizedValues[locale.languageCode]['labelistheendalive'];
+  }
+
+  String get labelIsTheEnd {
+    return _localizedValues[locale.languageCode]['labelistheend'];
   }
 }
 
