@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:locadeserta/animations/slideable_button.dart';
 import 'package:locadeserta/components/bordered_container.dart';
 import 'package:locadeserta/creator/components/text_editor.dart';
-import 'package:locadeserta/creator/components/create_view.dart';
 import 'package:locadeserta/creator/components/edit_node_view.dart';
 import 'package:locadeserta/creator/components/fat_button.dart';
 import 'package:locadeserta/creator/components/game_view.dart';
@@ -70,36 +69,38 @@ class _EditStoryViewState extends State<EditStoryView> {
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: <Widget>[
-                Radio(
-                  value: null,
-                  groupValue: story.currentPage.endType,
+                Checkbox(
+                  value: story.currentPage.isTheEnd(),
                   onChanged: (newValue) {
                     setState(() {
-                      story.currentPage.endType = null;
+                      story.currentPage.endType =
+                          newValue ? EndType.ALIVE : null;
                     });
                   },
                 ),
                 Text(LDLocalizations.of(context).labelIsTheEnd),
-                Radio(
-                  value: EndType.DEAD,
-                  groupValue: story.currentPage.endType,
-                  onChanged: (newValue) {
-                    setState(() {
-                      story.currentPage.endType = EndType.DEAD;
-                    });
-                  },
-                ),
-                Text(LDLocalizations.of(context).labelIsTheEndDead),
-                Radio(
-                  value: EndType.ALIVE,
-                  groupValue: story.currentPage.endType,
-                  onChanged: (newValue) {
-                    setState(() {
-                      story.currentPage.endType = EndType.ALIVE;
-                    });
-                  },
-                ),
-                Text(LDLocalizations.of(context).labelIsTheEndAlive)
+                if (story.currentPage.isTheEnd()) ...[
+                  Radio(
+                    value: EndType.DEAD,
+                    groupValue: story.currentPage.endType,
+                    onChanged: (newValue) {
+                      setState(() {
+                        story.currentPage.endType = EndType.DEAD;
+                      });
+                    },
+                  ),
+                  Text(LDLocalizations.of(context).labelIsTheEndDead),
+                  Radio(
+                    value: EndType.ALIVE,
+                    groupValue: story.currentPage.endType,
+                    onChanged: (newValue) {
+                      setState(() {
+                        story.currentPage.endType = EndType.ALIVE;
+                      });
+                    },
+                  ),
+                  Text(LDLocalizations.of(context).labelIsTheEndAlive)
+                ]
               ],
             ),
             Align(
@@ -124,7 +125,6 @@ class _EditStoryViewState extends State<EditStoryView> {
                   children: story.currentPage.next.map((PageNext next) {
                     if (!_textControllers.containsKey(next)) {
                       _textControllers[next] = TextEditingController();
-
                     }
                     _textControllers[next].text = next.text;
                     return Padding(

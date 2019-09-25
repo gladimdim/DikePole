@@ -174,8 +174,7 @@ class Page {
   void nextNode() {
     currentIndex++;
     if (currentIndex >= nodes.length) {
-      // TODO: this is a crunch
-      currentIndex = 0;
+      throw "End of nodes for current page";
     }
   }
 

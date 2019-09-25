@@ -96,8 +96,8 @@ class PassageState extends State<StoryView> with TickerProviderStateMixin {
                 ),
               )
               .toList(),
-          if (widget.currentStory.currentPage.isTheEnd())
-            Text("This is the end"),
+          if (!widget.currentStory.canContinue() && widget.currentStory.currentPage.isTheEnd())
+            Text(LDLocalizations.of(context).theEnd),
         ],
       ),
     ));
