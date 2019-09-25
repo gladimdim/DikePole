@@ -53,65 +53,63 @@ class _EditStoryViewState extends State<EditStoryView> {
         child: Column(
           children: <Widget>[
             Expanded(
-              child: SingleChildScrollView(
+              child: ListView(
                 scrollDirection: Axis.horizontal,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: <Widget>[
-                    if (story.root != story.currentPage)
-                      Align(
-                        alignment: Alignment.centerRight,
-                        child: BorderedContainer(
-                          child: FlatButton.icon(
-                            icon: Icon(Icons.arrow_back),
-                            label: Text(LDLocalizations.of(context).labelBack),
-                            onPressed: () {
-                              setState(() {
-                                var parent = story.findParentOfPage(story.currentPage);
-                                if (parent != null) {
-                                  story.currentPage = parent;
-                                } else {
-                                  story.currentPage = story.root;                                }
-
-                              });
-                            },
-                          ),
+                children: <Widget>[
+                  if (story.root != story.currentPage)
+                    Align(
+                      alignment: Alignment.centerRight,
+                      child: BorderedContainer(
+                        child: FlatButton.icon(
+                          icon: Icon(Icons.arrow_back),
+                          label: Text(LDLocalizations.of(context).labelBack),
+                          onPressed: () {
+                            setState(() {
+                              var parent =
+                                  story.findParentOfPage(story.currentPage);
+                              if (parent != null) {
+                                story.currentPage = parent;
+                              } else {
+                                story.currentPage = story.root;
+                              }
+                            });
+                          },
                         ),
                       ),
-                    Checkbox(
-                      value: story.currentPage.isTheEnd(),
+                    ),
+                  Checkbox(
+                    value: story.currentPage.isTheEnd(),
+                    onChanged: (newValue) {
+                      setState(() {
+                        story.currentPage.endType =
+                            newValue ? EndType.ALIVE : null;
+                      });
+                    },
+                  ),
+                  Center(child: Text(LDLocalizations.of(context).labelIsTheEnd)),
+                  if (story.currentPage.isTheEnd()) ...[
+                    Radio(
+                      value: EndType.DEAD,
+                      groupValue: story.currentPage.endType,
                       onChanged: (newValue) {
                         setState(() {
-                          story.currentPage.endType =
-                              newValue ? EndType.ALIVE : null;
+                          story.currentPage.endType = EndType.DEAD;
                         });
                       },
                     ),
-                    Text(LDLocalizations.of(context).labelIsTheEnd),
-                    if (story.currentPage.isTheEnd()) ...[
-                      Radio(
-                        value: EndType.DEAD,
-                        groupValue: story.currentPage.endType,
-                        onChanged: (newValue) {
-                          setState(() {
-                            story.currentPage.endType = EndType.DEAD;
-                          });
-                        },
-                      ),
-                      Text(LDLocalizations.of(context).labelIsTheEndDead),
-                      Radio(
-                        value: EndType.ALIVE,
-                        groupValue: story.currentPage.endType,
-                        onChanged: (newValue) {
-                          setState(() {
-                            story.currentPage.endType = EndType.ALIVE;
-                          });
-                        },
-                      ),
-                      Text(LDLocalizations.of(context).labelIsTheEndAlive)
-                    ]
-                  ],
-                ),
+                    Center(child: Text(LDLocalizations.of(context).labelIsTheEndDead)),
+                    Radio(
+                      value: EndType.ALIVE,
+                      groupValue: story.currentPage.endType,
+                      onChanged: (newValue) {
+                        setState(() {
+                          story.currentPage.endType = EndType.ALIVE;
+                        });
+                      },
+                    ),
+                    Center(child: Text(LDLocalizations.of(context).labelIsTheEndAlive))
+                  ]
+                ],
               ),
             ),
             Align(
