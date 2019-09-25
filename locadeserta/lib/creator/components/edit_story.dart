@@ -124,6 +124,7 @@ class _EditStoryViewState extends State<EditStoryView> {
                   children: story.currentPage.next.map((PageNext next) {
                     if (!_textControllers.containsKey(next)) {
                       _textControllers[next] = TextEditingController();
+
                     }
                     _textControllers[next].text = next.text;
                     return Padding(
