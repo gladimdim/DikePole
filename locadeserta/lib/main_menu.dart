@@ -57,8 +57,8 @@ class _MainMenuState extends State<MainMenu> with TickerProviderStateMixin {
   @override
   void didChangeDependencies() {
     List<AssetImage> allImages =
-        BackgroundImage.getRandomImageForType(ImageType.LANDING)
-            .getAllAvailableImages();
+    BackgroundImage.getRandomImageForType(ImageType.LANDING)
+        .getAllAvailableImages();
     allImages.forEach((AssetImage image) {
       precacheImage(image, context);
     });
@@ -72,13 +72,16 @@ class _MainMenuState extends State<MainMenu> with TickerProviderStateMixin {
         child: Stack(
           children: <Widget>[
             Padding(
-              padding: const EdgeInsets.only(top: APP_BAR_HEIGHT * 1.2, left: 4.0, right: 4.0),
+              padding: const EdgeInsets.only(
+                  top: APP_BAR_HEIGHT * 1.2, left: 4.0, right: 4.0),
               child: SlideableButton(
                 onPress: () {
                   Navigator.pushNamed(context, "/create");
                 },
                 child: FatButton(
-                  text: LDLocalizations.of(context).createStory,
+                  text: LDLocalizations
+                      .of(context)
+                      .createStory,
                   backgroundColor: Colors.black87,
                 ),
               ),
@@ -107,11 +110,17 @@ class _MainMenuState extends State<MainMenu> with TickerProviderStateMixin {
               ),
             ),
             AppBarCustom(
-              title: LDLocalizations.of(context).appTitle,
+              title: LDLocalizations
+                  .of(context)
+                  .appTitle,
               appBarButtons: [
                 AppBarObject(
-                  onTap: () => Navigator.of(context).pop(),
-                  text: LDLocalizations.of(context).backToMenu,
+                  onTap: () {
+                    Navigator.of(context).pop();
+                  },
+                  text: LDLocalizations
+                      .of(context)
+                      .backToMenu,
                 ),
               ],
             ),
@@ -152,7 +161,9 @@ class _MainMenuState extends State<MainMenu> with TickerProviderStateMixin {
             Padding(
               padding: const EdgeInsets.only(top: 40),
               child: Text(
-                LDLocalizations.of(context).translationNotYetReady,
+                LDLocalizations
+                    .of(context)
+                    .translationNotYetReady,
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 15.0,
@@ -228,9 +239,9 @@ class _MainMenuState extends State<MainMenu> with TickerProviderStateMixin {
           context,
           SlideRightNavigation(
               widget: GameView(
-            locale: Localizations.localeOf(context),
-            story: GladStory.Story.fromJson(story.gladJson),
-          )));
+                locale: Localizations.localeOf(context),
+                story: GladStory.Story.fromJson(story.gladJson),
+              )));
     }
   }
 

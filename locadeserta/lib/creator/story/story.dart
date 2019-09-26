@@ -63,8 +63,8 @@ class Story {
     history.add(
       HistoryItem(text: next.text),
     );
-
     currentPage = next.nextPage;
+    currentPage.currentIndex = 0;
   }
 
   bool canContinue() {
