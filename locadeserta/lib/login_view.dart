@@ -4,7 +4,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:locadeserta/animations/fade_images.dart';
 import 'package:locadeserta/animations/slideable_button.dart';
 import 'package:locadeserta/components/app_bar_custom.dart';
-import 'package:locadeserta/components/constants.dart';
+import 'package:locadeserta/components/narrow_scaffold.dart';
 import 'package:locadeserta/models/Auth.dart';
 import 'package:locadeserta/models/Localizations.dart';
 import 'package:locadeserta/radiuses.dart';
@@ -28,26 +28,15 @@ class _LoginViewState extends State<LoginView> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        body: SafeArea(
-        child: Stack(
-          children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.only(top: APP_BAR_HEIGHT),
-              child: _buildBody(context),
-            ),
-            AppBarCustom(
-              title: LDLocalizations.of(context).appTitle,
-              appBarButtons: [
-                AppBarObject(
-                  onTap: () => widget.auth.signOut(),
-                  text: LDLocalizations.of(context).signOut,
-                ),
-              ],
-            ),
-          ],
+    return NarrowScaffold(
+      body: _buildBody(context),
+      title: LDLocalizations.of(context).appTitle,
+      actions: [
+        AppBarObject(
+          onTap: () => widget.auth.signOut(),
+          text: LDLocalizations.of(context).signOut,
         ),
-      ),
+      ],
     );
   }
 

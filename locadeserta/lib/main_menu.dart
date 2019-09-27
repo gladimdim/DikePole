@@ -5,7 +5,7 @@ import 'package:locadeserta/animations/fade_images.dart';
 import 'package:locadeserta/animations/slideable_button.dart';
 import 'package:locadeserta/catalog_view.dart';
 import 'package:locadeserta/components/app_bar_custom.dart';
-import 'package:locadeserta/components/constants.dart';
+import 'package:locadeserta/components/narrow_scaffold.dart';
 import 'package:locadeserta/creator/components/fat_button.dart';
 import 'package:locadeserta/creator/components/game_view.dart';
 import 'package:locadeserta/creator/story/story.dart' as GladStory;
@@ -57,8 +57,8 @@ class _MainMenuState extends State<MainMenu> with TickerProviderStateMixin {
   @override
   void didChangeDependencies() {
     List<AssetImage> allImages =
-    BackgroundImage.getRandomImageForType(ImageType.LANDING)
-        .getAllAvailableImages();
+        BackgroundImage.getRandomImageForType(ImageType.LANDING)
+            .getAllAvailableImages();
     allImages.forEach((AssetImage image) {
       precacheImage(image, context);
     });
@@ -67,13 +67,15 @@ class _MainMenuState extends State<MainMenu> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: Stack(
+    return NarrowScaffold(
+      title: LDLocalizations.of(context).appTitle,
+      body: FractionallySizedBox(
+        widthFactor: 1,
+        heightFactor: 0.8,
+        child: Column(
           children: <Widget>[
             Padding(
-              padding: const EdgeInsets.only(
-                  top: APP_BAR_HEIGHT * 1.2, left: 4.0, right: 4.0),
+              padding: const EdgeInsets.all(4.0),
               child: SlideableButton(
                 onPress: () {
                   Navigator.pushNamed(context, "/create");
@@ -86,47 +88,37 @@ class _MainMenuState extends State<MainMenu> with TickerProviderStateMixin {
                 ),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.only(top: APP_BAR_HEIGHT * 3),
-              child: FutureBuilder(
-                future: _fetchData(context),
-                builder: (BuildContext context, snapshot) {
-                  switch (snapshot.connectionState) {
-                    case ConnectionState.none:
-                    case ConnectionState.active:
-                    case ConnectionState.waiting:
-                      return WaitingScreen();
-                      break;
-                    case ConnectionState.done:
-                      if (snapshot.data == null || snapshot.data.length == 0) {
-                        return _buildEmptyCatalogListView(context);
-                      } else {
-                        return _buildCatalogView(context, snapshot.data);
-                      }
-                      break;
-                  }
-                  return null;
-                },
-              ),
-            ),
-            AppBarCustom(
-              title: LDLocalizations
-                  .of(context)
-                  .appTitle,
-              appBarButtons: [
-                AppBarObject(
-                  onTap: () {
-                    Navigator.of(context).pop();
-                  },
-                  text: LDLocalizations
-                      .of(context)
-                      .backToMenu,
-                ),
-              ],
+            FutureBuilder(
+              future: _fetchData(context),
+              builder: (BuildContext context, snapshot) {
+                switch (snapshot.connectionState) {
+                  case ConnectionState.none:
+                  case ConnectionState.active:
+                  case ConnectionState.waiting:
+                    return WaitingScreen();
+                    break;
+                  case ConnectionState.done:
+                    if (snapshot.data == null || snapshot.data.length == 0) {
+                      return _buildEmptyCatalogListView(context);
+                    } else {
+                      return _buildCatalogView(context, snapshot.data);
+                    }
+                    break;
+                }
+                return null;
+              },
             ),
           ],
         ),
       ),
+      actions: [
+        AppBarObject(
+          onTap: () {
+            Navigator.of(context).pop();
+          },
+          text: LDLocalizations.of(context).backToMenu,
+        ),
+      ],
     );
   }
 
@@ -161,9 +153,7 @@ class _MainMenuState extends State<MainMenu> with TickerProviderStateMixin {
             Padding(
               padding: const EdgeInsets.only(top: 40),
               child: Text(
-                LDLocalizations
-                    .of(context)
-                    .translationNotYetReady,
+                LDLocalizations.of(context).translationNotYetReady,
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 15.0,
@@ -180,6 +170,7 @@ class _MainMenuState extends State<MainMenu> with TickerProviderStateMixin {
   _buildCatalogView(BuildContext context, List<CatalogStory> stories) {
     var child = ListView.builder(
         itemCount: stories.length,
+        shrinkWrap: true,
         itemBuilder: (BuildContext context, int index) {
           var story = stories[index];
           return Padding(
@@ -239,9 +230,9 @@ class _MainMenuState extends State<MainMenu> with TickerProviderStateMixin {
           context,
           SlideRightNavigation(
               widget: GameView(
-                locale: Localizations.localeOf(context),
-                story: GladStory.Story.fromJson(story.gladJson),
-              )));
+            locale: Localizations.localeOf(context),
+            story: GladStory.Story.fromJson(story.gladJson),
+          )));
     }
   }
 
