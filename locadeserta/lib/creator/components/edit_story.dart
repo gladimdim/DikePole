@@ -14,6 +14,7 @@ import 'package:locadeserta/creator/utils/utils.dart';
 import 'package:locadeserta/models/Auth.dart';
 import 'package:locadeserta/models/Localizations.dart';
 import 'package:locadeserta/models/background_image.dart';
+import 'package:share_extend/share_extend.dart';
 
 class EditStoryView extends StatefulWidget {
   final Story story;
@@ -257,7 +258,14 @@ class _EditStoryViewState extends State<EditStoryView> {
               text: LDLocalizations.of(context).backToStories,
               onTap: () {
                 Navigator.pop(context);
-              })
+              }),
+          AppBarObject(
+            text: LDLocalizations.of(context).exportGladStoryToJson,
+            onTap: () {
+              var json = widget.story.toJson();
+              ShareExtend.share(json, "text");
+            }
+          ),
         ]);
   }
 

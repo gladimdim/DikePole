@@ -78,7 +78,10 @@ class LDLocalizations {
       'labelistheenddead': 'Dies',
       'labelistheendalive': 'Lives',
       'labelistheend': 'The End',
-      'labelback': 'Back'
+      'labelback': 'Back',
+      'exportgladstorytojson': 'Export to JSON',
+      'pastefulljson': 'Paste full JSON text',
+      'import': 'Import',
     },
     'uk': {
       'continue': 'Продовжити',
@@ -142,7 +145,10 @@ class LDLocalizations {
       'labelistheenddead': 'Умирає',
       'labelistheendalive': 'Живе',
       'labelistheend': 'Це кінець',
-      'labelback': 'Назад'
+      'labelback': 'Назад',
+      'exportgladstorytojson': 'Експорт в JSON',
+      'pastefulljson': 'Вставте повний текст JSON',
+      'import': 'Імпортувати',
     },
     'pl': {
       'continue': 'Dalej',
@@ -207,7 +213,10 @@ class LDLocalizations {
       'labelistheenddead': 'Bohater nie żyje',
       'labelistheendalive': 'Bohater żyje',
       'labelistheend': 'Koniec',
-      'labelback': 'Wróć'
+      'labelback': 'Wróć',
+      'exportgladstorytojson': 'Eksportuj do JSON',
+      'pastefulljson': 'Wklej pełny JSON',
+      'import': 'Import',
     }
   };
 
@@ -441,6 +450,18 @@ class LDLocalizations {
 
   String get labelBack {
     return _localizedValues[locale.languageCode]['labelback'];
+  }
+
+  String get exportGladStoryToJson {
+    return _localizedValues[locale.languageCode]['exportgladstorytojson'];
+  }
+
+  String get pasteFullJSON {
+    return _localizedValues[locale.languageCode]['pastefulljson'];
+  }
+
+  String get labelImport {
+    return _localizedValues[locale.languageCode]['import'];
   }
 }
 

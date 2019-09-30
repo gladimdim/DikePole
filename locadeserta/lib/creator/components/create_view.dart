@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:async/async.dart';
+
 import 'package:locadeserta/creator/components/edit_story.dart';
+import 'package:locadeserta/creator/components/fat_button.dart';
 import 'package:locadeserta/creator/story/persistence.dart';
 import 'package:locadeserta/creator/story/story.dart';
+import 'package:locadeserta/import_gladstories_view.dart';
 import 'package:locadeserta/models/Auth.dart';
 import 'package:locadeserta/models/Localizations.dart';
 import 'package:locadeserta/waiting_screen.dart';
-import 'package:async/async.dart';
+import 'package:locadeserta/animations/slideable_button.dart';
 
 class CreateView extends StatefulWidget {
   final Locale locale;
@@ -32,22 +36,40 @@ class _CreateViewState extends State<CreateView> {
         ),
       ),
       backgroundColor: Theme.of(context).backgroundColor,
-      body: FutureBuilder(
-          future: _currentUser(),
-          builder: (context, snapshot) {
-            User user = snapshot.data;
-            switch (snapshot.connectionState) {
-              case ConnectionState.none:
-              case ConnectionState.active:
-              case ConnectionState.waiting:
-                return WaitingScreen();
-                break;
-              case ConnectionState.done:
-                return _buildStoryView(context, user);
-              default:
-                return WaitingScreen();
-            }
-          }),
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          children: <Widget>[
+            SlideableButton(
+              onPress: () async {
+                await Navigator.pushNamed(context, ImportGladStoryView.routeName);
+                _resetStoryBuilderFuture();
+              },
+              child: FatButton(
+                text: LDLocalizations.of(context).labelImport,
+              ),
+            ),
+            Expanded(
+              child: FutureBuilder(
+                  future: _currentUser(),
+                  builder: (context, snapshot) {
+                    User user = snapshot.data;
+                    switch (snapshot.connectionState) {
+                      case ConnectionState.none:
+                      case ConnectionState.active:
+                      case ConnectionState.waiting:
+                        return WaitingScreen();
+                        break;
+                      case ConnectionState.done:
+                        return _buildStoryView(context, user);
+                      default:
+                        return WaitingScreen();
+                    }
+                  }),
+            ),
+          ],
+        ),
+      ),
     );
   }
 
@@ -71,7 +93,7 @@ class _CreateViewState extends State<CreateView> {
                     onSave: (Story newStory) async {
                       await StoryPersistence.instance
                           .writeStory(user, newStory);
-                        _resetStoryBuilderFuture();
+                      _resetStoryBuilderFuture();
                     },
                     onDelete: null,
                   ),
@@ -138,7 +160,7 @@ class _CreateViewState extends State<CreateView> {
         child: CreateMetaStoryView(
           story: story,
           onSave: (Story newStory) {
-              _goToEditStoryView(newStory);
+            _goToEditStoryView(newStory);
           },
           onDelete: (Story story) async {
             await _deleteStory(user, story);
@@ -278,7 +300,9 @@ class _CreateMetaStoryViewState extends State<CreateMetaStoryView> {
                   }
                   widget.onSave(story);
                 },
-                label: Text(editMode ? LDLocalizations.of(context).edit : LDLocalizations.of(context).createStory),
+                label: Text(editMode
+                    ? LDLocalizations.of(context).edit
+                    : LDLocalizations.of(context).createStory),
               ),
             ),
             if (widget.onDelete != null)

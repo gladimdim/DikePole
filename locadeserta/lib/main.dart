@@ -8,6 +8,7 @@ import 'package:locadeserta/creator/components/edit_node_view.dart';
 import 'package:locadeserta/creator/components/edit_story.dart';
 import 'package:locadeserta/creator/components/game_view.dart';
 import 'package:locadeserta/export_pdf_view.dart';
+import 'package:locadeserta/import_gladstories_view.dart';
 import 'package:locadeserta/main_menu.dart';
 import 'package:locadeserta/login_view.dart';
 import 'package:locadeserta/models/Auth.dart';
@@ -66,7 +67,8 @@ class _LocaDesertaAppState extends State<LocaDesertaApp> {
             ExtractEditStoryViewArguments(auth: auth),
         ExtractArgumentsGameView.routeName: (context) =>
             ExtractArgumentsGameView(),
-        ExtractEditPassageView.routeName: (context) => ExtractEditPassageView()
+        ExtractEditPassageView.routeName: (context) => ExtractEditPassageView(),
+        ImportGladStoryView.routeName: (context) => ImportGladStoryView(),
       },
       localizationsDelegates: [
         const LDLocalizationsDelegate(),
