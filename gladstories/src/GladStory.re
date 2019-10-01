@@ -57,14 +57,12 @@ exception CouldNotParse(string);
 
 let fromJSON = (input): gladStory => {
   switch (input) {
-  | Some(value) =>
-    Js.log("yes");
-    {
+  | Some(value) => {
       title: Decode.title(value),
       description: Decode.description(value),
       authors: Decode.authors(value),
       root: Decode.root(value),
-    };
+    }
   | None => CouldNotParse("Glad Story JSON is invalid") |> raise
   };
 };

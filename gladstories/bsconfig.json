@@ -1,23 +1,28 @@
-
 {
   "name": "react-hooks-template",
   "reason": {
     "react-jsx": 3
   },
   "sources": {
-    "dir" : "src",
-    "subdirs" : true
+    "dir": "src",
+    "subdirs": true
   },
-  "package-specs": [{
-    "module": "commonjs",
-    "in-source": true
-  }],
+  "package-specs": [
+    {
+      "module": "commonjs",
+      "in-source": true
+    }
+  ],
   "suffix": ".bs.js",
   "namespace": true,
   "bs-dependencies": [
     "reason-react",
     "@glennsl/bs-json",
-    "bs-fetch"
+    "bs-fetch",
+    "@ryb73/decco"
   ],
-  "refmt": 3
+  "refmt": 3,
+  "ppx-flags": [
+    "@ryb73/decco/ppx/ppx_decco.sh"
+  ]
 }
