@@ -1,11 +1,6 @@
-let handleJSON = json => {
-  let story = GladStory.fromJSON(json);
-  story;
-};
-
 [@react.component]
-let make = (~firstName) => {
-  let (json, setJSON) = React.useState(_ => firstName);
+let make = (~jsonString: string) => {
+  let (json, setJSON) = React.useState(_ => jsonString);
   let (gladStory, setGladStory) = React.useState(_ => None);
   let handleTextChange = input => {
     setJSON(_ => input##value);
@@ -13,6 +8,20 @@ let make = (~firstName) => {
 
   let handleJson = input => {
     setGladStory(_ => Some(input));
+  };
+
+  let updateModelFromJson = input => {
+    setJSON(_ => Json.stringify(input));
+    GladStory.fromJSON(Some(input)) |> handleJson;
+  };
+
+  let handleFetch = () => {
+    Js.Promise.(
+      Fetch.fetch("/gladstory.json")
+      |> then_(Fetch.Response.json)
+      |> then_(json => updateModelFromJson(json) |> resolve)
+    )
+    |> ignore;
   };
 
   <div>
@@ -24,8 +33,21 @@ let make = (~firstName) => {
     />
     <p />
     <button
-      onClick={_ => json |> Json.parse |> GladStory.fromJSON |> handleJson}>
+      onClick={_ =>
+        json
+        |> Json.parse
+        |> (
+          json =>
+            {switch (json) {
+             | Some(value) => updateModelFromJson(value)
+             | None => ()
+             }}
+        )
+      }>
       {React.string("Parse")}
+    </button>
+    <button onClick={_ => handleFetch()}>
+      {React.string("Load from backend")}
     </button>
     {switch (gladStory) {
      | Some(v) => <div> {React.string(v.title)} </div>
