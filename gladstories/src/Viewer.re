@@ -25,13 +25,14 @@ let make = (~jsonString: string) => {
   };
 
   <div>
-    <p> {React.string("Paste the Glad Story JSON: ")} </p>
-    <textarea
-      value=json
-      rows=10
-      onChange={event => handleTextChange(ReactEvent.Form.target(event))}
-    />
-    <p />
+    <div>
+      <p> {React.string("Paste the Glad Story JSON: ")} </p>
+      <textarea
+        value=json
+        rows=10
+        onChange={event => handleTextChange(ReactEvent.Form.target(event))}
+      />
+    </div>
     <button
       onClick={_ =>
         json
