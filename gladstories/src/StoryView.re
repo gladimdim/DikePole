@@ -4,6 +4,25 @@ let make = (~initialPage: GladStory.page) => {
   let (page, setPage) = React.useState(_ => initialPage);
   let (history, setHistory) = React.useState(_ => []);
   <div>
+    {current == Array.length(page.nodes)
+       ? <div> {React.string("options")} </div>
+       : <button
+           className="continueBlock"
+           onClick={_ =>
+             setCurrent(c =>
+               c == Array.length(page.nodes) - 1
+                 ? {
+                   setPage(page => page.next[0].nextPage);
+                   0;
+                 }
+                 : {
+                   setHistory(old => [page.nodes[c].text, ...old]);
+                   c + 1;
+                 }
+             )
+           }>
+           {React.string({js|Продовжити|js})}
+         </button>}
     {List.mapi(
        (i, element) =>
          <div className="textContainer" key={string_of_int(i)}>
@@ -13,19 +32,5 @@ let make = (~initialPage: GladStory.page) => {
      )
      |> Array.of_list
      |> React.array}
-    <button
-      className="continueBlock"
-      onClick={_ =>
-        setCurrent(c =>
-          c == Array.length(page.nodes) - 1
-            ? 0
-            : {
-              setHistory(old => [page.nodes[c].text, ...old]);
-              c + 1;
-            }
-        )
-      }>
-      {React.string({js|Продовжити|js})}
-    </button>
   </div>;
 };
