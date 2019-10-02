@@ -1,7 +1,7 @@
 [@react.component]
 let make = (~jsonString: string) => {
   let (json, setJSON) = React.useState(_ => jsonString);
-  let (gladStory, setGladStory) = React.useState(_ => None);
+  let (story, setGladStory) = React.useState(_ => None);
   let handleTextChange = input => {
     setJSON(_ => input##value);
   };
@@ -28,7 +28,7 @@ let make = (~jsonString: string) => {
     <p> {React.string("Paste the Glad Story JSON: ")} </p>
     <textarea
       value=json
-      height="50"
+      rows=10
       onChange={event => handleTextChange(ReactEvent.Form.target(event))}
     />
     <p />
@@ -49,8 +49,8 @@ let make = (~jsonString: string) => {
     <button onClick={_ => handleFetch()}>
       {React.string("Load from backend")}
     </button>
-    {switch (gladStory) {
-     | Some(v) => <div> {React.string(v.title)} </div>
+    {switch (story) {
+     | Some(v) => <StoryView initialPage={v.root} />
      | None => <div> {React.string("Not yet parsed")} </div>
      }}
   </div>;
