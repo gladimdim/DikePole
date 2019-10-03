@@ -25,34 +25,38 @@ let make = (~jsonString: string) => {
   };
 
   <div>
-    <div>
-      <p> {React.string("Paste the Glad Story JSON: ")} </p>
-      <textarea
-        value=json
-        rows=10
-        onChange={event => handleTextChange(ReactEvent.Form.target(event))}
-      />
-    </div>
-    <button
-      onClick={_ =>
-        json
-        |> Json.parse
-        |> (
-          json =>
-            {switch (json) {
-             | Some(value) => updateModelFromJson(value)
-             | None => ()
-             }}
-        )
-      }>
-      {React.string("Parse")}
-    </button>
-    <button onClick={_ => handleFetch()}>
-      {React.string("Load from backend")}
-    </button>
     {switch (story) {
      | Some(v) => <StoryView initialPage={v.root} />
-     | None => <div> {React.string("Not yet parsed")} </div>
+     | None =>
+       <div>
+         <div>
+           <p> {React.string("Paste the Glad Story JSON: ")} </p>
+           <textarea
+             value=json
+             rows=10
+             onChange={event =>
+               handleTextChange(ReactEvent.Form.target(event))
+             }
+           />
+         </div>
+         <button
+           onClick={_ =>
+             json
+             |> Json.parse
+             |> (
+               json =>
+                 {switch (json) {
+                  | Some(value) => updateModelFromJson(value)
+                  | None => ()
+                  }}
+             )
+           }>
+           {React.string("Parse")}
+         </button>
+         <button onClick={_ => handleFetch()}>
+           {React.string("Load from backend")}
+         </button>
+       </div>
      }}
   </div>;
 };
