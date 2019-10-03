@@ -185,7 +185,7 @@ class _EditStoryViewState extends State<EditStoryView> {
                 label: Text(LDLocalizations.of(context).addNewPassage),
               ),
             ),
-            if (story.currentPage.next.length == 0)
+            if (story.currentPage.nodes.length == 0)
               Text(LDLocalizations.of(context).passageListEmpty),
             Expanded(
                 flex: 6,
