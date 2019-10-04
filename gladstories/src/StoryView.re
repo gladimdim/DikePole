@@ -4,7 +4,15 @@ let make = (~initialPage: GladStory.page) => {
   let (page, setPage) = React.useState(_ => initialPage);
   let (history, setHistory) =
     React.useState(_ =>
-      [(initialPage.nodes[0].text, initialPage.nodes[0].imageType)]
+      [
+        (
+          initialPage.nodes[0].text,
+          BackgroundImage.imageTypeToPath(
+            ~imageType=initialPage.nodes[0].imageType,
+            (),
+          ),
+        ),
+      ]
     );
   <div>
     {current == Array.length(page.nodes)
@@ -13,7 +21,15 @@ let make = (~initialPage: GladStory.page) => {
            onSelected={(selected: GladStory.pageNext) => {
              setPage(_ => selected.nextPage);
              setCurrent(_ => {
-               setHistory(old => [(selected.text, None), ...old]);
+               setHistory(old =>
+                 [
+                   (
+                     selected.text,
+                     BackgroundImage.imageTypeToPath(~imageType=None, ()),
+                   ),
+                   ...old,
+                 ]
+               );
                0;
              });
            }}
@@ -23,7 +39,16 @@ let make = (~initialPage: GladStory.page) => {
            onClickHandler={_ =>
              setCurrent(c => {
                setHistory(old =>
-                 [(page.nodes[c].text, page.nodes[c].imageType), ...old]
+                 [
+                   (
+                     page.nodes[c].text,
+                     BackgroundImage.imageTypeToPath(
+                       ~imageType=page.nodes[c].imageType,
+                       (),
+                     ),
+                   ),
+                   ...old,
+                 ]
                );
                c + 1;
              })
