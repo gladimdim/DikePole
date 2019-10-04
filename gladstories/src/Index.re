@@ -1,1 +1,1 @@
-ReactDOMRe.renderToElementWithId(<Viewer jsonString="Kuku" />, "index");
+ReactDOMRe.renderToElementWithId(<Viewer jsonString="" />, "index");

@@ -1,6 +1,30 @@
+type tImageType =
+  | Camp
+  | Steppe
+  | Landing
+  | Forest
+  | Bulrush
+  | Boat
+  | River
+  | Cossacks;
+
+let imageTypeFromString = input => {
+  switch (input) {
+  | "forest" => Forest
+  | "camp" => Camp
+  | "steppe" => Steppe
+  | "landing" => Landing
+  | "bulrush" => Bulrush
+  | "boat" => Boat
+  | "river" => River
+  | "cossack" => Cossacks
+  | _ => Bulrush
+  };
+};
+
 type node = {
   text: string,
-  imageType: option(string),
+  imageType: option(tImageType),
 };
 
 type page = {
@@ -33,6 +57,14 @@ module Decode = {
       Json.Decode.optional(
         Json.Decode.field("imageType", Json.Decode.string),
         input,
+      )
+      |> (
+        value => {
+          switch (value) {
+          | Some(v) => Some(imageTypeFromString(v))
+          | None => None
+          };
+        }
       ),
   };
 

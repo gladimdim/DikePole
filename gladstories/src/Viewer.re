@@ -17,7 +17,7 @@ let make = (~jsonString: string) => {
 
   let handleFetch = () => {
     Js.Promise.(
-      Fetch.fetch("/gladstory.json")
+      Fetch.fetch("./gladstory.json")
       |> then_(Fetch.Response.json)
       |> then_(json => updateModelFromJson(json) |> resolve)
     )
@@ -30,8 +30,13 @@ let make = (~jsonString: string) => {
      | None =>
        <div>
          <div>
-           <p> {React.string("Paste the Glad Story JSON: ")} </p>
+           <p>
+             {React.string(
+                {js|Вставте свій текст GladStory|js},
+              )}
+           </p>
            <textarea
+             className="textAreaStyle"
              value=json
              rows=10
              onChange={event =>
@@ -39,8 +44,9 @@ let make = (~jsonString: string) => {
              }
            />
          </div>
-         <button
-           onClick={_ =>
+         <FatButton
+           title={js|Розпізнати свій текст з форми|js}
+           onClickHandler={_ =>
              json
              |> Json.parse
              |> (
@@ -50,12 +56,12 @@ let make = (~jsonString: string) => {
                   | None => ()
                   }}
              )
-           }>
-           {React.string("Parse")}
-         </button>
-         <button onClick={_ => handleFetch()}>
-           {React.string("Load from backend")}
-         </button>
+           }
+         />
+         <FatButton
+           title={js|Завантажити Хотинську різню|js}
+           onClickHandler={_ => handleFetch()}
+         />
        </div>
      }}
   </div>;
