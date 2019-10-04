@@ -12,13 +12,26 @@ let imageTypeFromString = input => {
   switch (input) {
   | "forest" => Forest
   | "camp" => Camp
-  | "steppe" => Steppe
+  | "steppe" => Camp // shadowed
   | "landing" => Landing
   | "bulrush" => Bulrush
   | "boat" => Boat
   | "river" => River
-  | "cossack" => Cossacks
+  | "cossacks" => Camp // shadowed
   | _ => Bulrush
+  };
+};
+
+let imageTypeToString = input => {
+  switch (input) {
+  | Forest => "forest"
+  | Camp => "camp"
+  | Steppe => "steppe"
+  | Landing => "landing"
+  | Bulrush => "bulrush"
+  | Boat => "boat"
+  | River => "river"
+  | Cossacks => "cossacks"
   };
 };
 

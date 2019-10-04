@@ -1,10 +1,14 @@
 [@react.component]
 let make = (~historyItem) => {
-  let (text, _image) = historyItem;
+  let (text, image) = historyItem;
   <div>
-    {switch (historyItem) {
-     | (_, Some(_v)) => <div> {React.string("something")} </div>
-     | _ => <div />
+    {switch (image) {
+     | Some(v) =>
+       <img
+         className="historyImage"
+         src={BackgroundImage.imageTypeToPath(v)}
+       />
+     | None => <div />
      }}
     <TextContainer text key=text />
   </div>;

@@ -22,7 +22,9 @@ let make = (~initialPage: GladStory.page) => {
            title={js|Продовжити|js}
            onClickHandler={_ =>
              setCurrent(c => {
-               setHistory(old => [(page.nodes[c].text, None), ...old]);
+               setHistory(old =>
+                 [(page.nodes[c].text, page.nodes[c].imageType), ...old]
+               );
                c + 1;
              })
            }
