@@ -15,9 +15,9 @@ let make = (~jsonString: string) => {
     GladStory.fromJSON(Some(input)) |> handleJson;
   };
 
-  let handleFetch = () => {
+  let handleFetch = s => {
     Js.Promise.(
-      Fetch.fetch("./gladstory.json")
+      Fetch.fetch(s)
       |> then_(Fetch.Response.json)
       |> then_(json => updateModelFromJson(json) |> resolve)
     )
@@ -45,24 +45,30 @@ let make = (~jsonString: string) => {
            />
          </div>
          <div>
-         <FatButton
-           title={js|Розпізнати свій текст з форми|js}
-           onClickHandler={_ =>
-             json
-             |> Json.parse
-             |> (
-               json =>
-                 {switch (json) {
-                  | Some(value) => updateModelFromJson(value)
-                  | None => ()
-                  }}
-             )
-           }
-         />
-         <FatButton
-           title={js|Завантажити Хотинську різню|js}
-           onClickHandler={_ => handleFetch()}
-         />
+           <FatButton
+             title={js|Розпізнати свій текст з форми|js}
+             onClickHandler={_ =>
+               json
+               |> Json.parse
+               |> (
+                 json =>
+                   {switch (json) {
+                    | Some(value) => updateModelFromJson(value)
+                    | None => ()
+                    }}
+               )
+             }
+           />
+           <FatButton
+             title={js|Завантажити Хотинську різню|js}
+             onClickHandler={_ => handleFetch("./gladstory.json")}
+           />
+           <FatButton
+             title="Load After the Battle"
+             onClickHandler={_ =>
+               handleFetch("./afterbattle_en_gladstory.json")
+             }
+           />
          </div>
        </div>
      }}
