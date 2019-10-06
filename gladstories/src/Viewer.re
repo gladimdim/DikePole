@@ -44,6 +44,7 @@ let make = (~jsonString: string) => {
              }
            />
          </div>
+         <div>
          <FatButton
            title={js|Розпізнати свій текст з форми|js}
            onClickHandler={_ =>
@@ -62,6 +63,7 @@ let make = (~jsonString: string) => {
            title={js|Завантажити Хотинську різню|js}
            onClickHandler={_ => handleFetch()}
          />
+         </div>
        </div>
      }}
   </div>;
