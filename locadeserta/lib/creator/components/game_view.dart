@@ -9,9 +9,8 @@ import 'package:locadeserta/models/Localizations.dart';
 
 class GameView extends StatefulWidget {
   final Story story;
-  final Locale locale;
 
-  GameView({this.locale, this.story});
+  GameView({this.story});
 
   @override
   _MainViewState createState() => _MainViewState();
@@ -48,9 +47,8 @@ class _MainViewState extends State<GameView> {
 
 class GameViewArguments {
   final Story story;
-  final Locale locale;
 
-  GameViewArguments({this.locale, this.story});
+  GameViewArguments({this.story});
 }
 
 class ExtractArgumentsGameView extends StatelessWidget {
@@ -60,7 +58,6 @@ class ExtractArgumentsGameView extends StatelessWidget {
     final GameViewArguments args = ModalRoute.of(context).settings.arguments;
 
     return GameView(
-      locale: args.locale,
       story: args.story,
     );
   }

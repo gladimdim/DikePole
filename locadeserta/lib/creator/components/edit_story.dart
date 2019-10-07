@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:locadeserta/InheritedAuth.dart';
 import 'package:locadeserta/animations/slideable_button.dart';
 import 'package:locadeserta/components/app_bar_custom.dart';
 import 'package:locadeserta/components/bordered_container.dart';
@@ -11,18 +12,15 @@ import 'package:locadeserta/creator/components/game_view.dart';
 import 'package:locadeserta/creator/story/persistence.dart';
 import 'package:locadeserta/creator/story/story.dart';
 import 'package:locadeserta/creator/utils/utils.dart';
-import 'package:locadeserta/models/Auth.dart';
 import 'package:locadeserta/models/Localizations.dart';
 import 'package:locadeserta/models/background_image.dart';
 import 'package:share_extend/share_extend.dart';
 
 class EditStoryView extends StatefulWidget {
   final Story story;
-  final Locale locale;
-  final Auth auth;
 
   EditStoryView(
-      {@required this.story, @required this.locale, @required this.auth});
+      {@required this.story});
 
   @override
   _EditStoryViewState createState() => _EditStoryViewState();
@@ -212,7 +210,7 @@ class _EditStoryViewState extends State<EditStoryView> {
                                 ),
                               );
 
-                              var user = await widget.auth.currentUser();
+                              var user = await InheritedAuth.of(context).auth.currentUser();
                               await StoryPersistence.instance
                                   .writeStory(user, widget.story);
                             },
@@ -241,7 +239,7 @@ class _EditStoryViewState extends State<EditStoryView> {
                   context,
                   ExtractArgumentsGameView.routeName,
                   arguments:
-                      GameViewArguments(locale: widget.locale, story: story),
+                      GameViewArguments(story: story),
                 );
                 story.reset();
               },
@@ -252,7 +250,7 @@ class _EditStoryViewState extends State<EditStoryView> {
         actions: [
           AppBarObject(
             text: LDLocalizations.of(context).save,
-            onTap: _saveStoryCallback,
+            onTap: () => _saveStoryCallback(context),
           ),
           AppBarObject(
               text: LDLocalizations.of(context).backToStories,
@@ -269,14 +267,14 @@ class _EditStoryViewState extends State<EditStoryView> {
         ]);
   }
 
-  _saveStory() async {
-    var user = await widget.auth.currentUser();
+  _saveStory(BuildContext context) async {
+    var user = await InheritedAuth.of(context).auth.currentUser();
     await StoryPersistence.instance.writeStory(user, widget.story);
     setState(() {});
   }
 
-  _saveStoryCallback() {
-    _saveStory();
+  _saveStoryCallback(BuildContext context) {
+    _saveStory(context);
   }
 
   @override
@@ -290,25 +288,18 @@ class _EditStoryViewState extends State<EditStoryView> {
 
 class EditStoryViewArguments {
   final Story story;
-  final Locale locale;
-
-  EditStoryViewArguments({this.story, this.locale});
+  EditStoryViewArguments({this.story});
 }
 
 class ExtractEditStoryViewArguments extends StatelessWidget {
   static const routeName = "/edit_story";
-  final Auth auth;
-
-  ExtractEditStoryViewArguments({@required this.auth});
 
   Widget build(BuildContext context) {
     final EditStoryViewArguments args =
         ModalRoute.of(context).settings.arguments;
 
     return EditStoryView(
-      auth: auth,
       story: args.story,
-      locale: args.locale,
     );
   }
 }

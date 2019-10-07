@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:async/async.dart';
+import 'package:locadeserta/InheritedAuth.dart';
 
 import 'package:locadeserta/creator/components/edit_story.dart';
 import 'package:locadeserta/creator/components/fat_button.dart';
@@ -12,13 +13,9 @@ import 'package:locadeserta/waiting_screen.dart';
 import 'package:locadeserta/animations/slideable_button.dart';
 
 class CreateView extends StatefulWidget {
-  final Locale locale;
-  final Auth auth;
 
   @override
   _CreateViewState createState() => _CreateViewState();
-
-  CreateView({this.locale, @required this.auth});
 }
 
 class _CreateViewState extends State<CreateView> {
@@ -51,7 +48,7 @@ class _CreateViewState extends State<CreateView> {
             ),
             Expanded(
               child: FutureBuilder(
-                  future: _currentUser(),
+                  future: _currentUser(context),
                   builder: (context, snapshot) {
                     User user = snapshot.data;
                     switch (snapshot.connectionState) {
@@ -116,7 +113,7 @@ class _CreateViewState extends State<CreateView> {
                   } else {
                     List<Story> storyBuilders = snapshot.data;
                     return Column(
-                      children: _createStoryCards(storyBuilders, user),
+                      children: _createStoryCards(storyBuilders, user, context),
                     );
                   }
                   break;
@@ -141,26 +138,27 @@ class _CreateViewState extends State<CreateView> {
     });
   }
 
-  Future _currentUser() {
+  Future _currentUser(BuildContext context) {
     return _currentUserMemo.runOnce(() async {
-      return await widget.auth.currentUser();
+      var auth = InheritedAuth.of(context).auth;
+      return await auth.currentUser();
     });
   }
 
-  List<Widget> _createStoryCards(List<Story> storyBuilders, User user) {
+  List<Widget> _createStoryCards(List<Story> storyBuilders, User user, context) {
     return storyBuilders
-        .map((storyBuilder) => _createStoryCard(storyBuilder, user))
+        .map((storyBuilder) => _createStoryCard(storyBuilder, user, context))
         .toList();
   }
 
-  Widget _createStoryCard(Story story, User user) {
+  Widget _createStoryCard(Story story, User user, context) {
     return Center(
       child: Card(
         elevation: 10.0,
         child: CreateMetaStoryView(
           story: story,
           onSave: (Story newStory) {
-            _goToEditStoryView(newStory);
+            _goToEditStoryView(newStory, context);
           },
           onDelete: (Story story) async {
             await _deleteStory(user, story);
@@ -171,9 +169,9 @@ class _CreateViewState extends State<CreateView> {
     );
   }
 
-  _goToEditStoryView(Story story) async {
+  _goToEditStoryView(Story story, context) async {
     await Navigator.pushNamed(context, ExtractEditStoryViewArguments.routeName,
-        arguments: EditStoryViewArguments(story: story, locale: widget.locale));
+        arguments: EditStoryViewArguments(story: story));
     _resetStoryBuilderFuture();
   }
 

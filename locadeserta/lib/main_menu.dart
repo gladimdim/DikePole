@@ -1,6 +1,7 @@
 import 'package:async/async.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:locadeserta/InheritedAuth.dart';
 import 'package:locadeserta/animations/fade_images.dart';
 import 'package:locadeserta/animations/slideable_button.dart';
 import 'package:locadeserta/catalog_view.dart';
@@ -22,9 +23,7 @@ import 'package:locadeserta/radiuses.dart';
 const LANDING_IMAGE_HEIGHT = 200.0;
 
 class MainMenu extends StatefulWidget {
-  final Auth auth;
-
-  MainMenu({this.auth});
+  MainMenu({story});
 
   @override
   _MainMenuState createState() => _MainMenuState();
@@ -177,7 +176,7 @@ class _MainMenuState extends State<MainMenu> with TickerProviderStateMixin {
             padding: const EdgeInsets.only(top: 8.0, bottom: 48.0),
             child: CatalogView(
               catalogStory: story,
-              onReadPressed: () => _goToStory(story),
+              onReadPressed: () => _goToStory(story, context),
               onDetailPressed: () {
                 Navigator.pushNamed(
                   context,
@@ -185,7 +184,7 @@ class _MainMenuState extends State<MainMenu> with TickerProviderStateMixin {
                   arguments: CatalogViewArguments(
                     expanded: true,
                     catalogStory: story,
-                    onReadPressed: () => _goToStory(story),
+                    onReadPressed: () => _goToStory(story, context),
                     onDetailPressed: () {
                       Navigator.pop(context);
                     },
@@ -210,8 +209,8 @@ class _MainMenuState extends State<MainMenu> with TickerProviderStateMixin {
     );
   }
 
-  _goToStory(CatalogStory story) async {
-    var user = await widget.auth.currentUser();
+  _goToStory(CatalogStory story, context) async {
+    var user = await InheritedAuth.of(context).auth.currentUser();
     setState(() {
       loadingStory = false;
     });
@@ -230,7 +229,6 @@ class _MainMenuState extends State<MainMenu> with TickerProviderStateMixin {
           context,
           SlideRightNavigation(
               widget: GameView(
-            locale: Localizations.localeOf(context),
             story: GladStory.Story.fromJson(story.gladJson),
           )));
     }
