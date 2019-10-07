@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:collection';
 
 import 'package:flutter/foundation.dart';
@@ -11,6 +12,8 @@ class Story {
   Page root;
   List<HistoryItem> history = [];
   Page currentPage;
+
+  StreamController streamHistory = StreamController<List<HistoryItem>>();
 
   Story(
       {@required this.title,
@@ -48,6 +51,8 @@ class Story {
         ),
       );
     }
+
+    streamHistory.sink.add(history);
   }
 
   doContinue() {
@@ -77,6 +82,17 @@ class Story {
       "description": description,
       "authors": authors,
       "root": root.toMap(),
+    });
+  }
+
+  toStateJson() {
+    return jsonEncode({
+      "title": title,
+      "description": description,
+      "authors": authors,
+      "root": root.toMap(),
+      "currentPage": currentPage.toMap(),
+      "history": history.map((historyItem) => historyItem.toMap()).toList(),
     });
   }
 
@@ -124,6 +140,13 @@ class HistoryItem {
   final List<String> imagePath;
 
   HistoryItem({@required this.text, this.imagePath});
+
+  toMap() {
+    return {
+      "text": text,
+      "imagePath": imagePath,
+    };
+  }
 }
 
 class Page {
