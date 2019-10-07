@@ -70,44 +70,26 @@ class _MainMenuState extends State<MainMenu> with TickerProviderStateMixin {
       title: LDLocalizations.of(context).appTitle,
       body: FractionallySizedBox(
         widthFactor: 1,
-        heightFactor: 0.8,
-        child: Column(
-          children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.all(4.0),
-              child: SlideableButton(
-                onPress: () {
-                  Navigator.pushNamed(context, "/create");
-                },
-                child: FatButton(
-                  text: LDLocalizations
-                      .of(context)
-                      .createStory,
-                  backgroundColor: Colors.black87,
-                ),
-              ),
-            ),
-            FutureBuilder(
-              future: _fetchData(context),
-              builder: (BuildContext context, snapshot) {
-                switch (snapshot.connectionState) {
-                  case ConnectionState.none:
-                  case ConnectionState.active:
-                  case ConnectionState.waiting:
-                    return WaitingScreen();
-                    break;
-                  case ConnectionState.done:
-                    if (snapshot.data == null || snapshot.data.length == 0) {
-                      return _buildEmptyCatalogListView(context);
-                    } else {
-                      return _buildCatalogView(context, snapshot.data);
-                    }
-                    break;
+        heightFactor: 1.0,
+        child: FutureBuilder(
+          future: _fetchData(context),
+          builder: (BuildContext context, snapshot) {
+            switch (snapshot.connectionState) {
+              case ConnectionState.none:
+              case ConnectionState.active:
+              case ConnectionState.waiting:
+                return WaitingScreen();
+                break;
+              case ConnectionState.done:
+                if (snapshot.data == null || snapshot.data.length == 0) {
+                  return _buildEmptyCatalogListView(context);
+                } else {
+                  return _buildCatalogView(context, snapshot.data);
                 }
-                return null;
-              },
-            ),
-          ],
+                break;
+            }
+            return null;
+          },
         ),
       ),
       actions: [
@@ -168,12 +150,28 @@ class _MainMenuState extends State<MainMenu> with TickerProviderStateMixin {
 
   _buildCatalogView(BuildContext context, List<CatalogStory> stories) {
     var child = ListView.builder(
-        itemCount: stories.length,
+        itemCount: stories.length + 1,
         shrinkWrap: true,
         itemBuilder: (BuildContext context, int index) {
-          var story = stories[index];
+          if (index == 0) {
+            return Padding(
+              padding: const EdgeInsets.all(4.0),
+              child: SlideableButton(
+                onPress: () {
+                  Navigator.pushNamed(context, "/create");
+                },
+                child: FatButton(
+                  text: LDLocalizations
+                      .of(context)
+                      .createStory,
+                  backgroundColor: Colors.black87,
+                ),
+              ),
+            );
+          }
+          var story = stories[index-1];
           return Padding(
-            padding: const EdgeInsets.only(top: 8.0, bottom: 48.0),
+            padding: const EdgeInsets.only(top: 8.0),
             child: CatalogView(
               catalogStory: story,
               onReadPressed: () => _goToStory(story, context),
