@@ -60,7 +60,7 @@ let make = (~jsonString: string) => {
              }
            />
            <FatButton
-             title={js|Завантажити Хотинську різню|js}
+             title={js|Розпочати читати Хотинську різню|js}
              onClickHandler={_ => handleFetch("./gladstory.json")}
            />
            <FatButton
