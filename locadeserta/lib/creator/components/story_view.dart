@@ -22,11 +22,22 @@ class StoryView extends StatefulWidget {
 
 class PassageState extends State<StoryView> with TickerProviderStateMixin {
   ScrollController _passageScrollController = ScrollController();
+  
+  @override
+  initState() {
+    Future.delayed(Duration.zero, () {
+      widget.currentStory.historyChanges.listen((data) {
+        _saveStateToStorage(widget.currentStory, context);
+      });
+
+    });
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<List<HistoryItem>>(
-      stream: widget.currentStory.streamHistory.stream,
+      stream: widget.currentStory.historyChanges,
       initialData: [],
       builder: (context, snapshot) {
         var history = snapshot.data;
@@ -45,7 +56,7 @@ class PassageState extends State<StoryView> with TickerProviderStateMixin {
   }
 
   void _next(context) {
-    _saveStateToStorage(widget.currentStory, context);
+//    _saveStateToStorage(widget.currentStory, context);
     setState(() {
       var currentImageType =
           widget.currentStory.currentPage.getCurrentNode().imageType;

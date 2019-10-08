@@ -180,6 +180,10 @@ class PdfCreator {
       style: TextStyle(font: ttf, fontSize: 18),
     );
   }
+
+  dispose() {
+    _decodeProgress.close();
+  }
 }
 
 ImageUI.Image decodeImage(List<int> input) {
@@ -356,5 +360,9 @@ class PdfGladStoriesCreator {
       text,
       style: TextStyle(font: ttf, fontSize: 18),
     );
+  }
+
+  dispose() {
+    _decodeProgress.close();
   }
 }

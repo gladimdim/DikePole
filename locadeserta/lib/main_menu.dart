@@ -13,7 +13,6 @@ import 'package:locadeserta/creator/story/story.dart' as GladStory;
 import 'package:locadeserta/models/Localizations.dart';
 import 'package:locadeserta/models/background_image.dart';
 import 'package:locadeserta/story_view.dart';
-import 'package:locadeserta/models/Auth.dart';
 import 'package:locadeserta/models/catalogs.dart';
 import 'package:locadeserta/waiting_screen.dart';
 import 'package:locadeserta/animations/slide_right_navigation.dart';
