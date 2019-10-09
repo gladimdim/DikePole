@@ -18,12 +18,12 @@ let imageTypeToPath =
     colored
       ? String.concat(
           "",
-          ["./images/", GladStory.imageTypeToString(v), "/c_", ".jpg"],
+          ["images/", GladStory.imageTypeToString(v), "/c_", ".jpg"],
         )
       : String.concat(
           "",
           [
-            "./images/",
+            "images/",
             GladStory.imageTypeToString(v),
             "/",
             Random.int(max) |> string_of_int,

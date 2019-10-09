@@ -1,14 +1,14 @@
 [@react.component]
-let make = (~initialPage: GladStory.page) => {
+let make = (~initialPage: GladStory.gladStory) => {
   let (current, setCurrent) = React.useState(_ => 1);
-  let (page, setPage) = React.useState(_ => initialPage);
+  let (page, setPage) = React.useState(_ => initialPage.root);
   let (history, setHistory) =
     React.useState(_ =>
       [
         (
-          initialPage.nodes[0].text,
+          initialPage.root.nodes[0].text,
           BackgroundImage.imageTypeToPath(
-            ~imageType=initialPage.nodes[0].imageType,
+            ~imageType=initialPage.root.nodes[0].imageType,
             (),
           ),
         ),
