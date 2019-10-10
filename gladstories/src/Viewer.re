@@ -25,6 +25,10 @@ let make = (~storyName=?, ()) => {
          <div>
            <div>
              <FatButton
+               title={js|Створити свою|js}
+               onClickHandler={_ => ReasonReactRouter.push("editor")}
+             />
+             <FatButton
                title={js|Читати Хотинську різню|js}
                onClickHandler={_ =>
                  ReasonReactRouter.push("stories#hotin_massacre")
