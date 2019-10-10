@@ -54,7 +54,9 @@ class _EditStoryViewState extends State<EditStoryView> {
               return Container();
               break;
             case ConnectionState.done:
-              story = Story.fromJson(snapshot.data.body);
+              if (story == null) {
+                story = Story.fromJson(snapshot.data.body);
+              }
               return NarrowScaffold(
                 body: Column(
                   children: <Widget>[
@@ -127,7 +129,7 @@ class _EditStoryViewState extends State<EditStoryView> {
                           });
                         },
                         icon: Icon(Icons.add_box),
-                        label: Text("Options: "),
+                        label: Text("Options"),
                       ),
                     ),
                     if (story.currentPage.next.length == 0)
@@ -167,6 +169,7 @@ class _EditStoryViewState extends State<EditStoryView> {
                                         Icons.keyboard_arrow_right,
                                       ),
                                       onPressed: () {
+                                        print("pressed details");
                                         setState(() {
                                           story.goToNextPage(next);
                                         });

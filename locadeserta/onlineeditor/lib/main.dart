@@ -22,11 +22,7 @@ class MyApp extends StatelessWidget {
       initialRoute: "/edit_story",
       routes: {
         "/edit_story": (context) => EditStoryView(
-              story: Story(
-                  authors: "Me",
-                  title: "Yo",
-                  description: "DD",
-                  root: Page(nodes: [PageNode(text: "Test")])),
+              story: null,
             ),
         ExtractEditPassageView.routeName: (context) => ExtractEditPassageView(),
         ExtractArgumentsGameView.routeName: (context) =>
