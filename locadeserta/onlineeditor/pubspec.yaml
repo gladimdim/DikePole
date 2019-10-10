@@ -1,0 +1,240 @@
+name: onlineeditor
+description: A new Flutter project.
+
+# The following defines the version and build number for your application.
+# A version number is three numbers separated by dots, like 1.2.43
+# followed by an optional build number separated by a +.
+# Both the version and the builder number may be overridden in flutter
+# build by specifying --build-name and --build-number, respectively.
+# In Android, build-name is used as versionName while build-number used as versionCode.
+# Read more about Android versioning at https://developer.android.com/studio/publish/versioning
+# In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
+# Read more about iOS versioning at
+# https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.3.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  http:
+
+  # The following adds the Cupertino Icons font to your application.
+  # Use with the CupertinoIcons class for iOS style icons.
+  cupertino_icons: ^0.1.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  simple_animations: ^1.3.3
+  rxdart: ^0.22.3
+
+
+# For information on the generic Dart part of this file, see the
+# following page: https://dart.dev/tools/pub/pubspec
+
+# The following section is specific to Flutter.
+flutter:
+  uses-material-design: true
+  assets:
+  # bulrush images
+  - web/assets/images/background/bulrush/c_0.jpg
+  - web/assets/images/background/bulrush/0.jpg
+  - web/assets/images/background/bulrush/c_1.jpg
+  - web/assets/images/background/bulrush/1.jpg
+  - web/assets/images/background/bulrush/c_2.jpg
+  - web/assets/images/background/bulrush/2.jpg
+  - web/assets/images/background/bulrush/c_3.jpg
+  - web/assets/images/background/bulrush/3.jpg
+  - web/assets/images/background/bulrush/c_4.jpg
+  - web/assets/images/background/bulrush/4.jpg
+  - web/assets/images/background/bulrush/c_5.jpg
+  - web/assets/images/background/bulrush/5.jpg
+  - web/assets/images/background/bulrush/c_6.jpg
+  - web/assets/images/background/bulrush/6.jpg
+  - web/assets/images/background/bulrush/c_7.jpg
+  - web/assets/images/background/bulrush/7.jpg
+  - web/assets/images/background/bulrush/c_8.jpg
+  - web/assets/images/background/bulrush/8.jpg
+  - web/assets/images/background/bulrush/c_9.jpg
+  - web/assets/images/background/bulrush/9.jpg
+  - web/assets/images/background/bulrush/c_10.jpg
+  - web/assets/images/background/bulrush/10.jpg
+  - web/assets/images/background/bulrush/c_11.jpg
+  - web/assets/images/background/bulrush/11.jpg
+  # BOAT IMAGES
+  - web/assets/images/background/boat/0.jpg
+  - web/assets/images/background/boat/1.jpg
+  - web/assets/images/background/boat/2.jpg
+  - web/assets/images/background/boat/3.jpg
+  - web/assets/images/background/boat/4.jpg
+  - web/assets/images/background/boat/5.jpg
+  - web/assets/images/background/boat/6.jpg
+  - web/assets/images/background/boat/7.jpg
+  - web/assets/images/background/boat/8.jpg
+  - web/assets/images/background/boat/9.jpg
+  - web/assets/images/background/boat/10.jpg
+  - web/assets/images/background/boat/11.jpg
+  - web/assets/images/background/boat/12.jpg
+  - web/assets/images/background/boat/13.jpg
+  - web/assets/images/background/boat/14.jpg
+  - web/assets/images/background/boat/15.jpg
+  - web/assets/images/background/boat/16.jpg
+  - web/assets/images/background/boat/17.jpg
+  - web/assets/images/background/boat/18.jpg
+  - web/assets/images/background/boat/c_0.jpg
+  - web/assets/images/background/boat/c_1.jpg
+  - web/assets/images/background/boat/c_2.jpg
+  - web/assets/images/background/boat/c_3.jpg
+  - web/assets/images/background/boat/c_4.jpg
+  - web/assets/images/background/boat/c_5.jpg
+  - web/assets/images/background/boat/c_6.jpg
+  - web/assets/images/background/boat/c_7.jpg
+  - web/assets/images/background/boat/c_8.jpg
+  - web/assets/images/background/boat/c_9.jpg
+  - web/assets/images/background/boat/c_10.jpg
+  - web/assets/images/background/boat/c_11.jpg
+  - web/assets/images/background/boat/c_12.jpg
+  - web/assets/images/background/boat/c_13.jpg
+  - web/assets/images/background/boat/c_14.jpg
+  - web/assets/images/background/boat/c_15.jpg
+  - web/assets/images/background/boat/c_16.jpg
+  - web/assets/images/background/boat/c_17.jpg
+  - web/assets/images/background/boat/c_18.jpg
+
+  # FOREST IMAGES
+  - web/assets/images/background/forest/0.jpg
+  - web/assets/images/background/forest/1.jpg
+  - web/assets/images/background/forest/2.jpg
+  - web/assets/images/background/forest/3.jpg
+  - web/assets/images/background/forest/4.jpg
+  - web/assets/images/background/forest/5.jpg
+  - web/assets/images/background/forest/6.jpg
+  - web/assets/images/background/forest/7.jpg
+  - web/assets/images/background/forest/8.jpg
+  - web/assets/images/background/forest/9.jpg
+  - web/assets/images/background/forest/c_0.jpg
+  - web/assets/images/background/forest/c_1.jpg
+  - web/assets/images/background/forest/c_2.jpg
+  - web/assets/images/background/forest/c_3.jpg
+  - web/assets/images/background/forest/c_4.jpg
+  - web/assets/images/background/forest/c_5.jpg
+  - web/assets/images/background/forest/c_6.jpg
+  - web/assets/images/background/forest/c_7.jpg
+  - web/assets/images/background/forest/c_8.jpg
+  - web/assets/images/background/forest/c_9.jpg
+  # RIVER IMAGES
+  - web/assets/images/background/river/0.jpg
+  - web/assets/images/background/river/1.jpg
+  - web/assets/images/background/river/2.jpg
+  - web/assets/images/background/river/3.jpg
+  - web/assets/images/background/river/4.jpg
+  - web/assets/images/background/river/5.jpg
+  - web/assets/images/background/river/6.jpg
+  - web/assets/images/background/river/7.jpg
+  - web/assets/images/background/river/8.jpg
+  - web/assets/images/background/river/9.jpg
+  - web/assets/images/background/river/10.jpg
+  - web/assets/images/background/river/11.jpg
+  - web/assets/images/background/river/12.jpg
+  - web/assets/images/background/river/13.jpg
+  - web/assets/images/background/river/14.jpg
+  - web/assets/images/background/river/15.jpg
+  - web/assets/images/background/river/16.jpg
+  - web/assets/images/background/river/17.jpg
+  - web/assets/images/background/river/18.jpg
+  - web/assets/images/background/river/19.jpg
+  - web/assets/images/background/river/20.jpg
+  - web/assets/images/background/river/21.jpg
+  - web/assets/images/background/river/c_0.jpg
+  - web/assets/images/background/river/c_1.jpg
+  - web/assets/images/background/river/c_2.jpg
+  - web/assets/images/background/river/c_3.jpg
+  - web/assets/images/background/river/c_4.jpg
+  - web/assets/images/background/river/c_5.jpg
+  - web/assets/images/background/river/c_6.jpg
+  - web/assets/images/background/river/c_7.jpg
+  - web/assets/images/background/river/c_8.jpg
+  - web/assets/images/background/river/c_9.jpg
+  - web/assets/images/background/river/c_10.jpg
+  - web/assets/images/background/river/c_11.jpg
+  - web/assets/images/background/river/c_12.jpg
+  - web/assets/images/background/river/c_13.jpg
+  - web/assets/images/background/river/c_14.jpg
+  - web/assets/images/background/river/c_15.jpg
+  - web/assets/images/background/river/c_16.jpg
+  - web/assets/images/background/river/c_17.jpg
+  - web/assets/images/background/river/c_18.jpg
+  - web/assets/images/background/river/c_19.jpg
+  - web/assets/images/background/river/c_20.jpg
+  - web/assets/images/background/river/c_21.jpg
+  - web/assets/images/background/cossack_0.jpg
+  - web/assets/images/background/c_cossack_0.jpg
+  # LANDING IMAGES
+  - web/assets/images/background/landing/0.jpg
+  - web/assets/images/background/landing/1.jpg
+  - web/assets/images/background/landing/2.jpg
+  - web/assets/images/background/landing/3.jpg
+  - web/assets/images/background/landing/4.jpg
+  - web/assets/images/background/landing/5.jpg
+  - web/assets/images/background/landing/6.jpg
+  - web/assets/images/background/landing/7.jpg
+  - web/assets/images/background/landing/c_0.jpg
+  - web/assets/images/background/landing/c_1.jpg
+  - web/assets/images/background/landing/c_2.jpg
+  - web/assets/images/background/landing/c_3.jpg
+  - web/assets/images/background/landing/c_4.jpg
+  - web/assets/images/background/landing/c_5.jpg
+  - web/assets/images/background/landing/c_6.jpg
+  - web/assets/images/background/landing/c_7.jpg
+  # CAMP IMAGES
+  - web/assets/images/background/camp/0.jpg
+  - web/assets/images/background/camp/1.jpg
+  - web/assets/images/background/camp/2.jpg
+  - web/assets/images/background/camp/3.jpg
+  - web/assets/images/background/camp/4.jpg
+  - web/assets/images/background/camp/5.jpg
+  - web/assets/images/background/camp/6.jpg
+  - web/assets/images/background/camp/7.jpg
+  - web/assets/images/background/camp/8.jpg
+  - web/assets/images/background/camp/9.jpg
+  - web/assets/images/background/camp/10.jpg
+  - web/assets/images/background/camp/11.jpg
+  - web/assets/images/background/camp/12.jpg
+  - web/assets/images/background/camp/13.jpg
+  - web/assets/images/background/camp/14.jpg
+  - web/assets/images/background/camp/c_0.jpg
+  - web/assets/images/background/camp/c_1.jpg
+  - web/assets/images/background/camp/c_2.jpg
+  - web/assets/images/background/camp/c_3.jpg
+  - web/assets/images/background/camp/c_4.jpg
+  - web/assets/images/background/camp/c_5.jpg
+  - web/assets/images/background/camp/c_6.jpg
+  - web/assets/images/background/camp/c_7.jpg
+  - web/assets/images/background/camp/c_8.jpg
+  - web/assets/images/background/camp/c_9.jpg
+  - web/assets/images/background/camp/c_10.jpg
+  - web/assets/images/background/camp/c_11.jpg
+  - web/assets/images/background/camp/c_12.jpg
+  - web/assets/images/background/camp/c_13.jpg
+  - web/assets/images/background/camp/c_14.jpg
+
+
+fonts:
+  - family: Roboto
+    fonts:
+      - asset: fonts/Roboto/Roboto-Regular.ttf
+  - family: Roboto-Bold
+    fonts:
+      - asset: fonts/Roboto/Roboto-Bold.ttf
+  - family: Raleway
+    fonts:
+      - asset: fonts/Raleway/Raleway-Regular.ttf
+  - family: Raleway-Bold
+    fonts:
+      - asset: fonts/Raleway/Raleway-Bold.ttf
+  - family: Raleway-Black
+    fonts:
+      - asset: fonts/Raleway/Raleway-Black.ttf
