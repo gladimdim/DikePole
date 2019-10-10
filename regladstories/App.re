@@ -3,94 +3,7 @@ open Revery.Math;
 open Revery.UI;
 open Revery.UI.Components;
 
-open Cohttp;
-open Cohttp_lwt_unix;
 open Lwt.Infix;
-
-module Cohttp_Response = Response;
-module Response = {
-  type t = {
-    status: int,
-    text: unit => Lwt.t(string),
-  };
-};
-
-let fetch = (url: string) => {
-  Client.get(Uri.of_string(url))
-  >>= (
-    ((resp, body)) => {
-      let status = resp |> Cohttp_Response.status |> Code.code_of_status;
-
-      let readText = (body, ()) => Cohttp_lwt.Body.to_string(body);
-      body
-      |> Cohttp_lwt.Body.to_string
-      >|= (
-        body => {
-          body;
-        }
-      );
-    }
-  );
-};
-
-let animatedText = {
-  let component = React.component("AnimatedText");
-
-  (~children as _: list(React.syntheticElement), ~delay, ~textContent, ()) =>
-    component(hooks => {
-      let (translate, hooks) =
-        Hooks.animation(
-          Animated.floatValue(50.),
-          Animated.options(
-            ~toValue=0.,
-            ~duration=Seconds(0.5),
-            ~delay=Seconds(delay),
-            (),
-          ),
-          hooks,
-        );
-
-      let (opacityVal: float, hooks) =
-        Hooks.animation(
-          Animated.floatValue(0.),
-          Animated.options(
-            ~toValue=1.0,
-            ~duration=Seconds(1.),
-            ~delay=Seconds(delay),
-            (),
-          ),
-          hooks,
-        );
-
-      let textHeaderStyle =
-        Style.[
-          color(Colors.white),
-          fontFamily("Roboto-Regular.ttf"),
-          fontSize(24),
-          transform([Transform.TranslateY(translate)]),
-        ];
-
-      (
-        hooks,
-        <Opacity opacity=opacityVal>
-          <Padding padding=8>
-            <Text style=textHeaderStyle text=textContent />
-          </Padding>
-        </Opacity>,
-      );
-    });
-};
-
-let s: GladStory.gladStory = {
-  title: "Хотинська різня",
-  description: "Під час стояння під Хотином, козацьке військо здійснило унікальний для XVII століття нічний рейд. Було зруйновано декілька гармат та вирізано їх обслугу. В цій історії у вас буде багато важливих виборів, і не всі вони будуть очевидні..",
-  root: {
-    nodes: [||],
-    next: [||],
-    endType: None,
-  },
-  authors: "Сава Теслюк",
-};
 
 let mainView = {
   let component = React.component("Load Story");
@@ -98,10 +11,12 @@ let mainView = {
   (~children as _: list(React.syntheticElement), ()) =>
     component(hooks => {
       let (story, setStory, hooks) = React.Hooks.state(None, hooks);
-      let loadStory = () => {
+      let loadStory = storyName => {
         let result =
-          fetch(
-            "http://locadeserta.com/beta2/build/stories/hotin_massacre.json",
+          Api.fetch(
+            "http://locadeserta.com/beta2/build/stories/"
+            ++ storyName
+            ++ ".json",
           )
           |> Lwt_main.run;
         setStory(result |> GladStory.decode |> (a => Some(a)));
@@ -109,19 +24,22 @@ let mainView = {
 
       let wrapperStyle =
         Style.[
-          backgroundColor(Color.rgba(1., 1., 1., 0.1)),
-          border(~width=2, ~color=Colors.white),
+          backgroundColor(Colors.white),
+          border(~width=1, ~color=Colors.black),
           margin(16),
+          justifyContent(`Center),
+          alignItems(`Center),
         ];
 
       let textHeaderStyle =
         Style.[
           color(Colors.white),
+          width(200),
+          backgroundColor(Colors.black),
           fontFamily("Roboto-Regular.ttf"),
-          fontSize(20),
+          fontSize(18),
         ];
 
-      let textContent = "Load Story";
       (
         hooks,
         <View>
@@ -129,17 +47,15 @@ let mainView = {
            | Some(v) =>
              <View>
                {switch (story) {
-                | Some(v) => <Text style=textHeaderStyle text={v.title} />
+                | Some(v) => <MetaStoryView story=v />
                 | None => <Text style=textHeaderStyle />
                 }}
                <Image src="4.jpg" style=Style.[width(320), height(240)] />
              </View>
            | None =>
-             <Clickable onClick=loadStory>
+             <Clickable onClick={() => loadStory("hotin_massacre")}>
                <View style=wrapperStyle>
-                 <Padding padding=4>
-                   <Text style=textHeaderStyle text=textContent />
-                 </Padding>
+                 <Text style=textHeaderStyle text="Load Story" />
                </View>
              </Clickable>
            }}
@@ -162,9 +78,11 @@ let init = app => {
       top(0),
       left(0),
       right(0),
+      // width(500),
+      // height(500),
+      backgroundColor(Colors.gray),
+      border(~width=1, ~color=Colors.black),
     ];
-
-  let innerStyle = Style.[flexDirection(`Row), alignItems(`FlexEnd)];
 
   let element = <View style=containerStyle> <mainView /> </View>;
 
