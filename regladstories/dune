@@ -7,6 +7,7 @@
         bigarray
         Revery
         yojson
+        ssl lwt_ssl
         cohttp
         cohttp-lwt-unix
             ))

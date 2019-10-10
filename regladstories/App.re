@@ -14,7 +14,7 @@ let mainView = {
       let loadStory = storyName => {
         let result =
           Api.fetch(
-            "http://locadeserta.com/beta2/build/stories/"
+            "https://locadeserta.com/beta2/build/stories/"
             ++ storyName
             ++ ".json",
           )
