@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:async/async.dart';
 
 import 'package:onlineeditor/animations/slideable_button.dart';
 import 'package:onlineeditor/components/bordered_container.dart';
@@ -32,11 +33,18 @@ class _EditStoryViewState extends State<EditStoryView> {
         .get('https://locadeserta.com/beta2/build/stories/hotin_massacre.json');
   }
 
+  final AsyncMemoizer _fetchMemo = AsyncMemoizer();
+
+  fetchFuture() {
+    return _fetchMemo.runOnce(fetchStory);
+  }
+
+
   @override
   Widget build(BuildContext context) {
-//    var story = widget.story;
+
     return FutureBuilder(
-        future: fetchStory(),
+        future: fetchFuture(),
         builder: (context, snapshot) {
           print("State: ${snapshot.connectionState}");
           switch (snapshot.connectionState) {
