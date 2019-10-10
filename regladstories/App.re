@@ -22,14 +22,12 @@ let mainView = {
         setStory(result |> GladStory.decode |> (a => Some(a)));
       };
 
+      let startStory = () => {
+        ();
+      };
+
       let wrapperStyle =
-        Style.[
-          backgroundColor(Colors.white),
-          border(~width=1, ~color=Colors.black),
-          margin(16),
-          justifyContent(`Center),
-          alignItems(`Center),
-        ];
+        Style.[justifyContent(`Center), alignItems(`Center)];
 
       let textHeaderStyle =
         Style.[
@@ -38,24 +36,51 @@ let mainView = {
           backgroundColor(Colors.black),
           fontFamily("Roboto-Regular.ttf"),
           fontSize(18),
+          alignSelf(`Stretch),
+        ];
+
+      let fullWidthStyle =
+        Style.[
+          color(Colors.white),
+          backgroundColor(Colors.black),
+          fontFamily("Roboto-Regular.ttf"),
+          fontSize(18),
+          width(300),
+          justifyContent(`Center),
+          alignItems(`Center),
+          alignSelf(`Stretch),
         ];
 
       (
         hooks,
-        <View>
+        <View style=wrapperStyle>
           {switch (story) {
            | Some(v) =>
              <View>
                {switch (story) {
-                | Some(v) => <MetaStoryView story=v />
+                | Some(v) =>
+                  <View style=wrapperStyle>
+                    <Image
+                      src="4.jpg"
+                      style=Style.[width(320), height(240)]
+                    />
+                    <MetaStoryView story=v />
+                    <Clickable onClick={() => startStory()}>
+                      <View>
+                        <Text style=fullWidthStyle text="Читати" />
+                      </View>
+                    </Clickable>
+                  </View>
                 | None => <Text style=textHeaderStyle />
                 }}
-               <Image src="4.jpg" style=Style.[width(320), height(240)] />
              </View>
            | None =>
              <Clickable onClick={() => loadStory("hotin_massacre")}>
-               <View style=wrapperStyle>
-                 <Text style=textHeaderStyle text="Load Story" />
+               <View>
+                 <Text
+                   style=textHeaderStyle
+                   text="Завантажити історію"
+                 />
                </View>
              </Clickable>
            }}
@@ -78,8 +103,6 @@ let init = app => {
       top(0),
       left(0),
       right(0),
-      // width(500),
-      // height(500),
       backgroundColor(Colors.gray),
       border(~width=1, ~color=Colors.black),
     ];

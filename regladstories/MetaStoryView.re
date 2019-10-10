@@ -9,9 +9,10 @@ type tStory = GladStory.gladStory;
 let createElement =
     (~story: tStory, ~children as _: list(React.syntheticElement), ()) =>
   component(hooks => {
+    let centerStyle = Style.[justifyContent(`Center), alignItems(`Center)];
     let wrapperStyle =
       Style.[
-        width(300),
+        // width(300),
         // flexGrow(1),
         alignItems(`Center),
         justifyContent(`Center),
@@ -29,7 +30,7 @@ let createElement =
     (
       hooks,
       <Clickable>
-        <View style=wrapperStyle>
+        <View style=centerStyle>
           <Padding padding=8>
             <Text style=textHeaderStyle text={story.title} />
             <Text style=textHeaderStyle text={story.description} />
