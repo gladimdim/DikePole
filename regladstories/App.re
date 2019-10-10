@@ -3,6 +3,36 @@ open Revery.Math;
 open Revery.UI;
 open Revery.UI.Components;
 
+open Cohttp;
+open Cohttp_lwt_unix;
+open Lwt.Infix;
+
+module Cohttp_Response = Response;
+module Response = {
+  type t = {
+    status: int,
+    text: unit => Lwt.t(string),
+  };
+};
+
+let fetch = (url: string) => {
+  Client.get(Uri.of_string(url))
+  >>= (
+    ((resp, body)) => {
+      let status = resp |> Cohttp_Response.status |> Code.code_of_status;
+
+      let readText = (body, ()) => Cohttp_lwt.Body.to_string(body);
+      body
+      |> Cohttp_lwt.Body.to_string
+      >|= (
+        body => {
+          body;
+        }
+      );
+    }
+  );
+};
+
 let animatedText = {
   let component = React.component("AnimatedText");
 
@@ -68,7 +98,14 @@ let mainView = {
   (~children as _: list(React.syntheticElement), ()) =>
     component(hooks => {
       let (story, setStory, hooks) = React.Hooks.state(None, hooks);
-      let loadStory = () => setStory(Some(s));
+      let loadStory = () => {
+        let result =
+          fetch(
+            "http://locadeserta.com/beta2/build/stories/hotin_massacre.json",
+          )
+          |> Lwt_main.run;
+        setStory(result |> GladStory.decode |> (a => Some(a)));
+      };
 
       let wrapperStyle =
         Style.[

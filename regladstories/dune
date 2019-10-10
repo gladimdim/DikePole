@@ -1,9 +1,12 @@
 (executable
     (name App)
+    (preprocess (pps lwt_ppx))
     (package App)
     (public_name App)
     (libraries
         bigarray
         Revery
         yojson
+        cohttp
+        cohttp-lwt-unix
             ))

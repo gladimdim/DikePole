@@ -36,7 +36,11 @@
     "ocaml": "~4.7.0",
     "revery": "0.27.0",
     "@opam/dune": "1.7.3",
-    "@opam/yojson": "^1.5.0"
+    "@opam/yojson": "^1.5.0",
+    "@opam/cohttp": "^1.2.0",
+    "@opam/cohttp-lwt-unix": "*",
+    "@opam/lwt_ssl": "*",
+    "@opam/ssl": "*"
   },
   "resolutions": {
     "@opam/cmdliner": "1.0.2",
@@ -46,7 +50,8 @@
     "@brisk/brisk-reconciler": "github:briskml/brisk-reconciler#daa00be",
     "rebez": "github:jchavarri/rebez#46cbc183",
     "@brisk/brisk-reconciler": "github:briskml/brisk-reconciler#dd933fc",
-    "@opam/merlin-extend": "0.4"
+    "@opam/merlin-extend": "0.4",
+    "@opam/ssl": "github:bryphe/ocaml-ssl#0922e94"
   },
   "scripts": {
     "format": "bash -c \"refmt --in-place *.re\"",

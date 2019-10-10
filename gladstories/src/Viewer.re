@@ -14,13 +14,13 @@ let make = (~storyName=?, ()) => {
            <FatButton
              title={js|Читати Хотинську різню|js}
              onClickHandler={_ =>
-               ReasonReactRouter.push("stories#hotin_massacre")
+               ReasonReactRouter.push("stories/#hotin_massacre")
              }
            />
            <FatButton
              title="Load After the Battle"
              onClickHandler={_ =>
-               ReasonReactRouter.push("stories#afterbattle_en_gladstory")
+               ReasonReactRouter.push("stories/#afterbattle_en_gladstory")
              }
            />
          </div>

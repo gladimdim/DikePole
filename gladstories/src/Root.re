@@ -3,7 +3,7 @@ let make = () => {
   let url = ReasonReactRouter.useUrl();
 
   switch (url.path, url.hash) {
-  | (["stories"], h) =>
+  | (["stories", _], h) =>
     Js.log(h);
     <StoryViewWrapper storyName=h />;
   | _ =>
