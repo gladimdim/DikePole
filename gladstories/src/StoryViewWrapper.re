@@ -6,7 +6,7 @@ let make = (~storyName: string) => {
   };
 
   let updateModelFromJson = input => {
-    GladStory.fromJSON(Some(input)) |> handleJson;
+    Decoder.fromJSON(Some(input)) |> handleJson;
   };
   let handleFetch = s => {
     Js.Promise.(
