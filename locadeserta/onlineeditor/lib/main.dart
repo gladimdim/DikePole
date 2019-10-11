@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'creator/components/edit_node_view.dart';
-import 'creator/components/edit_story.dart';
-import 'creator/components/game_view.dart';
-import 'creator/story/story.dart';
+import 'RouteGenerator.dart';
 
 void main() => runApp(MyApp());
 
@@ -19,15 +16,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: theme,
-      initialRoute: "/edit_story",
-      routes: {
-        "/edit_story": (context) => EditStoryView(
-              story: null,
-            ),
-        ExtractEditPassageView.routeName: (context) => ExtractEditPassageView(),
-        ExtractArgumentsGameView.routeName: (context) =>
-            ExtractArgumentsGameView(),
-      },
+      initialRoute: "/",
+      onGenerateRoute: RouteGenerator.generateRoute,
     );
   }
 }

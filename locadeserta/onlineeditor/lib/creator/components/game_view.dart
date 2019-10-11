@@ -30,7 +30,7 @@ class _MainViewState extends State<GameView> {
       ),
       child: Padding(
           padding: const EdgeInsets.only(top: 32.0),
-          child: StoryView(currentStory: widget.story),
+          child: StoryView(currentStory: widget.story,),
       ),
     );
   }

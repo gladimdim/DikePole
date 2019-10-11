@@ -30,7 +30,7 @@ class _EditStoryViewState extends State<EditStoryView> {
 
   Future<http.Response> fetchStory() {
     return http
-        .get('https://locadeserta.com/beta2/build/stories/hotin_massacre.json');
+        .get('https://locadeserta.com/stories/hotin_massacre.json');
   }
 
   final AsyncMemoizer _fetchMemo = AsyncMemoizer();
@@ -42,7 +42,6 @@ class _EditStoryViewState extends State<EditStoryView> {
 
   @override
   Widget build(BuildContext context) {
-
     return FutureBuilder(
         future: fetchFuture(),
         builder: (context, snapshot) {
@@ -226,12 +225,11 @@ class _EditStoryViewState extends State<EditStoryView> {
                                                 .getAssetImageForType(
                                                     imageType)),
                                     onTap: () async {
+                                      print("going to node ${node.text}");
                                       await Navigator.pushNamed(
                                         context,
                                         ExtractEditPassageView.routeName,
-                                        arguments: EditPassageViewArguments(
-                                          node: node,
-                                        ),
+                                        arguments: node,
                                       );
                                     },
                                     trailing: IconButton(
@@ -258,7 +256,7 @@ class _EditStoryViewState extends State<EditStoryView> {
                         await Navigator.pushNamed(
                           context,
                           ExtractArgumentsGameView.routeName,
-                          arguments: GameViewArguments(story: story),
+                          arguments: story,
                         );
                         story.reset();
                       },
