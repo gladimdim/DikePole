@@ -191,8 +191,10 @@ ImageType imageTypeFromString(String input) {
       return ImageType.COSSACKS;
     case 'camp':
       return ImageType.CAMP;
+    case 'steppe':
+      return ImageType.STEPPE;
     default:
-      return null;
+      return ImageType.RIVER; // shadowed
   }
 }
 

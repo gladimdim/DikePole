@@ -113,7 +113,7 @@ class StoryBridge {
     BackgroundImage.nextRandomForType(type);
     var randomImage = BackgroundImage.getRandomImageForType(type);
 
-    return story.canContinue
+    return type != null
         ? HistoryItemText(text)
         : HistoryItemImage([
             randomImage.getImagePathColored(),
@@ -204,12 +204,21 @@ class StoryBridge {
   }
 
   void _addCurrentPassage() {
-    story.storyHistory.addItem(
-      _createPassage(
-        story.currentText,
-        createImageType(),
-      ),
-    );
+    story.storyHistory.addItem(HistoryItemText(story.currentText));
+    if (!story.canContinue) {
+      var type = createImageType();
+      BackgroundImage.nextRandomForType(type);
+      var randomImage = BackgroundImage.getRandomImageForType(type);
+      story.storyHistory.addItem(
+        HistoryItemImage(
+          [
+            randomImage.getImagePathColored(),
+            randomImage.getImagePath(),
+          ],
+          type,
+        ),
+      );
+    }
   }
 
   dispose() {
