@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_statusbarcolor/flutter_statusbarcolor.dart';
+import 'package:locadeserta/InheritedAuth.dart';
 import 'package:locadeserta/catalog_view.dart';
 import 'package:locadeserta/creator/components/create_view.dart';
 import 'package:locadeserta/creator/components/edit_node_view.dart';
@@ -38,48 +39,45 @@ class _LocaDesertaAppState extends State<LocaDesertaApp> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      locale: locale,
-      title: 'Loca Deserta',
-      theme: theme,
-      initialRoute: "/",
-      debugShowCheckedModeBanner: false,
-      routes: {
-        "/": (context) => LoginView(
-              auth: auth,
-              onContinue: () => Navigator.pushNamed(context, "/main_menu"),
-              onSetLocale: _onLocaleSet,
-            ),
-        "/main_menu": (context) => MainMenu(
-              auth: auth,
-            ),
-        ExtractCatalogViewArguments.routeName: (context) =>
-            ExtractCatalogViewArguments(),
-        ExtractExportPdfViewArguments.routeName: (context) =>
-            ExtractExportPdfViewArguments(),
-        ExtractExportGladStoriesPdfViewArguments.routeName: (context) =>
-            ExtractExportGladStoriesPdfViewArguments(),
-        "/create": (context) => CreateView(
-              locale: locale,
-              auth: auth,
-            ),
-        ExtractEditStoryViewArguments.routeName: (context) =>
-            ExtractEditStoryViewArguments(auth: auth),
-        ExtractArgumentsGameView.routeName: (context) =>
-            ExtractArgumentsGameView(),
-        ExtractEditPassageView.routeName: (context) => ExtractEditPassageView(),
-        ImportGladStoryView.routeName: (context) => ImportGladStoryView(),
-      },
-      localizationsDelegates: [
-        const LDLocalizationsDelegate(),
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-      ],
-      supportedLocales: [
-        Locale('en'),
-        Locale('uk'),
-        Locale('pl'),
-      ],
+    return InheritedAuth(
+      auth: auth,
+      child: MaterialApp(
+        locale: locale,
+        title: 'Loca Deserta',
+        theme: theme,
+        initialRoute: "/",
+        debugShowCheckedModeBanner: false,
+        routes: {
+          "/": (context) => LoginView(
+            onContinue: () => Navigator.pushNamed(context, "/main_menu"),
+            onSetLocale: _onLocaleSet,
+          ),
+          "/main_menu": (context) => MainMenu(),
+          ExtractCatalogViewArguments.routeName: (context) =>
+              ExtractCatalogViewArguments(),
+          ExtractExportPdfViewArguments.routeName: (context) =>
+              ExtractExportPdfViewArguments(),
+          ExtractExportGladStoriesPdfViewArguments.routeName: (context) =>
+              ExtractExportGladStoriesPdfViewArguments(),
+          "/create": (context) => CreateView(),
+          ExtractEditStoryViewArguments.routeName: (context) =>
+              ExtractEditStoryViewArguments(),
+          ExtractArgumentsGameView.routeName: (context) =>
+              ExtractArgumentsGameView(),
+          ExtractEditPassageView.routeName: (context) => ExtractEditPassageView(),
+          ImportGladStoryView.routeName: (context) => ImportGladStoryView(),
+        },
+        localizationsDelegates: [
+          const LDLocalizationsDelegate(),
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+        ],
+        supportedLocales: [
+          Locale('en'),
+          Locale('uk'),
+          Locale('pl'),
+        ],
+      ),
     );
   }
 

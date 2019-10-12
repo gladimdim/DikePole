@@ -1,7 +1,9 @@
+import 'dart:async';
 import 'dart:collection';
-
 import 'package:flutter/foundation.dart';
+import 'package:rxdart/rxdart.dart';
 import 'dart:convert';
+
 import 'package:locadeserta/models/background_image.dart';
 
 class Story {
@@ -12,12 +14,15 @@ class Story {
   List<HistoryItem> history = [];
   Page currentPage;
 
+  BehaviorSubject _streamHistory = BehaviorSubject<List<HistoryItem>>();
+  Stream historyChanges;
   Story(
       {@required this.title,
       @required this.description,
       @required this.authors,
       @required this.root}) {
     currentPage = root;
+    historyChanges = _streamHistory.stream;
     _logCurrentPassageToHistory();
   }
 
@@ -48,6 +53,8 @@ class Story {
         ),
       );
     }
+
+    _streamHistory.sink.add(history);
   }
 
   doContinue() {
@@ -77,6 +84,17 @@ class Story {
       "description": description,
       "authors": authors,
       "root": root.toMap(),
+    });
+  }
+
+  toStateJson() {
+    return jsonEncode({
+      "title": title,
+      "description": description,
+      "authors": authors,
+      "root": root.toMap(),
+      "currentPage": currentPage.toMap(),
+      "history": history.map((historyItem) => historyItem.toMap()).toList(),
     });
   }
 
@@ -117,6 +135,10 @@ class Story {
     }
     return null;
   }
+
+  dispose() {
+    _streamHistory.close();
+  }
 }
 
 class HistoryItem {
@@ -124,6 +146,13 @@ class HistoryItem {
   final List<String> imagePath;
 
   HistoryItem({@required this.text, this.imagePath});
+
+  toMap() {
+    return {
+      "text": text,
+      "imagePath": imagePath,
+    };
+  }
 }
 
 class Page {

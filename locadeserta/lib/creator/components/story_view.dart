@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:locadeserta/InheritedAuth.dart';
 import 'package:locadeserta/animations/slideable_button.dart';
 import 'package:locadeserta/components/BorderedRandomImageForType.dart';
 import 'package:locadeserta/creator/components/fat_button.dart';
@@ -6,6 +7,7 @@ import 'package:locadeserta/creator/story/story.dart';
 import 'package:locadeserta/creator/utils/utils.dart';
 import 'package:locadeserta/models/Localizations.dart';
 import 'package:locadeserta/models/background_image.dart';
+import 'package:locadeserta/models/persistence.dart';
 
 class StoryView extends StatefulWidget {
   final Story currentStory;
@@ -20,21 +22,41 @@ class StoryView extends StatefulWidget {
 
 class PassageState extends State<StoryView> with TickerProviderStateMixin {
   ScrollController _passageScrollController = ScrollController();
+  
+  @override
+  initState() {
+    Future.delayed(Duration.zero, () {
+      widget.currentStory.historyChanges.listen((data) {
+        _saveStateToStorage(widget.currentStory, context);
+      });
+
+    });
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        _buildTextSection(context),
-        if (widget.currentStory.canContinue()) createContinue(context),
-        if (!widget.currentStory.canContinue())
-          ...createOptionList(widget.currentStory.currentPage.next),
-      ],
-      crossAxisAlignment: CrossAxisAlignment.stretch,
+    return StreamBuilder<List<HistoryItem>>(
+      stream: widget.currentStory.historyChanges,
+      initialData: [],
+      builder: (context, snapshot) {
+        var history = snapshot.data;
+        return Column(
+          children: [
+            _buildTextSection(history, context),
+            if (widget.currentStory.canContinue()) createContinue(context),
+            if (!widget.currentStory.canContinue())
+              ...createOptionList(widget.currentStory.currentPage.next),
+          ],
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+        );
+      },
     );
+
   }
 
-  void _next() {
+  void _next(context) {
+//    _saveStateToStorage(widget.currentStory, context);
     setState(() {
       var currentImageType =
           widget.currentStory.currentPage.getCurrentNode().imageType;
@@ -43,6 +65,12 @@ class PassageState extends State<StoryView> with TickerProviderStateMixin {
       }
       widget.currentStory.doContinue();
     });
+  }
+
+  Future _saveStateToStorage(Story story, BuildContext context) async {
+    var auth = InheritedAuth.of(context).auth;
+    var user = await auth.currentUser();
+    await Persistence.instance.saveGladStoryToStorageForUser(user, story);
   }
 
   List<Widget> createOptionList(List<PageNext> nextPages) {
@@ -76,12 +104,12 @@ class PassageState extends State<StoryView> with TickerProviderStateMixin {
             backgroundColor: Theme.of(context).primaryColor,
           ),
           onPress: () {
-            _next();
+            _next(context);
           }),
     );
   }
 
-  Widget _buildTextSection(BuildContext context) {
+  Widget _buildTextSection(List<HistoryItem> history, BuildContext context) {
     Future.delayed(Duration(milliseconds: 300), _scroll(context));
 
     return Expanded(
@@ -89,7 +117,7 @@ class PassageState extends State<StoryView> with TickerProviderStateMixin {
       controller: _passageScrollController,
       child: Column(
         children: [
-          ...widget.currentStory.history
+          ...history
               .map(
                 (HistoryItem historyItem) => PassageItemView(
                   historyItem,

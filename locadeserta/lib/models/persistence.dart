@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import "package:locadeserta/models/story_bridge.dart";
+import 'package:locadeserta/creator/story/story.dart' as GladStory;
 
 import 'Auth.dart';
 import 'catalogs.dart';
@@ -71,6 +72,25 @@ class Persistence {
       "catalogidreference": catalogStory.id,
       "statejson": stateJson,
       "history": history,
+    };
+    if (doc.exists) {
+      storage.document(doc.reference.path).updateData(toAdd);
+    } else {
+      storage.document(doc.reference.path).setData(toAdd);
+    }
+  }
+
+  Future saveGladStoryToStorageForUser(User user, GladStory.Story story) async {
+    DocumentSnapshot doc = await storage
+        .collection("user_states")
+        .document(user.uid)
+        .collection("states")
+        .document(story.title)
+        .get();
+
+    Map<String, dynamic> toAdd = {
+      "catalogidreference": story.title,
+      "gladJsonState": story.toStateJson(),
     };
     if (doc.exists) {
       storage.document(doc.reference.path).updateData(toAdd);

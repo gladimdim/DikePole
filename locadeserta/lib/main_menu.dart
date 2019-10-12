@@ -1,6 +1,7 @@
 import 'package:async/async.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:locadeserta/InheritedAuth.dart';
 import 'package:locadeserta/animations/fade_images.dart';
 import 'package:locadeserta/animations/slideable_button.dart';
 import 'package:locadeserta/catalog_view.dart';
@@ -12,7 +13,6 @@ import 'package:locadeserta/creator/story/story.dart' as GladStory;
 import 'package:locadeserta/models/Localizations.dart';
 import 'package:locadeserta/models/background_image.dart';
 import 'package:locadeserta/story_view.dart';
-import 'package:locadeserta/models/Auth.dart';
 import 'package:locadeserta/models/catalogs.dart';
 import 'package:locadeserta/waiting_screen.dart';
 import 'package:locadeserta/animations/slide_right_navigation.dart';
@@ -22,9 +22,7 @@ import 'package:locadeserta/radiuses.dart';
 const LANDING_IMAGE_HEIGHT = 200.0;
 
 class MainMenu extends StatefulWidget {
-  final Auth auth;
-
-  MainMenu({this.auth});
+  MainMenu({story});
 
   @override
   _MainMenuState createState() => _MainMenuState();
@@ -71,44 +69,26 @@ class _MainMenuState extends State<MainMenu> with TickerProviderStateMixin {
       title: LDLocalizations.of(context).appTitle,
       body: FractionallySizedBox(
         widthFactor: 1,
-        heightFactor: 0.8,
-        child: Column(
-          children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.all(4.0),
-              child: SlideableButton(
-                onPress: () {
-                  Navigator.pushNamed(context, "/create");
-                },
-                child: FatButton(
-                  text: LDLocalizations
-                      .of(context)
-                      .createStory,
-                  backgroundColor: Colors.black87,
-                ),
-              ),
-            ),
-            FutureBuilder(
-              future: _fetchData(context),
-              builder: (BuildContext context, snapshot) {
-                switch (snapshot.connectionState) {
-                  case ConnectionState.none:
-                  case ConnectionState.active:
-                  case ConnectionState.waiting:
-                    return WaitingScreen();
-                    break;
-                  case ConnectionState.done:
-                    if (snapshot.data == null || snapshot.data.length == 0) {
-                      return _buildEmptyCatalogListView(context);
-                    } else {
-                      return _buildCatalogView(context, snapshot.data);
-                    }
-                    break;
+        heightFactor: 1.0,
+        child: FutureBuilder(
+          future: _fetchData(context),
+          builder: (BuildContext context, snapshot) {
+            switch (snapshot.connectionState) {
+              case ConnectionState.none:
+              case ConnectionState.active:
+              case ConnectionState.waiting:
+                return WaitingScreen();
+                break;
+              case ConnectionState.done:
+                if (snapshot.data == null || snapshot.data.length == 0) {
+                  return _buildEmptyCatalogListView(context);
+                } else {
+                  return _buildCatalogView(context, snapshot.data);
                 }
-                return null;
-              },
-            ),
-          ],
+                break;
+            }
+            return null;
+          },
         ),
       ),
       actions: [
@@ -169,15 +149,31 @@ class _MainMenuState extends State<MainMenu> with TickerProviderStateMixin {
 
   _buildCatalogView(BuildContext context, List<CatalogStory> stories) {
     var child = ListView.builder(
-        itemCount: stories.length,
+        itemCount: stories.length + 1,
         shrinkWrap: true,
         itemBuilder: (BuildContext context, int index) {
-          var story = stories[index];
+          if (index == 0) {
+            return Padding(
+              padding: const EdgeInsets.all(4.0),
+              child: SlideableButton(
+                onPress: () {
+                  Navigator.pushNamed(context, "/create");
+                },
+                child: FatButton(
+                  text: LDLocalizations
+                      .of(context)
+                      .createStory,
+                  backgroundColor: Colors.black87,
+                ),
+              ),
+            );
+          }
+          var story = stories[index-1];
           return Padding(
-            padding: const EdgeInsets.only(top: 8.0, bottom: 48.0),
+            padding: const EdgeInsets.only(top: 8.0),
             child: CatalogView(
               catalogStory: story,
-              onReadPressed: () => _goToStory(story),
+              onReadPressed: () => _goToStory(story, context),
               onDetailPressed: () {
                 Navigator.pushNamed(
                   context,
@@ -185,7 +181,7 @@ class _MainMenuState extends State<MainMenu> with TickerProviderStateMixin {
                   arguments: CatalogViewArguments(
                     expanded: true,
                     catalogStory: story,
-                    onReadPressed: () => _goToStory(story),
+                    onReadPressed: () => _goToStory(story, context),
                     onDetailPressed: () {
                       Navigator.pop(context);
                     },
@@ -210,8 +206,8 @@ class _MainMenuState extends State<MainMenu> with TickerProviderStateMixin {
     );
   }
 
-  _goToStory(CatalogStory story) async {
-    var user = await widget.auth.currentUser();
+  _goToStory(CatalogStory story, context) async {
+    var user = await InheritedAuth.of(context).auth.currentUser();
     setState(() {
       loadingStory = false;
     });
@@ -230,7 +226,6 @@ class _MainMenuState extends State<MainMenu> with TickerProviderStateMixin {
           context,
           SlideRightNavigation(
               widget: GameView(
-            locale: Localizations.localeOf(context),
             story: GladStory.Story.fromJson(story.gladJson),
           )));
     }

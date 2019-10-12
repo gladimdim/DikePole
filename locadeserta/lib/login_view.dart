@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:locadeserta/InheritedAuth.dart';
 import 'package:locadeserta/animations/fade_images.dart';
 import 'package:locadeserta/animations/slideable_button.dart';
 import 'package:locadeserta/components/app_bar_custom.dart';
@@ -13,11 +14,10 @@ import 'package:url_launcher/url_launcher.dart';
 import 'locale_selection.dart';
 
 class LoginView extends StatefulWidget {
-  final Auth auth;
   final VoidCallback onContinue;
   final Function onSetLocale;
 
-  LoginView({this.auth, this.onContinue, this.onSetLocale});
+  LoginView({this.onContinue, this.onSetLocale});
 
   @override
   _LoginViewState createState() => _LoginViewState();
@@ -33,7 +33,7 @@ class _LoginViewState extends State<LoginView> {
       title: LDLocalizations.of(context).appTitle,
       actions: [
         AppBarObject(
-          onTap: () => widget.auth.signOut(),
+          onTap: () => InheritedAuth.of(context).auth.signOut(),
           text: LDLocalizations.of(context).signOut,
         ),
       ],
@@ -42,7 +42,7 @@ class _LoginViewState extends State<LoginView> {
 
   Widget _buildBody(BuildContext context) {
     return StreamBuilder<User>(
-      stream: widget.auth.onAuthStateChange,
+      stream: InheritedAuth.of(context).auth.onAuthStateChange,
       initialData: null,
       builder: (context, snapshot) {
         User user = snapshot.data;
@@ -118,7 +118,7 @@ class _LoginViewState extends State<LoginView> {
           child: RaisedButton(
             color: Theme.of(context).primaryColor,
             textColor: Theme.of(context).textTheme.title.color,
-            onPressed: _onSignInPressed,
+            onPressed: () => _onSignInPressed(context),
             child: Text(
               LDLocalizations.of(context).signInWithGoogle,
               textAlign: TextAlign.center,
@@ -129,7 +129,7 @@ class _LoginViewState extends State<LoginView> {
         Expanded(
           flex: 2,
           child: RaisedButton(
-            onPressed: _onSignInAnonPressed,
+            onPressed: () => _onSignInAnonPressed(context),
             color: Theme.of(context).primaryColor,
             child: Text(LDLocalizations.of(context).anonLogin,
                 textAlign: TextAlign.center,
@@ -171,7 +171,7 @@ class _LoginViewState extends State<LoginView> {
     );
   }
 
-  _onSignInPressed() async {
+  _onSignInPressed(context) async {
     final GoogleSignInAccount googleUser = await _googleSignIn.signIn();
     final GoogleSignInAuthentication googleAuth =
         await googleUser.authentication;
@@ -180,11 +180,11 @@ class _LoginViewState extends State<LoginView> {
       idToken: googleAuth.idToken,
     );
 
-    await widget.auth.signInWithCredentials(credential);
+    await InheritedAuth.of(context).auth.signInWithCredentials(credential);
   }
 
-  _onSignInAnonPressed() async {
-    return await widget.auth.signInAnonymously();
+  _onSignInAnonPressed(context) async {
+    return await InheritedAuth.of(context).auth.signInAnonymously();
   }
 
   _setNewLocale(Locale locale) {

@@ -1,1 +1,1 @@
-ReactDOMRe.renderToElementWithId(<Viewer jsonString="" />, "index");
+ReactDOMRe.renderToElementWithId(<Root />, "index");

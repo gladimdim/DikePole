@@ -220,4 +220,8 @@ class StoryBridge {
       );
     }
   }
+
+  dispose() {
+    streamStory.close();
+  }
 }
