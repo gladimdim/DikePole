@@ -1,23 +1,22 @@
+import 'package:async/async.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:async/async.dart';
-
+import 'package:http/http.dart' as http;
 import 'package:onlineeditor/animations/slideable_button.dart';
 import 'package:onlineeditor/components/bordered_container.dart';
 import 'package:onlineeditor/components/narrow_scaffold.dart';
-import 'package:onlineeditor/creator/components/text_editor.dart';
 import 'package:onlineeditor/creator/components/edit_node_view.dart';
 import 'package:onlineeditor/creator/components/fat_button.dart';
 import 'package:onlineeditor/creator/components/game_view.dart';
+import 'package:onlineeditor/creator/components/text_editor.dart';
 import 'package:onlineeditor/creator/story/story.dart';
 import 'package:onlineeditor/creator/utils/utils.dart';
 import 'package:onlineeditor/models/background_image.dart';
-import 'package:http/http.dart' as http;
 
 class EditStoryView extends StatefulWidget {
-  final Story story;
+  final String storyUrl;
 
-  EditStoryView({@required this.story});
+  EditStoryView({@required this.storyUrl});
 
   @override
   _EditStoryViewState createState() => _EditStoryViewState();
@@ -29,8 +28,7 @@ class _EditStoryViewState extends State<EditStoryView> {
   Story story;
 
   Future<http.Response> fetchStory() {
-    return http
-        .get('https://locadeserta.com/stories/hotin_massacre.json');
+    return http.get(widget.storyUrl);
   }
 
   final AsyncMemoizer _fetchMemo = AsyncMemoizer();
@@ -38,7 +36,6 @@ class _EditStoryViewState extends State<EditStoryView> {
   fetchFuture() {
     return _fetchMemo.runOnce(fetchStory);
   }
-
 
   @override
   Widget build(BuildContext context) {

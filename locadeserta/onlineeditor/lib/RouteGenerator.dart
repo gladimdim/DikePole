@@ -1,10 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:onlineeditor/creator/components/catalog_vew.dart';
 
 import 'creator/components/edit_node_view.dart';
 import 'creator/components/edit_story.dart';
 import 'creator/components/game_view.dart';
-import 'creator/story/story.dart';
 
 class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -18,10 +18,12 @@ class RouteGenerator {
           ),
         );
         break;
-      case "/":
+      case "/editStories":
         return MaterialPageRoute(
-          builder: (_) => EditStoryView(story: null),
+          builder: (_) => EditStoryView(storyUrl: args),
         );
+      case "/":
+        return MaterialPageRoute(builder: (_) => CatalogGladStoryView());
       case "/play":
         return MaterialPageRoute(
             builder: (_) => GameView(
