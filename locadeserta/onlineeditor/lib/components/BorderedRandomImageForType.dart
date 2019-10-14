@@ -32,15 +32,16 @@ class BorderedRandomImageByType extends StatelessWidget {
 
 class BorderedRandomImageByPath extends StatelessWidget {
   final List imagePaths;
+  final bool repeat;
 
-  BorderedRandomImageByPath(this.imagePaths);
+  BorderedRandomImageByPath({this.imagePaths, this.repeat=false});
 
   @override
   Widget build(BuildContext context) {
     return BorderedContainer(
       child: TweenImage(
-        repeat: true,
-        duration: 3,
+        repeat: this.repeat,
+        duration: 6,
         first: AssetImage(imagePaths[0]),
         last: AssetImage(imagePaths[1]),
         imageFit: BoxFit.fitWidth,

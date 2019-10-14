@@ -41,8 +41,8 @@ class Story {
         HistoryItem(
           text: currentPage.getCurrentText(),
           imagePath: [
-            backgroundImage.getImagePath(),
-            backgroundImage.getImagePathColored()
+            backgroundImage.getImagePathColored(),
+            backgroundImage.getImagePath()
           ],
         ),
       );
