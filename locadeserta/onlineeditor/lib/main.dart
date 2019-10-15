@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-
 import 'RouteGenerator.dart';
 
-void main() => runApp(MyApp());
+void main() {
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
   final ThemeData theme = ThemeData(

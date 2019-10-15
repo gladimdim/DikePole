@@ -5,18 +5,12 @@ const admin = require('firebase-admin');
 admin.initializeApp();
 const auth = admin.auth();
 
-exports.addMessage = functions.https.onRequest(async (req, res) => {
-    const original = req.query.text;
-    const snapshot = await admin.database().ref("/messages").push({ original: original });
-    res.redirect(303, snapshot.ref.toString());
-});
-
 exports.hasPlayed = functions.https.onRequest(async (req, res) => {
     const id = req.query.id;
     const snapshot = await admin.firestore().collection(`/user_states/${id}/states`).get();
 
     const result = snapshot.docs.map(element => element.data().catalogidreference);
-
+    console.log(`processed id: ${id}`);
     res.json(result);
 });
 
@@ -38,7 +32,6 @@ exports.playStatistics = functions.https.onRequest(async (req, res) => {
         return Promise.all(promises).then(snapshots => {
             snapshots.map(snapshot => {
                 const result = snapshot.docs.map(element => element.data().catalogidreference);
-                console.log(result);
                 result.forEach(key => {
                     if (storyStats[key] !== undefined) {
                         storyStats[key] = storyStats[key] + 1;
@@ -53,9 +46,6 @@ exports.playStatistics = functions.https.onRequest(async (req, res) => {
     }
 
     const storyStats = await start();
-
-    res.json({
-        totalUsers: userIds.length,
-        storyStats
-    });
+    res.set('Access-Control-Allow-Origin', '*');
+    res.json(storyStats);
 });

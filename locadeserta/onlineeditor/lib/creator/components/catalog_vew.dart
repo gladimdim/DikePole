@@ -5,6 +5,8 @@ import 'package:onlineeditor/components/narrow_scaffold.dart';
 import 'package:onlineeditor/models/story_catalogs.dart';
 
 class CatalogGladStoryView extends StatefulWidget {
+  static const routeName = "/catalog_view";
+
   @override
   _CatalogGladStoryViewState createState() => _CatalogGladStoryViewState();
 }
@@ -29,26 +31,23 @@ class _CatalogGladStoryViewState extends State<CatalogGladStoryView> {
             case ConnectionState.done:
               List<CatalogGladStory> list =
                   CatalogGladStory.fromJsonList(snapshot.data.body);
-              return NarrowScaffold(
-                  title: "List of stories",
-                  actions: [],
-                  body: ListView(
-                    scrollDirection: Axis.vertical,
-                    children: list
-                        .map(
-                          (element) => ListTile(
-                            title: Text(element.title),
-                            subtitle: Text(element.description),
-                            leading: Text("${element.settingYear}"),
-                            onTap: () => Navigator.pushNamed(
-                              context,
-                              "/editStories",
-                              arguments: element.url,
-                            ),
-                          ),
-                        )
-                        .toList(),
-                  ));
+              return ListView(
+                scrollDirection: Axis.vertical,
+                children: list
+                    .map(
+                      (element) => ListTile(
+                        title: Text(element.title),
+                        subtitle: Text(element.description),
+                        leading: Text("${element.settingYear}"),
+                        onTap: () => Navigator.pushNamed(
+                          context,
+                          "/editStories",
+                          arguments: element.url,
+                        ),
+                      ),
+                    )
+                    .toList(),
+              );
           }
           return Container();
         });
