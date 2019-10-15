@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:onlineeditor/Localizations.dart';
 import 'package:onlineeditor/animations/slideable_button.dart';
 import 'package:onlineeditor/components/bordered_container.dart';
 import 'package:onlineeditor/creator/components/fat_button.dart';
@@ -141,7 +142,7 @@ class _TextEditorState extends State<TextEditorWithButton> {
           padding: const EdgeInsets.only(top: 8.0),
           child: SlideableButton(
             child: FatButton(
-              text: "Save",
+              text: LDLocalizations.save,
               backgroundColor: Theme.of(context).primaryColor,
             ),
             onPress: () {

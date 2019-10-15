@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:http/http.dart' as http;
-import 'package:onlineeditor/components/narrow_scaffold.dart';
+import 'package:onlineeditor/Localizations.dart';
 import 'package:onlineeditor/models/story_catalogs.dart';
 
 class CatalogGladStoryView extends StatefulWidget {
@@ -26,7 +26,7 @@ class _CatalogGladStoryViewState extends State<CatalogGladStoryView> {
             case ConnectionState.none:
             case ConnectionState.active:
             case ConnectionState.waiting:
-              return Container();
+              return Center(child: Text(LDLocalizations.loadingStory));
               break;
             case ConnectionState.done:
               List<CatalogGladStory> list =
@@ -49,7 +49,7 @@ class _CatalogGladStoryViewState extends State<CatalogGladStoryView> {
                     .toList(),
               );
           }
-          return Container();
+          return Center(child: Text(LDLocalizations.loadingStory));
         });
   }
 }

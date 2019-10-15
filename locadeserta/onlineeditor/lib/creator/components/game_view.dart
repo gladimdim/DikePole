@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:onlineeditor/Localizations.dart';
 import 'package:onlineeditor/components/game_app_bar.dart';
 import 'package:onlineeditor/components/game_component.dart';
 import 'package:onlineeditor/creator/components/story_view.dart';
@@ -20,7 +21,7 @@ class _MainViewState extends State<GameView> {
   Widget build(BuildContext context) {
     return GameViewScaffold(
       appBar: GameAppBar(
-        title: "Preview",
+        title: LDLocalizations.previewStory,
         onResetStory: () {
           setState(() {
             widget.story.reset();

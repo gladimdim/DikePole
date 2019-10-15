@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:onlineeditor/Localizations.dart';
 import 'package:onlineeditor/animations/slideable_button.dart';
 import 'package:onlineeditor/components/BorderedRandomImageForType.dart';
 import 'package:onlineeditor/creator/components/fat_button.dart';
@@ -85,7 +86,7 @@ class PassageState extends State<StoryView> with TickerProviderStateMixin {
       padding: EdgeInsets.all(8.0),
       child: SlideableButton(
           child: FatButton(
-            text: "Next",
+            text: LDLocalizations.next,
             backgroundColor: Theme.of(context).primaryColor,
           ),
           onPress: () {
@@ -110,7 +111,7 @@ class PassageState extends State<StoryView> with TickerProviderStateMixin {
               )
               .toList(),
           if (!widget.currentStory.canContinue() && widget.currentStory.currentPage.isTheEnd())
-            Text("The End"),
+            Text(LDLocalizations.theEnd),
         ],
       ),
     ));
@@ -148,7 +149,7 @@ class PassageItemView extends StatelessWidget {
           width: MediaQuery.of(context).size.width * 0.95,
           decoration: getDecorationForContainer(context),
           child: Text(
-            historyItem.text == "" ? "The End" : historyItem.text,
+            historyItem.text == "" ? LDLocalizations.labelIsTheEnd : historyItem.text,
             style: TextStyle(
               fontFamily: "Raleway-Bold",
               fontSize: 18,

@@ -2,6 +2,7 @@ import 'package:async/async.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:http/http.dart' as http;
+import 'package:onlineeditor/Localizations.dart';
 import 'package:onlineeditor/animations/slideable_button.dart';
 import 'package:onlineeditor/components/bordered_container.dart';
 import 'package:onlineeditor/components/narrow_scaffold.dart';
@@ -66,7 +67,7 @@ class _EditStoryViewState extends State<EditStoryView> {
                               child: BorderedContainer(
                                 child: FlatButton.icon(
                                   icon: Icon(Icons.arrow_back),
-                                  label: Text("Back"),
+                                  label: Text(LDLocalizations.labelBack),
                                   onPressed: () {
                                     setState(() {
                                       var parent = story
@@ -90,7 +91,7 @@ class _EditStoryViewState extends State<EditStoryView> {
                               });
                             },
                           ),
-                          Center(child: Text("Is the end")),
+                          Center(child: Text(LDLocalizations.labelIsTheEnd)),
                           if (story.currentPage.isTheEnd()) ...[
                             Radio(
                               value: EndType.DEAD,
@@ -101,7 +102,7 @@ class _EditStoryViewState extends State<EditStoryView> {
                                 });
                               },
                             ),
-                            Center(child: Text("Is dead")),
+                            Center(child: Text(LDLocalizations.labelIsTheEndDead)),
                             Radio(
                               value: EndType.ALIVE,
                               groupValue: story.currentPage.endType,
@@ -111,7 +112,7 @@ class _EditStoryViewState extends State<EditStoryView> {
                                 });
                               },
                             ),
-                            Center(child: Text("Is Alive"))
+                            Center(child: Text(LDLocalizations.labelIsTheEndAlive))
                           ]
                         ],
                       ),
@@ -125,7 +126,7 @@ class _EditStoryViewState extends State<EditStoryView> {
                           });
                         },
                         icon: Icon(Icons.add_box),
-                        label: Text("Options"),
+                        label: Text(LDLocalizations.labelOptions),
                       ),
                     ),
                     if (story.currentPage.next.length == 0)
@@ -165,7 +166,6 @@ class _EditStoryViewState extends State<EditStoryView> {
                                         Icons.keyboard_arrow_right,
                                       ),
                                       onPressed: () {
-                                        print("pressed details");
                                         setState(() {
                                           story.goToNextPage(next);
                                         });
@@ -197,11 +197,11 @@ class _EditStoryViewState extends State<EditStoryView> {
                           });
                         },
                         icon: Icon(Icons.add_box),
-                        label: Text("Add new passage"),
+                        label: Text(LDLocalizations.addNewPassage),
                       ),
                     ),
                     if (story.currentPage.nodes.length == 0)
-                      Text("Passage list is empty"),
+                      Text(LDLocalizations.passageListEmpty),
                     Expanded(
                         flex: 6,
                         child: SingleChildScrollView(
@@ -222,7 +222,6 @@ class _EditStoryViewState extends State<EditStoryView> {
                                                 .getAssetImageForType(
                                                     imageType)),
                                     onTap: () async {
-                                      print("going to node ${node.text}");
                                       await Navigator.pushNamed(
                                         context,
                                         ExtractEditPassageView.routeName,
@@ -245,7 +244,7 @@ class _EditStoryViewState extends State<EditStoryView> {
                         )),
                     SlideableButton(
                       child: FatButton(
-                        text: "Start story",
+                        text: LDLocalizations.startStory,
                         backgroundColor: Theme.of(context).primaryColor,
                       ),
                       onPress: () async {
@@ -260,7 +259,7 @@ class _EditStoryViewState extends State<EditStoryView> {
                     )
                   ],
                 ),
-                title: "Create story",
+                title: LDLocalizations.createStory,
                 actions: [],
               );
           }

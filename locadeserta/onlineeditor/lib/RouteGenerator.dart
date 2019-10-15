@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:onlineeditor/StatisticsView.dart';
-import 'package:onlineeditor/creator/components/catalog_vew.dart';
+import 'package:onlineeditor/creator/components/catalog_view.dart';
 import 'package:onlineeditor/root.dart';
 
 import 'creator/components/edit_node_view.dart';

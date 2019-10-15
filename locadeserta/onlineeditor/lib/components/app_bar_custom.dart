@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:onlineeditor/Localizations.dart';
 import 'package:onlineeditor/components/appbar_button.dart';
 import 'package:onlineeditor/components/button_text_icon.dart';
 
@@ -23,6 +24,7 @@ class _AppBarCustomState extends State<AppBarCustom> {
       left: 0.0,
       right: 0,
       child: Container(
+        padding: EdgeInsets.only(top: 8.0),
         color: Theme.of(context).primaryColor,
         height: expanded ? (widget.appBarButtons.length * 50).toDouble() + 40 : 40,
         child: Column(
@@ -45,7 +47,7 @@ class _AppBarCustomState extends State<AppBarCustom> {
                   ),
                 ),
                 ButtonTextIcon(
-                  text: "Menu",
+                  text: LDLocalizations.menuText,
                   color: Colors.white,
                   onTap: _toggleExpandedMenu,
                   icon: Icon(
