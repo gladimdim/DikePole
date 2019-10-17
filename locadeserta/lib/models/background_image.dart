@@ -194,7 +194,7 @@ ImageType imageTypeFromString(String input) {
     case 'steppe':
       return ImageType.STEPPE;
     default:
-      return ImageType.RIVER; // shadowed
+      return null; // shadowed
   }
 }
 
