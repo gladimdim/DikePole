@@ -100,7 +100,7 @@ class PassageState extends State<StoryView> with TickerProviderStateMixin {
       padding: EdgeInsets.all(8.0),
       child: SlideableButton(
           child: FatButton(
-            text: LDLocalizations.of(context).next,
+            text: LDLocalizations.next,
             backgroundColor: Theme.of(context).primaryColor,
           ),
           onPress: () {
@@ -125,7 +125,7 @@ class PassageState extends State<StoryView> with TickerProviderStateMixin {
               )
               .toList(),
           if (!widget.currentStory.canContinue() && widget.currentStory.currentPage.isTheEnd())
-            Text(LDLocalizations.of(context).theEnd),
+            Text(LDLocalizations.theEnd),
         ],
       ),
     ));

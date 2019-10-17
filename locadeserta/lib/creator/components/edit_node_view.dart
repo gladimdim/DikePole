@@ -48,7 +48,7 @@ class _EditNodeViewState extends State<EditNodeView> {
                     flex: 1,
                     child: Row(
                       children: <Widget>[
-                        Text(LDLocalizations.of(context).passageWillHaveImage),
+                        Text(LDLocalizations.passageWillHaveImage),
                         Checkbox(
                           value: widget.node.imageType != null,
                           onChanged: (newValue) {
@@ -69,7 +69,7 @@ class _EditNodeViewState extends State<EditNodeView> {
                       flex: 1,
                       child: Row(
                         children: <Widget>[
-                          Text(LDLocalizations.of(context).selectImageForPassage),
+                          Text(LDLocalizations.selectImageForPassage),
                           SizedBox(
                             width: 20,
                           ),
@@ -91,7 +91,7 @@ class _EditNodeViewState extends State<EditNodeView> {
         ),
       ),
       appBar: AppBar(
-        title: Text(LDLocalizations.of(context).editingPassage),
+        title: Text(LDLocalizations.editingPassage),
       ),
     );
   }
@@ -142,7 +142,7 @@ class _TextEditorState extends State<TextEditorWithButton> {
           padding: const EdgeInsets.only(top: 8.0),
           child: SlideableButton(
             child: FatButton(
-              text: LDLocalizations.of(context).save,
+              text: LDLocalizations.save,
               backgroundColor: Theme.of(context).primaryColor,
             ),
             onPress: () {

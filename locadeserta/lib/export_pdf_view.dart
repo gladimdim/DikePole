@@ -30,7 +30,7 @@ class _ExportToPDFState extends State<ExportToPDF> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(LDLocalizations.of(context).shareStory),
+        title: Text(LDLocalizations.shareStory),
       ),
       body: Center(
         child: savingToFile
@@ -42,7 +42,7 @@ class _ExportToPDFState extends State<ExportToPDF> {
                     size: 150,
                   ),
                   Text(
-                    LDLocalizations.of(context).savingExportFile,
+                    LDLocalizations.savingExportFile,
                     style:
                         TextStyle(fontSize: 30.0, fontWeight: FontWeight.bold),
                   )
@@ -59,7 +59,7 @@ class _ExportToPDFState extends State<ExportToPDF> {
                         child: Column(
                           children: <Widget>[
                             Text(
-                              LDLocalizations.of(context).processingImage,
+                              LDLocalizations.processingImage,
                               style: TextStyle(
                                   fontWeight: FontWeight.bold, fontSize: 30.0),
                             ),
@@ -80,7 +80,7 @@ class _ExportToPDFState extends State<ExportToPDF> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
                           Text(
-                            LDLocalizations.of(context).longProcessDescription,
+                            LDLocalizations.longProcessDescription,
                             style: TextStyle(
                                 fontWeight: FontWeight.bold, fontSize: 20.0),
                             textAlign: TextAlign.center,
@@ -89,7 +89,7 @@ class _ExportToPDFState extends State<ExportToPDF> {
                             height: 150,
                           ),
                           RaisedButton(
-                            child: Text(LDLocalizations.of(context).start,
+                            child: Text(LDLocalizations.start,
                                 style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                     fontSize: 20.0)),
@@ -192,7 +192,7 @@ class _ExportGladStoriesToPDFState extends State<ExportGladStoriesToPDF> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(LDLocalizations.of(context).shareStory),
+        title: Text(LDLocalizations.shareStory),
       ),
       body: Center(
         child: savingToFile
@@ -204,7 +204,7 @@ class _ExportGladStoriesToPDFState extends State<ExportGladStoriesToPDF> {
                     size: 150,
                   ),
                   Text(
-                    LDLocalizations.of(context).savingExportFile,
+                    LDLocalizations.savingExportFile,
                     style:
                         TextStyle(fontSize: 30.0, fontWeight: FontWeight.bold),
                   )
@@ -221,7 +221,7 @@ class _ExportGladStoriesToPDFState extends State<ExportGladStoriesToPDF> {
                         child: Column(
                           children: <Widget>[
                             Text(
-                              LDLocalizations.of(context).processingImage,
+                              LDLocalizations.processingImage,
                               style: TextStyle(
                                   fontWeight: FontWeight.bold, fontSize: 30.0),
                             ),
@@ -242,7 +242,7 @@ class _ExportGladStoriesToPDFState extends State<ExportGladStoriesToPDF> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
                           Text(
-                            LDLocalizations.of(context).longProcessDescription,
+                            LDLocalizations.longProcessDescription,
                             style: TextStyle(
                                 fontWeight: FontWeight.bold, fontSize: 20.0),
                             textAlign: TextAlign.center,
@@ -251,7 +251,7 @@ class _ExportGladStoriesToPDFState extends State<ExportGladStoriesToPDF> {
                             height: 150,
                           ),
                           RaisedButton(
-                            child: Text(LDLocalizations.of(context).start,
+                            child: Text(LDLocalizations.start,
                                 style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                     fontSize: 20.0)),

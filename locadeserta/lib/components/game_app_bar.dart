@@ -16,15 +16,15 @@ class GameAppBar extends StatelessWidget {
       appBarButtons: [
         AppBarObject(
           onTap: () => Navigator.pop(context),
-          text: LDLocalizations.of(context).backToStories,
+          text: LDLocalizations.backToStories,
         ),
         AppBarObject(
           onTap: onResetStory,
-          text: LDLocalizations.of(context).reset,
+          text: LDLocalizations.reset,
         ),
         AppBarObject(
           onTap: onExportStory,
-          text: LDLocalizations.of(context).shareStory,
+          text: LDLocalizations.shareStory,
         ),
       ],
     );

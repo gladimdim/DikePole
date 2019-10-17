@@ -21,13 +21,13 @@ class _ImportGladStoryViewState extends State<ImportGladStoryView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(LDLocalizations.of(context).exportGladStoryToJson),
+        title: Text(LDLocalizations.exportGladStoryToJson),
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(
           children: [
-            Text(LDLocalizations.of(context).pasteFullJSON),
+            Text(LDLocalizations.pasteFullJSON),
             BorderedContainer(
               child: TextField(
                 controller: _controller,
@@ -38,7 +38,7 @@ class _ImportGladStoryViewState extends State<ImportGladStoryView> {
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: FatButton(
-                  text: LDLocalizations.of(context).labelImport,
+                  text: LDLocalizations.labelImport,
                 ),
               ),
               onPress: () async {

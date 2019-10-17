@@ -107,7 +107,7 @@ class _CatalogViewState extends State<CatalogView>
                           child: Align(
                             alignment: Alignment.center,
                             child: Text(
-                              LDLocalizations.of(context).showStoryDetails,
+                              LDLocalizations.showStoryDetails,
                               style: TextStyle(
                                 color: Theme.of(context).textTheme.title.color,
                                 fontSize: 22.0,
@@ -139,7 +139,7 @@ class _CatalogViewState extends State<CatalogView>
                         child: Align(
                           alignment: Alignment.center,
                           child: Text(
-                            LDLocalizations.of(context).startStory,
+                            LDLocalizations.startStory,
                             style: TextStyle(
                               color: Theme.of(context).textTheme.title.color,
                               fontSize: 22.0,
@@ -174,7 +174,7 @@ class _CatalogViewState extends State<CatalogView>
                   scrollDirection: Axis.horizontal,
                   children: [
                     Text(
-                      LDLocalizations.of(context).authors,
+                      LDLocalizations.authors,
                       style: TextStyle(
                           fontWeight: FontWeight.bold, fontSize: 18.0),
                     ),

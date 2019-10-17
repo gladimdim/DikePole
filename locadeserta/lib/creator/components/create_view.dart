@@ -28,7 +28,7 @@ class _CreateViewState extends State<CreateView> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          LDLocalizations.of(context).createStory,
+          LDLocalizations.createStory,
           style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0),
         ),
       ),
@@ -43,7 +43,7 @@ class _CreateViewState extends State<CreateView> {
                 _resetStoryBuilderFuture();
               },
               child: FatButton(
-                text: LDLocalizations.of(context).labelImport,
+                text: LDLocalizations.labelImport,
               ),
             ),
             Expanded(
@@ -83,7 +83,7 @@ class _CreateViewState extends State<CreateView> {
                 children: <Widget>[
                   ListTile(
                     leading: Icon(Icons.book),
-                    title: Text(LDLocalizations.of(context).createStory),
+                    title: Text(LDLocalizations.createStory),
                   ),
                   CreateMetaStoryView(
                     story: null,
@@ -196,7 +196,7 @@ class StoryViewHeader extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(
-              LDLocalizations.of(context).labelStoryTitle,
+              LDLocalizations.labelStoryTitle,
               style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
             ),
             Text(
@@ -240,8 +240,8 @@ class _CreateMetaStoryViewState extends State<CreateMetaStoryView> {
           TextFormField(
             decoration: InputDecoration(
               icon: Icon(Icons.title),
-              hintText: LDLocalizations.of(context).enterStoryTitle,
-              labelText: LDLocalizations.of(context).labelStoryTitle,
+              hintText: LDLocalizations.enterStoryTitle,
+              labelText: LDLocalizations.labelStoryTitle,
             ),
             initialValue: widget.story == null ? "" : widget.story.title,
             onSaved: (value) {
@@ -251,8 +251,8 @@ class _CreateMetaStoryViewState extends State<CreateMetaStoryView> {
           TextFormField(
             decoration: InputDecoration(
               icon: Icon(Icons.description),
-              hintText: LDLocalizations.of(context).hintDescription,
-              labelText: LDLocalizations.of(context).description,
+              hintText: LDLocalizations.hintDescription,
+              labelText: LDLocalizations.description,
             ),
             onSaved: (value) {
               _description = value;
@@ -262,8 +262,8 @@ class _CreateMetaStoryViewState extends State<CreateMetaStoryView> {
           TextFormField(
             decoration: InputDecoration(
               icon: Icon(Icons.title),
-              hintText: LDLocalizations.of(context).listOfAuthors,
-              labelText: LDLocalizations.of(context).labelAuthors,
+              hintText: LDLocalizations.listOfAuthors,
+              labelText: LDLocalizations.labelAuthors,
             ),
             onSaved: (value) {
               _authors = value;
@@ -299,8 +299,8 @@ class _CreateMetaStoryViewState extends State<CreateMetaStoryView> {
                   widget.onSave(story);
                 },
                 label: Text(editMode
-                    ? LDLocalizations.of(context).edit
-                    : LDLocalizations.of(context).createStory),
+                    ? LDLocalizations.edit
+                    : LDLocalizations.createStory),
               ),
             ),
             if (widget.onDelete != null)
@@ -311,7 +311,7 @@ class _CreateMetaStoryViewState extends State<CreateMetaStoryView> {
                   onPressed: () {
                     widget.onDelete(widget.story);
                   },
-                  label: Text(LDLocalizations.of(context).remove),
+                  label: Text(LDLocalizations.remove),
                 ),
               ),
           ]),

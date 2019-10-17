@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:locadeserta/components/appbar_button.dart';
 import 'package:locadeserta/components/button_text_icon.dart';
 import 'package:locadeserta/models/Localizations.dart';
-
 class AppBarCustom extends StatefulWidget {
   final String title;
   final List<AppBarObject> appBarButtons;
@@ -24,6 +23,7 @@ class _AppBarCustomState extends State<AppBarCustom> {
       left: 0.0,
       right: 0,
       child: Container(
+        padding: EdgeInsets.only(top: 8.0),
         color: Theme.of(context).primaryColor,
         height: expanded ? (widget.appBarButtons.length * 50).toDouble() + 40 : 40,
         child: Column(
@@ -46,7 +46,7 @@ class _AppBarCustomState extends State<AppBarCustom> {
                   ),
                 ),
                 ButtonTextIcon(
-                  text: LDLocalizations.of(context).menuText,
+                  text: LDLocalizations.menuText,
                   color: Colors.white,
                   onTap: _toggleExpandedMenu,
                   icon: Icon(
@@ -63,7 +63,7 @@ class _AppBarCustomState extends State<AppBarCustom> {
                 child: ListView(
                   scrollDirection: Axis.vertical,
                   children:
-                      widget.appBarButtons.map(_appBarObjectToButton).toList(),
+                  widget.appBarButtons.map(_appBarObjectToButton).toList(),
                 ),
               ),
           ],

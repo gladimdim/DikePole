@@ -2,6 +2,7 @@ import 'package:async/async.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:locadeserta/InheritedAuth.dart';
+import 'package:locadeserta/StatisticsView.dart';
 import 'package:locadeserta/animations/fade_images.dart';
 import 'package:locadeserta/animations/slideable_button.dart';
 import 'package:locadeserta/catalog_view.dart';
@@ -66,7 +67,7 @@ class _MainMenuState extends State<MainMenu> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return NarrowScaffold(
-      title: LDLocalizations.of(context).appTitle,
+      title: LDLocalizations.appTitle,
       body: FractionallySizedBox(
         widthFactor: 1,
         heightFactor: 1.0,
@@ -96,14 +97,20 @@ class _MainMenuState extends State<MainMenu> with TickerProviderStateMixin {
           onTap: () {
             Navigator.of(context).pop();
           },
-          text: LDLocalizations.of(context).backToMenu,
+          text: LDLocalizations.backToMenu,
         ),
+        AppBarObject(
+          text: LDLocalizations.statisticsTitle,
+          onTap: () {
+            Navigator.pushNamed(context, StatisticsView.routeName);
+          },
+        )
       ],
     );
   }
 
   _fetchData(BuildContext context) {
-    var locale = Localizations.localeOf(context);
+    var locale = LDLocalizations.locale;
     return _catalogListMemo.runOnce(() async {
       List<CatalogStory> catalogStories = await Persistence.instance
           .getAvailableCatalogStories(locale.languageCode);
@@ -133,7 +140,7 @@ class _MainMenuState extends State<MainMenu> with TickerProviderStateMixin {
             Padding(
               padding: const EdgeInsets.only(top: 40),
               child: Text(
-                LDLocalizations.of(context).translationNotYetReady,
+                LDLocalizations.translationNotYetReady,
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 15.0,
@@ -160,15 +167,13 @@ class _MainMenuState extends State<MainMenu> with TickerProviderStateMixin {
                   Navigator.pushNamed(context, "/create");
                 },
                 child: FatButton(
-                  text: LDLocalizations
-                      .of(context)
-                      .createStory,
+                  text: LDLocalizations.createStory,
                   backgroundColor: Colors.black87,
                 ),
               ),
             );
           }
-          var story = stories[index-1];
+          var story = stories[index - 1];
           return Padding(
             padding: const EdgeInsets.only(top: 8.0),
             child: CatalogView(

@@ -37,8 +37,8 @@ class PassageState extends State<Passage> with TickerProviderStateMixin {
 
   List<Widget> _buildTheEnd(BuildContext context) {
     var text = widget.currentStory.theEnd
-        ? LDLocalizations.of(context).theEnd
-        : LDLocalizations.of(context).toBeContinued;
+        ? LDLocalizations.theEnd
+        : LDLocalizations.toBeContinued;
     return <Widget>[
       Text(
         text,
@@ -111,7 +111,7 @@ class PassageState extends State<Passage> with TickerProviderStateMixin {
       padding: EdgeInsets.all(8.0),
       child: SlideableButton(
           child: FatButton(
-            text: LDLocalizations.of(context).Continue,
+            text: LDLocalizations.Continue,
             backgroundColor: Theme.of(context).primaryColor,
           ),
           onPress: () {
@@ -157,7 +157,7 @@ class PassageState extends State<Passage> with TickerProviderStateMixin {
                       ),
                     ),
                     child: Text(
-                      passageItem.value == "" ? LDLocalizations.of(context).storyBegin : passageItem.value,
+                      passageItem.value == "" ? LDLocalizations.storyBegin : passageItem.value,
                       style: TextStyle(
                         fontFamily: "Raleway-Bold",
                         fontSize: 18,

@@ -30,11 +30,15 @@ class _LoginViewState extends State<LoginView> {
   Widget build(BuildContext context) {
     return NarrowScaffold(
       body: _buildBody(context),
-      title: LDLocalizations.of(context).appTitle,
+      title: LDLocalizations.appTitle,
       actions: [
         AppBarObject(
-          onTap: () => InheritedAuth.of(context).auth.signOut(),
-          text: LDLocalizations.of(context).signOut,
+          onTap: () =>
+              InheritedAuth
+                  .of(context)
+                  .auth
+                  .signOut(),
+          text: LDLocalizations.signOut,
         ),
       ],
     );
@@ -42,7 +46,10 @@ class _LoginViewState extends State<LoginView> {
 
   Widget _buildBody(BuildContext context) {
     return StreamBuilder<User>(
-      stream: InheritedAuth.of(context).auth.onAuthStateChange,
+      stream: InheritedAuth
+          .of(context)
+          .auth
+          .onAuthStateChange,
       initialData: null,
       builder: (context, snapshot) {
         User user = snapshot.data;
@@ -77,10 +84,10 @@ class _LoginViewState extends State<LoginView> {
             if (snapshot.data != null) _buildLoginedView(user, context),
             LocaleSelection(
               onLocaleChanged: _setNewLocale,
-              locale: Localizations.localeOf(context),
+              locale: LDLocalizations.locale,
             ),
             Center(
-              child: Text(LDLocalizations.of(context).versionLabel),
+              child: Text(LDLocalizations.versionLabel),
             ),
             Center(
               child: Material(
@@ -116,13 +123,22 @@ class _LoginViewState extends State<LoginView> {
         Expanded(
           flex: 2,
           child: RaisedButton(
-            color: Theme.of(context).primaryColor,
-            textColor: Theme.of(context).textTheme.title.color,
+            color: Theme
+                .of(context)
+                .primaryColor,
+            textColor: Theme
+                .of(context)
+                .textTheme
+                .title
+                .color,
             onPressed: () => _onSignInPressed(context),
             child: Text(
-              LDLocalizations.of(context).signInWithGoogle,
+              LDLocalizations.signInWithGoogle,
               textAlign: TextAlign.center,
-              style: Theme.of(context).textTheme.title,
+              style: Theme
+                  .of(context)
+                  .textTheme
+                  .title,
             ),
           ),
         ),
@@ -130,10 +146,15 @@ class _LoginViewState extends State<LoginView> {
           flex: 2,
           child: RaisedButton(
             onPressed: () => _onSignInAnonPressed(context),
-            color: Theme.of(context).primaryColor,
-            child: Text(LDLocalizations.of(context).anonLogin,
+            color: Theme
+                .of(context)
+                .primaryColor,
+            child: Text(LDLocalizations.anonLogin,
                 textAlign: TextAlign.center,
-                style: Theme.of(context).textTheme.title),
+                style: Theme
+                    .of(context)
+                    .textTheme
+                    .title),
           ),
         ),
       ],
@@ -145,13 +166,18 @@ class _LoginViewState extends State<LoginView> {
       onPress: widget.onContinue,
       child: Container(
         height: 50.0,
-        color: Theme.of(context).primaryColor,
+        color: Theme
+            .of(context)
+            .primaryColor,
         child: Align(
           alignment: Alignment.center,
           child: Text(
-            LDLocalizations.of(context).start,
+            LDLocalizations.start,
             textAlign: TextAlign.center,
-            style: Theme.of(context).textTheme.title,
+            style: Theme
+                .of(context)
+                .textTheme
+                .title,
           ),
         ),
       ),
@@ -160,8 +186,8 @@ class _LoginViewState extends State<LoginView> {
 
   Widget _buildWelcomeText(User user, context) {
     var text = user == null
-        ? LDLocalizations.of(context).welcomeText
-        : LDLocalizations.of(context).greetUserByName(user.displayName);
+        ? LDLocalizations.welcomeText
+        : LDLocalizations.greetUserByName(user.displayName);
 
     return Center(
       child: Padding(
@@ -174,17 +200,23 @@ class _LoginViewState extends State<LoginView> {
   _onSignInPressed(context) async {
     final GoogleSignInAccount googleUser = await _googleSignIn.signIn();
     final GoogleSignInAuthentication googleAuth =
-        await googleUser.authentication;
+    await googleUser.authentication;
     final AuthCredential credential = GoogleAuthProvider.getCredential(
       accessToken: googleAuth.accessToken,
       idToken: googleAuth.idToken,
     );
 
-    await InheritedAuth.of(context).auth.signInWithCredentials(credential);
+    await InheritedAuth
+        .of(context)
+        .auth
+        .signInWithCredentials(credential);
   }
 
   _onSignInAnonPressed(context) async {
-    return await InheritedAuth.of(context).auth.signInAnonymously();
+    return await InheritedAuth
+        .of(context)
+        .auth
+        .signInAnonymously();
   }
 
   _setNewLocale(Locale locale) {

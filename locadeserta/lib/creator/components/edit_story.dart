@@ -46,7 +46,7 @@ class _EditStoryViewState extends State<EditStoryView> {
                       child: BorderedContainer(
                         child: FlatButton.icon(
                           icon: Icon(Icons.arrow_back),
-                          label: Text(LDLocalizations.of(context).labelBack),
+                          label: Text(LDLocalizations.labelBack),
                           onPressed: () {
                             setState(() {
                               var parent =
@@ -71,7 +71,7 @@ class _EditStoryViewState extends State<EditStoryView> {
                     },
                   ),
                   Center(
-                      child: Text(LDLocalizations.of(context).labelIsTheEnd)),
+                      child: Text(LDLocalizations.labelIsTheEnd)),
                   if (story.currentPage.isTheEnd()) ...[
                     Radio(
                       value: EndType.DEAD,
@@ -84,7 +84,7 @@ class _EditStoryViewState extends State<EditStoryView> {
                     ),
                     Center(
                         child: Text(
-                            LDLocalizations.of(context).labelIsTheEndDead)),
+                            LDLocalizations.labelIsTheEndDead)),
                     Radio(
                       value: EndType.ALIVE,
                       groupValue: story.currentPage.endType,
@@ -96,7 +96,7 @@ class _EditStoryViewState extends State<EditStoryView> {
                     ),
                     Center(
                         child: Text(
-                            LDLocalizations.of(context).labelIsTheEndAlive))
+                            LDLocalizations.labelIsTheEndAlive))
                   ]
                 ],
               ),
@@ -107,15 +107,15 @@ class _EditStoryViewState extends State<EditStoryView> {
                 onPressed: () {
                   setState(() {
                     story.currentPage.addNextPageWithText(
-                        LDLocalizations.of(context).optionPlaceHolder);
+                        LDLocalizations.optionPlaceHolder);
                   });
                 },
                 icon: Icon(Icons.add_box),
-                label: Text(LDLocalizations.of(context).labelOptions),
+                label: Text(LDLocalizations.labelOptions),
               ),
             ),
             if (story.currentPage.next.length == 0)
-              Text(LDLocalizations.of(context).optionsListEmpty),
+              Text(LDLocalizations.optionsListEmpty),
             Expanded(
               flex: 3,
               child: SingleChildScrollView(
@@ -180,11 +180,11 @@ class _EditStoryViewState extends State<EditStoryView> {
                   });
                 },
                 icon: Icon(Icons.add_box),
-                label: Text(LDLocalizations.of(context).addNewPassage),
+                label: Text(LDLocalizations.addNewPassage),
               ),
             ),
             if (story.currentPage.nodes.length == 0)
-              Text(LDLocalizations.of(context).passageListEmpty),
+              Text(LDLocalizations.passageListEmpty),
             Expanded(
                 flex: 6,
                 child: SingleChildScrollView(
@@ -230,7 +230,7 @@ class _EditStoryViewState extends State<EditStoryView> {
                 )),
             SlideableButton(
               child: FatButton(
-                text: LDLocalizations.of(context).startStory,
+                text: LDLocalizations.startStory,
                 backgroundColor: Theme.of(context).primaryColor,
               ),
               onPress: () async {
@@ -246,19 +246,19 @@ class _EditStoryViewState extends State<EditStoryView> {
             )
           ],
         ),
-        title: LDLocalizations.of(context).createStory,
+        title: LDLocalizations.createStory,
         actions: [
           AppBarObject(
-            text: LDLocalizations.of(context).save,
+            text: LDLocalizations.save,
             onTap: () => _saveStoryCallback(context),
           ),
           AppBarObject(
-              text: LDLocalizations.of(context).backToStories,
+              text: LDLocalizations.backToStories,
               onTap: () {
                 Navigator.pop(context);
               }),
           AppBarObject(
-            text: LDLocalizations.of(context).exportGladStoryToJson,
+            text: LDLocalizations.exportGladStoryToJson,
             onTap: () {
               var json = widget.story.toJson();
               ShareExtend.share(json, "text");

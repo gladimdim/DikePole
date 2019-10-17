@@ -20,7 +20,7 @@ class About extends StatelessWidget {
       children: [
         Center(
           child: Text(
-            localization.appTitle,
+            LDLocalizations.appTitle,
             style: Theme.of(context).textTheme.title,
           ),
         ),
@@ -62,7 +62,7 @@ class About extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: Text(
-            localization.aboutGame,
+            LDLocalizations.aboutGame,
           ),
         ),
         Row(

@@ -1,18 +1,11 @@
 import 'dart:core';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/foundation.dart' show SynchronousFuture;
 
-var version = "1.87";
+var version = "1.88";
 
 class LDLocalizations {
-  LDLocalizations(this.locale);
-
-  final Locale locale;
-
-  static LDLocalizations of(BuildContext context) {
-    return Localizations.of<LDLocalizations>(context, LDLocalizations);
-  }
+  static Locale locale = Locale('uk');
 
   static Map<String, Map<String, String>> _localizedValues = {
     'en': {
@@ -36,9 +29,9 @@ class LDLocalizations {
       'tobecontinued': 'To be continued. Wait on the story update.',
       'showstorydetails': 'More Details',
       'translationnotready':
-          'Translations are not yet ready for your language.',
+      'Translations are not yet ready for your language.',
       'aboutgame':
-          'Interactive Fiction. This game allows to dive into heroic epoch in XVII century, which took part in the southern part of Ukraine, at Loca Deserta. You not only read the story but you can select how it proceeds further! Depending on your selections you can get absolutely different events, encounters. Or you can even die.',
+      'Interactive Fiction. This game allows to dive into heroic epoch in XVII century, which took part in the southern part of Ukraine, at Loca Deserta. You not only read the story but you can select how it proceeds further! Depending on your selections you can get absolutely different events, encounters. Or you can even die.',
       'menu': 'Menu',
       'backtostories': 'Back to stories',
       'backtomenu': 'Back to menu',
@@ -48,10 +41,10 @@ class LDLocalizations {
       'preparingexport': 'Preparing export of the story',
       'openingsharedialog': 'Sending story to share dialog',
       'warninglongprocess':
-          'This feature takes some time to finish, please wait.',
+      'This feature takes some time to finish, please wait.',
       'longprocesswarning': 'Operation might take up to 30 seconds.',
       'longprocessdescription':
-          'We have to compile your story into passages, add pictures and create PDF file. It might take some time.',
+      'We have to compile your story into passages, add pictures and create PDF file. It might take some time.',
       'createpdfdocument': 'Create',
       'cancel': 'Cancel',
       'processingimage': "Processing image, please wait",
@@ -82,6 +75,13 @@ class LDLocalizations {
       'exportgladstorytojson': 'Export to JSON',
       'pastefulljson': 'Paste full JSON text',
       'import': 'Import',
+      'statisticsTitle': 'Statistics of the platform',
+      'theendstartoverquestion': 'This is the end. Start again?',
+      'statisticsViewTitle': 'Statistics of the Platform',
+      'registeredUsers': 'Registered users',
+      'timesRead': 'Times read',
+      'failedToLoadStats': 'Failed to load statistics',
+      'loadingStats': 'Loading. Might take up to 6 seconds...'
     },
     'uk': {
       'continue': 'Продовжити',
@@ -105,7 +105,7 @@ class LDLocalizations {
       'showstorydetails': 'Детальніше',
       'translationnotready': 'Переклад історії на вашу мову ще не готовий.',
       'aboutgame':
-          'Інтерактивна гра-книга (Interactive Fiction). Гра дозволяє зануритись в бурхливі події 1620х років, які відбувалися на Дикому Полі. Але ви не тільки читаєте історію, а ще і можете вибирати подальший розвиток подій. В залежності від вашого вибору, історія продовжується в різних напрямах, або ж і просто обривається назавжди.',
+      'Інтерактивна гра-книга (Interactive Fiction). Гра дозволяє зануритись в бурхливі події 1620х років, які відбувалися на Дикому Полі. Але ви не тільки читаєте історію, а ще і можете вибирати подальший розвиток подій. В залежності від вашого вибору, історія продовжується в різних напрямах, або ж і просто обривається назавжди.',
       'menu': 'Меню',
       'backtostories': 'Назад до історій',
       'backtomenu': 'Назад до меню',
@@ -115,10 +115,10 @@ class LDLocalizations {
       'preparingexport': 'Підготовка до експорту історії',
       'openingsharedialog': 'Передаю дані до діалогу поширення',
       'warninglongprocess':
-          'Ця функція займає деякий час, будь ласка, почекайте.',
+      'Ця функція займає деякий час, будь ласка, почекайте.',
       'longprocesswarning': 'Операція може зайняти до 30 секунд.',
       'longprocessdescription':
-          'Нам необхідно обробити вашу пройдену історію, сформувати абзаци і додати картинки. Тому це може заняти деякий час.',
+      'Нам необхідно обробити вашу пройдену історію, сформувати абзаци і додати картинки. Тому це може заняти деякий час.',
       'createpdfdocument': 'Сформувати документ',
       'cancel': 'Скасувати',
       'processingimage': 'Обробляємо картинку, будь ласка, почекайте',
@@ -149,6 +149,13 @@ class LDLocalizations {
       'exportgladstorytojson': 'Експорт в JSON',
       'pastefulljson': 'Вставте повний текст JSON',
       'import': 'Імпортувати',
+      'statisticsTitle': 'Статистика по платформі',
+      'theendstartoverquestion': 'Це кінець, почати заново?',
+      'statisticsViewTitle': 'Статистики платформи',
+      'registeredUsers': 'Зареєстровано користувачів',
+      'timesRead': 'Прочитано разів',
+      'failedToLoadStats': 'Не змогли завантажити статистику',
+      'loadingStats': 'Завантажуємо статистику. Може зайняти до 6 секунд.'
     },
     'pl': {
       'continue': 'Dalej',
@@ -171,9 +178,9 @@ class LDLocalizations {
       'tobecontinued': 'Ciąg dalszy nastąpi. Poczekaj na aktualizację historii',
       'showstorydetails': 'Więcej szczegółów',
       'translationnotready':
-          'Tłumaczenie opowiadań dla twojego języka nie jest jeszcze gotowe.',
+      'Tłumaczenie opowiadań dla twojego języka nie jest jeszcze gotowe.',
       'aboutgame':
-          'Interaktywna fikcja. Ta gra pozwala zanurzyć się w heroicznej epoce w XVII wieku, która odbyła się w południowej części Ukrainy, w Loca Deserta. Nie tylko czytasz historię, ale możesz wybrać, jak dalej będzie postępować! W zależności od wyboru możesz uzyskać zupełnie inne wydarzenia, spotkania. Albo możesz nawet umrzeć.',
+      'Interaktywna fikcja. Ta gra pozwala zanurzyć się w heroicznej epoce w XVII wieku, która odbyła się w południowej części Ukrainy, w Loca Deserta. Nie tylko czytasz historię, ale możesz wybrać, jak dalej będzie postępować! W zależności od wyboru możesz uzyskać zupełnie inne wydarzenia, spotkania. Albo możesz nawet umrzeć.',
       'menu': 'Menu',
       'backtostories': 'Powrót do historii',
       'backtomenu': 'Powrót do menu',
@@ -182,11 +189,11 @@ class LDLocalizations {
       'sharestory': 'Podziel się historią',
       'preparingexport': 'Przygotowanie historii na eksport',
       'openingsharedialog':
-          'Wysyłanie danych do okna dialogowego udostępniania',
+      'Wysyłanie danych do okna dialogowego udostępniania',
       'warninglongprocess': 'Ta funkcja wymaga trochę czasu, proszę czekać.',
       'longprocesswarning': 'Operacja może potrwać do 30 sekund.',
       'longprocessdescription':
-          'Musimy przetworzyć twoją historię, utworzyć akapity i dodać zdjęcia. Dlatego tak długo to trwało.',
+      'Musimy przetworzyć twoją historię, utworzyć akapity i dodać zdjęcia. Dlatego tak długo to trwało.',
       'createpdfdocument': 'Utwórz dokument',
       'cancel': 'Anuluj',
       'processingimage': 'Przetwarzanie obrazu',
@@ -217,266 +224,285 @@ class LDLocalizations {
       'exportgladstorytojson': 'Eksportuj do JSON',
       'pastefulljson': 'Wklej pełny JSON',
       'import': 'Import',
+      'statisticsTitle': 'Statystyka platformy',
+      'theendstartoverquestion': 'To jest koniec. Zacznij jeszcze raz?',
+      'statisticsViewTitle': 'Platform Stats',
+      'registeredUsers': 'Zarejestrowani Użytkownicy',
+      'timesRead': 'Czytaj czasy',
+      'failedToLoadStats': 'Nie udało się załadować statystyk',
+      'loadingStats': 'Ładowanie statystyk. Może to potrwać do 6 sekund.'
     }
   };
 
-  String get Continue {
-    return _localizedValues[locale.languageCode]['continue'];
+  static String get Continue {
+    return _localizedValues[LDLocalizations.locale.languageCode]['continue'];
   }
 
-  String get signInWithGoogle {
+  static String get signInWithGoogle {
     return _localizedValues[locale.languageCode]['signinwithgoogle'];
   }
 
-  String get signOut {
+  static String get signOut {
     return _localizedValues[locale.languageCode]['signout'];
   }
 
-  String get next {
+  static String get next {
     return _localizedValues[locale.languageCode]['next'];
   }
 
-  String get appTitle {
+  static String get appTitle {
     return _localizedValues[locale.languageCode]['apptitle'];
   }
 
-  String get view {
+  static String get view {
     return _localizedValues[locale.languageCode]['view'];
   }
 
-  String get start {
+  static String get start {
     return _localizedValues[locale.languageCode]['start'];
   }
 
-  String greetUserByName(String name) {
+  static String greetUserByName(String name) {
     return '${_localizedValues[locale.languageCode]['greet']}, $name';
   }
 
-  String get versionLabel {
+  static String get versionLabel {
     return "${_localizedValues[locale.languageCode]['version']}: $version";
   }
 
-  String get loadingStory {
+  static String get loadingStory {
     return _localizedValues[locale.languageCode]['loadingstory'];
   }
 
-  String get startStory {
+  static String get startStory {
     return _localizedValues[locale.languageCode]['startstory'];
   }
 
-  String get lookingForHeroes {
+  static String get lookingForHeroes {
     return _localizedValues[locale.languageCode]['lookingforheroes'];
   }
 
-  String get save {
+  static String get save {
     return _localizedValues[locale.languageCode]['save'];
   }
 
-  String get reset {
+  static String get reset {
     return _localizedValues[locale.languageCode]['reset'];
   }
 
-  String get anonLogin {
+  static String get anonLogin {
     return _localizedValues[locale.languageCode]['anonlogin'];
   }
 
-  String get welcomeText {
+  static String get welcomeText {
     return _localizedValues[locale.languageCode]['welcometext'];
   }
 
-  String get theEnd {
+  static String get theEnd {
     return _localizedValues[locale.languageCode]['theend'];
   }
 
-  String get toBeContinued {
+  static String get toBeContinued {
     return _localizedValues[locale.languageCode]['tobecontinued'];
   }
 
-  String get showStoryDetails {
+  static String get showStoryDetails {
     return _localizedValues[locale.languageCode]['showstorydetails'];
   }
 
-  String get translationNotYetReady {
+  static String get translationNotYetReady {
     return _localizedValues[locale.languageCode]['translationnotready'];
   }
 
-  String get aboutGame {
+  static String get aboutGame {
     return _localizedValues[locale.languageCode]['aboutgame'];
   }
 
-  String get menuText {
+  static String get menuText {
     return _localizedValues[locale.languageCode]['menu'];
   }
 
-  String get backToStories {
+  static String get backToStories {
     return _localizedValues[locale.languageCode]['backtostories'];
   }
 
-  String get backToMenu {
+  static String get backToMenu {
     return _localizedValues[locale.languageCode]['backtomenu'];
   }
 
-  String get authors {
+  static String get authors {
     return _localizedValues[locale.languageCode]['authors'];
   }
 
-  String get storyBegin {
+  static String get storyBegin {
     return _localizedValues[locale.languageCode]['storybegin'];
   }
 
-  String get shareStory {
+  static String get shareStory {
     return _localizedValues[locale.languageCode]['sharestory'];
   }
 
-  String get preparingExport {
+  static String get preparingExport {
     return _localizedValues[locale.languageCode]['preparingexport'];
   }
 
-  String get openingShareDialog {
+  static String get openingShareDialog {
     return _localizedValues[locale.languageCode]['openingsharedialog'];
   }
 
-  String get longProcessWarning {
+  static String get longProcessWarning {
     return _localizedValues[locale.languageCode]['longprocesswarning'];
   }
 
-  String get longProcessDescription {
+  static String get longProcessDescription {
     return _localizedValues[locale.languageCode]['longprocessdescription'];
   }
 
-  String get createPdfDocument {
+  static String get createPdfDocument {
     return _localizedValues[locale.languageCode]['createpdfdocument'];
   }
 
-  String get cancel {
+  static String get cancel {
     return _localizedValues[locale.languageCode]['cancel'];
   }
 
-  String get processingImage {
+  static String get processingImage {
     return _localizedValues[locale.languageCode]['processingimage'];
   }
 
-  String get savingExportFile {
+  static String get savingExportFile {
     return _localizedValues[locale.languageCode]['savingexportdocument'];
   }
 
-  String get enterStoryTitle {
+  static String get enterStoryTitle {
     return _localizedValues[locale.languageCode]['enterstorytitle'];
   }
 
-  String get labelStoryTitle {
+  static String get labelStoryTitle {
     return _localizedValues[locale.languageCode]['labelStoryTitle'];
   }
 
-  String get listOfAuthors {
+  static String get listOfAuthors {
     return _localizedValues[locale.languageCode]['listofauthors'];
   }
 
-  String get labelAuthors {
+  static String get labelAuthors {
     return _localizedValues[locale.languageCode]['labelauthors'];
   }
 
-  String get createStory {
+  static String get createStory {
     return _localizedValues[locale.languageCode]['createstory'];
   }
 
-  String get edit {
+  static String get edit {
     return _localizedValues[locale.languageCode]['edit'];
   }
 
-  String get description {
+  static String get description {
     return _localizedValues[locale.languageCode]['description'];
   }
 
-  String get hintDescription {
+  static String get hintDescription {
     return _localizedValues[locale.languageCode]['hintDescription'];
   }
 
-  String get remove {
+  static String get remove {
     return _localizedValues[locale.languageCode]['remove'];
   }
 
-  String get labelOptions {
+  static String get labelOptions {
     return _localizedValues[locale.languageCode]['labeloptions'];
   }
 
-  String get optionPlaceHolder {
+  static String get optionPlaceHolder {
     return _localizedValues[locale.languageCode]['optionplaceholder'];
   }
 
-  String get goToRootPage {
+  static String get goToRootPage {
     return _localizedValues[locale.languageCode]['gotorootpage'];
   }
 
-  String get addNewPassage {
+  static String get addNewPassage {
     return _localizedValues[locale.languageCode]['addnewpassage'];
   }
 
-  String get passageWillHaveImage {
+  static String get passageWillHaveImage {
     return _localizedValues[locale.languageCode]['passagewillhaveimage'];
   }
 
-  String get selectImageForPassage {
+  static String get selectImageForPassage {
     return _localizedValues[locale.languageCode]['selectimageforpassage'];
   }
 
-  String get editingPassage {
+  static String get editingPassage {
     return _localizedValues[locale.languageCode]['editingpassage'];
   }
 
-  String get previewStory {
+  static String get previewStory {
     return _localizedValues[locale.languageCode]['previewstory'];
   }
 
-  String get optionsListEmpty {
+  static String get optionsListEmpty {
     return _localizedValues[locale.languageCode]['optionslistempty'];
   }
 
-  String get passageListEmpty {
+  static String get passageListEmpty {
     return _localizedValues[locale.languageCode]['passagelistempty'];
   }
 
-  String get labelIsTheEndDead {
+  static String get labelIsTheEndDead {
     return _localizedValues[locale.languageCode]['labelistheenddead'];
   }
 
-  String get labelIsTheEndAlive {
+  static String get labelIsTheEndAlive {
     return _localizedValues[locale.languageCode]['labelistheendalive'];
   }
 
-  String get labelIsTheEnd {
+  static String get labelIsTheEnd {
     return _localizedValues[locale.languageCode]['labelistheend'];
   }
 
-  String get labelBack {
+  static String get labelBack {
     return _localizedValues[locale.languageCode]['labelback'];
   }
 
-  String get exportGladStoryToJson {
+  static String get exportGladStoryToJson {
     return _localizedValues[locale.languageCode]['exportgladstorytojson'];
   }
 
-  String get pasteFullJSON {
+  static String get pasteFullJSON {
     return _localizedValues[locale.languageCode]['pastefulljson'];
   }
 
-  String get labelImport {
+  static String get labelImport {
     return _localizedValues[locale.languageCode]['import'];
   }
-}
 
-class LDLocalizationsDelegate extends LocalizationsDelegate<LDLocalizations> {
-  const LDLocalizationsDelegate();
-
-  bool isSupported(Locale locale) =>
-      ['en', 'uk', 'pl'].contains(locale.languageCode);
-
-  Future<LDLocalizations> load(Locale locale) {
-    return SynchronousFuture<LDLocalizations>(LDLocalizations(locale));
+  static String get statisticsTitle {
+    return _localizedValues[locale.languageCode]['statisticsTitle'];
   }
 
-  @override
-  bool shouldReload(LocalizationsDelegate<LDLocalizations> old) {
-    return false;
+  static String get theEndStartOverQuestion {
+    return _localizedValues[locale.languageCode]['theendstartoverquestion'];
+  }
+
+  static String get statisticsViewTitle {
+    return _localizedValues[locale.languageCode]['statisticsViewTitle'];
+  }
+
+  static String get registeredUsers {
+    return _localizedValues[locale.languageCode]['registeredUsers'];
+  }
+
+  static String get timesRead {
+    return _localizedValues[locale.languageCode]['timesRead'];
+  }
+
+  static String get failedToLoadStats {
+    return _localizedValues[locale.languageCode]['failedToLoadStats'];
+  }
+
+  static String get loadingStats {
+    return _localizedValues[locale.languageCode]['loadingStats'];
   }
 }

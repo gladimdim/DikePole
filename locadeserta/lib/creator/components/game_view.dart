@@ -21,7 +21,7 @@ class _MainViewState extends State<GameView> {
   Widget build(BuildContext context) {
     return GameViewScaffold(
       appBar: GameAppBar(
-        title: LDLocalizations.of(context).previewStory,
+        title: LDLocalizations.previewStory,
         onResetStory: () {
           setState(() {
             widget.story.reset();

@@ -1,7 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:flutter_statusbarcolor/flutter_statusbarcolor.dart';
 import 'package:locadeserta/InheritedAuth.dart';
 import 'package:locadeserta/catalog_view.dart';
 import 'package:locadeserta/creator/components/create_view.dart';
@@ -14,9 +12,9 @@ import 'package:locadeserta/main_menu.dart';
 import 'package:locadeserta/login_view.dart';
 import 'package:locadeserta/models/Auth.dart';
 import 'package:locadeserta/models/Localizations.dart';
+import 'StatisticsView.dart';
 
-void main() async {
-  await FlutterStatusbarcolor.setStatusBarColor(Colors.black);
+void main() {
   runApp(LocaDesertaApp());
 }
 
@@ -28,7 +26,6 @@ class LocaDesertaApp extends StatefulWidget {
 }
 
 class _LocaDesertaAppState extends State<LocaDesertaApp> {
-  Locale locale = Locale('uk');
 
   final ThemeData theme = ThemeData(
       primaryColor: Colors.black,
@@ -42,7 +39,6 @@ class _LocaDesertaAppState extends State<LocaDesertaApp> {
     return InheritedAuth(
       auth: auth,
       child: MaterialApp(
-        locale: locale,
         title: 'Loca Deserta',
         theme: theme,
         initialRoute: "/",
@@ -66,24 +62,15 @@ class _LocaDesertaAppState extends State<LocaDesertaApp> {
               ExtractArgumentsGameView(),
           ExtractEditPassageView.routeName: (context) => ExtractEditPassageView(),
           ImportGladStoryView.routeName: (context) => ImportGladStoryView(),
+          StatisticsView.routeName: (context) => StatisticsView(),
         },
-        localizationsDelegates: [
-          const LDLocalizationsDelegate(),
-          GlobalMaterialLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate,
-        ],
-        supportedLocales: [
-          Locale('en'),
-          Locale('uk'),
-          Locale('pl'),
-        ],
       ),
     );
   }
 
   void _onLocaleSet(Locale newLocale) {
     setState(() {
-      locale = newLocale;
+      LDLocalizations.locale = newLocale;
     });
   }
 }

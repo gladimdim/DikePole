@@ -14,7 +14,7 @@ class WaitingScreen extends StatelessWidget {
           Padding(
             padding: EdgeInsets.only(top: 10.0),
             child: Text(
-              LDLocalizations.of(context).lookingForHeroes,
+              LDLocalizations.lookingForHeroes,
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
           ),
