@@ -47,5 +47,8 @@ exports.playStatistics = functions.https.onRequest(async (req, res) => {
 
     const storyStats = await start();
     res.set('Access-Control-Allow-Origin', '*');
-    res.json(storyStats);
+    res.json({
+        storyStats: storyStats,
+        users: userIds.length
+    });
 });
