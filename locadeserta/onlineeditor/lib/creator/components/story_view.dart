@@ -20,7 +20,7 @@ class StoryView extends StatefulWidget {
 
 class PassageState extends State<StoryView> with TickerProviderStateMixin {
   ScrollController _passageScrollController = ScrollController();
-  
+
   @override
   initState() {
     super.initState();
@@ -44,7 +44,6 @@ class PassageState extends State<StoryView> with TickerProviderStateMixin {
         );
       },
     );
-
   }
 
   void _next(context) {
@@ -99,22 +98,29 @@ class PassageState extends State<StoryView> with TickerProviderStateMixin {
     Future.delayed(Duration(milliseconds: 300), _scroll(context));
 
     return Expanded(
-        child: SingleChildScrollView(
-      controller: _passageScrollController,
-      child: Column(
-        children: [
-          ...history
-              .map(
-                (HistoryItem historyItem) => PassageItemView(
-                  historyItem,
-                ),
-              )
-              .toList(),
-          if (!widget.currentStory.canContinue() && widget.currentStory.currentPage.isTheEnd())
-            Text(LDLocalizations.theEnd),
-        ],
+      child: SingleChildScrollView(
+        controller: _passageScrollController,
+        child: Column(
+          children: [
+            ...history
+                .map(
+                  (HistoryItem historyItem) => PassageItemView(
+                    historyItem,
+                  ),
+                )
+                .toList(),
+            if (!widget.currentStory.canContinue() &&
+                widget.currentStory.currentPage.isTheEnd())
+              SlideableButton(
+                child: FatButton(text: LDLocalizations.theEndStartOverQuestion),
+                onPress: () {
+                  widget.currentStory.reset();
+                },
+              ),
+          ],
+        ),
       ),
-    ));
+    );
   }
 
   _scroll(BuildContext context) {
@@ -141,7 +147,8 @@ class PassageItemView extends StatelessWidget {
     return Column(
       children: <Widget>[
         if (historyItem.imagePath != null)
-          BorderedRandomImageByPath(imagePaths: historyItem.imagePath, repeat: false),
+          BorderedRandomImageByPath(
+              imagePaths: historyItem.imagePath, repeat: false),
         Container(
           alignment: Alignment.topCenter,
           padding: EdgeInsets.all(8.0),
@@ -149,7 +156,9 @@ class PassageItemView extends StatelessWidget {
           width: MediaQuery.of(context).size.width * 0.95,
           decoration: getDecorationForContainer(context),
           child: Text(
-            historyItem.text == "" ? LDLocalizations.labelIsTheEnd : historyItem.text,
+            historyItem.text == ""
+                ? LDLocalizations.labelIsTheEnd
+                : historyItem.text,
             style: TextStyle(
               fontFamily: "Raleway-Bold",
               fontSize: 18,

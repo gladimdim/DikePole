@@ -35,29 +35,37 @@ class _StatisticsViewState extends State<StatisticsView> {
               case ConnectionState.none:
               case ConnectionState.active:
               case ConnectionState.waiting:
-                return Center(child: Text(LDLocalizations.backToStories));
+                return Center(
+                    child: Text("Loading. Might take up to 6 seconds..."));
                 break;
               case ConnectionState.done:
                 if (snapshot.hasData) {
                   Map response = jsonDecode(snapshot.data.body);
+                  Map storyStats = response["storyStats"];
+                  var userCount = response["users"];
                   return ListView(
-                    scrollDirection: Axis.vertical,
-                    children: response.keys
-                        .map(
-                          (key) => ListTile(
-                            title: Text("Story title: $key"),
-                            subtitle: Text("Times read: ${response[key]}"),
-                          ),
+                      scrollDirection: Axis.vertical,
+                      children: [
+                        ListTile(
+                          title: Text("Registered users"),
+                          subtitle: Text("$userCount"),
                         )
-                        .toList(),
-                  );
+                      ]..addAll(storyStats.keys
+                          .map(
+                            (key) => ListTile(
+                              title: Text("Story title: $key"),
+                              subtitle: Text("Times read: ${storyStats[key]}"),
+                            ),
+                          )
+                          .toList()));
                 } else {
                   return Container(
                       child: Text(
                           "Failed to load the statistics, try again later"));
                 }
             }
-            return Center(child: Text(LDLocalizations.backToStories));
+            return Center(
+                child: Text("Loading. Might take up to 6 seconds..."));
           },
         ),
       ),

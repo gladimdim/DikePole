@@ -76,6 +76,7 @@ class LDLocalizations {
       'pastefulljson': 'Paste full JSON text',
       'import': 'Import',
       'statisticsTitle': 'Statistics of the platform',
+      'theendstartoverquestion': 'This is the end. Start again?'
     },
     'uk': {
       'continue': 'Продовжити',
@@ -143,7 +144,8 @@ class LDLocalizations {
       'exportgladstorytojson': 'Експорт в JSON',
       'pastefulljson': 'Вставте повний текст JSON',
       'import': 'Імпортувати',
-      'statisticsTitle': 'Статистика по плафтормі'
+      'statisticsTitle': 'Статистика по платформі',
+      'theendstartoverquestion': 'Це кінець, почати заново?',
     },
     'pl': {
       'continue': 'Dalej',
@@ -213,6 +215,7 @@ class LDLocalizations {
       'pastefulljson': 'Wklej pełny JSON',
       'import': 'Import',
       'statisticsTitle': 'Statystyka platformy',
+      'theendstartoverquestion': 'To jest koniec. Zacznij jeszcze raz?',
     }
   };
 
@@ -462,5 +465,9 @@ class LDLocalizations {
 
   static String get statisticsTitle {
     return _localizedValues[locale.languageCode]['statisticsTitle'];
+  }
+
+  static String get theEndStartOverQuestion {
+    return _localizedValues[locale.languageCode]['theendstartoverquestion'];
   }
 }
