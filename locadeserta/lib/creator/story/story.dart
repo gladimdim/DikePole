@@ -72,6 +72,7 @@ class Story {
     );
     currentPage = next.nextPage;
     currentPage.currentIndex = 0;
+    _logCurrentPassageToHistory();
   }
 
   bool canContinue() {
