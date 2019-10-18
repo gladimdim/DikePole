@@ -7,6 +7,7 @@ import 'package:onlineeditor/creator/components/catalog_view.dart';
 import 'package:onlineeditor/locale_selection_view.dart';
 
 class Root extends StatefulWidget {
+  static const routeName = "/root";
   @override
   _RootState createState() => _RootState();
 }

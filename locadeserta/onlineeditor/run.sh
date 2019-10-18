@@ -1,3 +1,3 @@
 flutter config --enable-web
 
-flutter build web --web-port=5000
+flutter run -d headless-server --web-port=5000
