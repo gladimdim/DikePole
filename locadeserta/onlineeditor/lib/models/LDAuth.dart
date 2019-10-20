@@ -1,4 +1,5 @@
 import 'package:firebase/firebase.dart';
+
 import 'LDUser.dart';
 
 class LDAuth {
@@ -36,7 +37,7 @@ class LDAuth {
     }
   }
 
-  Future<LDUser> getUser() async {
+  LDUser getUser() {
     return LDUser(
       displayName: fbAuth.currentUser.displayName,
       uid: fbAuth.currentUser.uid,

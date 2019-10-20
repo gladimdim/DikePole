@@ -1,8 +1,12 @@
+import 'package:async/async.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:http/http.dart' as http;
 import 'package:onlineeditor/Localizations.dart';
-import 'package:onlineeditor/models/story_catalogs.dart';
+import 'package:onlineeditor/creator/story/persistence.dart';
+import 'package:onlineeditor/creator/story/story.dart';
+import 'package:onlineeditor/models/LDUser.dart';
+import 'package:onlineeditor/views/inherited_auth.dart';
 
 class CatalogGladStoryView extends StatefulWidget {
   static const routeName = "/catalog_view";
@@ -12,14 +16,23 @@ class CatalogGladStoryView extends StatefulWidget {
 }
 
 class _CatalogGladStoryViewState extends State<CatalogGladStoryView> {
+  AsyncMemoizer _storyBuilderCatalogMemo = AsyncMemoizer();
+
   Future fetchCatalog() async {
     return await http.get("https://locadeserta.com/stories/index.json");
   }
 
+  Future _fetchData(LDUser user) {
+    return _storyBuilderCatalogMemo.runOnce(() async {
+      return StoryPersistence.instance.getUserStories(user);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
+    var user = InheritedAuth.of(context).auth.getUser();
     return FutureBuilder(
-        future: fetchCatalog(),
+        future: _fetchData(user),
         builder: (context, snapshot) {
           print(snapshot.connectionState);
           switch (snapshot.connectionState) {
@@ -29,8 +42,7 @@ class _CatalogGladStoryViewState extends State<CatalogGladStoryView> {
               return Center(child: Text(LDLocalizations.loadingStory));
               break;
             case ConnectionState.done:
-              List<CatalogGladStory> list =
-                  CatalogGladStory.fromJsonList(snapshot.data.body);
+              List<Story> list = snapshot.data;
               return ListView(
                 scrollDirection: Axis.vertical,
                 children: list
@@ -38,11 +50,10 @@ class _CatalogGladStoryViewState extends State<CatalogGladStoryView> {
                       (element) => ListTile(
                         title: Text(element.title),
                         subtitle: Text(element.description),
-                        leading: Text("${element.settingYear}"),
                         onTap: () => Navigator.pushNamed(
                           context,
                           "/editStories",
-                          arguments: element.url,
+                          arguments: element,
                         ),
                       ),
                     )

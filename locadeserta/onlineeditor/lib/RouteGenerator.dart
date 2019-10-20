@@ -11,6 +11,8 @@ import 'creator/components/edit_node_view.dart';
 import 'creator/components/edit_story.dart';
 import 'creator/components/game_view.dart';
 
+var ldAuth = LDAuth();
+
 class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     final args = settings.arguments;
@@ -21,7 +23,10 @@ class RouteGenerator {
       case StatisticsView.routeName:
         return MaterialPageRoute(builder: (_) => StatisticsView());
       case CatalogGladStoryView.routeName:
-        return MaterialPageRoute(builder: (_) => CatalogGladStoryView());
+        return MaterialPageRoute(
+          builder: (_) =>
+              InheritedAuth(child: CatalogGladStoryView(), auth: ldAuth),
+        );
       case "/editPassage":
         return MaterialPageRoute(
           builder: (_) => EditNodeView(
@@ -31,18 +36,20 @@ class RouteGenerator {
         break;
       case "/editStories":
         return MaterialPageRoute(
-          builder: (_) => EditStoryView(storyUrl: args),
+          builder: (_) =>
+              InheritedAuth(child: EditStoryView(story: args), auth: ldAuth),
         );
       case "/":
         return MaterialPageRoute(
-            builder: (_) => InheritedAuth(child: LoginView(), auth: LDAuth()));
+            builder: (_) => InheritedAuth(child: LoginView(), auth: ldAuth));
       case "/play":
         return MaterialPageRoute(
             builder: (_) => GameView(
                   story: args,
                 ));
       case Root.routeName:
-        return MaterialPageRoute(builder: (_) => Root());
+        return MaterialPageRoute(
+            builder: (_) => InheritedAuth(child: Root(), auth: ldAuth));
     }
     return _errorRoute();
   }

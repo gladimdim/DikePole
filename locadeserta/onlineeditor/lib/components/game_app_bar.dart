@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:onlineeditor/Localizations.dart';
 import 'package:onlineeditor/components/app_bar_custom.dart';
 
 class GameAppBar extends StatelessWidget {
@@ -13,6 +14,14 @@ class GameAppBar extends StatelessWidget {
     return AppBarCustom(
       title: title,
       appBarButtons: [
+        AppBarObject(
+          onTap: () => Navigator.pop(context),
+          text: LDLocalizations.backToStories,
+        ),
+        AppBarObject(
+          onTap: onResetStory,
+          text: LDLocalizations.reset,
+        ),
       ],
     );
   }
