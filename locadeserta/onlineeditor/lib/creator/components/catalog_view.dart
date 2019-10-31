@@ -1,6 +1,7 @@
 import 'package:async/async.dart';
 import 'package:flutter/material.dart';
 import 'package:onlineeditor/Localizations.dart';
+import 'package:onlineeditor/creator/components/meta_story_view.dart';
 import 'package:onlineeditor/creator/story/persistence.dart';
 import 'package:onlineeditor/creator/story/story.dart';
 import 'package:onlineeditor/models/LDUser.dart';
@@ -16,8 +17,8 @@ class CatalogGladStoryView extends StatefulWidget {
 
 class _CatalogGladStoryViewState extends State<CatalogGladStoryView> {
   Story story;
+  List<Story> storyBuilders = [];
   AsyncMemoizer _storyBuilderCatalogMemo = AsyncMemoizer();
-  final AsyncMemoizer _currentUserMemo = AsyncMemoizer();
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +40,7 @@ class _CatalogGladStoryViewState extends State<CatalogGladStoryView> {
                     leading: Icon(Icons.book),
                     title: Text(LDLocalizations.createStory),
                   ),
-                  CreateMetaStoryView(
+                  EditMetaStoryView(
                     story: null,
                     onSave: (Story newStory) async {
                       await StoryPersistence.instance
@@ -65,7 +66,7 @@ class _CatalogGladStoryViewState extends State<CatalogGladStoryView> {
                   if (snapshot.data == null) {
                     return Container();
                   } else {
-                    List<Story> storyBuilders = snapshot.data;
+                    storyBuilders = snapshot.data;
                     return Column(
                       children: _createStoryCards(storyBuilders, user, context),
                     );
@@ -100,14 +101,27 @@ class _CatalogGladStoryViewState extends State<CatalogGladStoryView> {
   }
 
   Widget _createStoryCard(Story story, LDUser user, context) {
-    return Center(
-      child: Card(
-        elevation: 10.0,
-        child: CreateMetaStoryView(
-          story: story,
-          onSave: (Story newStory) {
-            _goToEditStoryView(newStory, context);
-          },
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 8.0),
+      child: Center(
+        child: Card(
+          elevation: 10.0,
+          child: MetaStoryView(
+            story: story,
+            onSave: (Story newStory) async {
+              await StoryPersistence.instance
+                  .writeStory(InheritedAuth.of(context).auth.getUser(), story);
+              setState(() {});
+            },
+            onEdit: (story) {
+              _goToEditStoryView(story, context);
+            },
+            onDelete: (story) async {
+              await _deleteStory(
+                  InheritedAuth.of(context).auth.getUser(), story);
+              _resetStoryBuilderFuture();
+            },
+          ),
         ),
       ),
     );
@@ -119,6 +133,10 @@ class _CatalogGladStoryViewState extends State<CatalogGladStoryView> {
       "/editStories",
       arguments: story,
     );
+  }
+
+  _deleteStory(LDUser user, Story story) async {
+    return await StoryPersistence.instance.deleteStory(user, story);
   }
 }
 
@@ -148,117 +166,6 @@ class StoryViewHeader extends StatelessWidget {
           ],
         ),
       ],
-    );
-  }
-}
-
-class CreateMetaStoryView extends StatefulWidget {
-  final Function(Story story) onSave;
-  final Story story;
-  final Function(Story story) onDelete;
-
-  CreateMetaStoryView({this.onDelete, @required this.onSave, this.story});
-
-  @override
-  _CreateMetaStoryViewState createState() => _CreateMetaStoryViewState();
-}
-
-class _CreateMetaStoryViewState extends State<CreateMetaStoryView> {
-  final _formKey = GlobalKey<FormState>();
-
-  String _title;
-
-  String _description;
-
-  String _authors;
-
-  @override
-  Widget build(BuildContext context) {
-    var editMode = widget.onDelete != null;
-    return Form(
-      key: _formKey,
-      child: Column(
-        children: <Widget>[
-          TextFormField(
-            decoration: InputDecoration(
-              icon: Icon(Icons.title),
-              hintText: LDLocalizations.enterStoryTitle,
-              labelText: LDLocalizations.labelStoryTitle,
-            ),
-            initialValue: widget.story == null ? "" : widget.story.title,
-            onSaved: (value) {
-              _title = value;
-            },
-          ),
-          TextFormField(
-            decoration: InputDecoration(
-              icon: Icon(Icons.description),
-              hintText: LDLocalizations.hintDescription,
-              labelText: LDLocalizations.description,
-            ),
-            onSaved: (value) {
-              _description = value;
-            },
-            initialValue: widget.story == null ? "" : widget.story.description,
-          ),
-          TextFormField(
-            decoration: InputDecoration(
-              icon: Icon(Icons.title),
-              hintText: LDLocalizations.listOfAuthors,
-              labelText: LDLocalizations.labelAuthors,
-            ),
-            onSaved: (value) {
-              _authors = value;
-            },
-            initialValue: widget.story == null ? "" : widget.story.authors,
-          ),
-          Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-            Padding(
-              padding: EdgeInsets.all(4.0),
-              child: FlatButton.icon(
-                icon: Icon(Icons.edit),
-                onPressed: () {
-                  _formKey.currentState.save();
-                  var story;
-                  if (widget.story == null) {
-                    story = Story(
-                      title: _title,
-                      description: _description,
-                      authors: _authors,
-                      root: Page.generate(),
-                    );
-                  } else {
-                    story = widget.story;
-                    story.title = _title;
-                    story.description = _description;
-                    story.authors = _authors;
-                  }
-                  if (!editMode) {
-                    setState(() {
-                      _formKey.currentState.reset();
-                    });
-                  }
-                  widget.onSave(story);
-                },
-                label: Text(editMode
-                    ? LDLocalizations.edit
-                    : LDLocalizations.createStory),
-              ),
-            ),
-            if (widget.onDelete != null)
-              Padding(
-                padding: EdgeInsets.all(4.0),
-                child: FlatButton.icon(
-                  icon: Icon(Icons.delete),
-                  onPressed: () {
-                    widget.onDelete(widget.story);
-                  },
-                  label: Text(LDLocalizations.remove),
-                ),
-              ),
-          ]),
-        ],
-      ),
     );
   }
 }

@@ -40,4 +40,9 @@ class StoryPersistence {
       storage.doc(doc.ref.path).set(data);
     }
   }
+
+  Future deleteStory(LDUser user, Story story) async {
+    return await storage
+        .doc("user_stories/${user.uid}/stories/${story.title}").delete();
+  }
 }

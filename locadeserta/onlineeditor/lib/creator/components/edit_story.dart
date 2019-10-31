@@ -6,7 +6,7 @@ import 'package:onlineeditor/components/app_bar_custom.dart';
 import 'package:onlineeditor/components/bordered_container.dart';
 import 'package:onlineeditor/components/narrow_scaffold.dart';
 import 'package:onlineeditor/creator/components/edit_node_view.dart';
-import 'package:onlineeditor/creator/components/fat_button.dart';
+import 'package:onlineeditor/creator/components/fat_container.dart';
 import 'package:onlineeditor/creator/components/game_view.dart';
 import 'package:onlineeditor/creator/components/text_editor.dart';
 import 'package:onlineeditor/creator/story/persistence.dart';
@@ -214,7 +214,7 @@ class _EditStoryViewState extends State<EditStoryView> {
                 ),
               )),
           SlideableButton(
-            child: FatButton(
+            child: FatContainer(
               text: LDLocalizations.startStory,
               backgroundColor: Theme.of(context).primaryColor,
             ),
@@ -233,21 +233,21 @@ class _EditStoryViewState extends State<EditStoryView> {
       title: LDLocalizations.createStory,
       actions: [
         AppBarObject(
-          text: LDLocalizations.save,
-          onTap: () => _saveStoryCallback(context),
-        ),
-        AppBarObject(
           text: LDLocalizations.backToStories,
           onTap: () {
             Navigator.pop(context);
           },
+        ),
+        AppBarObject(
+          text: LDLocalizations.save,
+          onTap: () => _saveStoryCallback(context),
         ),
       ],
     );
   }
 
   _saveStory(BuildContext context) async {
-    var user = await InheritedAuth.of(context).auth.getUser();
+    var user = InheritedAuth.of(context).auth.getUser();
     await StoryPersistence.instance.writeStory(user, widget.story);
     setState(() {});
   }

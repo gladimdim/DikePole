@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:onlineeditor/Localizations.dart';
 import 'package:onlineeditor/animations/slideable_button.dart';
 import 'package:onlineeditor/components/BorderedRandomImageForType.dart';
-import 'package:onlineeditor/creator/components/fat_button.dart';
+import 'package:onlineeditor/creator/components/fat_container.dart';
 import 'package:onlineeditor/creator/story/story.dart';
 import 'package:onlineeditor/creator/utils/utils.dart';
 import 'package:onlineeditor/models/background_image.dart';
@@ -70,7 +70,7 @@ class PassageState extends State<StoryView> with TickerProviderStateMixin {
                 widget.currentStory.goToNextPage(page);
               });
             },
-            child: FatButton(
+            child: FatContainer(
               text: page.text,
               backgroundColor: Theme.of(context).primaryColor,
             ),
@@ -84,7 +84,7 @@ class PassageState extends State<StoryView> with TickerProviderStateMixin {
     return Padding(
       padding: EdgeInsets.all(8.0),
       child: SlideableButton(
-          child: FatButton(
+          child: FatContainer(
             text: LDLocalizations.next,
             backgroundColor: Theme.of(context).primaryColor,
           ),
@@ -112,7 +112,7 @@ class PassageState extends State<StoryView> with TickerProviderStateMixin {
             if (!widget.currentStory.canContinue() &&
                 widget.currentStory.currentPage.isTheEnd())
               SlideableButton(
-                child: FatButton(text: LDLocalizations.theEndStartOverQuestion),
+                child: FatContainer(text: LDLocalizations.theEndStartOverQuestion),
                 onPress: () {
                   widget.currentStory.reset();
                 },

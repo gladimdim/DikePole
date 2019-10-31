@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:onlineeditor/Localizations.dart';
 import 'package:onlineeditor/animations/slideable_button.dart';
 import 'package:onlineeditor/components/bordered_container.dart';
-import 'package:onlineeditor/creator/components/fat_button.dart';
+import 'package:onlineeditor/creator/components/fat_container.dart';
 import 'package:onlineeditor/creator/components/image_selector.dart';
 import 'package:onlineeditor/creator/components/text_editor.dart';
 import 'package:onlineeditor/creator/story/story.dart';
@@ -141,7 +141,7 @@ class _TextEditorState extends State<TextEditorWithButton> {
         Padding(
           padding: const EdgeInsets.only(top: 8.0),
           child: SlideableButton(
-            child: FatButton(
+            child: FatContainer(
               text: LDLocalizations.save,
               backgroundColor: Theme.of(context).primaryColor,
             ),

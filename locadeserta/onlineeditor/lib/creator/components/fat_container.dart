@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 
-class FatButton extends StatelessWidget {
+class FatContainer extends StatelessWidget {
   final String text;
   final Color backgroundColor;
-  FatButton({@required this.text, this.backgroundColor = Colors.black});
+
+  FatContainer({@required this.text, this.backgroundColor = Colors.black});
 
   @override
   Widget build(BuildContext context) {
-    var height = MediaQuery.of(context).size.height*0.075;
+    var height = MediaQuery.of(context).size.height * 0.075;
     return SizedBox(
       height: height,
       child: Container(
