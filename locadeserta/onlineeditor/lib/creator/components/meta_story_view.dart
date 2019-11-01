@@ -3,6 +3,8 @@ import 'package:onlineeditor/Localizations.dart';
 import 'package:onlineeditor/animations/slideable_button.dart';
 import 'package:onlineeditor/creator/components/fat_container.dart';
 import 'package:onlineeditor/creator/story/story.dart';
+import 'package:flutter/services.dart';
+
 
 class MetaStoryView extends StatefulWidget {
   final Function(Story story) onSave;
@@ -74,8 +76,19 @@ class _EditMetaStoryViewState extends State<EditMetaStoryView> {
 
   String _authors;
 
+  int _year;
+
   @override
   Widget build(BuildContext context) {
+
+    var year;
+
+    if (widget.story != null && widget.story.year != null) {
+      year = widget.story.year;
+    } else {
+      year = 1620;
+    }
+
     return Form(
       key: _formKey,
       child: Column(
@@ -115,6 +128,19 @@ class _EditMetaStoryViewState extends State<EditMetaStoryView> {
             },
             initialValue: widget.story == null ? "" : widget.story.authors,
           ),
+          TextFormField(
+            decoration: InputDecoration(
+              icon: Icon(Icons.calendar_today),
+              hintText: LDLocalizations.hintFieldYear,
+              labelText: LDLocalizations.labelYear,
+            ),
+            keyboardType: TextInputType.number,
+            inputFormatters: [WhitelistingTextInputFormatter.digitsOnly],
+            onSaved: (value) {
+              _year = int.parse(value);
+            },
+            initialValue: "$year",
+          ),
           Row(mainAxisAlignment: MainAxisAlignment.center, children: [
             Padding(
               padding: EdgeInsets.all(4.0),
@@ -135,6 +161,7 @@ class _EditMetaStoryViewState extends State<EditMetaStoryView> {
                     story.title = _title;
                     story.description = _description;
                     story.authors = _authors;
+                    story.year = _year;
                   }
                   widget.onSave(story);
                 },

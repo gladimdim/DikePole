@@ -2,7 +2,7 @@ import 'dart:core';
 
 import 'package:flutter/material.dart';
 
-var version = "1.91";
+var version = "1.92";
 
 class LDLocalizations {
   static Locale locale = Locale('uk');
@@ -81,7 +81,9 @@ class LDLocalizations {
       'registeredUsers': 'Registered users',
       'timesRead': 'Times read',
       'failedToLoadStats': 'Failed to load statistics',
-      'loadingStats': 'Loading. Might take up to 6 seconds...'
+      'loadingStats': 'Loading. Might take up to 6 seconds...',
+      'hintFieldYear': 'Enter year when the story happened',
+      'labelYear': 'Year:',
     },
     'uk': {
       'continue': 'Продовжити',
@@ -155,7 +157,9 @@ class LDLocalizations {
       'registeredUsers': 'Зареєстровано користувачів',
       'timesRead': 'Прочитано разів',
       'failedToLoadStats': 'Не змогли завантажити статистику',
-      'loadingStats': 'Завантажуємо статистику. Може зайняти до 6 секунд.'
+      'loadingStats': 'Завантажуємо статистику. Може зайняти до 6 секунд.',
+      'hintFieldYear': 'Введіть рік, коли історія відбулася',
+      'labelYear': 'Рік:',
     },
     'pl': {
       'continue': 'Dalej',
@@ -230,7 +234,9 @@ class LDLocalizations {
       'registeredUsers': 'Zarejestrowani Użytkownicy',
       'timesRead': 'Czytaj czasy',
       'failedToLoadStats': 'Nie udało się załadować statystyk',
-      'loadingStats': 'Ładowanie statystyk. Może to potrwać do 6 sekund.'
+      'loadingStats': 'Ładowanie statystyk. Może to potrwać do 6 sekund.',
+      'hintFieldYear': 'Podaj rok, w którym wydarzyła się historia',
+      'labelYear': 'Rok:',
     }
   };
 
@@ -504,5 +510,13 @@ class LDLocalizations {
 
   static String get loadingStats {
     return _localizedValues[locale.languageCode]['loadingStats'];
+  }
+
+  static String get hintFieldYear {
+    return _localizedValues[locale.languageCode]['hintFieldYear'];
+  }
+
+  static String get labelYear {
+    return _localizedValues[locale.languageCode]['labelYear'];
   }
 }
