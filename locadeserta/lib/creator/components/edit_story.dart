@@ -7,7 +7,7 @@ import 'package:locadeserta/components/bordered_container.dart';
 import 'package:locadeserta/components/narrow_scaffold.dart';
 import 'package:locadeserta/creator/components/text_editor.dart';
 import 'package:locadeserta/creator/components/edit_node_view.dart';
-import 'package:locadeserta/creator/components/fat_button.dart';
+import 'package:locadeserta/creator/components/fat_container.dart';
 import 'package:locadeserta/creator/components/game_view.dart';
 import 'package:locadeserta/creator/story/persistence.dart';
 import 'package:locadeserta/creator/story/story.dart';
@@ -19,8 +19,7 @@ import 'package:share_extend/share_extend.dart';
 class EditStoryView extends StatefulWidget {
   final Story story;
 
-  EditStoryView(
-      {@required this.story});
+  EditStoryView({@required this.story});
 
   @override
   _EditStoryViewState createState() => _EditStoryViewState();
@@ -70,8 +69,7 @@ class _EditStoryViewState extends State<EditStoryView> {
                       });
                     },
                   ),
-                  Center(
-                      child: Text(LDLocalizations.labelIsTheEnd)),
+                  Center(child: Text(LDLocalizations.labelIsTheEnd)),
                   if (story.currentPage.isTheEnd()) ...[
                     Radio(
                       value: EndType.DEAD,
@@ -82,9 +80,7 @@ class _EditStoryViewState extends State<EditStoryView> {
                         });
                       },
                     ),
-                    Center(
-                        child: Text(
-                            LDLocalizations.labelIsTheEndDead)),
+                    Center(child: Text(LDLocalizations.labelIsTheEndDead)),
                     Radio(
                       value: EndType.ALIVE,
                       groupValue: story.currentPage.endType,
@@ -94,9 +90,7 @@ class _EditStoryViewState extends State<EditStoryView> {
                         });
                       },
                     ),
-                    Center(
-                        child: Text(
-                            LDLocalizations.labelIsTheEndAlive))
+                    Center(child: Text(LDLocalizations.labelIsTheEndAlive))
                   ]
                 ],
               ),
@@ -106,8 +100,8 @@ class _EditStoryViewState extends State<EditStoryView> {
               child: FlatButton.icon(
                 onPressed: () {
                   setState(() {
-                    story.currentPage.addNextPageWithText(
-                        LDLocalizations.optionPlaceHolder);
+                    story.currentPage
+                        .addNextPageWithText(LDLocalizations.optionPlaceHolder);
                   });
                 },
                 icon: Icon(Icons.add_box),
@@ -210,7 +204,9 @@ class _EditStoryViewState extends State<EditStoryView> {
                                 ),
                               );
 
-                              var user = await InheritedAuth.of(context).auth.currentUser();
+                              var user = await InheritedAuth.of(context)
+                                  .auth
+                                  .currentUser();
                               await StoryPersistence.instance
                                   .writeStory(user, widget.story);
                             },
@@ -229,7 +225,7 @@ class _EditStoryViewState extends State<EditStoryView> {
                   ),
                 )),
             SlideableButton(
-              child: FatButton(
+              child: FatContainer(
                 text: LDLocalizations.startStory,
                 backgroundColor: Theme.of(context).primaryColor,
               ),
@@ -238,8 +234,7 @@ class _EditStoryViewState extends State<EditStoryView> {
                 await Navigator.pushNamed(
                   context,
                   ExtractArgumentsGameView.routeName,
-                  arguments:
-                      GameViewArguments(story: story),
+                  arguments: GameViewArguments(story: story),
                 );
                 story.reset();
               },
@@ -249,21 +244,20 @@ class _EditStoryViewState extends State<EditStoryView> {
         title: LDLocalizations.createStory,
         actions: [
           AppBarObject(
-            text: LDLocalizations.save,
-            onTap: () => _saveStoryCallback(context),
-          ),
-          AppBarObject(
               text: LDLocalizations.backToStories,
               onTap: () {
                 Navigator.pop(context);
               }),
           AppBarObject(
-            text: LDLocalizations.exportGladStoryToJson,
-            onTap: () {
-              var json = widget.story.toJson();
-              ShareExtend.share(json, "text");
-            }
+            text: LDLocalizations.save,
+            onTap: () => _saveStoryCallback(context),
           ),
+          AppBarObject(
+              text: LDLocalizations.exportGladStoryToJson,
+              onTap: () {
+                var json = widget.story.toJson();
+                ShareExtend.share(json, "text");
+              }),
         ]);
   }
 
@@ -288,6 +282,7 @@ class _EditStoryViewState extends State<EditStoryView> {
 
 class EditStoryViewArguments {
   final Story story;
+
   EditStoryViewArguments({this.story});
 }
 

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:locadeserta/animations/slideable_button.dart';
 import 'package:locadeserta/components/bordered_container.dart';
-import 'package:locadeserta/creator/components/fat_button.dart';
+import 'package:locadeserta/creator/components/fat_container.dart';
 import 'package:locadeserta/creator/story/persistence.dart';
 import 'package:locadeserta/creator/story/story.dart';
 import 'package:locadeserta/models/Auth.dart';
@@ -37,7 +37,7 @@ class _ImportGladStoryViewState extends State<ImportGladStoryView> {
             SlideableButton(
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: FatButton(
+                child: FatContainer(
                   text: LDLocalizations.labelImport,
                 ),
               ),

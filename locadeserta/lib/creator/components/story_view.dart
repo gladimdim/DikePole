@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:locadeserta/InheritedAuth.dart';
 import 'package:locadeserta/animations/slideable_button.dart';
 import 'package:locadeserta/components/BorderedRandomImageForType.dart';
-import 'package:locadeserta/creator/components/fat_button.dart';
+import 'package:locadeserta/creator/components/fat_container.dart';
 import 'package:locadeserta/creator/story/story.dart';
 import 'package:locadeserta/creator/utils/utils.dart';
 import 'package:locadeserta/models/Localizations.dart';
@@ -85,7 +85,7 @@ class PassageState extends State<StoryView> with TickerProviderStateMixin {
                 widget.currentStory.goToNextPage(page);
               });
             },
-            child: FatButton(
+            child: FatContainer(
               text: page.text,
               backgroundColor: Theme.of(context).primaryColor,
             ),
@@ -99,7 +99,7 @@ class PassageState extends State<StoryView> with TickerProviderStateMixin {
     return Padding(
       padding: EdgeInsets.all(8.0),
       child: SlideableButton(
-          child: FatButton(
+          child: FatContainer(
             text: LDLocalizations.next,
             backgroundColor: Theme.of(context).primaryColor,
           ),

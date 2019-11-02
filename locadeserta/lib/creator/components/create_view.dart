@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:async/async.dart';
 import 'package:locadeserta/InheritedAuth.dart';
-
 import 'package:locadeserta/creator/components/edit_story.dart';
-import 'package:locadeserta/creator/components/fat_button.dart';
+
+import 'package:locadeserta/creator/components/fat_container.dart';
+import 'package:locadeserta/creator/components/meta_story_view.dart';
 import 'package:locadeserta/creator/story/persistence.dart';
 import 'package:locadeserta/creator/story/story.dart';
 import 'package:locadeserta/import_gladstories_view.dart';
@@ -20,11 +21,12 @@ class CreateView extends StatefulWidget {
 
 class _CreateViewState extends State<CreateView> {
   Story story;
+  List<Story> storyBuilders = [];
   AsyncMemoizer _storyBuilderCatalogMemo = AsyncMemoizer();
-  final AsyncMemoizer _currentUserMemo = AsyncMemoizer();
 
   @override
   Widget build(BuildContext context) {
+    var user = InheritedAuth.of(context).auth.user;
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -42,27 +44,12 @@ class _CreateViewState extends State<CreateView> {
                 await Navigator.pushNamed(context, ImportGladStoryView.routeName);
                 _resetStoryBuilderFuture();
               },
-              child: FatButton(
+              child: FatContainer(
                 text: LDLocalizations.labelImport,
               ),
             ),
             Expanded(
-              child: FutureBuilder(
-                  future: _currentUser(context),
-                  builder: (context, snapshot) {
-                    User user = snapshot.data;
-                    switch (snapshot.connectionState) {
-                      case ConnectionState.none:
-                      case ConnectionState.active:
-                      case ConnectionState.waiting:
-                        return WaitingScreen();
-                        break;
-                      case ConnectionState.done:
-                        return _buildStoryView(context, user);
-                      default:
-                        return WaitingScreen();
-                    }
-                  }),
+              child: _buildStoryView(context, user),
             ),
           ],
         ),
@@ -70,59 +57,60 @@ class _CreateViewState extends State<CreateView> {
     );
   }
 
+
   _buildStoryView(BuildContext context, User user) {
     return Padding(
       padding: const EdgeInsets.all(2.0),
       child: SingleChildScrollView(
           child: Column(
-        children: <Widget>[
-          Center(
-            child: Card(
-              elevation: 10.0,
-              child: Column(
-                children: <Widget>[
-                  ListTile(
-                    leading: Icon(Icons.book),
-                    title: Text(LDLocalizations.createStory),
+            children: <Widget>[
+              Center(
+                child: Card(
+                  elevation: 10.0,
+                  child: Column(
+                    children: <Widget>[
+                      ListTile(
+                        leading: Icon(Icons.book),
+                        title: Text(LDLocalizations.createStory),
+                      ),
+                      EditMetaStoryView(
+                        story: null,
+                        onSave: (Story newStory) async {
+                          await StoryPersistence.instance
+                              .writeStory(user, newStory);
+                          _resetStoryBuilderFuture();
+                        },
+                        onDelete: null,
+                      ),
+                    ],
                   ),
-                  CreateMetaStoryView(
-                    story: null,
-                    onSave: (Story newStory) async {
-                      await StoryPersistence.instance
-                          .writeStory(user, newStory);
-                      _resetStoryBuilderFuture();
-                    },
-                    onDelete: null,
-                  ),
-                ],
+                ),
               ),
-            ),
-          ),
-          FutureBuilder(
-            future: _fetchData(user),
-            builder: (context, snapshot) {
-              switch (snapshot.connectionState) {
-                case ConnectionState.none:
-                case ConnectionState.active:
-                case ConnectionState.waiting:
-                  return WaitingScreen();
-                  break;
-                case ConnectionState.done:
-                  if (snapshot.data == null) {
-                    return Container();
-                  } else {
-                    List<Story> storyBuilders = snapshot.data;
-                    return Column(
-                      children: _createStoryCards(storyBuilders, user, context),
-                    );
+              FutureBuilder(
+                future: _fetchData(user),
+                builder: (context, snapshot) {
+                  switch (snapshot.connectionState) {
+                    case ConnectionState.none:
+                    case ConnectionState.active:
+                    case ConnectionState.waiting:
+                      return WaitingScreen();
+                      break;
+                    case ConnectionState.done:
+                      if (snapshot.data == null) {
+                        return Container();
+                      } else {
+                        storyBuilders = snapshot.data;
+                        return Column(
+                          children: _createStoryCards(storyBuilders, user, context),
+                        );
+                      }
+                      break;
                   }
-                  break;
-              }
-              return Container();
-            },
-          )
-        ],
-      )),
+                  return Container();
+                },
+              )
+            ],
+          )),
     );
   }
 
@@ -138,32 +126,35 @@ class _CreateViewState extends State<CreateView> {
     });
   }
 
-  Future _currentUser(BuildContext context) {
-    return _currentUserMemo.runOnce(() async {
-      var auth = InheritedAuth.of(context).auth;
-      return await auth.currentUser();
-    });
-  }
-
-  List<Widget> _createStoryCards(List<Story> storyBuilders, User user, context) {
+  List<Widget> _createStoryCards(
+      List<Story> storyBuilders, User user, context) {
     return storyBuilders
         .map((storyBuilder) => _createStoryCard(storyBuilder, user, context))
         .toList();
   }
 
   Widget _createStoryCard(Story story, User user, context) {
-    return Center(
-      child: Card(
-        elevation: 10.0,
-        child: CreateMetaStoryView(
-          story: story,
-          onSave: (Story newStory) {
-            _goToEditStoryView(newStory, context);
-          },
-          onDelete: (Story story) async {
-            await _deleteStory(user, story);
-            _resetStoryBuilderFuture();
-          },
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 8.0),
+      child: Center(
+        child: Card(
+          elevation: 10.0,
+          child: MetaStoryView(
+            story: story,
+            onSave: (Story newStory) async {
+              await StoryPersistence.instance
+                  .writeStory(user, story);
+              setState(() {});
+            },
+            onEdit: (story) {
+              _goToEditStoryView(story, context);
+            },
+            onDelete: (story) async {
+              await _deleteStory(
+                  user, story);
+              _resetStoryBuilderFuture();
+            },
+          ),
         ),
       ),
     );
@@ -206,117 +197,6 @@ class StoryViewHeader extends StatelessWidget {
           ],
         ),
       ],
-    );
-  }
-}
-
-class CreateMetaStoryView extends StatefulWidget {
-  final Function(Story story) onSave;
-  final Story story;
-  final Function(Story story) onDelete;
-
-  CreateMetaStoryView({this.onDelete, @required this.onSave, this.story});
-
-  @override
-  _CreateMetaStoryViewState createState() => _CreateMetaStoryViewState();
-}
-
-class _CreateMetaStoryViewState extends State<CreateMetaStoryView> {
-  final _formKey = GlobalKey<FormState>();
-
-  String _title;
-
-  String _description;
-
-  String _authors;
-
-  @override
-  Widget build(BuildContext context) {
-    var editMode = widget.onDelete != null;
-    return Form(
-      key: _formKey,
-      child: Column(
-        children: <Widget>[
-          TextFormField(
-            decoration: InputDecoration(
-              icon: Icon(Icons.title),
-              hintText: LDLocalizations.enterStoryTitle,
-              labelText: LDLocalizations.labelStoryTitle,
-            ),
-            initialValue: widget.story == null ? "" : widget.story.title,
-            onSaved: (value) {
-              _title = value;
-            },
-          ),
-          TextFormField(
-            decoration: InputDecoration(
-              icon: Icon(Icons.description),
-              hintText: LDLocalizations.hintDescription,
-              labelText: LDLocalizations.description,
-            ),
-            onSaved: (value) {
-              _description = value;
-            },
-            initialValue: widget.story == null ? "" : widget.story.description,
-          ),
-          TextFormField(
-            decoration: InputDecoration(
-              icon: Icon(Icons.title),
-              hintText: LDLocalizations.listOfAuthors,
-              labelText: LDLocalizations.labelAuthors,
-            ),
-            onSaved: (value) {
-              _authors = value;
-            },
-            initialValue: widget.story == null ? "" : widget.story.authors,
-          ),
-          Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-            Padding(
-              padding: EdgeInsets.all(4.0),
-              child: FlatButton.icon(
-                icon: Icon(Icons.edit),
-                onPressed: () {
-                  _formKey.currentState.save();
-                  var story;
-                  if (widget.story == null) {
-                    story = Story(
-                      title: _title,
-                      description: _description,
-                      authors: _authors,
-                      root: Page.generate(),
-                    );
-                  } else {
-                    story = widget.story;
-                    story.title = _title;
-                    story.description = _description;
-                    story.authors = _authors;
-                  }
-                  if (!editMode) {
-                    setState(() {
-                      _formKey.currentState.reset();
-                    });
-                  }
-                  widget.onSave(story);
-                },
-                label: Text(editMode
-                    ? LDLocalizations.edit
-                    : LDLocalizations.createStory),
-              ),
-            ),
-            if (widget.onDelete != null)
-              Padding(
-                padding: EdgeInsets.all(4.0),
-                child: FlatButton.icon(
-                  icon: Icon(Icons.delete),
-                  onPressed: () {
-                    widget.onDelete(widget.story);
-                  },
-                  label: Text(LDLocalizations.remove),
-                ),
-              ),
-          ]),
-        ],
-      ),
     );
   }
 }

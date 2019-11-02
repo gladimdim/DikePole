@@ -5,22 +5,24 @@ import 'package:locadeserta/models/background_image.dart';
 import 'package:rxdart/rxdart.dart';
 import 'dart:convert';
 
-
 class Story {
   String title;
   String description;
   String authors;
+  int year;
   Page root;
   List<HistoryItem> history = [];
   Page currentPage;
 
   BehaviorSubject _streamHistory = BehaviorSubject<List<HistoryItem>>();
   Stream historyChanges;
+
   Story(
       {@required this.title,
         @required this.description,
         @required this.authors,
-        @required this.root}) {
+        @required this.root,
+        this.year}) {
     currentPage = root;
     historyChanges = _streamHistory.stream;
     _logCurrentPassageToHistory();
@@ -34,6 +36,9 @@ class Story {
   }
 
   _logCurrentPassageToHistory() {
+    if (currentPage.nodes.isEmpty) {
+      return;
+    }
     if (currentPage.getCurrentNode().imageType != null) {
       var backgroundImage = BackgroundImage.getRandomImageForType(
           currentPage.getCurrentNode().imageType);
@@ -85,6 +90,7 @@ class Story {
       "description": description,
       "authors": authors,
       "root": root.toMap(),
+      "year": year,
     });
   }
 
@@ -95,6 +101,7 @@ class Story {
       "authors": authors,
       "root": root.toMap(),
       "currentPage": currentPage.toMap(),
+      "year": year,
       "history": history.map((historyItem) => historyItem.toMap()).toList(),
     });
   }
@@ -109,6 +116,7 @@ class Story {
       description: map["description"],
       root: rootPage,
       authors: authors,
+      year: map["year"],
     );
   }
 
@@ -119,6 +127,7 @@ class Story {
       "At the beginning of XVII century a confrontation flares up between Polish-Lithuanian Commonwealth and Ottoman Empire. As a result of a devastating defeat in the Battle of Cecora, a lot of noblemen, cossacks and soldiers perished or were captured by Turks and Tatars. A fate of a young cossack, wayfaring through the Wild FIelds in a desperate attempt to escape from captivity, depends on a reader of this interactive fiction. All challenges are equally hard: survive in a steppe, avoid the revenge of Tatars, win the trust of cossack fishermen and return home. But the time of the final battle that will change history is coming. Will the main character be able to participate in it and stay alive and where his life will go from there - only You know the answer.",
       authors: "Konstantin Boytsov, Anastasiia Tsapenko",
       root: Page.generate(),
+      year: 1620,
     );
     return story;
   }
@@ -270,36 +279,26 @@ class Page {
   static Page generate() {
     var p1 = PageNode(
       text:
-      "The sun was setting over the river, casting a crimson glow over everything. A swift current swept the dark water south to the sea while the wind quietly rustled the reeds, carrying the scent of autumn and smoke from the fire. Twilight was settling in.",
+      "This is an example of passage text",
     );
     var p2 = PageNode(
       text:
-      "Dmytro lay hidden in the thicket far from the water, listening carefully to the nearby sounds. Pesky gnats needled his face and neck. A little further off on the shore, where the reeds gave place to steppe grass and sparsely growing trees, three men had settled near a fire. The runaway couldn’t see them, but he could sometimes hear fragments of their conversation and the clatter of provisions passed on by the wind. They were Tatars. Dmytro was trying to hear whether they were there for him.",
-    );
-
-    var p3 = PageNode(
-      text:
-      "The Cossack lay like this for a long time, covering his head with his hands until it was completely dark. The wind increased, blocking out all other sounds except for the haunting song of the rustling reeds. The wispy clouds were driven westward, creating a covering for the weak light of the crescent moon. Dmytro couldn’t wait any longer. He had to do something. Gripping tightly a good combat knife, the only thing he managed to take from the boat when running away, he slowly crawled to the path that led to the river. He waited a while before getting up and, trying to step as lightly as possible, made his way to the river. There was no one on the dark path. He squatted and started to drink the cold river water, cupping it in his hand. From time to time, the moon and the thick clouds reflected on the river’s service. Suddenly, a girl’s face was seen. The man sprang back and stared at the spot where he had seen the bright eyes of a young girl. But there was nothing there – only the moonlight that sometimes shone through the clouds. He crossed himself and went back, whispering a prayer. Then he turned and made his way to where the wall of reeds ended.",
-    );
-
-    var p4 = PageNode(
-      text:
-      "The runaway had to crawl once again since the river bank had risen. Suddenly, he spotted a solitary fire glowing in the dark sea of the steppe.",
-    );
-
-    var p5 = PageNode(
-      text:
-      "In the rare times the moonlight was visible, it was possible to glimpse the silhouettes of people and horses. Two were sleeping on the ground facing each other. A third was sitting closer to the fire, leaning against a short spear and, seemingly, also sleeping. It was harder to make out the horses as they slept on the other side of the fire, but there appeared to be at least five of them.",
-    );
-
-    var p6 = PageNode(
-      text:
-      "In the rare times the moonlight was visible, it was possible to glimpse the silhouettes of people and horses. Two were sleeping on the ground facing each other. A third was sitting closer to the fire, leaning against a short spear and, seemingly, also sleeping. It was harder to make out the horses as they slept on the other side of the fire, but there appeared to be at least five of them.",
+      "This is second passage",
     );
 
     return Page(
-      nodes: [p1, p2, p3, p4, p5, p6],
-      endType: EndType.ALIVE,
+        nodes: [p1, p2],
+        endType: EndType.ALIVE,
+        next: [
+          PageNext(
+            text: "Option 1",
+            nextPage: Page(),
+          ),
+          PageNext(
+            text: "Option 2",
+            nextPage: Page(),
+          )
+        ]
     );
   }
 }

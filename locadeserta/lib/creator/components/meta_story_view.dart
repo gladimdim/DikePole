@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:onlineeditor/Localizations.dart';
-import 'package:onlineeditor/animations/slideable_button.dart';
-import 'package:onlineeditor/creator/components/fat_container.dart';
-import 'package:onlineeditor/creator/story/story.dart';
+import 'package:locadeserta/animations/slideable_button.dart';
+import 'package:locadeserta/creator/components/fat_container.dart';
+import 'package:locadeserta/creator/story/story.dart';
 import 'package:flutter/services.dart';
+import 'package:locadeserta/models/Localizations.dart';
 
 class MetaStoryView extends StatefulWidget {
   final Function(Story story) onSave;

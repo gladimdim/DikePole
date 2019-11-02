@@ -25,12 +25,16 @@ class Auth {
   }
 
   Stream<User> get onAuthStateChange {
-    return _auth.onAuthStateChanged.map(User.fromFirebaseUser);
+    return _auth.onAuthStateChanged.map((fbUser) {
+      user = User.fromFirebaseUser(fbUser);
+      return user;
+    });
   }
 
   Future<User> signInWithCredentials(AuthCredential creds) async {
-    final FirebaseUser user = await _auth.signInWithCredential(creds);
-    return User.fromFirebaseUser(user);
+    final FirebaseUser fbUser = await _auth.signInWithCredential(creds);
+    user = User.fromFirebaseUser(fbUser);
+    return user;
   }
 
   Future<void> signOut() async {
@@ -38,6 +42,8 @@ class Auth {
   }
 
   Future<void> signInAnonymously() async {
-    await _auth.signInAnonymously();
+    var fbUser = await _auth.signInAnonymously();
+    user = User.fromFirebaseUser(fbUser);
+    return user;
   }
 }

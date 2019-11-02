@@ -8,7 +8,7 @@ import 'package:locadeserta/animations/slideable_button.dart';
 import 'package:locadeserta/catalog_view.dart';
 import 'package:locadeserta/components/app_bar_custom.dart';
 import 'package:locadeserta/components/narrow_scaffold.dart';
-import 'package:locadeserta/creator/components/fat_button.dart';
+import 'package:locadeserta/creator/components/fat_container.dart';
 import 'package:locadeserta/creator/components/game_view.dart';
 import 'package:locadeserta/creator/story/story.dart' as GladStory;
 import 'package:locadeserta/models/Localizations.dart';
@@ -166,7 +166,7 @@ class _MainMenuState extends State<MainMenu> with TickerProviderStateMixin {
                 onPress: () {
                   Navigator.pushNamed(context, "/create");
                 },
-                child: FatButton(
+                child: FatContainer(
                   text: LDLocalizations.createStory,
                   backgroundColor: Colors.black87,
                 ),
