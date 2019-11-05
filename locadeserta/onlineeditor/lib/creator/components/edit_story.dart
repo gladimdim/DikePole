@@ -5,7 +5,7 @@ import 'package:onlineeditor/animations/slideable_button.dart';
 import 'package:onlineeditor/components/app_bar_custom.dart';
 import 'package:onlineeditor/components/bordered_container.dart';
 import 'package:onlineeditor/components/narrow_scaffold.dart';
-import 'package:onlineeditor/creator/components/edit_node_view.dart';
+import 'package:onlineeditor/creator/components/edit_node_sequence_view.dart';
 import 'package:onlineeditor/creator/components/fat_container.dart';
 import 'package:onlineeditor/creator/components/game_view.dart';
 import 'package:onlineeditor/creator/components/text_editor.dart';
@@ -196,7 +196,10 @@ class _EditStoryViewState extends State<EditStoryView> {
                             await Navigator.pushNamed(
                               context,
                               ExtractEditPassageView.routeName,
-                              arguments: node,
+                              arguments: {
+                                "page": story.currentPage,
+                                "startIndex": story.currentPage.nodes.indexOf(node)
+                              },
                             );
                           },
                           trailing: IconButton(

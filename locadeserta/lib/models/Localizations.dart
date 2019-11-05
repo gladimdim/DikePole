@@ -77,7 +77,6 @@ class LDLocalizations {
       'import': 'Import',
       'statisticsTitle': 'Statistics of the platform',
       'theendstartoverquestion': 'This is the end. Start again?',
-      'statisticsViewTitle': 'Statistics of the Platform',
       'registeredUsers': 'Registered users',
       'timesRead': 'Times read',
       'failedToLoadStats': 'Failed to load statistics',
@@ -153,7 +152,6 @@ class LDLocalizations {
       'import': 'Імпортувати',
       'statisticsTitle': 'Статистика по платформі',
       'theendstartoverquestion': 'Це кінець, почати заново?',
-      'statisticsViewTitle': 'Статистики платформи',
       'registeredUsers': 'Зареєстровано користувачів',
       'timesRead': 'Прочитано разів',
       'failedToLoadStats': 'Не змогли завантажити статистику',
@@ -230,7 +228,6 @@ class LDLocalizations {
       'import': 'Import',
       'statisticsTitle': 'Statystyka platformy',
       'theendstartoverquestion': 'To jest koniec. Zacznij jeszcze raz?',
-      'statisticsViewTitle': 'Platform Stats',
       'registeredUsers': 'Zarejestrowani Użytkownicy',
       'timesRead': 'Czytaj czasy',
       'failedToLoadStats': 'Nie udało się załadować statystyk',
@@ -490,10 +487,6 @@ class LDLocalizations {
 
   static String get theEndStartOverQuestion {
     return _localizedValues[locale.languageCode]['theendstartoverquestion'];
-  }
-
-  static String get statisticsViewTitle {
-    return _localizedValues[locale.languageCode]['statisticsViewTitle'];
   }
 
   static String get registeredUsers {

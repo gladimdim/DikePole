@@ -23,7 +23,7 @@ class _StatisticsViewState extends State<StatisticsView> {
   @override
   Widget build(BuildContext context) {
     return NarrowScaffold(
-      title: LDLocalizations.statisticsViewTitle,
+      title: LDLocalizations.statisticsTitle,
       actions: [
         AppBarObject(
           text: LDLocalizations.labelBack,

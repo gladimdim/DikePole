@@ -10,91 +10,101 @@ import 'package:onlineeditor/models/background_image.dart';
 
 class EditNodeView extends StatefulWidget {
   final PageNode node;
+  final VoidCallback onFinished;
+  final bool isLastNode;
 
-  EditNodeView({this.node});
+  EditNodeView({@required this.node, this.onFinished, this.isLastNode = false});
 
   @override
   _EditNodeViewState createState() => _EditNodeViewState();
 }
 
 class _EditNodeViewState extends State<EditNodeView> {
+  TextEditingController controller = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: BorderedContainer(
         child: Padding(
           padding: const EdgeInsets.all(8.0),
-          child: BorderedContainer(
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Column(
-                children: <Widget>[
-                  Expanded(
-                    flex: 8,
-                    child: TextEditor(
-                      text: widget.node.text,
-                      maxLines: 20,
-                      onSave: (text) {
-                        widget.node.text = text;
-                      },
-                      onSubmitted: (text) {
-                        widget.node.text = text;
-                        Navigator.pop(context);
-                      },
-                    ),
-                  ),
-                  Expanded(
-                    flex: 1,
-                    child: Row(
-                      children: <Widget>[
-                        Text("Passage with image"),
-                        Checkbox(
-                          value: widget.node.imageType != null,
-                          onChanged: (newValue) {
-                            setState(() {
-                              if (newValue) {
-                                widget.node.imageType = ImageType.BOAT;
-                              } else {
-                                widget.node.imageType = null;
-                              }
-                            });
-                          },
-                        ),
-                      ],
-                    ),
-                  ),
-                  if (widget.node.imageType != null)
-                    Expanded(
-                      flex: 1,
-                      child: Row(
-                        children: <Widget>[
-                          Text("Select image for passage"),
-                          SizedBox(
-                            width: 20,
-                          ),
-                          ImageSelector(
-                            imageType: widget.node.imageType,
-                            onSelected: (newImageType) {
-                              setState(() {
-                                widget.node.imageType = newImageType;
-                              });
-                            },
-                          ),
-                        ],
-                      ),
-                    ),
-                ],
+          child: Column(
+            children: <Widget>[
+              Expanded(
+                flex: 8,
+                child: TextEditor(
+                  controller: _setTextToTextEditingController(widget.node.text),
+                  text: widget.node.text,
+                  maxLines: 20,
+                  onSave: (text) {
+                    widget.node.text = text;
+                  },
+                  onSubmitted: (text) {
+                    widget.node.text = text;
+                    widget.onFinished();
+                  },
+                  showDone: widget.isLastNode,
+                ),
               ),
-            ),
+              Expanded(
+                flex: 1,
+                child: Row(
+                  children: <Widget>[
+                    Text(LDLocalizations.passageWillHaveImage),
+                    Checkbox(
+                      value: widget.node.imageType != null,
+                      onChanged: (newValue) {
+                        setState(() {
+                          if (newValue) {
+                            widget.node.imageType = ImageType.BOAT;
+                          } else {
+                            widget.node.imageType = null;
+                          }
+                        });
+                      },
+                    ),
+                  ],
+                ),
+              ),
+              if (widget.node.imageType != null)
+                Expanded(
+                  flex: 1,
+                  child: Row(
+                    children: <Widget>[
+                      Text(LDLocalizations.selectImageForPassage),
+                      SizedBox(
+                        width: 20,
+                      ),
+                      ImageSelector(
+                        imageType: widget.node.imageType,
+                        onSelected: (newImageType) {
+                          setState(() {
+                            widget.node.imageType = newImageType;
+                          });
+                        },
+                      ),
+                    ],
+                  ),
+                ),
+            ],
           ),
         ),
       ),
-      appBar: AppBar(
-        title: Text("Editing passage"),
-      ),
     );
   }
+
+  _setTextToTextEditingController(String text) {
+    controller.text = text;
+    return controller;
+  }
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
+
 }
 
 class TextEditorWithButton extends StatefulWidget {
@@ -151,25 +161,6 @@ class _TextEditorState extends State<TextEditorWithButton> {
           ),
         )
       ],
-    );
-  }
-}
-
-class EditPassageViewArguments {
-  final PageNode node;
-
-  EditPassageViewArguments({this.node});
-}
-
-class ExtractEditPassageView extends StatelessWidget {
-  static const routeName = "/editPassage";
-
-  Widget build(BuildContext context) {
-    final EditPassageViewArguments args =
-        ModalRoute.of(context).settings.arguments;
-
-    return EditNodeView(
-      node: args.node,
     );
   }
 }
