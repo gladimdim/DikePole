@@ -8,6 +8,7 @@ import 'package:onlineeditor/locale_selection_view.dart';
 
 class Root extends StatefulWidget {
   static const routeName = "/root";
+
   @override
   _RootState createState() => _RootState();
 }
@@ -17,15 +18,7 @@ class _RootState extends State<Root> {
   Widget build(BuildContext context) {
     return NarrowScaffold(
       title: LDLocalizations.appTitle,
-      body: Column(children: [
-        LocaleSelection(
-          onLocaleChanged: (newLocale) {
-            LDLocalizations.locale = newLocale;
-            setState(() {});
-          },
-        ),
-        Expanded(child: CatalogGladStoryView()),
-      ]),
+      body: CatalogGladStoryView(),
       actions: [
         AppBarObject(
             text: LDLocalizations.statisticsTitle,

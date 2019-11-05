@@ -124,8 +124,14 @@ class PassageState extends State<StoryView> with TickerProviderStateMixin {
                 ),
               )
               .toList(),
-          if (!widget.currentStory.canContinue() && widget.currentStory.currentPage.isTheEnd())
-            Text(LDLocalizations.theEnd),
+          if (!widget.currentStory.canContinue() &&
+              widget.currentStory.currentPage.isTheEnd())
+            SlideableButton(
+              child: FatContainer(text: LDLocalizations.theEndStartOverQuestion),
+              onPress: () {
+                widget.currentStory.reset();
+              },
+            ),
         ],
       ),
     ));
