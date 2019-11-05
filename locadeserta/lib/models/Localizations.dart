@@ -2,7 +2,7 @@ import 'dart:core';
 
 import 'package:flutter/material.dart';
 
-var version = "1.92";
+var version = "1.93";
 
 class LDLocalizations {
   static Locale locale = Locale('uk');

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:locadeserta/InheritedAuth.dart';
 import 'package:locadeserta/catalog_view.dart';
 import 'package:locadeserta/creator/components/create_view.dart';
-import 'package:locadeserta/creator/components/edit_node_view.dart';
+import 'package:locadeserta/creator/components/edit_node_sequence_view.dart';
 import 'package:locadeserta/creator/components/edit_story.dart';
 import 'package:locadeserta/creator/components/game_view.dart';
 import 'package:locadeserta/export_pdf_view.dart';
