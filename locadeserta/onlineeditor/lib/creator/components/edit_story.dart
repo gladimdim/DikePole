@@ -195,7 +195,7 @@ class _EditStoryViewState extends State<EditStoryView> {
                           onTap: () async {
                             await Navigator.pushNamed(
                               context,
-                              ExtractEditPassageView.routeName,
+                              EditNodeSequence.routeName,
                               arguments: {
                                 "page": story.currentPage,
                                 "startIndex": story.currentPage.nodes.indexOf(node)

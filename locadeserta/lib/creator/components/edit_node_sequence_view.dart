@@ -30,13 +30,14 @@ class _EditNodeSequenceState extends State<EditNodeSequence> {
           child: EditNodeView(
             node: widget.page.getCurrentNode(),
             onFinished: () {
-              if (widget.page.hasNext()) {
+              if (!widget.page.hasNext()) {
                 setState(() {
-                  widget.page.nextNode();
+                  widget.page.addNodeWithText("");
                 });
-              } else {
-                Navigator.pop(context);
               }
+              setState(() {
+                widget.page.nextNode();
+              });
             },
             isLastNode: !widget.page.hasNext(),
           )),

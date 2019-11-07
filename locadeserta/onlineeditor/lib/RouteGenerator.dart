@@ -1,8 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:onlineeditor/StatisticsView.dart';
+import 'package:onlineeditor/catalog_view.dart';
 import 'package:onlineeditor/creator/components/catalog_view.dart';
 import 'package:onlineeditor/creator/components/edit_node_sequence_view.dart';
+import 'package:onlineeditor/main_menu.dart';
 import 'package:onlineeditor/models/LDAuth.dart';
 import 'package:onlineeditor/root.dart';
 import 'package:onlineeditor/views/inherited_auth.dart';
@@ -19,13 +21,35 @@ class RouteGenerator {
     final args = settings.arguments;
     print(settings.name);
     switch (settings.name) {
+      case CatalogView.routeName:
+        Map ar = args;
+        return MaterialPageRoute(
+            builder: (_) => InheritedAuth(
+                  auth: ldAuth,
+                  child: Scaffold(
+                    appBar: AppBar(
+                      title: Text(ar["catalogStory"].title),
+                    ),
+                    body: CatalogView(
+                        catalogStory: ar["catalogStory"],
+                        expanded: ar["expanded"],
+                        onReadPressed: ar["onReadPressed"],
+                        onDetailPressed: ar["onDetailPressed"]),
+                  ),
+                ));
+      case MainMenu.routeName:
+        return MaterialPageRoute(builder: (_) => MainMenu());
       case LoginView.routeName:
         return MaterialPageRoute(builder: (_) => LoginView());
       case StatisticsView.routeName:
         return MaterialPageRoute(builder: (_) => StatisticsView());
-      case ExtractEditPassageView.routeName:
+      case EditNodeSequence.routeName:
         Map ar = args;
-        return MaterialPageRoute(builder: (_) => EditNodeSequence(page: ar["page"], startIndex: ar["startIndex"],));
+        return MaterialPageRoute(
+            builder: (_) => EditNodeSequence(
+                  page: ar["page"],
+                  startIndex: ar["startIndex"],
+                ));
       case CatalogGladStoryView.routeName:
         return MaterialPageRoute(
           builder: (_) =>

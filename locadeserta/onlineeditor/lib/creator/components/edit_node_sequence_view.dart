@@ -6,6 +6,7 @@ import 'package:onlineeditor/creator/story/story.dart';
 class EditNodeSequence extends StatefulWidget {
   final Page page;
   final int startIndex;
+  static const routeName = "/editPassages";
 
   EditNodeSequence({@required this.page, this.startIndex = 0});
 
@@ -30,40 +31,20 @@ class _EditNodeSequenceState extends State<EditNodeSequence> {
           child: EditNodeView(
             node: widget.page.getCurrentNode(),
             onFinished: () {
-              if (widget.page.hasNext()) {
+              if (!widget.page.hasNext()) {
                 setState(() {
-                  widget.page.nextNode();
+                  widget.page.addNodeWithText("");
                 });
-              } else {
-                Navigator.pop(context);
               }
+              setState(() {
+                widget.page.nextNode();
+              });
             },
             isLastNode: !widget.page.hasNext(),
           )),
       appBar: AppBar(
         title: Text(LDLocalizations.editingPassage),
       ),
-    );
-  }
-}
-
-class EditPassageViewArguments {
-  final Page page;
-  final int startIndex;
-
-  EditPassageViewArguments({this.page, this.startIndex = 0});
-}
-
-class ExtractEditPassageView extends StatelessWidget {
-  static const routeName = "/editPassages";
-
-  Widget build(BuildContext context) {
-    final EditPassageViewArguments args =
-        ModalRoute.of(context).settings.arguments;
-
-    return EditNodeSequence(
-      page: args.page,
-      startIndex: args.startIndex,
     );
   }
 }

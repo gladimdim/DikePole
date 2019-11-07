@@ -3,10 +3,10 @@ import 'package:onlineeditor/animations/fade_images.dart';
 import 'package:onlineeditor/animations/slideable_button.dart';
 import 'package:onlineeditor/components/app_bar_custom.dart';
 import 'package:onlineeditor/components/narrow_scaffold.dart';
+import 'package:onlineeditor/main_menu.dart';
 import 'package:onlineeditor/models/LDAuth.dart';
 import 'package:onlineeditor/Localizations.dart';
 import 'package:onlineeditor/locale_selection_view.dart';
-import 'package:onlineeditor/root.dart';
 import 'package:onlineeditor/views/inherited_auth.dart';
 import 'package:onlineeditor/models/LDUser.dart';
 
@@ -105,7 +105,7 @@ class _LoginViewState extends State<LoginView> {
   Widget _buildLoginedView(LDUser user, BuildContext context) {
     return SlideableButton(
       onPress: () {
-        Navigator.pushNamed(context, Root.routeName);
+        Navigator.pushNamed(context, MainMenu.routeName);
       },
       child: Container(
         height: 50.0,
