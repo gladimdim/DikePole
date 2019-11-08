@@ -17,6 +17,11 @@ class LDAuth {
     return user;
   }
 
+  Future<UserCredential> signInAnonymously() async {
+    var user = await fbAuth.signInAnonymously();
+    return user;
+  }
+
   Future<bool> isSignedIn() async {
     final currentUser = fbAuth.currentUser;
     return currentUser != null;

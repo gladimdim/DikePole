@@ -98,6 +98,19 @@ class _LoginViewState extends State<LoginView> {
             ),
           ),
         ),
+        Expanded(
+          flex: 2,
+          child: RaisedButton(
+            color: Theme.of(context).primaryColor,
+            textColor: Theme.of(context).textTheme.title.color,
+            onPressed: () => _onAnonSignInPressed(context),
+            child: Text(
+              LDLocalizations.anonLogin,
+              textAlign: TextAlign.center,
+              style: Theme.of(context).textTheme.title,
+            ),
+          ),
+        ),
       ],
     );
   }
@@ -139,9 +152,9 @@ class _LoginViewState extends State<LoginView> {
     await InheritedAuth.of(context).auth.signInWithGoogle();
   }
 
-  // _onSignInAnonPressed(context) async {
-  //   return await InheritedAuth.of(context).auth.signInAnonymously();
-  // }
+  _onAnonSignInPressed(context) async {
+    await InheritedAuth.of(context).auth.signInAnonymously();
+  }
 
   _setNewLocale(Locale locale) {
     LDLocalizations.locale = locale;
