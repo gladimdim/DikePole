@@ -12,9 +12,9 @@ import 'package:onlineeditor/components/narrow_scaffold.dart';
 import 'package:onlineeditor/creator/components/fat_container.dart';
 import 'package:onlineeditor/creator/components/game_view.dart';
 import 'package:onlineeditor/creator/story/story.dart' as GladStory;
+import 'package:onlineeditor/main_editor_view.dart';
 import 'package:onlineeditor/models/background_image.dart';
 import 'package:onlineeditor/models/catalogs.dart';
-import 'package:onlineeditor/root.dart';
 import 'package:onlineeditor/waiting_screen.dart';
 
 const LANDING_IMAGE_HEIGHT = 200.0;
@@ -162,7 +162,7 @@ class _MainMenuState extends State<MainMenu> with TickerProviderStateMixin {
               padding: const EdgeInsets.all(4.0),
               child: SlideableButton(
                 onPress: () {
-                  Navigator.pushNamed(context, Root.routeName);
+                  Navigator.pushNamed(context, MainEditorView.routeName);
                 },
                 child: FatContainer(
                   text: LDLocalizations.createStory,
