@@ -11,10 +11,11 @@ import 'package:onlineeditor/components/app_bar_custom.dart';
 import 'package:onlineeditor/components/narrow_scaffold.dart';
 import 'package:onlineeditor/creator/components/fat_container.dart';
 import 'package:onlineeditor/creator/components/game_view.dart';
-import 'package:onlineeditor/creator/story/story.dart' as GladStory;
+import 'package:onlineeditor/creator/story/persistence.dart';
 import 'package:onlineeditor/models/background_image.dart';
 import 'package:onlineeditor/models/catalogs.dart';
 import 'package:onlineeditor/root.dart';
+import 'package:onlineeditor/views/inherited_auth.dart';
 import 'package:onlineeditor/waiting_screen.dart';
 
 const LANDING_IMAGE_HEIGHT = 200.0;
@@ -210,16 +211,29 @@ class _MainMenuState extends State<MainMenu> with TickerProviderStateMixin {
     );
   }
 
-  _goToStory(CatalogStory story, context) {
+  _goToStory(CatalogStory story, context) async {
     setState(() {
       loadingStory = false;
     });
+
+    var storyWithState;
+    var user = InheritedAuth.of(context).auth.getUser();
+    try {
+      storyWithState =
+          await StoryPersistence.instance.readyStoryStateById(user, story);
+    } catch (e) {
+      print(e);
+    }
     Navigator.push(
-        context,
-        SlideRightNavigation(
-            widget: GameView(
-          story: GladStory.Story.fromJson(story.gladJson),
-        )));
+      context,
+      SlideRightNavigation(
+        widget: InheritedAuth(
+            child: GameView(
+              story: storyWithState,
+            ),
+            auth: InheritedAuth.of(context).auth),
+      ),
+    );
   }
 
   @override

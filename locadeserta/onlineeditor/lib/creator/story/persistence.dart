@@ -2,6 +2,7 @@ import 'package:firebase/firebase.dart' as fb;
 import 'package:firebase/firestore.dart' as fs;
 import 'package:onlineeditor/creator/story/story.dart';
 import 'package:onlineeditor/models/LDUser.dart';
+import 'package:onlineeditor/models/catalogs.dart';
 
 fs.Firestore storage = fb.firestore();
 
@@ -28,6 +29,20 @@ class StoryPersistence {
     return null;
   }
 
+  Future<Story> readyStoryStateById(LDUser user, CatalogStory story) async {
+    fs.DocumentSnapshot doc = await storage
+        .doc("user_states/${user.uid}/states/${story.title}")
+        .get();
+
+    if (doc.exists) {
+      var state = doc.data()["gladJsonState"];
+      var savedStory = Story.fromJson(state);
+      return savedStory;
+    } else {
+      return Story.fromJson(story.gladJson);
+    }
+  }
+
   writeStory(LDUser user, Story story) async {
     fs.DocumentSnapshot doc = await storage
         .doc("user_stories/${user.uid}/stories/${story.title}")
@@ -44,5 +59,21 @@ class StoryPersistence {
   Future deleteStory(LDUser user, Story story) async {
     return await storage
         .doc("user_stories/${user.uid}/stories/${story.title}").delete();
+  }
+
+  Future saveGladStoryToStorageForUser(LDUser user, Story story) async {
+    fs.DocumentSnapshot doc = await storage
+        .doc("user_states/${user.uid}/states/${story.title}")
+        .get();
+
+    Map<String, dynamic> toAdd = {
+      "catalogidreference": story.title,
+      "gladJsonState": story.toStateJson(),
+    };
+    if (doc.exists) {
+      storage.doc(doc.ref.path).update(data: toAdd);
+    } else {
+      storage.doc(doc.ref.path).set(toAdd);
+    }
   }
 }

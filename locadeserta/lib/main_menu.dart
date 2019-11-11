@@ -10,7 +10,6 @@ import 'package:locadeserta/components/app_bar_custom.dart';
 import 'package:locadeserta/components/narrow_scaffold.dart';
 import 'package:locadeserta/creator/components/fat_container.dart';
 import 'package:locadeserta/creator/components/game_view.dart';
-import 'package:locadeserta/creator/story/story.dart' as GladStory;
 import 'package:locadeserta/models/Localizations.dart';
 import 'package:locadeserta/models/background_image.dart';
 import 'package:locadeserta/story_view.dart';
@@ -18,6 +17,8 @@ import 'package:locadeserta/models/catalogs.dart';
 import 'package:locadeserta/waiting_screen.dart';
 import 'package:locadeserta/animations/slide_right_navigation.dart';
 import 'package:locadeserta/models/persistence.dart';
+import 'package:locadeserta/creator/story/persistence.dart'
+    as GladStoryPersistence;
 import 'package:locadeserta/radiuses.dart';
 
 const LANDING_IMAGE_HEIGHT = 200.0;
@@ -227,11 +228,19 @@ class _MainMenuState extends State<MainMenu> with TickerProviderStateMixin {
         ),
       );
     } else {
+      var storyWithState;
+      try {
+        storyWithState = await GladStoryPersistence.StoryPersistence.instance
+            .readyStoryStateById(user, story);
+      } catch (e) {
+        print(e);
+      }
+
       Navigator.push(
           context,
           SlideRightNavigation(
               widget: GameView(
-            story: GladStory.Story.fromJson(story.gladJson),
+            story: storyWithState,
           )));
     }
   }

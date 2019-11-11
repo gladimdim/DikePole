@@ -38,7 +38,7 @@ class PassageState extends State<StoryView> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     return StreamBuilder<List<HistoryItem>>(
       stream: widget.currentStory.historyChanges,
-      initialData: [],
+      initialData: widget.currentStory.history,
       builder: (context, snapshot) {
         var history = snapshot.data;
         return Column(

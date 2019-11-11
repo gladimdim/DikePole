@@ -1,10 +1,9 @@
 import 'dart:async';
 import 'dart:collection';
 import 'package:flutter/foundation.dart';
+import 'package:onlineeditor/models/background_image.dart';
 import 'package:rxdart/rxdart.dart';
 import 'dart:convert';
-
-import 'package:onlineeditor/models/background_image.dart';
 
 class Story {
   String title;
@@ -20,13 +19,19 @@ class Story {
 
   Story(
       {@required this.title,
-      @required this.description,
-      @required this.authors,
-      @required this.root,
-      this.year}) {
-    currentPage = root;
+        @required this.description,
+        @required this.authors,
+        @required this.root,
+        this.currentPage,
+        this.history,
+        this.year}) {
+    if (this.currentPage == null) {
+      currentPage = root;
+    }
     historyChanges = _streamHistory.stream;
-    _logCurrentPassageToHistory();
+    if (history.isEmpty) {
+      _logCurrentPassageToHistory();
+    }
   }
 
   void reset() {
@@ -111,6 +116,10 @@ class Story {
     Map map = jsonDecode(input);
     var rootMap = map["root"];
     var rootPage = Page.fromMap(rootMap);
+    var currentPageMap = map["currentPage"];
+    var currentPage =
+    currentPageMap == null ? null : Page.fromMap(map["currentPage"]);
+    List historyList = map["history"];
     String authors = map["authors"];
     return Story(
       title: map["title"],
@@ -118,6 +127,10 @@ class Story {
       root: rootPage,
       authors: authors,
       year: map["year"],
+      currentPage: currentPage,
+      history: historyList == null
+          ? []
+          : historyList.map((item) => HistoryItem.fromMap(item)).toList(),
     );
   }
 
@@ -125,7 +138,7 @@ class Story {
     var story = Story(
       title: "After the battle",
       description:
-          "At the beginning of XVII century a confrontation flares up between Polish-Lithuanian Commonwealth and Ottoman Empire. As a result of a devastating defeat in the Battle of Cecora, a lot of noblemen, cossacks and soldiers perished or were captured by Turks and Tatars. A fate of a young cossack, wayfaring through the Wild FIelds in a desperate attempt to escape from captivity, depends on a reader of this interactive fiction. All challenges are equally hard: survive in a steppe, avoid the revenge of Tatars, win the trust of cossack fishermen and return home. But the time of the final battle that will change history is coming. Will the main character be able to participate in it and stay alive and where his life will go from there - only You know the answer.",
+      "At the beginning of XVII century a confrontation flares up between Polish-Lithuanian Commonwealth and Ottoman Empire. As a result of a devastating defeat in the Battle of Cecora, a lot of noblemen, cossacks and soldiers perished or were captured by Turks and Tatars. A fate of a young cossack, wayfaring through the Wild FIelds in a desperate attempt to escape from captivity, depends on a reader of this interactive fiction. All challenges are equally hard: survive in a steppe, avoid the revenge of Tatars, win the trust of cossack fishermen and return home. But the time of the final battle that will change history is coming. Will the main character be able to participate in it and stay alive and where his life will go from there - only You know the answer.",
       authors: "Konstantin Boytsov, Anastasiia Tsapenko",
       root: Page.generate(),
       year: 1620,
@@ -163,6 +176,17 @@ class HistoryItem {
       "text": text,
       "imagePath": imagePath,
     };
+  }
+
+  static HistoryItem fromMap(Map map) {
+    List listFromMap = map["imagePath"];
+    List<String> imagePaths = listFromMap == null
+        ? null
+        : listFromMap.map((item) => "$item").toList();
+    return HistoryItem(
+      text: map["text"],
+      imagePath: imagePaths,
+    );
   }
 }
 
@@ -260,6 +284,7 @@ class Page {
       "endType": endTypeToString(endType),
       "next": next.map((n) => n.toMap()).toList(),
       "nodes": nodes.map((n) => n.toMap()).toList(),
+      "currentIndex": currentIndex,
     };
   }
 
@@ -268,39 +293,37 @@ class Page {
     List<PageNext> parsedNext = List.from(next.map((n) => PageNext.fromMap(n)));
     List nodes = map["nodes"];
     List<PageNode> parsedNodes =
-        List.from(nodes.map((n) => PageNode.fromMap(n)));
-
+    List.from(nodes.map((n) => PageNode.fromMap(n)));
+    int currentI = map["currentIndex"];
     return Page(
       next: parsedNext,
       endType: endTypeFromString(map["endType"]),
       nodes: parsedNodes,
+      currentIndex: currentI == null ? 0 : currentI,
     );
   }
 
   static Page generate() {
     var p1 = PageNode(
-      text:
-          "This is an example of passage text",
+      text: "This is an example of passage text",
     );
     var p2 = PageNode(
-      text:
-          "This is second passage",
+      text: "This is second passage",
     );
 
     return Page(
-      nodes: [p1, p2],
-      endType: EndType.ALIVE,
-      next: [
-        PageNext(
-          text: "Option 1",
-          nextPage: Page(),
-        ),
-        PageNext(
-          text: "Option 2",
-          nextPage: Page(),
-        )
-      ]
-    );
+        nodes: [p1, p2],
+        endType: EndType.ALIVE,
+        next: [
+          PageNext(
+            text: "Option 1",
+            nextPage: Page(),
+          ),
+          PageNext(
+            text: "Option 2",
+            nextPage: Page(),
+          )
+        ]);
   }
 }
 

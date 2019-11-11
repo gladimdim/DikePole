@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:locadeserta/creator/story/story.dart';
 import 'package:locadeserta/models/Auth.dart';
+import 'package:locadeserta/models/catalogs.dart';
 
 final Firestore storage = Firestore.instance;
 
@@ -33,6 +34,23 @@ class StoryPersistence {
         .collection("stories")
         .document(story.title)
         .delete();
+  }
+
+  Future<Story> readyStoryStateById(User user, CatalogStory story) async {
+    DocumentSnapshot doc = await storage
+        .collection("user_states")
+        .document(user.uid)
+        .collection("states")
+        .document(story.title)
+        .get();
+
+    if (doc.exists) {
+      var state = doc.data["gladJsonState"];
+      var story = Story.fromJson(state);
+      return story;
+    } else {
+      return Story.fromJson(story.gladJson);
+    }
   }
 
   writeStory(User user, Story story) async {

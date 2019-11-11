@@ -3,9 +3,11 @@ import 'package:onlineeditor/Localizations.dart';
 import 'package:onlineeditor/animations/slideable_button.dart';
 import 'package:onlineeditor/components/BorderedRandomImageForType.dart';
 import 'package:onlineeditor/creator/components/fat_container.dart';
+import 'package:onlineeditor/creator/story/persistence.dart';
 import 'package:onlineeditor/creator/story/story.dart';
 import 'package:onlineeditor/creator/utils/utils.dart';
 import 'package:onlineeditor/models/background_image.dart';
+import 'package:onlineeditor/views/inherited_auth.dart';
 
 class StoryView extends StatefulWidget {
   final Story currentStory;
@@ -24,13 +26,19 @@ class PassageState extends State<StoryView> with TickerProviderStateMixin {
   @override
   initState() {
     super.initState();
+    Future.delayed(Duration.zero, () {
+      widget.currentStory.historyChanges.listen((data) {
+        _saveStateToStorage(widget.currentStory, context);
+      });
+
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<List<HistoryItem>>(
       stream: widget.currentStory.historyChanges,
-      initialData: [],
+      initialData: widget.currentStory.history,
       builder: (context, snapshot) {
         var history = snapshot.data;
         return Column(
@@ -56,6 +64,11 @@ class PassageState extends State<StoryView> with TickerProviderStateMixin {
       }
       widget.currentStory.doContinue();
     });
+  }
+
+  Future _saveStateToStorage(Story story, BuildContext context) async {
+    var user = InheritedAuth.of(context).auth.getUser();
+    await StoryPersistence.instance.saveGladStoryToStorageForUser(user, story);
   }
 
   List<Widget> createOptionList(List<PageNext> nextPages) {

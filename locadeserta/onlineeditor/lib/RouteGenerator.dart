@@ -38,7 +38,7 @@ class RouteGenerator {
                   ),
                 ));
       case MainMenu.routeName:
-        return MaterialPageRoute(builder: (_) => MainMenu());
+        return MaterialPageRoute(builder: (_) => InheritedAuth(child: MainMenu(), auth: ldAuth));
       case LoginView.routeName:
         return MaterialPageRoute(builder: (_) => LoginView());
       case StatisticsView.routeName:
