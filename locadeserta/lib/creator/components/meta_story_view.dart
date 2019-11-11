@@ -96,119 +96,130 @@ class _EditMetaStoryViewState extends State<EditMetaStoryView> {
       year = 1620;
     }
 
-    return Form(
-      key: _formKey,
-      child: Column(
-        children: <Widget>[
-          TextFormField(
-            decoration: InputDecoration(
-              icon: Icon(Icons.title),
-              hintText: LDLocalizations.enterStoryTitle,
-              labelText: LDLocalizations.labelStoryTitle,
-            ),
-            initialValue: widget.story == null ? "" : widget.story.title,
-            onSaved: (value) {
-              _title = value;
-            },
+    return Column(
+      children: <Widget>[
+        if (widget.story != null) Padding(
+          padding: const EdgeInsets.only(top: 8.0),
+          child: Text(
+            widget.story.title,
+            style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
           ),
-          TextFormField(
-            decoration: InputDecoration(
-              icon: Icon(Icons.description),
-              hintText: LDLocalizations.hintDescription,
-              labelText: LDLocalizations.description,
-            ),
-            onSaved: (value) {
-              _description = value;
-            },
-            minLines: 1,
-            maxLines: 5,
-            initialValue: widget.story == null ? "" : widget.story.description,
-          ),
-          TextFormField(
-            decoration: InputDecoration(
-              icon: Icon(Icons.title),
-              hintText: LDLocalizations.listOfAuthors,
-              labelText: LDLocalizations.labelAuthors,
-            ),
-            onSaved: (value) {
-              _authors = value;
-            },
-            initialValue: widget.story == null ? "" : widget.story.authors,
-          ),
-          TextFormField(
-            decoration: InputDecoration(
-              icon: Icon(Icons.calendar_today),
-              hintText: LDLocalizations.hintFieldYear,
-              labelText: LDLocalizations.labelYear,
-            ),
-            keyboardType: TextInputType.number,
-            inputFormatters: [WhitelistingTextInputFormatter.digitsOnly],
-            onSaved: (value) {
-              _year = int.parse(value);
-            },
-            initialValue: "$year",
-          ),
-          Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-            Padding(
-              padding: EdgeInsets.all(4.0),
-              child: IconButton(
-                icon: Icon(Icons.save),
-                onPressed: () {
-                  _formKey.currentState.save();
-                  var story;
-                  if (widget.story == null) {
-                    story = Story(
-                      title: _title,
-                      description: _description,
-                      authors: _authors,
-                      root: Page.generate(),
-                    );
-                  } else {
-                    story = widget.story;
-                    story.title = _title;
-                    story.description = _description;
-                    story.authors = _authors;
-                    story.year = _year;
-                  }
-                  widget.onSave(story);
+        ),
+        Form(
+          key: _formKey,
+          child: Column(
+            children: <Widget>[
+              TextFormField(
+                decoration: InputDecoration(
+                  icon: Icon(Icons.title),
+                  hintText: LDLocalizations.enterStoryTitle,
+                  labelText: LDLocalizations.labelStoryTitle,
+                ),
+                initialValue: widget.story == null ? "" : widget.story.title,
+                onSaved: (value) {
+                  _title = value;
                 },
               ),
-            ),
-            if (widget.onEdit != null)
-              Padding(
-                padding: EdgeInsets.all(4.0),
-                child: IconButton(
-                  icon: Icon(Icons.edit),
-                  onPressed: () {
-                    widget.onEdit(widget.story);
-                  },
+              TextFormField(
+                decoration: InputDecoration(
+                  icon: Icon(Icons.description),
+                  hintText: LDLocalizations.hintDescription,
+                  labelText: LDLocalizations.description,
                 ),
+                onSaved: (value) {
+                  _description = value;
+                },
+                minLines: 1,
+                maxLines: 5,
+                initialValue: widget.story == null ? "" : widget.story.description,
               ),
-            if (widget.onEdit != null)
-              Padding(
-                padding: EdgeInsets.all(4.0),
-                child: IconButton(
-                  icon: Icon(Icons.cancel),
-                  onPressed: () {
-                    setState(() {
-                      widget.onToggleEdit();
-                    });
-                  },
+              TextFormField(
+                decoration: InputDecoration(
+                  icon: Icon(Icons.title),
+                  hintText: LDLocalizations.listOfAuthors,
+                  labelText: LDLocalizations.labelAuthors,
                 ),
+                onSaved: (value) {
+                  _authors = value;
+                },
+                initialValue: widget.story == null ? "" : widget.story.authors,
               ),
-            if (widget.onDelete != null)
-              Padding(
-                padding: EdgeInsets.all(4.0),
-                child: IconButton(
-                  icon: Icon(Icons.delete),
-                  onPressed: () {
-                    widget.onDelete(widget.story);
-                  },
+              TextFormField(
+                decoration: InputDecoration(
+                  icon: Icon(Icons.calendar_today),
+                  hintText: LDLocalizations.hintFieldYear,
+                  labelText: LDLocalizations.labelYear,
                 ),
+                keyboardType: TextInputType.number,
+                inputFormatters: [WhitelistingTextInputFormatter.digitsOnly],
+                onSaved: (value) {
+                  _year = int.parse(value);
+                },
+                initialValue: "$year",
               ),
-          ]),
-        ],
-      ),
+              Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                Padding(
+                  padding: EdgeInsets.all(4.0),
+                  child: IconButton(
+                    icon: Icon(Icons.save),
+                    onPressed: () {
+                      _formKey.currentState.save();
+                      var story;
+                      if (widget.story == null) {
+                        story = Story(
+                          title: _title,
+                          description: _description,
+                          authors: _authors,
+                          root: Page.generate(),
+                        );
+                      } else {
+                        story = widget.story;
+                        story.title = _title;
+                        story.description = _description;
+                        story.authors = _authors;
+                        story.year = _year;
+                      }
+                      widget.onSave(story);
+                    },
+                  ),
+                ),
+                if (widget.onEdit != null)
+                  Padding(
+                    padding: EdgeInsets.all(4.0),
+                    child: IconButton(
+                      icon: Icon(Icons.edit),
+                      onPressed: () {
+                        widget.onEdit(widget.story);
+                      },
+                    ),
+                  ),
+                if (widget.onEdit != null)
+                  Padding(
+                    padding: EdgeInsets.all(4.0),
+                    child: IconButton(
+                      icon: Icon(Icons.cancel),
+                      onPressed: () {
+                        setState(() {
+                          widget.onToggleEdit();
+                        });
+                      },
+                    ),
+                  ),
+                if (widget.onDelete != null)
+                  Padding(
+                    padding: EdgeInsets.all(4.0),
+                    child: IconButton(
+                      icon: Icon(Icons.delete),
+                      onPressed: () {
+                        widget.onDelete(widget.story);
+                      },
+                    ),
+                  ),
+              ]),
+            ],
+          ),
+        ),
+      ],
     );
   }
 }
