@@ -5,14 +5,14 @@ import 'package:onlineeditor/components/app_bar_custom.dart';
 import 'package:onlineeditor/components/narrow_scaffold.dart';
 import 'package:onlineeditor/creator/components/catalog_view.dart';
 
-class Root extends StatefulWidget {
+class MainEditorView extends StatefulWidget {
   static const routeName = "/root";
 
   @override
-  _RootState createState() => _RootState();
+  _MainEditorViewState createState() => _MainEditorViewState();
 }
 
-class _RootState extends State<Root> {
+class _MainEditorViewState extends State<MainEditorView> {
   @override
   Widget build(BuildContext context) {
     return NarrowScaffold(
@@ -20,10 +20,11 @@ class _RootState extends State<Root> {
       body: CatalogGladStoryView(),
       actions: [
         AppBarObject(
-            text: LDLocalizations.statisticsTitle,
-            onTap: () => {
-                  Navigator.pushNamed(context, StatisticsView.routeName),
-                })
+          text: LDLocalizations.statisticsTitle,
+          onTap: () => {
+            Navigator.pushNamed(context, StatisticsView.routeName),
+          },
+        )
       ],
     );
   }

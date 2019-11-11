@@ -1,10 +1,13 @@
 import 'package:async/async.dart';
 import 'package:flutter/material.dart';
 import 'package:onlineeditor/Localizations.dart';
+import 'package:onlineeditor/animations/slideable_button.dart';
+import 'package:onlineeditor/creator/components/fat_container.dart';
 import 'package:onlineeditor/creator/components/meta_story_view.dart';
 import 'package:onlineeditor/creator/story/persistence.dart';
 import 'package:onlineeditor/creator/story/story.dart';
 import 'package:onlineeditor/models/LDUser.dart';
+import 'package:onlineeditor/views/import_gladstories_view.dart';
 import 'package:onlineeditor/views/inherited_auth.dart';
 import 'package:onlineeditor/waiting_screen.dart';
 
@@ -22,7 +25,23 @@ class _CatalogGladStoryViewState extends State<CatalogGladStoryView> {
 
   @override
   Widget build(BuildContext context) {
-    return _buildStoryView(context, InheritedAuth.of(context).auth.getUser());
+    var user = InheritedAuth.of(context).auth.getUser();
+    return Column(
+      children: <Widget>[
+        SlideableButton(
+          onPress: () async {
+            await Navigator.pushNamed(context, ImportGladStoryView.routeName);
+            _resetStoryBuilderFuture();
+          },
+          child: FatContainer(
+            text: LDLocalizations.labelImport,
+          ),
+        ),
+        Expanded(
+          child: _buildStoryView(context, user),
+        ),
+      ],
+    );
   }
 
   _buildStoryView(BuildContext context, LDUser user) {

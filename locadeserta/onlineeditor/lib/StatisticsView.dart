@@ -3,9 +3,9 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:http/http.dart' as http;
+import 'package:onlineeditor/Localizations.dart';
 import 'package:onlineeditor/components/app_bar_custom.dart';
 import 'package:onlineeditor/components/narrow_scaffold.dart';
-import 'package:onlineeditor/Localizations.dart';
 
 class StatisticsView extends StatefulWidget {
   static const String routeName = "/statistics";
@@ -29,8 +29,7 @@ class _StatisticsViewState extends State<StatisticsView> {
             text: LDLocalizations.labelBack,
             onTap: () {
               Navigator.pop(context);
-            }
-        )
+            })
       ],
       body: FractionallySizedBox(
         widthFactor: 1.0,
@@ -59,12 +58,11 @@ class _StatisticsViewState extends State<StatisticsView> {
                       ]..addAll(storyStats.keys
                           .map(
                             (key) => ListTile(
-                          title: Text(
-                              LDLocalizations.labelStoryTitle + ": $key"),
-                          subtitle: Text(LDLocalizations.timesRead +
-                              ": ${storyStats[key]}"),
-                        ),
-                      )
+                              title: Text("$key"),
+                              subtitle: Text(LDLocalizations.timesRead +
+                                  ": ${storyStats[key]}"),
+                            ),
+                          )
                           .toList()));
                 } else {
                   return Container(

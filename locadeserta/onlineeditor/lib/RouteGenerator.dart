@@ -4,9 +4,10 @@ import 'package:onlineeditor/StatisticsView.dart';
 import 'package:onlineeditor/catalog_view.dart';
 import 'package:onlineeditor/creator/components/catalog_view.dart';
 import 'package:onlineeditor/creator/components/edit_node_sequence_view.dart';
+import 'package:onlineeditor/main_editor_view.dart';
 import 'package:onlineeditor/main_menu.dart';
 import 'package:onlineeditor/models/LDAuth.dart';
-import 'package:onlineeditor/root.dart';
+import 'package:onlineeditor/views/import_gladstories_view.dart';
 import 'package:onlineeditor/views/inherited_auth.dart';
 import 'package:onlineeditor/views/login_view.dart';
 
@@ -21,6 +22,8 @@ class RouteGenerator {
     final args = settings.arguments;
     print(settings.name);
     switch (settings.name) {
+      case ImportGladStoryView.routeName:
+        return MaterialPageRoute(builder: (_) => InheritedAuth(child: ImportGladStoryView(), auth: ldAuth,));
       case CatalogView.routeName:
         Map ar = args;
         return MaterialPageRoute(
@@ -75,9 +78,10 @@ class RouteGenerator {
             builder: (_) => GameView(
                   story: args,
                 ));
-      case Root.routeName:
+      case MainEditorView.routeName:
         return MaterialPageRoute(
-            builder: (_) => InheritedAuth(child: Root(), auth: ldAuth));
+            builder: (_) =>
+                InheritedAuth(child: MainEditorView(), auth: ldAuth));
     }
     return _errorRoute();
   }
