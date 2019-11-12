@@ -75,9 +75,12 @@ class RouteGenerator {
             builder: (_) => InheritedAuth(child: LoginView(), auth: ldAuth));
       case "/play":
         return MaterialPageRoute(
-            builder: (_) => GameView(
-                  story: args,
-                ));
+            builder: (_) => InheritedAuth(
+              auth: ldAuth,
+              child: GameView(
+                    story: args,
+                  ),
+            ));
       case MainEditorView.routeName:
         return MaterialPageRoute(
             builder: (_) =>
