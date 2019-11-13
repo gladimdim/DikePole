@@ -36,7 +36,7 @@ class CatalogStory {
 
       return parsedStories;
     } catch (e) {
-      print('Exception while calling getUserStories: ${e.stackTrace}');
+      print('Exception while calling getUserStories: $e');
     }
     return null;
   }

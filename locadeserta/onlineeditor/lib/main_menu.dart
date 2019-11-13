@@ -18,7 +18,6 @@ import 'package:onlineeditor/models/catalogs.dart';
 import 'package:onlineeditor/views/inherited_auth.dart';
 import 'package:onlineeditor/waiting_screen.dart';
 
-
 const LANDING_IMAGE_HEIGHT = 200.0;
 
 class MainMenu extends StatefulWidget {
