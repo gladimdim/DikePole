@@ -17,6 +17,7 @@ import 'package:onlineeditor/views/inherited_auth.dart';
 
 class EditStoryView extends StatefulWidget {
   final Story story;
+  static const routeName = "/editStories";
 
   EditStoryView({@required this.story});
 

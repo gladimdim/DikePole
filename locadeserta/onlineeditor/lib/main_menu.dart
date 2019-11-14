@@ -230,6 +230,7 @@ class _MainMenuState extends State<MainMenu> with TickerProviderStateMixin {
         widget: InheritedAuth(
             child: GameView(
               story: storyWithState,
+              catalogStory: story,
             ),
             auth: InheritedAuth.of(context).auth),
       ),

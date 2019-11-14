@@ -6,11 +6,13 @@ import 'package:locadeserta/creator/components/story_view.dart';
 import 'package:locadeserta/creator/story/story.dart';
 import 'package:locadeserta/export_pdf_view.dart';
 import 'package:locadeserta/models/Localizations.dart';
+import 'package:locadeserta/models/catalogs.dart';
 
 class GameView extends StatefulWidget {
   final Story story;
+  final CatalogStory catalogStory;
 
-  GameView({this.story});
+  GameView({this.story, this.catalogStory});
 
   @override
   _MainViewState createState() => _MainViewState();
@@ -24,6 +26,10 @@ class _MainViewState extends State<GameView> {
         title: LDLocalizations.previewStory,
         onResetStory: () {
           setState(() {
+            if (widget.catalogStory != null && widget.catalogStory.gladJson != null) {
+              var templateStory = Story.fromJson(widget.catalogStory.gladJson);
+              widget.story.root = templateStory.root;
+            }
             widget.story.reset();
           });
         },

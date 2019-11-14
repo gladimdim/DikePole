@@ -237,11 +237,14 @@ class _MainMenuState extends State<MainMenu> with TickerProviderStateMixin {
       }
 
       Navigator.push(
-          context,
-          SlideRightNavigation(
-              widget: GameView(
+        context,
+        SlideRightNavigation(
+          widget: GameView(
             story: storyWithState,
-          )));
+            catalogStory: story,
+          ),
+        ),
+      );
     }
   }
 

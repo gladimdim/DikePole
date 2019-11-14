@@ -2,6 +2,7 @@ import 'package:async/async.dart';
 import 'package:flutter/material.dart';
 import 'package:onlineeditor/Localizations.dart';
 import 'package:onlineeditor/animations/slideable_button.dart';
+import 'package:onlineeditor/creator/components/edit_story.dart';
 import 'package:onlineeditor/creator/components/fat_container.dart';
 import 'package:onlineeditor/creator/components/meta_story_view.dart';
 import 'package:onlineeditor/creator/story/persistence.dart';
@@ -149,7 +150,7 @@ class _CatalogGladStoryViewState extends State<CatalogGladStoryView> {
   _goToEditStoryView(Story story, context) async {
     await Navigator.pushNamed(
       context,
-      "/editStories",
+      EditStoryView.routeName,
       arguments: story,
     );
   }

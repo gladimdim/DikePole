@@ -98,13 +98,14 @@ class _EditMetaStoryViewState extends State<EditMetaStoryView> {
 
     return Column(
       children: <Widget>[
-        if (widget.story != null) Padding(
-          padding: const EdgeInsets.only(top: 8.0),
-          child: Text(
-            widget.story.title,
-            style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+        if (widget.story != null)
+          Padding(
+            padding: const EdgeInsets.only(top: 8.0),
+            child: Text(
+              widget.story.title,
+              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+            ),
           ),
-        ),
         Form(
           key: _formKey,
           child: Column(

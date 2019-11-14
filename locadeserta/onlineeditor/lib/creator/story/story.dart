@@ -20,12 +20,12 @@ class Story {
 
   Story(
       {@required this.title,
-      @required this.description,
-      @required this.authors,
-      @required this.root,
-      this.currentPage,
-      this.history,
-      this.year}) {
+        @required this.description,
+        @required this.authors,
+        @required this.root,
+        this.currentPage,
+        this.history,
+        this.year}) {
     if (this.currentPage == null) {
       currentPage = root;
     }
@@ -106,8 +106,8 @@ class Story {
       "title": title,
       "description": description,
       "authors": authors,
-      "root": root.toStateMap(),
-      "currentPage": currentPage.toMap(),
+      "root": root.toMap(),
+      "currentPage": currentPage.toStateMap(),
       "year": year,
       "history": history.map((historyItem) => historyItem.toMap()).toList(),
     });
@@ -119,7 +119,7 @@ class Story {
     var rootPage = Page.fromMap(rootMap);
     var currentPageMap = map["currentPage"];
     var currentPage =
-        currentPageMap == null ? null : Page.fromMap(map["currentPage"]);
+    currentPageMap == null ? null : Page.fromMap(map["currentPage"]);
     List historyList = map["history"];
     String authors = map["authors"];
     return Story(
@@ -139,7 +139,7 @@ class Story {
     var story = Story(
       title: "After the battle",
       description:
-          "At the beginning of XVII century a confrontation flares up between Polish-Lithuanian Commonwealth and Ottoman Empire. As a result of a devastating defeat in the Battle of Cecora, a lot of noblemen, cossacks and soldiers perished or were captured by Turks and Tatars. A fate of a young cossack, wayfaring through the Wild FIelds in a desperate attempt to escape from captivity, depends on a reader of this interactive fiction. All challenges are equally hard: survive in a steppe, avoid the revenge of Tatars, win the trust of cossack fishermen and return home. But the time of the final battle that will change history is coming. Will the main character be able to participate in it and stay alive and where his life will go from there - only You know the answer.",
+      "At the beginning of XVII century a confrontation flares up between Polish-Lithuanian Commonwealth and Ottoman Empire. As a result of a devastating defeat in the Battle of Cecora, a lot of noblemen, cossacks and soldiers perished or were captured by Turks and Tatars. A fate of a young cossack, wayfaring through the Wild FIelds in a desperate attempt to escape from captivity, depends on a reader of this interactive fiction. All challenges are equally hard: survive in a steppe, avoid the revenge of Tatars, win the trust of cossack fishermen and return home. But the time of the final battle that will change history is coming. Will the main character be able to participate in it and stay alive and where his life will go from there - only You know the answer.",
       authors: "Konstantin Boytsov, Anastasiia Tsapenko",
       root: Page.generate(),
       year: 1620,
@@ -302,7 +302,7 @@ class Page {
     List<PageNext> parsedNext = List.from(next.map((n) => PageNext.fromMap(n)));
     List nodes = map["nodes"];
     List<PageNode> parsedNodes =
-        List.from(nodes.map((n) => PageNode.fromMap(n)));
+    List.from(nodes.map((n) => PageNode.fromMap(n)));
     int currentI = map["currentIndex"];
     return Page(
       next: parsedNext,

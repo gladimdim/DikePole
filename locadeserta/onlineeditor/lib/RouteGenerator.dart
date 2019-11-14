@@ -65,7 +65,7 @@ class RouteGenerator {
           ),
         );
         break;
-      case "/editStories":
+      case EditStoryView.routeName:
         return MaterialPageRoute(
           builder: (_) =>
               InheritedAuth(child: EditStoryView(story: args), auth: ldAuth),

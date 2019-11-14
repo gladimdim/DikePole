@@ -106,8 +106,8 @@ class Story {
       "title": title,
       "description": description,
       "authors": authors,
-      "root": root.toStateMap(),
-      "currentPage": currentPage.toMap(),
+      "root": root.toMap(),
+      "currentPage": currentPage.toStateMap(),
       "year": year,
       "history": history.map((historyItem) => historyItem.toMap()).toList(),
     });
