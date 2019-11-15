@@ -10,6 +10,7 @@ import 'package:onlineeditor/models/catalogs.dart';
 class GameView extends StatefulWidget {
   final Story story;
   final CatalogStory catalogStory;
+
   GameView({this.story, this.catalogStory});
 
   @override
@@ -17,7 +18,6 @@ class GameView extends StatefulWidget {
 }
 
 class _MainViewState extends State<GameView> {
-
   @override
   Widget build(BuildContext context) {
     return GameViewScaffold(
@@ -25,7 +25,8 @@ class _MainViewState extends State<GameView> {
         title: LDLocalizations.previewStory,
         onResetStory: () {
           setState(() {
-            if (widget.catalogStory != null && widget.catalogStory.gladJson != null) {
+            if (widget.catalogStory != null &&
+                widget.catalogStory.gladJson != null) {
               var templateStory = Story.fromJson(widget.catalogStory.gladJson);
               widget.story.root = templateStory.root;
             }
@@ -35,8 +36,11 @@ class _MainViewState extends State<GameView> {
         onExportStory: () {},
       ),
       child: Padding(
-          padding: const EdgeInsets.only(top: 32.0),
-          child: StoryView(currentStory: widget.story,),
+        padding: const EdgeInsets.only(top: 32.0),
+        child: StoryView(
+          currentStory: widget.story,
+          previewMode: widget.catalogStory == null,
+        ),
       ),
     );
   }

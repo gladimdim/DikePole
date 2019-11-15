@@ -8,12 +8,15 @@ import 'package:locadeserta/creator/utils/utils.dart';
 import 'package:locadeserta/models/Localizations.dart';
 import 'package:locadeserta/models/background_image.dart';
 import 'package:locadeserta/models/persistence.dart';
+import 'package:locadeserta/models/analytics.dart';
 
 class StoryView extends StatefulWidget {
   final Story currentStory;
+  final bool previewMode;
 
   StoryView({
     this.currentStory,
+    this.previewMode = true,
   });
 
   @override
@@ -22,14 +25,16 @@ class StoryView extends StatefulWidget {
 
 class PassageState extends State<StoryView> with TickerProviderStateMixin {
   ScrollController _passageScrollController = ScrollController();
-  
+
   @override
   initState() {
     Future.delayed(Duration.zero, () {
       widget.currentStory.historyChanges.listen((data) {
         _saveStateToStorage(widget.currentStory, context);
+        if (widget.currentStory.currentPage.isTheEnd() && !widget.currentStory.currentPage.hasNext() && !widget.previewMode) {
+          Analytics.instance.addStoryToLog(widget.currentStory);
+        }
       });
-
     });
     super.initState();
   }
@@ -52,7 +57,6 @@ class PassageState extends State<StoryView> with TickerProviderStateMixin {
         );
       },
     );
-
   }
 
   void _next(context) {
@@ -127,7 +131,8 @@ class PassageState extends State<StoryView> with TickerProviderStateMixin {
           if (!widget.currentStory.canContinue() &&
               widget.currentStory.currentPage.isTheEnd())
             SlideableButton(
-              child: FatContainer(text: LDLocalizations.theEndStartOverQuestion),
+              child:
+                  FatContainer(text: LDLocalizations.theEndStartOverQuestion),
               onPress: () {
                 widget.currentStory.reset();
               },

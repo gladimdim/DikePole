@@ -2,7 +2,7 @@ import 'dart:core';
 
 import 'package:flutter/material.dart';
 
-var version = "1.96";
+var version = "1.97";
 
 class LDLocalizations {
   static Locale locale = Locale('uk');
@@ -18,7 +18,7 @@ class LDLocalizations {
       'start': 'Start',
       'greet': 'Good day',
       'version': 'Version',
-      'loadingstory': 'Loading Story',
+      'loadingstory': 'Loadin˚g Story',
       'startstory': 'Read',
       'lookingforheroes': 'Looking for heroes in Loca Deserta lands...',
       'save': 'Save',

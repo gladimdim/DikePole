@@ -6,14 +6,17 @@ import 'package:onlineeditor/creator/components/fat_container.dart';
 import 'package:onlineeditor/creator/story/persistence.dart';
 import 'package:onlineeditor/creator/story/story.dart';
 import 'package:onlineeditor/creator/utils/utils.dart';
+import 'package:onlineeditor/models/analytics.dart';
 import 'package:onlineeditor/models/background_image.dart';
 import 'package:onlineeditor/views/inherited_auth.dart';
 
 class StoryView extends StatefulWidget {
   final Story currentStory;
+  final bool previewMode;
 
   StoryView({
     this.currentStory,
+    this.previewMode = true,
   });
 
   @override
@@ -29,6 +32,9 @@ class PassageState extends State<StoryView> with TickerProviderStateMixin {
     Future.delayed(Duration.zero, () {
       widget.currentStory.historyChanges.listen((data) {
         _saveStateToStorage(widget.currentStory, context);
+        if (widget.currentStory.currentPage.isTheEnd() && !widget.currentStory.currentPage.hasNext() && !widget.previewMode) {
+          Analytics.instance.addStoryToLog(widget.currentStory);
+        }
       });
 
     });
