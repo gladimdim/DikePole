@@ -14,7 +14,6 @@ import 'package:locadeserta/waiting_screen.dart';
 import 'package:locadeserta/animations/slideable_button.dart';
 
 class CreateView extends StatefulWidget {
-
   @override
   _CreateViewState createState() => _CreateViewState();
 }
@@ -41,7 +40,8 @@ class _CreateViewState extends State<CreateView> {
           children: <Widget>[
             SlideableButton(
               onPress: () async {
-                await Navigator.pushNamed(context, ImportGladStoryView.routeName);
+                await Navigator.pushNamed(
+                    context, ImportGladStoryView.routeName);
                 _resetStoryBuilderFuture();
               },
               child: FatContainer(
@@ -57,60 +57,62 @@ class _CreateViewState extends State<CreateView> {
     );
   }
 
-
   _buildStoryView(BuildContext context, User user) {
     return Padding(
       padding: const EdgeInsets.all(2.0),
       child: SingleChildScrollView(
           child: Column(
-            children: <Widget>[
-              Center(
-                child: Card(
-                  elevation: 10.0,
-                  child: Column(
-                    children: <Widget>[
-                      ListTile(
-                        leading: Icon(Icons.book),
-                        title: Text(LDLocalizations.createStory),
-                      ),
-                      EditMetaStoryView(
-                        story: null,
-                        onSave: (Story newStory) async {
-                          await StoryPersistence.instance
-                              .writeStory(user, newStory);
-                          _resetStoryBuilderFuture();
-                        },
-                        onDelete: null,
-                      ),
-                    ],
-                  ),
+        children: <Widget>[
+          Padding(
+            padding: const EdgeInsets.only(top: 8.0),
+            child: Center(
+              child: Card(
+                elevation: 10.0,
+                child: Column(
+                  children: <Widget>[
+                    ListTile(
+                      leading: Icon(Icons.book),
+                      title: Text(LDLocalizations.createStory),
+                    ),
+                    EditMetaStoryView(
+                      story: null,
+                      onSave: (Story newStory) async {
+                        await StoryPersistence.instance
+                            .writeStory(user, newStory);
+                        _resetStoryBuilderFuture();
+                      },
+                      onDelete: null,
+                    ),
+                  ],
                 ),
               ),
-              FutureBuilder(
-                future: _fetchData(user),
-                builder: (context, snapshot) {
-                  switch (snapshot.connectionState) {
-                    case ConnectionState.none:
-                    case ConnectionState.active:
-                    case ConnectionState.waiting:
-                      return WaitingScreen();
-                      break;
-                    case ConnectionState.done:
-                      if (snapshot.data == null) {
-                        return Container();
-                      } else {
-                        storyBuilders = snapshot.data;
-                        return Column(
-                          children: _createStoryCards(storyBuilders, user, context),
-                        );
-                      }
-                      break;
+            ),
+          ),
+          FutureBuilder(
+            future: _fetchData(user),
+            builder: (context, snapshot) {
+              switch (snapshot.connectionState) {
+                case ConnectionState.none:
+                case ConnectionState.active:
+                case ConnectionState.waiting:
+                  return WaitingScreen();
+                  break;
+                case ConnectionState.done:
+                  if (snapshot.data == null) {
+                    return Container();
+                  } else {
+                    storyBuilders = snapshot.data;
+                    return Column(
+                      children: _createStoryCards(storyBuilders, user, context),
+                    );
                   }
-                  return Container();
-                },
-              )
-            ],
-          )),
+                  break;
+              }
+              return Container();
+            },
+          )
+        ],
+      )),
     );
   }
 
@@ -142,16 +144,14 @@ class _CreateViewState extends State<CreateView> {
           child: MetaStoryView(
             story: story,
             onSave: (Story newStory) async {
-              await StoryPersistence.instance
-                  .writeStory(user, story);
+              await StoryPersistence.instance.writeStory(user, story);
               setState(() {});
             },
             onEdit: (story) {
               _goToEditStoryView(story, context);
             },
             onDelete: (story) async {
-              await _deleteStory(
-                  user, story);
+              await _deleteStory(user, story);
               _resetStoryBuilderFuture();
             },
           ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:locadeserta/InheritedAuth.dart';
 import 'package:locadeserta/animations/slideable_button.dart';
 import 'package:locadeserta/components/BorderedRandomImageForType.dart';
@@ -31,7 +32,9 @@ class PassageState extends State<StoryView> with TickerProviderStateMixin {
     Future.delayed(Duration.zero, () {
       widget.currentStory.historyChanges.listen((data) {
         _saveStateToStorage(widget.currentStory, context);
-        if (widget.currentStory.currentPage.isTheEnd() && !widget.currentStory.currentPage.hasNext() && !widget.previewMode) {
+        if (widget.currentStory.currentPage.isTheEnd() &&
+            !widget.currentStory.currentPage.hasNext() &&
+            !widget.previewMode) {
           Analytics.instance.addStoryToLog(widget.currentStory);
         }
       });
@@ -59,8 +62,8 @@ class PassageState extends State<StoryView> with TickerProviderStateMixin {
     );
   }
 
-  void _next(context) {
-//    _saveStateToStorage(widget.currentStory, context);
+  void _next(context) async {
+    await HapticFeedback.lightImpact();
     setState(() {
       var currentImageType =
           widget.currentStory.currentPage.getCurrentNode().imageType;
@@ -85,6 +88,7 @@ class PassageState extends State<StoryView> with TickerProviderStateMixin {
           height: MediaQuery.of(context).size.height * 0.075,
           child: SlideableButton(
             onPress: () {
+              HapticFeedback.mediumImpact();
               setState(() {
                 widget.currentStory.goToNextPage(page);
               });

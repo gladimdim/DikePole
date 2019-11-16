@@ -74,6 +74,7 @@ class _StoryViewState extends State<StoryView> {
                 ? Passage(
                     currentStory: currentStory,
                     onNextOptionSelected: (s, i) async {
+                      await HapticFeedback.lightImpact();
                       _previousPassages.add(s);
                       switch (s.type) {
                         case PassageTypes.TEXT:

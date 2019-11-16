@@ -2,7 +2,7 @@ import 'dart:core';
 
 import 'package:flutter/material.dart';
 
-var version = "1.96";
+var version = "1.97";
 
 class LDLocalizations {
   static Locale locale = Locale('uk');
@@ -29,9 +29,9 @@ class LDLocalizations {
       'tobecontinued': 'To be continued. Wait on the story update.',
       'showstorydetails': 'More Details',
       'translationnotready':
-      'Translations are not yet ready for your language.',
+          'Translations are not yet ready for your language.',
       'aboutgame':
-      'Interactive Fiction. This game allows to dive into heroic epoch in XVII century, which took part in the southern part of Ukraine, at Loca Deserta. You not only read the story but you can select how it proceeds further! Depending on your selections you can get absolutely different events, encounters. Or you can even die.',
+          'Interactive Fiction. This game allows to dive into heroic epoch in XVII century, which took part in the southern part of Ukraine, at Loca Deserta. You not only read the story but you can select how it proceeds further! Depending on your selections you can get absolutely different events, encounters. Or you can even die.',
       'menu': 'Menu',
       'backtostories': 'Back to stories',
       'backtomenu': 'Back to menu',
@@ -41,10 +41,10 @@ class LDLocalizations {
       'preparingexport': 'Preparing export of the story',
       'openingsharedialog': 'Sending story to share dialog',
       'warninglongprocess':
-      'This feature takes some time to finish, please wait.',
+          'This feature takes some time to finish, please wait.',
       'longprocesswarning': 'Operation might take up to 30 seconds.',
       'longprocessdescription':
-      'We have to compile your story into passages, add pictures and create PDF file. It might take some time.',
+          'We have to compile your story into passages, add pictures and create PDF file. It might take some time.',
       'createpdfdocument': 'Create',
       'cancel': 'Cancel',
       'processingimage': "Processing image, please wait",
@@ -106,7 +106,7 @@ class LDLocalizations {
       'showstorydetails': 'Детальніше',
       'translationnotready': 'Переклад історії на вашу мову ще не готовий.',
       'aboutgame':
-      'Інтерактивна гра-книга (Interactive Fiction). Гра дозволяє зануритись в бурхливі події 1620х років, які відбувалися на Дикому Полі. Але ви не тільки читаєте історію, а ще і можете вибирати подальший розвиток подій. В залежності від вашого вибору, історія продовжується в різних напрямах, або ж і просто обривається назавжди.',
+          'Інтерактивна гра-книга (Interactive Fiction). Гра дозволяє зануритись в бурхливі події 1620х років, які відбувалися на Дикому Полі. Але ви не тільки читаєте історію, а ще і можете вибирати подальший розвиток подій. В залежності від вашого вибору, історія продовжується в різних напрямах, або ж і просто обривається назавжди.',
       'menu': 'Меню',
       'backtostories': 'Назад до історій',
       'backtomenu': 'Назад до меню',
@@ -116,10 +116,10 @@ class LDLocalizations {
       'preparingexport': 'Підготовка до експорту історії',
       'openingsharedialog': 'Передаю дані до діалогу поширення',
       'warninglongprocess':
-      'Ця функція займає деякий час, будь ласка, почекайте.',
+          'Ця функція займає деякий час, будь ласка, почекайте.',
       'longprocesswarning': 'Операція може зайняти до 30 секунд.',
       'longprocessdescription':
-      'Нам необхідно обробити вашу пройдену історію, сформувати абзаци і додати картинки. Тому це може заняти деякий час.',
+          'Нам необхідно обробити вашу пройдену історію, сформувати абзаци і додати картинки. Тому це може заняти деякий час.',
       'createpdfdocument': 'Сформувати документ',
       'cancel': 'Скасувати',
       'processingimage': 'Обробляємо картинку, будь ласка, почекайте',
@@ -180,9 +180,9 @@ class LDLocalizations {
       'tobecontinued': 'Ciąg dalszy nastąpi. Poczekaj na aktualizację historii',
       'showstorydetails': 'Więcej szczegółów',
       'translationnotready':
-      'Tłumaczenie opowiadań dla twojego języka nie jest jeszcze gotowe.',
+          'Tłumaczenie opowiadań dla twojego języka nie jest jeszcze gotowe.',
       'aboutgame':
-      'Interaktywna fikcja. Ta gra pozwala zanurzyć się w heroicznej epoce w XVII wieku, która odbyła się w południowej części Ukrainy, w Loca Deserta. Nie tylko czytasz historię, ale możesz wybrać, jak dalej będzie postępować! W zależności od wyboru możesz uzyskać zupełnie inne wydarzenia, spotkania. Albo możesz nawet umrzeć.',
+          'Interaktywna fikcja. Ta gra pozwala zanurzyć się w heroicznej epoce w XVII wieku, która odbyła się w południowej części Ukrainy, w Loca Deserta. Nie tylko czytasz historię, ale możesz wybrać, jak dalej będzie postępować! W zależności od wyboru możesz uzyskać zupełnie inne wydarzenia, spotkania. Albo możesz nawet umrzeć.',
       'menu': 'Menu',
       'backtostories': 'Powrót do historii',
       'backtomenu': 'Powrót do menu',
@@ -191,11 +191,11 @@ class LDLocalizations {
       'sharestory': 'Podziel się historią',
       'preparingexport': 'Przygotowanie historii na eksport',
       'openingsharedialog':
-      'Wysyłanie danych do okna dialogowego udostępniania',
+          'Wysyłanie danych do okna dialogowego udostępniania',
       'warninglongprocess': 'Ta funkcja wymaga trochę czasu, proszę czekać.',
       'longprocesswarning': 'Operacja może potrwać do 30 sekund.',
       'longprocessdescription':
-      'Musimy przetworzyć twoją historię, utworzyć akapity i dodać zdjęcia. Dlatego tak długo to trwało.',
+          'Musimy przetworzyć twoją historię, utworzyć akapity i dodać zdjęcia. Dlatego tak długo to trwało.',
       'createpdfdocument': 'Utwórz dokument',
       'cancel': 'Anuluj',
       'processingimage': 'Przetwarzanie obrazu',

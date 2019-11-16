@@ -32,8 +32,8 @@ class Auth {
   }
 
   Future<User> signInWithCredentials(AuthCredential creds) async {
-    final FirebaseUser fbUser = await _auth.signInWithCredential(creds);
-    user = User.fromFirebaseUser(fbUser);
+    final AuthResult fbUser = await _auth.signInWithCredential(creds);
+    user = User.fromFirebaseUser(fbUser.user);
     return user;
   }
 
@@ -43,7 +43,7 @@ class Auth {
 
   Future<void> signInAnonymously() async {
     var fbUser = await _auth.signInAnonymously();
-    user = User.fromFirebaseUser(fbUser);
+    user = User.fromFirebaseUser(fbUser.user);
     return user;
   }
 }
