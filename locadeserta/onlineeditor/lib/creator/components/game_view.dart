@@ -5,6 +5,7 @@ import 'package:onlineeditor/components/game_app_bar.dart';
 import 'package:onlineeditor/components/game_component.dart';
 import 'package:onlineeditor/creator/components/story_view.dart';
 import 'package:gladstoriesengine/gladstoriesengine.dart';
+import 'package:onlineeditor/models/background_image.dart';
 import 'package:onlineeditor/models/catalogs.dart';
 
 class GameView extends StatefulWidget {
@@ -27,7 +28,7 @@ class _MainViewState extends State<GameView> {
           setState(() {
             if (widget.catalogStory != null &&
                 widget.catalogStory.gladJson != null) {
-              var templateStory = Story.fromJson(widget.catalogStory.gladJson);
+              var templateStory = Story.fromJson(widget.catalogStory.gladJson, imageResolver: BackgroundImage.getRandomImageForType);
               widget.story.root = templateStory.root;
             }
             widget.story.reset();

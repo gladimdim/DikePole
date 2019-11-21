@@ -2,6 +2,7 @@ import 'package:firebase/firebase.dart' as fb;
 import 'package:firebase/firestore.dart' as fs;
 import 'package:gladstoriesengine/gladstoriesengine.dart';
 import 'package:onlineeditor/models/LDUser.dart';
+import 'package:onlineeditor/models/background_image.dart';
 import 'package:onlineeditor/models/catalogs.dart';
 
 fs.Firestore storage = fb.firestore();
@@ -18,7 +19,7 @@ class StoryPersistence {
           .collection("user_stories/${user.uid}/stories")
           .get();
       List parsedStories = stories.docs.map((document) {
-        Story story = Story.fromJson(document.data()["storyjson"]);
+        Story story = Story.fromJson(document.data()["storyjson"], imageResolver: BackgroundImage.getRandomImageForType);
         return story;
       }).toList();
 
@@ -36,7 +37,7 @@ class StoryPersistence {
 
     if (doc.exists) {
       var state = doc.data()["gladJsonState"];
-      var savedStory = Story.fromJson(state);
+      var savedStory = Story.fromJson(state, imageResolver: BackgroundImage.getRandomImageForType);
       return savedStory;
     } else {
       return Story.fromJson(story.gladJson);

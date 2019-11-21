@@ -7,6 +7,7 @@ import 'package:onlineeditor/components/narrow_scaffold.dart';
 import 'package:onlineeditor/creator/components/fat_container.dart';
 import 'package:onlineeditor/creator/story/persistence.dart';
 import 'package:gladstoriesengine/gladstoriesengine.dart';
+import 'package:onlineeditor/models/background_image.dart';
 import 'package:onlineeditor/views/inherited_auth.dart';
 
 class ImportGladStoryView extends StatefulWidget {
@@ -49,7 +50,7 @@ class _ImportGladStoryViewState extends State<ImportGladStoryView> {
                 ),
               ),
               onPress: () async {
-                var story = Story.fromJson(_controller.text);
+                var story = Story.fromJson(_controller.text, imageResolver: BackgroundImage.getRandomImageForType);
                 var user = InheritedAuth.of(context).auth.getUser();
                 await StoryPersistence.instance.writeStory(user, story);
                 Navigator.pop(context);
