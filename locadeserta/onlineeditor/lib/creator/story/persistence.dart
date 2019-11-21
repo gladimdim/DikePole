@@ -1,6 +1,6 @@
 import 'package:firebase/firebase.dart' as fb;
 import 'package:firebase/firestore.dart' as fs;
-import 'package:onlineeditor/creator/story/story.dart';
+import 'package:gladstoriesengine/gladstoriesengine.dart';
 import 'package:onlineeditor/models/LDUser.dart';
 import 'package:onlineeditor/models/catalogs.dart';
 

@@ -3,6 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'package:onlineeditor/animations/fade_images.dart';
 import 'package:onlineeditor/components/bordered_container.dart';
 import 'package:onlineeditor/models/background_image.dart';
+import 'package:gladstoriesengine/gladstoriesengine.dart';
 
 class BorderedRandomImageByType extends StatelessWidget {
   final ImageType type;

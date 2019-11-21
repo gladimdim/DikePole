@@ -5,6 +5,7 @@ import 'package:onlineeditor/animations/fade_images.dart';
 import 'package:onlineeditor/animations/slideable_button.dart';
 import 'package:onlineeditor/models/background_image.dart';
 import 'package:onlineeditor/models/catalogs.dart';
+import 'package:gladstoriesengine/gladstoriesengine.dart';
 
 class CatalogViewArguments {
   final CatalogStory catalogStory;

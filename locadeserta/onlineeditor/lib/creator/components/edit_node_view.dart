@@ -5,8 +5,7 @@ import 'package:onlineeditor/components/bordered_container.dart';
 import 'package:onlineeditor/creator/components/fat_container.dart';
 import 'package:onlineeditor/creator/components/image_selector.dart';
 import 'package:onlineeditor/creator/components/text_editor.dart';
-import 'package:onlineeditor/creator/story/story.dart';
-import 'package:onlineeditor/models/background_image.dart';
+import 'package:gladstoriesengine/gladstoriesengine.dart';
 
 class EditNodeView extends StatefulWidget {
   final PageNode node;

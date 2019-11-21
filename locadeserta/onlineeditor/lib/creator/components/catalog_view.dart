@@ -6,7 +6,7 @@ import 'package:onlineeditor/creator/components/edit_story.dart';
 import 'package:onlineeditor/creator/components/fat_container.dart';
 import 'package:onlineeditor/creator/components/meta_story_view.dart';
 import 'package:onlineeditor/creator/story/persistence.dart';
-import 'package:onlineeditor/creator/story/story.dart';
+import 'package:gladstoriesengine/gladstoriesengine.dart';
 import 'package:onlineeditor/models/LDUser.dart';
 import 'package:onlineeditor/views/import_gladstories_view.dart';
 import 'package:onlineeditor/views/inherited_auth.dart';

@@ -4,7 +4,7 @@ import 'package:onlineeditor/animations/slideable_button.dart';
 import 'package:onlineeditor/components/BorderedRandomImageForType.dart';
 import 'package:onlineeditor/creator/components/fat_container.dart';
 import 'package:onlineeditor/creator/story/persistence.dart';
-import 'package:onlineeditor/creator/story/story.dart';
+import 'package:gladstoriesengine/gladstoriesengine.dart';
 import 'package:onlineeditor/creator/utils/utils.dart';
 import 'package:onlineeditor/models/analytics.dart';
 import 'package:onlineeditor/models/background_image.dart';

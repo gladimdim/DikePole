@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:onlineeditor/Localizations.dart';
 import 'package:onlineeditor/creator/components/edit_node_view.dart';
-import 'package:onlineeditor/creator/story/story.dart';
+import 'package:gladstoriesengine/gladstoriesengine.dart';
 
 class EditNodeSequence extends StatefulWidget {
   final Page page;

@@ -10,7 +10,7 @@ import 'package:onlineeditor/creator/components/fat_container.dart';
 import 'package:onlineeditor/creator/components/game_view.dart';
 import 'package:onlineeditor/creator/components/text_editor.dart';
 import 'package:onlineeditor/creator/story/persistence.dart';
-import 'package:onlineeditor/creator/story/story.dart';
+import 'package:gladstoriesengine/gladstoriesengine.dart';
 import 'package:onlineeditor/creator/utils/utils.dart';
 import 'package:onlineeditor/models/background_image.dart';
 import 'package:onlineeditor/views/inherited_auth.dart';

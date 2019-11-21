@@ -17,6 +17,7 @@ import 'package:onlineeditor/models/background_image.dart';
 import 'package:onlineeditor/models/catalogs.dart';
 import 'package:onlineeditor/views/inherited_auth.dart';
 import 'package:onlineeditor/waiting_screen.dart';
+import 'package:gladstoriesengine/gladstoriesengine.dart';
 
 const LANDING_IMAGE_HEIGHT = 200.0;
 

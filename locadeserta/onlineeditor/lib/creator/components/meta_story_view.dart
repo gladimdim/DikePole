@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:onlineeditor/Localizations.dart';
 import 'package:onlineeditor/animations/slideable_button.dart';
 import 'package:onlineeditor/creator/components/fat_container.dart';
-import 'package:onlineeditor/creator/story/story.dart';
+import 'package:gladstoriesengine/gladstoriesengine.dart';
 import 'package:flutter/services.dart';
+import 'package:onlineeditor/models/background_image.dart';
 
 class MetaStoryView extends StatefulWidget {
   final Function(Story story) onSave;
@@ -173,6 +174,7 @@ class _EditMetaStoryViewState extends State<EditMetaStoryView> {
                           description: _description,
                           authors: _authors,
                           root: Page.generate(),
+                          imageResolver: BackgroundImage.getRandomImageForType,
                         );
                       } else {
                         story = widget.story;
