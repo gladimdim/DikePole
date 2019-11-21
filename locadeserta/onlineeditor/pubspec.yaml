@@ -17,8 +17,7 @@ environment:
   sdk: ">=2.3.0 <3.0.0"
 
 dependencies:
-  gladstoriesengine:
-    path: ../../../gladstoriesdart
+  gladstoriesengine: ^0.1.1
   flutter:
     sdk: flutter
   http:
