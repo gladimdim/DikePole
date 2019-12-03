@@ -19,7 +19,8 @@ class StoryPersistence {
           .collection("user_stories/${user.uid}/stories")
           .get();
       List parsedStories = stories.docs.map((document) {
-        Story story = Story.fromJson(document.data()["storyjson"], imageResolver: BackgroundImage.getRandomImageForType);
+        Story story = Story.fromJson(document.data()["storyjson"],
+            imageResolver: BackgroundImage.getRandomImageForType);
         return story;
       }).toList();
 
@@ -37,10 +38,13 @@ class StoryPersistence {
 
     if (doc.exists) {
       var state = doc.data()["gladJsonState"];
-      var savedStory = Story.fromJson(state, imageResolver: BackgroundImage.getRandomImageForType);
+      var savedStory = Story.fromJson(state,
+          imageResolver: BackgroundImage.getRandomImageForType);
       return savedStory;
     } else {
-      return Story.fromJson(story.gladJson);
+      print("doc does not exist");
+      return Story.fromJson(story.gladJson,
+          imageResolver: BackgroundImage.getRandomImageForType);
     }
   }
 
@@ -59,7 +63,8 @@ class StoryPersistence {
 
   Future deleteStory(LDUser user, Story story) async {
     return await storage
-        .doc("user_stories/${user.uid}/stories/${story.title}").delete();
+        .doc("user_stories/${user.uid}/stories/${story.title}")
+        .delete();
   }
 
   Future saveGladStoryToStorageForUser(LDUser user, Story story) async {

@@ -115,7 +115,9 @@ class _MainMenuState extends State<MainMenu> with TickerProviderStateMixin {
     return _catalogListMemo.runOnce(() async {
       List<CatalogStory> catalogStories =
           await CatalogStory.getAvailableCatalogStories(locale.languageCode);
-      return catalogStories;
+      return catalogStories
+          .where((story) => story.title != "Після Битви")
+          .toList();
     });
   }
 
