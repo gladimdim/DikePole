@@ -4,7 +4,7 @@ import 'package:locadeserta/models/Auth.dart';
 class InheritedAuth extends InheritedWidget {
   final Auth auth;
   final Widget child;
-  InheritedAuth({this.auth,  this.child}) : super(child: child);
+  InheritedAuth({this.auth, this.child}) : super(child: child);
 
   @override
   updateShouldNotify(oldWidget) => true;

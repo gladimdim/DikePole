@@ -14,13 +14,30 @@ class CatalogStory {
   final String id;
   final String author;
   final String gladJson;
+  final String year;
 
-  CatalogStory({this.title, this.description, this.inkJson, this.documentReference, this.id, this.author, this.gladJson});
+  CatalogStory({
+    this.title,
+    this.description,
+    this.inkJson,
+    this.documentReference,
+    this.id,
+    this.author,
+    this.gladJson,
+    this.year,
+  });
 
   CatalogStory.fromMap(Map<String, dynamic> map, {this.documentReference})
-      : title = map['title'], description = map['description'], inkJson = map['inkjson'], id = documentReference.documentID, author = map["author"], gladJson = map["gladJson"];
+      : title = map['title'],
+        description = map['description'],
+        inkJson = map['inkjson'],
+        id = documentReference.documentID,
+        author = map["author"],
+        year = map["year"],
+        gladJson = map["gladJson"];
 
-  CatalogStory.fromSnapshot(DocumentSnapshot snapshot) : this.fromMap(snapshot.data, documentReference: snapshot.reference);
+  CatalogStory.fromSnapshot(DocumentSnapshot snapshot)
+      : this.fromMap(snapshot.data, documentReference: snapshot.reference);
 
   static Future<CatalogStory> getStoryById(String id) async {
     var possibleStory = Firestore.instance.collection('catalog').document(id);
@@ -32,7 +49,8 @@ class CatalogStory {
     QuerySnapshot a = await Firestore.instance
         .collection("user_states")
         .document(user.uid)
-        .collection("states").getDocuments();
+        .collection("states")
+        .getDocuments();
 
     String s = a.documents[0]["catalogidreference"];
 

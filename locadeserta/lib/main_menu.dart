@@ -1,5 +1,6 @@
 import 'package:async/async.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:locadeserta/InheritedAuth.dart';
 import 'package:locadeserta/StatisticsView.dart';
@@ -8,6 +9,7 @@ import 'package:locadeserta/animations/slideable_button.dart';
 import 'package:locadeserta/catalog_view.dart';
 import 'package:locadeserta/components/app_bar_custom.dart';
 import 'package:locadeserta/components/narrow_scaffold.dart';
+import 'package:locadeserta/components/transforming_page_view.dart';
 import 'package:locadeserta/creator/components/fat_container.dart';
 import 'package:locadeserta/creator/components/game_view.dart';
 import 'package:locadeserta/models/Localizations.dart';
@@ -156,27 +158,11 @@ class _MainMenuState extends State<MainMenu> with TickerProviderStateMixin {
   }
 
   _buildCatalogView(BuildContext context, List<CatalogStory> stories) {
-    var child = ListView.builder(
-        itemCount: stories.length + 1,
-        shrinkWrap: true,
-        itemBuilder: (BuildContext context, int index) {
-          if (index == 0) {
-            return Padding(
-              padding: const EdgeInsets.all(4.0),
-              child: SlideableButton(
-                onPress: () {
-                  Navigator.pushNamed(context, "/create");
-                },
-                child: FatContainer(
-                  text: LDLocalizations.createStory,
-                  backgroundColor: Colors.black87,
-                ),
-              ),
-            );
-          }
-          var story = stories[index - 1];
-          return Padding(
-            padding: const EdgeInsets.only(top: 8.0),
+    List<CatalogStory> sortedStories = List.from(stories);
+    sortedStories.sort((story1, story2) => story1.year.compareTo(story2.year));
+    List<Widget> widgets = sortedStories
+        .map(
+          (CatalogStory story) => Center(
             child: CatalogView(
               catalogStory: story,
               onReadPressed: () => _goToStory(story, context),
@@ -195,16 +181,35 @@ class _MainMenuState extends State<MainMenu> with TickerProviderStateMixin {
                 );
               },
             ),
-          );
-        });
+          ),
+        )
+        .toList();
+    var child = TransformingPageView(
+      pages: widgets,
+      scrollDirection: Axis.vertical,
+    );
 
     return AnimatedBuilder(
       animation: appearanceAnimation,
       builder: (BuildContext context, Widget child) {
         return Transform.translate(
           offset: Offset(appearanceAnimation.value, 0.0),
-          child: Container(
-            child: child,
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(4.0),
+                child: SlideableButton(
+                  onPress: () {
+                    Navigator.pushNamed(context, "/create");
+                  },
+                  child: FatContainer(
+                    text: LDLocalizations.createStory,
+                    backgroundColor: Colors.black87,
+                  ),
+                ),
+              ),
+              Expanded(flex: 1, child: child),
+            ],
           ),
         );
       },

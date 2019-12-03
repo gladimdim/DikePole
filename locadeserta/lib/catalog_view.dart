@@ -39,8 +39,6 @@ class CatalogView extends StatefulWidget {
 
 class _CatalogViewState extends State<CatalogView>
     with TickerProviderStateMixin {
-  Future _future = Future.delayed(Duration(milliseconds: 10));
-
   @override
   Widget build(BuildContext context) {
     BackgroundImage.nextRandomForType(ImageType.LANDING);
@@ -53,13 +51,15 @@ class _CatalogViewState extends State<CatalogView>
             border: Border.all(color: Theme.of(context).primaryColor, width: 1),
           );
 
-    return FutureBuilder(
-      future: _future,
-      builder: (context, snapshot) => Padding(
-        padding: const EdgeInsets.all(4.0),
+    return Padding(
+      padding: const EdgeInsets.all(4.0),
+      child: SizedBox(
+        height: MediaQuery.of(context).size.height / 2,
+        width: MediaQuery.of(context).size.width,
         child: Container(
           decoration: decoration,
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
               if (!widget.expanded)
                 Container(
@@ -152,7 +152,6 @@ class _CatalogViewState extends State<CatalogView>
                   ),
                 ],
               ),
-
               if (widget.expanded) _showDetails(widget.catalogStory, context),
             ],
           ),
