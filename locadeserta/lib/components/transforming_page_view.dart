@@ -38,24 +38,18 @@ class _TransformingPageViewState extends State<TransformingPageView> {
       itemCount: widget.pages.length,
       itemBuilder: (context, index) {
         if (index == currentPage.floor()) {
-          return Transform(
-            transform: Matrix4.identity()
-              ..rotateX(currentPage - index)
-              ..rotateZ(currentPage - index),
+          return Transform.translate(
+            offset: Offset(100 * (currentPage - index.toDouble()), 0),
             child: widget.pages[index],
           );
         } else if (index >= currentPage.floor() + 1) {
-          return Transform(
-            transform: Matrix4.identity()
-              ..rotateX(index - currentPage)
-              ..rotateZ(index - currentPage),
+          return Transform.translate(
+            offset: Offset(100 * (index.toDouble() - currentPage), 0),
             child: widget.pages[index],
           );
         } else if (index <= currentPage.floor() - 1) {
-          return Transform(
-            transform: Matrix4.identity()
-              ..rotateX(index - currentPage)
-              ..rotateZ(index - currentPage),
+          return Transform.translate(
+            offset: Offset(100 * (currentPage - index.toDouble()), 0),
             child: widget.pages[index],
           );
         } else {
