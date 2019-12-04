@@ -36,7 +36,7 @@ class _ImageTransitionState extends State<ImageTransition> {
           first: image,
           last: coloredImage,
           duration: 4,
-          repeat: true,
+          repeat: false,
         ),
       ),
     );

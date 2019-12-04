@@ -21,7 +21,7 @@ class BorderedRandomImageByType extends StatelessWidget {
         ),
       ),
       child: TweenImage(
-        repeat: true,
+        repeat: false,
         duration: 3,
         first: BackgroundImage.getAssetImageForType(type),
         last: BackgroundImage.getColoredAssetImageForType(type),
@@ -35,7 +35,7 @@ class BorderedRandomImageByPath extends StatelessWidget {
   final List imagePaths;
   final bool repeat;
 
-  BorderedRandomImageByPath({this.imagePaths, this.repeat=false});
+  BorderedRandomImageByPath({this.imagePaths, this.repeat = false});
 
   @override
   Widget build(BuildContext context) {

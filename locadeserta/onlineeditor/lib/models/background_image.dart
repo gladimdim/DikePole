@@ -60,7 +60,7 @@ class BackgroundImage {
   }
 }
 
-class RandomImage implements HistoryImage{
+class RandomImage implements HistoryImage {
   Random _random = Random();
   int _currentRandom;
   int _max;

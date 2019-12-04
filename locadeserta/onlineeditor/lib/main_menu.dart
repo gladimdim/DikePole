@@ -130,7 +130,7 @@ class _MainMenuState extends State<MainMenu> with TickerProviderStateMixin {
               child: Hero(
                 tag: "CossackHero",
                 child: TweenImage(
-                  repeat: true,
+                  repeat: false,
                   last: AssetImage("images/background/cossack_0.jpg"),
                   first: AssetImage("images/background/c_cossack_0.jpg"),
                   duration: 4,
