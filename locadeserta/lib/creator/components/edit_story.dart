@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:gladstoriesengine/gladstoriesengine.dart';
 import 'package:locadeserta/InheritedAuth.dart';
 import 'package:locadeserta/animations/slideable_button.dart';
 import 'package:locadeserta/components/app_bar_custom.dart';
@@ -10,7 +11,6 @@ import 'package:locadeserta/creator/components/text_editor.dart';
 import 'package:locadeserta/creator/components/fat_container.dart';
 import 'package:locadeserta/creator/components/game_view.dart';
 import 'package:locadeserta/creator/story/persistence.dart';
-import 'package:locadeserta/creator/story/story.dart';
 import 'package:locadeserta/creator/utils/utils.dart';
 import 'package:locadeserta/models/Localizations.dart';
 import 'package:locadeserta/models/background_image.dart';
@@ -201,7 +201,8 @@ class _EditStoryViewState extends State<EditStoryView> {
                                 ExtractEditPassageView.routeName,
                                 arguments: EditPassageViewArguments(
                                   page: story.currentPage,
-                                  startIndex: story.currentPage.nodes.indexOf(node),
+                                  startIndex:
+                                      story.currentPage.nodes.indexOf(node),
                                 ),
                               );
 

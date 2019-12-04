@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:gladstoriesengine/gladstoriesengine.dart';
 import 'package:locadeserta/animations/fade_images.dart';
 import 'package:locadeserta/components/bordered_container.dart';
 import 'package:locadeserta/models/background_image.dart';

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:gladstoriesengine/gladstoriesengine.dart';
 import 'package:locadeserta/animations/slideable_button.dart';
 import 'package:locadeserta/creator/components/fat_container.dart';
-import 'package:locadeserta/creator/story/story.dart';
 import 'package:flutter/services.dart';
 import 'package:locadeserta/models/Localizations.dart';
 
@@ -98,13 +98,14 @@ class _EditMetaStoryViewState extends State<EditMetaStoryView> {
 
     return Column(
       children: <Widget>[
-        if (widget.story != null) Padding(
-          padding: const EdgeInsets.only(top: 8.0),
-          child: Text(
-            widget.story.title,
-            style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+        if (widget.story != null)
+          Padding(
+            padding: const EdgeInsets.only(top: 8.0),
+            child: Text(
+              widget.story.title,
+              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+            ),
           ),
-        ),
         Form(
           key: _formKey,
           child: Column(
@@ -131,7 +132,8 @@ class _EditMetaStoryViewState extends State<EditMetaStoryView> {
                 },
                 minLines: 1,
                 maxLines: 5,
-                initialValue: widget.story == null ? "" : widget.story.description,
+                initialValue:
+                    widget.story == null ? "" : widget.story.description,
               ),
               TextFormField(
                 decoration: InputDecoration(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gladstoriesengine/gladstoriesengine.dart' as GSE;
 import 'package:locadeserta/components/BorderedRandomImageForType.dart';
 import 'package:locadeserta/creator/components/fat_container.dart';
 import 'package:locadeserta/models/story_history.dart';
@@ -22,7 +23,7 @@ class Passage extends StatefulWidget {
 
 class PassageState extends State<Passage> with TickerProviderStateMixin {
   ScrollController _passageScrollController = new ScrollController();
-  ImageType _imageType = ImageType.BULRUSH;
+  GSE.ImageType _imageType = GSE.ImageType.BULRUSH;
 
   @override
   Widget build(BuildContext context) {
@@ -53,7 +54,7 @@ class PassageState extends State<Passage> with TickerProviderStateMixin {
       ),
       Padding(
         padding: const EdgeInsets.all(8.0),
-        child: BorderedRandomImageByType(ImageType.LANDING),
+        child: BorderedRandomImageByType(GSE.ImageType.LANDING),
       )
     ];
   }
@@ -134,7 +135,9 @@ class PassageState extends State<Passage> with TickerProviderStateMixin {
         controller: _passageScrollController,
         child: Column(
           children: [
-            ...widget.currentStory.storyHistory.getHistory().map((var passageItem) {
+            ...widget.currentStory.storyHistory
+                .getHistory()
+                .map((var passageItem) {
               if (passageItem == null) {
                 return Container();
               }
@@ -157,7 +160,9 @@ class PassageState extends State<Passage> with TickerProviderStateMixin {
                       ),
                     ),
                     child: Text(
-                      passageItem.value == "" ? LDLocalizations.storyBegin : passageItem.value,
+                      passageItem.value == ""
+                          ? LDLocalizations.storyBegin
+                          : passageItem.value,
                       style: TextStyle(
                         fontFamily: "Raleway-Bold",
                         fontSize: 18,
@@ -175,13 +180,13 @@ class PassageState extends State<Passage> with TickerProviderStateMixin {
     );
   }
 
-  ImageType _createImageType(Story story) {
+  GSE.ImageType _createImageType(Story story) {
     print("current tags: ${story.currentTags}");
     var currentTags = story.currentTags;
     if (currentTags != null && currentTags.isNotEmpty) {
       return BackgroundImage.imageTypeFromCurrentTags(currentTags);
     } else {
-      return ImageType.FOREST;
+      return GSE.ImageType.FOREST;
     }
   }
 

@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:locadeserta/creator/story/story.dart';
+import 'package:gladstoriesengine/gladstoriesengine.dart';
 import 'package:locadeserta/models/Localizations.dart';
 import 'package:locadeserta/models/catalogs.dart';
 import 'package:locadeserta/models/pdf_creator.dart';
@@ -272,8 +272,8 @@ class _ExportGladStoriesToPDFState extends State<ExportGladStoriesToPDF> {
     });
     final creator = widget.creator;
     await creator.loadImages();
-    final pdf = await creator.toPdfDocument(
-        widget.story.title, widget.story.authors);
+    final pdf =
+        await creator.toPdfDocument(widget.story.title, widget.story.authors);
     final file = await _localFile;
     setState(() {
       savingToFile = true;

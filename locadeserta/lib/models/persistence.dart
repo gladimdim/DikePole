@@ -1,8 +1,7 @@
 import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import "package:locadeserta/models/story_bridge.dart";
-import 'package:locadeserta/creator/story/story.dart' as GladStory;
-
+import 'package:gladstoriesengine/gladstoriesengine.dart' as GladStory;
 import 'Auth.dart';
 import 'catalogs.dart';
 
@@ -33,7 +32,8 @@ class Persistence {
     }
   }
 
-  Future<String> getHistoryJsonForUserAndCatalog(User user, CatalogStory catalogStory) async {
+  Future<String> getHistoryJsonForUserAndCatalog(
+      User user, CatalogStory catalogStory) async {
     CollectionReference collection = _getUserStateReferences(user);
     DocumentSnapshot doc = await collection.document(catalogStory.id).get();
 
@@ -52,12 +52,16 @@ class Persistence {
   }
 
   Future<List<CatalogStory>> getAvailableCatalogStories(String locale) async {
-    QuerySnapshot stories = await storage.collection("catalogs/$locale/stories").getDocuments();
+    QuerySnapshot stories =
+        await storage.collection("catalogs/$locale/stories").getDocuments();
 
-    return stories.documents.map((snapshot) => CatalogStory.fromSnapshot(snapshot)).toList();
+    return stories.documents
+        .map((snapshot) => CatalogStory.fromSnapshot(snapshot))
+        .toList();
   }
 
-  Future saveStateToStorageForUser(User user, CatalogStory catalogStory, StoryBridge bridge) async {
+  Future saveStateToStorageForUser(
+      User user, CatalogStory catalogStory, StoryBridge bridge) async {
     String stateJson = await getStateJsonFromBridge(bridge);
 
     DocumentSnapshot doc = await storage

@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:gladstoriesengine/gladstoriesengine.dart';
 
 // from inkle:
 // image: bulrush; image boat; image river; image cossacks, image fight, image steppe, image forest
@@ -60,7 +61,7 @@ class BackgroundImage {
   }
 }
 
-class RandomImage {
+class RandomImage implements HistoryImage {
   Random _random = Random();
   int _currentRandom;
   int _max;
@@ -162,8 +163,6 @@ class RandomImage {
   }
 }
 
-enum ImageType { BOAT, STEPPE, FOREST, BULRUSH, RIVER, LANDING, CAMP, COSSACKS }
-
 List<String> getImagesForType(String blackWhiteImagePath) {
   var split = blackWhiteImagePath.split("/");
   split.last = "c_${split.last}";
@@ -171,43 +170,4 @@ List<String> getImagesForType(String blackWhiteImagePath) {
     blackWhiteImagePath,
     split.join("/"),
   ];
-}
-
-ImageType imageTypeFromString(String input) {
-  switch (input) {
-    case "forest":
-      return ImageType.FOREST;
-    case "bulrush":
-      return ImageType.BULRUSH;
-    case "boat":
-      return ImageType.BOAT;
-    case "river":
-      return ImageType.RIVER;
-    case 'landing':
-      return ImageType.LANDING;
-    case 'camp':
-      return ImageType.CAMP;
-    case 'cossacks':
-      return ImageType.COSSACKS;
-    case 'camp':
-      return ImageType.CAMP;
-    case 'steppe':
-      return ImageType.STEPPE;
-    default:
-      return null; // shadowed
-  }
-}
-
-String imageTypeToString(ImageType imageType) {
-  switch (imageType) {
-    case ImageType.FOREST: return "forest";
-    case ImageType.BOAT: return 'boat';
-    case ImageType.BULRUSH: return 'bulrush';
-    case ImageType.CAMP: return 'camp';
-    case ImageType.COSSACKS: return 'cossacks';
-    case ImageType.RIVER: return 'river';
-    case ImageType.LANDING: return 'landing';
-    case ImageType.STEPPE: return 'steppe';
-    default: return null;
-  }
 }

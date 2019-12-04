@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:gladstoriesengine/gladstoriesengine.dart';
 import 'package:locadeserta/components/BorderedRandomImageForType.dart';
 import 'package:locadeserta/models/Localizations.dart';
 import 'package:locadeserta/creator/utils/utils.dart';
@@ -69,7 +70,9 @@ class About extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
             InkWell(
-              onTap: () { print("tapped store"); },
+              onTap: () {
+                print("tapped store");
+              },
               child: Image(
                 width: widthThird(size),
                 image: AssetImage(
@@ -78,7 +81,9 @@ class About extends StatelessWidget {
               ),
             ),
             InkWell(
-              onTap: () { print("Open link"); },
+              onTap: () {
+                print("Open link");
+              },
               child: Image(
                 width: widthThird(size),
                 image: AssetImage(

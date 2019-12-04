@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:locadeserta/models/background_image.dart';
+import 'package:gladstoriesengine/gladstoriesengine.dart';
 
 class ImageSelector extends StatefulWidget {
   final ImageType imageType;

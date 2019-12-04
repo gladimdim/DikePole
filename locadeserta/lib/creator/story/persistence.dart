@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:locadeserta/creator/story/story.dart';
+import 'package:gladstoriesengine/gladstoriesengine.dart';
 import 'package:locadeserta/models/Auth.dart';
+import 'package:locadeserta/models/background_image.dart';
 import 'package:locadeserta/models/catalogs.dart';
 
 final Firestore storage = Firestore.instance;
@@ -12,11 +13,14 @@ class StoryPersistence {
 
   Future<List<Story>> getUserStories(User user) async {
     try {
-      var stories =
-      await storage.collection("user_stories").document(user.uid).collection(
-          "stories").getDocuments();
+      var stories = await storage
+          .collection("user_stories")
+          .document(user.uid)
+          .collection("stories")
+          .getDocuments();
       List parsedStories = stories.documents.map((document) {
-        Story story = Story.fromJson(document.data["storyjson"]);
+        Story story = Story.fromJson(document.data["storyjson"],
+            imageResolver: BackgroundImage.getRandomImageForType);
         return story;
       }).toList();
 
@@ -46,10 +50,12 @@ class StoryPersistence {
 
     if (doc.exists) {
       var state = doc.data["gladJsonState"];
-      var story = Story.fromJson(state);
+      var story = Story.fromJson(state,
+          imageResolver: BackgroundImage.getRandomImageForType);
       return story;
     } else {
-      return Story.fromJson(story.gladJson);
+      return Story.fromJson(story.gladJson,
+          imageResolver: BackgroundImage.getRandomImageForType);
     }
   }
 

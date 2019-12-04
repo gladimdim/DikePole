@@ -1,5 +1,6 @@
 import 'dart:core';
 import 'package:flutter/services.dart';
+import 'package:gladstoriesengine/gladstoriesengine.dart';
 import 'package:locadeserta/models/background_image.dart';
 import 'dart:async';
 

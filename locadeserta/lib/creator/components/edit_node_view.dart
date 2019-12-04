@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:gladstoriesengine/gladstoriesengine.dart';
 import 'package:locadeserta/animations/slideable_button.dart';
 import 'package:locadeserta/components/bordered_container.dart';
 import 'package:locadeserta/creator/components/fat_container.dart';
 import 'package:locadeserta/creator/components/image_selector.dart';
 import 'package:locadeserta/creator/components/text_editor.dart';
-import 'package:locadeserta/creator/story/story.dart';
 import 'package:locadeserta/models/Localizations.dart';
-import 'package:locadeserta/models/background_image.dart';
 
 class EditNodeView extends StatefulWidget {
   final PageNode node;
@@ -95,8 +94,8 @@ class _EditNodeViewState extends State<EditNodeView> {
   }
 
   _setTextToTextEditingController(String text) {
-      controller.text = text;
-      return controller;
+    controller.text = text;
+    return controller;
   }
 
   @override
@@ -104,7 +103,6 @@ class _EditNodeViewState extends State<EditNodeView> {
     controller.dispose();
     super.dispose();
   }
-
 }
 
 class TextEditorWithButton extends StatefulWidget {

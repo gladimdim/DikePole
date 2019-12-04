@@ -1,6 +1,5 @@
 import 'dart:convert';
-
-import 'package:locadeserta/models/background_image.dart';
+import 'package:gladstoriesengine/gladstoriesengine.dart';
 
 class StoryHistory {
   List _history;
@@ -129,9 +128,7 @@ abstract class HistoryItemBase {
   PassageTypes type;
   var value;
   String toJson();
-  static fromString(String s) {
-
-  }
+  static fromString(String s) {}
 }
 
 enum PassageTypes { IMAGE, TEXT }

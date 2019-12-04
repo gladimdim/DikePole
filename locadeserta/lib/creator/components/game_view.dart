@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:gladstoriesengine/gladstoriesengine.dart';
 import 'package:locadeserta/components/game_app_bar.dart';
 import 'package:locadeserta/components/game_component.dart';
 import 'package:locadeserta/creator/components/story_view.dart';
-import 'package:locadeserta/creator/story/story.dart';
 import 'package:locadeserta/export_pdf_view.dart';
 import 'package:locadeserta/models/Localizations.dart';
+import 'package:locadeserta/models/background_image.dart';
 import 'package:locadeserta/models/catalogs.dart';
 
 class GameView extends StatefulWidget {
@@ -26,8 +27,10 @@ class _MainViewState extends State<GameView> {
         title: LDLocalizations.previewStory,
         onResetStory: () {
           setState(() {
-            if (widget.catalogStory != null && widget.catalogStory.gladJson != null) {
-              var templateStory = Story.fromJson(widget.catalogStory.gladJson);
+            if (widget.catalogStory != null &&
+                widget.catalogStory.gladJson != null) {
+              var templateStory = Story.fromJson(widget.catalogStory.gladJson,
+                  imageResolver: BackgroundImage.getRandomImageForType);
               widget.story.root = templateStory.root;
             }
             widget.story.reset();
@@ -45,7 +48,10 @@ class _MainViewState extends State<GameView> {
       ),
       child: Padding(
         padding: const EdgeInsets.only(top: 32.0),
-        child: StoryView(currentStory: widget.story, previewMode: widget.catalogStory == null,),
+        child: StoryView(
+          currentStory: widget.story,
+          previewMode: widget.catalogStory == null,
+        ),
       ),
     );
   }

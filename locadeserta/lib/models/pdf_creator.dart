@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/services.dart';
-import 'package:locadeserta/creator/story/story.dart' as StoryModel;
+import 'package:gladstoriesengine/gladstoriesengine.dart' as StoryModel;
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart';
 import 'story_history.dart';
