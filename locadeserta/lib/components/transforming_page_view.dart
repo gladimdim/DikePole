@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:locadeserta/animations/slideable_button.dart';
+import 'package:locadeserta/catalog_view.dart';
 import 'package:locadeserta/components/bordered_container.dart';
 import 'package:locadeserta/components/image_transition.dart';
 import 'package:locadeserta/components/revolver_shell.dart';
@@ -119,7 +120,20 @@ class _TransformingPageViewState extends State<TransformingPageView> {
                   Flexible(
                     flex: 10,
                     child: SlideableButton(
-                      onPress: () => {},
+                      onPress: () => {
+                        Navigator.pushNamed(
+                          context,
+                          "/story_details",
+                          arguments: CatalogViewArguments(
+                            expanded: true,
+                            catalogStory: story,
+                            onReadPressed: () => widget.onStorySelected(story),
+                            onDetailPressed: () {
+                              Navigator.pop(context);
+                            },
+                          ),
+                        )
+                      },
                       child: Container(
                         height: 50,
                         decoration: BoxDecoration(

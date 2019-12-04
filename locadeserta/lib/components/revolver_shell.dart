@@ -18,7 +18,6 @@ class _RevolverShellState extends State<RevolverShell> {
 
   @override
   Widget build(BuildContext context) {
-    print(widget.animationValue);
     if (widget.animationValue > 0.5 && widget.animationValue <= 1) {
       _animatedWidget = Column(
         mainAxisAlignment: MainAxisAlignment.end,
