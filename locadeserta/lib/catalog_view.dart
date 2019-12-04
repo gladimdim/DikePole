@@ -25,16 +25,17 @@ class CatalogView extends StatefulWidget {
   final Function onReadPressed;
   final Function onDetailPressed;
   final bool expanded;
+  final double animationValue;
 
   @override
   _CatalogViewState createState() => _CatalogViewState();
 
-  CatalogView({
-    this.catalogStory,
-    this.onReadPressed,
-    this.onDetailPressed,
-    this.expanded = false,
-  });
+  CatalogView(
+      {this.catalogStory,
+      this.onReadPressed,
+      this.onDetailPressed,
+      this.expanded = false,
+      this.animationValue = 0.0});
 }
 
 class _CatalogViewState extends State<CatalogView>
@@ -105,13 +106,13 @@ class _CatalogViewState extends State<CatalogView>
                   if (!widget.expanded)
                     Flexible(
                       flex: 10,
-                      child: Container(
-                        height: 50,
-                        decoration: BoxDecoration(
-                          color: Theme.of(context).primaryColor,
-                        ),
-                        child: InkWell(
-                          onTap: widget.onDetailPressed,
+                      child: SlideableButton(
+                        onPress: widget.onDetailPressed,
+                        child: Container(
+                          height: 50,
+                          decoration: BoxDecoration(
+                            color: Theme.of(context).primaryColor,
+                          ),
                           child: Align(
                             alignment: Alignment.center,
                             child: Text(
