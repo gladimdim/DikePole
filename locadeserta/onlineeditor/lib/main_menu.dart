@@ -6,13 +6,12 @@ import 'package:onlineeditor/StatisticsView.dart';
 import 'package:onlineeditor/animations/fade_images.dart';
 import 'package:onlineeditor/animations/slide_right_navigation.dart';
 import 'package:onlineeditor/animations/slideable_button.dart';
-import 'package:onlineeditor/catalog_view.dart';
 import 'package:onlineeditor/components/app_bar_custom.dart';
 import 'package:onlineeditor/components/narrow_scaffold.dart';
+import 'package:onlineeditor/components/transforming_page_view.dart';
 import 'package:onlineeditor/creator/components/fat_container.dart';
 import 'package:onlineeditor/creator/components/game_view.dart';
 import 'package:onlineeditor/creator/story/persistence.dart';
-import 'package:onlineeditor/main_editor_view.dart';
 import 'package:onlineeditor/models/background_image.dart';
 import 'package:onlineeditor/models/catalogs.dart';
 import 'package:onlineeditor/views/inherited_auth.dart';
@@ -157,46 +156,25 @@ class _MainMenuState extends State<MainMenu> with TickerProviderStateMixin {
   }
 
   _buildCatalogView(BuildContext context, List<CatalogStory> stories) {
-    var child = ListView.builder(
-        itemCount: stories.length + 1,
-        shrinkWrap: true,
-        itemBuilder: (BuildContext context, int index) {
-          if (index == 0) {
-            return Padding(
-              padding: const EdgeInsets.all(4.0),
-              child: SlideableButton(
-                onPress: () {
-                  Navigator.pushNamed(context, MainEditorView.routeName);
-                },
-                child: FatContainer(
-                  text: LDLocalizations.createStory,
-                  backgroundColor: Colors.black87,
-                ),
-              ),
-            );
-          }
-          var story = stories[index - 1];
-          return Padding(
-            padding: const EdgeInsets.only(top: 8.0),
-            child: CatalogView(
-              catalogStory: story,
-              onReadPressed: () => _goToStory(story, context),
-              onDetailPressed: () {
-                print("gogogogo");
-                Navigator.pushNamed(
-                  context,
-                  "/story_details",
-                  arguments: {
-                    "expanded": true,
-                    "catalogStory": story,
-                    "onReadPressed": () => _goToStory(story, context),
-                    "onDetailPressed": () {
-                      Navigator.pop(context);
-                    },
-                  },
-                );
+    List<CatalogStory> sortedStories = List.from(stories);
+    sortedStories.sort((story1, story2) => story1.year.compareTo(story2.year));
+
+    var child = TransformingPageView(
+        stories: sortedStories,
+        scrollDirection: Axis.vertical,
+        onStorySelected: (story) => _goToStory(story, context),
+        onDetailsSelected: (story) {
+          Navigator.pushNamed(
+            context,
+            "/story_details",
+            arguments: {
+              "expanded": true,
+              "catalogStory": story,
+              "onReadPressed": () => _goToStory(story, context),
+              "onDetailPressed": () {
+                Navigator.pop(context);
               },
-            ),
+            },
           );
         });
 
@@ -205,8 +183,22 @@ class _MainMenuState extends State<MainMenu> with TickerProviderStateMixin {
       builder: (BuildContext context, Widget child) {
         return Transform.translate(
           offset: Offset(appearanceAnimation.value, 0.0),
-          child: Container(
-            child: child,
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(4.0),
+                child: SlideableButton(
+                  onPress: () {
+                    Navigator.pushNamed(context, "/create");
+                  },
+                  child: FatContainer(
+                    text: LDLocalizations.createStory,
+                    backgroundColor: Colors.black87,
+                  ),
+                ),
+              ),
+              Expanded(flex: 1, child: child),
+            ],
           ),
         );
       },

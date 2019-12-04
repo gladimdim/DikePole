@@ -13,15 +13,22 @@ class CatalogStory {
   final String id;
   final String author;
   final String gladJson;
+  final String year;
 
   CatalogStory(
-      {this.title, this.description, this.id, this.author, this.gladJson});
+      {this.title,
+      this.description,
+      this.id,
+      this.author,
+      this.gladJson,
+      this.year});
 
   CatalogStory.fromMap(Map<String, dynamic> map)
       : title = map['title'],
         description = map['description'],
         id = map['title'],
         author = map["author"],
+        year = map["year"],
         gladJson = map["gladJson"];
 
   static Future<List<CatalogStory>> getAvailableCatalogStories(
