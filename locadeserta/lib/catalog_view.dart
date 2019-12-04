@@ -39,12 +39,20 @@ class CatalogView extends StatefulWidget {
 
 class _CatalogViewState extends State<CatalogView>
     with TickerProviderStateMixin {
+  AssetImage image;
+  AssetImage coloredImage;
+
+  @override
+  void initState() {
+    super.initState();
+    BackgroundImage.nextRandomForType(ImageType.LANDING);
+    image = BackgroundImage.getAssetImageForType(ImageType.LANDING);
+    coloredImage =
+        BackgroundImage.getColoredAssetImageForType(ImageType.LANDING);
+  }
+
   @override
   Widget build(BuildContext context) {
-    BackgroundImage.nextRandomForType(ImageType.LANDING);
-    var image = BackgroundImage.getAssetImageForType(ImageType.LANDING);
-    var coloredImage =
-        BackgroundImage.getColoredAssetImageForType(ImageType.LANDING);
     var decoration = widget.expanded
         ? null
         : BoxDecoration(

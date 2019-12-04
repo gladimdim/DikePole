@@ -185,8 +185,9 @@ class _MainMenuState extends State<MainMenu> with TickerProviderStateMixin {
         )
         .toList();
     var child = TransformingPageView(
-      pages: widgets,
+      stories: sortedStories,
       scrollDirection: Axis.vertical,
+      onStorySelected: (story) => _goToStory(story, context),
     );
 
     return AnimatedBuilder(

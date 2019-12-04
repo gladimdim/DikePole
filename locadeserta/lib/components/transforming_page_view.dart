@@ -1,13 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
+import 'package:locadeserta/catalog_view.dart';
+import 'package:locadeserta/models/catalogs.dart';
 
 class TransformingPageView extends StatefulWidget {
-  final List<Widget> pages;
   final Axis scrollDirection;
+  final List<CatalogStory> stories;
+  final Function(CatalogStory story) onStorySelected;
 
-  TransformingPageView(
-      {@required this.pages, this.scrollDirection = Axis.vertical});
+  TransformingPageView({
+    this.scrollDirection = Axis.vertical,
+    @required this.onStorySelected,
+    this.stories,
+  });
 
   @override
   _TransformingPageViewState createState() => _TransformingPageViewState();
@@ -35,27 +41,55 @@ class _TransformingPageViewState extends State<TransformingPageView> {
     return PageView.builder(
       scrollDirection: widget.scrollDirection,
       controller: _pageController,
-      itemCount: widget.pages.length,
+      itemCount: widget.stories.length,
       itemBuilder: (context, index) {
         if (index == currentPage.floor()) {
           return Transform.translate(
             offset: Offset(100 * (currentPage - index.toDouble()), 0),
-            child: widget.pages[index],
+            child: _buildStoryShell(
+                widget.stories[index], currentPage - index.toDouble()),
           );
         } else if (index >= currentPage.floor() + 1) {
           return Transform.translate(
             offset: Offset(100 * (index.toDouble() - currentPage), 0),
-            child: widget.pages[index],
+            child: _buildStoryShell(
+                widget.stories[index], currentPage - index.toDouble()),
           );
         } else if (index <= currentPage.floor() - 1) {
           return Transform.translate(
             offset: Offset(100 * (currentPage - index.toDouble()), 0),
-            child: widget.pages[index],
+            child: _buildStoryShell(
+                widget.stories[index], currentPage - index.toDouble()),
           );
         } else {
-          return widget.pages[index];
+          return _buildStoryShell(
+              widget.stories[index], index.toDouble() - currentPage);
         }
       },
+    );
+  }
+
+  Widget _buildStoryShell(CatalogStory story, double value) {
+    return Center(
+      child: CatalogView(
+        catalogStory: story,
+//        animationValue: value,
+        onReadPressed: () => widget.onStorySelected(story),
+        onDetailPressed: () {
+          Navigator.pushNamed(
+            context,
+            "/story_details",
+            arguments: CatalogViewArguments(
+              expanded: true,
+              catalogStory: story,
+              onReadPressed: () => widget.onStorySelected(story),
+              onDetailPressed: () {
+                Navigator.pop(context);
+              },
+            ),
+          );
+        },
+      ),
     );
   }
 }
