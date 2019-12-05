@@ -9,7 +9,6 @@ class TweenImage extends StatefulWidget {
   final AssetImage last;
   final int duration;
   final double height;
-  final double width;
   final BoxFit imageFit;
   final bool repeat;
 
@@ -18,7 +17,6 @@ class TweenImage extends StatefulWidget {
       @required this.last,
       this.duration = 2,
       this.height,
-      this.width,
       this.imageFit = BoxFit.fitHeight,
       this.repeat = false});
 }

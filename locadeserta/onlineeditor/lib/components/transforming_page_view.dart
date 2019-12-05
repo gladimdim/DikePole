@@ -7,6 +7,7 @@ import 'package:onlineeditor/animations/slideable_button.dart';
 import 'package:onlineeditor/components/bordered_container.dart';
 import 'package:onlineeditor/components/image_transition.dart';
 import 'package:onlineeditor/components/revolver_shell.dart';
+import 'package:onlineeditor/models/background_image.dart';
 import 'package:onlineeditor/models/catalogs.dart';
 
 class TransformingPageView extends StatefulWidget {
@@ -29,7 +30,7 @@ class TransformingPageView extends StatefulWidget {
 class _TransformingPageViewState extends State<TransformingPageView> {
   double currentPage = 0.0;
   PageController _pageController;
-  Map<CatalogStory, Widget> imageWidgets = {};
+  Map<CatalogStory, List<AssetImage>> imageWidgets = {};
 
   void _onScroll() {
     setState(() {
@@ -40,17 +41,18 @@ class _TransformingPageViewState extends State<TransformingPageView> {
   @override
   void initState() {
     super.initState();
-    _pageController = PageController(initialPage: 0, viewportFraction: 0.7)
+    _pageController = PageController(initialPage: 0, viewportFraction: 0.8)
       ..addListener(_onScroll);
 
     widget.stories.forEach(
       (story) => imageWidgets.putIfAbsent(
         story,
         () {
-          return ImageTransition(
-            title: story.title,
-            imageType: ImageType.LANDING,
-          );
+          BackgroundImage.nextRandomForType(ImageType.LANDING);
+          return [
+            BackgroundImage.getAssetImageForType(ImageType.LANDING),
+            BackgroundImage.getColoredAssetImageForType(ImageType.LANDING)
+          ];
         },
       ),
     );
@@ -114,7 +116,11 @@ class _TransformingPageViewState extends State<TransformingPageView> {
                   ),
                 ),
               ),
-              middle: imageWidgets[story],
+              middle: ImageTransition(
+                title: story.title,
+                image: imageWidgets[story][0],
+                coloredImage: imageWidgets[story][1],
+              ),
               bottom: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [

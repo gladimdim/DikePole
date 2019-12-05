@@ -1,41 +1,27 @@
 import 'package:flutter/widgets.dart';
-import 'package:gladstoriesengine/gladstoriesengine.dart';
 import 'package:onlineeditor/animations/fade_images.dart';
-import 'package:onlineeditor/models/background_image.dart';
 
-class ImageTransition extends StatefulWidget {
+class ImageTransition extends StatelessWidget {
   final String title;
-  final ImageType imageType;
+  final AssetImage image;
+  final AssetImage coloredImage;
 
-  ImageTransition({@required this.title, @required this.imageType});
-
-  @override
-  _ImageTransitionState createState() => _ImageTransitionState();
-}
-
-class _ImageTransitionState extends State<ImageTransition> {
-  AssetImage image;
-  AssetImage coloredImage;
-
-  @override
-  void initState() {
-    super.initState();
-    BackgroundImage.nextRandomForType(ImageType.LANDING);
-    image = BackgroundImage.getAssetImageForType(ImageType.LANDING);
-    coloredImage =
-        BackgroundImage.getColoredAssetImageForType(ImageType.LANDING);
-  }
+  ImageTransition(
+      {@required this.title,
+      @required this.image,
+      @required this.coloredImage});
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 1.0),
       child: Hero(
-        tag: "CatalogView" + widget.title,
+        tag: "CatalogView" + title,
         child: TweenImage(
           first: image,
           last: coloredImage,
           duration: 4,
+          height: MediaQuery.of(context).size.height / 3,
           repeat: false,
         ),
       ),

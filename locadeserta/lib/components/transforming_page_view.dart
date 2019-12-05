@@ -3,21 +3,23 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:gladstoriesengine/gladstoriesengine.dart';
 import 'package:locadeserta/animations/slideable_button.dart';
-import 'package:locadeserta/catalog_view.dart';
 import 'package:locadeserta/components/bordered_container.dart';
 import 'package:locadeserta/components/image_transition.dart';
 import 'package:locadeserta/components/revolver_shell.dart';
 import 'package:locadeserta/models/Localizations.dart';
+import 'package:locadeserta/models/background_image.dart';
 import 'package:locadeserta/models/catalogs.dart';
 
 class TransformingPageView extends StatefulWidget {
   final Axis scrollDirection;
   final List<CatalogStory> stories;
   final Function(CatalogStory story) onStorySelected;
+  final Function(CatalogStory story) onDetailsSelected;
 
   TransformingPageView({
     this.scrollDirection = Axis.vertical,
     @required this.onStorySelected,
+    @required this.onDetailsSelected,
     this.stories,
   });
 
@@ -28,7 +30,7 @@ class TransformingPageView extends StatefulWidget {
 class _TransformingPageViewState extends State<TransformingPageView> {
   double currentPage = 0.0;
   PageController _pageController;
-  Map<CatalogStory, Widget> imageWidgets = {};
+  Map<CatalogStory, List<AssetImage>> imageWidgets = {};
 
   void _onScroll() {
     setState(() {
@@ -39,17 +41,18 @@ class _TransformingPageViewState extends State<TransformingPageView> {
   @override
   void initState() {
     super.initState();
-    _pageController = PageController(initialPage: 0, viewportFraction: 0.7)
+    _pageController = PageController(initialPage: 0, viewportFraction: 0.8)
       ..addListener(_onScroll);
 
     widget.stories.forEach(
       (story) => imageWidgets.putIfAbsent(
         story,
         () {
-          return ImageTransition(
-            title: story.title,
-            imageType: ImageType.LANDING,
-          );
+          BackgroundImage.nextRandomForType(ImageType.LANDING);
+          return [
+            BackgroundImage.getAssetImageForType(ImageType.LANDING),
+            BackgroundImage.getColoredAssetImageForType(ImageType.LANDING)
+          ];
         },
       ),
     );
@@ -113,27 +116,18 @@ class _TransformingPageViewState extends State<TransformingPageView> {
                   ),
                 ),
               ),
-              middle: imageWidgets[story],
+              middle: ImageTransition(
+                title: story.title,
+                image: imageWidgets[story][0],
+                coloredImage: imageWidgets[story][1],
+              ),
               bottom: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Flexible(
                     flex: 10,
                     child: SlideableButton(
-                      onPress: () => {
-                        Navigator.pushNamed(
-                          context,
-                          "/story_details",
-                          arguments: CatalogViewArguments(
-                            expanded: true,
-                            catalogStory: story,
-                            onReadPressed: () => widget.onStorySelected(story),
-                            onDetailPressed: () {
-                              Navigator.pop(context);
-                            },
-                          ),
-                        )
-                      },
+                      onPress: () => widget.onDetailsSelected(story),
                       child: Container(
                         height: 50,
                         decoration: BoxDecoration(
@@ -192,25 +186,5 @@ class _TransformingPageViewState extends State<TransformingPageView> {
         ),
       ),
     );
-//      child: CatalogView(
-//        catalogStory: story,
-//        animationValue: value,
-//        onReadPressed: () => widget.onStorySelected(story),
-//        onDetailPressed: () {
-//          Navigator.pushNamed(
-//            context,
-//            "/story_details",
-//            arguments: CatalogViewArguments(
-//              expanded: true,
-//              catalogStory: story,
-//              onReadPressed: () => widget.onStorySelected(story),
-//              onDetailPressed: () {
-//                Navigator.pop(context);
-//              },
-//            ),
-//          );
-//        },
-//      ),
-//    );
   }
 }
