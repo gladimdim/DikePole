@@ -7,6 +7,7 @@ import 'package:locadeserta/InheritedAuth.dart';
 import 'package:locadeserta/StatisticsView.dart';
 import 'package:locadeserta/animations/fade_images.dart';
 import 'package:locadeserta/animations/slideable_button.dart';
+import 'package:locadeserta/catalog_view.dart';
 import 'package:locadeserta/components/app_bar_custom.dart';
 import 'package:locadeserta/components/narrow_scaffold.dart';
 import 'package:locadeserta/components/transforming_page_view.dart';
@@ -162,10 +163,21 @@ class _MainMenuState extends State<MainMenu> with TickerProviderStateMixin {
     sortedStories.sort((story1, story2) => story1.year.compareTo(story2.year));
 
     var child = TransformingPageView(
-      stories: sortedStories,
-      scrollDirection: Axis.vertical,
-      onStorySelected: (story) => _goToStory(story, context),
-    );
+        stories: sortedStories,
+        scrollDirection: Axis.vertical,
+        onStorySelected: (story) => _goToStory(story, context),
+        onDetailsSelected: (story) => Navigator.pushNamed(
+              context,
+              "/story_details",
+              arguments: CatalogViewArguments(
+                expanded: true,
+                catalogStory: story,
+                onReadPressed: () => _goToStory(story, context),
+                onDetailPressed: () {
+                  Navigator.pop(context);
+                },
+              ),
+            ));
 
     return AnimatedBuilder(
       animation: appearanceAnimation,
