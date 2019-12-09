@@ -12,6 +12,7 @@ import 'package:onlineeditor/components/transforming_page_view.dart';
 import 'package:onlineeditor/creator/components/fat_container.dart';
 import 'package:onlineeditor/creator/components/game_view.dart';
 import 'package:onlineeditor/creator/story/persistence.dart';
+import 'package:onlineeditor/main_editor_view.dart';
 import 'package:onlineeditor/models/background_image.dart';
 import 'package:onlineeditor/models/catalogs.dart';
 import 'package:onlineeditor/views/inherited_auth.dart';
@@ -189,7 +190,7 @@ class _MainMenuState extends State<MainMenu> with TickerProviderStateMixin {
                 padding: const EdgeInsets.all(4.0),
                 child: SlideableButton(
                   onPress: () {
-                    Navigator.pushNamed(context, "/create");
+                    Navigator.pushNamed(context, MainEditorView.routeName);
                   },
                   child: FatContainer(
                     text: LDLocalizations.createStory,

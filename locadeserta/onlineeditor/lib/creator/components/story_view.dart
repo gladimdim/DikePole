@@ -32,11 +32,12 @@ class PassageState extends State<StoryView> with TickerProviderStateMixin {
     Future.delayed(Duration.zero, () {
       widget.currentStory.historyChanges.listen((data) {
         _saveStateToStorage(widget.currentStory, context);
-        if (widget.currentStory.currentPage.isTheEnd() && !widget.currentStory.currentPage.hasNext() && !widget.previewMode) {
+        if (widget.currentStory.currentPage.isTheEnd() &&
+            !widget.currentStory.currentPage.hasNextNode() &&
+            !widget.previewMode) {
           Analytics.instance.addStoryToLog(widget.currentStory);
         }
       });
-
     });
   }
 
@@ -131,7 +132,8 @@ class PassageState extends State<StoryView> with TickerProviderStateMixin {
             if (!widget.currentStory.canContinue() &&
                 widget.currentStory.currentPage.isTheEnd())
               SlideableButton(
-                child: FatContainer(text: LDLocalizations.theEndStartOverQuestion),
+                child:
+                    FatContainer(text: LDLocalizations.theEndStartOverQuestion),
                 onPress: () {
                   widget.currentStory.reset();
                 },

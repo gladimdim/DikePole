@@ -33,7 +33,7 @@ class PassageState extends State<StoryView> with TickerProviderStateMixin {
       widget.currentStory.historyChanges.listen((data) {
         _saveStateToStorage(widget.currentStory, context);
         if (widget.currentStory.currentPage.isTheEnd() &&
-            !widget.currentStory.currentPage.hasNext() &&
+            !widget.currentStory.currentPage.hasNextNode() &&
             !widget.previewMode) {
           Analytics.instance.addStoryToLog(widget.currentStory);
         }

@@ -32,13 +32,13 @@ class _EditNodeSequenceState extends State<EditNodeSequence> {
             node: widget.page.getCurrentNode(),
             onFinished: () {
               setState(() {
-                if (!widget.page.hasNext()) {
+                if (!widget.page.hasNextNode()) {
                   widget.page.addNodeWithText("");
                 }
                 widget.page.nextNode();
               });
             },
-            isLastNode: !widget.page.hasNext(),
+            isLastNode: !widget.page.hasNextNode(),
           )),
       appBar: AppBar(
         title: Text(LDLocalizations.editingPassage),
