@@ -159,33 +159,3 @@ class _CatalogGladStoryViewState extends State<CatalogGladStoryView> {
     return await StoryPersistence.instance.deleteStory(user, story);
   }
 }
-
-class StoryViewHeader extends StatelessWidget {
-  final Story story;
-
-  final VoidCallback onEdit;
-
-  StoryViewHeader({this.story, this.onEdit});
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: <Widget>[
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              LDLocalizations.labelStoryTitle,
-              style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
-            ),
-            Text(
-              story.title,
-              style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
-            ),
-          ],
-        ),
-      ],
-    );
-  }
-}

@@ -1,0 +1,177 @@
+import 'package:flutter/material.dart';
+import 'package:async/async.dart';
+import 'package:gladstoriesengine/gladstoriesengine.dart';
+import 'package:locadeserta/InheritedAuth.dart';
+import 'package:locadeserta/creator/components/fat_container.dart';
+import 'package:locadeserta/creator/components/user_story_view.dart';
+import 'package:locadeserta/creator/story/persistence.dart';
+import 'package:locadeserta/import_gladstories_view.dart';
+import 'package:locadeserta/models/Auth.dart';
+import 'package:locadeserta/models/Localizations.dart';
+import 'package:locadeserta/waiting_screen.dart';
+import 'package:locadeserta/animations/slideable_button.dart';
+
+class EditingUserStoriesView extends StatefulWidget {
+  static String routeName = "/create";
+
+  @override
+  _EditingUserStoriesViewState createState() => _EditingUserStoriesViewState();
+}
+
+class _EditingUserStoriesViewState extends State<EditingUserStoriesView> {
+  Story story;
+  List<Story> storyBuilders = [];
+  AsyncMemoizer _storyBuilderCatalogMemo = AsyncMemoizer();
+
+  @override
+  Widget build(BuildContext context) {
+    var user = InheritedAuth.of(context).auth.user;
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          LDLocalizations.createStory,
+          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0),
+        ),
+      ),
+      backgroundColor: Theme.of(context).backgroundColor,
+      body: Column(
+        children: <Widget>[
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: SlideableButton(
+              onPress: () async {
+                await Navigator.pushNamed(
+                    context, ImportGladStoryView.routeName);
+                _resetStoryBuilderFuture();
+              },
+              child: FatContainer(
+                text: LDLocalizations.labelImport,
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: SlideableButton(
+              onPress: () async {},
+              child: FatContainer(
+                text: LDLocalizations.createNewStory,
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(top: 18.0),
+            child: Text(
+              "Your existing stories",
+              style: TextStyle(
+                fontFamily: 'Roboto',
+                fontSize: 22.0,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+          Expanded(
+            child: _buildStoryView(context, user),
+          ),
+        ],
+      ),
+    );
+  }
+
+  _buildStoryView(BuildContext context, User user) {
+    return Padding(
+      padding: const EdgeInsets.all(2.0),
+      child: SingleChildScrollView(
+          child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          children: <Widget>[
+            FutureBuilder(
+              future: _fetchData(user),
+              builder: (context, snapshot) {
+                switch (snapshot.connectionState) {
+                  case ConnectionState.none:
+                  case ConnectionState.active:
+                  case ConnectionState.waiting:
+                    return WaitingScreen();
+                    break;
+                  case ConnectionState.done:
+                    if (snapshot.data == null) {
+                      return Container();
+                    } else {
+                      storyBuilders = snapshot.data;
+                      return Column(
+                        children:
+                            _createStoryViews(storyBuilders, user, context),
+                      );
+                    }
+                    break;
+                }
+                return Container();
+              },
+            )
+          ],
+        ),
+      )),
+    );
+  }
+
+  Future _fetchData(User user) {
+    return _storyBuilderCatalogMemo.runOnce(() async {
+      return StoryPersistence.instance.getUserStories(user);
+    });
+  }
+
+  _resetStoryBuilderFuture() {
+    setState(() {
+      _storyBuilderCatalogMemo = AsyncMemoizer();
+    });
+  }
+
+  List<Widget> _createStoryViews(
+      List<Story> storyBuilders, User user, context) {
+    return storyBuilders
+        .map((storyBuilder) => _createStoryView(storyBuilder, user, context))
+        .toList();
+  }
+
+  Widget _createStoryView(Story story, User user, context) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 8.0),
+      child: Center(
+        child: UserStoryView(
+          story: story,
+        ),
+      ),
+    );
+  }
+}
+
+class StoryViewHeader extends StatelessWidget {
+  final Story story;
+
+  final VoidCallback onEdit;
+
+  StoryViewHeader({this.story, this.onEdit});
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Text(
+              LDLocalizations.labelStoryTitle,
+              style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
+            ),
+            Text(
+              story.title,
+              style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+}

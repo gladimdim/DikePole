@@ -2,10 +2,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:locadeserta/InheritedAuth.dart';
 import 'package:locadeserta/catalog_view.dart';
-import 'package:locadeserta/creator/components/create_view.dart';
+import 'package:locadeserta/creator/components/editing_user_stories_view.dart';
 import 'package:locadeserta/creator/components/edit_node_sequence_view.dart';
 import 'package:locadeserta/creator/components/edit_story.dart';
 import 'package:locadeserta/creator/components/game_view.dart';
+import 'package:locadeserta/creator/components/user_story_details_view.dart';
 import 'package:locadeserta/export_pdf_view.dart';
 import 'package:locadeserta/import_gladstories_view.dart';
 import 'package:locadeserta/main_menu.dart';
@@ -26,7 +27,6 @@ class LocaDesertaApp extends StatefulWidget {
 }
 
 class _LocaDesertaAppState extends State<LocaDesertaApp> {
-
   final ThemeData theme = ThemeData(
       primaryColor: Colors.black,
       backgroundColor: Colors.white,
@@ -45,9 +45,9 @@ class _LocaDesertaAppState extends State<LocaDesertaApp> {
         debugShowCheckedModeBanner: false,
         routes: {
           "/": (context) => LoginView(
-            onContinue: () => Navigator.pushNamed(context, "/main_menu"),
-            onSetLocale: _onLocaleSet,
-          ),
+                onContinue: () => Navigator.pushNamed(context, "/main_menu"),
+                onSetLocale: _onLocaleSet,
+              ),
           "/main_menu": (context) => MainMenu(),
           ExtractCatalogViewArguments.routeName: (context) =>
               ExtractCatalogViewArguments(),
@@ -55,14 +55,20 @@ class _LocaDesertaAppState extends State<LocaDesertaApp> {
               ExtractExportPdfViewArguments(),
           ExtractExportGladStoriesPdfViewArguments.routeName: (context) =>
               ExtractExportGladStoriesPdfViewArguments(),
-          "/create": (context) => CreateView(),
+          EditingUserStoriesView.routeName: (context) =>
+              EditingUserStoriesView(),
           ExtractEditStoryViewArguments.routeName: (context) =>
               ExtractEditStoryViewArguments(),
           ExtractArgumentsGameView.routeName: (context) =>
               ExtractArgumentsGameView(),
-          ExtractEditPassageView.routeName: (context) => ExtractEditPassageView(),
+          ExtractEditPassageView.routeName: (context) =>
+              ExtractEditPassageView(),
           ImportGladStoryView.routeName: (context) => ImportGladStoryView(),
           StatisticsView.routeName: (context) => StatisticsView(),
+          UserStoryDetailsView.routeName: (context) => InheritedAuth(
+                child: ExtractUserStoryDetailsViewArguments(),
+                auth: auth,
+              ),
         },
       ),
     );

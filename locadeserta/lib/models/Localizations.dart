@@ -83,6 +83,7 @@ class LDLocalizations {
       'loadingStats': 'Loading. Might take up to 6 seconds...',
       'hintFieldYear': 'Enter year when the story happened',
       'labelYear': 'Year:',
+      'createNewStory': 'Create new story',
     },
     'uk': {
       'continue': 'Продовжити',
@@ -158,6 +159,7 @@ class LDLocalizations {
       'loadingStats': 'Завантажуємо статистику. Може зайняти до 6 секунд.',
       'hintFieldYear': 'Введіть рік, коли історія відбулася',
       'labelYear': 'Рік:',
+      'createNewStory': 'Створити нову історію'
     },
     'pl': {
       'continue': 'Dalej',
@@ -234,6 +236,7 @@ class LDLocalizations {
       'loadingStats': 'Ładowanie statystyk. Może to potrwać do 6 sekund.',
       'hintFieldYear': 'Podaj rok, w którym wydarzyła się historia',
       'labelYear': 'Rok:',
+      'createNewStory': 'Utwórz nową historię',
     }
   };
 
@@ -511,5 +514,9 @@ class LDLocalizations {
 
   static String get labelYear {
     return _localizedValues[locale.languageCode]['labelYear'];
+  }
+
+  static String get createNewStory {
+    return _localizedValues[locale.languageCode]['createNewStory'];
   }
 }
