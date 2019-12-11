@@ -17,8 +17,14 @@ import 'locale_selection.dart';
 class LoginView extends StatefulWidget {
   final VoidCallback onContinue;
   final Function onSetLocale;
+  final Function(bool) onThemeChange;
+  final bool darkTheme;
 
-  LoginView({this.onContinue, this.onSetLocale});
+  LoginView(
+      {this.onContinue,
+      this.onSetLocale,
+      this.onThemeChange,
+      this.darkTheme = false});
 
   @override
   _LoginViewState createState() => _LoginViewState();
@@ -37,6 +43,12 @@ class _LoginViewState extends State<LoginView> {
           onTap: () => InheritedAuth.of(context).auth.signOut(),
           text: LDLocalizations.signOut,
         ),
+        AppBarObject(
+          onTap: () {
+            widget.onThemeChange(!widget.darkTheme);
+          },
+          text: widget.darkTheme ? "Light theme" : "Dark Theme",
+        )
       ],
     );
   }

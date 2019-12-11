@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:async/async.dart';
 import 'package:gladstoriesengine/gladstoriesengine.dart';
 import 'package:locadeserta/InheritedAuth.dart';
 import 'package:locadeserta/components/app_bar_custom.dart';
@@ -25,7 +24,6 @@ class UserStoriesList extends StatefulWidget {
 class _UserStoriesListState extends State<UserStoriesList> {
   Story story;
   List<Story> storyBuilders = [];
-  AsyncMemoizer _storyBuilderCatalogMemo = AsyncMemoizer();
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +45,6 @@ class _UserStoriesListState extends State<UserStoriesList> {
                 onPress: () async {
                   await Navigator.pushNamed(
                       context, ImportGladStoryView.routeName);
-                  _resetStoryBuilderFuture();
                 },
                 child: FatContainer(
                   text: LDLocalizations.labelImport,
@@ -132,12 +129,6 @@ class _UserStoriesListState extends State<UserStoriesList> {
         ),
       )),
     );
-  }
-
-  _resetStoryBuilderFuture() {
-    setState(() {
-      _storyBuilderCatalogMemo = AsyncMemoizer();
-    });
   }
 
   List<Widget> _createStoryViews(

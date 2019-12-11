@@ -49,6 +49,8 @@ var blackTheme = ThemeData(
       color: Colors.white,
     ),
   ),
+  hintColor: Colors.white,
+  focusColor: Colors.yellow,
   iconTheme: IconThemeData(
     color: Colors.white,
   ),
@@ -92,7 +94,7 @@ var whiteTheme = ThemeData(
 );
 
 class _LocaDesertaAppState extends State<LocaDesertaApp> {
-  final ThemeData theme = whiteTheme;
+  ThemeData theme = whiteTheme;
 
   @override
   Widget build(BuildContext context) {
@@ -110,6 +112,14 @@ class _LocaDesertaAppState extends State<LocaDesertaApp> {
                   MainMenu.routeName,
                 ),
                 onSetLocale: _onLocaleSet,
+                onThemeChange: (bool isDark) {
+                  setState(() {
+                    if (isDark) {
+                      theme = blackTheme;
+                    } else
+                      theme = whiteTheme;
+                  });
+                },
               ),
           MainMenu.routeName: (context) => MainMenu(),
           ExtractCatalogViewArguments.routeName: (context) =>

@@ -4,6 +4,7 @@ import 'package:flutter/widgets.dart';
 import 'package:gladstoriesengine/gladstoriesengine.dart';
 import 'package:locadeserta/InheritedAuth.dart';
 import 'package:locadeserta/components/app_bar_custom.dart';
+import 'package:locadeserta/components/bordered_container.dart';
 import 'package:locadeserta/components/narrow_scaffold.dart';
 import 'package:locadeserta/creator/components/edit_story.dart';
 import 'package:locadeserta/creator/story/persistence.dart';
@@ -45,132 +46,139 @@ class _UserStoryDetailsViewState extends State<UserStoryDetailsView> {
         children: <Widget>[
           if (widget.story != null)
             Padding(
-              padding: const EdgeInsets.only(top: 8.0),
+              padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
               child: Text(
                 widget.story.title,
-                style: TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
-                    color: Theme.of(context).textTheme.title.color),
               ),
             ),
-          Form(
-            key: _formKey,
-            child: Column(
-              children: <Widget>[
-                TextFormField(
-                  style: Theme.of(context).textTheme.title,
-                  decoration: InputDecoration(
-                    icon: Icon(Icons.title),
-                    hintText: LDLocalizations.enterStoryTitle,
-                    labelText: LDLocalizations.labelStoryTitle,
+          BorderedContainer(
+            child: Form(
+              key: _formKey,
+              child: Column(
+                children: <Widget>[
+                  TextFormField(
+                    style: Theme.of(context).textTheme.body1,
+                    decoration: InputDecoration(
+                      icon: Icon(Icons.title,
+                          color: Theme.of(context).iconTheme.color),
+                      hintText: LDLocalizations.enterStoryTitle,
+                      labelText: LDLocalizations.labelStoryTitle,
+                    ),
+                    initialValue:
+                        widget.story == null ? "" : widget.story.title,
+                    onSaved: (value) {
+                      _title = value;
+                    },
                   ),
-                  initialValue: widget.story == null ? "" : widget.story.title,
-                  onSaved: (value) {
-                    _title = value;
-                  },
-                ),
-                TextFormField(
-                  decoration: InputDecoration(
-                    icon: Icon(Icons.description),
-                    hintText: LDLocalizations.hintDescription,
-                    labelText: LDLocalizations.description,
+                  TextFormField(
+                    style: Theme.of(context).textTheme.body1,
+                    decoration: InputDecoration(
+                      icon: Icon(Icons.description,
+                          color: Theme.of(context).iconTheme.color),
+                      hintText: LDLocalizations.hintDescription,
+                      labelText: LDLocalizations.description,
+                    ),
+                    onSaved: (value) {
+                      _description = value;
+                    },
+                    minLines: 1,
+                    maxLines: 5,
+                    initialValue:
+                        widget.story == null ? "" : widget.story.description,
                   ),
-                  onSaved: (value) {
-                    _description = value;
-                  },
-                  minLines: 1,
-                  maxLines: 5,
-                  initialValue:
-                      widget.story == null ? "" : widget.story.description,
-                ),
-                TextFormField(
-                  decoration: InputDecoration(
-                    icon: Icon(Icons.title),
-                    hintText: LDLocalizations.listOfAuthors,
-                    labelText: LDLocalizations.labelAuthors,
+                  TextFormField(
+                    style: Theme.of(context).textTheme.body1,
+                    decoration: InputDecoration(
+                      icon: Icon(Icons.person,
+                          color: Theme.of(context).iconTheme.color),
+                      hintText: LDLocalizations.listOfAuthors,
+                      labelText: LDLocalizations.labelAuthors,
+                    ),
+                    onSaved: (value) {
+                      _authors = value;
+                    },
+                    initialValue:
+                        widget.story == null ? "" : widget.story.authors,
                   ),
-                  onSaved: (value) {
-                    _authors = value;
-                  },
-                  initialValue:
-                      widget.story == null ? "" : widget.story.authors,
-                ),
-                TextFormField(
-                  decoration: InputDecoration(
-                    icon: Icon(Icons.calendar_today),
-                    hintText: LDLocalizations.hintFieldYear,
-                    labelText: LDLocalizations.labelYear,
-                  ),
-                  keyboardType: TextInputType.number,
-                  inputFormatters: [WhitelistingTextInputFormatter.digitsOnly],
-                  onSaved: (value) {
-                    _year = int.parse(value);
-                  },
-                  initialValue: "$_year",
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 30.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      Padding(
-                        padding: EdgeInsets.all(4.0),
-                        child: IconButton(
-                          icon: Icon(
-                            Icons.save,
-                            size: 30.0,
-                          ),
-                          onPressed: () {
-                            _formKey.currentState.save();
-                            var story;
-                            if (widget.story == null) {
-                              story = Story(
-                                title: _title,
-                                description: _description,
-                                authors: _authors,
-                                root: Page.generate(),
-                              );
-                            } else {
-                              story = widget.story;
-                              story.title = _title;
-                              story.description = _description;
-                              story.authors = _authors;
-                              story.year = _year;
-                            }
-                            _onSave(story);
-                          },
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.all(4.0),
-                        child: IconButton(
-                          icon: Icon(
-                            Icons.edit,
-                            size: 30,
-                          ),
-                          onPressed: () {
-                            _goToEditStoryView(widget.story, context);
-                          },
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.all(4.0),
-                        child: IconButton(
-                          icon: Icon(
-                            Icons.delete,
-                            size: 30,
-                          ),
-                          onPressed: () {
-                            _deleteStory(widget.story);
-                            Navigator.pop(context);
-                          },
-                        ),
-                      ),
+                  TextFormField(
+                    style: Theme.of(context).textTheme.body1,
+                    decoration: InputDecoration(
+                      icon: Icon(Icons.calendar_today),
+                      hintText: LDLocalizations.hintFieldYear,
+                      labelText: LDLocalizations.labelYear,
+                    ),
+                    keyboardType: TextInputType.number,
+                    inputFormatters: [
+                      WhitelistingTextInputFormatter.digitsOnly
                     ],
+                    onSaved: (value) {
+                      _year = int.parse(value);
+                    },
+                    initialValue: "$_year",
                   ),
-                ),
-              ],
+                  Padding(
+                    padding: const EdgeInsets.only(top: 30.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.all(4.0),
+                          child: IconButton(
+                            icon: Icon(
+                              Icons.save,
+                              size: 30.0,
+                            ),
+                            onPressed: () {
+                              _formKey.currentState.save();
+                              var story;
+                              if (widget.story == null) {
+                                story = Story(
+                                  title: _title,
+                                  description: _description,
+                                  authors: _authors,
+                                  root: Page.generate(),
+                                );
+                              } else {
+                                story = widget.story;
+                                story.title = _title;
+                                story.description = _description;
+                                story.authors = _authors;
+                                story.year = _year;
+                              }
+                              _onSave(story);
+                            },
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.all(4.0),
+                          child: IconButton(
+                            icon: Icon(
+                              Icons.edit,
+                              size: 30,
+                            ),
+                            onPressed: () {
+                              _goToEditStoryView(widget.story, context);
+                            },
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.all(4.0),
+                          child: IconButton(
+                            icon: Icon(
+                              Icons.delete,
+                              size: 30,
+                            ),
+                            onPressed: () {
+                              _deleteStory(widget.story);
+                              Navigator.pop(context);
+                            },
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ],
