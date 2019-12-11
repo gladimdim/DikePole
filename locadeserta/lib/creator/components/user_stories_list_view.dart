@@ -2,7 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:async/async.dart';
 import 'package:gladstoriesengine/gladstoriesengine.dart';
 import 'package:locadeserta/InheritedAuth.dart';
+import 'package:locadeserta/components/app_bar_custom.dart';
+import 'package:locadeserta/components/bordered_container.dart';
+import 'package:locadeserta/components/narrow_scaffold.dart';
 import 'package:locadeserta/creator/components/fat_container.dart';
+import 'package:locadeserta/creator/components/user_story_details_view.dart';
 import 'package:locadeserta/creator/components/user_story_view.dart';
 import 'package:locadeserta/creator/story/persistence.dart';
 import 'package:locadeserta/import_gladstories_view.dart';
@@ -11,14 +15,14 @@ import 'package:locadeserta/models/Localizations.dart';
 import 'package:locadeserta/waiting_screen.dart';
 import 'package:locadeserta/animations/slideable_button.dart';
 
-class EditingUserStoriesView extends StatefulWidget {
-  static String routeName = "/create";
+class UserStoriesList extends StatefulWidget {
+  static String routeName = "/user_stories_list";
 
   @override
-  _EditingUserStoriesViewState createState() => _EditingUserStoriesViewState();
+  _UserStoriesListState createState() => _UserStoriesListState();
 }
 
-class _EditingUserStoriesViewState extends State<EditingUserStoriesView> {
+class _UserStoriesListState extends State<UserStoriesList> {
   Story story;
   List<Story> storyBuilders = [];
   AsyncMemoizer _storyBuilderCatalogMemo = AsyncMemoizer();
@@ -26,47 +30,62 @@ class _EditingUserStoriesViewState extends State<EditingUserStoriesView> {
   @override
   Widget build(BuildContext context) {
     var user = InheritedAuth.of(context).auth.user;
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          LDLocalizations.createStory,
-          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0),
-        ),
-      ),
-      backgroundColor: Theme.of(context).backgroundColor,
+    return NarrowScaffold(
+      title: LDLocalizations.ownStories,
+      actions: [
+        AppBarObject(
+          text: LDLocalizations.backToMenu,
+          onTap: () => Navigator.pop(context),
+        )
+      ],
       body: Column(
         children: <Widget>[
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: SlideableButton(
-              onPress: () async {
-                await Navigator.pushNamed(
-                    context, ImportGladStoryView.routeName);
-                _resetStoryBuilderFuture();
-              },
-              child: FatContainer(
-                text: LDLocalizations.labelImport,
+            child: BorderedContainer(
+              child: SlideableButton(
+                onPress: () async {
+                  await Navigator.pushNamed(
+                      context, ImportGladStoryView.routeName);
+                  _resetStoryBuilderFuture();
+                },
+                child: FatContainer(
+                  text: LDLocalizations.labelImport,
+                ),
               ),
             ),
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: SlideableButton(
-              onPress: () async {},
-              child: FatContainer(
-                text: LDLocalizations.createNewStory,
+            child: BorderedContainer(
+              child: SlideableButton(
+                onPress: () async {
+                  try {
+                    await Navigator.pushNamed(
+                      context,
+                      UserStoryDetailsView.routeName,
+                      arguments: UserStoryDetailsViewArguments(
+                        story: Story(
+                            title: "Your title",
+                            description: "Your description",
+                            authors: "Your name"),
+                      ),
+                    );
+                  } catch (e) {
+                    debugPrint("lol");
+                  }
+                },
+                child: FatContainer(
+                  text: LDLocalizations.createNewStory,
+                ),
               ),
             ),
           ),
           Padding(
             padding: const EdgeInsets.only(top: 18.0),
             child: Text(
-              "Your existing stories",
-              style: TextStyle(
-                fontFamily: 'Roboto',
-                fontSize: 22.0,
-                fontWeight: FontWeight.bold,
-              ),
+              LDLocalizations.yourExistingStories,
+              style: Theme.of(context).textTheme.title,
             ),
           ),
           Expanded(
@@ -86,7 +105,7 @@ class _EditingUserStoriesViewState extends State<EditingUserStoriesView> {
         child: Column(
           children: <Widget>[
             FutureBuilder(
-              future: _fetchData(user),
+              future: StoryPersistence.instance.getUserStories(user),
               builder: (context, snapshot) {
                 switch (snapshot.connectionState) {
                   case ConnectionState.none:
@@ -115,12 +134,6 @@ class _EditingUserStoriesViewState extends State<EditingUserStoriesView> {
     );
   }
 
-  Future _fetchData(User user) {
-    return _storyBuilderCatalogMemo.runOnce(() async {
-      return StoryPersistence.instance.getUserStories(user);
-    });
-  }
-
   _resetStoryBuilderFuture() {
     setState(() {
       _storyBuilderCatalogMemo = AsyncMemoizer();
@@ -138,40 +151,12 @@ class _EditingUserStoriesViewState extends State<EditingUserStoriesView> {
     return Padding(
       padding: const EdgeInsets.only(bottom: 8.0),
       child: Center(
-        child: UserStoryView(
-          story: story,
+        child: BorderedContainer(
+          child: UserStoryView(
+            story: story,
+          ),
         ),
       ),
-    );
-  }
-}
-
-class StoryViewHeader extends StatelessWidget {
-  final Story story;
-
-  final VoidCallback onEdit;
-
-  StoryViewHeader({this.story, this.onEdit});
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: <Widget>[
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              LDLocalizations.labelStoryTitle,
-              style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
-            ),
-            Text(
-              story.title,
-              style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
-            ),
-          ],
-        ),
-      ],
     );
   }
 }

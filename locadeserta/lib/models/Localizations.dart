@@ -63,7 +63,7 @@ class LDLocalizations {
       'gotorootpage': 'Go to root page',
       'addnewpassage': 'Add new passage',
       'passagewillhaveimage': 'Passage will have image',
-      'selectimageforpassage': 'Select image for the passage: ',
+      'selectimageforpassage': 'Select image: ',
       'editingpassage': 'Editing passage',
       'previewstory': 'Preview story',
       'optionslistempty': 'Options list is empty',
@@ -84,6 +84,8 @@ class LDLocalizations {
       'hintFieldYear': 'Enter year when the story happened',
       'labelYear': 'Year:',
       'createNewStory': 'Create new story',
+      'ownStories': 'Your stories',
+      'yourExistingStories': 'Your existing stories',
     },
     'uk': {
       'continue': 'Продовжити',
@@ -139,7 +141,7 @@ class LDLocalizations {
       'gotorootpage': 'Назад на головну сторінку',
       'addnewpassage': 'Додати новий абзац',
       'passagewillhaveimage': 'Абзац буде з картинкою',
-      'selectimageforpassage': 'Виберіть картинку для абзацу: ',
+      'selectimageforpassage': 'Виберіть картинку: ',
       'editingpassage': 'Редагування абзацу',
       'previewstory': 'Перегляд історії',
       'optionslistempty': 'Список опцій порожній',
@@ -159,7 +161,9 @@ class LDLocalizations {
       'loadingStats': 'Завантажуємо статистику. Може зайняти до 6 секунд.',
       'hintFieldYear': 'Введіть рік, коли історія відбулася',
       'labelYear': 'Рік:',
-      'createNewStory': 'Створити нову історію'
+      'createNewStory': 'Створити нову історію',
+      'ownStories': 'Ваші історії',
+      'yourExistingStories': 'Ваші існуючі історії'
     },
     'pl': {
       'continue': 'Dalej',
@@ -216,7 +220,7 @@ class LDLocalizations {
       'gotorootpage': 'Idź do strony głównej',
       'addnewpassage': 'Dodaj nowy fragment',
       'passagewillhaveimage': 'Przejście będzie miało obraz',
-      'selectimageforpassage': 'Wybierz zdjęcie do przejścia: ',
+      'selectimageforpassage': 'Wybierz zdjęcie: ',
       'editingpassage': 'Edycja fragmentu',
       'previewstory': 'Zobacz historię',
       'optionslistempty': 'Lista opcji jest pusta',
@@ -237,6 +241,8 @@ class LDLocalizations {
       'hintFieldYear': 'Podaj rok, w którym wydarzyła się historia',
       'labelYear': 'Rok:',
       'createNewStory': 'Utwórz nową historię',
+      'ownStories': 'Własne historie',
+      'yourExistingStories': 'Twoje istniejące historie',
     }
   };
 
@@ -518,5 +524,13 @@ class LDLocalizations {
 
   static String get createNewStory {
     return _localizedValues[locale.languageCode]['createNewStory'];
+  }
+
+  static String get ownStories {
+    return _localizedValues[locale.languageCode]['ownStories'];
+  }
+
+  static String get yourExistingStories {
+    return _localizedValues[locale.languageCode]['yourExistingStories'];
   }
 }

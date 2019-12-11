@@ -50,19 +50,22 @@ class _SlideableButtonState extends State<SlideableButton>
       curve: Curves.easeInOut,
     ));
 
-    return AnimatedBuilder(
-      animation: animation,
-      child: widget.child,
-      builder: (context, child) {
-        return Transform.translate(
-          offset: Offset(animation.value, 0.0),
-          child: InkWell(
-              child: child,
-              onTap: () {
-                controller.forward();
-              }),
-        );
-      },
+    return DefaultTextStyle(
+      style: Theme.of(context).textTheme.button,
+      child: AnimatedBuilder(
+        animation: animation,
+        child: widget.child,
+        builder: (context, child) {
+          return Transform.translate(
+            offset: Offset(animation.value, 0.0),
+            child: InkWell(
+                child: child,
+                onTap: () {
+                  controller.forward();
+                }),
+          );
+        },
+      ),
     );
   }
 }

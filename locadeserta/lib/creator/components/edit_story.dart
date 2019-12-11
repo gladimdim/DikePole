@@ -45,7 +45,10 @@ class _EditStoryViewState extends State<EditStoryView> {
                       child: BorderedContainer(
                         child: FlatButton.icon(
                           icon: Icon(Icons.arrow_back),
-                          label: Text(LDLocalizations.labelBack),
+                          label: Text(
+                            LDLocalizations.labelBack,
+                            style: Theme.of(context).textTheme.title,
+                          ),
                           onPressed: () {
                             setState(() {
                               var parent =
@@ -61,6 +64,8 @@ class _EditStoryViewState extends State<EditStoryView> {
                       ),
                     ),
                   Checkbox(
+                    activeColor: Theme.of(context).primaryColor,
+                    checkColor: Theme.of(context).backgroundColor,
                     value: story.currentPage.isTheEnd(),
                     onChanged: (newValue) {
                       setState(() {
@@ -69,7 +74,11 @@ class _EditStoryViewState extends State<EditStoryView> {
                       });
                     },
                   ),
-                  Center(child: Text(LDLocalizations.labelIsTheEnd)),
+                  Center(
+                      child: Text(
+                    LDLocalizations.labelIsTheEnd,
+                    style: Theme.of(context).textTheme.title,
+                  )),
                   if (story.currentPage.isTheEnd()) ...[
                     Radio(
                       value: EndType.DEAD,
@@ -80,7 +89,9 @@ class _EditStoryViewState extends State<EditStoryView> {
                         });
                       },
                     ),
-                    Center(child: Text(LDLocalizations.labelIsTheEndDead)),
+                    Center(
+                        child: Text(LDLocalizations.labelIsTheEndDead,
+                            style: Theme.of(context).textTheme.title)),
                     Radio(
                       value: EndType.ALIVE,
                       groupValue: story.currentPage.endType,
@@ -90,7 +101,9 @@ class _EditStoryViewState extends State<EditStoryView> {
                         });
                       },
                     ),
-                    Center(child: Text(LDLocalizations.labelIsTheEndAlive))
+                    Center(
+                        child: Text(LDLocalizations.labelIsTheEndAlive,
+                            style: Theme.of(context).textTheme.title))
                   ]
                 ],
               ),
@@ -105,11 +118,17 @@ class _EditStoryViewState extends State<EditStoryView> {
                   });
                 },
                 icon: Icon(Icons.add_box),
-                label: Text(LDLocalizations.labelOptions),
+                label: Text(
+                  LDLocalizations.labelOptions,
+                  style: Theme.of(context).textTheme.title,
+                ),
               ),
             ),
             if (story.currentPage.next.length == 0)
-              Text(LDLocalizations.optionsListEmpty),
+              Text(
+                LDLocalizations.optionsListEmpty,
+                style: Theme.of(context).textTheme.title,
+              ),
             Expanded(
               flex: 3,
               child: SingleChildScrollView(
@@ -173,8 +192,11 @@ class _EditStoryViewState extends State<EditStoryView> {
                     story.currentPage.addNodeWithText("");
                   });
                 },
-                icon: Icon(Icons.add_box),
-                label: Text(LDLocalizations.addNewPassage),
+                icon: Icon(
+                  Icons.add_box,
+                ),
+                label: Text(LDLocalizations.addNewPassage,
+                    style: Theme.of(context).textTheme.title),
               ),
             ),
             if (story.currentPage.nodes.length == 0)
@@ -189,9 +211,14 @@ class _EditStoryViewState extends State<EditStoryView> {
                         padding: const EdgeInsets.all(8.0),
                         child: BorderedContainer(
                           child: ListTile(
-                            title: Text(firstNCharsFromString(node.text, 60)),
+                            title: Text(
+                              firstNCharsFromString(node.text, 60),
+                              style: Theme.of(context).textTheme.title,
+                            ),
                             leading: imageType == null
-                                ? Icon(Icons.texture)
+                                ? Icon(
+                                    Icons.texture,
+                                  )
                                 : Image(
                                     image: BackgroundImage.getAssetImageForType(
                                         imageType)),
@@ -213,7 +240,10 @@ class _EditStoryViewState extends State<EditStoryView> {
                                   .writeStory(user, widget.story);
                             },
                             trailing: IconButton(
-                              icon: Icon(Icons.delete),
+                              icon: Icon(
+                                Icons.delete,
+                                color: Theme.of(context).primaryColor,
+                              ),
                               onPressed: () {
                                 setState(() {
                                   story.currentPage.removeNode(node);
@@ -226,20 +256,21 @@ class _EditStoryViewState extends State<EditStoryView> {
                     }).toList(),
                   ),
                 )),
-            SlideableButton(
-              child: FatContainer(
-                text: LDLocalizations.startStory,
-                backgroundColor: Theme.of(context).primaryColor,
+            BorderedContainer(
+              child: SlideableButton(
+                child: FatContainer(
+                  text: LDLocalizations.startStory,
+                ),
+                onPress: () async {
+                  story.reset();
+                  await Navigator.pushNamed(
+                    context,
+                    ExtractArgumentsGameView.routeName,
+                    arguments: GameViewArguments(story: story),
+                  );
+                  story.reset();
+                },
               ),
-              onPress: () async {
-                story.reset();
-                await Navigator.pushNamed(
-                  context,
-                  ExtractArgumentsGameView.routeName,
-                  arguments: GameViewArguments(story: story),
-                );
-                story.reset();
-              },
             )
           ],
         ),

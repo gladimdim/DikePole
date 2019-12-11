@@ -7,21 +7,16 @@ class FatContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var height = MediaQuery.of(context).size.height*0.075;
+    var height = MediaQuery.of(context).size.height * 0.075;
     return SizedBox(
       height: height,
       child: Container(
-        color: backgroundColor,
+        color: Theme.of(context).backgroundColor,
         child: Align(
           alignment: Alignment.center,
           child: Text(
             text,
             textAlign: TextAlign.center,
-            style: TextStyle(
-                fontFamily: 'Montserrat',
-                fontSize: 20.0,
-                fontWeight: FontWeight.bold,
-                color: Theme.of(context).textTheme.title.color),
           ),
         ),
       ),

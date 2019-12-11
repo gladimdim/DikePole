@@ -41,13 +41,17 @@ class _UserStoryDetailsViewState extends State<UserStoryDetailsView> {
     return NarrowScaffold(
       title: LDLocalizations.edit,
       body: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
           if (widget.story != null)
             Padding(
               padding: const EdgeInsets.only(top: 8.0),
               child: Text(
                 widget.story.title,
-                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                style: TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                    color: Theme.of(context).textTheme.title.color),
               ),
             ),
           Form(
@@ -55,6 +59,7 @@ class _UserStoryDetailsViewState extends State<UserStoryDetailsView> {
             child: Column(
               children: <Widget>[
                 TextFormField(
+                  style: Theme.of(context).textTheme.title,
                   decoration: InputDecoration(
                     icon: Icon(Icons.title),
                     hintText: LDLocalizations.enterStoryTitle,
@@ -104,53 +109,66 @@ class _UserStoryDetailsViewState extends State<UserStoryDetailsView> {
                   },
                   initialValue: "$_year",
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.all(4.0),
-                      child: IconButton(
-                        icon: Icon(Icons.save),
-                        onPressed: () {
-                          _formKey.currentState.save();
-                          var story;
-                          if (widget.story == null) {
-                            story = Story(
-                              title: _title,
-                              description: _description,
-                              authors: _authors,
-                              root: Page.generate(),
-                            );
-                          } else {
-                            story = widget.story;
-                            story.title = _title;
-                            story.description = _description;
-                            story.authors = _authors;
-                            story.year = _year;
-                          }
-                          _onSave(story);
-                        },
+                Padding(
+                  padding: const EdgeInsets.only(top: 30.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.all(4.0),
+                        child: IconButton(
+                          icon: Icon(
+                            Icons.save,
+                            size: 30.0,
+                          ),
+                          onPressed: () {
+                            _formKey.currentState.save();
+                            var story;
+                            if (widget.story == null) {
+                              story = Story(
+                                title: _title,
+                                description: _description,
+                                authors: _authors,
+                                root: Page.generate(),
+                              );
+                            } else {
+                              story = widget.story;
+                              story.title = _title;
+                              story.description = _description;
+                              story.authors = _authors;
+                              story.year = _year;
+                            }
+                            _onSave(story);
+                          },
+                        ),
                       ),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.all(4.0),
-                      child: IconButton(
-                        icon: Icon(Icons.edit),
-                        onPressed: () {
-                          _goToEditStoryView(widget.story, context);
-                        },
+                      Padding(
+                        padding: EdgeInsets.all(4.0),
+                        child: IconButton(
+                          icon: Icon(
+                            Icons.edit,
+                            size: 30,
+                          ),
+                          onPressed: () {
+                            _goToEditStoryView(widget.story, context);
+                          },
+                        ),
                       ),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.all(4.0),
-                      child: IconButton(
-                        icon: Icon(Icons.delete),
-                        onPressed: () {
-                          _deleteStory(widget.story);
-                        },
+                      Padding(
+                        padding: EdgeInsets.all(4.0),
+                        child: IconButton(
+                          icon: Icon(
+                            Icons.delete,
+                            size: 30,
+                          ),
+                          onPressed: () {
+                            _deleteStory(widget.story);
+                            Navigator.pop(context);
+                          },
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ],
             ),
@@ -188,7 +206,6 @@ class _UserStoryDetailsViewState extends State<UserStoryDetailsView> {
   _goToEditStoryView(Story story, context) async {
     await Navigator.pushNamed(context, ExtractEditStoryViewArguments.routeName,
         arguments: EditStoryViewArguments(story: story));
-//    _resetStoryBuilderFuture();
   }
 }
 

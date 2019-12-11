@@ -12,10 +12,11 @@ class NarrowScaffold extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Theme.of(context).backgroundColor,
       body: SafeArea(
         child: Stack(children: [
           Padding(
-            padding: EdgeInsets.only(top: APP_BAR_HEIGHT),
+            padding: EdgeInsets.only(top: APP_BAR_HEIGHT + 8),
             child: body,
           ),
           AppBarCustom(

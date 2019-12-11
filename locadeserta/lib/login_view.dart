@@ -5,6 +5,7 @@ import 'package:locadeserta/InheritedAuth.dart';
 import 'package:locadeserta/animations/fade_images.dart';
 import 'package:locadeserta/animations/slideable_button.dart';
 import 'package:locadeserta/components/app_bar_custom.dart';
+import 'package:locadeserta/components/bordered_container.dart';
 import 'package:locadeserta/components/narrow_scaffold.dart';
 import 'package:locadeserta/models/Auth.dart';
 import 'package:locadeserta/models/Localizations.dart';
@@ -33,11 +34,7 @@ class _LoginViewState extends State<LoginView> {
       title: LDLocalizations.appTitle,
       actions: [
         AppBarObject(
-          onTap: () =>
-              InheritedAuth
-                  .of(context)
-                  .auth
-                  .signOut(),
+          onTap: () => InheritedAuth.of(context).auth.signOut(),
           text: LDLocalizations.signOut,
         ),
       ],
@@ -46,10 +43,7 @@ class _LoginViewState extends State<LoginView> {
 
   Widget _buildBody(BuildContext context) {
     return StreamBuilder<User>(
-      stream: InheritedAuth
-          .of(context)
-          .auth
-          .onAuthStateChange,
+      stream: InheritedAuth.of(context).auth.onAuthStateChange,
       initialData: null,
       builder: (context, snapshot) {
         User user = snapshot.data;
@@ -91,22 +85,27 @@ class _LoginViewState extends State<LoginView> {
             ),
             Center(
               child: Material(
-                child: InkWell(
-                  child: Padding(
-                    padding: const EdgeInsets.only(top: 8.0),
+                color: Theme.of(context).backgroundColor,
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 8.0),
+                  child: InkWell(
                     child: Text(
                       "For Privacy Policy Tap here.",
                       style: TextStyle(
-                          fontSize: 15.0, fontWeight: FontWeight.bold),
+                        fontSize: 15.0,
+                        fontWeight: FontWeight.bold,
+                        backgroundColor: Theme.of(context).backgroundColor,
+                        color: Theme.of(context).textTheme.title.color,
+                      ),
                     ),
+                    onTap: () async {
+                      if (await canLaunch(
+                          "https://locadeserta.com/privacy_policy.html")) {
+                        await launch(
+                            "https://locadeserta.com/privacy_policy.html");
+                      }
+                    },
                   ),
-                  onTap: () async {
-                    if (await canLaunch(
-                        "https://locadeserta.com/privacy_policy.html")) {
-                      await launch(
-                          "https://locadeserta.com/privacy_policy.html");
-                    }
-                  },
                 ),
               ),
             ),
@@ -123,22 +122,13 @@ class _LoginViewState extends State<LoginView> {
         Expanded(
           flex: 2,
           child: RaisedButton(
-            color: Theme
-                .of(context)
-                .primaryColor,
-            textColor: Theme
-                .of(context)
-                .textTheme
-                .title
-                .color,
+            color: Theme.of(context).primaryColor,
+            textColor: Theme.of(context).textTheme.title.color,
             onPressed: () => _onSignInPressed(context),
             child: Text(
               LDLocalizations.signInWithGoogle,
               textAlign: TextAlign.center,
-              style: Theme
-                  .of(context)
-                  .textTheme
-                  .title,
+              style: Theme.of(context).textTheme.title,
             ),
           ),
         ),
@@ -149,15 +139,10 @@ class _LoginViewState extends State<LoginView> {
           flex: 2,
           child: RaisedButton(
             onPressed: () => _onSignInAnonPressed(context),
-            color: Theme
-                .of(context)
-                .primaryColor,
+            color: Theme.of(context).primaryColor,
             child: Text(LDLocalizations.anonLogin,
                 textAlign: TextAlign.center,
-                style: Theme
-                    .of(context)
-                    .textTheme
-                    .title),
+                style: Theme.of(context).textTheme.title),
           ),
         ),
       ],
@@ -167,20 +152,17 @@ class _LoginViewState extends State<LoginView> {
   Widget _buildLoginedView(User user, BuildContext context) {
     return SlideableButton(
       onPress: widget.onContinue,
-      child: Container(
-        height: 50.0,
-        color: Theme
-            .of(context)
-            .primaryColor,
-        child: Align(
-          alignment: Alignment.center,
-          child: Text(
-            LDLocalizations.start,
-            textAlign: TextAlign.center,
-            style: Theme
-                .of(context)
-                .textTheme
-                .title,
+      child: BorderedContainer(
+        child: Container(
+          height: 50.0,
+          color: Theme.of(context).backgroundColor,
+          child: Align(
+            alignment: Alignment.center,
+            child: Text(
+              LDLocalizations.start,
+              textAlign: TextAlign.center,
+              style: Theme.of(context).textTheme.button,
+            ),
           ),
         ),
       ),
@@ -203,23 +185,17 @@ class _LoginViewState extends State<LoginView> {
   _onSignInPressed(context) async {
     final GoogleSignInAccount googleUser = await _googleSignIn.signIn();
     final GoogleSignInAuthentication googleAuth =
-    await googleUser.authentication;
+        await googleUser.authentication;
     final AuthCredential credential = GoogleAuthProvider.getCredential(
       accessToken: googleAuth.accessToken,
       idToken: googleAuth.idToken,
     );
 
-    await InheritedAuth
-        .of(context)
-        .auth
-        .signInWithCredentials(credential);
+    await InheritedAuth.of(context).auth.signInWithCredentials(credential);
   }
 
   _onSignInAnonPressed(context) async {
-    return await InheritedAuth
-        .of(context)
-        .auth
-        .signInAnonymously();
+    return await InheritedAuth.of(context).auth.signInAnonymously();
   }
 
   _setNewLocale(Locale locale) {

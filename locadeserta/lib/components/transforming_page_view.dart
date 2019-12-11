@@ -100,19 +100,21 @@ class _TransformingPageViewState extends State<TransformingPageView> {
           width: MediaQuery.of(context).size.width,
           child: BorderedContainer(
             child: RevolverShell(
-              top: Container(
-                height: 75,
-                alignment: Alignment.center,
-                decoration: BoxDecoration(
-                  color: Theme.of(context).primaryColor,
-                ),
-                child: Text(
-                  "${story.year}: ${story.title}",
-                  style: TextStyle(
-                    fontSize: 32.0,
-                    fontWeight: FontWeight.bold,
-                    color: Theme.of(context).textTheme.title.color,
-                    backgroundColor: Theme.of(context).primaryColor,
+              top: BorderedContainer(
+                child: Container(
+                  height: 75,
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                    color: Theme.of(context).backgroundColor,
+                  ),
+                  child: Text(
+                    "${story.year}: ${story.title}",
+                    style: TextStyle(
+                      fontSize: 32.0,
+                      fontWeight: FontWeight.bold,
+                      color: Theme.of(context).textTheme.title.color,
+                      backgroundColor: Theme.of(context).backgroundColor,
+                    ),
                   ),
                 ),
               ),
@@ -128,19 +130,21 @@ class _TransformingPageViewState extends State<TransformingPageView> {
                     flex: 10,
                     child: SlideableButton(
                       onPress: () => widget.onDetailsSelected(story),
-                      child: Container(
-                        height: 50,
-                        decoration: BoxDecoration(
-                          color: Theme.of(context).primaryColor,
-                        ),
-                        child: Align(
-                          alignment: Alignment.center,
-                          child: Text(
-                            LDLocalizations.showStoryDetails,
-                            style: TextStyle(
-                              color: Theme.of(context).textTheme.title.color,
-                              fontSize: 22.0,
-                              fontWeight: FontWeight.bold,
+                      child: BorderedContainer(
+                        child: Container(
+                          height: 50,
+                          decoration: BoxDecoration(
+                            color: Theme.of(context).backgroundColor,
+                          ),
+                          child: Align(
+                            alignment: Alignment.center,
+                            child: Text(
+                              LDLocalizations.showStoryDetails,
+                              style: TextStyle(
+                                color: Theme.of(context).textTheme.title.color,
+                                fontSize: 22.0,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
                           ),
                         ),
@@ -159,19 +163,21 @@ class _TransformingPageViewState extends State<TransformingPageView> {
                     flex: 10,
                     child: SlideableButton(
                       onPress: () => widget.onStorySelected(story),
-                      child: Container(
-                        height: 50,
-                        decoration: BoxDecoration(
-                          color: Theme.of(context).primaryColor,
-                        ),
-                        child: Align(
-                          alignment: Alignment.center,
-                          child: Text(
-                            LDLocalizations.startStory,
-                            style: TextStyle(
-                              color: Theme.of(context).textTheme.title.color,
-                              fontSize: 22.0,
-                              fontWeight: FontWeight.bold,
+                      child: BorderedContainer(
+                        child: Container(
+                          height: 50,
+                          decoration: BoxDecoration(
+                            color: Theme.of(context).backgroundColor,
+                          ),
+                          child: Align(
+                            alignment: Alignment.center,
+                            child: Text(
+                              LDLocalizations.startStory,
+                              style: TextStyle(
+                                color: Theme.of(context).textTheme.title.color,
+                                fontSize: 22.0,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
                           ),
                         ),

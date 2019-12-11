@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gladstoriesengine/gladstoriesengine.dart' as GSE;
 import 'package:locadeserta/components/BorderedRandomImageForType.dart';
+import 'package:locadeserta/components/bordered_container.dart';
 import 'package:locadeserta/creator/components/fat_container.dart';
 import 'package:locadeserta/models/story_history.dart';
 import 'package:locadeserta/models/story_bridge.dart';
@@ -70,13 +71,15 @@ class PassageState extends State<Passage> with TickerProviderStateMixin {
       padding: EdgeInsets.all(8.0),
       child: SizedBox(
         height: MediaQuery.of(context).size.height * 0.075,
-        child: SlideableButton(
-          onPress: () {
-            _nextWithChoice(i);
-          },
-          child: FatContainer(
-            text: text,
-            backgroundColor: Theme.of(context).primaryColor,
+        child: BorderedContainer(
+          child: SlideableButton(
+            onPress: () {
+              _nextWithChoice(i);
+            },
+            child: FatContainer(
+              text: text,
+              backgroundColor: Theme.of(context).primaryColor,
+            ),
           ),
         ),
       ),
@@ -110,14 +113,16 @@ class PassageState extends State<Passage> with TickerProviderStateMixin {
   Widget createContinue(BuildContext context) {
     return Padding(
       padding: EdgeInsets.all(8.0),
-      child: SlideableButton(
-          child: FatContainer(
-            text: LDLocalizations.Continue,
-            backgroundColor: Theme.of(context).primaryColor,
-          ),
-          onPress: () {
-            _next();
-          }),
+      child: BorderedContainer(
+        child: SlideableButton(
+            child: FatContainer(
+              text: LDLocalizations.Continue,
+              backgroundColor: Theme.of(context).primaryColor,
+            ),
+            onPress: () {
+              _next();
+            }),
+      ),
     );
   }
 
@@ -163,10 +168,7 @@ class PassageState extends State<Passage> with TickerProviderStateMixin {
                       passageItem.value == ""
                           ? LDLocalizations.storyBegin
                           : passageItem.value,
-                      style: TextStyle(
-                        fontFamily: "Raleway-Bold",
-                        fontSize: 18,
-                      ),
+                      style: Theme.of(context).textTheme.body1,
                     ),
                   );
               }

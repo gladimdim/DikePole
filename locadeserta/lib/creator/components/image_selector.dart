@@ -25,7 +25,6 @@ class _ImageSelectorState extends State<ImageSelector> {
 
   @override
   Widget build(BuildContext context) {
-    print("image type: ${widget.imageType}");
     return DropdownButton<ImageType>(
       value: widget.imageType,
       onChanged: (newType) {
@@ -34,7 +33,8 @@ class _ImageSelectorState extends State<ImageSelector> {
       items: imageTypes.map<DropdownMenuItem<ImageType>>((imageType) {
         return DropdownMenuItem(
           value: imageType,
-          child: Text(imageTypeToString(imageType)),
+          child: Text(imageTypeToString(imageType),
+              style: Theme.of(context).textTheme.title),
         );
       }).toList(),
     );

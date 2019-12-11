@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:locadeserta/InheritedAuth.dart';
 import 'package:locadeserta/catalog_view.dart';
-import 'package:locadeserta/creator/components/editing_user_stories_view.dart';
+import 'package:locadeserta/creator/components/user_stories_list_view.dart';
 import 'package:locadeserta/creator/components/edit_node_sequence_view.dart';
 import 'package:locadeserta/creator/components/edit_story.dart';
 import 'package:locadeserta/creator/components/game_view.dart';
@@ -26,13 +26,73 @@ class LocaDesertaApp extends StatefulWidget {
   _LocaDesertaAppState createState() => _LocaDesertaAppState();
 }
 
-class _LocaDesertaAppState extends State<LocaDesertaApp> {
-  final ThemeData theme = ThemeData(
-      primaryColor: Colors.black,
-      backgroundColor: Colors.white,
-      accentColor: Colors.black,
+var blackTheme = ThemeData(
+  primaryColor: Colors.white,
+  backgroundColor: Colors.black,
+  accentColor: Colors.white,
+  fontFamily: 'Roboto',
+  unselectedWidgetColor: Colors.white,
+  textTheme: TextTheme(
+    body1: TextStyle(
+      fontFamily: "Raleway-Bold",
+      fontSize: 18,
+      color: Colors.white,
+    ),
+    title: TextStyle(
+      color: Colors.white,
       fontFamily: 'Roboto',
-      textTheme: TextTheme(title: TextStyle(color: Colors.white)));
+    ),
+    button: TextStyle(
+      fontFamily: 'Montserrat',
+      fontSize: 20.0,
+      fontWeight: FontWeight.bold,
+      color: Colors.white,
+    ),
+  ),
+  iconTheme: IconThemeData(
+    color: Colors.white,
+  ),
+  appBarTheme: AppBarTheme(
+    color: Colors.black,
+    iconTheme: IconThemeData(
+      color: Colors.white,
+    ),
+  ),
+);
+
+var whiteTheme = ThemeData(
+  primaryColor: Colors.black,
+  backgroundColor: Colors.white,
+  accentColor: Colors.black,
+  fontFamily: 'Roboto',
+  unselectedWidgetColor: Colors.black,
+  textTheme: TextTheme(
+    body1: TextStyle(
+      fontFamily: "Raleway-Bold",
+      fontSize: 18,
+      color: Colors.black,
+    ),
+    title: TextStyle(color: Colors.black),
+    button: TextStyle(
+      fontFamily: 'Montserrat',
+      fontSize: 20.0,
+      fontWeight: FontWeight.bold,
+      color: Colors.black,
+    ),
+  ),
+  iconTheme: IconThemeData(
+    color: Colors.black,
+  ),
+  appBarTheme: AppBarTheme(
+    color: Colors.white,
+    iconTheme: IconThemeData(
+      color: Colors.black,
+    ),
+  ),
+);
+
+class _LocaDesertaAppState extends State<LocaDesertaApp> {
+  final ThemeData theme = whiteTheme;
 
   @override
   Widget build(BuildContext context) {
@@ -45,18 +105,20 @@ class _LocaDesertaAppState extends State<LocaDesertaApp> {
         debugShowCheckedModeBanner: false,
         routes: {
           "/": (context) => LoginView(
-                onContinue: () => Navigator.pushNamed(context, "/main_menu"),
+                onContinue: () => Navigator.pushNamed(
+                  context,
+                  MainMenu.routeName,
+                ),
                 onSetLocale: _onLocaleSet,
               ),
-          "/main_menu": (context) => MainMenu(),
+          MainMenu.routeName: (context) => MainMenu(),
           ExtractCatalogViewArguments.routeName: (context) =>
               ExtractCatalogViewArguments(),
           ExtractExportPdfViewArguments.routeName: (context) =>
               ExtractExportPdfViewArguments(),
           ExtractExportGladStoriesPdfViewArguments.routeName: (context) =>
               ExtractExportGladStoriesPdfViewArguments(),
-          EditingUserStoriesView.routeName: (context) =>
-              EditingUserStoriesView(),
+          UserStoriesList.routeName: (context) => UserStoriesList(),
           ExtractEditStoryViewArguments.routeName: (context) =>
               ExtractEditStoryViewArguments(),
           ExtractArgumentsGameView.routeName: (context) =>

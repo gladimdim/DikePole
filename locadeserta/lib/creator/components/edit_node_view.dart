@@ -50,7 +50,10 @@ class _EditNodeViewState extends State<EditNodeView> {
                 flex: 1,
                 child: Row(
                   children: <Widget>[
-                    Text(LDLocalizations.passageWillHaveImage),
+                    Text(
+                      LDLocalizations.passageWillHaveImage,
+                      style: Theme.of(context).textTheme.title,
+                    ),
                     Checkbox(
                       value: widget.node.imageType != null,
                       onChanged: (newValue) {
@@ -71,7 +74,12 @@ class _EditNodeViewState extends State<EditNodeView> {
                   flex: 1,
                   child: Row(
                     children: <Widget>[
-                      Text(LDLocalizations.selectImageForPassage),
+                      Text(
+                        LDLocalizations.selectImageForPassage,
+                        style: TextStyle(
+                          color: Theme.of(context).primaryColor,
+                        ),
+                      ),
                       SizedBox(
                         width: 20,
                       ),
@@ -136,7 +144,7 @@ class _TextEditorState extends State<TextEditorWithButton> {
         BorderedContainer(
           child: EditableText(
             cursorColor: Colors.black,
-            backgroundCursorColor: Colors.white,
+            backgroundCursorColor: Theme.of(context).backgroundColor,
             focusNode: FocusNode(),
             maxLines: widget.maxLines,
             controller: _controller,

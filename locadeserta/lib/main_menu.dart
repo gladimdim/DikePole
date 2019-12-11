@@ -9,10 +9,12 @@ import 'package:locadeserta/animations/fade_images.dart';
 import 'package:locadeserta/animations/slideable_button.dart';
 import 'package:locadeserta/catalog_view.dart';
 import 'package:locadeserta/components/app_bar_custom.dart';
+import 'package:locadeserta/components/bordered_container.dart';
 import 'package:locadeserta/components/narrow_scaffold.dart';
 import 'package:locadeserta/components/transforming_page_view.dart';
 import 'package:locadeserta/creator/components/fat_container.dart';
 import 'package:locadeserta/creator/components/game_view.dart';
+import 'package:locadeserta/creator/components/user_stories_list_view.dart';
 import 'package:locadeserta/models/Localizations.dart';
 import 'package:locadeserta/models/background_image.dart';
 import 'package:locadeserta/story_view.dart';
@@ -27,6 +29,7 @@ import 'package:locadeserta/radiuses.dart';
 const LANDING_IMAGE_HEIGHT = 200.0;
 
 class MainMenu extends StatefulWidget {
+  static String routeName = "/main_menu";
   MainMenu({story});
 
   @override
@@ -163,21 +166,22 @@ class _MainMenuState extends State<MainMenu> with TickerProviderStateMixin {
     sortedStories.sort((story1, story2) => story1.year.compareTo(story2.year));
 
     var child = TransformingPageView(
-        stories: sortedStories,
-        scrollDirection: Axis.vertical,
-        onStorySelected: (story) => _goToStory(story, context),
-        onDetailsSelected: (story) => Navigator.pushNamed(
-              context,
-              "/story_details",
-              arguments: CatalogViewArguments(
-                expanded: true,
-                catalogStory: story,
-                onReadPressed: () => _goToStory(story, context),
-                onDetailPressed: () {
-                  Navigator.pop(context);
-                },
-              ),
-            ));
+      stories: sortedStories,
+      scrollDirection: Axis.vertical,
+      onStorySelected: (story) => _goToStory(story, context),
+      onDetailsSelected: (story) => Navigator.pushNamed(
+        context,
+        ExtractCatalogViewArguments.routeName,
+        arguments: CatalogViewArguments(
+          expanded: true,
+          catalogStory: story,
+          onReadPressed: () => _goToStory(story, context),
+          onDetailPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+      ),
+    );
 
     return AnimatedBuilder(
       animation: appearanceAnimation,
@@ -190,11 +194,12 @@ class _MainMenuState extends State<MainMenu> with TickerProviderStateMixin {
                 padding: const EdgeInsets.all(4.0),
                 child: SlideableButton(
                   onPress: () {
-                    Navigator.pushNamed(context, "/create");
+                    Navigator.pushNamed(context, UserStoriesList.routeName);
                   },
-                  child: FatContainer(
-                    text: LDLocalizations.createStory,
-                    backgroundColor: Colors.black87,
+                  child: BorderedContainer(
+                    child: FatContainer(
+                      text: LDLocalizations.createStory,
+                    ),
                   ),
                 ),
               ),

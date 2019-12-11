@@ -3,6 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'package:gladstoriesengine/gladstoriesengine.dart';
 import 'package:locadeserta/animations/fade_images.dart';
 import 'package:locadeserta/animations/slideable_button.dart';
+import 'package:locadeserta/components/bordered_container.dart';
 import 'package:locadeserta/models/background_image.dart';
 import 'package:locadeserta/models/Localizations.dart';
 import 'package:locadeserta/models/catalogs.dart';
@@ -80,12 +81,12 @@ class _CatalogViewState extends State<CatalogView>
                   ),
                   child: Text(
                     widget.catalogStory.title,
-                    style: TextStyle(
-                      fontSize: 32.0,
-                      fontWeight: FontWeight.bold,
-                      color: Theme.of(context).textTheme.title.color,
-                      backgroundColor: Theme.of(context).primaryColor,
-                    ),
+//                    style: TextStyle(
+//                      fontSize: 32.0,
+//                      fontWeight: FontWeight.bold,
+//                      color: Colors.black,
+//                      backgroundColor: Theme.of(context).backgroundColor,
+//                    ),
                   ),
                 ),
               Padding(
@@ -107,21 +108,19 @@ class _CatalogViewState extends State<CatalogView>
                   if (!widget.expanded)
                     Flexible(
                       flex: 10,
-                      child: SlideableButton(
-                        onPress: widget.onDetailPressed,
-                        child: Container(
-                          height: 50,
-                          decoration: BoxDecoration(
-                            color: Theme.of(context).primaryColor,
-                          ),
-                          child: Align(
-                            alignment: Alignment.center,
-                            child: Text(
-                              LDLocalizations.showStoryDetails,
-                              style: TextStyle(
-                                color: Theme.of(context).textTheme.title.color,
-                                fontSize: 22.0,
-                                fontWeight: FontWeight.bold,
+                      child: BorderedContainer(
+                        child: SlideableButton(
+                          onPress: widget.onDetailPressed,
+                          child: Container(
+                            height: 50,
+                            decoration: BoxDecoration(
+                              color: Theme.of(context).backgroundColor,
+                            ),
+                            child: Align(
+                              alignment: Alignment.center,
+                              child: Text(
+                                LDLocalizations.showStoryDetails,
+                                style: Theme.of(context).textTheme.button,
                               ),
                             ),
                           ),
@@ -139,21 +138,19 @@ class _CatalogViewState extends State<CatalogView>
                     ),
                   Flexible(
                     flex: 10,
-                    child: SlideableButton(
-                      onPress: widget.onReadPressed,
-                      child: Container(
-                        height: 50,
-                        decoration: BoxDecoration(
-                          color: Theme.of(context).primaryColor,
-                        ),
-                        child: Align(
-                          alignment: Alignment.center,
-                          child: Text(
-                            LDLocalizations.startStory,
-                            style: TextStyle(
-                              color: Theme.of(context).textTheme.title.color,
-                              fontSize: 22.0,
-                              fontWeight: FontWeight.bold,
+                    child: BorderedContainer(
+                      child: SlideableButton(
+                        onPress: widget.onReadPressed,
+                        child: Container(
+                          height: 50,
+                          decoration: BoxDecoration(
+                            color: Theme.of(context).backgroundColor,
+                          ),
+                          child: Align(
+                            alignment: Alignment.center,
+                            child: Text(
+                              LDLocalizations.startStory,
+                              style: Theme.of(context).textTheme.button,
                             ),
                           ),
                         ),
@@ -222,6 +219,7 @@ class ExtractCatalogViewArguments extends StatelessWidget {
     final CatalogViewArguments args = ModalRoute.of(context).settings.arguments;
 
     return Scaffold(
+        backgroundColor: Theme.of(context).backgroundColor,
         appBar: AppBar(
           title: Text(args.catalogStory.title),
         ),

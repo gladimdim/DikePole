@@ -25,6 +25,7 @@ class _EditNodeSequenceState extends State<EditNodeSequence> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Theme.of(context).backgroundColor,
       body: Padding(
           padding: const EdgeInsets.all(8.0),
           child: EditNodeView(
@@ -40,7 +41,10 @@ class _EditNodeSequenceState extends State<EditNodeSequence> {
             isLastNode: !widget.page.hasNextNode(),
           )),
       appBar: AppBar(
-        title: Text(LDLocalizations.editingPassage),
+        title: Text(
+          LDLocalizations.editingPassage,
+          style: Theme.of(context).textTheme.title,
+        ),
       ),
     );
   }

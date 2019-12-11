@@ -21,8 +21,12 @@ class _ImportGladStoryViewState extends State<ImportGladStoryView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Theme.of(context).backgroundColor,
       appBar: AppBar(
-        title: Text(LDLocalizations.exportGladStoryToJson),
+        title: Text(
+          LDLocalizations.exportGladStoryToJson,
+          style: Theme.of(context).textTheme.title,
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -35,20 +39,25 @@ class _ImportGladStoryViewState extends State<ImportGladStoryView> {
                 maxLines: 15,
               ),
             ),
-            SlideableButton(
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: FatContainer(
-                  text: LDLocalizations.labelImport,
+            Padding(
+              padding: const EdgeInsets.only(top: 8.0),
+              child: BorderedContainer(
+                child: SlideableButton(
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: FatContainer(
+                      text: LDLocalizations.labelImport,
+                    ),
+                  ),
+                  onPress: () async {
+                    var story = Story.fromJson(_controller.text,
+                        imageResolver: BackgroundImage.getRandomImageForType);
+                    var user = await Auth().currentUser();
+                    await StoryPersistence.instance.writeStory(user, story);
+                    Navigator.pop(context);
+                  },
                 ),
               ),
-              onPress: () async {
-                var story = Story.fromJson(_controller.text,
-                    imageResolver: BackgroundImage.getRandomImageForType);
-                var user = await Auth().currentUser();
-                await StoryPersistence.instance.writeStory(user, story);
-                Navigator.pop(context);
-              },
             ),
           ],
         ),
