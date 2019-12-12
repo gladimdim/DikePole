@@ -47,7 +47,9 @@ class _LoginViewState extends State<LoginView> {
           onTap: () {
             widget.onThemeChange(!widget.darkTheme);
           },
-          text: widget.darkTheme ? "Light theme" : "Dark Theme",
+          text: widget.darkTheme
+              ? LDLocalizations.lightThemeLabel
+              : LDLocalizations.darkThemeLabel,
         )
       ],
     );
@@ -133,14 +135,13 @@ class _LoginViewState extends State<LoginView> {
       children: [
         Expanded(
           flex: 2,
-          child: RaisedButton(
-            color: Theme.of(context).primaryColor,
-            textColor: Theme.of(context).textTheme.title.color,
-            onPressed: () => _onSignInPressed(context),
-            child: Text(
-              LDLocalizations.signInWithGoogle,
-              textAlign: TextAlign.center,
-              style: Theme.of(context).textTheme.title,
+          child: BorderedContainer(
+            child: SlideableButton(
+              onPress: () => _onSignInPressed(context),
+              child: Text(
+                LDLocalizations.signInWithGoogle,
+                textAlign: TextAlign.center,
+              ),
             ),
           ),
         ),
@@ -149,12 +150,14 @@ class _LoginViewState extends State<LoginView> {
         ),
         Expanded(
           flex: 2,
-          child: RaisedButton(
-            onPressed: () => _onSignInAnonPressed(context),
-            color: Theme.of(context).primaryColor,
-            child: Text(LDLocalizations.anonLogin,
+          child: BorderedContainer(
+            child: SlideableButton(
+              onPress: () => _onSignInAnonPressed(context),
+              child: Text(
+                LDLocalizations.anonLogin,
                 textAlign: TextAlign.center,
-                style: Theme.of(context).textTheme.title),
+              ),
+            ),
           ),
         ),
       ],

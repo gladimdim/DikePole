@@ -111,6 +111,7 @@ class _LocaDesertaAppState extends State<LocaDesertaApp> {
                   context,
                   MainMenu.routeName,
                 ),
+                darkTheme: theme == blackTheme,
                 onSetLocale: _onLocaleSet,
                 onThemeChange: (bool isDark) {
                   setState(() {

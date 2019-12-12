@@ -86,6 +86,8 @@ class LDLocalizations {
       'createNewStory': 'Create new story',
       'ownStories': 'Your stories',
       'yourExistingStories': 'Your existing stories',
+      'darkThemeLabel': 'Dark theme',
+      'lightThemeLabel': 'Light theme',
     },
     'uk': {
       'continue': 'Продовжити',
@@ -163,7 +165,9 @@ class LDLocalizations {
       'labelYear': 'Рік:',
       'createNewStory': 'Створити нову історію',
       'ownStories': 'Ваші історії',
-      'yourExistingStories': 'Ваші існуючі історії'
+      'yourExistingStories': 'Ваші існуючі історії',
+      'darkThemeLabel': 'Темна тема',
+      'lightThemeLabel': 'Світла тема',
     },
     'pl': {
       'continue': 'Dalej',
@@ -243,6 +247,8 @@ class LDLocalizations {
       'createNewStory': 'Utwórz nową historię',
       'ownStories': 'Własne historie',
       'yourExistingStories': 'Twoje istniejące historie',
+      'darkThemeLabel': 'Ciemny motyw',
+      'lightThemeLabel': 'Lekki motyw',
     }
   };
 
@@ -532,5 +538,13 @@ class LDLocalizations {
 
   static String get yourExistingStories {
     return _localizedValues[locale.languageCode]['yourExistingStories'];
+  }
+
+  static String get darkThemeLabel {
+    return _localizedValues[locale.languageCode]['darkThemeLabel'];
+  }
+
+  static String get lightThemeLabel {
+    return _localizedValues[locale.languageCode]['lightThemeLabel'];
   }
 }

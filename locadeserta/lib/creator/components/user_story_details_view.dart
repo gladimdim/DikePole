@@ -117,7 +117,7 @@ class _UserStoryDetailsViewState extends State<UserStoryDetailsView> {
                     initialValue: "$_year",
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(top: 30.0),
+                    padding: const EdgeInsets.only(top: 10.0),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
