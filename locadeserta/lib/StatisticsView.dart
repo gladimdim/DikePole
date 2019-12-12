@@ -26,11 +26,10 @@ class _StatisticsViewState extends State<StatisticsView> {
       title: LDLocalizations.statisticsTitle,
       actions: [
         AppBarObject(
-          text: LDLocalizations.labelBack,
-          onTap: () {
-            Navigator.pop(context);
-          }
-        )
+            text: LDLocalizations.labelBack,
+            onTap: () {
+              Navigator.pop(context);
+            })
       ],
       body: FractionallySizedBox(
         widthFactor: 1.0,
@@ -42,7 +41,7 @@ class _StatisticsViewState extends State<StatisticsView> {
               case ConnectionState.none:
               case ConnectionState.active:
               case ConnectionState.waiting:
-                return loadingScreen();
+                return loadingScreen(context);
                 break;
               case ConnectionState.done:
                 if (snapshot.hasData) {
@@ -53,16 +52,23 @@ class _StatisticsViewState extends State<StatisticsView> {
                       scrollDirection: Axis.vertical,
                       children: [
                         ListTile(
-                          title: Text(LDLocalizations.registeredUsers),
-                          subtitle: Text("$userCount"),
+                          title: Text(LDLocalizations.registeredUsers,
+                              style: Theme.of(context).textTheme.title),
+                          subtitle: Text("$userCount",
+                              style: Theme.of(context).textTheme.body1),
                         )
                       ]..addAll(storyStats.keys
                           .map(
                             (key) => ListTile(
                               title: Text(
-                                  LDLocalizations.labelStoryTitle + ": $key"),
-                              subtitle: Text(LDLocalizations.timesRead +
-                                  ": ${storyStats[key]}"),
+                                LDLocalizations.labelStoryTitle + ": $key",
+                                style: Theme.of(context).textTheme.title,
+                              ),
+                              subtitle: Text(
+                                LDLocalizations.timesRead +
+                                    ": ${storyStats[key]}",
+                                style: Theme.of(context).textTheme.body1,
+                              ),
                             ),
                           )
                           .toList()));
@@ -71,24 +77,23 @@ class _StatisticsViewState extends State<StatisticsView> {
                       child: Text(LDLocalizations.failedToLoadStats));
                 }
             }
-            return loadingScreen();
+            return loadingScreen(context);
           },
         ),
       ),
     );
   }
 
-  Widget loadingScreen() {
+  Widget loadingScreen(BuildContext context) {
     return Center(
-      child: SizedBox(
-        width: 200,
-        height: 200,
-        child: Column(
-          children: [
-            Text(LDLocalizations.loadingStats),
-            CircularProgressIndicator(),
-          ],
-        ),
+      child: Column(
+        children: [
+          Text(LDLocalizations.loadingStats),
+          SizedBox(
+            height: 50,
+          ),
+          CircularProgressIndicator(),
+        ],
       ),
     );
   }

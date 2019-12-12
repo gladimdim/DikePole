@@ -27,14 +27,16 @@ class _ImageSelectorState extends State<ImageSelector> {
   Widget build(BuildContext context) {
     return DropdownButton<ImageType>(
       value: widget.imageType,
+      style: Theme.of(context).textTheme.button,
       onChanged: (newType) {
         widget.onSelected(newType);
       },
       items: imageTypes.map<DropdownMenuItem<ImageType>>((imageType) {
         return DropdownMenuItem(
           value: imageType,
-          child: Text(imageTypeToString(imageType),
-              style: Theme.of(context).textTheme.title),
+          child: Text(
+            imageTypeToString(imageType),
+          ),
         );
       }).toList(),
     );

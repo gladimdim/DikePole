@@ -81,7 +81,7 @@ class _AppBarCustomState extends State<AppBarCustom> {
     return AppBarButton(
       onTap: _callbackerHandler(object.onTap),
       text: object.text,
-      color: Theme.of(context).textTheme.title.color,
+      color: Theme.of(context).primaryColor,
     );
   }
 

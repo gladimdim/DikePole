@@ -2,6 +2,8 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:gladstoriesengine/gladstoriesengine.dart';
+import 'package:locadeserta/components/app_bar_custom.dart';
+import 'package:locadeserta/components/narrow_scaffold.dart';
 import 'package:locadeserta/models/Localizations.dart';
 import 'package:locadeserta/models/catalogs.dart';
 import 'package:locadeserta/models/pdf_creator.dart';
@@ -28,10 +30,14 @@ class _ExportToPDFState extends State<ExportToPDF> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(LDLocalizations.shareStory),
-      ),
+    return NarrowScaffold(
+      title: LDLocalizations.shareStory,
+      actions: [
+        AppBarObject(
+          text: LDLocalizations.labelBack,
+          onTap: () => Navigator.pop(context),
+        )
+      ],
       body: Center(
         child: savingToFile
             ? Column(

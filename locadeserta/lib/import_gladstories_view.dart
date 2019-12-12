@@ -37,6 +37,7 @@ class _ImportGladStoryViewState extends State<ImportGladStoryView> {
               child: TextField(
                 controller: _controller,
                 maxLines: 15,
+                style: Theme.of(context).textTheme.body1,
               ),
             ),
             Padding(

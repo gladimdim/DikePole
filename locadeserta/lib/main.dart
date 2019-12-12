@@ -39,6 +39,7 @@ var blackTheme = ThemeData(
       color: Colors.white,
     ),
     title: TextStyle(
+      fontSize: 20,
       color: Colors.white,
       fontFamily: 'Roboto',
     ),
@@ -60,6 +61,7 @@ var blackTheme = ThemeData(
       color: Colors.white,
     ),
   ),
+  canvasColor: Colors.black,
 );
 
 var whiteTheme = ThemeData(
@@ -74,7 +76,11 @@ var whiteTheme = ThemeData(
       fontSize: 18,
       color: Colors.black,
     ),
-    title: TextStyle(color: Colors.black),
+    title: TextStyle(
+      color: Colors.black,
+      fontSize: 18.0,
+      fontFamily: 'Roboto',
+    ),
     button: TextStyle(
       fontFamily: 'Montserrat',
       fontSize: 20.0,
@@ -91,6 +97,7 @@ var whiteTheme = ThemeData(
       color: Colors.black,
     ),
   ),
+  canvasColor: Colors.white,
 );
 
 class _LocaDesertaAppState extends State<LocaDesertaApp> {
