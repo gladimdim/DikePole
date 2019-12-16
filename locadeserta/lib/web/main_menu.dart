@@ -9,7 +9,7 @@ import 'package:locadeserta/animations/slideable_button.dart';
 import 'package:locadeserta/components/app_bar_custom.dart';
 import 'package:locadeserta/components/narrow_scaffold.dart';
 import 'package:locadeserta/components/transforming_page_view.dart';
-import 'package:locadeserta/web/creator/components/fat_container.dart';
+import 'package:locadeserta/creator/components/fat_container.dart';
 import 'package:locadeserta/web/creator/components/game_view.dart';
 import 'package:locadeserta/web/creator/story/persistence.dart';
 import 'package:locadeserta/web/main_editor_view.dart';

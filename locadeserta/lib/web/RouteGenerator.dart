@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:locadeserta/StatisticsView.dart';
+import 'package:locadeserta/creator/components/edit_node_view.dart';
 import 'package:locadeserta/web/catalog_view.dart';
 import 'package:locadeserta/web/creator/components/catalog_view.dart';
 import 'package:locadeserta/web/creator/components/edit_node_sequence_view.dart';
@@ -11,7 +12,6 @@ import 'package:locadeserta/web/views/import_gladstories_view.dart';
 import 'package:locadeserta/web/views/inherited_auth.dart';
 import 'package:locadeserta/web/views/login_view.dart';
 
-import 'creator/components/edit_node_view.dart';
 import 'creator/components/edit_story.dart';
 import 'creator/components/game_view.dart';
 

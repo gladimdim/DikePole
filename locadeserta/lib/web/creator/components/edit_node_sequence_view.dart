@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:locadeserta/creator/components/edit_node_view.dart';
 import 'package:locadeserta/models/Localizations.dart';
-import 'package:locadeserta/web/creator/components/edit_node_view.dart';
 import 'package:gladstoriesengine/gladstoriesengine.dart';
 
 class EditNodeSequence extends StatefulWidget {

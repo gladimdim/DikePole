@@ -6,7 +6,7 @@ import 'package:locadeserta/components/app_bar_custom.dart';
 import 'package:locadeserta/components/bordered_container.dart';
 import 'package:locadeserta/components/narrow_scaffold.dart';
 import 'package:locadeserta/web/creator/components/edit_node_sequence_view.dart';
-import 'package:locadeserta/web/creator/components/fat_container.dart';
+import 'package:locadeserta/creator/components/fat_container.dart';
 import 'package:locadeserta/web/creator/components/game_view.dart';
 import 'package:locadeserta/creator/components/text_editor.dart';
 import 'package:locadeserta/web/creator/story/persistence.dart';
