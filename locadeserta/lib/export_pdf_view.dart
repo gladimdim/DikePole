@@ -57,7 +57,6 @@ class _ExportToPDFState extends State<ExportToPDF> {
             : StreamBuilder<Tuple2<double, String>>(
                 stream: widget.creator.decodeProgress,
                 builder: (context, snapshot) {
-                  print(snapshot.hasData);
                   if (snapshot.hasData) {
                     return Padding(
                       padding: EdgeInsets.only(top: 12.0),
@@ -219,7 +218,6 @@ class _ExportGladStoriesToPDFState extends State<ExportGladStoriesToPDF> {
             : StreamBuilder<Tuple2<double, String>>(
                 stream: widget.creator.decodeProgress,
                 builder: (context, snapshot) {
-                  print(snapshot.hasData);
                   if (snapshot.hasData) {
                     return Padding(
                       padding: EdgeInsets.only(top: 12.0),

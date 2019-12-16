@@ -32,7 +32,6 @@ class PdfCreator {
       }
       var file = await rootBundle.load(imageItem.value[1]);
       counter += 0.3;
-      print("decoding image: ${imageItem.value[1]}");
       _decodeProgress.sink.add(Tuple2(counter, imageItem.value[1]));
       var uiImage = await compute(decodeImage, file.buffer.asUint8List());
       _images[imageItem.value[1]] = uiImage;
@@ -187,7 +186,6 @@ class PdfCreator {
 }
 
 ImageUI.Image decodeImage(List<int> input) {
-  print("yes");
   return ImageUI.decodeImage(input);
 }
 

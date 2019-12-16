@@ -121,7 +121,6 @@ class PassageState extends State<StoryView> with TickerProviderStateMixin {
               backgroundColor: Theme.of(context).primaryColor,
             ),
             onPress: () {
-              debugPrint("next pressed");
               _next(context);
             }),
       ),

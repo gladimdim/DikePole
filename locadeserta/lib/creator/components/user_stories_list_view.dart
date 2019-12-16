@@ -69,7 +69,8 @@ class _UserStoriesListState extends State<UserStoriesList> {
                       ),
                     );
                   } catch (e) {
-                    debugPrint("lol");
+                    print(
+                        "exception happened in navigating to UserStoryDetails: $e");
                   }
                 },
                 child: FatContainer(

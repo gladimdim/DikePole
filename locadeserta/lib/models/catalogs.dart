@@ -63,7 +63,6 @@ class CatalogStory {
     } catch (e) {
       print("exception: $e");
     }
-    print("go stories: $stories");
     return stories.documents
         .map((snapshot) => CatalogStory.fromSnapshot(snapshot))
         .toList();
