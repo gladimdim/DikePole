@@ -1,21 +1,20 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 import 'package:locadeserta/animations/fade_images.dart';
 import 'package:locadeserta/animations/slideable_button.dart';
 import 'package:locadeserta/components/app_bar_custom.dart';
 import 'package:locadeserta/components/narrow_scaffold.dart';
-import 'package:locadeserta/models/Auth.dart';
 import 'package:locadeserta/web/main_menu.dart';
+import 'package:locadeserta/web/models/LDAuth.dart';
 import 'package:locadeserta/models/Localizations.dart';
 import 'package:locadeserta/web/locale_selection_view.dart';
-import 'package:locadeserta/InheritedAuth.dart';
+import 'package:locadeserta/web/views/inherited_auth.dart';
+import 'package:locadeserta/web/models/LDUser.dart';
 
 class LoginView extends StatefulWidget {
   static const String routeName = "/login_view";
   final VoidCallback onContinue;
   final Function onSetLocale;
-  final Auth auth = Auth();
+  final LDAuth auth = LDAuth();
 
   LoginView({this.onContinue, this.onSetLocale});
 
@@ -24,8 +23,6 @@ class LoginView extends StatefulWidget {
 }
 
 class _LoginViewState extends State<LoginView> {
-  final GoogleSignIn _googleSignIn = GoogleSignIn();
-
   @override
   Widget build(BuildContext context) {
     return NarrowScaffold(
@@ -41,11 +38,11 @@ class _LoginViewState extends State<LoginView> {
   }
 
   Widget _buildBody(BuildContext context) {
-    return StreamBuilder<User>(
+    return StreamBuilder<LDUser>(
       stream: InheritedAuth.of(context).auth.onAuthStateChange,
       initialData: null,
       builder: (context, snapshot) {
-        User user = snapshot.data;
+        LDUser user = snapshot.data;
         return Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           mainAxisAlignment: MainAxisAlignment.start,
@@ -121,7 +118,7 @@ class _LoginViewState extends State<LoginView> {
     );
   }
 
-  Widget _buildLoginedView(User user, BuildContext context) {
+  Widget _buildLoginedView(LDUser user, BuildContext context) {
     return SlideableButton(
       onPress: () {
         Navigator.pushNamed(context, MainMenu.routeName);
@@ -141,7 +138,7 @@ class _LoginViewState extends State<LoginView> {
     );
   }
 
-  Widget _buildWelcomeText(User user, context) {
+  Widget _buildWelcomeText(LDUser user, context) {
     var text = user == null
         ? LDLocalizations.welcomeText
         : LDLocalizations.greetUserByName(user.displayName);
@@ -155,15 +152,7 @@ class _LoginViewState extends State<LoginView> {
   }
 
   _onSignInPressed(context) async {
-    final GoogleSignInAccount googleUser = await _googleSignIn.signIn();
-    final GoogleSignInAuthentication googleAuth =
-        await googleUser.authentication;
-    final AuthCredential credential = GoogleAuthProvider.getCredential(
-      accessToken: googleAuth.accessToken,
-      idToken: googleAuth.idToken,
-    );
-
-    await InheritedAuth.of(context).auth.signInWithCredentials(credential);
+    await InheritedAuth.of(context).auth.signInWithGoogle();
   }
 
   _onAnonSignInPressed(context) async {

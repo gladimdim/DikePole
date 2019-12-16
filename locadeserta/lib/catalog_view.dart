@@ -97,7 +97,7 @@ class _CatalogViewState extends State<CatalogView>
                     first: image,
                     last: coloredImage,
                     duration: 4,
-                    repeat: true,
+                    repeat: false,
                     height: widget.expanded ? 200 : null,
                   ),
                 ),

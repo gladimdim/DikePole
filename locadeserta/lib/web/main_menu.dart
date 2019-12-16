@@ -2,22 +2,21 @@ import 'package:async/async.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:locadeserta/models/Localizations.dart';
-import 'package:locadeserta/StatisticsView.dart';
+import 'package:locadeserta/web/StatisticsView.dart';
 import 'package:locadeserta/animations/fade_images.dart';
 import 'package:locadeserta/animations/slide_right_navigation.dart';
 import 'package:locadeserta/animations/slideable_button.dart';
 import 'package:locadeserta/components/app_bar_custom.dart';
 import 'package:locadeserta/components/narrow_scaffold.dart';
-import 'package:locadeserta/models/persistence.dart';
-import 'package:locadeserta/web/components/transforming_page_view.dart';
-import 'package:locadeserta/creator/components/fat_container.dart';
-import 'package:locadeserta/creator/components/game_view.dart';
-import 'package:locadeserta/creator/story/persistence.dart';
+import 'package:locadeserta/components/transforming_page_view.dart';
+import 'package:locadeserta/web/creator/components/fat_container.dart';
+import 'package:locadeserta/web/creator/components/game_view.dart';
+import 'package:locadeserta/web/creator/story/persistence.dart';
 import 'package:locadeserta/web/main_editor_view.dart';
-import 'package:locadeserta/models/background_image.dart';
-import 'package:locadeserta/models/catalogs.dart';
-import 'package:locadeserta/InheritedAuth.dart';
-import 'package:locadeserta/waiting_screen.dart';
+import 'package:locadeserta/web/models/background_image.dart';
+import 'package:locadeserta/web/models/catalogs.dart';
+import 'package:locadeserta/web/views/inherited_auth.dart';
+import 'package:locadeserta/web/waiting_screen.dart';
 import 'package:gladstoriesengine/gladstoriesengine.dart';
 
 const LANDING_IMAGE_HEIGHT = 200.0;
@@ -34,7 +33,7 @@ class MainMenu extends StatefulWidget {
 class _MainMenuState extends State<MainMenu> with TickerProviderStateMixin {
   bool loadingStory = false;
   final AsyncMemoizer _catalogListMemo = AsyncMemoizer();
-
+  List<CatalogStory> stories;
   var appearanceController;
   var appearanceAnimation;
 
@@ -83,6 +82,9 @@ class _MainMenuState extends State<MainMenu> with TickerProviderStateMixin {
                 return WaitingScreen();
                 break;
               case ConnectionState.done:
+                stories = List.from(snapshot.data);
+                stories.sort(
+                    (story1, story2) => story1.year.compareTo(story2.year));
                 if (snapshot.data == null || snapshot.data.length == 0) {
                   return _buildEmptyCatalogListView(context);
                 } else {
@@ -114,8 +116,8 @@ class _MainMenuState extends State<MainMenu> with TickerProviderStateMixin {
   _fetchData(BuildContext context) {
     var locale = LDLocalizations.locale;
     return _catalogListMemo.runOnce(() async {
-      List<CatalogStory> catalogStories = await Persistence.instance
-          .getAvailableCatalogStories(locale.languageCode);
+      List<CatalogStory> catalogStories =
+          await CatalogStory.getAvailableCatalogStories(locale.languageCode);
       return catalogStories
           .where((story) => story.title != "Після Битви")
           .toList();
@@ -158,13 +160,11 @@ class _MainMenuState extends State<MainMenu> with TickerProviderStateMixin {
   }
 
   _buildCatalogView(BuildContext context, List<CatalogStory> stories) {
-    List<CatalogStory> sortedStories = List.from(stories);
-    sortedStories.sort((story1, story2) => story1.year.compareTo(story2.year));
-
     var child = TransformingPageView(
-        stories: sortedStories,
+        titles:
+            stories.map((story) => "${story.year}: ${story.title}").toList(),
         scrollDirection: Axis.vertical,
-        onStorySelected: (story) => _goToStory(story, context),
+        onStorySelected: (index) => _goToStory(stories[index], context),
         onDetailsSelected: (story) {
           Navigator.pushNamed(
             context,
@@ -172,7 +172,7 @@ class _MainMenuState extends State<MainMenu> with TickerProviderStateMixin {
             arguments: {
               "expanded": true,
               "catalogStory": story,
-              "onReadPressed": () => _goToStory(story, context),
+              "onReadPressed": (index) => _goToStory(stories[index], context),
               "onDetailPressed": () {
                 Navigator.pop(context);
               },
@@ -214,7 +214,7 @@ class _MainMenuState extends State<MainMenu> with TickerProviderStateMixin {
     });
 
     var storyWithState;
-    var user = InheritedAuth.of(context).auth.user;
+    var user = InheritedAuth.of(context).auth.getUser();
     try {
       storyWithState =
           await StoryPersistence.instance.readyStoryStateById(user, story);
@@ -225,11 +225,12 @@ class _MainMenuState extends State<MainMenu> with TickerProviderStateMixin {
       context,
       SlideRightNavigation(
         widget: InheritedAuth(
-            child: GameView(
-              story: storyWithState,
-              catalogStory: story,
-            ),
-            auth: InheritedAuth.of(context).auth),
+          child: GameView(
+            story: storyWithState,
+            catalogStory: story,
+          ),
+          auth: InheritedAuth.of(context).auth,
+        ),
       ),
     );
   }

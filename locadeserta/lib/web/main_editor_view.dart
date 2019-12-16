@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:locadeserta/models/Localizations.dart';
-import 'package:locadeserta/StatisticsView.dart';
+import 'package:locadeserta/web/StatisticsView.dart';
 import 'package:locadeserta/components/app_bar_custom.dart';
 import 'package:locadeserta/components/narrow_scaffold.dart';
 import 'package:locadeserta/web/creator/components/catalog_view.dart';

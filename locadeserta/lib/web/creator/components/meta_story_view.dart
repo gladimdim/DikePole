@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:locadeserta/models/Localizations.dart';
 import 'package:locadeserta/animations/slideable_button.dart';
-import 'package:locadeserta/creator/components/fat_container.dart';
+import 'package:locadeserta/web/creator/components/fat_container.dart';
 import 'package:gladstoriesengine/gladstoriesengine.dart';
 import 'package:flutter/services.dart';
-import 'package:locadeserta/models/background_image.dart';
+import 'package:locadeserta/web/models/background_image.dart';
 
 class MetaStoryView extends StatefulWidget {
   final Function(Story story) onSave;

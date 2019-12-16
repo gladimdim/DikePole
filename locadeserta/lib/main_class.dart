@@ -101,6 +101,7 @@ class _LocaDesertaAppState extends State<LocaDesertaApp> {
 
   @override
   Widget build(BuildContext context) {
+    debugPrint("going to main class native!!!");
     return InheritedAuth(
       auth: auth,
       child: MaterialApp(

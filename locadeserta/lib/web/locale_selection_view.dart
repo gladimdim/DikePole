@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:locadeserta/web/Localizations.dart';
+import 'package:locadeserta/models/Localizations.dart';
 
 class LocaleSelection extends StatefulWidget {
   final Function(Locale locale) onLocaleChanged;

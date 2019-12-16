@@ -15,7 +15,7 @@ import 'package:locadeserta/waiting_screen.dart';
 import 'package:locadeserta/animations/slideable_button.dart';
 
 class UserStoriesList extends StatefulWidget {
-  static String routeName = "/user_stories_list";
+  static const String routeName = "/user_stories_list";
 
   @override
   _UserStoriesListState createState() => _UserStoriesListState();

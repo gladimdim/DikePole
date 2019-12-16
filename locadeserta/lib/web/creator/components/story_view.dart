@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:locadeserta/models/Localizations.dart';
 import 'package:locadeserta/animations/slideable_button.dart';
 import 'package:locadeserta/components/BorderedRandomImageForType.dart';
-import 'package:locadeserta/creator/components/fat_container.dart';
-import 'package:locadeserta/creator/story/persistence.dart';
+import 'package:locadeserta/web/creator/components/fat_container.dart';
+import 'package:locadeserta/web/creator/story/persistence.dart';
 import 'package:gladstoriesengine/gladstoriesengine.dart';
-import 'package:locadeserta/creator/utils/utils.dart';
-import 'package:locadeserta/models/analytics.dart';
-import 'package:locadeserta/models/background_image.dart';
-import 'package:locadeserta/InheritedAuth.dart';
+import 'package:locadeserta/web/creator/utils/utils.dart';
+import 'package:locadeserta/web/models/analytics.dart';
+import 'package:locadeserta/web/models/background_image.dart';
+import 'package:locadeserta/web/views/inherited_auth.dart';
 
 class StoryView extends StatefulWidget {
   final Story currentStory;
@@ -74,8 +74,8 @@ class PassageState extends State<StoryView> with TickerProviderStateMixin {
   }
 
   Future _saveStateToStorage(Story story, BuildContext context) async {
-    var user = InheritedAuth.of(context).auth.user;
-    await StoryPersistence.instance.writeStory(user, story);
+    var user = InheritedAuth.of(context).auth.getUser();
+    await StoryPersistence.instance.saveGladStoryToStorageForUser(user, story);
   }
 
   List<Widget> createOptionList(List<PageNext> nextPages) {

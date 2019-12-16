@@ -3,10 +3,10 @@ import 'package:flutter/widgets.dart';
 import 'package:locadeserta/models/Localizations.dart';
 import 'package:locadeserta/components/game_app_bar.dart';
 import 'package:locadeserta/components/game_component.dart';
-import 'package:locadeserta/creator/components/story_view.dart';
+import 'package:locadeserta/web/creator/components/story_view.dart';
 import 'package:gladstoriesengine/gladstoriesengine.dart';
-import 'package:locadeserta/models/background_image.dart';
-import 'package:locadeserta/models/catalogs.dart';
+import 'package:locadeserta/web/models/background_image.dart';
+import 'package:locadeserta/web/models/catalogs.dart';
 
 class GameView extends StatefulWidget {
   final Story story;

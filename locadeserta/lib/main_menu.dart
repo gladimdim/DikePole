@@ -13,7 +13,7 @@ import 'package:locadeserta/components/bordered_container.dart';
 import 'package:locadeserta/components/narrow_scaffold.dart';
 import 'package:locadeserta/components/transforming_page_view.dart';
 import 'package:locadeserta/creator/components/fat_container.dart';
-import 'package:locadeserta/web/creator/components/game_view.dart';
+import 'package:locadeserta/creator/components/game_view.dart';
 import 'package:locadeserta/creator/components/user_stories_list_view.dart';
 import 'package:locadeserta/models/Localizations.dart';
 import 'package:locadeserta/models/background_image.dart';
@@ -39,9 +39,10 @@ class MainMenu extends StatefulWidget {
 class _MainMenuState extends State<MainMenu> with TickerProviderStateMixin {
   bool loadingStory = false;
   final AsyncMemoizer _catalogListMemo = AsyncMemoizer();
-
   var appearanceController;
   var appearanceAnimation;
+
+  List<CatalogStory> stories;
 
   @override
   void initState() {
@@ -88,6 +89,9 @@ class _MainMenuState extends State<MainMenu> with TickerProviderStateMixin {
                 return WaitingScreen();
                 break;
               case ConnectionState.done:
+                stories = List.from(snapshot.data);
+                stories.sort(
+                    (story1, story2) => story1.year.compareTo(story2.year));
                 if (snapshot.data == null || snapshot.data.length == 0) {
                   return _buildEmptyCatalogListView(context);
                 } else {
@@ -117,6 +121,7 @@ class _MainMenuState extends State<MainMenu> with TickerProviderStateMixin {
   }
 
   _fetchData(BuildContext context) {
+    debugPrint("kuku");
     var locale = LDLocalizations.locale;
     return _catalogListMemo.runOnce(() async {
       List<CatalogStory> catalogStories = await Persistence.instance
@@ -136,7 +141,7 @@ class _MainMenuState extends State<MainMenu> with TickerProviderStateMixin {
               child: Hero(
                 tag: "CossackHero",
                 child: TweenImage(
-                  repeat: true,
+                  repeat: false,
                   last: AssetImage("images/background/cossack_0.jpg"),
                   first: AssetImage("images/background/c_cossack_0.jpg"),
                   duration: 4,
@@ -166,16 +171,16 @@ class _MainMenuState extends State<MainMenu> with TickerProviderStateMixin {
     sortedStories.sort((story1, story2) => story1.year.compareTo(story2.year));
 
     var child = TransformingPageView(
-      stories: sortedStories,
+      titles: sortedStories,
       scrollDirection: Axis.vertical,
-      onStorySelected: (story) => _goToStory(story, context),
-      onDetailsSelected: (story) => Navigator.pushNamed(
+      onStorySelected: (index) => _goToStory(stories[index], context),
+      onDetailsSelected: (index) => Navigator.pushNamed(
         context,
         ExtractCatalogViewArguments.routeName,
         arguments: CatalogViewArguments(
           expanded: true,
-          catalogStory: story,
-          onReadPressed: () => _goToStory(story, context),
+          catalogStory: stories[index],
+          onReadPressed: () => _goToStory(stories[index], context),
           onDetailPressed: () {
             Navigator.pop(context);
           },

@@ -1,16 +1,16 @@
 import 'package:async/async.dart';
 import 'package:flutter/material.dart';
-import 'package:locadeserta/models/Auth.dart';
 import 'package:locadeserta/models/Localizations.dart';
 import 'package:locadeserta/animations/slideable_button.dart';
 import 'package:locadeserta/web/creator/components/edit_story.dart';
-import 'package:locadeserta/creator/components/fat_container.dart';
+import 'package:locadeserta/web/creator/components/fat_container.dart';
 import 'package:locadeserta/web/creator/components/meta_story_view.dart';
-import 'package:locadeserta/creator/story/persistence.dart';
+import 'package:locadeserta/web/creator/story/persistence.dart';
 import 'package:gladstoriesengine/gladstoriesengine.dart';
-import 'package:locadeserta/import_gladstories_view.dart';
-import 'package:locadeserta/InheritedAuth.dart';
-import 'package:locadeserta/waiting_screen.dart';
+import 'package:locadeserta/web/models/LDUser.dart';
+import 'package:locadeserta/web/views/import_gladstories_view.dart';
+import 'package:locadeserta/web/views/inherited_auth.dart';
+import 'package:locadeserta/web/waiting_screen.dart';
 
 class CatalogGladStoryView extends StatefulWidget {
   @override
@@ -26,7 +26,7 @@ class _CatalogGladStoryViewState extends State<CatalogGladStoryView> {
 
   @override
   Widget build(BuildContext context) {
-    var user = InheritedAuth.of(context).auth.user;
+    var user = InheritedAuth.of(context).auth.getUser();
     return Column(
       children: <Widget>[
         SlideableButton(
@@ -45,7 +45,7 @@ class _CatalogGladStoryViewState extends State<CatalogGladStoryView> {
     );
   }
 
-  _buildStoryView(BuildContext context, User user) {
+  _buildStoryView(BuildContext context, LDUser user) {
     return Padding(
       padding: const EdgeInsets.all(2.0),
       child: SingleChildScrollView(
@@ -101,7 +101,7 @@ class _CatalogGladStoryViewState extends State<CatalogGladStoryView> {
     );
   }
 
-  Future _fetchData(User user) {
+  Future _fetchData(LDUser user) {
     return _storyBuilderCatalogMemo.runOnce(() async {
       return StoryPersistence.instance.getUserStories(user);
     });
@@ -114,13 +114,13 @@ class _CatalogGladStoryViewState extends State<CatalogGladStoryView> {
   }
 
   List<Widget> _createStoryCards(
-      List<Story> storyBuilders, User user, context) {
+      List<Story> storyBuilders, LDUser user, context) {
     return storyBuilders
         .map((storyBuilder) => _createStoryCard(storyBuilder, user, context))
         .toList();
   }
 
-  Widget _createStoryCard(Story story, User user, context) {
+  Widget _createStoryCard(Story story, LDUser user, context) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 8.0),
       child: Center(
@@ -130,14 +130,15 @@ class _CatalogGladStoryViewState extends State<CatalogGladStoryView> {
             story: story,
             onSave: (Story newStory) async {
               await StoryPersistence.instance
-                  .writeStory(InheritedAuth.of(context).auth.user, story);
+                  .writeStory(InheritedAuth.of(context).auth.getUser(), story);
               setState(() {});
             },
             onEdit: (story) {
               _goToEditStoryView(story, context);
             },
             onDelete: (story) async {
-              await _deleteStory(InheritedAuth.of(context).auth.user, story);
+              await _deleteStory(
+                  InheritedAuth.of(context).auth.getUser(), story);
               _resetStoryBuilderFuture();
             },
           ),
@@ -154,7 +155,7 @@ class _CatalogGladStoryViewState extends State<CatalogGladStoryView> {
     );
   }
 
-  _deleteStory(User user, Story story) async {
+  _deleteStory(LDUser user, Story story) async {
     return await StoryPersistence.instance.deleteStory(user, story);
   }
 }

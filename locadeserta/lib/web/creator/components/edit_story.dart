@@ -6,14 +6,14 @@ import 'package:locadeserta/components/app_bar_custom.dart';
 import 'package:locadeserta/components/bordered_container.dart';
 import 'package:locadeserta/components/narrow_scaffold.dart';
 import 'package:locadeserta/web/creator/components/edit_node_sequence_view.dart';
-import 'package:locadeserta/creator/components/fat_container.dart';
-import 'package:locadeserta/creator/components/game_view.dart';
-import 'package:locadeserta/creator/components/text_editor.dart';
-import 'package:locadeserta/creator/story/persistence.dart';
+import 'package:locadeserta/web/creator/components/fat_container.dart';
+import 'package:locadeserta/web/creator/components/game_view.dart';
+import 'package:locadeserta/web/creator/components/text_editor.dart';
+import 'package:locadeserta/web/creator/story/persistence.dart';
 import 'package:gladstoriesengine/gladstoriesengine.dart';
-import 'package:locadeserta/creator/utils/utils.dart';
-import 'package:locadeserta/models/background_image.dart';
-import 'package:locadeserta/InheritedAuth.dart';
+import 'package:locadeserta/web/creator/utils/utils.dart';
+import 'package:locadeserta/web/models/background_image.dart';
+import 'package:locadeserta/web/views/inherited_auth.dart';
 
 class EditStoryView extends StatefulWidget {
   final Story story;
@@ -252,7 +252,7 @@ class _EditStoryViewState extends State<EditStoryView> {
   }
 
   _saveStory(BuildContext context) async {
-    var user = InheritedAuth.of(context).auth.user;
+    var user = InheritedAuth.of(context).auth.getUser();
     await StoryPersistence.instance.writeStory(user, widget.story);
     setState(() {});
   }

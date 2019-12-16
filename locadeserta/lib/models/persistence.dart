@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
 import "package:locadeserta/models/story_bridge.dart";
 import 'package:gladstoriesengine/gladstoriesengine.dart' as GladStory;
 import 'Auth.dart';
@@ -52,9 +53,15 @@ class Persistence {
   }
 
   Future<List<CatalogStory>> getAvailableCatalogStories(String locale) async {
-    QuerySnapshot stories =
-        await storage.collection("catalogs/$locale/stories").getDocuments();
-
+    debugPrint("async kuku $locale");
+    QuerySnapshot stories;
+    try {
+      stories =
+          await storage.collection("catalogs/$locale/stories").getDocuments();
+    } catch (e) {
+      print("exception: $e");
+    }
+    print("go stories: ${stories}");
     return stories.documents
         .map((snapshot) => CatalogStory.fromSnapshot(snapshot))
         .toList();

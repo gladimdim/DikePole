@@ -3,8 +3,8 @@ import 'package:flutter/widgets.dart';
 import 'package:locadeserta/models/Localizations.dart';
 import 'package:locadeserta/animations/fade_images.dart';
 import 'package:locadeserta/animations/slideable_button.dart';
-import 'package:locadeserta/models/background_image.dart';
-import 'package:locadeserta/models/catalogs.dart';
+import 'package:locadeserta/web/models/background_image.dart';
+import 'package:locadeserta/web/models/catalogs.dart';
 import 'package:gladstoriesengine/gladstoriesengine.dart';
 
 class CatalogViewArguments {

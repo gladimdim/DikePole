@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'RouteGenerator.dart';
+import 'package:locadeserta/web/RouteGenerator.dart';
 
 //  if (kIsWeb) {
 //    initializeApp(
@@ -22,6 +22,7 @@ class LocaDesertaApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    debugPrint("going to web main class!!!");
     return MaterialApp(
       theme: theme,
       initialRoute: "/",

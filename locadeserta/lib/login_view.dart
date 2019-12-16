@@ -15,6 +15,7 @@ import 'package:url_launcher/url_launcher.dart';
 import 'locale_selection.dart';
 
 class LoginView extends StatefulWidget {
+  static const String routeName = "/login_view";
   final VoidCallback onContinue;
   final Function onSetLocale;
   final Function(bool) onThemeChange;
@@ -74,7 +75,7 @@ class _LoginViewState extends State<LoginView> {
                     child: Hero(
                       tag: "CossackHero",
                       child: TweenImage(
-                        repeat: true,
+                        repeat: false,
                         last: AssetImage("images/background/cossack_0.jpg"),
                         first: AssetImage("images/background/c_cossack_0.jpg"),
                         duration: 4,
