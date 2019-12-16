@@ -1,35 +1,30 @@
 import 'package:async/async.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
-import 'package:gladstoriesengine/gladstoriesengine.dart';
-import 'package:locadeserta/InheritedAuth.dart';
+import 'package:locadeserta/models/Localizations.dart';
 import 'package:locadeserta/StatisticsView.dart';
 import 'package:locadeserta/animations/fade_images.dart';
-import 'package:locadeserta/animations/slideable_button.dart';
-import 'package:locadeserta/catalog_view.dart';
-import 'package:locadeserta/components/app_bar_custom.dart';
-import 'package:locadeserta/components/bordered_container.dart';
-import 'package:locadeserta/components/narrow_scaffold.dart';
-import 'package:locadeserta/components/transforming_page_view.dart';
-import 'package:locadeserta/creator/components/fat_container.dart';
-import 'package:locadeserta/web/creator/components/game_view.dart';
-import 'package:locadeserta/creator/components/user_stories_list_view.dart';
-import 'package:locadeserta/models/Localizations.dart';
-import 'package:locadeserta/models/background_image.dart';
-import 'package:locadeserta/story_view.dart';
-import 'package:locadeserta/models/catalogs.dart';
-import 'package:locadeserta/waiting_screen.dart';
 import 'package:locadeserta/animations/slide_right_navigation.dart';
+import 'package:locadeserta/animations/slideable_button.dart';
+import 'package:locadeserta/components/app_bar_custom.dart';
+import 'package:locadeserta/components/narrow_scaffold.dart';
 import 'package:locadeserta/models/persistence.dart';
-import 'package:locadeserta/creator/story/persistence.dart'
-    as GladStoryPersistence;
-import 'package:locadeserta/radiuses.dart';
+import 'package:locadeserta/web/components/transforming_page_view.dart';
+import 'package:locadeserta/creator/components/fat_container.dart';
+import 'package:locadeserta/creator/components/game_view.dart';
+import 'package:locadeserta/creator/story/persistence.dart';
+import 'package:locadeserta/web/main_editor_view.dart';
+import 'package:locadeserta/models/background_image.dart';
+import 'package:locadeserta/models/catalogs.dart';
+import 'package:locadeserta/InheritedAuth.dart';
+import 'package:locadeserta/waiting_screen.dart';
+import 'package:gladstoriesengine/gladstoriesengine.dart';
 
 const LANDING_IMAGE_HEIGHT = 200.0;
 
 class MainMenu extends StatefulWidget {
-  static String routeName = "/main_menu";
+  static const String routeName = "/main_menu";
+
   MainMenu({story});
 
   @override
@@ -121,7 +116,9 @@ class _MainMenuState extends State<MainMenu> with TickerProviderStateMixin {
     return _catalogListMemo.runOnce(() async {
       List<CatalogStory> catalogStories = await Persistence.instance
           .getAvailableCatalogStories(locale.languageCode);
-      return catalogStories;
+      return catalogStories
+          .where((story) => story.title != "Після Битви")
+          .toList();
     });
   }
 
@@ -132,11 +129,10 @@ class _MainMenuState extends State<MainMenu> with TickerProviderStateMixin {
         child: Column(
           children: <Widget>[
             ClipRRect(
-              borderRadius: getAllRoundedBorderRadius(),
               child: Hero(
                 tag: "CossackHero",
                 child: TweenImage(
-                  repeat: true,
+                  repeat: false,
                   last: AssetImage("images/background/cossack_0.jpg"),
                   first: AssetImage("images/background/c_cossack_0.jpg"),
                   duration: 4,
@@ -166,22 +162,23 @@ class _MainMenuState extends State<MainMenu> with TickerProviderStateMixin {
     sortedStories.sort((story1, story2) => story1.year.compareTo(story2.year));
 
     var child = TransformingPageView(
-      stories: sortedStories,
-      scrollDirection: Axis.vertical,
-      onStorySelected: (story) => _goToStory(story, context),
-      onDetailsSelected: (story) => Navigator.pushNamed(
-        context,
-        ExtractCatalogViewArguments.routeName,
-        arguments: CatalogViewArguments(
-          expanded: true,
-          catalogStory: story,
-          onReadPressed: () => _goToStory(story, context),
-          onDetailPressed: () {
-            Navigator.pop(context);
-          },
-        ),
-      ),
-    );
+        stories: sortedStories,
+        scrollDirection: Axis.vertical,
+        onStorySelected: (story) => _goToStory(story, context),
+        onDetailsSelected: (story) {
+          Navigator.pushNamed(
+            context,
+            "/story_details",
+            arguments: {
+              "expanded": true,
+              "catalogStory": story,
+              "onReadPressed": () => _goToStory(story, context),
+              "onDetailPressed": () {
+                Navigator.pop(context);
+              },
+            },
+          );
+        });
 
     return AnimatedBuilder(
       animation: appearanceAnimation,
@@ -194,12 +191,11 @@ class _MainMenuState extends State<MainMenu> with TickerProviderStateMixin {
                 padding: const EdgeInsets.all(4.0),
                 child: SlideableButton(
                   onPress: () {
-                    Navigator.pushNamed(context, UserStoriesList.routeName);
+                    Navigator.pushNamed(context, MainEditorView.routeName);
                   },
-                  child: BorderedContainer(
-                    child: FatContainer(
-                      text: LDLocalizations.createStory,
-                    ),
+                  child: FatContainer(
+                    text: LDLocalizations.createStory,
+                    backgroundColor: Colors.black87,
                   ),
                 ),
               ),
@@ -213,39 +209,29 @@ class _MainMenuState extends State<MainMenu> with TickerProviderStateMixin {
   }
 
   _goToStory(CatalogStory story, context) async {
-    var user = await InheritedAuth.of(context).auth.currentUser();
     setState(() {
       loadingStory = false;
     });
-    if (story.inkJson != null) {
-      Navigator.push(
-        context,
-        SlideRightNavigation(
-          widget: StoryView(
-            user: user,
-            catalogStory: story,
-          ),
-        ),
-      );
-    } else {
-      var storyWithState;
-      try {
-        storyWithState = await GladStoryPersistence.StoryPersistence.instance
-            .readyStoryStateById(user, story);
-      } catch (e) {
-        print(e);
-      }
 
-      Navigator.push(
-        context,
-        SlideRightNavigation(
-          widget: GameView(
-            story: storyWithState,
-            catalogStory: story,
-          ),
-        ),
-      );
+    var storyWithState;
+    var user = InheritedAuth.of(context).auth.user;
+    try {
+      storyWithState =
+          await StoryPersistence.instance.readyStoryStateById(user, story);
+    } catch (e) {
+      print(e);
     }
+    Navigator.push(
+      context,
+      SlideRightNavigation(
+        widget: InheritedAuth(
+            child: GameView(
+              story: storyWithState,
+              catalogStory: story,
+            ),
+            auth: InheritedAuth.of(context).auth),
+      ),
+    );
   }
 
   @override

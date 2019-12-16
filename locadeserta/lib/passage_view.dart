@@ -149,7 +149,8 @@ class PassageState extends State<Passage> with TickerProviderStateMixin {
               Widget container;
               switch (passageItem.type) {
                 case PassageTypes.IMAGE:
-                  container = BorderedRandomImageByPath(passageItem.value);
+                  container =
+                      BorderedRandomImageByPath(imagePaths: passageItem.value);
                   break;
                 case PassageTypes.TEXT:
                   container = Container(

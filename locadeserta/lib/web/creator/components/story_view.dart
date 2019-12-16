@@ -1,16 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:gladstoriesengine/gladstoriesengine.dart';
-import 'package:locadeserta/InheritedAuth.dart';
+import 'package:locadeserta/models/Localizations.dart';
 import 'package:locadeserta/animations/slideable_button.dart';
 import 'package:locadeserta/components/BorderedRandomImageForType.dart';
-import 'package:locadeserta/components/bordered_container.dart';
 import 'package:locadeserta/creator/components/fat_container.dart';
+import 'package:locadeserta/creator/story/persistence.dart';
+import 'package:gladstoriesengine/gladstoriesengine.dart';
 import 'package:locadeserta/creator/utils/utils.dart';
-import 'package:locadeserta/models/Localizations.dart';
-import 'package:locadeserta/models/background_image.dart';
-import 'package:locadeserta/models/persistence.dart';
 import 'package:locadeserta/models/analytics.dart';
+import 'package:locadeserta/models/background_image.dart';
+import 'package:locadeserta/InheritedAuth.dart';
 
 class StoryView extends StatefulWidget {
   final Story currentStory;
@@ -30,6 +28,7 @@ class PassageState extends State<StoryView> with TickerProviderStateMixin {
 
   @override
   initState() {
+    super.initState();
     Future.delayed(Duration.zero, () {
       widget.currentStory.historyChanges.listen((data) {
         _saveStateToStorage(widget.currentStory, context);
@@ -40,7 +39,6 @@ class PassageState extends State<StoryView> with TickerProviderStateMixin {
         }
       });
     });
-    super.initState();
   }
 
   @override
@@ -63,8 +61,8 @@ class PassageState extends State<StoryView> with TickerProviderStateMixin {
     );
   }
 
-  void _next(context) async {
-    await HapticFeedback.lightImpact();
+  void _next(context) {
+//    _saveStateToStorage(widget.currentStory, context);
     setState(() {
       var currentImageType =
           widget.currentStory.currentPage.getCurrentNode().imageType;
@@ -76,9 +74,8 @@ class PassageState extends State<StoryView> with TickerProviderStateMixin {
   }
 
   Future _saveStateToStorage(Story story, BuildContext context) async {
-    var auth = InheritedAuth.of(context).auth;
-    var user = await auth.currentUser();
-    await Persistence.instance.saveGladStoryToStorageForUser(user, story);
+    var user = InheritedAuth.of(context).auth.user;
+    await StoryPersistence.instance.writeStory(user, story);
   }
 
   List<Widget> createOptionList(List<PageNext> nextPages) {
@@ -87,18 +84,15 @@ class PassageState extends State<StoryView> with TickerProviderStateMixin {
         padding: EdgeInsets.all(8.0),
         child: SizedBox(
           height: MediaQuery.of(context).size.height * 0.075,
-          child: BorderedContainer(
-            child: SlideableButton(
-              onPress: () {
-                HapticFeedback.mediumImpact();
-                setState(() {
-                  widget.currentStory.goToNextPage(page);
-                });
-              },
-              child: FatContainer(
-                text: page.text,
-                backgroundColor: Theme.of(context).primaryColor,
-              ),
+          child: SlideableButton(
+            onPress: () {
+              setState(() {
+                widget.currentStory.goToNextPage(page);
+              });
+            },
+            child: FatContainer(
+              text: page.text,
+              backgroundColor: Theme.of(context).primaryColor,
             ),
           ),
         ),
@@ -109,16 +103,14 @@ class PassageState extends State<StoryView> with TickerProviderStateMixin {
   Widget createContinue(BuildContext context) {
     return Padding(
       padding: EdgeInsets.all(8.0),
-      child: BorderedContainer(
-        child: SlideableButton(
-            child: FatContainer(
-              text: LDLocalizations.next,
-              backgroundColor: Theme.of(context).primaryColor,
-            ),
-            onPress: () {
-              _next(context);
-            }),
-      ),
+      child: SlideableButton(
+          child: FatContainer(
+            text: LDLocalizations.next,
+            backgroundColor: Theme.of(context).primaryColor,
+          ),
+          onPress: () {
+            _next(context);
+          }),
     );
   }
 
@@ -126,31 +118,30 @@ class PassageState extends State<StoryView> with TickerProviderStateMixin {
     Future.delayed(Duration(milliseconds: 300), _scroll(context));
 
     return Expanded(
-        child: SingleChildScrollView(
-      controller: _passageScrollController,
-      child: Column(
-        children: [
-          ...history
-              .map(
-                (HistoryItem historyItem) => PassageItemView(
-                  historyItem,
-                ),
-              )
-              .toList(),
-          if (!widget.currentStory.canContinue() &&
-              widget.currentStory.currentPage.isTheEnd())
-            BorderedContainer(
-              child: SlideableButton(
+      child: SingleChildScrollView(
+        controller: _passageScrollController,
+        child: Column(
+          children: [
+            ...history
+                .map(
+                  (HistoryItem historyItem) => PassageItemView(
+                    historyItem,
+                  ),
+                )
+                .toList(),
+            if (!widget.currentStory.canContinue() &&
+                widget.currentStory.currentPage.isTheEnd())
+              SlideableButton(
                 child:
                     FatContainer(text: LDLocalizations.theEndStartOverQuestion),
                 onPress: () {
                   widget.currentStory.reset();
                 },
               ),
-            ),
-        ],
+          ],
+        ),
       ),
-    ));
+    );
   }
 
   _scroll(BuildContext context) {
@@ -177,7 +168,8 @@ class PassageItemView extends StatelessWidget {
     return Column(
       children: <Widget>[
         if (historyItem.imagePath != null)
-          BorderedRandomImageByPath(imagePaths: historyItem.imagePath),
+          BorderedRandomImageByPath(
+              imagePaths: historyItem.imagePath, repeat: false),
         Container(
           alignment: Alignment.topCenter,
           padding: EdgeInsets.all(8.0),
@@ -185,8 +177,13 @@ class PassageItemView extends StatelessWidget {
           width: MediaQuery.of(context).size.width * 0.95,
           decoration: getDecorationForContainer(context),
           child: Text(
-            historyItem.text == "" ? "The End" : historyItem.text,
-            style: Theme.of(context).textTheme.body1,
+            historyItem.text == ""
+                ? LDLocalizations.labelIsTheEnd
+                : historyItem.text,
+            style: TextStyle(
+              fontFamily: "Raleway-Bold",
+              fontSize: 18,
+            ),
           ),
         ),
       ],
