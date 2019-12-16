@@ -2,7 +2,7 @@ import 'package:async/async.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:locadeserta/models/Localizations.dart';
-import 'package:locadeserta/web/StatisticsView.dart';
+import 'package:locadeserta/StatisticsView.dart';
 import 'package:locadeserta/animations/fade_images.dart';
 import 'package:locadeserta/animations/slide_right_navigation.dart';
 import 'package:locadeserta/animations/slideable_button.dart';
@@ -16,7 +16,7 @@ import 'package:locadeserta/web/main_editor_view.dart';
 import 'package:locadeserta/web/models/background_image.dart';
 import 'package:locadeserta/web/models/catalogs.dart';
 import 'package:locadeserta/web/views/inherited_auth.dart';
-import 'package:locadeserta/web/waiting_screen.dart';
+import 'package:locadeserta/waiting_screen.dart';
 import 'package:gladstoriesengine/gladstoriesengine.dart';
 
 const LANDING_IMAGE_HEIGHT = 200.0;

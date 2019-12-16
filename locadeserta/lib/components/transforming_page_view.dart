@@ -129,7 +129,6 @@ class _TransformingPageViewState extends State<TransformingPageView> {
                     flex: 10,
                     child: SlideableButton(
                       onPress: () {
-                        debugPrint("index selected: ${index}");
                         widget.onDetailsSelected(index);
                       },
                       child: BorderedContainer(

@@ -10,7 +10,7 @@ import 'package:gladstoriesengine/gladstoriesengine.dart';
 import 'package:locadeserta/web/models/LDUser.dart';
 import 'package:locadeserta/web/views/import_gladstories_view.dart';
 import 'package:locadeserta/web/views/inherited_auth.dart';
-import 'package:locadeserta/web/waiting_screen.dart';
+import 'package:locadeserta/waiting_screen.dart';
 
 class CatalogGladStoryView extends StatefulWidget {
   @override

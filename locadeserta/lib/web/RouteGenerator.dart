@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:locadeserta/web/StatisticsView.dart';
+import 'package:locadeserta/StatisticsView.dart';
 import 'package:locadeserta/web/catalog_view.dart';
 import 'package:locadeserta/web/creator/components/catalog_view.dart';
 import 'package:locadeserta/web/creator/components/edit_node_sequence_view.dart';

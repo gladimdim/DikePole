@@ -3,8 +3,8 @@ import 'package:locadeserta/models/Localizations.dart';
 import 'package:locadeserta/animations/slideable_button.dart';
 import 'package:locadeserta/components/bordered_container.dart';
 import 'package:locadeserta/web/creator/components/fat_container.dart';
-import 'package:locadeserta/web/creator/components/image_selector.dart';
-import 'package:locadeserta/web/creator/components/text_editor.dart';
+import 'package:locadeserta/creator/components/image_selector.dart';
+import 'package:locadeserta/creator/components/text_editor.dart';
 import 'package:gladstoriesengine/gladstoriesengine.dart';
 
 class EditNodeView extends StatefulWidget {

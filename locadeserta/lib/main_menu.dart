@@ -167,11 +167,8 @@ class _MainMenuState extends State<MainMenu> with TickerProviderStateMixin {
   }
 
   _buildCatalogView(BuildContext context, List<CatalogStory> stories) {
-    List<CatalogStory> sortedStories = List.from(stories);
-    sortedStories.sort((story1, story2) => story1.year.compareTo(story2.year));
-
     var child = TransformingPageView(
-      titles: sortedStories,
+      titles: stories.map((story) => "${story.year}: ${story.title}").toList(),
       scrollDirection: Axis.vertical,
       onStorySelected: (index) => _goToStory(stories[index], context),
       onDetailsSelected: (index) => Navigator.pushNamed(
