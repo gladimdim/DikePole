@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:gladstoriesengine/gladstoriesengine.dart';
@@ -9,8 +10,8 @@ import 'package:locadeserta/creator/components/fat_container.dart';
 import 'package:locadeserta/creator/utils/utils.dart';
 import 'package:locadeserta/models/Localizations.dart';
 import 'package:locadeserta/models/background_image.dart';
-import 'package:locadeserta/models/persistence.dart';
-import 'package:locadeserta/models/analytics.dart';
+import 'package:locadeserta/loaders/creator_story_persistence.dart';
+import 'package:locadeserta/loaders/analytics.dart';
 
 class StoryView extends StatefulWidget {
   final Story currentStory;
@@ -64,7 +65,9 @@ class PassageState extends State<StoryView> with TickerProviderStateMixin {
   }
 
   void _next(context) async {
-    await HapticFeedback.lightImpact();
+    if (!kIsWeb) {
+      await HapticFeedback.lightImpact();
+    }
     setState(() {
       var currentImageType =
           widget.currentStory.currentPage.getCurrentNode().imageType;
@@ -78,7 +81,7 @@ class PassageState extends State<StoryView> with TickerProviderStateMixin {
   Future _saveStateToStorage(Story story, BuildContext context) async {
     var auth = InheritedAuth.of(context).auth;
     var user = await auth.currentUser();
-    await Persistence.instance.saveGladStoryToStorageForUser(user, story);
+    await StoryPersistence.instance.saveGladStoryToStorageForUser(user, story);
   }
 
   List<Widget> createOptionList(List<PageNext> nextPages) {
@@ -90,7 +93,9 @@ class PassageState extends State<StoryView> with TickerProviderStateMixin {
           child: BorderedContainer(
             child: SlideableButton(
               onPress: () {
-                HapticFeedback.mediumImpact();
+                if (!kIsWeb) {
+                  HapticFeedback.mediumImpact();
+                }
                 setState(() {
                   widget.currentStory.goToNextPage(page);
                 });
@@ -116,6 +121,7 @@ class PassageState extends State<StoryView> with TickerProviderStateMixin {
               backgroundColor: Theme.of(context).primaryColor,
             ),
             onPress: () {
+              debugPrint("next pressed");
               _next(context);
             }),
       ),

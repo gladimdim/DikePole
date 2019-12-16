@@ -7,7 +7,7 @@ import 'package:locadeserta/creator/components/story_view.dart';
 import 'package:locadeserta/export_pdf_view.dart';
 import 'package:locadeserta/models/Localizations.dart';
 import 'package:locadeserta/models/background_image.dart';
-import 'package:locadeserta/models/catalogs.dart';
+import 'package:locadeserta/loaders/catalogs.dart';
 
 class GameView extends StatefulWidget {
   final Story story;

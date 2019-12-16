@@ -2,8 +2,8 @@ import 'package:firebase/firebase.dart' as fb;
 import 'package:firebase/firestore.dart' as fs;
 import 'package:gladstoriesengine/gladstoriesengine.dart';
 import 'package:locadeserta/models/Auth.dart';
-import 'package:locadeserta/web/models/background_image.dart';
-import 'package:locadeserta/web/models/catalogs.dart';
+import 'package:locadeserta/models/background_image.dart';
+import 'package:locadeserta/loaders/catalogs.dart';
 
 fs.Firestore storage = fb.firestore();
 

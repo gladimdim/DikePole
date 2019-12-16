@@ -6,7 +6,7 @@ import 'package:locadeserta/animations/slideable_button.dart';
 import 'package:locadeserta/components/bordered_container.dart';
 import 'package:locadeserta/models/background_image.dart';
 import 'package:locadeserta/models/Localizations.dart';
-import 'package:locadeserta/models/catalogs.dart';
+import 'package:locadeserta/loaders/catalogs.dart';
 
 class CatalogViewArguments {
   final CatalogStory catalogStory;

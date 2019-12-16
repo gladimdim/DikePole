@@ -17,12 +17,10 @@ import 'package:locadeserta/creator/components/game_view.dart';
 import 'package:locadeserta/creator/components/user_stories_list_view.dart';
 import 'package:locadeserta/models/Localizations.dart';
 import 'package:locadeserta/models/background_image.dart';
-import 'package:locadeserta/story_view.dart';
-import 'package:locadeserta/models/catalogs.dart';
+import 'package:locadeserta/loaders/catalogs.dart';
 import 'package:locadeserta/waiting_screen.dart';
 import 'package:locadeserta/animations/slide_right_navigation.dart';
-import 'package:locadeserta/models/persistence.dart';
-import 'package:locadeserta/creator/story/persistence.dart'
+import 'package:locadeserta/loaders/creator_story_persistence.dart'
     as GladStoryPersistence;
 import 'package:locadeserta/radiuses.dart';
 
@@ -121,12 +119,13 @@ class _MainMenuState extends State<MainMenu> with TickerProviderStateMixin {
   }
 
   _fetchData(BuildContext context) {
-    debugPrint("kuku");
     var locale = LDLocalizations.locale;
     return _catalogListMemo.runOnce(() async {
-      List<CatalogStory> catalogStories = await Persistence.instance
-          .getAvailableCatalogStories(locale.languageCode);
-      return catalogStories;
+      List<CatalogStory> catalogStories =
+          await CatalogStory.getAvailableCatalogStories(locale.languageCode);
+      return catalogStories
+          .where((story) => story.title != "Після Битви")
+          .toList();
     });
   }
 
@@ -219,35 +218,24 @@ class _MainMenuState extends State<MainMenu> with TickerProviderStateMixin {
     setState(() {
       loadingStory = false;
     });
-    if (story.inkJson != null) {
-      Navigator.push(
-        context,
-        SlideRightNavigation(
-          widget: StoryView(
-            user: user,
-            catalogStory: story,
-          ),
-        ),
-      );
-    } else {
-      var storyWithState;
-      try {
-        storyWithState = await GladStoryPersistence.StoryPersistence.instance
-            .readyStoryStateById(user, story);
-      } catch (e) {
-        print(e);
-      }
 
-      Navigator.push(
-        context,
-        SlideRightNavigation(
-          widget: GameView(
-            story: storyWithState,
-            catalogStory: story,
-          ),
-        ),
-      );
+    var storyWithState;
+    try {
+      storyWithState = await GladStoryPersistence.StoryPersistence.instance
+          .readyStoryStateById(user, story);
+    } catch (e) {
+      print(e);
     }
+
+    Navigator.push(
+      context,
+      SlideRightNavigation(
+        widget: GameView(
+          story: storyWithState,
+          catalogStory: story,
+        ),
+      ),
+    );
   }
 
   @override

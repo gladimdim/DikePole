@@ -7,7 +7,7 @@ import 'package:locadeserta/components/narrow_scaffold.dart';
 import 'package:locadeserta/creator/components/fat_container.dart';
 import 'package:locadeserta/creator/components/user_story_details_view.dart';
 import 'package:locadeserta/creator/components/user_story_view.dart';
-import 'package:locadeserta/creator/story/persistence.dart';
+import 'package:locadeserta/loaders/creator_story_persistence.dart';
 import 'package:locadeserta/import_gladstories_view.dart';
 import 'package:locadeserta/models/Auth.dart';
 import 'package:locadeserta/models/Localizations.dart';

@@ -5,7 +5,7 @@ import 'package:gladstoriesengine/gladstoriesengine.dart';
 import 'package:locadeserta/components/app_bar_custom.dart';
 import 'package:locadeserta/components/narrow_scaffold.dart';
 import 'package:locadeserta/models/Localizations.dart';
-import 'package:locadeserta/models/catalogs.dart';
+import 'package:locadeserta/loaders/catalogs.dart';
 import 'package:locadeserta/models/pdf_creator.dart';
 import 'package:locadeserta/models/story_history.dart';
 import 'package:path_provider/path_provider.dart';

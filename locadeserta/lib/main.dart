@@ -1,6 +1,6 @@
 import 'package:flutter/widgets.dart';
 
-import "package:locadeserta/main2.dart";
+import "package:locadeserta/main_class.dart";
 
 void main() {
 //  if (kIsWeb) {
