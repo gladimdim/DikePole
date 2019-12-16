@@ -1,1 +1,0 @@
-const APP_BAR_HEIGHT = 40.0;
