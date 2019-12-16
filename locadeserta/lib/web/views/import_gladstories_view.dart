@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:locadeserta/InheritedAuth.dart';
 import 'package:locadeserta/models/Localizations.dart';
 import 'package:locadeserta/animations/slideable_button.dart';
 import 'package:locadeserta/components/app_bar_custom.dart';
@@ -8,7 +9,6 @@ import 'package:locadeserta/creator/components/fat_container.dart';
 import 'package:locadeserta/web/creator/story/persistence.dart';
 import 'package:gladstoriesengine/gladstoriesengine.dart';
 import 'package:locadeserta/web/models/background_image.dart';
-import 'package:locadeserta/web/views/inherited_auth.dart';
 
 class ImportGladStoryView extends StatefulWidget {
   static const String routeName = "/import_glad_story";
@@ -52,7 +52,7 @@ class _ImportGladStoryViewState extends State<ImportGladStoryView> {
               onPress: () async {
                 var story = Story.fromJson(_controller.text,
                     imageResolver: BackgroundImage.getRandomImageForType);
-                var user = InheritedAuth.of(context).auth.getUser();
+                var user = InheritedAuth.of(context).auth.user;
                 await StoryPersistence.instance.writeStory(user, story);
                 Navigator.pop(context);
               },

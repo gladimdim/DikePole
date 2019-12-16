@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:locadeserta/InheritedAuth.dart';
 import 'package:locadeserta/models/Localizations.dart';
 import 'package:locadeserta/animations/slideable_button.dart';
 import 'package:locadeserta/components/app_bar_custom.dart';
@@ -13,7 +14,6 @@ import 'package:locadeserta/web/creator/story/persistence.dart';
 import 'package:gladstoriesengine/gladstoriesengine.dart';
 import 'package:locadeserta/web/creator/utils/utils.dart';
 import 'package:locadeserta/web/models/background_image.dart';
-import 'package:locadeserta/web/views/inherited_auth.dart';
 
 class EditStoryView extends StatefulWidget {
   final Story story;
@@ -252,7 +252,7 @@ class _EditStoryViewState extends State<EditStoryView> {
   }
 
   _saveStory(BuildContext context) async {
-    var user = InheritedAuth.of(context).auth.getUser();
+    var user = InheritedAuth.of(context).auth.user;
     await StoryPersistence.instance.writeStory(user, widget.story);
     setState(() {});
   }

@@ -1,6 +1,7 @@
 import 'package:async/async.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:locadeserta/InheritedAuth.dart';
 import 'package:locadeserta/models/Localizations.dart';
 import 'package:locadeserta/StatisticsView.dart';
 import 'package:locadeserta/animations/fade_images.dart';
@@ -15,7 +16,6 @@ import 'package:locadeserta/web/creator/story/persistence.dart';
 import 'package:locadeserta/web/main_editor_view.dart';
 import 'package:locadeserta/web/models/background_image.dart';
 import 'package:locadeserta/web/models/catalogs.dart';
-import 'package:locadeserta/web/views/inherited_auth.dart';
 import 'package:locadeserta/waiting_screen.dart';
 import 'package:gladstoriesengine/gladstoriesengine.dart';
 
@@ -214,7 +214,7 @@ class _MainMenuState extends State<MainMenu> with TickerProviderStateMixin {
     });
 
     var storyWithState;
-    var user = InheritedAuth.of(context).auth.getUser();
+    var user = InheritedAuth.of(context).auth.user;
     try {
       storyWithState =
           await StoryPersistence.instance.readyStoryStateById(user, story);

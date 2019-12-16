@@ -1,7 +1,7 @@
 import 'package:firebase/firebase.dart' as fb;
 import 'package:firebase/firestore.dart' as fs;
 import 'package:gladstoriesengine/gladstoriesengine.dart';
-import 'package:locadeserta/web/models/LDUser.dart';
+import 'package:locadeserta/models/Auth.dart';
 import 'package:locadeserta/web/models/background_image.dart';
 import 'package:locadeserta/web/models/catalogs.dart';
 
@@ -12,7 +12,7 @@ class StoryPersistence {
 
   static final StoryPersistence instance = StoryPersistence._internal();
 
-  Future<List<Story>> getUserStories(LDUser user) async {
+  Future<List<Story>> getUserStories(User user) async {
     try {
       fs.QuerySnapshot stories = await fb
           .firestore()
@@ -31,7 +31,7 @@ class StoryPersistence {
     return null;
   }
 
-  Future<Story> readyStoryStateById(LDUser user, CatalogStory story) async {
+  Future<Story> readyStoryStateById(User user, CatalogStory story) async {
     fs.DocumentSnapshot doc = await storage
         .doc("user_states/${user.uid}/states/${story.title}")
         .get();
@@ -48,7 +48,7 @@ class StoryPersistence {
     }
   }
 
-  writeStory(LDUser user, Story story) async {
+  writeStory(User user, Story story) async {
     fs.DocumentSnapshot doc = await storage
         .doc("user_stories/${user.uid}/stories/${story.title}")
         .get();
@@ -61,13 +61,13 @@ class StoryPersistence {
     }
   }
 
-  Future deleteStory(LDUser user, Story story) async {
+  Future deleteStory(User user, Story story) async {
     return await storage
         .doc("user_stories/${user.uid}/stories/${story.title}")
         .delete();
   }
 
-  Future saveGladStoryToStorageForUser(LDUser user, Story story) async {
+  Future saveGladStoryToStorageForUser(User user, Story story) async {
     fs.DocumentSnapshot doc = await storage
         .doc("user_states/${user.uid}/states/${story.title}")
         .get();

@@ -1,20 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:locadeserta/InheritedAuth.dart';
 import 'package:locadeserta/animations/fade_images.dart';
 import 'package:locadeserta/animations/slideable_button.dart';
 import 'package:locadeserta/components/app_bar_custom.dart';
 import 'package:locadeserta/components/narrow_scaffold.dart';
+import 'package:locadeserta/models/Auth.dart';
 import 'package:locadeserta/web/main_menu.dart';
-import 'package:locadeserta/web/models/LDAuth.dart';
 import 'package:locadeserta/models/Localizations.dart';
 import 'package:locadeserta/web/locale_selection_view.dart';
-import 'package:locadeserta/web/views/inherited_auth.dart';
-import 'package:locadeserta/web/models/LDUser.dart';
 
 class LoginView extends StatefulWidget {
   static const String routeName = "/login_view";
   final VoidCallback onContinue;
   final Function onSetLocale;
-  final LDAuth auth = LDAuth();
 
   LoginView({this.onContinue, this.onSetLocale});
 
@@ -38,11 +36,11 @@ class _LoginViewState extends State<LoginView> {
   }
 
   Widget _buildBody(BuildContext context) {
-    return StreamBuilder<LDUser>(
+    return StreamBuilder<User>(
       stream: InheritedAuth.of(context).auth.onAuthStateChange,
       initialData: null,
       builder: (context, snapshot) {
-        LDUser user = snapshot.data;
+        User user = snapshot.data;
         return Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           mainAxisAlignment: MainAxisAlignment.start,
@@ -118,7 +116,7 @@ class _LoginViewState extends State<LoginView> {
     );
   }
 
-  Widget _buildLoginedView(LDUser user, BuildContext context) {
+  Widget _buildLoginedView(User user, BuildContext context) {
     return SlideableButton(
       onPress: () {
         Navigator.pushNamed(context, MainMenu.routeName);
@@ -138,7 +136,7 @@ class _LoginViewState extends State<LoginView> {
     );
   }
 
-  Widget _buildWelcomeText(LDUser user, context) {
+  Widget _buildWelcomeText(User user, context) {
     var text = user == null
         ? LDLocalizations.welcomeText
         : LDLocalizations.greetUserByName(user.displayName);
