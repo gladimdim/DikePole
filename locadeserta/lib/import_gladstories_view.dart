@@ -3,13 +3,13 @@ import 'package:gladstoriesengine/gladstoriesengine.dart';
 import 'package:locadeserta/animations/slideable_button.dart';
 import 'package:locadeserta/components/bordered_container.dart';
 import 'package:locadeserta/creator/components/fat_container.dart';
-import 'package:locadeserta/creator/story/persistence.dart';
+import 'package:locadeserta/loaders/creator_story_persistence.dart';
 import 'package:locadeserta/models/Auth.dart';
 import 'package:locadeserta/models/Localizations.dart';
 import 'package:locadeserta/models/background_image.dart';
 
 class ImportGladStoryView extends StatefulWidget {
-  static final String routeName = "/import_glad_story";
+  static const String routeName = "/import_glad_story";
 
   @override
   _ImportGladStoryViewState createState() => _ImportGladStoryViewState();

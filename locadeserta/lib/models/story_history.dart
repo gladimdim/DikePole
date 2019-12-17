@@ -33,7 +33,7 @@ class StoryHistory {
     try {
       result = JsonEncoder.withIndent("  ").convert(_history);
     } catch (e) {
-      print(e);
+      print("Cannot json encode _history: $e");
     }
     return result;
   }

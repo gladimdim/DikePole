@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:gladstoriesengine/gladstoriesengine.dart';
 import 'package:locadeserta/animations/fade_images.dart';
 import 'package:locadeserta/components/bordered_container.dart';
 import 'package:locadeserta/models/background_image.dart';
+import 'package:gladstoriesengine/gladstoriesengine.dart';
 
 class BorderedRandomImageByType extends StatelessWidget {
   final ImageType type;
@@ -21,7 +21,7 @@ class BorderedRandomImageByType extends StatelessWidget {
         ),
       ),
       child: TweenImage(
-        repeat: true,
+        repeat: false,
         duration: 3,
         first: BackgroundImage.getAssetImageForType(type),
         last: BackgroundImage.getColoredAssetImageForType(type),
@@ -33,15 +33,16 @@ class BorderedRandomImageByType extends StatelessWidget {
 
 class BorderedRandomImageByPath extends StatelessWidget {
   final List imagePaths;
+  final bool repeat;
 
-  BorderedRandomImageByPath(this.imagePaths);
+  BorderedRandomImageByPath({this.imagePaths, this.repeat = false});
 
   @override
   Widget build(BuildContext context) {
     return BorderedContainer(
       child: TweenImage(
-        repeat: true,
-        duration: 3,
+        repeat: this.repeat,
+        duration: 6,
         first: AssetImage(imagePaths[0]),
         last: AssetImage(imagePaths[1]),
         imageFit: BoxFit.fitWidth,

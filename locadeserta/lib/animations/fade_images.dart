@@ -13,13 +13,14 @@ class TweenImage extends StatefulWidget {
   final BoxFit imageFit;
   final bool repeat;
 
-  TweenImage({@required this.first,
-    @required this.last,
-    this.duration = 2,
-    this.height,
-    this.width,
-    this.imageFit = BoxFit.fitHeight,
-    this.repeat = false});
+  TweenImage(
+      {@required this.first,
+      @required this.last,
+      this.duration = 2,
+      this.height,
+      this.width,
+      this.imageFit = BoxFit.fitHeight,
+      this.repeat = false});
 }
 
 class _TweenImageState extends State<TweenImage> {
@@ -29,9 +30,12 @@ class _TweenImageState extends State<TweenImage> {
   initState() {
     if (widget.repeat) {
       playback = Playback.MIRROR;
+    } else {
+      playback = Playback.PLAY_FORWARD;
     }
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -39,7 +43,7 @@ class _TweenImageState extends State<TweenImage> {
         _updatePlayback();
       },
       child: ControlledAnimation(
-        playback: Playback.MIRROR,
+        playback: playback,
         duration: Duration(seconds: widget.duration),
         tween: Tween(begin: 0.0, end: 1.0),
         builder: (context, value) => Stack(

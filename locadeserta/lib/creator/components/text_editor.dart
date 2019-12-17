@@ -8,13 +8,14 @@ class TextEditor extends StatefulWidget {
   final TextEditingController controller;
   final bool showDone;
 
-  TextEditor(
-      {this.text,
-      this.maxLines = 1,
-      @required this.onSave,
-      @required this.onSubmitted,
-      @required this.controller,
-      this.showDone = true});
+  TextEditor({
+    this.text,
+    this.maxLines = 1,
+    @required this.onSave,
+    @required this.onSubmitted,
+    @required this.controller,
+    this.showDone = true,
+  });
 
   @override
   _TextEditorState createState() => _TextEditorState();

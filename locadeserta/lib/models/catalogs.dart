@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-
-import 'Auth.dart';
+import 'package:locadeserta/models/Auth.dart';
 
 class Catalog {
   List<CatalogStory> stories;
@@ -9,7 +8,6 @@ class Catalog {
 class CatalogStory {
   final String title;
   final String description;
-  final String inkJson;
   final DocumentReference documentReference;
   final String id;
   final String author;
@@ -19,7 +17,6 @@ class CatalogStory {
   CatalogStory({
     this.title,
     this.description,
-    this.inkJson,
     this.documentReference,
     this.id,
     this.author,
@@ -30,7 +27,6 @@ class CatalogStory {
   CatalogStory.fromMap(Map<String, dynamic> map, {this.documentReference})
       : title = map['title'],
         description = map['description'],
-        inkJson = map['inkjson'],
         id = documentReference.documentID,
         author = map["author"],
         year = map["year"],
@@ -55,5 +51,20 @@ class CatalogStory {
     String s = a.documents[0]["catalogidreference"];
 
     return await CatalogStory.getStoryById(s);
+  }
+
+  static Future<List<CatalogStory>> getAvailableCatalogStories(
+      String locale) async {
+    QuerySnapshot stories;
+    try {
+      stories = await Firestore.instance
+          .collection("catalogs/$locale/stories")
+          .getDocuments();
+    } catch (e) {
+      print("exception: $e");
+    }
+    return stories.documents
+        .map((snapshot) => CatalogStory.fromSnapshot(snapshot))
+        .toList();
   }
 }

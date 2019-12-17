@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:gladstoriesengine/gladstoriesengine.dart';
 import 'package:locadeserta/models/Auth.dart';
 import 'package:locadeserta/models/background_image.dart';
-import 'package:locadeserta/models/catalogs.dart';
+import 'package:locadeserta/loaders/catalogs.dart';
 
 final Firestore storage = Firestore.instance;
 
@@ -72,6 +72,25 @@ class StoryPersistence {
       storage.document(doc.reference.path).updateData(data);
     } else {
       storage.document(doc.reference.path).setData(data);
+    }
+  }
+
+  Future saveGladStoryToStorageForUser(User user, Story story) async {
+    DocumentSnapshot doc = await storage
+        .collection("user_states")
+        .document(user.uid)
+        .collection("states")
+        .document(story.title)
+        .get();
+
+    Map<String, dynamic> toAdd = {
+      "catalogidreference": story.title,
+      "gladJsonState": story.toStateJson(),
+    };
+    if (doc.exists) {
+      storage.document(doc.reference.path).updateData(toAdd);
+    } else {
+      storage.document(doc.reference.path).setData(toAdd);
     }
   }
 }
