@@ -12,7 +12,7 @@ import 'package:locadeserta/models/Localizations.dart';
 import 'package:locadeserta/radiuses.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import 'locale_selection.dart';
+import 'package:locadeserta/locale_selection.dart';
 
 class LoginView extends StatefulWidget {
   static const String routeName = "/login_view";
@@ -137,8 +137,10 @@ class _LoginViewState extends State<LoginView> {
         Expanded(
           flex: 2,
           child: BorderedContainer(
-            child: SlideableButton(
-              onPress: () => _onSignInPressed(context),
+            child: FlatButton(
+              color: Theme.of(context).backgroundColor,
+              textColor: Theme.of(context).primaryColor,
+              onPressed: () => _onSignInPressed(context),
               child: Text(
                 LDLocalizations.signInWithGoogle,
                 textAlign: TextAlign.center,
@@ -152,8 +154,10 @@ class _LoginViewState extends State<LoginView> {
         Expanded(
           flex: 2,
           child: BorderedContainer(
-            child: SlideableButton(
-              onPress: () => _onSignInAnonPressed(context),
+            child: FlatButton(
+              color: Theme.of(context).backgroundColor,
+              textColor: Theme.of(context).primaryColor,
+              onPressed: () => _onSignInAnonPressed(context),
               child: Text(
                 LDLocalizations.anonLogin,
                 textAlign: TextAlign.center,

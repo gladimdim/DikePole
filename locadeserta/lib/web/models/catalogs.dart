@@ -64,7 +64,7 @@ class CatalogStory {
   }
 
   static Future<CatalogStory> getStoryById(String id) async {
-    var possibleStory = await storage.collection('catalog/${id}').get();
+    var possibleStory = await storage.collection('catalog/$id').get();
     return CatalogStory.fromSnapshot(possibleStory.docs[0]);
   }
 }
