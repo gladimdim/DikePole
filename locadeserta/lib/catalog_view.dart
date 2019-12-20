@@ -8,6 +8,9 @@ import 'package:locadeserta/models/background_image.dart';
 import 'package:locadeserta/models/Localizations.dart';
 import 'package:locadeserta/loaders/catalogs.dart';
 
+import 'package:locadeserta/components/narrow_scaffold.dart';
+import 'package:locadeserta/components/app_bar_custom.dart';
+
 class CatalogViewArguments {
   final CatalogStory catalogStory;
   final Function onReadPressed;
@@ -65,12 +68,10 @@ class _CatalogViewState extends State<CatalogView>
     return Padding(
       padding: const EdgeInsets.all(4.0),
       child: SizedBox(
-        height: MediaQuery.of(context).size.height / 2,
-        width: MediaQuery.of(context).size.width,
         child: Container(
           decoration: decoration,
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
               if (!widget.expanded)
                 Container(
@@ -81,12 +82,6 @@ class _CatalogViewState extends State<CatalogView>
                   ),
                   child: Text(
                     widget.catalogStory.title,
-//                    style: TextStyle(
-//                      fontSize: 32.0,
-//                      fontWeight: FontWeight.bold,
-//                      color: Colors.black,
-//                      backgroundColor: Theme.of(context).backgroundColor,
-//                    ),
                   ),
                 ),
               Padding(
@@ -159,7 +154,10 @@ class _CatalogViewState extends State<CatalogView>
                   ),
                 ],
               ),
-              if (widget.expanded) _showDetails(widget.catalogStory, context),
+              if (widget.expanded)
+                Flexible(
+                    flex: 50,
+                    child: _showDetails(widget.catalogStory, context)),
             ],
           ),
         ),
@@ -168,44 +166,41 @@ class _CatalogViewState extends State<CatalogView>
   }
 
   Widget _showDetails(CatalogStory story, BuildContext context) {
-    return Expanded(
-      child: SingleChildScrollView(
-        child: Padding(
-          padding: EdgeInsets.all(8.0),
-          child: Column(
-            children: <Widget>[
-              SizedBox(
-                height: 30,
-                child: ListView(
-                  scrollDirection: Axis.horizontal,
-                  children: [
-                    Text(
-                      LDLocalizations.authors,
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold, fontSize: 18.0),
-                    ),
-                    Text(
-                      story.author,
-                      style: TextStyle(
-                          fontWeight: FontWeight.normal, fontSize: 18.0),
-                    )
-                  ],
-                ),
+    return SingleChildScrollView(
+      child: Padding(
+        padding: EdgeInsets.all(8.0),
+        child: Column(
+          children: <Widget>[
+            SizedBox(
+              height: 30,
+              child: Row(
+                children: [
+                  Text(
+                    LDLocalizations.authors,
+                    style:
+                        TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0),
+                  ),
+                  Text(
+                    story.author,
+                    style: TextStyle(
+                        fontWeight: FontWeight.normal, fontSize: 18.0),
+                  )
+                ],
               ),
-              SizedBox(
-                child: Container(
-                  color: Theme.of(context).primaryColor,
-                ),
-                height: 2,
+            ),
+            SizedBox(
+              child: Container(
+                color: Theme.of(context).primaryColor,
               ),
-              Text(
-                story.description,
-                style: TextStyle(
-                  fontSize: 15.0,
-                ),
+              height: 2,
+            ),
+            Text(
+              story.description,
+              style: TextStyle(
+                fontSize: 15.0,
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
@@ -218,16 +213,20 @@ class ExtractCatalogViewArguments extends StatelessWidget {
   Widget build(BuildContext context) {
     final CatalogViewArguments args = ModalRoute.of(context).settings.arguments;
 
-    return Scaffold(
-        backgroundColor: Theme.of(context).backgroundColor,
-        appBar: AppBar(
-          title: Text(args.catalogStory.title),
+    return NarrowScaffold(
+      actions: [
+        AppBarObject(
+          text: LDLocalizations.labelBack,
+          onTap: () => Navigator.pop(context),
         ),
-        body: CatalogView(
-          catalogStory: args.catalogStory,
-          onReadPressed: args.onReadPressed,
-          onDetailPressed: args.onDetailPressed,
-          expanded: args.expanded,
-        ));
+      ],
+      title: args.catalogStory.title,
+      body: CatalogView(
+        catalogStory: args.catalogStory,
+        onReadPressed: args.onReadPressed,
+        onDetailPressed: args.onDetailPressed,
+        expanded: args.expanded,
+      ),
+    );
   }
 }

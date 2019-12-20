@@ -36,6 +36,7 @@ var blackTheme = ThemeData(
     ),
     title: TextStyle(
       fontSize: 20,
+      fontWeight: FontWeight.bold,
       color: Colors.white,
       fontFamily: 'Roboto',
     ),
@@ -74,7 +75,8 @@ var whiteTheme = ThemeData(
     ),
     title: TextStyle(
       color: Colors.black,
-      fontSize: 18.0,
+      fontSize: 20.0,
+      fontWeight: FontWeight.bold,
       fontFamily: 'Roboto',
     ),
     button: TextStyle(

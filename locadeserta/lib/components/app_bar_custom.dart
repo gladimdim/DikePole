@@ -42,11 +42,7 @@ class _AppBarCustomState extends State<AppBarCustom> {
                     padding: EdgeInsets.only(left: 10),
                     child: Text(
                       widget.title,
-                      style: TextStyle(
-                        fontFamily: 'Montserrat',
-                        fontSize: Theme.of(context).textTheme.title.fontSize,
-                        color: Theme.of(context).textTheme.title.color,
-                      ),
+                      style: Theme.of(context).textTheme.title,
                       textAlign: TextAlign.center,
                     ),
                   ),
