@@ -93,7 +93,7 @@ class _MainMenuState extends State<MainMenu> with TickerProviderStateMixin {
                 if (snapshot.data == null || snapshot.data.length == 0) {
                   return _buildEmptyCatalogListView(context);
                 } else {
-                  return _buildCatalogView(context, snapshot.data);
+                  return _buildCatalogView(context, stories);
                 }
                 break;
             }
