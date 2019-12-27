@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:locadeserta/loaders/url_parser.dart';
 
 class LocaleSelection extends StatefulWidget {
   final Function(Locale locale) onLocaleChanged;
@@ -10,31 +11,26 @@ class LocaleSelection extends StatefulWidget {
 }
 
 class _LocaleSelectionState extends State<LocaleSelection> {
+
   @override
   Widget build(BuildContext context) {
     return _buildLocaleSelection();
   }
 
   Widget _buildLocaleSelection() {
-    final languageCode = widget.locale.languageCode;
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
-      children: [
+      children:
+      [
         Radio(
           value: 'uk',
-          groupValue: languageCode,
+          groupValue: widget.locale.languageCode,
           onChanged: _setNewLocale,
         ),
         Text('🇺🇦'),
         Radio(
-          value: 'pl',
-          groupValue: languageCode,
-          onChanged: _setNewLocale,
-        ),
-        Text('🇵🇱'),
-        Radio(
           value: 'en',
-          groupValue: languageCode,
+          groupValue: widget.locale.languageCode,
           onChanged: _setNewLocale,
         ),
         Text('🇺🇸'),
@@ -43,6 +39,7 @@ class _LocaleSelectionState extends State<LocaleSelection> {
   }
 
   void _setNewLocale(String newValue) {
+    UrlParser.updateLanguage(newValue);
     widget.onLocaleChanged(Locale(newValue));
   }
 }

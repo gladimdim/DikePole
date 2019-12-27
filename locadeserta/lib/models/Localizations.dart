@@ -1,11 +1,22 @@
 import 'dart:core';
-
+import 'package:locadeserta/loaders/url_parser.dart';
 import 'package:flutter/material.dart';
 
-var version = "1.106";
+var version = "1.107";
+
+String getDefaultOrUrlLanguage() {
+  var urlLang = UrlParser.getLanguage();
+  if (LDLocalizations.supportedLanguageCodes.contains(urlLang)) {
+    return urlLang;
+  } else {
+    return 'uk';
+  }
+}
 
 class LDLocalizations {
-  static Locale locale = Locale('uk');
+  static List supportedLanguageCodes = ['uk', 'en'];
+
+  static Locale locale = Locale(getDefaultOrUrlLanguage());
 
   static Map<String, Map<String, String>> _localizedValues = {
     'en': {
