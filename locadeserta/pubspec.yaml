@@ -18,7 +18,7 @@ dependencies:
   flutter:
     sdk: flutter
   path_provider: 1.2.0
-  rxdart: 0.22.6
+  rxdart: ^0.23.1
   cupertino_icons: ^0.1.2
   firebase_core: 0.4.3+1
   cloud_firestore: 0.12.10
@@ -30,7 +30,7 @@ dependencies:
   share_extend: "^1.0.9"
   tuple: ^1.0.2
   http:
-  gladstoriesengine: 0.2.2
+  gladstoriesengine: 0.2.3
   firebase:
   fluri: ^1.2.8
 
