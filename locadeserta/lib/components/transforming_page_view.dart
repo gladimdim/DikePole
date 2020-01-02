@@ -108,12 +108,12 @@ class _TransformingPageViewState extends State<TransformingPageView> {
                   ),
                   child: Text(
                     title,
-                    style: TextStyle(
-                      fontSize: 32.0,
-                      fontWeight: FontWeight.bold,
-                      color: Theme.of(context).textTheme.title.color,
-                      backgroundColor: Theme.of(context).backgroundColor,
-                    ),
+                    style: Theme.of(context).textTheme.title.merge(
+                          TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 28,
+                          ),
+                        ),
                   ),
                 ),
               ),

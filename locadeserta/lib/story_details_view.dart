@@ -11,13 +11,13 @@ import 'package:locadeserta/loaders/catalogs.dart';
 import 'package:locadeserta/components/narrow_scaffold.dart';
 import 'package:locadeserta/components/app_bar_custom.dart';
 
-class CatalogViewArguments {
+class StoryDetailsViewArguments {
   final CatalogStory catalogStory;
   final Function onReadPressed;
   final Function onDetailPressed;
   final bool expanded;
 
-  CatalogViewArguments({
+  StoryDetailsViewArguments({
     this.catalogStory,
     this.onReadPressed,
     this.onDetailPressed,
@@ -25,7 +25,7 @@ class CatalogViewArguments {
   });
 }
 
-class CatalogView extends StatefulWidget {
+class StoryDetailsView extends StatefulWidget {
   final CatalogStory catalogStory;
   final Function onReadPressed;
   final Function onDetailPressed;
@@ -33,9 +33,9 @@ class CatalogView extends StatefulWidget {
   final double animationValue;
 
   @override
-  _CatalogViewState createState() => _CatalogViewState();
+  _StoryDetailsViewState createState() => _StoryDetailsViewState();
 
-  CatalogView(
+  StoryDetailsView(
       {this.catalogStory,
       this.onReadPressed,
       this.onDetailPressed,
@@ -43,7 +43,7 @@ class CatalogView extends StatefulWidget {
       this.animationValue = 0.0});
 }
 
-class _CatalogViewState extends State<CatalogView>
+class _StoryDetailsViewState extends State<StoryDetailsView>
     with TickerProviderStateMixin {
   AssetImage image;
   AssetImage coloredImage;
@@ -207,11 +207,11 @@ class _CatalogViewState extends State<CatalogView>
   }
 }
 
-class ExtractCatalogViewArguments extends StatelessWidget {
+class ExtractStoryDetailsViewArguments extends StatelessWidget {
   static const routeName = "/story_details";
 
   Widget build(BuildContext context) {
-    final CatalogViewArguments args = ModalRoute.of(context).settings.arguments;
+    final StoryDetailsViewArguments args = ModalRoute.of(context).settings.arguments;
 
     return NarrowScaffold(
       actions: [
@@ -221,7 +221,7 @@ class ExtractCatalogViewArguments extends StatelessWidget {
         ),
       ],
       title: args.catalogStory.title,
-      body: CatalogView(
+      body: StoryDetailsView(
         catalogStory: args.catalogStory,
         onReadPressed: args.onReadPressed,
         onDetailPressed: args.onDetailPressed,

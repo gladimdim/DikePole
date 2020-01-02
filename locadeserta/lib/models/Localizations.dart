@@ -2,7 +2,7 @@ import 'dart:core';
 import 'package:locadeserta/loaders/url_parser.dart';
 import 'package:flutter/material.dart';
 
-var version = "1.107";
+var version = "1.108";
 
 String getDefaultOrUrlLanguage() {
   var urlLang = UrlParser.getLanguage();

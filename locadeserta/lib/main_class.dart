@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:locadeserta/InheritedAuth.dart';
-import 'package:locadeserta/catalog_view.dart';
+import 'package:locadeserta/story_details_view.dart';
 import 'package:locadeserta/creator/components/user_stories_list_view.dart';
 import 'package:locadeserta/creator/components/edit_node_sequence_view.dart';
 import 'package:locadeserta/creator/components/edit_story.dart';
@@ -13,6 +13,7 @@ import 'package:locadeserta/main_menu.dart';
 import 'package:locadeserta/login_view.dart';
 import 'package:locadeserta/models/Auth.dart';
 import 'package:locadeserta/models/Localizations.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'StatisticsView.dart';
 
 final Auth auth = Auth();
@@ -99,7 +100,22 @@ var whiteTheme = ThemeData(
 );
 
 class _LocaDesertaAppState extends State<LocaDesertaApp> {
-  ThemeData theme = whiteTheme;
+  bool isDarkTheme = false;
+
+  @override
+  initState() {
+    super.initState();
+    initPreferences();
+  }
+
+  initPreferences() async {
+    final instance = await SharedPreferences.getInstance();
+    bool isDark = instance.getBool('isDarkTheme');
+    print("is dark theme: $isDark");
+    setState(() {
+      isDarkTheme = isDark ?? false;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -107,7 +123,7 @@ class _LocaDesertaAppState extends State<LocaDesertaApp> {
       auth: auth,
       child: MaterialApp(
         title: 'Loca Deserta',
-        theme: theme,
+        theme: isDarkTheme ? blackTheme : whiteTheme,
         initialRoute: "/",
         debugShowCheckedModeBanner: false,
         routes: {
@@ -116,20 +132,19 @@ class _LocaDesertaAppState extends State<LocaDesertaApp> {
                   context,
                   MainMenu.routeName,
                 ),
-                darkTheme: theme == blackTheme,
+                darkTheme: isDarkTheme,
                 onSetLocale: _onLocaleSet,
-                onThemeChange: (bool isDark) {
+                onThemeChange: (bool isDark) async {
+                  var instance = await SharedPreferences.getInstance();
+                  instance.setBool('isDarkTheme', isDark);
                   setState(() {
-                    if (isDark) {
-                      theme = blackTheme;
-                    } else
-                      theme = whiteTheme;
+                    isDarkTheme = isDark;
                   });
                 },
               ),
           MainMenu.routeName: (context) => MainMenu(),
-          ExtractCatalogViewArguments.routeName: (context) =>
-              ExtractCatalogViewArguments(),
+          ExtractStoryDetailsViewArguments.routeName: (context) =>
+              ExtractStoryDetailsViewArguments(),
           ExtractExportPdfViewArguments.routeName: (context) =>
               ExtractExportPdfViewArguments(),
           ExtractExportGladStoriesPdfViewArguments.routeName: (context) =>

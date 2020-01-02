@@ -7,7 +7,7 @@ import 'package:locadeserta/InheritedAuth.dart';
 import 'package:locadeserta/StatisticsView.dart';
 import 'package:locadeserta/animations/fade_images.dart';
 import 'package:locadeserta/animations/slideable_button.dart';
-import 'package:locadeserta/catalog_view.dart';
+import 'package:locadeserta/story_details_view.dart';
 import 'package:locadeserta/components/app_bar_custom.dart';
 import 'package:locadeserta/components/bordered_container.dart';
 import 'package:locadeserta/components/narrow_scaffold.dart';
@@ -172,8 +172,8 @@ class _MainMenuState extends State<MainMenu> with TickerProviderStateMixin {
       onStorySelected: (index) => _goToStory(stories[index], context),
       onDetailsSelected: (index) => Navigator.pushNamed(
         context,
-        ExtractCatalogViewArguments.routeName,
-        arguments: CatalogViewArguments(
+        ExtractStoryDetailsViewArguments.routeName,
+        arguments: StoryDetailsViewArguments(
           expanded: true,
           catalogStory: stories[index],
           onReadPressed: () => _goToStory(stories[index], context),
