@@ -22,6 +22,13 @@ async function asyncForEach(array, callback) {
 }
 
 exports.playStatistics = functions.https.onRequest(async (req, res) => {
+    const stats = await admin.firestore().collection("/statistics").doc("usage").get();
+    res.set('Access-Control-Allow-Origin', '*');
+    res.json(stats.data());
+
+});
+
+exports.generateStatistics = functions.https.onRequest(async (req, res) => {
     const userRecords = await auth.listUsers();
     const userIds = userRecords.users.map((user) => user.uid);
 
@@ -46,6 +53,14 @@ exports.playStatistics = functions.https.onRequest(async (req, res) => {
     }
 
     const storyStats = await start();
+    const statsDoc = admin.firestore().collection("/statistics").doc("usage");
+    statsDoc.get().then(async (doc) => {
+        await statsDoc.update({
+            storyStats: storyStats,
+            users: userIds.length
+        });
+        console.log('updated the record!');
+    });
     res.set('Access-Control-Allow-Origin', '*');
     res.json({
         storyStats: storyStats,
