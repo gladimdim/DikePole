@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:locadeserta/loaders/url_parser.dart';
+import 'package:locadeserta/models/app_preferences.dart';
 
 class LocaleSelection extends StatefulWidget {
   final Function(Locale locale) onLocaleChanged;
@@ -38,8 +39,9 @@ class _LocaleSelectionState extends State<LocaleSelection> {
     );
   }
 
-  void _setNewLocale(String newValue) {
+  void _setNewLocale(String newValue) async {
     UrlParser.updateLanguage(newValue);
+    await AppPreferences.instance.setUILanguage(newValue);
     widget.onLocaleChanged(Locale(newValue));
   }
 }

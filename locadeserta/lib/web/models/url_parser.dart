@@ -16,7 +16,6 @@ class UrlParser {
     var queryParams = fluri.queryParameters;
     Map<String, dynamic> map = Map.from(queryParams);
     map['lang'] = newLocale;
-    print(map);
     fluri.setQueryParam('lang', newLocale);
     print("uri: ${fluri.toString()}");
     js.context['history'].callMethod('pushState', [{}, null, fluri.toString()]);
@@ -24,10 +23,6 @@ class UrlParser {
 
   static String getLanguage() {
     var params = UrlParser.getUrlParams();
-    if (params['lang'] == null) {
-      return 'uk';
-    } else {
       return params['lang'];
-    }
   }
 }

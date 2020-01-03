@@ -9,6 +9,6 @@ class UrlParser {
   }
 
   static String getLanguage() {
-    return 'uk';
+    return null;
   }
 }

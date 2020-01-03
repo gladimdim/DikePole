@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:locadeserta/InheritedAuth.dart';
+import 'package:locadeserta/StatisticsView.dart';
 import 'package:locadeserta/story_details_view.dart';
 import 'package:locadeserta/creator/components/user_stories_list_view.dart';
 import 'package:locadeserta/creator/components/edit_node_sequence_view.dart';
@@ -11,12 +12,11 @@ import 'package:locadeserta/export_pdf_view.dart';
 import 'package:locadeserta/import_gladstories_view.dart';
 import 'package:locadeserta/main_menu.dart';
 import 'package:locadeserta/login_view.dart';
-import 'package:locadeserta/models/Auth.dart';
+import 'package:locadeserta/models/Auth.dart' as LDAuth;
 import 'package:locadeserta/models/Localizations.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'StatisticsView.dart';
+import 'package:locadeserta/models/app_preferences.dart';
 
-final Auth auth = Auth();
+final LDAuth.Auth auth = LDAuth.Auth();
 
 class LocaDesertaApp extends StatefulWidget {
   @override
@@ -100,70 +100,61 @@ var whiteTheme = ThemeData(
 );
 
 class _LocaDesertaAppState extends State<LocaDesertaApp> {
-  bool isDarkTheme = false;
-
-  @override
-  initState() {
-    super.initState();
-    initPreferences();
-  }
-
-  initPreferences() async {
-    final instance = await SharedPreferences.getInstance();
-    bool isDark = instance.getBool('isDarkTheme');
-    print("is dark theme: $isDark");
-    setState(() {
-      isDarkTheme = isDark ?? false;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return InheritedAuth(
       auth: auth,
-      child: MaterialApp(
-        title: 'Loca Deserta',
-        theme: isDarkTheme ? blackTheme : whiteTheme,
-        initialRoute: "/",
-        debugShowCheckedModeBanner: false,
-        routes: {
-          "/": (context) => LoginView(
-                onContinue: () => Navigator.pushNamed(
-                  context,
-                  MainMenu.routeName,
-                ),
-                darkTheme: isDarkTheme,
-                onSetLocale: _onLocaleSet,
-                onThemeChange: (bool isDark) async {
-                  var instance = await SharedPreferences.getInstance();
-                  instance.setBool('isDarkTheme', isDark);
-                  setState(() {
-                    isDarkTheme = isDark;
-                  });
+      child: FutureBuilder(
+          future: AppPreferences.instance.init(),
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              return MaterialApp(
+                title: 'Loca Deserta',
+                theme: AppPreferences.instance.getDarkTheme()
+                    ? blackTheme
+                    : whiteTheme,
+                initialRoute: "/",
+                debugShowCheckedModeBanner: false,
+                routes: {
+                  "/": (context) => LoginView(
+                        onContinue: () => Navigator.pushNamed(
+                          context,
+                          MainMenu.routeName,
+                        ),
+                        darkTheme: AppPreferences.instance.getDarkTheme(),
+                        onSetLocale: _onLocaleSet,
+                        onThemeChange: (bool isDark) async {
+                          await AppPreferences.instance.setDarkTheme(isDark);
+                          setState(() {});
+                        },
+                      ),
+                  MainMenu.routeName: (context) => MainMenu(),
+                  ExtractStoryDetailsViewArguments.routeName: (context) =>
+                      ExtractStoryDetailsViewArguments(),
+                  ExtractExportPdfViewArguments.routeName: (context) =>
+                      ExtractExportPdfViewArguments(),
+                  ExtractExportGladStoriesPdfViewArguments.routeName:
+                      (context) => ExtractExportGladStoriesPdfViewArguments(),
+                  UserStoriesList.routeName: (context) => UserStoriesList(),
+                  ExtractEditStoryViewArguments.routeName: (context) =>
+                      ExtractEditStoryViewArguments(),
+                  ExtractArgumentsGameView.routeName: (context) =>
+                      ExtractArgumentsGameView(),
+                  ExtractEditPassageView.routeName: (context) =>
+                      ExtractEditPassageView(),
+                  ImportGladStoryView.routeName: (context) =>
+                      ImportGladStoryView(),
+                  StatisticsView.routeName: (context) => StatisticsView(),
+                  UserStoryDetailsView.routeName: (context) => InheritedAuth(
+                        child: ExtractUserStoryDetailsViewArguments(),
+                        auth: auth,
+                      ),
                 },
-              ),
-          MainMenu.routeName: (context) => MainMenu(),
-          ExtractStoryDetailsViewArguments.routeName: (context) =>
-              ExtractStoryDetailsViewArguments(),
-          ExtractExportPdfViewArguments.routeName: (context) =>
-              ExtractExportPdfViewArguments(),
-          ExtractExportGladStoriesPdfViewArguments.routeName: (context) =>
-              ExtractExportGladStoriesPdfViewArguments(),
-          UserStoriesList.routeName: (context) => UserStoriesList(),
-          ExtractEditStoryViewArguments.routeName: (context) =>
-              ExtractEditStoryViewArguments(),
-          ExtractArgumentsGameView.routeName: (context) =>
-              ExtractArgumentsGameView(),
-          ExtractEditPassageView.routeName: (context) =>
-              ExtractEditPassageView(),
-          ImportGladStoryView.routeName: (context) => ImportGladStoryView(),
-          StatisticsView.routeName: (context) => StatisticsView(),
-          UserStoryDetailsView.routeName: (context) => InheritedAuth(
-                child: ExtractUserStoryDetailsViewArguments(),
-                auth: auth,
-              ),
-        },
-      ),
+              );
+            } else {
+              return Container();
+            }
+          }),
     );
   }
 

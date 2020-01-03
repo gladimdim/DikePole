@@ -1,13 +1,20 @@
 import 'dart:core';
 import 'package:locadeserta/loaders/url_parser.dart';
 import 'package:flutter/material.dart';
+import 'package:locadeserta/models/app_preferences.dart';
 
-var version = "1.108";
+var version = "1.109";
 
 String getDefaultOrUrlLanguage() {
   var urlLang = UrlParser.getLanguage();
+  final savedLangCode = AppPreferences.instance.getUILanguage();
+  print('saved lang code: $savedLangCode');
   if (LDLocalizations.supportedLanguageCodes.contains(urlLang)) {
     return urlLang;
+  } else if (savedLangCode != null &&
+      LDLocalizations.supportedLanguageCodes.contains(savedLangCode)) {
+
+    return savedLangCode;
   } else {
     return 'uk';
   }
@@ -99,6 +106,7 @@ class LDLocalizations {
       'yourExistingStories': 'Your existing stories',
       'darkThemeLabel': 'Dark theme',
       'lightThemeLabel': 'Light theme',
+      'updateStatsLabel': 'Update Stats',
     },
     'uk': {
       'continue': 'Продовжити',
@@ -179,6 +187,7 @@ class LDLocalizations {
       'yourExistingStories': 'Ваші існуючі історії',
       'darkThemeLabel': 'Темна тема',
       'lightThemeLabel': 'Світла тема',
+      'updateStatsLabel': 'Оновити статистику',
     },
     'pl': {
       'continue': 'Dalej',
@@ -260,6 +269,7 @@ class LDLocalizations {
       'yourExistingStories': 'Twoje istniejące historie',
       'darkThemeLabel': 'Ciemny motyw',
       'lightThemeLabel': 'Lekki motyw',
+      'updateStatsLabel': 'Update stats',
     }
   };
 
@@ -557,5 +567,9 @@ class LDLocalizations {
 
   static String get lightThemeLabel {
     return _localizedValues[locale.languageCode]['lightThemeLabel'];
+  }
+
+  static String get updateStats {
+    return _localizedValues[locale.languageCode]['updateStatsLabel'];
   }
 }

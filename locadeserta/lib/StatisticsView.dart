@@ -29,7 +29,13 @@ class _StatisticsViewState extends State<StatisticsView> {
             text: LDLocalizations.labelBack,
             onTap: () {
               Navigator.pop(context);
-            })
+            }),
+        AppBarObject(
+          text: LDLocalizations.updateStats,
+          onTap: () {
+            http.get( "https://us-central1-dike-pole-1548444278704.cloudfunctions.net/generateStatistics");
+          }
+        )
       ],
       body: FractionallySizedBox(
         widthFactor: 1.0,
