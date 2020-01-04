@@ -33,7 +33,9 @@ class PassageState extends State<StoryView> with TickerProviderStateMixin {
   initState() {
     Future.delayed(Duration.zero, () {
       widget.currentStory.historyChanges.listen((data) {
-        _saveStateToStorage(widget.currentStory, context);
+        if (!widget.previewMode) {
+          _saveStateToStorage(widget.currentStory, context);
+        }
         if (widget.currentStory.currentPage.isTheEnd() &&
             !widget.currentStory.currentPage.hasNextNode() &&
             !widget.previewMode) {
