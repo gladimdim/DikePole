@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:gladstoriesengine/gladstoriesengine.dart';
-import 'package:locadeserta/components/game_app_bar.dart';
-import 'package:locadeserta/components/game_component.dart';
+import 'package:locadeserta/components/app_bar_custom.dart';
+import 'package:locadeserta/components/narrow_scaffold.dart';
 import 'package:locadeserta/creator/components/story_view.dart';
 import 'package:locadeserta/export_pdf_view.dart';
 import 'package:locadeserta/models/Localizations.dart';
@@ -22,31 +22,42 @@ class GameView extends StatefulWidget {
 class _MainViewState extends State<GameView> {
   @override
   Widget build(BuildContext context) {
-    return GameViewScaffold(
-      appBar: GameAppBar(
-        title: LDLocalizations.previewStory,
-        onResetStory: () {
-          setState(() {
-            if (widget.catalogStory != null &&
-                widget.catalogStory.gladJson != null) {
-              var templateStory = Story.fromJson(widget.catalogStory.gladJson,
-                  imageResolver: BackgroundImage.getRandomImageForType);
-              widget.story.root = templateStory.root;
-            }
-            widget.story.reset();
-          });
-        },
-        onExportStory: () {
-          Navigator.pushNamed(
-            context,
-            ExtractExportGladStoriesPdfViewArguments.routeName,
-            arguments: ExportGladStoriesPdfViewArguments(
-              story: widget.story,
-            ),
-          );
-        },
-      ),
-      child: Padding(
+    final title = widget.catalogStory != null ? widget.catalogStory.title : LDLocalizations.previewStory;
+    return NarrowScaffold(
+      title: title,
+      actions: [
+        AppBarObject(
+          onTap: () => Navigator.pop(context),
+          text: LDLocalizations.backToStories,
+        ),
+        AppBarObject(
+          onTap: () {
+            setState(() {
+              if (widget.catalogStory != null &&
+                  widget.catalogStory.gladJson != null) {
+                var templateStory = Story.fromJson(widget.catalogStory.gladJson,
+                    imageResolver: BackgroundImage.getRandomImageForType);
+                widget.story.root = templateStory.root;
+              }
+              widget.story.reset();
+            });
+          },
+          text: LDLocalizations.reset,
+        ),
+        AppBarObject(
+          onTap: () {
+            Navigator.pushNamed(
+              context,
+              ExtractExportGladStoriesPdfViewArguments.routeName,
+              arguments: ExportGladStoriesPdfViewArguments(
+                story: widget.story,
+              ),
+            );
+          },
+          text: LDLocalizations.shareStory,
+        ),
+      ],
+      body: Padding(
         padding: const EdgeInsets.only(top: 32.0),
         child: StoryView(
           currentStory: widget.story,

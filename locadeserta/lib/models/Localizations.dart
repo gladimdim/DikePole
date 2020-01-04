@@ -3,12 +3,11 @@ import 'package:locadeserta/loaders/url_parser.dart';
 import 'package:flutter/material.dart';
 import 'package:locadeserta/models/app_preferences.dart';
 
-var version = "1.109";
+var version = "1.110";
 
 String getDefaultOrUrlLanguage() {
   var urlLang = UrlParser.getLanguage();
   final savedLangCode = AppPreferences.instance.getUILanguage();
-  print('saved lang code: $savedLangCode');
   if (LDLocalizations.supportedLanguageCodes.contains(urlLang)) {
     return urlLang;
   } else if (savedLangCode != null &&

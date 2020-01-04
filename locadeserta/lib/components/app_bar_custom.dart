@@ -7,19 +7,19 @@ import 'package:locadeserta/models/Localizations.dart';
 class AppBarCustom extends StatefulWidget {
   final String title;
   final List<AppBarObject> appBarButtons;
+  final Function(bool expand) onExpanded;
+  final bool expanded;
 
-  AppBarCustom({@required this.appBarButtons, @required this.title});
+  AppBarCustom({@required this.appBarButtons, @required this.title, this.onExpanded, this.expanded = false});
 
   @override
   _AppBarCustomState createState() => _AppBarCustomState();
 }
 
 class _AppBarCustomState extends State<AppBarCustom> {
-  bool expanded = false;
-
   @override
   Widget build(BuildContext context) {
-    var menuIcon = expanded ? Icons.arrow_drop_up : Icons.arrow_drop_down;
+    var menuIcon = widget.expanded ? Icons.arrow_drop_up : Icons.arrow_drop_down;
     return Positioned(
       top: 0,
       left: 0.0,
@@ -28,7 +28,7 @@ class _AppBarCustomState extends State<AppBarCustom> {
         child: Container(
           padding: EdgeInsets.only(top: 8.0),
           color: Theme.of(context).backgroundColor,
-          height: expanded
+          height: widget.expanded
               ? (widget.appBarButtons.length * 50).toDouble() + 40
               : 40,
           child: Column(
@@ -55,7 +55,7 @@ class _AppBarCustomState extends State<AppBarCustom> {
                   ),
                 ],
               ),
-              if (expanded)
+              if (widget.expanded)
                 SizedBox(
                   height: (widget.appBarButtons.length * 50).toDouble(),
                   width: MediaQuery.of(context).size.width,
@@ -82,9 +82,7 @@ class _AppBarCustomState extends State<AppBarCustom> {
   }
 
   _toggleExpandedMenu() {
-    setState(() {
-      expanded = !expanded;
-    });
+    widget.onExpanded(!widget.expanded);
   }
 
   _callbackerHandler(VoidCallback callback) {
