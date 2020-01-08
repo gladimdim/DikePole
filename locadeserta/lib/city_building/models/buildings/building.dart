@@ -2,14 +2,33 @@ import 'package:locadeserta/city_building/models/citizen.dart';
 import 'package:locadeserta/city_building/models/resources/resource.dart';
 
 class Building {
+  static Map<RESOURCE_TYPES, int> requiredToBuild;
+
   BUILDING_TYPES type;
-  int output = 0;
+  int stock = 0;
   Map<RESOURCE_TYPES, int> input = Map();
   List<RESOURCE_TYPES> requires = [];
   RESOURCE_TYPES produces;
-  List<Citizen> assignedHumans = [];
+  List<Citizen> _assignedHumans = [];
 
-  void generated() {
+  Building({this.type});
+  void addWorker(Citizen citizen) {
+    _assignedHumans.add(citizen);
+  }
+
+  Citizen removeWorker() {
+    return _assignedHumans.removeLast();
+  }
+
+  bool hasWorkers() {
+    return _assignedHumans.isNotEmpty;
+  }
+
+  void generate() {
+    if (!hasWorkers()) {
+      throw NoWorkersAssignedException(
+          'Building $type has no workers assigned');
+    }
     for (var r in requires) {
       if (input[r] > 0) {
         continue;
@@ -18,18 +37,23 @@ class Building {
       }
     }
 
-    output++;
+    stock++;
 
     input.keys.forEach((key) {
       input[key] = input[key] - 1;
     });
   }
-
 }
 
-enum BUILDING_TYPES { SMITH }
+enum BUILDING_TYPES { SMITH, PASTURE, HOUSE, FIELD, MILL, FOREST }
 
 class NotEnoughResourceException implements Exception {
   String cause;
+
   NotEnoughResourceException(this.cause);
+}
+
+class NoWorkersAssignedException implements Exception {
+  String cause;
+  NoWorkersAssignedException(this.cause);
 }

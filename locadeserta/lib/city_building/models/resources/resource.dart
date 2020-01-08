@@ -32,6 +32,10 @@ class Resource {
   static Resource createFish() {
     return Resource(RESOURCE_TYPES.FISH);
   }
+
+  static Resource createHose() {
+    return Resource(RESOURCE_TYPES.HORSE);
+  }
 }
 
-enum RESOURCE_TYPES { WOOD, FOOD, STONE, SULFUR, IRON, FUR, FISH, FIREARM }
+enum RESOURCE_TYPES { WOOD, FOOD, STONE, SULFUR, IRON, FUR, FISH, FIREARM, HORSE }
