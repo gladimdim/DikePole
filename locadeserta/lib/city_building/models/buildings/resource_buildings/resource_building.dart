@@ -9,23 +9,30 @@ abstract class ResourceBuilding {
   static Map<RESOURCE_TYPES, int> requiredToBuild;
 
   BUILDING_TYPES type;
-  int stock = 0;
   int workMultiplier = 1;
-  Map<RESOURCE_TYPES, int> input = Map();
-  List<RESOURCE_TYPES> requires = [];
+  Map<RESOURCE_TYPES, int> requires = Map();
   RESOURCE_TYPES produces;
   List<Citizen> _assignedHumans = [];
 
-  static fromType(BUILDING_TYPES type) {
+  static ResourceBuilding fromType(BUILDING_TYPES type) {
     switch (type) {
-      case BUILDING_TYPES.FIELD: return Field();
-      case BUILDING_TYPES.MILL: return Mill();
-      case BUILDING_TYPES.QUARRY: return Quarry();
-      case BUILDING_TYPES.SMITH: return Smith();
+      case BUILDING_TYPES.FIELD:
+        return Field();
+      case BUILDING_TYPES.MILL:
+        return Mill();
+      case BUILDING_TYPES.QUARRY:
+        return Quarry();
+      case BUILDING_TYPES.SMITH:
+        return Smith();
     }
   }
+
   void addWorker(Citizen citizen) {
+    if (citizen.occupied()) {
+      return;
+    }
     _assignedHumans.add(citizen);
+    citizen.assignedTo = this;
   }
 
   Citizen removeWorker() {
@@ -36,24 +43,32 @@ abstract class ResourceBuilding {
     return _assignedHumans.isNotEmpty;
   }
 
-  void generate() {
+  void generate(Map<RESOURCE_TYPES, int> stock) {
     if (!hasWorkers()) {
       throw NoWorkersAssignedException(
           'Building $type has no workers assigned');
     }
-    for (var r in requires) {
-      if (input[r] > 0) {
-        continue;
-      } else {
-        throw NotEnoughResourceException('Building $type has not enough: $r');
+
+    if (requires.entries.length > 0) {
+      var executors = [];
+      // check if stock satisfies the required input
+      for (var reqRes in requires.entries) {
+        var inStock = stock[reqRes.key];
+        var requiredToProduce = reqRes.value * _assignedHumans.length;
+        if (requiredToProduce > inStock) {
+          throw NotEnoughResourceException(
+              'There is no enough ${reqRes.key} in stock');
+        } else {
+          executors.add(() {
+            stock[reqRes.key] = stock[reqRes.key] - requiredToProduce;
+          });
+        }
       }
+
+      // no exception was thrown, we can execute the stock
+      executors.forEach((executor) => executor());
     }
-
-    stock = stock + workMultiplier * _assignedHumans.length;
-
-    input.keys.forEach((key) {
-      input[key] = input[key] - 1;
-    });
+    stock[produces] = stock[produces] + _assignedHumans.length * workMultiplier;
   }
 }
 
@@ -67,5 +82,6 @@ class NotEnoughResourceException implements Exception {
 
 class NoWorkersAssignedException implements Exception {
   String cause;
+
   NoWorkersAssignedException(this.cause);
 }
