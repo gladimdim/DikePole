@@ -14,7 +14,7 @@ void main() {
     });
 
     test("Inits with default stock", () {
-      expect(city.stock.keys.length, equals(5));
+      expect(city.stock.keys.length, equals(10));
       expect(city.stock[RESOURCE_TYPES.FOOD], equals(50));
     });
 
@@ -42,6 +42,7 @@ void main() {
       expect(city.stock[RESOURCE_TYPES.FOOD], equals(53));
       expect(city.stock[RESOURCE_TYPES.IRON], equals(9));
       expect(city.stock[RESOURCE_TYPES.FIREARM], equals(6));
+      expect(city.stock[RESOURCE_TYPES.SULFUR], equals(19));
     });
 
     test("makeTurn for city with Field with 2 workers, Smith with 1 worker", () {

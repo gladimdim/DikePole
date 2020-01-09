@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:locadeserta/city_building/models/buildings/resource_buildings/resource_building.dart';
 import 'package:locadeserta/city_building/models/citizen.dart';
 import 'package:locadeserta/city_building/models/resources/resource.dart';
@@ -20,7 +19,7 @@ class Sloboda {
   List<ResourceBuilding> resourceBuildings = [];
 
   Sloboda({this.name}) {
-    for (var i = 0; i < 15; i++) {
+    for (var i = 0; i < properties[CITY_PROPERTIES.CITIZENS]; i++) {
       citizens.add(Citizen());
     }
   }
@@ -31,15 +30,33 @@ class Sloboda {
     RESOURCE_TYPES.WOOD: 50,
     RESOURCE_TYPES.STONE: 30,
     RESOURCE_TYPES.IRON: 10,
+    RESOURCE_TYPES.MONEY: 50,
+    RESOURCE_TYPES.HORSE: 10,
+    RESOURCE_TYPES.SULFUR: 20,
+    RESOURCE_TYPES.FUR: 0,
+    RESOURCE_TYPES.FISH: 0,
   };
 
+  void removeResourceBuildingByType(BUILDING_TYPES type) {
+    var building = resourceBuildings.lastWhere((b) => b.type == type);
+
+    building.removeWorker();
+
+    resourceBuildings.remove(building);
+  }
+
   void makeTurn() {
+    var exceptions = [];
     resourceBuildings.forEach((resBuilding) {
       try {
         resBuilding.generate(stock);
       } catch (e) {
-        debugPrint('Failed to generate resources: $e');
+        exceptions.add(e);
       }
     });
+
+    if (exceptions.isNotEmpty) {
+      throw exceptions;
+    }
   }
 }

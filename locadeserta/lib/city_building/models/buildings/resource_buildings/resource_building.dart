@@ -14,6 +14,10 @@ abstract class ResourceBuilding {
   RESOURCE_TYPES produces;
   List<Citizen> _assignedHumans = [];
 
+  int output() {
+    return workMultiplier * _assignedHumans.length;
+  }
+
   static ResourceBuilding fromType(BUILDING_TYPES type) {
     switch (type) {
       case BUILDING_TYPES.FIELD:
@@ -36,11 +40,15 @@ abstract class ResourceBuilding {
   }
 
   Citizen removeWorker() {
-    return _assignedHumans.removeLast();
+    return _assignedHumans.isNotEmpty ? _assignedHumans.removeLast() : null;
   }
 
   bool hasWorkers() {
     return _assignedHumans.isNotEmpty;
+  }
+
+  int amountOfWorkers() {
+    return _assignedHumans.length;
   }
 
   void generate(Map<RESOURCE_TYPES, int> stock) {
@@ -73,6 +81,15 @@ abstract class ResourceBuilding {
 }
 
 enum BUILDING_TYPES { SMITH, FIELD, MILL, QUARRY }
+
+buildingTypeToString(BUILDING_TYPES type) {
+  switch (type) {
+    case BUILDING_TYPES.FIELD: return 'Field';
+    case BUILDING_TYPES.MILL: return 'Mill';
+    case BUILDING_TYPES.SMITH: return 'Smith';
+    case BUILDING_TYPES.QUARRY: return 'Quarry';
+  }
+}
 
 class NotEnoughResourceException implements Exception {
   String cause;

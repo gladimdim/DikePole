@@ -59,16 +59,16 @@ class _NarrowScaffoldState extends State<NarrowScaffold> {
 //                ),
 //              ),
               ),
-            AppBarCustom(
-              title: widget.title,
-              appBarButtons: widget.actions,
-              expanded: expanded,
-              onExpanded: (expand) {
-                setState(() {
-                  expanded = expand;
-                });
-              },
-            ),
+              AppBarCustom(
+                title: widget.title,
+                appBarButtons: widget.actions,
+                expanded: expanded,
+                onExpanded: (expand) {
+                  setState(() {
+                    expanded = expand;
+                  });
+                },
+              ),
           ],
         ),
       ),
