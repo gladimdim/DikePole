@@ -1,17 +1,29 @@
+import 'package:locadeserta/city_building/models/buildings/resource_buildings/field.dart';
+import 'package:locadeserta/city_building/models/buildings/resource_buildings/mill.dart';
+import 'package:locadeserta/city_building/models/buildings/resource_buildings/quarry.dart';
+import 'package:locadeserta/city_building/models/buildings/resource_buildings/smith.dart';
 import 'package:locadeserta/city_building/models/citizen.dart';
 import 'package:locadeserta/city_building/models/resources/resource.dart';
 
-class Building {
+abstract class ResourceBuilding {
   static Map<RESOURCE_TYPES, int> requiredToBuild;
 
   BUILDING_TYPES type;
   int stock = 0;
+  int workMultiplier = 1;
   Map<RESOURCE_TYPES, int> input = Map();
   List<RESOURCE_TYPES> requires = [];
   RESOURCE_TYPES produces;
   List<Citizen> _assignedHumans = [];
 
-  Building({this.type});
+  static fromType(BUILDING_TYPES type) {
+    switch (type) {
+      case BUILDING_TYPES.FIELD: return Field();
+      case BUILDING_TYPES.MILL: return Mill();
+      case BUILDING_TYPES.QUARRY: return Quarry();
+      case BUILDING_TYPES.SMITH: return Smith();
+    }
+  }
   void addWorker(Citizen citizen) {
     _assignedHumans.add(citizen);
   }
@@ -37,7 +49,7 @@ class Building {
       }
     }
 
-    stock++;
+    stock = stock + workMultiplier * _assignedHumans.length;
 
     input.keys.forEach((key) {
       input[key] = input[key] - 1;
@@ -45,7 +57,7 @@ class Building {
   }
 }
 
-enum BUILDING_TYPES { SMITH, PASTURE, HOUSE, FIELD, MILL, FOREST }
+enum BUILDING_TYPES { SMITH, FIELD, MILL, QUARRY }
 
 class NotEnoughResourceException implements Exception {
   String cause;

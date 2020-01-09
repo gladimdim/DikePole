@@ -1,3 +1,4 @@
+import 'package:locadeserta/city_building/models/buildings/city_buildings/city_building.dart';
 import 'package:test/test.dart';
 import 'package:locadeserta/city_building/models/sloboda.dart';
 
@@ -14,11 +15,11 @@ void main() {
     });
 
     test("Inits with 15 citizens", () {
-      expect(city.citizens.length, equals(15));
+      expect(city.properties[CITY_PROPERTIES.CITIZENS], equals(15));
     });
 
     test("Inits with default buildings", () {
-      expect(city.buildings.length, equals(3));
+      expect(city.cityBuildings.length, equals(1));
     });
   });
 }

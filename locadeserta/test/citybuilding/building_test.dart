@@ -1,10 +1,10 @@
 import 'package:locadeserta/city_building/models/citizen.dart';
 import 'package:test/test.dart';
-import 'package:locadeserta/city_building/models/buildings/building.dart';
+import 'package:locadeserta/city_building/models/buildings/resource_buildings/resource_building.dart';
 
 void main() {
-  group("Building Forest", () {
-    var forest = Building(type: BUILDING_TYPES.FOREST);
+  group("Building Main Tests", () {
+    var forest = ResourceBuilding.fromType(BUILDING_TYPES.SMITH);
     test("Inits with zero stock", () {
       expect(forest.stock, equals(0));
     });
@@ -15,6 +15,10 @@ void main() {
 
     test("Can add worker", () {
       forest.addWorker(Citizen());
+      expect(forest.hasWorkers(), isTrue);
+    });
+
+    test("Can tell if workers are assigned", () {
       expect(forest.hasWorkers(), isTrue);
     });
 

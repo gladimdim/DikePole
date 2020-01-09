@@ -1,22 +1,22 @@
-import 'package:locadeserta/city_building/models/buildings/building.dart';
-import 'package:locadeserta/city_building/models/citizen.dart';
+import 'package:locadeserta/city_building/models/buildings/resource_buildings/resource_building.dart';
 import 'package:locadeserta/city_building/models/resources/resource.dart';
+import 'package:locadeserta/city_building/models/buildings/city_buildings/city_building.dart';
 
 class Sloboda {
   int foundedYear = 1550;
-  List<Citizen> citizens = [];
-  List<Building> buildings = [
-    Building(type: BUILDING_TYPES.FOREST),
-    Building(type: BUILDING_TYPES.PASTURE),
-    Building(type: BUILDING_TYPES.HOUSE),
+  List<CityBuilding> cityBuildings = [
+    CityBuilding.fromType(CITY_BUILDING_TYPES.HOUSE),
   ];
+
+  Map<CITY_PROPERTIES, int> properties = {
+    CITY_PROPERTIES.GLORY: 1,
+    CITY_PROPERTIES.DEFENSE: 1,
+    CITY_PROPERTIES.CITIZENS: 15,
+  };
+  List<ResourceBuilding> resourceBuildings = [];
   String name;
 
-  Sloboda({this.name}) {
-    for (var i = 0; i < 15; i++) {
-      citizens.add(Citizen());
-    }
-  }
+  Sloboda({this.name});
 
   Map<RESOURCE_TYPES, int> stock = {
     RESOURCE_TYPES.FOOD: 50,
