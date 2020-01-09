@@ -25,6 +25,7 @@ class _CityGameState extends State<CityGame> {
     super.initState();
     city = Sloboda();
     city.resourceBuildings.add(ResourceBuilding.fromType(BUILDING_TYPES.FIELD));
+    city.resourceBuildings.add(ResourceBuilding.fromType(BUILDING_TYPES.MILL));
   }
 
   @override

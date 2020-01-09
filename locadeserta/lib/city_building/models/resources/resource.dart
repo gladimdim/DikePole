@@ -43,6 +43,7 @@ enum RESOURCE_TYPES { MONEY, WOOD, FOOD, STONE, SULFUR, IRON, FUR, FISH, FIREARM
 String resourceTypesToString(RESOURCE_TYPES type) {
   switch (type) {
     case RESOURCE_TYPES.FOOD: return 'Food';
+    case RESOURCE_TYPES.MONEY: return 'Money';
     default: return 'PLACEHOLDER';
   }
 }
