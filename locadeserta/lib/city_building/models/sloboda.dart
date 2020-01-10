@@ -50,6 +50,10 @@ class Sloboda {
     }
   }
 
+  List<Citizen> getAllFreeCitizens() {
+    return citizens.where((citizen) => !citizen.occupied()).toList();
+  }
+
   void removeResourceBuildingByType(BUILDING_TYPES type) {
     var building = resourceBuildings.lastWhere((b) => b.type == type);
 
