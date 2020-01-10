@@ -7,7 +7,7 @@ import 'package:locadeserta/InheritedAuth.dart';
 import 'package:locadeserta/StatisticsView.dart';
 import 'package:locadeserta/animations/fade_images.dart';
 import 'package:locadeserta/animations/slideable_button.dart';
-import 'package:locadeserta/city_building/city_game.dart';
+import 'package:locadeserta/city_building/views/city_game.dart';
 import 'package:locadeserta/story_details_view.dart';
 import 'package:locadeserta/components/app_bar_custom.dart';
 import 'package:locadeserta/components/bordered_container.dart';

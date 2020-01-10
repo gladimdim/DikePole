@@ -37,6 +37,19 @@ class Sloboda {
     RESOURCE_TYPES.FISH: 0,
   };
 
+  bool hasFreeCitizens() {
+    return citizens.where((citizen) => !citizen.occupied()).length > 0;
+  }
+
+  Citizen getFirstFreeCitizen() {
+    var free = citizens.where((citizen) => !citizen.occupied()).toList();
+    if (free.isEmpty) {
+      throw 'No free citizens';
+    } else {
+      return free[0];
+    }
+  }
+
   void removeResourceBuildingByType(BUILDING_TYPES type) {
     var building = resourceBuildings.lastWhere((b) => b.type == type);
 

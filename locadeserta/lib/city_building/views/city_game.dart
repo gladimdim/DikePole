@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:locadeserta/animations/slideable_button.dart';
 import 'package:locadeserta/city_building/models/buildings/resource_buildings/resource_building.dart';
-import 'package:locadeserta/city_building/models/citizen.dart';
 import 'package:locadeserta/city_building/models/resources/resource.dart';
 import 'package:locadeserta/city_building/models/sloboda.dart';
+import 'package:locadeserta/city_building/views/city_dashboard.dart';
 import 'package:locadeserta/components/app_bar_custom.dart';
 import 'package:locadeserta/components/bordered_container.dart';
 import 'package:locadeserta/components/narrow_scaffold.dart';
@@ -24,6 +25,7 @@ class _CityGameState extends State<CityGame> {
   initState() {
     super.initState();
     city = Sloboda();
+    city.name = 'Dimitrova';
     city.resourceBuildings.add(ResourceBuilding.fromType(BUILDING_TYPES.FIELD));
     city.resourceBuildings.add(ResourceBuilding.fromType(BUILDING_TYPES.MILL));
   }
@@ -61,7 +63,7 @@ class _CityGameState extends State<CityGame> {
             icon: Icon(Icons.add),
             onPressed: () {
               setState(() {
-                building.addWorker(Citizen());
+                building.addWorker(city.getFirstFreeCitizen());
               });
             },
           )
@@ -112,9 +114,20 @@ class _CityGameState extends State<CityGame> {
       body: FractionallySizedBox(
         heightFactor: 1,
         widthFactor: 1,
-        child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: resourceFieldsColumn),
+        child: PageView.builder(
+          scrollDirection: Axis.horizontal,
+          itemCount: 2,
+          itemBuilder: (context, index) {
+            if (index == 1) {
+              return Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: resourceFieldsColumn);
+            } else {
+              return CityDashboard(city:  city,);
+            }
+          }
+          ,
+        ),
       ),
     );
   }

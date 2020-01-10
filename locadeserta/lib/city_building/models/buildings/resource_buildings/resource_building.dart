@@ -40,7 +40,12 @@ abstract class ResourceBuilding {
   }
 
   Citizen removeWorker() {
-    return _assignedHumans.isNotEmpty ? _assignedHumans.removeLast() : null;
+     var freed = _assignedHumans.isNotEmpty ? _assignedHumans.removeLast() : null;
+     if (freed != null) {
+       freed.free();
+     }
+
+     return freed;
   }
 
   bool hasWorkers() {
