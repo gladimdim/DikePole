@@ -2,9 +2,9 @@ import 'package:locadeserta/city_building/models/buildings/resource_buildings/re
 import 'package:locadeserta/city_building/models/resources/resource.dart';
 
 class Mill extends ResourceBuilding {
-  BUILDING_TYPES type = BUILDING_TYPES.MILL;
+  RESOURCE_BUILDING_TYPES type = RESOURCE_BUILDING_TYPES.MILL;
 
-  static Map<RESOURCE_TYPES, int> requiredToBuild = {
+  Map<RESOURCE_TYPES, int> requiredToBuild = {
     RESOURCE_TYPES.FOOD: 5,
     RESOURCE_TYPES.STONE: 5,
     RESOURCE_TYPES.WOOD: 5,

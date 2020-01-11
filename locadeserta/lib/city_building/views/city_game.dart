@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:locadeserta/animations/slideable_button.dart';
 import 'package:locadeserta/city_building/models/buildings/resource_buildings/resource_building.dart';
-import 'package:locadeserta/city_building/models/resources/resource.dart';
 import 'package:locadeserta/city_building/models/sloboda.dart';
 import 'package:locadeserta/city_building/views/city_dashboard.dart';
+import 'package:locadeserta/city_building/views/resource_buildings_page.dart';
 import 'package:locadeserta/components/app_bar_custom.dart';
-import 'package:locadeserta/components/bordered_container.dart';
 import 'package:locadeserta/components/narrow_scaffold.dart';
-import 'package:locadeserta/creator/components/fat_container.dart';
 import 'package:locadeserta/models/Localizations.dart';
 
 class CityGame extends StatefulWidget {
@@ -26,82 +23,13 @@ class _CityGameState extends State<CityGame> {
     super.initState();
     city = Sloboda();
     city.name = 'Dimitrova';
-    city.resourceBuildings.add(ResourceBuilding.fromType(BUILDING_TYPES.FIELD));
-    city.resourceBuildings.add(ResourceBuilding.fromType(BUILDING_TYPES.MILL));
+    city.resourceBuildings.add(ResourceBuilding.fromType(RESOURCE_BUILDING_TYPES.FIELD));
+    city.resourceBuildings.add(ResourceBuilding.fromType(RESOURCE_BUILDING_TYPES.MILL));
   }
 
   @override
   Widget build(BuildContext context) {
-    var resourceFieldsColumn = city.resourceBuildings.map<Widget>((building) {
-      return Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          IconButton(
-            icon: Icon(Icons.remove),
-            onPressed: () {
-              setState(() {
-                building.removeWorker();
-              });
-            },
-          ),
 
-            Row(
-              children: [
-                Text(
-                  buildingTypeToString(building.type),
-                ),
-                Text(': +${building.output()} ${resourceTypesToString(building.produces)}'),
-                if (building.hasWorkers())
-                Text('( ${building.amountOfWorkers()} '),
-                if (building.hasWorkers())
-                Icon(Icons.person),
-                if (building.hasWorkers())
-                Text(')'),
-              ],
-            ),
-          IconButton(
-            icon: Icon(Icons.add),
-            onPressed: () {
-              setState(() {
-                building.addWorker(city.getFirstFreeCitizen());
-              });
-            },
-          )
-        ],
-      );
-    }).toList();
-    resourceFieldsColumn.add(
-      Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
-        Expanded(
-          child: BorderedContainer(
-            child: SlideableButton(
-              child: FatContainer(text: "Add Field"),
-              onPress: () {
-                setState(() {
-                  city.resourceBuildings
-                      .add(ResourceBuilding.fromType(BUILDING_TYPES.FIELD));
-                });
-              },
-            ),
-          ),
-        ),
-        SizedBox(
-          width: 5,
-        ),
-        Expanded(
-          child: BorderedContainer(
-            child: SlideableButton(
-              child: FatContainer(text: "Remove Field"),
-              onPress: () {
-                setState(() {
-                  city.removeResourceBuildingByType(BUILDING_TYPES.FIELD);
-                });
-              },
-            ),
-          ),
-        )
-      ]),
-    );
     return NarrowScaffold(
       title: 'Sloboda',
       actions: [
@@ -119,9 +47,7 @@ class _CityGameState extends State<CityGame> {
           itemCount: 2,
           itemBuilder: (context, index) {
             if (index == 1) {
-              return Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: resourceFieldsColumn);
+              return ResourceBuildingsPage(city: city);
             } else {
               return CityDashboard(city:  city,);
             }

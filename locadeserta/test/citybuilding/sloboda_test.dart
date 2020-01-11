@@ -40,7 +40,7 @@ void main() {
     });
 
     test("Can remove resource building", () {
-      city.removeResourceBuildingByType(BUILDING_TYPES.MILL);
+      city.removeResourceBuildingByType(RESOURCE_BUILDING_TYPES.MILL);
       expect(city.resourceBuildings.length, equals(0));
       expect(city.getAllFreeCitizens().length, equals(15));
     });
@@ -48,8 +48,8 @@ void main() {
 
   group("Stock management", () {
     var city = Sloboda(name: 'Dimitrova');
-    var field = ResourceBuilding.fromType(BUILDING_TYPES.FIELD);
-    var smith = ResourceBuilding.fromType(BUILDING_TYPES.SMITH);
+    var field = ResourceBuilding.fromType(RESOURCE_BUILDING_TYPES.FIELD);
+    var smith = ResourceBuilding.fromType(RESOURCE_BUILDING_TYPES.SMITH);
     field.addWorker(city.getFirstFreeCitizen());
     smith.addWorker(city.getFirstFreeCitizen());
     city.resourceBuildings.add(field);

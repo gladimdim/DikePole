@@ -52,7 +52,7 @@ class _CityDashboardState extends State<CityDashboard> {
         BorderedContainer(
           child: Row(
             children: [
-              Text("Not occupied citizens: "),
+              Text("Free citizens: "),
               Text(widget.city.citizens.where((citizen) => !citizen.occupied()).toList().length.toString(),)
             ],
           ),

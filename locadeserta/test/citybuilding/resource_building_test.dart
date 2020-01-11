@@ -5,7 +5,7 @@ import 'package:locadeserta/city_building/models/buildings/resource_buildings/re
 
 void main() {
   group("Smith Main Tests", () {
-    var smith = ResourceBuilding.fromType(BUILDING_TYPES.SMITH);
+    var smith = ResourceBuilding.fromType(RESOURCE_BUILDING_TYPES.SMITH);
     Map<RESOURCE_TYPES, int> stock = {
       RESOURCE_TYPES.FOOD: 5,
       RESOURCE_TYPES.IRON: 5,
@@ -42,6 +42,16 @@ void main() {
     test("Cannot generate resource when no workers assigned", () {
       expect(() => smith.generate(stock),
           throwsA(TypeMatcher<NoWorkersAssignedException>()));
+    });
+
+    test("Cannot add more workers than allowed", () {
+      smith.addWorker(Citizen());
+      smith.addWorker(Citizen());
+      smith.addWorker(Citizen());
+      smith.addWorker(Citizen());
+      smith.addWorker(Citizen());
+      expect(() => smith.addWorker(Citizen()),
+          throwsA(TypeMatcher<BuildingFull>()));
     });
   });
 }

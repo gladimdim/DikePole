@@ -44,6 +44,13 @@ String resourceTypesToString(RESOURCE_TYPES type) {
   switch (type) {
     case RESOURCE_TYPES.FOOD: return 'Food';
     case RESOURCE_TYPES.MONEY: return 'Money';
+    case RESOURCE_TYPES.WOOD: return 'Wood';
+    case RESOURCE_TYPES.STONE: return 'Stone';
+    case RESOURCE_TYPES.SULFUR: return 'Sulfur';
+    case RESOURCE_TYPES.IRON: return 'Iron';
+    case RESOURCE_TYPES.FUR: return 'Fur';
+    case RESOURCE_TYPES.FIREARM: return 'Firearm';
+    case RESOURCE_TYPES.HORSE: return 'Horse';
     default: return 'PLACEHOLDER';
   }
 }
