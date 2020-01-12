@@ -2,6 +2,7 @@ import 'package:locadeserta/city_building/models/buildings/resource_buildings/fi
 import 'package:locadeserta/city_building/models/buildings/resource_buildings/mill.dart';
 import 'package:locadeserta/city_building/models/buildings/resource_buildings/quarry.dart';
 import 'package:locadeserta/city_building/models/buildings/resource_buildings/smith.dart';
+import 'package:locadeserta/city_building/models/buildings/resource_buildings/stables.dart';
 import 'package:locadeserta/city_building/models/citizen.dart';
 import 'package:locadeserta/city_building/models/resources/resource.dart';
 
@@ -29,6 +30,8 @@ abstract class ResourceBuilding {
         return Quarry();
       case RESOURCE_BUILDING_TYPES.SMITH:
         return Smith();
+      case RESOURCE_BUILDING_TYPES.STABLES:
+        return Stables();
     }
   }
 
@@ -102,14 +105,25 @@ abstract class ResourceBuilding {
   }
 }
 
-enum RESOURCE_BUILDING_TYPES { SMITH, FIELD, MILL, QUARRY }
+enum RESOURCE_BUILDING_TYPES { SMITH, FIELD, MILL, QUARRY, STABLES }
 
-buildingTypeToString(RESOURCE_BUILDING_TYPES type) {
+String buildingTypeToString(RESOURCE_BUILDING_TYPES type) {
   switch (type) {
     case RESOURCE_BUILDING_TYPES.FIELD: return 'Field';
     case RESOURCE_BUILDING_TYPES.MILL: return 'Mill';
     case RESOURCE_BUILDING_TYPES.SMITH: return 'Smith';
     case RESOURCE_BUILDING_TYPES.QUARRY: return 'Quarry';
+    case RESOURCE_BUILDING_TYPES.STABLES: return 'Stables';
+  }
+}
+
+String buildingTypeToIconPath(RESOURCE_BUILDING_TYPES type) {
+  switch (type) {
+    case RESOURCE_BUILDING_TYPES.FIELD: return 'images/city_building/resource_buildings/mill.gif';
+    case RESOURCE_BUILDING_TYPES.MILL: return 'images/city_building/resource_buildings/mill.gif';
+    case RESOURCE_BUILDING_TYPES.SMITH: return 'images/city_building/resource_buildings/mill.gif';
+    case RESOURCE_BUILDING_TYPES.QUARRY: return 'images/city_building/resource_buildings/mill.gif';
+    case RESOURCE_BUILDING_TYPES.STABLES: return 'images/city_building/resource_buildings/mill.gif';
   }
 }
 

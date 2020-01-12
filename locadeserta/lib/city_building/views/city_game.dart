@@ -3,7 +3,7 @@ import 'package:flutter/rendering.dart';
 import 'package:locadeserta/city_building/models/buildings/resource_buildings/resource_building.dart';
 import 'package:locadeserta/city_building/models/sloboda.dart';
 import 'package:locadeserta/city_building/views/city_dashboard.dart';
-import 'package:locadeserta/city_building/views/resource_buildings_page.dart';
+import 'package:locadeserta/city_building/views/resource_buildings/resource_buildings_page.dart';
 import 'package:locadeserta/components/app_bar_custom.dart';
 import 'package:locadeserta/components/narrow_scaffold.dart';
 import 'package:locadeserta/models/Localizations.dart';
