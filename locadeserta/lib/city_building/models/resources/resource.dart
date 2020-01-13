@@ -38,7 +38,7 @@ class Resource {
   }
 }
 
-enum RESOURCE_TYPES { MONEY, WOOD, FOOD, STONE, SULFUR, IRON, FUR, FISH, FIREARM, HORSE }
+enum RESOURCE_TYPES { MONEY, WOOD, FOOD, STONE, SULFUR, IRON, FUR, FISH, FIREARM, HORSE, IRON_ORE }
 
 String resourceTypesToString(RESOURCE_TYPES type) {
   switch (type) {
@@ -51,6 +51,7 @@ String resourceTypesToString(RESOURCE_TYPES type) {
     case RESOURCE_TYPES.FUR: return 'Fur';
     case RESOURCE_TYPES.FIREARM: return 'Firearm';
     case RESOURCE_TYPES.HORSE: return 'Horse';
+    case RESOURCE_TYPES.IRON_ORE: return 'Ore';
     default: return 'PLACEHOLDER';
   }
 }

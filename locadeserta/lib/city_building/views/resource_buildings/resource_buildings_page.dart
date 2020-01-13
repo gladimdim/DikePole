@@ -82,8 +82,11 @@ class _ResourceBuildingsPageState extends State<ResourceBuildingsPage> {
                     child: ResourceBuildingMetaView(type: value),
                     onPress: () {
                       setState(() {
-                        city.resourceBuildings
-                            .add(ResourceBuilding.fromType(value));
+                        try {
+                          city.buildResourceBuildingFromType(value);
+                        } catch (e) {
+                          print('Cannot build. Missing: $e');
+                        }
                       });
                     },
                   ),

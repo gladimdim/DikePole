@@ -41,6 +41,36 @@ class Sloboda {
     return citizens.where((citizen) => !citizen.occupied()).length > 0;
   }
 
+  _removeFromStock(Map<RESOURCE_TYPES, int> map) {
+    map.entries.forEach((e) {
+      stock[e.key] = stock[e.key] - e.value;
+    });
+  }
+
+  buildResourceBuildingFromType(RESOURCE_BUILDING_TYPES type) {
+    var building = ResourceBuilding.fromType(type);
+    if (canBuildResourceBuilding(building)) {
+      _removeFromStock(building.requiredToBuild);
+      resourceBuildings.add(building);
+    }
+  }
+
+  bool canBuildResourceBuilding(ResourceBuilding b) {
+    var required = b.requiredToBuild;
+    var missing = [];
+    required.entries.forEach((r) {
+      if (r.value > stock[r.key]) {
+        missing.add({r.key: r.value - stock[r.key]});
+      }
+    });
+
+    if (missing.isEmpty) {
+      return true;
+    } else {
+      throw missing;
+    }
+  }
+
   Citizen getFirstFreeCitizen() {
     var free = citizens.where((citizen) => !citizen.occupied()).toList();
     if (free.isEmpty) {

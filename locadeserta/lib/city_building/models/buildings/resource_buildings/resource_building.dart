@@ -1,4 +1,5 @@
 import 'package:locadeserta/city_building/models/buildings/resource_buildings/field.dart';
+import 'package:locadeserta/city_building/models/buildings/resource_buildings/iron_mine.dart';
 import 'package:locadeserta/city_building/models/buildings/resource_buildings/mill.dart';
 import 'package:locadeserta/city_building/models/buildings/resource_buildings/quarry.dart';
 import 'package:locadeserta/city_building/models/buildings/resource_buildings/smith.dart';
@@ -32,6 +33,8 @@ abstract class ResourceBuilding {
         return Smith();
       case RESOURCE_BUILDING_TYPES.STABLES:
         return Stables();
+      case RESOURCE_BUILDING_TYPES.IRON_MINE:
+        return IronMine();
     }
   }
 
@@ -105,7 +108,7 @@ abstract class ResourceBuilding {
   }
 }
 
-enum RESOURCE_BUILDING_TYPES { SMITH, FIELD, MILL, QUARRY, STABLES }
+enum RESOURCE_BUILDING_TYPES { SMITH, FIELD, MILL, QUARRY, STABLES, IRON_MINE }
 
 String buildingTypeToString(RESOURCE_BUILDING_TYPES type) {
   switch (type) {
@@ -114,6 +117,7 @@ String buildingTypeToString(RESOURCE_BUILDING_TYPES type) {
     case RESOURCE_BUILDING_TYPES.SMITH: return 'Smith';
     case RESOURCE_BUILDING_TYPES.QUARRY: return 'Quarry';
     case RESOURCE_BUILDING_TYPES.STABLES: return 'Stables';
+    case RESOURCE_BUILDING_TYPES.IRON_MINE: return 'Iron mine';
   }
 }
 
@@ -124,6 +128,7 @@ String buildingTypeToIconPath(RESOURCE_BUILDING_TYPES type) {
     case RESOURCE_BUILDING_TYPES.SMITH: return 'images/city_building/resource_buildings/mill.gif';
     case RESOURCE_BUILDING_TYPES.QUARRY: return 'images/city_building/resource_buildings/mill.gif';
     case RESOURCE_BUILDING_TYPES.STABLES: return 'images/city_building/resource_buildings/mill.gif';
+    case RESOURCE_BUILDING_TYPES.IRON_MINE: return 'images/city_building/resource_buildings/mill.gif';
   }
 }
 
