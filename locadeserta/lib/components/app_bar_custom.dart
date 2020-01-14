@@ -6,15 +6,18 @@ import 'package:locadeserta/models/Localizations.dart';
 
 class AppBarCustom extends StatefulWidget {
   final String title;
+  final Widget titleView;
   final List<AppBarObject> appBarButtons;
   final Function(bool expand) onExpanded;
   final bool expanded;
 
-  AppBarCustom(
-      {this.appBarButtons = const [],
-      @required this.title,
-      this.onExpanded,
-      this.expanded = false});
+  AppBarCustom({
+    this.appBarButtons = const [],
+    @required this.title,
+    this.onExpanded,
+    this.titleView,
+    this.expanded = false,
+  });
 
   @override
   _AppBarCustomState createState() => _AppBarCustomState();
@@ -45,11 +48,16 @@ class _AppBarCustomState extends State<AppBarCustom> {
                 children: <Widget>[
                   Padding(
                     padding: EdgeInsets.only(left: 10),
-                    child: Text(
-                      widget.title,
-                      style: Theme.of(context).textTheme.title,
-                      textAlign: TextAlign.center,
-                    ),
+                    child: widget.titleView != null
+                        ? SizedBox(
+                            width: MediaQuery.of(context).size.width * 0.7,
+                            child: widget.titleView,
+                          )
+                        : Text(
+                            widget.title,
+                            style: Theme.of(context).textTheme.title,
+                            textAlign: TextAlign.center,
+                          ),
                   ),
                   if (widget.appBarButtons != null)
                     ButtonTextIcon(

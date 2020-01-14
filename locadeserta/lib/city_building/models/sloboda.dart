@@ -2,6 +2,8 @@ import 'package:locadeserta/city_building/models/buildings/resource_buildings/re
 import 'package:locadeserta/city_building/models/citizen.dart';
 import 'package:locadeserta/city_building/models/resources/resource.dart';
 import 'package:locadeserta/city_building/models/buildings/city_buildings/city_building.dart';
+import 'package:locadeserta/city_building/models/stock.dart';
+import 'package:rxdart/rxdart.dart';
 
 class Sloboda {
   String name;
@@ -18,24 +20,17 @@ class Sloboda {
 
   List<ResourceBuilding> resourceBuildings = [];
 
+  final Stock stock = Stock();
+
+  BehaviorSubject _innerChanges = BehaviorSubject();
+  ValueStream changes;
+
   Sloboda({this.name}) {
     for (var i = 0; i < properties[CITY_PROPERTIES.CITIZENS]; i++) {
       citizens.add(Citizen());
     }
+    changes = _innerChanges.stream;
   }
-
-  Map<RESOURCE_TYPES, int> stock = {
-    RESOURCE_TYPES.FOOD: 50,
-    RESOURCE_TYPES.FIREARM: 5,
-    RESOURCE_TYPES.WOOD: 50,
-    RESOURCE_TYPES.STONE: 30,
-    RESOURCE_TYPES.IRON: 10,
-    RESOURCE_TYPES.MONEY: 50,
-    RESOURCE_TYPES.HORSE: 10,
-    RESOURCE_TYPES.SULFUR: 20,
-    RESOURCE_TYPES.FUR: 0,
-    RESOURCE_TYPES.FISH: 0,
-  };
 
   bool hasFreeCitizens() {
     return citizens.where((citizen) => !citizen.occupied()).length > 0;
@@ -43,8 +38,10 @@ class Sloboda {
 
   _removeFromStock(Map<RESOURCE_TYPES, int> map) {
     map.entries.forEach((e) {
-      stock[e.key] = stock[e.key] - e.value;
+      stock.removeFromType(e.key, e.value);
     });
+
+    _innerChanges.add(this);
   }
 
   buildResourceBuildingFromType(RESOURCE_BUILDING_TYPES type) {
@@ -52,6 +49,7 @@ class Sloboda {
     if (canBuildResourceBuilding(building)) {
       _removeFromStock(building.requiredToBuild);
       resourceBuildings.add(building);
+      _innerChanges.add(this);
     }
   }
 
@@ -59,8 +57,8 @@ class Sloboda {
     var required = b.requiredToBuild;
     var missing = [];
     required.entries.forEach((r) {
-      if (r.value > stock[r.key]) {
-        missing.add({r.key: r.value - stock[r.key]});
+      if (r.value > stock.getByType(r.key)) {
+        missing.add({r.key: r.value - stock.getByType(r.key)});
       }
     });
 
@@ -86,15 +84,15 @@ class Sloboda {
 
   void removeResourceBuildingByType(RESOURCE_BUILDING_TYPES type) {
     var building = resourceBuildings.lastWhere((b) => b.type == type);
-
     building.removeWorker();
-
     resourceBuildings.remove(building);
+    _innerChanges.add(this);
   }
 
   void removeResourceBuilding(ResourceBuilding building) {
     resourceBuildings.remove(building);
     building.destroy();
+    _innerChanges.add(this);
   }
 
   void makeTurn() {
@@ -108,7 +106,12 @@ class Sloboda {
     });
 
     if (exceptions.isNotEmpty) {
+      _innerChanges.add(this);
       throw exceptions;
     }
+  }
+
+  void dispose() {
+    _innerChanges.close();
   }
 }

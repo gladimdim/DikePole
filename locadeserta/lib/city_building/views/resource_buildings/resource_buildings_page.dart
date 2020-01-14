@@ -33,10 +33,10 @@ class _ResourceBuildingsPageState extends State<ResourceBuildingsPage> {
                     icon: Icon(Icons.remove),
                     onPressed: !building.isEmpty()
                         ? () {
-                      setState(() {
-                        building.removeWorker();
-                      });
-                    }
+                            setState(() {
+                              building.removeWorker();
+                            });
+                          }
                         : null,
                   ),
                   Row(
@@ -56,18 +56,16 @@ class _ResourceBuildingsPageState extends State<ResourceBuildingsPage> {
                     icon: Icon(Icons.add),
                     onPressed: !building.isFull()
                         ? () {
-                      setState(() {
-                        building.addWorker(city.getFirstFreeCitizen());
-                      });
-                    }
+                            setState(() {
+                              building.addWorker(city.getFirstFreeCitizen());
+                            });
+                          }
                         : null,
                   ),
                   IconButton(
                     icon: Icon(Icons.delete_forever),
                     onPressed: () {
-                      setState(() {
-                        city.removeResourceBuilding(building);
-                      });
+                      city.removeResourceBuilding(building);
                     },
                   )
                 ],
@@ -81,13 +79,11 @@ class _ResourceBuildingsPageState extends State<ResourceBuildingsPage> {
                   child: SlideableButton(
                     child: ResourceBuildingMetaView(type: value),
                     onPress: () {
-                      setState(() {
-                        try {
-                          city.buildResourceBuildingFromType(value);
-                        } catch (e) {
-                          print('Cannot build. Missing: $e');
-                        }
-                      });
+                      try {
+                        city.buildResourceBuildingFromType(value);
+                      } catch (e) {
+                        print('Cannot build. Missing: $e');
+                      }
                     },
                   ),
                 ),

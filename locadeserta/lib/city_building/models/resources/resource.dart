@@ -38,20 +38,72 @@ class Resource {
   }
 }
 
-enum RESOURCE_TYPES { MONEY, WOOD, FOOD, STONE, SULFUR, IRON, FUR, FISH, FIREARM, HORSE, IRON_ORE }
+enum RESOURCE_TYPES {
+  MONEY,
+  WOOD,
+  FOOD,
+  STONE,
+  SULFUR,
+  IRON,
+  FUR,
+  FISH,
+  FIREARM,
+  HORSE,
+  IRON_ORE
+}
 
 String resourceTypesToString(RESOURCE_TYPES type) {
   switch (type) {
-    case RESOURCE_TYPES.FOOD: return 'Food';
-    case RESOURCE_TYPES.MONEY: return 'Money';
-    case RESOURCE_TYPES.WOOD: return 'Wood';
-    case RESOURCE_TYPES.STONE: return 'Stone';
-    case RESOURCE_TYPES.SULFUR: return 'Sulfur';
-    case RESOURCE_TYPES.IRON: return 'Iron';
-    case RESOURCE_TYPES.FUR: return 'Fur';
-    case RESOURCE_TYPES.FIREARM: return 'Firearm';
-    case RESOURCE_TYPES.HORSE: return 'Horse';
-    case RESOURCE_TYPES.IRON_ORE: return 'Ore';
-    default: return 'PLACEHOLDER';
+    case RESOURCE_TYPES.FOOD:
+      return 'Food';
+    case RESOURCE_TYPES.MONEY:
+      return 'Money';
+    case RESOURCE_TYPES.WOOD:
+      return 'Wood';
+    case RESOURCE_TYPES.STONE:
+      return 'Stone';
+    case RESOURCE_TYPES.SULFUR:
+      return 'Sulfur';
+    case RESOURCE_TYPES.IRON:
+      return 'Iron';
+    case RESOURCE_TYPES.FUR:
+      return 'Fur';
+    case RESOURCE_TYPES.FIREARM:
+      return 'Firearm';
+    case RESOURCE_TYPES.HORSE:
+      return 'Horse';
+    case RESOURCE_TYPES.IRON_ORE:
+      return 'Ore';
+    case RESOURCE_TYPES.FISH:
+      return 'Fish';
+    default:
+      return 'PLACEHOLDER';
+  }
+}
+
+String resourceTypesToImagePath(RESOURCE_TYPES type) {
+  switch (type) {
+    case RESOURCE_TYPES.FOOD:
+      return 'images/city_building/resources/stone.png';
+    case RESOURCE_TYPES.MONEY:
+      return 'images/city_building/resources/stone.png';
+    case RESOURCE_TYPES.WOOD:
+      return 'images/city_building/resources/stone.png';
+    case RESOURCE_TYPES.STONE:
+      return 'images/city_building/resources/stone.png';
+    case RESOURCE_TYPES.SULFUR:
+      return 'images/city_building/resources/stone.png';
+    case RESOURCE_TYPES.IRON:
+      return 'images/city_building/resources/stone.png';
+    case RESOURCE_TYPES.FUR:
+      return 'images/city_building/resources/stone.png';
+    case RESOURCE_TYPES.FIREARM:
+      return 'images/city_building/resources/stone.png';
+    case RESOURCE_TYPES.HORSE:
+      return 'images/city_building/resources/stone.png';
+    case RESOURCE_TYPES.IRON_ORE:
+      return 'images/city_building/resources/stone.png';
+    default:
+      return 'images/city_building/resources/stone.png';
   }
 }

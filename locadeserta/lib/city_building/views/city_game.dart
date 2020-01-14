@@ -4,6 +4,7 @@ import 'package:locadeserta/city_building/models/buildings/resource_buildings/re
 import 'package:locadeserta/city_building/models/sloboda.dart';
 import 'package:locadeserta/city_building/views/city_dashboard.dart';
 import 'package:locadeserta/city_building/views/resource_buildings/resource_buildings_page.dart';
+import 'package:locadeserta/city_building/views/stock_view.dart';
 import 'package:locadeserta/components/app_bar_custom.dart';
 import 'package:locadeserta/components/narrow_scaffold.dart';
 import 'package:locadeserta/models/Localizations.dart';
@@ -23,38 +24,45 @@ class _CityGameState extends State<CityGame> {
     super.initState();
     city = Sloboda();
     city.name = 'Dimitrova';
-    city.resourceBuildings.add(ResourceBuilding.fromType(RESOURCE_BUILDING_TYPES.FIELD));
-    city.resourceBuildings.add(ResourceBuilding.fromType(RESOURCE_BUILDING_TYPES.MILL));
+    city.resourceBuildings
+        .add(ResourceBuilding.fromType(RESOURCE_BUILDING_TYPES.FIELD));
+    city.resourceBuildings
+        .add(ResourceBuilding.fromType(RESOURCE_BUILDING_TYPES.MILL));
   }
 
   @override
   Widget build(BuildContext context) {
-
-    return NarrowScaffold(
-      title: 'Sloboda',
-      actions: [
-        AppBarObject(
-            text: LDLocalizations.backToMenu,
-            onTap: () {
-              Navigator.pop(context);
-            })
-      ],
-      body: FractionallySizedBox(
-        heightFactor: 1,
-        widthFactor: 1,
-        child: PageView.builder(
-          scrollDirection: Axis.horizontal,
-          itemCount: 2,
-          itemBuilder: (context, index) {
-            if (index == 1) {
-              return ResourceBuildingsPage(city: city);
-            } else {
-              return CityDashboard(city:  city,);
-            }
-          }
-          ,
-        ),
-      ),
+    return StreamBuilder(
+      stream: city.changes,
+      builder: (context, snapshot) {
+        return NarrowScaffold(
+          titleView: StockMiniView(stock: city.stock),
+          actions: [
+            AppBarObject(
+                text: LDLocalizations.backToMenu,
+                onTap: () {
+                  Navigator.pop(context);
+                })
+          ],
+          body: FractionallySizedBox(
+            heightFactor: 1,
+            widthFactor: 1,
+            child: PageView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: 2,
+              itemBuilder: (context, index) {
+                if (index == 1) {
+                  return ResourceBuildingsPage(city: city);
+                } else {
+                  return CityDashboard(
+                    city: city,
+                  );
+                }
+              },
+            ),
+          ),
+        );
+      },
     );
   }
 }

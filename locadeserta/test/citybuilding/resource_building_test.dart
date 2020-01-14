@@ -1,17 +1,18 @@
 import 'package:locadeserta/city_building/models/citizen.dart';
 import 'package:locadeserta/city_building/models/resources/resource.dart';
+import 'package:locadeserta/city_building/models/stock.dart';
 import 'package:test/test.dart';
 import 'package:locadeserta/city_building/models/buildings/resource_buildings/resource_building.dart';
 
 void main() {
   group("Smith Main Tests", () {
     var smith = ResourceBuilding.fromType(RESOURCE_BUILDING_TYPES.SMITH);
-    Map<RESOURCE_TYPES, int> stock = {
+    Stock stock = Stock({
       RESOURCE_TYPES.FOOD: 5,
       RESOURCE_TYPES.IRON: 5,
       RESOURCE_TYPES.FIREARM: 0,
       RESOURCE_TYPES.SULFUR: 1,
-    };
+    });
 
     test("Does not require other resources", () {
       expect(smith.requires, isNotEmpty);
@@ -28,9 +29,9 @@ void main() {
 
     test("Can generate wood with 1 worker", () {
       smith.generate(stock);
-      expect(stock[RESOURCE_TYPES.FIREARM], equals(1));
-      expect(stock[RESOURCE_TYPES.IRON], equals(4));
-      expect(stock[RESOURCE_TYPES.FOOD], equals(3));
+      expect(stock.getByType(RESOURCE_TYPES.FIREARM), equals(1));
+      expect(stock.getByType(RESOURCE_TYPES.IRON), equals(4));
+      expect(stock.getByType(RESOURCE_TYPES.FOOD), equals(3));
     });
 
     test("Can remove workers", () {

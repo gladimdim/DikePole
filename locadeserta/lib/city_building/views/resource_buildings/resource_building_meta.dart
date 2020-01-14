@@ -49,7 +49,15 @@ class _ResourceBuildingMetaViewState extends State<ResourceBuildingMetaView> {
           children: [
             Text('Build'),
             ...building.requiredToBuild.entries.map((e) {
-              return Text('${resourceTypesToString(e.key)}: ${e.value}');
+              return Row(
+                children: [
+                  Image.asset(
+                    resourceTypesToImagePath(e.key),
+                    height: 64,
+                  ),
+                  Text('${e.value}'),
+                ],
+              );
             }).toList()
           ],
         ),
@@ -75,7 +83,8 @@ class _ResourceBuildingMetaViewState extends State<ResourceBuildingMetaView> {
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
             Text('Output'),
-            Text('${resourceTypesToString(building.produces)}: ${building.workMultiplier}'),
+            Text(
+                '${resourceTypesToString(building.produces)}: ${building.workMultiplier}'),
           ],
         )
       ],

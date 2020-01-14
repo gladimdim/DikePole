@@ -6,6 +6,7 @@ import 'package:locadeserta/city_building/models/buildings/resource_buildings/sm
 import 'package:locadeserta/city_building/models/buildings/resource_buildings/stables.dart';
 import 'package:locadeserta/city_building/models/citizen.dart';
 import 'package:locadeserta/city_building/models/resources/resource.dart';
+import 'package:locadeserta/city_building/models/stock.dart';
 
 abstract class ResourceBuilding {
   Map<RESOURCE_TYPES, int> requiredToBuild;
@@ -79,7 +80,7 @@ abstract class ResourceBuilding {
     return _assignedHumans.length;
   }
 
-  void generate(Map<RESOURCE_TYPES, int> stock) {
+  void generate(Stock stock) {
     if (!hasWorkers()) {
       throw NoWorkersAssignedException(
           'Building $type has no workers assigned');
@@ -89,14 +90,14 @@ abstract class ResourceBuilding {
       var executors = [];
       // check if stock satisfies the required input
       for (var reqRes in requires.entries) {
-        var inStock = stock[reqRes.key];
+        var inStock = stock.getByType(reqRes.key);
         var requiredToProduce = reqRes.value * _assignedHumans.length;
         if (requiredToProduce > inStock) {
           throw NotEnoughResourceException(
               'There is no enough ${reqRes.key} in stock');
         } else {
           executors.add(() {
-            stock[reqRes.key] = stock[reqRes.key] - requiredToProduce;
+            stock.removeFromType(reqRes.key, requiredToProduce);
           });
         }
       }
@@ -104,7 +105,7 @@ abstract class ResourceBuilding {
       // no exception was thrown, we can execute the stock
       executors.forEach((executor) => executor());
     }
-    stock[produces] = stock[produces] + _assignedHumans.length * workMultiplier;
+    stock.addToType(produces, _assignedHumans.length * workMultiplier);
   }
 }
 

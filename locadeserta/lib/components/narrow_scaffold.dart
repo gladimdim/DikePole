@@ -7,8 +7,14 @@ class NarrowScaffold extends StatefulWidget {
   final Widget body;
   final List<AppBarObject> actions;
   final String title;
+  final Widget titleView;
 
-  NarrowScaffold({this.body, this.actions, this.title});
+  NarrowScaffold({
+    this.body,
+    this.actions,
+    this.title,
+    this.titleView,
+  });
 
   @override
   _NarrowScaffoldState createState() => _NarrowScaffoldState();
@@ -59,16 +65,17 @@ class _NarrowScaffoldState extends State<NarrowScaffold> {
 //                ),
 //              ),
               ),
-              AppBarCustom(
-                title: widget.title,
-                appBarButtons: widget.actions,
-                expanded: expanded,
-                onExpanded: (expand) {
-                  setState(() {
-                    expanded = expand;
-                  });
-                },
-              ),
+            AppBarCustom(
+              title: widget.title,
+              titleView: widget.titleView,
+              appBarButtons: widget.actions,
+              expanded: expanded,
+              onExpanded: (expand) {
+                setState(() {
+                  expanded = expand;
+                });
+              },
+            ),
           ],
         ),
       ),
