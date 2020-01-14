@@ -60,9 +60,12 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     # city building
+    - images/city_building/resource_buildings/kurin.png
     - images/city_building/resource_buildings/mill.gif
     - images/city_building/resources/stone.png
     - images/city_building/resources/wood.png
+    - images/city_building/resources/kurin.png
+    - images/city_building/resources/chastokol.png
     # bulrush images
     - images/background/bulrush/c_0.jpg
     - images/background/bulrush/0.jpg

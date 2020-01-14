@@ -35,13 +35,10 @@ class _ResourceBuildingMetaViewState extends State<ResourceBuildingMetaView> {
               padding: const EdgeInsets.all(8.0),
               child: Image.asset(
                 buildingTypeToIconPath(widget.type),
-                height: 64,
+                height: 70,
               ),
             ),
           ],
-        ),
-        SizedBox(
-          width: 5,
         ),
         Column(
           mainAxisAlignment: MainAxisAlignment.start,

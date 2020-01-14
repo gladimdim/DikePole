@@ -124,12 +124,12 @@ String buildingTypeToString(RESOURCE_BUILDING_TYPES type) {
 
 String buildingTypeToIconPath(RESOURCE_BUILDING_TYPES type) {
   switch (type) {
-    case RESOURCE_BUILDING_TYPES.FIELD: return 'images/city_building/resource_buildings/mill.gif';
-    case RESOURCE_BUILDING_TYPES.MILL: return 'images/city_building/resource_buildings/mill.gif';
-    case RESOURCE_BUILDING_TYPES.SMITH: return 'images/city_building/resource_buildings/mill.gif';
-    case RESOURCE_BUILDING_TYPES.QUARRY: return 'images/city_building/resource_buildings/mill.gif';
-    case RESOURCE_BUILDING_TYPES.STABLES: return 'images/city_building/resource_buildings/mill.gif';
-    case RESOURCE_BUILDING_TYPES.IRON_MINE: return 'images/city_building/resource_buildings/mill.gif';
+    case RESOURCE_BUILDING_TYPES.FIELD: return 'images/city_building/resource_buildings/kurin.png';
+    case RESOURCE_BUILDING_TYPES.MILL: return 'images/city_building/resource_buildings/kurin.png';
+    case RESOURCE_BUILDING_TYPES.SMITH: return 'images/city_building/resource_buildings/kurin.png';
+    case RESOURCE_BUILDING_TYPES.QUARRY: return 'images/city_building/resource_buildings/kurin.png';
+    case RESOURCE_BUILDING_TYPES.STABLES: return 'images/city_building/resource_buildings/kurin.png';
+    case RESOURCE_BUILDING_TYPES.IRON_MINE: return 'images/city_building/resources/chastokol.png';
   }
 }
 
