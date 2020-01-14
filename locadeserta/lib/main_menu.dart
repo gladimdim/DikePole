@@ -211,7 +211,7 @@ class _MainMenuState extends State<MainMenu> with TickerProviderStateMixin {
                 },
                 child:  BorderedContainer(
                   child: FatContainer(
-                    text: "City Game",
+                    text: "City Building Game (dev)",
                   ),
                 ),
               ),
