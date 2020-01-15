@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:locadeserta/animations/slideable_button.dart';
 import 'package:locadeserta/city_building/models/buildings/resource_buildings/resource_building.dart';
 import 'package:locadeserta/city_building/models/resources/resource.dart';
 import 'package:locadeserta/city_building/models/sloboda.dart';
@@ -17,6 +16,8 @@ class ResourceBuildingsPage extends StatefulWidget {
 }
 
 class _ResourceBuildingsPageState extends State<ResourceBuildingsPage> {
+  var selected;
+
   @override
   Widget build(BuildContext context) {
     var city = widget.city;
@@ -76,14 +77,27 @@ class _ResourceBuildingsPageState extends State<ResourceBuildingsPage> {
               return Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: BorderedContainer(
-                  child: SlideableButton(
-                    child: ResourceBuildingMetaView(type: value),
-                    onPress: () {
-                      try {
-                        city.buildResourceBuildingFromType(value);
-                      } catch (e) {
-                        print('Cannot build. Missing: $e');
+                  child: InkWell(
+                    child: ResourceBuildingMetaView(
+                      type: value,
+                      selected: selected == value,
+                      onBuildPressed: () {
+                        try {
+                          city.buildResourceBuildingFromType(value);
+                        } catch (e) {
+                          print('Cannot build. Missing: $e');
+                        }
                       }
+                    ),
+                    onTap: () {
+                      setState(() {
+                        if (selected == value) {
+                          selected = null;
+                        } else {
+                          selected = value;
+                        }
+                      });
+
                     },
                   ),
                 ),
