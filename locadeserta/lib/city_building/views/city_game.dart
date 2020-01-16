@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:locadeserta/city_building/models/buildings/resource_buildings/resource_building.dart';
 import 'package:locadeserta/city_building/models/sloboda.dart';
+import 'package:locadeserta/city_building/views/city_buildings/city_buildings_page.dart';
 import 'package:locadeserta/city_building/views/city_dashboard.dart';
 import 'package:locadeserta/city_building/views/resource_buildings/resource_buildings_page.dart';
 import 'package:locadeserta/city_building/views/stock_view.dart';
@@ -49,14 +50,16 @@ class _CityGameState extends State<CityGame> {
             widthFactor: 1,
             child: PageView.builder(
               scrollDirection: Axis.horizontal,
-              itemCount: 2,
+              itemCount: 3,
               itemBuilder: (context, index) {
                 if (index == 1) {
                   return ResourceBuildingsPage(city: city);
-                } else {
+                } else if (index == 0) {
                   return CityDashboard(
                     city: city,
                   );
+                } else {
+                  return CityBuildingsPage(city: city);
                 }
               },
             ),

@@ -1,28 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:locadeserta/animations/slideable_button.dart';
-import 'package:locadeserta/city_building/models/buildings/resource_buildings/resource_building.dart';
+import 'package:locadeserta/city_building/models/buildings/city_buildings/city_building.dart';
 import 'package:locadeserta/city_building/models/resources/resource.dart';
 import 'package:locadeserta/components/bordered_container.dart';
 import 'package:locadeserta/creator/components/fat_container.dart';
 
-class ResourceBuildingMetaView extends StatefulWidget {
-  final RESOURCE_BUILDING_TYPES type;
+class CityBuildingMetaView extends StatefulWidget {
+  final CITY_BUILDING_TYPES type;
   final bool selected;
   final VoidCallback onBuildPressed;
 
-  ResourceBuildingMetaView(
+  CityBuildingMetaView(
       {this.type, this.selected = false, this.onBuildPressed});
 
   @override
-  _ResourceBuildingMetaViewState createState() =>
-      _ResourceBuildingMetaViewState();
+  _CityBuildingMetaViewState createState() =>
+      _CityBuildingMetaViewState();
 }
 
-class _ResourceBuildingMetaViewState extends State<ResourceBuildingMetaView> {
+class _CityBuildingMetaViewState extends State<CityBuildingMetaView> {
   @override
   Widget build(BuildContext context) {
-    var building = ResourceBuilding.fromType(widget.type);
+    var building = CityBuilding.fromType(widget.type);
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Column(
@@ -33,7 +33,7 @@ class _ResourceBuildingMetaViewState extends State<ResourceBuildingMetaView> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Text(
-                '${buildingTypeToString(widget.type)}',
+                '${cityBuildingTypeToString(widget.type)}',
                 style: Theme.of(context)
                     .textTheme
                     .title
@@ -42,7 +42,7 @@ class _ResourceBuildingMetaViewState extends State<ResourceBuildingMetaView> {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Image.asset(
-                  buildingTypeToIconPath(widget.type),
+                  cityTypeToIconPath(widget.type),
                   height: 320,
                 ),
               ),
@@ -55,54 +55,17 @@ class _ResourceBuildingMetaViewState extends State<ResourceBuildingMetaView> {
                 Text('Requires to build'),
                 Column(
                     children: building.requiredToBuild.entries.map((e) {
-                  return Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Image.asset(
-                        resourceTypesToImagePath(e.key),
-                        height: 64,
-                      ),
-                      Text(': ${e.value}'),
-                    ],
-                  );
-                }).toList())
-              ],
-            ),
-            SizedBox(
-              height: 35,
-            ),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text('Max number of workers'),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text('${building.maxWorkers}x'),
-                    Icon(Icons.person),
-                  ],
-                ),
-              ],
-            ),
-            SizedBox(
-              height: 35,
-            ),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text('Input'),
-                ...building.requires.entries.map((e) {
-                  return Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Image.asset(
-                        resourceTypesToImagePath(e.key),
-                        height: 64,
-                      ),
-                      Text(': ${e.value}'),
-                    ],
-                  );
-                }).toList(),
+                      return Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Image.asset(
+                            resourceTypesToImagePath(e.key),
+                            height: 64,
+                          ),
+                          Text(': ${e.value}'),
+                        ],
+                      );
+                    }).toList())
               ],
             ),
             SizedBox(
@@ -113,7 +76,7 @@ class _ResourceBuildingMetaViewState extends State<ResourceBuildingMetaView> {
               children: [
                 Text('Output'),
                 Text(
-                    '${resourceTypesToString(building.produces)}: ${building.workMultiplier}'),
+                    '${cityBuildingTypeToString(building.produces)}: ${building.workMultiplier}'),
               ],
             ),
             SizedBox(

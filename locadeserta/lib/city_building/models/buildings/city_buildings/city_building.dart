@@ -24,3 +24,21 @@ abstract class CityBuilding {
 enum CITY_BUILDING_TYPES { HOUSE, CHURCH, TOWER, WATCH_TOWER }
 
 enum CITY_PROPERTIES { FAITH, DEFENSE, GLORY, CITIZENS }
+
+String cityBuildingTypeToString(CITY_BUILDING_TYPES type) {
+  switch (type) {
+    case CITY_BUILDING_TYPES.WATCH_TOWER: return 'Watch Tower';
+    case CITY_BUILDING_TYPES.TOWER: return 'Tower';
+    case CITY_BUILDING_TYPES.HOUSE: return 'House';
+    case CITY_BUILDING_TYPES.CHURCH: return 'Church';
+  }
+}
+
+String cityTypeToIconPath(CITY_BUILDING_TYPES type) {
+  switch (type) {
+    case CITY_BUILDING_TYPES.WATCH_TOWER: return 'images/city_building/city_buildings/kurin.png';
+    case CITY_BUILDING_TYPES.TOWER: return'images/city_building/city_buildings/kurin.png';
+    case CITY_BUILDING_TYPES.HOUSE: return 'images/city_building/city_buildings/kurin.png';
+    case CITY_BUILDING_TYPES.CHURCH: return 'images/city_building/city_buildings/kurin.png';
+  }
+}
