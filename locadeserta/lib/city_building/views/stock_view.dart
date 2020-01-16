@@ -9,17 +9,20 @@ class StockMiniView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(top: 6.0),
-      child: Row(
-        children: stock.getResourceTypesKeys().map<Widget>((key) {
-          return Text(
-            '${resourceTypesToString(key)[0]}: ${stock.getByType(key)} ',
-            style: TextStyle(
-              fontSize: 12,
-            ),
-          );
-        }).toList(),
+    return SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      child: Padding(
+        padding: const EdgeInsets.only(top: 6.0),
+        child: Row(
+          children: stock.getResourceTypesKeys().map<Widget>((key) {
+            return Text(
+              '${resourceTypesToString(key)}: ${stock.getByType(key)} ',
+              style: TextStyle(
+                fontSize: 12,
+              ),
+            );
+          }).toList(),
+        ),
       ),
     );
   }

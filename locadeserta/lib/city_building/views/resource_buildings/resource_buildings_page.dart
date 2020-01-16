@@ -47,7 +47,7 @@ class _ResourceBuildingsPageState extends State<ResourceBuildingsPage> {
                         selected: selected == value,
                         onBuildPressed: () {
                           try {
-                            city.buildResourceBuildingFromType(value);
+                            city.buildBuilding(ResourceBuilding.fromType(value));
                           } catch (e) {
                             print('Cannot build. Missing: $e');
                           }

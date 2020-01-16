@@ -1,3 +1,4 @@
+import 'package:locadeserta/city_building/models/buildings/buildable.dart';
 import 'package:locadeserta/city_building/models/buildings/resource_buildings/field.dart';
 import 'package:locadeserta/city_building/models/buildings/resource_buildings/iron_mine.dart';
 import 'package:locadeserta/city_building/models/buildings/resource_buildings/mill.dart';
@@ -8,7 +9,7 @@ import 'package:locadeserta/city_building/models/citizen.dart';
 import 'package:locadeserta/city_building/models/resources/resource.dart';
 import 'package:locadeserta/city_building/models/stock.dart';
 
-abstract class ResourceBuilding {
+abstract class ResourceBuilding  implements Buildable<RESOURCE_TYPES>{
   Map<RESOURCE_TYPES, int> requiredToBuild;
 
   RESOURCE_BUILDING_TYPES type;

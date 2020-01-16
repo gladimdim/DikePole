@@ -76,7 +76,7 @@ class _CityBuildingMetaViewState extends State<CityBuildingMetaView> {
               children: [
                 Text('Output'),
                 Text(
-                    '${cityBuildingTypeToString(building.produces)}: ${building.workMultiplier}'),
+                    '${cityPropertiesToString(building.produces)}'),
               ],
             ),
             SizedBox(

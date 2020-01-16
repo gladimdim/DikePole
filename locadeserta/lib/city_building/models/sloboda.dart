@@ -1,3 +1,4 @@
+import 'package:locadeserta/city_building/models/buildings/buildable.dart';
 import 'package:locadeserta/city_building/models/buildings/resource_buildings/resource_building.dart';
 import 'package:locadeserta/city_building/models/citizen.dart';
 import 'package:locadeserta/city_building/models/resources/resource.dart';
@@ -44,16 +45,19 @@ class Sloboda {
     _innerChanges.add(this);
   }
 
-  buildResourceBuildingFromType(RESOURCE_BUILDING_TYPES type) {
-    var building = ResourceBuilding.fromType(type);
-    if (canBuildResourceBuilding(building)) {
-      _removeFromStock(building.requiredToBuild);
-      resourceBuildings.add(building);
+  buildBuilding(Buildable buildable) {
+    if (canBuildResourceBuilding(buildable)) {
+      _removeFromStock(buildable.requiredToBuild);
+      if (buildable is ResourceBuilding) {
+        resourceBuildings.add(buildable);
+      } else if (buildable is CityBuilding) {
+        cityBuildings.add(buildable);
+      }
       _innerChanges.add(this);
     }
   }
 
-  bool canBuildResourceBuilding(ResourceBuilding b) {
+  bool canBuildResourceBuilding(Buildable b) {
     var required = b.requiredToBuild;
     var missing = [];
     required.entries.forEach((r) {
