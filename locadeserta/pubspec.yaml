@@ -64,6 +64,7 @@ flutter:
     - images/city_building/resource_buildings/mill.gif
     - images/city_building/resource_buildings/iron_mine.png
     - images/city_building/resource_buildings/field.png
+    - images/city_building/resource_buildings/quarry.png
     - images/city_building/resources/stone.png
     - images/city_building/resources/wood.png
     - images/city_building/resources/kurin.png
