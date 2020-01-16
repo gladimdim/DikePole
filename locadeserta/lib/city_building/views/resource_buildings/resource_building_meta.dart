@@ -34,13 +34,10 @@ class _ResourceBuildingMetaViewState extends State<ResourceBuildingMetaView> {
             children: <Widget>[
               Text(
                 '${buildingTypeToString(widget.type)}',
-                style: Theme
-                    .of(context)
+                style: Theme.of(context)
                     .textTheme
-                    .title,
-              ),
-              SizedBox(
-                height: 5,
+                    .title
+                    .merge(TextStyle(fontSize: widget.selected ? 25 : 30)),
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -51,59 +48,84 @@ class _ResourceBuildingMetaViewState extends State<ResourceBuildingMetaView> {
               ),
             ],
           ),
-          if (widget.selected) Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text('Build'),
-              ...building.requiredToBuild.entries.map((e) {
-                return Column(
+          if (widget.selected) ...[
+            Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Text('Requires to build'),
+                Column(
+                    children: building.requiredToBuild.entries.map((e) {
+                  return Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Image.asset(
+                        resourceTypesToImagePath(e.key),
+                        height: 64,
+                      ),
+                      Text(': ${e.value}'),
+                    ],
+                  );
+                }).toList())
+              ],
+            ),
+            SizedBox(
+              height: 35,
+            ),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text('Max number of workers'),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Image.asset(
-                      resourceTypesToImagePath(e.key),
-                      height: 64,
-                    ),
-                    Text('${e.value}'),
+                    Text('${building.maxWorkers}x'),
+                    Icon(Icons.person),
                   ],
-                );
-              }).toList()
-            ],
-          ),
-          if (widget.selected)SizedBox(
-            height: 35,
-          ),
-          if (widget.selected)Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text('Max'),
-              Row(children: [
-                Text('${building.maxWorkers}x'),
-                Icon(Icons.person),
-              ]),
-            ],
-          ),
-          if (widget.selected) SizedBox(
-            height: 35,
-          ),
-          if (widget.selected) Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text('Outputs'),
-              Text(
-                  '${resourceTypesToString(building.produces)}: ${building
-                      .workMultiplier}'),
-            ],
-          ),
-          if (widget.selected) SizedBox(
-            height: 35,
-          ),
+                ),
+              ],
+            ),
+            SizedBox(
+              height: 35,
+            ),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text('Input'),
+                ...building.requires.entries.map((e) {
+                  return Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Image.asset(
+                        resourceTypesToImagePath(e.key),
+                        height: 64,
+                      ),
+                      Text(': ${e.value}'),
+                    ],
+                  );
+                }).toList(),
+              ],
+            ),
+            SizedBox(
+              height: 35,
+            ),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text('Output'),
+                Text(
+                    '${resourceTypesToString(building.produces)}: ${building.workMultiplier}'),
+              ],
+            ),
+            SizedBox(
+              height: 35,
+            ),
+          ],
           if (widget.onBuildPressed != null)
             BorderedContainer(
               child: SlideableButton(
                 direction: Direction.Left,
-                  child:
-                  FatContainer(text: 'Build'),
-                  onPress:
-                  widget.onBuildPressed,
+                child: FatContainer(text: 'Build'),
+                onPress: widget.onBuildPressed,
               ),
             ),
         ],

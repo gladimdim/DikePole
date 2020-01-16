@@ -15,6 +15,6 @@ class Quarry extends ResourceBuilding {
   Map<RESOURCE_TYPES, int> requires = {
     RESOURCE_TYPES.FOOD: 2,
     RESOURCE_TYPES.IRON: 1,
-    RESOURCE_TYPES.SULFUR: 1,
+    RESOURCE_TYPES.NITER: 1,
   };
 }

@@ -63,10 +63,13 @@ flutter:
     - images/city_building/resource_buildings/kurin.png
     - images/city_building/resource_buildings/mill.gif
     - images/city_building/resource_buildings/iron_mine.png
+    - images/city_building/resource_buildings/field.png
     - images/city_building/resources/stone.png
     - images/city_building/resources/wood.png
     - images/city_building/resources/kurin.png
     - images/city_building/resources/chastokol.png
+    - images/city_building/resources/niter.png
+
     # bulrush images
     - images/background/bulrush/c_0.jpg
     - images/background/bulrush/0.jpg

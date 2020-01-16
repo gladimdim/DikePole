@@ -1,7 +1,9 @@
 import 'package:flutter/widgets.dart';
+import 'package:locadeserta/animations/slideable_button.dart';
 import 'package:locadeserta/city_building/models/sloboda.dart';
 import 'package:locadeserta/city_building/views/stock_view.dart';
 import 'package:locadeserta/components/bordered_container.dart';
+import 'package:locadeserta/creator/components/fat_container.dart';
 
 class CityDashboard extends StatefulWidget {
   final Sloboda city;
@@ -26,6 +28,19 @@ class _CityDashboardState extends State<CityDashboard> {
                 Text("Name: "),
                 Text(widget.city.name),
               ],
+            ),
+          ),
+          SizedBox(
+            height: 20,
+          ),
+          BorderedContainer(
+            child: SlideableButton(
+              onPress: () {
+                widget.city.makeTurn();
+              },
+              child: FatContainer(
+                text: 'Make Turn',
+              ),
             ),
           ),
           SizedBox(

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:locadeserta/city_building/models/buildings/resource_buildings/resource_building.dart';
-import 'package:locadeserta/city_building/models/resources/resource.dart';
 import 'package:locadeserta/city_building/models/sloboda.dart';
+import 'package:locadeserta/city_building/views/resource_buildings/resource_building_built.dart';
 import 'package:locadeserta/city_building/views/resource_buildings/resource_building_meta.dart';
 import 'package:locadeserta/components/bordered_container.dart';
 
@@ -26,52 +26,16 @@ class _ResourceBuildingsPageState extends State<ResourceBuildingsPage> {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
-            ...city.resourceBuildings.map<Widget>((building) {
-              return Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  IconButton(
-                    icon: Icon(Icons.remove),
-                    onPressed: !building.isEmpty()
-                        ? () {
-                            setState(() {
-                              building.removeWorker();
-                            });
-                          }
-                        : null,
-                  ),
-                  Row(
-                    children: [
-                      Text(
-                        buildingTypeToString(building.type),
-                      ),
-                      Text(
-                          ': +${building.output()} ${resourceTypesToString(building.produces)}'),
-                      if (building.hasWorkers())
-                        Text('( ${building.amountOfWorkers()} '),
-                      if (building.hasWorkers()) Icon(Icons.person),
-                      if (building.hasWorkers()) Text(')'),
-                    ],
-                  ),
-                  IconButton(
-                    icon: Icon(Icons.add),
-                    onPressed: !building.isFull()
-                        ? () {
-                            setState(() {
-                              building.addWorker(city.getFirstFreeCitizen());
-                            });
-                          }
-                        : null,
-                  ),
-                  IconButton(
-                    icon: Icon(Icons.delete_forever),
-                    onPressed: () {
-                      city.removeResourceBuilding(building);
-                    },
-                  )
-                ],
-              );
-            }).toList(),
+            Text(
+              'Resource Buildings',
+              style: TextStyle(fontSize: 30),
+            ),
+            ...city.resourceBuildings
+                .map<Widget>((building) => ResourceBuildingBuilt(
+                      building: building,
+                      city: city,
+                    ))
+                .toList(),
             // what can we build
             ...RESOURCE_BUILDING_TYPES.values.map((value) {
               return Padding(
@@ -79,16 +43,15 @@ class _ResourceBuildingsPageState extends State<ResourceBuildingsPage> {
                 child: BorderedContainer(
                   child: InkWell(
                     child: ResourceBuildingMetaView(
-                      type: value,
-                      selected: selected == value,
-                      onBuildPressed: () {
-                        try {
-                          city.buildResourceBuildingFromType(value);
-                        } catch (e) {
-                          print('Cannot build. Missing: $e');
-                        }
-                      }
-                    ),
+                        type: value,
+                        selected: selected == value,
+                        onBuildPressed: () {
+                          try {
+                            city.buildResourceBuildingFromType(value);
+                          } catch (e) {
+                            print('Cannot build. Missing: $e');
+                          }
+                        }),
                     onTap: () {
                       setState(() {
                         if (selected == value) {
@@ -97,7 +60,6 @@ class _ResourceBuildingsPageState extends State<ResourceBuildingsPage> {
                           selected = value;
                         }
                       });
-
                     },
                   ),
                 ),

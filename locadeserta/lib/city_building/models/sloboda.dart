@@ -105,8 +105,8 @@ class Sloboda {
       }
     });
 
+    _innerChanges.add(this);
     if (exceptions.isNotEmpty) {
-      _innerChanges.add(this);
       throw exceptions;
     }
   }

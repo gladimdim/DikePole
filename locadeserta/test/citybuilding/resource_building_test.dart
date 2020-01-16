@@ -11,7 +11,7 @@ void main() {
       RESOURCE_TYPES.FOOD: 5,
       RESOURCE_TYPES.IRON: 5,
       RESOURCE_TYPES.FIREARM: 0,
-      RESOURCE_TYPES.SULFUR: 1,
+      RESOURCE_TYPES.NITER: 1,
     });
 
     test("Does not require other resources", () {

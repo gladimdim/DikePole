@@ -82,8 +82,7 @@ abstract class ResourceBuilding {
 
   void generate(Stock stock) {
     if (!hasWorkers()) {
-      throw NoWorkersAssignedException(
-          'Building $type has no workers assigned');
+      return;
     }
 
     if (requires.entries.length > 0) {
@@ -124,7 +123,7 @@ String buildingTypeToString(RESOURCE_BUILDING_TYPES type) {
 
 String buildingTypeToIconPath(RESOURCE_BUILDING_TYPES type) {
   switch (type) {
-    case RESOURCE_BUILDING_TYPES.FIELD: return 'images/city_building/resource_buildings/kurin.png';
+    case RESOURCE_BUILDING_TYPES.FIELD: return 'images/city_building/resource_buildings/field.png';
     case RESOURCE_BUILDING_TYPES.MILL: return 'images/city_building/resource_buildings/kurin.png';
     case RESOURCE_BUILDING_TYPES.SMITH: return 'images/city_building/resource_buildings/kurin.png';
     case RESOURCE_BUILDING_TYPES.QUARRY: return 'images/city_building/resource_buildings/kurin.png';
