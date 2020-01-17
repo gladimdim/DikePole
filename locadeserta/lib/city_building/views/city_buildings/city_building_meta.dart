@@ -58,7 +58,7 @@ class _CityBuildingMetaViewState extends State<CityBuildingMetaView> {
                       return Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Image.asset(
+                            Image.asset(
                             resourceTypesToImagePath(e.key),
                             height: 64,
                           ),

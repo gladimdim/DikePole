@@ -84,7 +84,7 @@ String resourceTypesToString(RESOURCE_TYPES type) {
 String resourceTypesToImagePath(RESOURCE_TYPES type) {
   switch (type) {
     case RESOURCE_TYPES.FOOD:
-      return 'images/city_building/resources/stone.png';
+      return 'images/city_building/resources/food.png';
     case RESOURCE_TYPES.MONEY:
       return 'images/city_building/resources/stone.png';
     case RESOURCE_TYPES.WOOD:

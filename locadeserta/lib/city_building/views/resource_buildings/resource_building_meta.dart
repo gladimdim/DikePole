@@ -87,7 +87,7 @@ class _ResourceBuildingMetaViewState extends State<ResourceBuildingMetaView> {
             SizedBox(
               height: 35,
             ),
-            Column(
+            if (building.requires.isNotEmpty) Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text('Input'),
@@ -112,8 +112,16 @@ class _ResourceBuildingMetaViewState extends State<ResourceBuildingMetaView> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text('Output'),
-                Text(
-                    '${resourceTypesToString(building.produces)}: ${building.workMultiplier}'),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Image.asset(
+                      resourceTypesToImagePath(building.produces),
+                      height: 64,
+                    ),
+                    Text(': ${building.workMultiplier}'),
+                  ],
+                ),
               ],
             ),
             SizedBox(
