@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:locadeserta/InheritedAuth.dart';
 import 'package:locadeserta/StatisticsView.dart';
 import 'package:locadeserta/city_building/views/city_game.dart';
+import 'package:locadeserta/city_building/views/resource_buildings/resource_building_built.dart';
 import 'package:locadeserta/story_details_view.dart';
 import 'package:locadeserta/creator/components/user_stories_list_view.dart';
 import 'package:locadeserta/creator/components/edit_node_sequence_view.dart';
@@ -150,7 +151,9 @@ class _LocaDesertaAppState extends State<LocaDesertaApp> {
                         child: ExtractUserStoryDetailsViewArguments(),
                         auth: auth,
                       ),
+                  // city building routes
                   CityGame.routeName: (context) => CityGame(),
+                  ResourceBuildingBuilt.routeName: (context) => ExtractResourceBuildingBuiltArguments(),
                 },
               );
             } else {

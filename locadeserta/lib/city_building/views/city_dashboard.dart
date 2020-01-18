@@ -17,89 +17,91 @@ class CityDashboard extends StatefulWidget {
 class _CityDashboardState extends State<CityDashboard> {
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: <Widget>[
-          BorderedContainer(
-            child: Row(
-              children: [
-                Text("Name: "),
-                Text(widget.city.name),
-              ],
-            ),
-          ),
-          SizedBox(
-            height: 20,
-          ),
-          BorderedContainer(
-            child: SlideableButton(
-              onPress: () {
-                widget.city.makeTurn();
-              },
-              child: FatContainer(
-                text: 'Make Turn',
+    return SingleChildScrollView(
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: <Widget>[
+            BorderedContainer(
+              child: Row(
+                children: [
+                  Text("Name: "),
+                  Text(widget.city.name),
+                ],
               ),
             ),
-          ),
-          SizedBox(
-            height: 20,
-          ),
-          BorderedContainer(
-            child: StockFullView(stock: widget.city.stock),
-          ),
-          SizedBox(
-            height: 20,
-          ),
-          BorderedContainer(
-            child: Row(
-              children: [
-                Text("Resource buildings: "),
-                Text(
-                  widget.city.resourceBuildings.length.toString(),
-                )
-              ],
+            SizedBox(
+              height: 20,
             ),
-          ),
-          SizedBox(
-            height: 20,
-          ),
-          BorderedContainer(
-            child: Row(children: [
-              Text("City Buildings: "),
-              Text(widget.city.cityBuildings.length.toString()),
-            ]),
-          ),
-          SizedBox(
-            height: 20,
-          ),
-          BorderedContainer(
-            child: Row(
-              children: <Widget>[
-                Text("Citizens: "),
-                Text(widget.city.citizens.length.toString()),
-              ],
+            BorderedContainer(
+              child: SlideableButton(
+                onPress: () {
+                  widget.city.makeTurn();
+                },
+                child: FatContainer(
+                  text: 'Make Turn',
+                ),
+              ),
             ),
-          ),
-          SizedBox(
-            height: 20,
-          ),
-          BorderedContainer(
-            child: Row(
-              children: [
-                Text("Free citizens: "),
-                Text(
-                  widget.city.citizens
-                      .where((citizen) => !citizen.occupied())
-                      .toList()
-                      .length
-                      .toString(),
-                )
-              ],
+            SizedBox(
+              height: 20,
             ),
-          ),
-        ],
+            BorderedContainer(
+              child: StockFullView(stock: widget.city.stock),
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            BorderedContainer(
+              child: Row(
+                children: [
+                  Text("Resource buildings: "),
+                  Text(
+                    widget.city.resourceBuildings.length.toString(),
+                  )
+                ],
+              ),
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            BorderedContainer(
+              child: Row(children: [
+                Text("City Buildings: "),
+                Text(widget.city.cityBuildings.length.toString()),
+              ]),
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            BorderedContainer(
+              child: Row(
+                children: <Widget>[
+                  Text("Citizens: "),
+                  Text(widget.city.citizens.length.toString()),
+                ],
+              ),
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            BorderedContainer(
+              child: Row(
+                children: [
+                  Text("Free citizens: "),
+                  Text(
+                    widget.city.citizens
+                        .where((citizen) => !citizen.occupied())
+                        .toList()
+                        .length
+                        .toString(),
+                  )
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

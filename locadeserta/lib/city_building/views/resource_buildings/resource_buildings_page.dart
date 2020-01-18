@@ -31,10 +31,23 @@ class _ResourceBuildingsPageState extends State<ResourceBuildingsPage> {
               style: TextStyle(fontSize: 30),
             ),
             ...city.resourceBuildings
-                .map<Widget>((building) => ResourceBuildingBuilt(
-                      building: building,
-                      city: city,
-                    ))
+                .map<Widget>(
+                  (building) => FlatButton(
+                    child: Text(
+                      buildingTypeToString(building.type),
+                    ),
+                    onPressed: () {
+                      Navigator.pushNamed(
+                        context,
+                        ResourceBuildingBuilt.routeName,
+                        arguments: ResourceBuildingBuiltArguments(
+                          city: widget.city,
+                          building: building,
+                        ),
+                      );
+                    },
+                  ),
+                )
                 .toList(),
             // what can we build
             ...RESOURCE_BUILDING_TYPES.values.map((value) {
@@ -47,7 +60,8 @@ class _ResourceBuildingsPageState extends State<ResourceBuildingsPage> {
                         selected: selected == value,
                         onBuildPressed: () {
                           try {
-                            city.buildBuilding(ResourceBuilding.fromType(value));
+                            city.buildBuilding(
+                                ResourceBuilding.fromType(value));
                           } catch (e) {
                             print('Cannot build. Missing: $e');
                           }
