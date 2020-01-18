@@ -71,6 +71,7 @@ flutter:
     - images/city_building/resources/chastokol.png
     - images/city_building/resources/niter.png
     - images/city_building/resources/food.png
+    - images/city_building/resources/money.png
     - images/city_building/city_buildings/kurin.png
 
     # bulrush images
