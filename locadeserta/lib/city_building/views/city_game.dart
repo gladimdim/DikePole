@@ -5,9 +5,9 @@ import 'package:locadeserta/city_building/models/sloboda.dart';
 import 'package:locadeserta/city_building/views/city_buildings/city_buildings_page.dart';
 import 'package:locadeserta/city_building/views/city_dashboard.dart';
 import 'package:locadeserta/city_building/views/resource_buildings/resource_buildings_page.dart';
+import 'package:locadeserta/city_building/views/soft_container.dart';
 import 'package:locadeserta/city_building/views/stock_view.dart';
 import 'package:locadeserta/components/app_bar_custom.dart';
-import 'package:locadeserta/components/bordered_container.dart';
 import 'package:locadeserta/components/narrow_scaffold.dart';
 import 'package:locadeserta/models/Localizations.dart';
 
@@ -79,25 +79,29 @@ class _CityGameState extends State<CityGame> {
                     return Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Center(
-                        child: BorderedContainer(
+                        child: SoftContainer(
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: <Widget>[
                               if (index != 0)
-                                IconButton(
-                                  icon: Icon(Icons.arrow_back),
-                                  onPressed: () {
-                                    _goToPage(index - 1);
-                                  },
+                                SoftContainer(
+                                  child: IconButton(
+                                    icon: Icon(Icons.arrow_back),
+                                    onPressed: () {
+                                      _goToPage(index - 1);
+                                    },
+                                  ),
                                 ),
                               if (index == 0) SizedBox(width: 50),
                               Text(_pageTitles[index]),
                               if (index != _pageTitles.length - 1)
-                                IconButton(
-                                  icon: Icon(Icons.arrow_forward),
-                                  onPressed: () {
-                                    _goToPage(index + 1);
-                                  },
+                                SoftContainer(
+                                  child: IconButton(
+                                    icon: Icon(Icons.arrow_forward),
+                                    onPressed: () {
+                                      _goToPage(index + 1);
+                                    },
+                                  ),
                                 ),
                               if (index == _pageTitles.length - 1)
                                 SizedBox(width: 50),

@@ -3,8 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'package:locadeserta/animations/slideable_button.dart';
 import 'package:locadeserta/city_building/models/buildings/resource_buildings/resource_building.dart';
 import 'package:locadeserta/city_building/models/resources/resource.dart';
-import 'package:locadeserta/components/bordered_container.dart';
-import 'package:locadeserta/creator/components/fat_container.dart';
+import 'package:locadeserta/city_building/views/soft_container.dart';
 
 class ResourceBuildingMetaView extends StatefulWidget {
   final RESOURCE_BUILDING_TYPES type;
@@ -23,120 +22,130 @@ class _ResourceBuildingMetaViewState extends State<ResourceBuildingMetaView> {
   @override
   Widget build(BuildContext context) {
     var building = ResourceBuilding.fromType(widget.type);
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: <Widget>[
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+    return SoftContainer(
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: SoftContainer(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
-              Text(
-                '${buildingTypeToString(widget.type)}',
-                style: Theme.of(context)
-                    .textTheme
-                    .title
-                    .merge(TextStyle(fontSize: widget.selected ? 25 : 30)),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Text(
+                    '${buildingTypeToString(widget.type)}',
+                    style: Theme.of(context)
+                        .textTheme
+                        .title
+                        .merge(TextStyle(fontSize: 30)),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Image.asset(
+                      buildingTypeToIconPath(widget.type),
+                      height: 320,
+                    ),
+                  ),
+                ],
               ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Image.asset(
-                  buildingTypeToIconPath(widget.type),
-                  height: 320,
-                ),
-              ),
-            ],
-          ),
-          if (widget.selected) ...[
-            Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Text('Requires to build'),
+              if (widget.selected) ...[
                 Column(
-                    children: building.requiredToBuild.entries.map((e) {
-                  return Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Image.asset(
-                        resourceTypesToImagePath(e.key),
-                        height: 64,
-                      ),
-                      Text(': ${e.value}'),
-                    ],
-                  );
-                }).toList())
-              ],
-            ),
-            SizedBox(
-              height: 35,
-            ),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text('Max number of workers'),
-                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Text('Requires to build'),
+                    Column(
+                        children: building.requiredToBuild.entries.map((e) {
+                      return Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Image.asset(
+                            resourceTypesToImagePath(e.key),
+                            height: 64,
+                          ),
+                          Text(': ${e.value}'),
+                        ],
+                      );
+                    }).toList())
+                  ],
+                ),
+                SizedBox(
+                  height: 35,
+                ),
+                Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text('${building.maxWorkers}x'),
-                    Icon(Icons.person),
-                  ],
-                ),
-              ],
-            ),
-            SizedBox(
-              height: 35,
-            ),
-            if (building.requires.isNotEmpty) Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text('Input'),
-                ...building.requires.entries.map((e) {
-                  return Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Image.asset(
-                        resourceTypesToImagePath(e.key),
-                        height: 64,
-                      ),
-                      Text(': ${e.value}'),
-                    ],
-                  );
-                }).toList(),
-              ],
-            ),
-            SizedBox(
-              height: 35,
-            ),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text('Output'),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Image.asset(
-                      resourceTypesToImagePath(building.produces),
-                      height: 64,
+                    Text('Max number of workers'),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text('${building.maxWorkers}x'),
+                        Icon(Icons.person),
+                      ],
                     ),
-                    Text(': ${building.workMultiplier}'),
                   ],
                 ),
+                SizedBox(
+                  height: 35,
+                ),
+                if (building.requires.isNotEmpty)
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text('Input'),
+                      ...building.requires.entries.map((e) {
+                        return Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Image.asset(
+                              resourceTypesToImagePath(e.key),
+                              height: 64,
+                            ),
+                            Text(': ${e.value}'),
+                          ],
+                        );
+                      }).toList(),
+                    ],
+                  ),
+                SizedBox(
+                  height: 35,
+                ),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text('Output'),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Image.asset(
+                          resourceTypesToImagePath(building.produces),
+                          height: 64,
+                        ),
+                        Text(': ${building.workMultiplier}'),
+                      ],
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 35,
+                ),
               ],
-            ),
-            SizedBox(
-              height: 35,
-            ),
-          ],
-          if (widget.onBuildPressed != null)
-            BorderedContainer(
-              child: SlideableButton(
-                direction: Direction.Left,
-                child: FatContainer(text: 'Build'),
-                onPress: widget.onBuildPressed,
-              ),
-            ),
-        ],
+              if (widget.onBuildPressed != null)
+                SoftContainer(
+                  child: SlideableButton(
+                    direction: Direction.Left,
+                    child: Container(
+                      height: 64,
+                      child: Center(
+                        child: Text('Build'),
+                      ),
+                    ),
+                    onPress: widget.onBuildPressed,
+                  ),
+                ),
+            ],
+          ),
+        ),
       ),
     );
   }

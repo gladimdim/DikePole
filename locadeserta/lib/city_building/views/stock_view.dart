@@ -51,11 +51,9 @@ class StockFullView extends StatelessWidget {
             return Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                Text(
-                  '${resourceTypesToString(key)}',
-                  style: TextStyle(
-                    fontSize: 20,
-                  ),
+                Image.asset(
+                  '${resourceTypesToImagePath(key)}',
+                  height: 64,
                 ),
                 Text(stock.getByType(key).toString()),
               ],
