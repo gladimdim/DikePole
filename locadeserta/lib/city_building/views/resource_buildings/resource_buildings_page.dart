@@ -24,7 +24,7 @@ class _ResourceBuildingsPageState extends State<ResourceBuildingsPage> {
     return SingleChildScrollView(
       child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.end,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Text(
               'Resource Buildings',
@@ -32,9 +32,15 @@ class _ResourceBuildingsPageState extends State<ResourceBuildingsPage> {
             ),
             ...city.resourceBuildings
                 .map<Widget>(
-                  (building) => FlatButton(
-                    child: Text(
-                      buildingTypeToString(building.type),
+                  (building) => RaisedButton(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        Text(
+                          buildingTypeToString(building.type),
+                        ),
+                        Icon(Icons.arrow_right),
+                      ],
                     ),
                     onPressed: () {
                       Navigator.pushNamed(

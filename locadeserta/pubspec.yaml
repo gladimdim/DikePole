@@ -68,11 +68,11 @@ flutter:
     - images/city_building/resources/stone.png
     - images/city_building/resources/wood.png
     - images/city_building/resources/kurin.png
-    - images/city_building/resources/chastokol.png
     - images/city_building/resources/niter.png
     - images/city_building/resources/food.png
     - images/city_building/resources/money.png
     - images/city_building/city_buildings/kurin.png
+    - images/city_building/city_buildings/wall.png
 
     # bulrush images
     - images/background/bulrush/c_0.jpg

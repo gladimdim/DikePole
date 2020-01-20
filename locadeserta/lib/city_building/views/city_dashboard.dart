@@ -1,5 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:locadeserta/animations/slideable_button.dart';
+import 'package:locadeserta/city_building/models/buildings/city_buildings/city_building.dart';
 import 'package:locadeserta/city_building/models/sloboda.dart';
 import 'package:locadeserta/city_building/views/stock_view.dart';
 import 'package:locadeserta/components/bordered_container.dart';
@@ -55,6 +56,7 @@ class _CityDashboardState extends State<CityDashboard> {
             ),
             BorderedContainer(
               child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text("Resource buildings: "),
                   Text(
@@ -67,27 +69,19 @@ class _CityDashboardState extends State<CityDashboard> {
               height: 20,
             ),
             BorderedContainer(
-              child: Row(children: [
-                Text("City Buildings: "),
-                Text(widget.city.cityBuildings.length.toString()),
-              ]),
+              child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text("City Buildings: "),
+                    Text(widget.city.cityBuildings.length.toString()),
+                  ]),
             ),
             SizedBox(
               height: 20,
             ),
             BorderedContainer(
               child: Row(
-                children: <Widget>[
-                  Text("Citizens: "),
-                  Text(widget.city.citizens.length.toString()),
-                ],
-              ),
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            BorderedContainer(
-              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text("Free citizens: "),
                   Text(
@@ -100,6 +94,28 @@ class _CityDashboardState extends State<CityDashboard> {
                 ],
               ),
             ),
+            SizedBox(
+              height: 20,
+            ),
+            BorderedContainer(
+              child: Column(
+                children: CITY_PROPERTIES.values
+                    .map(
+                      (v) => Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          Text(
+                            cityPropertiesToString(v),
+                          ),
+                          Text(
+                            widget.city.properties[v].toString(),
+                          )
+                        ],
+                      ),
+                    )
+                    .toList(),
+              ),
+            )
           ],
         ),
       ),

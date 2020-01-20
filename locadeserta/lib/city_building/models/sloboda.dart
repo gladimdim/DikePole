@@ -17,6 +17,7 @@ class Sloboda {
     CITY_PROPERTIES.GLORY: 1,
     CITY_PROPERTIES.DEFENSE: 1,
     CITY_PROPERTIES.CITIZENS: 15,
+    CITY_PROPERTIES.FAITH: 1,
   };
 
   List<ResourceBuilding> resourceBuildings = [];

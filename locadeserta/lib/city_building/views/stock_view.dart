@@ -48,11 +48,17 @@ class StockFullView extends StatelessWidget {
             ),
           ),
           ...stock.getResourceTypesKeys().map<Widget>((key) {
-            return Text(
-              '${resourceTypesToString(key)}: ${stock.getByType(key)} ',
-              style: TextStyle(
-                fontSize: 20,
-              ),
+            return Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Text(
+                  '${resourceTypesToString(key)}',
+                  style: TextStyle(
+                    fontSize: 20,
+                  ),
+                ),
+                Text(stock.getByType(key).toString()),
+              ],
             );
           }).toList(),
         ],
