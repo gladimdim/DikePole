@@ -26,10 +26,6 @@ class _ResourceBuildingsPageState extends State<ResourceBuildingsPage> {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Text(
-              'Resource Buildings',
-              style: TextStyle(fontSize: 30),
-            ),
             ...city.resourceBuildings
                 .map<Widget>(
                   (building) => RaisedButton(
