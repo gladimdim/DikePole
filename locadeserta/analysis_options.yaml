@@ -2,6 +2,8 @@
 
 enable-experiment:
   - extension-methods
-analyzer:
-  strong-mode:
-    - implicit-dynamic: false
+
+#analyzer:
+#  strong-mode:
+#    implicit-dynamic: false
+#    implicit-casts: false
