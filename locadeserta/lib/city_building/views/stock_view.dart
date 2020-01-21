@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:locadeserta/city_building/models/resources/resource.dart';
 import 'package:locadeserta/city_building/models/stock.dart';
+import 'package:locadeserta/city_building/views/components/lined_container.dart';
 
 class StockMiniView extends StatelessWidget {
   final Stock stock;
@@ -15,11 +16,19 @@ class StockMiniView extends StatelessWidget {
         padding: const EdgeInsets.only(top: 6.0),
         child: Row(
           children: stock.getResourceTypesKeys().map<Widget>((key) {
-            return Text(
-              '${resourceTypesToString(key)}: ${stock.getByType(key)} ',
-              style: TextStyle(
-                fontSize: 12,
-              ),
+            return Row(
+              children: <Widget>[
+                Image.asset(
+                  resourceTypesToImagePath(key),
+                  width: 24,
+                ),
+                Text(
+                  '${stock.getByType(key)} ',
+                  style: TextStyle(
+                    fontSize: 12,
+                  ),
+                ),
+              ],
             );
           }).toList(),
         ),
@@ -48,15 +57,17 @@ class StockFullView extends StatelessWidget {
             ),
           ),
           ...stock.getResourceTypesKeys().map<Widget>((key) {
-            return Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                Image.asset(
-                  '${resourceTypesToImagePath(key)}',
-                  height: 64,
-                ),
-                Text(stock.getByType(key).toString()),
-              ],
+            return LineContainer(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  Image.asset(
+                    '${resourceTypesToImagePath(key)}',
+                    height: 64,
+                  ),
+                  Text(stock.getByType(key).toString()),
+                ],
+              ),
             );
           }).toList(),
         ],

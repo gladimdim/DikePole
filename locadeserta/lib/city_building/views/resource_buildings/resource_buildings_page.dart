@@ -5,7 +5,7 @@ import 'package:locadeserta/city_building/models/buildings/resource_buildings/re
 import 'package:locadeserta/city_building/models/sloboda.dart';
 import 'package:locadeserta/city_building/views/resource_buildings/resource_building_built.dart';
 import 'package:locadeserta/city_building/views/resource_buildings/resource_building_meta.dart';
-import 'package:locadeserta/city_building/views/soft_container.dart';
+import 'package:locadeserta/city_building/views/components/soft_container.dart';
 
 class ResourceBuildingsPage extends StatefulWidget {
   final Sloboda city;

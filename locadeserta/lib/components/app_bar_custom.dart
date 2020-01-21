@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:locadeserta/city_building/views/components/soft_container.dart';
 import 'package:locadeserta/components/appbar_button.dart';
-import 'package:locadeserta/components/bordered_container.dart';
 import 'package:locadeserta/components/button_text_icon.dart';
 import 'package:locadeserta/models/Localizations.dart';
 
@@ -32,7 +32,7 @@ class _AppBarCustomState extends State<AppBarCustom> {
       top: 0,
       left: 0.0,
       right: 0,
-      child: BorderedContainer(
+      child: SoftContainer(
         child: Container(
           padding: EdgeInsets.only(top: 8.0),
           color: Theme.of(context).backgroundColor,

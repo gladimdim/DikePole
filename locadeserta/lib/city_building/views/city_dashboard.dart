@@ -3,7 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'package:locadeserta/animations/slideable_button.dart';
 import 'package:locadeserta/city_building/models/buildings/city_buildings/city_building.dart';
 import 'package:locadeserta/city_building/models/sloboda.dart';
-import 'package:locadeserta/city_building/views/soft_container.dart';
+import 'package:locadeserta/city_building/views/components/soft_container.dart';
 import 'package:locadeserta/city_building/views/stock_view.dart';
 
 class CityDashboard extends StatefulWidget {

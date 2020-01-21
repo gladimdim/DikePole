@@ -3,7 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'package:locadeserta/animations/slideable_button.dart';
 import 'package:locadeserta/city_building/models/buildings/resource_buildings/resource_building.dart';
 import 'package:locadeserta/city_building/models/resources/resource.dart';
-import 'package:locadeserta/city_building/views/soft_container.dart';
+import 'package:locadeserta/city_building/views/components/soft_container.dart';
 
 class ResourceBuildingMetaView extends StatefulWidget {
   final RESOURCE_BUILDING_TYPES type;
