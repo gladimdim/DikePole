@@ -1,0 +1,7 @@
+#include: package:effective_dart/analysis_options.yaml
+
+enable-experiment:
+  - extension-methods
+analyzer:
+  strong-mode:
+    - implicit-dynamic: false

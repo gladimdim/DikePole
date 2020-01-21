@@ -33,7 +33,7 @@ class Stock {
     _stock[type] = _stock[type] - amount;
   }
 
-  getResourceTypesKeys() {
+  List getResourceTypesKeys() {
     return _stock.keys.toList();
   }
 }

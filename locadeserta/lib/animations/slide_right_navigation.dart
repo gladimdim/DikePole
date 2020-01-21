@@ -14,7 +14,7 @@ class SlideRightNavigation extends material.PageRouteBuilder {
               material.Animation<double> animation,
               material.Animation<double> secondaryAnimation,
               material.Widget child) {
-            return new material.SlideTransition(
+            return material.SlideTransition(
               position: material.Tween(
                 begin: material.Offset.fromDirection(0.8),
                 // 45 degrees down

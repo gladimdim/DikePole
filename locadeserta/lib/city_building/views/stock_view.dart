@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:locadeserta/city_building/models/resources/resource.dart';
 import 'package:locadeserta/city_building/models/stock.dart';
 import 'package:locadeserta/city_building/views/components/lined_container.dart';
+import 'package:locadeserta/extensions/list.dart';
 
 class StockMiniView extends StatelessWidget {
   final Stock stock;
@@ -47,7 +48,7 @@ class StockFullView extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
           Text(
             'Stock',
@@ -56,22 +57,32 @@ class StockFullView extends StatelessWidget {
               fontSize: 25,
             ),
           ),
-          ...stock.getResourceTypesKeys().map<Widget>((key) {
-            return LineContainer(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  Image.asset(
-                    '${resourceTypesToImagePath(key)}',
-                    height: 64,
-                  ),
-                  Text(stock.getByType(key).toString()),
-                ],
-              ),
-            );
-          }).toList(),
+          ...stock.getResourceTypesKeys().divideBy(2).map<Widget>(
+            (List keys) {
+              return LineContainer(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: keys
+                      .map(
+                        (key) => Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            Image.asset(
+                              '${resourceTypesToImagePath(key)}',
+                              height: 64,
+                            ),
+                            Text(stock.getByType(key).toString()),
+                          ],
+                        ),
+                      )
+                      .toList(),
+                ),
+              );
+            },
+          ).toList(),
         ],
       ),
     );
   }
 }
+
