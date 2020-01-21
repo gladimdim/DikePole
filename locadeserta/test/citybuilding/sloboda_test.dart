@@ -62,7 +62,6 @@ void main() {
     test("makeTurn for city with Field, Smith with 1 worker", () {
       city.makeTurn();
       expect(city.stock.getByType(RESOURCE_TYPES.FOOD), equals(53));
-      expect(city.stock.getByType(RESOURCE_TYPES.IRON), equals(9));
       expect(city.stock.getByType(RESOURCE_TYPES.FIREARM), equals(6));
       expect(city.stock.getByType(RESOURCE_TYPES.NITER), equals(19));
     });

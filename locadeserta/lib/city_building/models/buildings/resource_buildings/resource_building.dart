@@ -1,5 +1,6 @@
 import 'package:locadeserta/city_building/models/buildings/buildable.dart';
 import 'package:locadeserta/city_building/models/buildings/resource_buildings/field.dart';
+import 'package:locadeserta/city_building/models/buildings/resource_buildings/fishing_pool.dart';
 import 'package:locadeserta/city_building/models/buildings/resource_buildings/iron_mine.dart';
 import 'package:locadeserta/city_building/models/buildings/resource_buildings/mill.dart';
 import 'package:locadeserta/city_building/models/buildings/resource_buildings/quarry.dart';
@@ -37,6 +38,8 @@ abstract class ResourceBuilding  implements Buildable<RESOURCE_TYPES>{
         return Stables();
       case RESOURCE_BUILDING_TYPES.IRON_MINE:
         return IronMine();
+      case RESOURCE_BUILDING_TYPES.POOL:
+        return FishingPool();
     }
   }
 
@@ -109,7 +112,7 @@ abstract class ResourceBuilding  implements Buildable<RESOURCE_TYPES>{
   }
 }
 
-enum RESOURCE_BUILDING_TYPES { SMITH, FIELD, MILL, QUARRY, STABLES, IRON_MINE }
+enum RESOURCE_BUILDING_TYPES { SMITH, FIELD, MILL, QUARRY, STABLES, IRON_MINE, POOL }
 
 String buildingTypeToString(RESOURCE_BUILDING_TYPES type) {
   switch (type) {
@@ -119,6 +122,7 @@ String buildingTypeToString(RESOURCE_BUILDING_TYPES type) {
     case RESOURCE_BUILDING_TYPES.QUARRY: return 'Quarry';
     case RESOURCE_BUILDING_TYPES.STABLES: return 'Stables';
     case RESOURCE_BUILDING_TYPES.IRON_MINE: return 'Iron mine';
+    case RESOURCE_BUILDING_TYPES.POOL: return 'Fishing Pool';
   }
 }
 
@@ -130,6 +134,7 @@ String buildingTypeToIconPath(RESOURCE_BUILDING_TYPES type) {
     case RESOURCE_BUILDING_TYPES.QUARRY: return 'images/city_building/resource_buildings/quarry.png';
     case RESOURCE_BUILDING_TYPES.STABLES: return 'images/city_building/resource_buildings/kurin.png';
     case RESOURCE_BUILDING_TYPES.IRON_MINE: return 'images/city_building/resource_buildings/iron_mine.png';
+    case RESOURCE_BUILDING_TYPES.POOL: return 'images/city_building/resource_buildings/kurin.png';
   }
 }
 

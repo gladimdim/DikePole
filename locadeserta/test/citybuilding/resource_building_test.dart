@@ -9,7 +9,6 @@ void main() {
     var smith = ResourceBuilding.fromType(RESOURCE_BUILDING_TYPES.SMITH);
     Stock stock = Stock({
       RESOURCE_TYPES.FOOD: 5,
-      RESOURCE_TYPES.IRON: 5,
       RESOURCE_TYPES.FIREARM: 0,
       RESOURCE_TYPES.NITER: 1,
     });
@@ -30,7 +29,6 @@ void main() {
     test("Can generate wood with 1 worker", () {
       smith.generate(stock);
       expect(stock.getByType(RESOURCE_TYPES.FIREARM), equals(1));
-      expect(stock.getByType(RESOURCE_TYPES.IRON), equals(4));
       expect(stock.getByType(RESOURCE_TYPES.FOOD), equals(3));
     });
 

@@ -76,6 +76,7 @@ flutter:
     - images/city_building/resources/fur2.png
     - images/city_building/city_buildings/kurin.png
     - images/city_building/city_buildings/wall.png
+    - images/city_building/city_buildings/watch_tower.png
 
     # bulrush images
     - images/background/bulrush/c_0.jpg

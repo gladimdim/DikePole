@@ -49,7 +49,7 @@ String cityBuildingTypeToString(CITY_BUILDING_TYPES type) {
 
 String cityTypeToIconPath(CITY_BUILDING_TYPES type) {
   switch (type) {
-    case CITY_BUILDING_TYPES.WATCH_TOWER: return 'images/city_building/city_buildings/kurin.png';
+    case CITY_BUILDING_TYPES.WATCH_TOWER: return 'images/city_building/city_buildings/watch_tower.png';
     case CITY_BUILDING_TYPES.TOWER: return'images/city_building/city_buildings/kurin.png';
     case CITY_BUILDING_TYPES.HOUSE: return 'images/city_building/city_buildings/kurin.png';
     case CITY_BUILDING_TYPES.WALL: return 'images/city_building/city_buildings/wall.png';

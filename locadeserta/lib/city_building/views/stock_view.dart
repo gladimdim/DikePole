@@ -24,7 +24,7 @@ class StockMiniView extends StatelessWidget {
                   width: 24,
                 ),
                 Text(
-                  '${stock.getByType(key)} ',
+                  '${resourceTypesToString(key)}: ${stock.getByType(key)} ',
                   style: TextStyle(
                     fontSize: 12,
                   ),

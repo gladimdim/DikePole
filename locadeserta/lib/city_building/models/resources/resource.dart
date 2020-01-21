@@ -21,10 +21,6 @@ class Resource {
     return Resource(RESOURCE_TYPES.NITER);
   }
 
-  static Resource createIron() {
-    return Resource(RESOURCE_TYPES.IRON);
-  }
-
   static Resource createFur() {
     return Resource(RESOURCE_TYPES.FUR);
   }
@@ -44,7 +40,6 @@ enum RESOURCE_TYPES {
   FOOD,
   STONE,
   NITER,
-  IRON,
   FUR,
   FISH,
   FIREARM,
@@ -64,8 +59,6 @@ String resourceTypesToString(RESOURCE_TYPES type) {
       return 'Stone';
     case RESOURCE_TYPES.NITER:
       return 'Niter';
-    case RESOURCE_TYPES.IRON:
-      return 'Iron';
     case RESOURCE_TYPES.FUR:
       return 'Fur';
     case RESOURCE_TYPES.FIREARM:
@@ -86,15 +79,13 @@ String resourceTypesToImagePath(RESOURCE_TYPES type) {
     case RESOURCE_TYPES.FOOD:
       return 'images/city_building/resources/food.png';
     case RESOURCE_TYPES.MONEY:
-      return 'images/city_building/resources/stone.png';
+      return 'images/city_building/resources/money.png';
     case RESOURCE_TYPES.WOOD:
       return 'images/city_building/resources/wood.png';
     case RESOURCE_TYPES.STONE:
       return 'images/city_building/resources/stone.png';
     case RESOURCE_TYPES.NITER:
       return 'images/city_building/resources/niter.png';
-    case RESOURCE_TYPES.IRON:
-      return 'images/city_building/resources/stone.png';
     case RESOURCE_TYPES.FUR:
       return 'images/city_building/resources/fur2.png';
     case RESOURCE_TYPES.FIREARM:
@@ -103,7 +94,8 @@ String resourceTypesToImagePath(RESOURCE_TYPES type) {
       return 'images/city_building/resources/stone.png';
     case RESOURCE_TYPES.IRON_ORE:
       return 'images/city_building/resources/stone.png';
-    default:
+    case RESOURCE_TYPES.FISH:
       return 'images/city_building/resources/stone.png';
+
   }
 }
