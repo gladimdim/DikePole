@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:locadeserta/animations/slideable_button.dart';
 import 'package:locadeserta/city_building/models/buildings/resource_buildings/resource_building.dart';
-import 'package:locadeserta/city_building/models/resources/resource.dart';
 import 'package:locadeserta/city_building/views/components/soft_container.dart';
+import 'package:locadeserta/city_building/views/resource_view.dart';
 import 'package:locadeserta/extensions/list.dart';
 
 class ResourceBuildingMetaView extends StatefulWidget {
@@ -51,65 +51,82 @@ class _ResourceBuildingMetaViewState extends State<ResourceBuildingMetaView> {
                 ],
               ),
               if (widget.selected) ...[
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Text('Requires to build'),
-                    Column(
-                        children: building.requiredToBuild.entries.toList().divideBy(2).map((row) {
-                      return Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: row.map((e) => Row(
-                          children: <Widget>[
-                            Image.asset(
-                              resourceTypesToImagePath(e.key),
-                              height: 64,
-                            ),
-                            Text('x ${e.value}'),],
-                        )).toList()
-                      );
-                    }).toList())
-                  ],
+                SoftContainer(
+                  child: Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Text('Requires to build'),
+                        Column(
+                            children: building.requiredToBuild.entries
+                                .toList()
+                                .divideBy(2)
+                                .map((row) {
+                          return Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: row
+                                  .map((e) => Row(
+                                        children: <Widget>[
+                                          ResourceImageView(
+                                            type: e.key,
+                                          ),
+                                          Text('x ${e.value}'),
+                                        ],
+                                      ))
+                                  .toList());
+                        }).toList())
+                      ],
+                    ),
+                  ),
                 ),
                 SizedBox(
                   height: 35,
                 ),
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text('Max number of workers'),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text('${building.maxWorkers}x'),
-                        Icon(Icons.person),
-                      ],
-                    ),
-                  ],
+                SoftContainer(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text('Max number of workers'),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text('${building.maxWorkers}x'),
+                          Icon(Icons.person),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
                 SizedBox(
                   height: 35,
                 ),
                 if (building.requires.isNotEmpty)
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Text('Requires to build'),
-                      Column(
-                          children: building.requires.entries.toList().divideBy(2).map((row) {
-                            return Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                children: row.map((e) => Row(
-                                  children: <Widget>[
-                                    Image.asset(
-                                      resourceTypesToImagePath(e.key),
-                                      height: 64,
-                                    ),
-                                    Text('x ${e.value}'),],
-                                )).toList()
-                            );
-                          }).toList())
-                    ],
+                  SoftContainer(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Text('Requires to build'),
+                        Column(
+                            children: building.requires.entries
+                                .toList()
+                                .divideBy(2)
+                                .map((row) {
+                          return Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: row
+                                  .map((e) => Row(
+                                        children: <Widget>[
+                                          ResourceImageView(
+                                            type: e.key,
+                                          ),
+                                          Text('x ${e.value}'),
+                                        ],
+                                      ))
+                                  .toList());
+                        }).toList())
+                      ],
+                    ),
                   ),
                 SizedBox(
                   height: 35,
@@ -121,9 +138,8 @@ class _ResourceBuildingMetaViewState extends State<ResourceBuildingMetaView> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
-                        Image.asset(
-                          resourceTypesToImagePath(building.produces),
-                          height: 64,
+                        ResourceImageView(
+                          type: building.produces,
                         ),
                         Text('x ${building.workMultiplier}'),
                       ],
