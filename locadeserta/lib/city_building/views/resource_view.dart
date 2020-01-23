@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:locadeserta/city_building/models/buildings/resource_buildings/resource_building.dart';
 import 'package:locadeserta/city_building/models/resources/resource.dart';
@@ -60,6 +61,7 @@ class ResourceDetailsView extends StatelessWidget {
                     },
                     child: Image.asset(
                       resourceTypesToImagePath(type),
+                      height: kIsWeb ? 512 : null,
                     ),
                   ),
                 ),
