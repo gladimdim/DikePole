@@ -142,7 +142,7 @@ class _CityGameState extends State<CityGame> {
     );
   }
 
-  void dipose() {
+  void dispose() {
     _topPageController.dispose();
     _mainPageController.dispose();
   }

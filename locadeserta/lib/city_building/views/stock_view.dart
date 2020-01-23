@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:locadeserta/city_building/models/resources/resource.dart';
 import 'package:locadeserta/city_building/models/stock.dart';
 import 'package:locadeserta/city_building/views/components/lined_container.dart';
+import 'package:locadeserta/city_building/views/resource_view.dart';
 import 'package:locadeserta/extensions/list.dart';
 
 class StockMiniView extends StatelessWidget {
@@ -47,40 +48,40 @@ class StockFullView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: <Widget>[
-          Text(
-            'Stock',
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              fontSize: 25,
+      child: Padding(
+        padding: const EdgeInsets.only(left: 20.0, right: 20.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            Text(
+              'Stock',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 25,
+              ),
             ),
-          ),
-          ...stock.getResourceTypesKeys().divideBy(2).map<Widget>(
-            (List keys) {
-              return LineContainer(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: keys
-                      .map(
-                        (key) => Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            Image.asset(
-                              '${resourceTypesToImagePath(key)}',
-                              height: 64,
-                            ),
-                            Text(stock.getByType(key).toString()),
-                          ],
-                        ),
-                      )
-                      .toList(),
-                ),
-              );
-            },
-          ).toList(),
-        ],
+            ...stock.getResourceTypesKeys().divideBy(2).map<Widget>(
+              (List keys) {
+                return LineContainer(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: keys
+                        .map(
+                          (key) => Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              ResourceImageView(type: key),
+                              Text(stock.getByType(key).toString()),
+                            ],
+                          ),
+                        )
+                        .toList(),
+                  ),
+                );
+              },
+            ).toList(),
+          ],
+        ),
       ),
     );
   }

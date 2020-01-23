@@ -4,6 +4,7 @@ import 'package:locadeserta/animations/slideable_button.dart';
 import 'package:locadeserta/city_building/models/buildings/resource_buildings/resource_building.dart';
 import 'package:locadeserta/city_building/models/resources/resource.dart';
 import 'package:locadeserta/city_building/views/components/soft_container.dart';
+import 'package:locadeserta/extensions/list.dart';
 
 class ResourceBuildingMetaView extends StatefulWidget {
   final RESOURCE_BUILDING_TYPES type;
@@ -55,16 +56,17 @@ class _ResourceBuildingMetaViewState extends State<ResourceBuildingMetaView> {
                   children: [
                     Text('Requires to build'),
                     Column(
-                        children: building.requiredToBuild.entries.map((e) {
+                        children: building.requiredToBuild.entries.toList().divideBy(2).map((row) {
                       return Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Image.asset(
-                            resourceTypesToImagePath(e.key),
-                            height: 64,
-                          ),
-                          Text(': ${e.value}'),
-                        ],
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: row.map((e) => Row(
+                          children: <Widget>[
+                            Image.asset(
+                              resourceTypesToImagePath(e.key),
+                              height: 64,
+                            ),
+                            Text('x ${e.value}'),],
+                        )).toList()
                       );
                     }).toList())
                   ],
@@ -90,21 +92,23 @@ class _ResourceBuildingMetaViewState extends State<ResourceBuildingMetaView> {
                 ),
                 if (building.requires.isNotEmpty)
                   Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      Text('Input'),
-                      ...building.requires.entries.map((e) {
-                        return Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Image.asset(
-                              resourceTypesToImagePath(e.key),
-                              height: 64,
-                            ),
-                            Text(': ${e.value}'),
-                          ],
-                        );
-                      }).toList(),
+                      Text('Requires to build'),
+                      Column(
+                          children: building.requires.entries.toList().divideBy(2).map((row) {
+                            return Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                children: row.map((e) => Row(
+                                  children: <Widget>[
+                                    Image.asset(
+                                      resourceTypesToImagePath(e.key),
+                                      height: 64,
+                                    ),
+                                    Text('x ${e.value}'),],
+                                )).toList()
+                            );
+                          }).toList())
                     ],
                   ),
                 SizedBox(
@@ -121,7 +125,7 @@ class _ResourceBuildingMetaViewState extends State<ResourceBuildingMetaView> {
                           resourceTypesToImagePath(building.produces),
                           height: 64,
                         ),
-                        Text(': ${building.workMultiplier}'),
+                        Text('x ${building.workMultiplier}'),
                       ],
                     ),
                   ],
