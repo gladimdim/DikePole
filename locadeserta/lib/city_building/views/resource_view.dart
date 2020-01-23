@@ -45,6 +45,11 @@ class ResourceDetailsView extends StatelessWidget {
       var instance = ResourceBuilding.fromType(v);
       return instance.requiredToBuild.containsKey(type);
     }).toList();
+
+    var producedBy = RESOURCE_BUILDING_TYPES.values.where((v) {
+      var instance = ResourceBuilding.fromType(v);
+      return instance.produces == type;
+    }).toList();
     return SingleChildScrollView(
       child: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -83,15 +88,16 @@ class ResourceDetailsView extends StatelessWidget {
                       children: requiredProd
                           .divideBy(2)
                           .map((List row) => Padding(
-                        padding: const EdgeInsets.all(16.0),
-                        child: Row(
-                          mainAxisAlignment:
-                          MainAxisAlignment.spaceBetween,
-                          children: row
-                              .map((e) => ResourceBuildingImageView(type: e))
-                              .toList(),
-                        ),
-                      ))
+                                padding: const EdgeInsets.all(16.0),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: row
+                                      .map((e) =>
+                                          ResourceBuildingImageView(type: e))
+                                      .toList(),
+                                ),
+                              ))
                           .toList(),
                     ),
                   )
@@ -115,13 +121,39 @@ class ResourceDetailsView extends StatelessWidget {
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: row
-                                      .map((e) => ResourceBuildingImageView(type: e))
+                                      .map((e) =>
+                                          ResourceBuildingImageView(type: e))
                                       .toList(),
                                 ),
                               ))
                           .toList(),
                     ),
-                  )
+                  ),
+                ],
+                if (producedBy.isNotEmpty) ...[
+                  Center(child: Text('Produced by')),
+                  SizedBox(
+                    height: 15,
+                  ),
+                  SoftContainer(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: producedBy
+                          .divideBy(2)
+                          .map((List row) => Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: Row(
+                          mainAxisAlignment:
+                          MainAxisAlignment.spaceBetween,
+                          children: row
+                              .map((e) =>
+                              ResourceBuildingImageView(type: e))
+                              .toList(),
+                        ),
+                      ))
+                          .toList(),
+                    ),
+                  ),
                 ]
               ],
             ),
@@ -151,28 +183,30 @@ class ExtractResourceDetailsScreenArguments extends StatelessWidget {
 
 class ResourceImageView extends StatelessWidget {
   final RESOURCE_TYPES type;
+  final int amount;
 
-  ResourceImageView({this.type});
+  ResourceImageView({this.type, this.amount});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: SoftContainer(
-        child: InkWell(
-          onTap: () {
-            Navigator.pushNamed(
-              context,
-              ResourceDetailsScreen.routeName,
-              arguments: ResourceDetailsScreenArguments(
-                type: type,
-              ),
-            );
-          },
-          child: Image.asset(
+    return InkWell(
+      onTap: () {
+        Navigator.pushNamed(
+          context,
+          ResourceDetailsScreen.routeName,
+          arguments: ResourceDetailsScreenArguments(
+            type: type,
+          ),
+        );
+      },
+      child: Row(
+        children: <Widget>[
+          Image.asset(
             '${resourceTypesToImagePath(type)}',
             height: 64,
           ),
-        ),
+          if (amount != null) Text('x $amount'),
+        ],
       ),
     );
   }

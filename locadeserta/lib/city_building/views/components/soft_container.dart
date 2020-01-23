@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 class SoftContainer extends StatelessWidget {
   final Widget child;
   final bool onlyTop;
+  final double borderRadiusValue;
 
-  const SoftContainer({Key key, this.child, this.onlyTop = false}) : super(key: key);
+  const SoftContainer({Key key, this.child, this.onlyTop = false, this.borderRadiusValue = 40.0})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -14,9 +16,9 @@ class SoftContainer extends StatelessWidget {
 //          shape: BoxShape.rectangle,
           borderRadius: onlyTop
               ? BorderRadius.only(
-                  topLeft: Radius.circular(40), topRight: Radius.circular(40))
+                  topLeft: Radius.circular(borderRadiusValue), topRight: Radius.circular(borderRadiusValue))
               : BorderRadius.all(
-                  Radius.circular(40),
+                  Radius.circular(borderRadiusValue),
                 ),
           boxShadow: [
             BoxShadow(

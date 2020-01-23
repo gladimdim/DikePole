@@ -70,8 +70,10 @@ class StockFullView extends StatelessWidget {
                           (key) => Row(
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
-                              ResourceImageView(type: key),
-                              Text(stock.getByType(key).toString()),
+                              ResourceImageView(
+                                type: key,
+                                amount: stock.getByType(key),
+                              ),
                             ],
                           ),
                         )
@@ -86,4 +88,3 @@ class StockFullView extends StatelessWidget {
     );
   }
 }
-
