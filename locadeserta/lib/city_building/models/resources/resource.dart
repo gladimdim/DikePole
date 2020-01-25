@@ -89,9 +89,9 @@ String resourceTypesToImagePath(RESOURCE_TYPES type) {
     case RESOURCE_TYPES.FUR:
       return 'images/city_building/resources/fur2.png';
     case RESOURCE_TYPES.FIREARM:
-      return 'images/city_building/resources/stone.png';
+      return 'images/city_building/resources/firearm.png';
     case RESOURCE_TYPES.HORSE:
-      return 'images/city_building/resources/stone.png';
+      return 'images/city_building/resources/horse.png';
     case RESOURCE_TYPES.IRON_ORE:
       return 'images/city_building/resources/iron_ore.png';
     case RESOURCE_TYPES.FISH:

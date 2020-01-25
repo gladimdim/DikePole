@@ -106,7 +106,7 @@ class _ResourceBuildingMetaViewState extends State<ResourceBuildingMetaView> {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        Text('Requires to build'),
+                        Text('Input'),
                         Column(
                             children: building.requires.entries
                                 .toList()
