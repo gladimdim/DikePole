@@ -1,4 +1,4 @@
-import 'package:locadeserta/city_building/models/buildings/buildable.dart';
+import 'package:locadeserta/city_building/models/abstract/buildable.dart';
 import 'package:locadeserta/city_building/models/buildings/city_buildings/church.dart';
 import 'package:locadeserta/city_building/models/buildings/city_buildings/house.dart';
 import 'package:locadeserta/city_building/models/buildings/city_buildings/tower.dart';

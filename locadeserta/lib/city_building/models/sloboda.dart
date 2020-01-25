@@ -1,4 +1,6 @@
-import 'package:locadeserta/city_building/models/buildings/buildable.dart';
+import 'package:locadeserta/city_building/models/abstract/buildable.dart';
+import 'package:locadeserta/city_building/models/abstract/producable.dart';
+import 'package:locadeserta/city_building/models/buildings/resource_buildings/nature_resource.dart';
 import 'package:locadeserta/city_building/models/buildings/resource_buildings/resource_building.dart';
 import 'package:locadeserta/city_building/models/citizen.dart';
 import 'package:locadeserta/city_building/models/resources/resource.dart';
@@ -21,6 +23,10 @@ class Sloboda {
   };
 
   List<ResourceBuilding> resourceBuildings = [];
+  List<NaturalResource> naturalResources = [
+    Forest(),
+    River(),
+  ];
 
   final Stock stock = Stock();
 
@@ -102,7 +108,9 @@ class Sloboda {
 
   void makeTurn() {
     var exceptions = [];
-    resourceBuildings.forEach((resBuilding) {
+    List<Producable> list = [...naturalResources, ...resourceBuildings];
+
+    list.forEach((resBuilding) {
       try {
         resBuilding.generate(stock);
       } catch (e) {

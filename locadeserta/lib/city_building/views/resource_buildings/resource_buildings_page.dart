@@ -3,6 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'package:locadeserta/animations/slideable_button.dart';
 import 'package:locadeserta/city_building/models/buildings/resource_buildings/resource_building.dart';
 import 'package:locadeserta/city_building/models/sloboda.dart';
+import 'package:locadeserta/city_building/views/nature_resource_buildings.dart';
 import 'package:locadeserta/city_building/views/resource_buildings/resource_building_built.dart';
 import 'package:locadeserta/city_building/views/resource_buildings/resource_building_meta.dart';
 import 'package:locadeserta/city_building/views/components/soft_container.dart';
@@ -27,6 +28,37 @@ class _ResourceBuildingsPageState extends State<ResourceBuildingsPage> {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
+            ...city.naturalResources.map<Widget>((el) {
+              return Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: SoftContainer(
+                  child: SlideableButton(
+                    onPress: () {
+                      Navigator.pushNamed(
+                          context, NatureResourceBuildingScreen.routeName,
+                          arguments: NatureResourceBuildingArguments(
+                            city: widget.city,
+                            building: el,
+                          ));
+                    },
+                    child: Container(
+                      height: 64,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Image.asset(
+                            el.getIconPath(),
+                            height: 64,
+                          ),
+                          Text(el.toString()),
+                          Icon(Icons.arrow_right),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              );
+            }).toList(),
             ...city.resourceBuildings
                 .map<Widget>(
                   (building) => Padding(
