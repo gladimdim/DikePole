@@ -10,9 +10,8 @@ class Producable {
   int maxWorkers = 5;
   int workMultiplier = 1;
 
-  int output() {
-    return workMultiplier * assignedHumans.length;
-  }
+  get outputAmount =>
+     workMultiplier * assignedHumans.length;
 
   bool hasWorkers() {
     return assignedHumans.isNotEmpty;

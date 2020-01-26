@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:locadeserta/animations/slideable_button.dart';
 import 'package:locadeserta/city_building/models/buildings/resource_buildings/nature_resource.dart';
-import 'package:locadeserta/city_building/models/resources/resource.dart';
 import 'package:locadeserta/city_building/models/sloboda.dart';
+import 'package:locadeserta/city_building/views/components/resource_building_output_view.dart';
 import 'package:locadeserta/city_building/views/components/soft_container.dart';
 
 class NatureResourceBuildingScreen extends StatefulWidget {
@@ -41,60 +42,90 @@ class _NatureResourceBuildingScreenState
         ],
       )),
       body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            children: <Widget>[
-              InkWell(
-                onTap: () {
-                  Navigator.pop(context);
-                },
-                child: SoftContainer(
+        child: SoftContainer(
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: <Widget>[
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
                   child: Image.asset(
                     building.getIconPath(),
-                    height: 512,
+                    height: 320,
                   ),
                 ),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  IconButton(
-                    icon: Icon(Icons.remove),
-                    onPressed: !building.isEmpty()
-                        ? () {
-                            setState(() {
-                              building.removeWorker();
-                            });
-                          }
-                        : null,
-                  ),
-                  Row(
-                    children: [
-                      Text(
-                        building.toString(),
+                if (!building.isFull())
+                  SoftContainer(
+                    child: SlideableButton(
+                      onPress: !building.isFull()
+                          ? () {
+                        setState(() {
+                          building.addWorker(city.getFirstFreeCitizen());
+                        });
+                      }
+                          : null,
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Center(child: Text('Add worker')),
                       ),
-                      Text(
-                          ': +${building.output()} ${resourceTypesToString(building.produces)}'),
-                      if (building.hasWorkers())
-                        Text('( ${building.amountOfWorkers()} '),
-                      if (building.hasWorkers()) Icon(Icons.person),
-                      if (building.hasWorkers()) Text(')'),
-                    ],
+                    ),
                   ),
-                  IconButton(
-                    icon: Icon(Icons.add),
-                    onPressed: !building.isFull()
-                        ? () {
-                            setState(() {
-                              building.addWorker(city.getFirstFreeCitizen());
-                            });
-                          }
-                        : null,
+                SizedBox(
+                  height: 32,
+                ),
+                if (building.assignedHumans.isNotEmpty)
+                  SoftContainer(
+                    child: Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: Column(children: [
+                        Center(child: Text('Assigned workers')),
+                        ...building.assignedHumans.map(
+                              (h) {
+                            return Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Row(
+                                mainAxisAlignment:
+                                MainAxisAlignment.spaceBetween,
+                                children: <Widget>[
+                                  Text(
+                                    h.name,
+                                  ),
+                                  SoftContainer(
+                                    child: IconButton(
+                                      icon: Icon(Icons.remove),
+                                      onPressed: !building.isEmpty()
+                                          ? () {
+                                        setState(() {
+                                          building.removeWorker();
+                                        });
+                                      }
+                                          : null,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            );
+                          },
+                        ).toList(),
+                      ]),
+                    ),
+                  ),
+                SizedBox(
+                  height: 32,
+                ),
+                if (building.assignedHumans.isNotEmpty) ...[
+                  SoftContainer(
+                    child: ResourceBuildingOutputView(
+                      building: building,
+                    ),
+                  ),
+                  SizedBox(
+                    height: 32,
                   ),
                 ],
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

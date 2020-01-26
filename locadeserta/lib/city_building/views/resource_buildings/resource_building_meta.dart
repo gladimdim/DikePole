@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:locadeserta/animations/slideable_button.dart';
 import 'package:locadeserta/city_building/models/buildings/resource_buildings/resource_building.dart';
+import 'package:locadeserta/city_building/views/components/resource_building_input_view.dart';
+import 'package:locadeserta/city_building/views/components/resource_building_output_view.dart';
+import 'package:locadeserta/city_building/views/components/resource_building_requires_to_build.dart';
 import 'package:locadeserta/city_building/views/components/soft_container.dart';
-import 'package:locadeserta/city_building/views/resource_view.dart';
-import 'package:locadeserta/extensions/list.dart';
 
 class ResourceBuildingMetaView extends StatefulWidget {
   final RESOURCE_BUILDING_TYPES type;
@@ -54,30 +55,7 @@ class _ResourceBuildingMetaViewState extends State<ResourceBuildingMetaView> {
                 SoftContainer(
                   child: Padding(
                     padding: const EdgeInsets.all(16.0),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Text('Requires to build'),
-                        Column(
-                            children: building.requiredToBuild.entries
-                                .toList()
-                                .divideBy(2)
-                                .map((row) {
-                          return Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: row
-                                  .map((e) => Row(
-                                        children: <Widget>[
-                                          ResourceImageView(
-                                            type: e.key,
-                                          ),
-                                          Text('x ${e.value}'),
-                                        ],
-                                      ))
-                                  .toList());
-                        }).toList())
-                      ],
-                    ),
+                    child: ResourceBuildingRequiresToBuildView(building: building),
                   ),
                 ),
                 SizedBox(
@@ -103,49 +81,12 @@ class _ResourceBuildingMetaViewState extends State<ResourceBuildingMetaView> {
                 ),
                 if (building.requires.isNotEmpty)
                   SoftContainer(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Text('Input'),
-                        Column(
-                            children: building.requires.entries
-                                .toList()
-                                .divideBy(2)
-                                .map((row) {
-                          return Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: row
-                                  .map((e) => Row(
-                                        children: <Widget>[
-                                          ResourceImageView(
-                                            type: e.key,
-                                          ),
-                                          Text('x ${e.value}'),
-                                        ],
-                                      ))
-                                  .toList());
-                        }).toList())
-                      ],
-                    ),
+                    child: ResourceBuildingInputView(building: building),
                   ),
                 SizedBox(
                   height: 35,
                 ),
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text('Output'),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        ResourceImageView(
-                          type: building.produces,
-                        ),
-                        Text('x ${building.workMultiplier}'),
-                      ],
-                    ),
-                  ],
-                ),
+                ResourceBuildingOutputView(building: building),
                 SizedBox(
                   height: 35,
                 ),
@@ -170,3 +111,5 @@ class _ResourceBuildingMetaViewState extends State<ResourceBuildingMetaView> {
     );
   }
 }
+
+

@@ -29,7 +29,9 @@ class _SlideableButtonState extends State<SlideableButton>
       duration: widget.duration,
     )..addStatusListener((state) {
         if (state == AnimationStatus.completed) {
-          widget.onPress();
+          if (widget.onPress != null) {
+            widget.onPress();
+          }
           controller.reverse();
         }
       });

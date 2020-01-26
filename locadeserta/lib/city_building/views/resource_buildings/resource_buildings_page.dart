@@ -1,18 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:locadeserta/animations/slideable_button.dart';
+import 'package:locadeserta/city_building/inherited_city.dart';
 import 'package:locadeserta/city_building/models/buildings/resource_buildings/resource_building.dart';
-import 'package:locadeserta/city_building/models/sloboda.dart';
 import 'package:locadeserta/city_building/views/nature_resource_buildings.dart';
 import 'package:locadeserta/city_building/views/resource_buildings/resource_building_built.dart';
 import 'package:locadeserta/city_building/views/resource_buildings/resource_building_meta.dart';
 import 'package:locadeserta/city_building/views/components/soft_container.dart';
 
 class ResourceBuildingsPage extends StatefulWidget {
-  final Sloboda city;
-
-  ResourceBuildingsPage({this.city});
-
   @override
   _ResourceBuildingsPageState createState() => _ResourceBuildingsPageState();
 }
@@ -22,7 +18,7 @@ class _ResourceBuildingsPageState extends State<ResourceBuildingsPage> {
 
   @override
   Widget build(BuildContext context) {
-    var city = widget.city;
+    var city = InheritedCity.of(context).city;
     return SingleChildScrollView(
       child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -37,7 +33,7 @@ class _ResourceBuildingsPageState extends State<ResourceBuildingsPage> {
                       Navigator.pushNamed(
                           context, NatureResourceBuildingScreen.routeName,
                           arguments: NatureResourceBuildingArguments(
-                            city: widget.city,
+                            city: city,
                             building: el,
                           ));
                     },
@@ -63,37 +59,8 @@ class _ResourceBuildingsPageState extends State<ResourceBuildingsPage> {
                 .map<Widget>(
                   (building) => Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: SoftContainer(
-                      child: SlideableButton(
-                        child: Container(
-                          height: 64,
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: <Widget>[
-                                Image.asset(
-                                  buildingTypeToIconPath(building.type),
-                                ),
-                                Text(
-                                  buildingTypeToString(building.type),
-                                ),
-                                Icon(Icons.arrow_right),
-                              ],
-                            ),
-                          ),
-                        ),
-                        onPress: () {
-                          Navigator.pushNamed(
-                            context,
-                            ResourceBuildingBuilt.routeName,
-                            arguments: ResourceBuildingBuiltArguments(
-                              city: widget.city,
-                              building: building,
-                            ),
-                          );
-                        },
-                      ),
+                    child: ResourceBuildingBuiltListItemView(
+                      building: building,
                     ),
                   ),
                 )

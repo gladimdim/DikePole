@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 class FatContainer extends StatelessWidget {
   final String text;
   final Color backgroundColor;
+
   FatContainer({@required this.text, this.backgroundColor = Colors.black});
 
   @override
@@ -19,6 +20,26 @@ class FatContainer extends StatelessWidget {
             textAlign: TextAlign.center,
           ),
         ),
+      ),
+    );
+  }
+}
+
+class FullWidthContainer extends StatelessWidget {
+  final Widget child;
+
+  FullWidthContainer({
+    @required this.child,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    var height = MediaQuery.of(context).size.height * 0.075;
+    return SizedBox(
+      height: height,
+      child: Container(
+        color: Theme.of(context).backgroundColor,
+        child: Align(alignment: Alignment.center, child: child),
       ),
     );
   }

@@ -121,7 +121,7 @@ class Sloboda {
 
     _innerChanges.add(this);
     if (exceptions.isNotEmpty) {
-      throw exceptions;
+      print(exceptions);
     }
   }
 
@@ -144,8 +144,6 @@ class Sloboda {
       return value;
     });
 
-    print(requires);
-
     Map produces = list.fold({}, (Map value, building) {
       if (value.containsKey(building.produces)) {
         value[building.produces] +=
@@ -157,8 +155,6 @@ class Sloboda {
 
       return value;
     });
-
-    print(produces);
 
     Map<RESOURCE_TYPES, int> diff = Map();
     RESOURCE_TYPES.values.forEach((type) {
@@ -177,7 +173,6 @@ class Sloboda {
         print(e);
       }
     });
-    print(diff);
 
     return diff;
   }
