@@ -61,7 +61,7 @@ class Producable {
       // check if stock satisfies the required input
       for (var reqRes in requires.entries) {
         var inStock = stock.getByType(reqRes.key);
-        var requiredToProduce = reqRes.value * assignedHumans.length;
+        var requiredToProduce = reqRes.value * assignedHumans.length * workMultiplier;
         if (requiredToProduce > inStock) {
           throw NotEnoughResourceException(
               'There is no enough ${reqRes.key} in stock');

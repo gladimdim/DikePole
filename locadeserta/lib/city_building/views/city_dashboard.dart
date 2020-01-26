@@ -46,7 +46,7 @@ class _CityDashboardState extends State<CityDashboard> {
               height: 20,
             ),
             SoftContainer(
-              child: StockFullView(stock: widget.city.stock),
+              child: StockFullView(stock: widget.city.stock, simulation: widget.city.simulate(),),
             ),
             SizedBox(
               height: 20,

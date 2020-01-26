@@ -7,8 +7,9 @@ import 'package:locadeserta/extensions/list.dart';
 
 class StockMiniView extends StatelessWidget {
   final Stock stock;
+  final Map<RESOURCE_TYPES, int> simulation;
 
-  StockMiniView({this.stock});
+  StockMiniView({@required this.stock, @required this.simulation});
 
   @override
   Widget build(BuildContext context) {
@@ -30,6 +31,8 @@ class StockMiniView extends StatelessWidget {
                     fontSize: 12,
                   ),
                 ),
+                if (simulation[key] > 0) Icon(Icons.arrow_upward, color: Colors.green,),
+                if (simulation[key] < 0) Icon(Icons.arrow_downward, color: Colors.red,),
               ],
             );
           }).toList(),
@@ -41,8 +44,9 @@ class StockMiniView extends StatelessWidget {
 
 class StockFullView extends StatelessWidget {
   final Stock stock;
+  final Map<RESOURCE_TYPES, int> simulation;
 
-  StockFullView({this.stock});
+  StockFullView({@required this.stock, @required this.simulation});
 
   @override
   Widget build(BuildContext context) {
@@ -74,6 +78,14 @@ class StockFullView extends StatelessWidget {
                                 type: key,
                                 amount: stock.getByType(key),
                               ),
+                              if (simulation[key] > 0) ...[
+                                Icon(Icons.arrow_upward, color: Colors.green,),
+                                Text(simulation[key].toString())
+                              ],
+                              if (simulation[key] < 0) ...[
+                                Icon(Icons.arrow_downward, color: Colors.red,),
+                                Text(simulation[key].toString()),
+                              ]
                             ],
                           ),
                         )

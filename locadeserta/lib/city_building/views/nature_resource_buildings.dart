@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:locadeserta/city_building/models/buildings/resource_buildings/nature_resource.dart';
 import 'package:locadeserta/city_building/models/resources/resource.dart';
 import 'package:locadeserta/city_building/models/sloboda.dart';
+import 'package:locadeserta/city_building/views/components/soft_container.dart';
 
 class NatureResourceBuildingScreen extends StatefulWidget {
   final NaturalResource building;
@@ -25,7 +26,6 @@ class _NatureResourceBuildingScreenState
       appBar: AppBar(
           title: Row(
         mainAxisAlignment: MainAxisAlignment.start,
-//        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Image.asset(
             building.getIconPath(),
@@ -41,51 +41,61 @@ class _NatureResourceBuildingScreenState
         ],
       )),
       body: SingleChildScrollView(
-        child: Column(
-          children: <Widget>[
-            Image.asset(
-              building.getIconPath(),
-              height: 512,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                IconButton(
-                  icon: Icon(Icons.remove),
-                  onPressed: !building.isEmpty()
-                      ? () {
-                          setState(() {
-                            building.removeWorker();
-                          });
-                        }
-                      : null,
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            children: <Widget>[
+              InkWell(
+                onTap: () {
+                  Navigator.pop(context);
+                },
+                child: SoftContainer(
+                  child: Image.asset(
+                    building.getIconPath(),
+                    height: 512,
+                  ),
                 ),
-                Row(
-                  children: [
-                    Text(
-                      building.toString(),
-                    ),
-                    Text(
-                        ': +${building.output()} ${resourceTypesToString(building.produces)}'),
-                    if (building.hasWorkers())
-                      Text('( ${building.amountOfWorkers()} '),
-                    if (building.hasWorkers()) Icon(Icons.person),
-                    if (building.hasWorkers()) Text(')'),
-                  ],
-                ),
-                IconButton(
-                  icon: Icon(Icons.add),
-                  onPressed: !building.isFull()
-                      ? () {
-                          setState(() {
-                            building.addWorker(city.getFirstFreeCitizen());
-                          });
-                        }
-                      : null,
-                ),
-              ],
-            ),
-          ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  IconButton(
+                    icon: Icon(Icons.remove),
+                    onPressed: !building.isEmpty()
+                        ? () {
+                            setState(() {
+                              building.removeWorker();
+                            });
+                          }
+                        : null,
+                  ),
+                  Row(
+                    children: [
+                      Text(
+                        building.toString(),
+                      ),
+                      Text(
+                          ': +${building.output()} ${resourceTypesToString(building.produces)}'),
+                      if (building.hasWorkers())
+                        Text('( ${building.amountOfWorkers()} '),
+                      if (building.hasWorkers()) Icon(Icons.person),
+                      if (building.hasWorkers()) Text(')'),
+                    ],
+                  ),
+                  IconButton(
+                    icon: Icon(Icons.add),
+                    onPressed: !building.isFull()
+                        ? () {
+                            setState(() {
+                              building.addWorker(city.getFirstFreeCitizen());
+                            });
+                          }
+                        : null,
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );

@@ -20,7 +20,7 @@ class Forest extends NaturalResource {
   };
 
   String getIconPath() {
-    return 'images/city_building/resource_buildings/iron_mine.png';
+    return 'images/city_building/resource_buildings/forest.png';
   }
 
   String toString() {

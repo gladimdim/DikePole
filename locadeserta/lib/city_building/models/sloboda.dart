@@ -108,6 +108,7 @@ class Sloboda {
 
   void makeTurn() {
     var exceptions = [];
+    simulate();
     List<Producable> list = [...naturalResources, ...resourceBuildings];
 
     list.forEach((resBuilding) {
@@ -122,6 +123,63 @@ class Sloboda {
     if (exceptions.isNotEmpty) {
       throw exceptions;
     }
+  }
+
+  Map<RESOURCE_TYPES, int> simulate() {
+    List<Producable> list = [...naturalResources, ...resourceBuildings];
+
+    Map requires = list.fold({}, (Map value, building) {
+      var req = building.requires.map((k, v) {
+        return MapEntry(
+            k, v * building.amountOfWorkers() * building.workMultiplier);
+      });
+
+      req.entries.forEach((element) {
+        if (value.containsKey(element.key)) {
+          value[element.key] += element.value;
+        } else {
+          value[element.key] = element.value;
+        }
+      });
+      return value;
+    });
+
+    print(requires);
+
+    Map produces = list.fold({}, (Map value, building) {
+      if (value.containsKey(building.produces)) {
+        value[building.produces] +=
+            building.workMultiplier * building.amountOfWorkers();
+      } else {
+        value[building.produces] =
+            building.workMultiplier * building.amountOfWorkers();
+      }
+
+      return value;
+    });
+
+    print(produces);
+
+    Map<RESOURCE_TYPES, int> diff = Map();
+    RESOURCE_TYPES.values.forEach((type) {
+      if (!diff.containsKey(type)) {
+        diff[type] = 0;
+      }
+      if (!produces.containsKey(type)) {
+        produces[type] = 0;
+      }
+      if (!requires.containsKey(type)) {
+        requires[type] = 0;
+      }
+      try {
+        diff[type] = produces[type] - requires[type];
+      } catch (e) {
+        print(e);
+      }
+    });
+    print(diff);
+
+    return diff;
   }
 
   void dispose() {

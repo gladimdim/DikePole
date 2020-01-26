@@ -60,7 +60,7 @@ class _CityGameState extends State<CityGame> {
         return Theme(
           data: Theme.of(context).copyWith(backgroundColor: Colors.grey[300]),
           child: NarrowScaffold(
-            titleView: StockMiniView(stock: city.stock),
+            titleView: StockMiniView(stock: city.stock, simulation: city.simulate(),),
             actions: [
               AppBarObject(
                   text: LDLocalizations.backToMenu,
