@@ -37,7 +37,7 @@ class River extends NaturalResource {
   };
 
   String getIconPath() {
-    return 'images/city_building/resource_buildings/quarry.png';
+    return 'images/city_building/resource_buildings/river.png';
   }
 
   String toString() {
