@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:locadeserta/animations/slideable_button.dart';
 import 'package:locadeserta/city_building/inherited_city.dart';
 import 'package:locadeserta/city_building/models/buildings/resource_buildings/resource_building.dart';
+import 'package:locadeserta/city_building/models/resources/resource.dart';
+import 'package:locadeserta/city_building/views/components/built_building_listview.dart';
 import 'package:locadeserta/city_building/views/nature_resource_buildings.dart';
 import 'package:locadeserta/city_building/views/resource_buildings/resource_building_built.dart';
 import 'package:locadeserta/city_building/views/resource_buildings/resource_building_meta.dart';
@@ -28,33 +29,25 @@ class _ResourceBuildingsPageState extends State<ResourceBuildingsPage> {
               return Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: SoftContainer(
-                  child: SlideableButton(
-                    onPress: () {
-                      Navigator.pushNamed(
-                          context, NatureResourceBuildingScreen.routeName,
-                          arguments: NatureResourceBuildingArguments(
-                            city: city,
-                            building: el,
-                          ));
-                    },
-                    child: Container(
-                      height: 64,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Image.asset(
-                            el.getIconPath(),
-                            height: 64,
-                          ),
-                          Text(el.toString()),
-                          Icon(Icons.arrow_right),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
+                    child: BuiltBuildingListView(
+                  title: el.toString(),
+                  buildingIconPath: el.getIconPath(),
+                  producesIconPath: resourceTypesToImagePath(el.produces),
+                  amount: el.outputAmount,
+                  onPress: () {
+                    Navigator.pushNamed(
+                        context, NatureResourceBuildingScreen.routeName,
+                        arguments: NatureResourceBuildingArguments(
+                          city: city,
+                          building: el,
+                        ));
+                  },
+                )),
               );
             }).toList(),
+            SizedBox(
+              height: 32,
+            ),
             ...city.resourceBuildings
                 .map<Widget>(
                   (building) => Padding(
