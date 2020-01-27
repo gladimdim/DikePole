@@ -2,6 +2,7 @@ import 'package:locadeserta/city_building/models/buildings/city_buildings/city_b
 import 'package:locadeserta/city_building/models/resources/resource.dart';
 
 class Wall extends CityBuilding {
+  CITY_BUILDING_TYPES type = CITY_BUILDING_TYPES.WALL;
   CITY_PROPERTIES produces = CITY_PROPERTIES.DEFENSE;
 
   Map<RESOURCE_TYPES, int> requiredToBuild = {

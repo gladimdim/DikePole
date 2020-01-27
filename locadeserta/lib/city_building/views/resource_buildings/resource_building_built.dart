@@ -4,6 +4,7 @@ import 'package:locadeserta/city_building/inherited_city.dart';
 import 'package:locadeserta/city_building/models/buildings/resource_buildings/resource_building.dart';
 import 'package:locadeserta/city_building/models/resources/resource.dart';
 import 'package:locadeserta/city_building/models/sloboda.dart';
+import 'package:locadeserta/city_building/views/components/built_building_listview.dart';
 import 'package:locadeserta/city_building/views/components/resource_building_input_view.dart';
 import 'package:locadeserta/city_building/views/components/resource_building_output_view.dart';
 import 'package:locadeserta/city_building/views/components/soft_container.dart';
@@ -16,52 +17,21 @@ class ResourceBuildingBuiltListItemView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Sloboda city = InheritedCity.of(context).city;
-    return SoftContainer(
-      child: SlideableButton(
-        child: Container(
-          height: 64,
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                Image.asset(
-                  buildingTypeToIconPath(building.type),
-                ),
-                Text(
-                  buildingTypeToString(building.type),
-                  style: TextStyle(fontSize: 24),
-                ),
-                Row(
-                  children: <Widget>[
-                    Image.asset(
-                      resourceTypesToImagePath(building.produces),
-                      height: 32,
-                    ),
-                    Text(
-                      'x ${building.outputAmount}',
-                      style: TextStyle(
-                        fontSize: 18,
-                      ),
-                    ),
-                    Icon(Icons.arrow_right),
-                  ],
-                ),
-              ],
-            ),
+    return BuiltBuildingListView(
+      title: buildingTypeToString(building.type),
+      producesIconPath: resourceTypesToImagePath(building.produces),
+      amount: building.outputAmount,
+      buildingIconPath: buildingTypeToIconPath(building.type),
+      onPress: () {
+        Navigator.pushNamed(
+          context,
+          ResourceBuildingBuilt.routeName,
+          arguments: ResourceBuildingBuiltArguments(
+            city: city,
+            building: building,
           ),
-        ),
-        onPress: () {
-          Navigator.pushNamed(
-            context,
-            ResourceBuildingBuilt.routeName,
-            arguments: ResourceBuildingBuiltArguments(
-              city: city,
-              building: building,
-            ),
-          );
-        },
-      ),
+        );
+      },
     );
   }
 }

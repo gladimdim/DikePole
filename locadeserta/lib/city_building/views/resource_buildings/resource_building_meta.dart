@@ -4,7 +4,7 @@ import 'package:locadeserta/animations/slideable_button.dart';
 import 'package:locadeserta/city_building/models/buildings/resource_buildings/resource_building.dart';
 import 'package:locadeserta/city_building/views/components/resource_building_input_view.dart';
 import 'package:locadeserta/city_building/views/components/resource_building_output_view.dart';
-import 'package:locadeserta/city_building/views/components/resource_building_requires_to_build.dart';
+import 'package:locadeserta/city_building/views/components/buildable_requires_to_build.dart';
 import 'package:locadeserta/city_building/views/components/soft_container.dart';
 
 class ResourceBuildingMetaView extends StatefulWidget {
@@ -55,7 +55,7 @@ class _ResourceBuildingMetaViewState extends State<ResourceBuildingMetaView> {
                 SoftContainer(
                   child: Padding(
                     padding: const EdgeInsets.all(16.0),
-                    child: ResourceBuildingRequiresToBuildView(building: building),
+                    child: BuildableRequiredToBuildView(building: building),
                   ),
                 ),
                 SizedBox(

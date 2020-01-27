@@ -123,6 +123,13 @@ class Sloboda {
     if (exceptions.isNotEmpty) {
       print(exceptions);
     }
+
+    cityBuildings.forEach((cb) {
+      Map<CITY_PROPERTIES, int> generated = cb.generate();
+      generated.entries.forEach((e) {
+        properties[e.key] += e.value;
+      });
+    });
   }
 
   Map<RESOURCE_TYPES, int> simulate() {

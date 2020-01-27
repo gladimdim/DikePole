@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:locadeserta/city_building/inherited_city.dart';
 import 'package:locadeserta/city_building/models/buildings/city_buildings/city_building.dart';
+import 'package:locadeserta/city_building/views/city_buildings/city_building_built.dart';
 import 'package:locadeserta/city_building/views/city_buildings/city_building_meta.dart';
 
 class CityBuildingsPage extends StatefulWidget {
@@ -19,8 +20,17 @@ class _CityBuildingsPageState extends State<CityBuildingsPage> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.end,
-        children: CITY_BUILDING_TYPES.values
-            .map((v) => InkWell(
+        children: [
+          ...city.cityBuildings
+              .map(
+                (cb) => CityBuildingBuiltListItemView(
+                  building: cb,
+                ),
+              )
+              .toList(),
+          ...CITY_BUILDING_TYPES.values
+              .map(
+                (v) => InkWell(
                   onTap: () {
                     setState(() {
                       if (selected == v) {
@@ -41,8 +51,10 @@ class _CityBuildingsPageState extends State<CityBuildingsPage> {
                       }
                     },
                   ),
-                ))
-            .toList(),
+                ),
+              )
+              .toList(),
+        ],
       ),
     );
   }

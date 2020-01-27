@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:locadeserta/animations/slideable_button.dart';
 import 'package:locadeserta/city_building/models/buildings/city_buildings/city_building.dart';
-import 'package:locadeserta/city_building/models/resources/resource.dart';
+import 'package:locadeserta/city_building/views/components/buildable_requires_to_build.dart';
 import 'package:locadeserta/city_building/views/components/soft_container.dart';
 
 class CityBuildingMetaView extends StatefulWidget {
@@ -47,24 +47,13 @@ class _CityBuildingMetaViewState extends State<CityBuildingMetaView> {
               ],
             ),
             if (widget.selected) ...[
-              Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Text('Requires to build'),
-                  Column(
-                      children: building.requiredToBuild.entries.map((e) {
-                    return Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Image.asset(
-                          resourceTypesToImagePath(e.key),
-                          height: 64,
-                        ),
-                        Text(': ${e.value}'),
-                      ],
-                    );
-                  }).toList())
-                ],
+              SoftContainer(
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: BuildableRequiredToBuildView(
+                    building: building,
+                  ),
+                ),
               ),
               SizedBox(
                 height: 35,
