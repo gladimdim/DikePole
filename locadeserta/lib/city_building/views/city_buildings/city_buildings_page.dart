@@ -4,6 +4,7 @@ import 'package:locadeserta/city_building/inherited_city.dart';
 import 'package:locadeserta/city_building/models/buildings/city_buildings/city_building.dart';
 import 'package:locadeserta/city_building/views/city_buildings/city_building_built.dart';
 import 'package:locadeserta/city_building/views/city_buildings/city_building_meta.dart';
+import 'package:locadeserta/city_building/views/components/built_building_listview.dart';
 
 class CityBuildingsPage extends StatefulWidget {
   @override
@@ -23,8 +24,22 @@ class _CityBuildingsPageState extends State<CityBuildingsPage> {
         children: [
           ...city.cityBuildings
               .map(
-                (cb) => CityBuildingBuiltListItemView(
-                  building: cb,
+                (cb) => Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: BuiltBuildingListView(
+                    title: cityBuildingTypeToString(cb.type),
+                    buildingIconPath: cityTypeToIconPath(cb.type),
+                    producesIconPath: cityPropertiesToIconPath(cb.produces),
+                    amount: 1,
+                    onPress: () {
+                      Navigator.pushNamed(
+                          context, CityBuildingBuilt.routeName,
+                          arguments: CityBuildingBuiltArguments(
+                            city: city,
+                            building: cb,
+                          ));
+                    },
+                  ),
                 ),
               )
               .toList(),

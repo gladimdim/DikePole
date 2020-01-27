@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:locadeserta/InheritedAuth.dart';
 import 'package:locadeserta/StatisticsView.dart';
+import 'package:locadeserta/city_building/views/city_buildings/city_building_built.dart';
 import 'package:locadeserta/city_building/views/city_game.dart';
 import 'package:locadeserta/city_building/views/nature_resource_buildings.dart';
 import 'package:locadeserta/city_building/views/resource_buildings/resource_building_built.dart';
@@ -161,6 +162,7 @@ class _LocaDesertaAppState extends State<LocaDesertaApp> {
                   ResourceDetailsScreen.routeName: (context) =>
                       ExtractResourceDetailsScreenArguments(),
                   ResourceBuildingDetailsScreen.routeName: (context) => ExtractResourceBuildingDetailsScreenArguments(),
+                  CityBuildingBuilt.routeName: (context) => ExtractCityBuildingBuiltArguments(),
                   NatureResourceBuildingScreen.routeName: (context) => ExtractNatureResourceBuildingArguments(),
                 },
               );

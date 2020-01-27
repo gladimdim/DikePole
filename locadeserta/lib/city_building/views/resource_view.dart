@@ -21,10 +21,11 @@ class ResourceDetailsScreen extends StatelessWidget {
       title: resourceTypesToString(type),
       actions: [
         AppBarObject(
-            text: 'Back',
-            onTap: () {
-              Navigator.pop(context);
-            })
+          text: 'Back',
+          onTap: () {
+            Navigator.pop(context);
+          },
+        ),
       ],
     );
   }
@@ -141,16 +142,16 @@ class ResourceDetailsView extends StatelessWidget {
                       children: producedBy
                           .divideBy(2)
                           .map((List row) => Padding(
-                        padding: const EdgeInsets.all(16.0),
-                        child: Row(
-                          mainAxisAlignment:
-                          MainAxisAlignment.spaceBetween,
-                          children: row
-                              .map((e) =>
-                              ResourceBuildingImageView(type: e))
-                              .toList(),
-                        ),
-                      ))
+                                padding: const EdgeInsets.all(16.0),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: row
+                                      .map((e) =>
+                                          ResourceBuildingImageView(type: e))
+                                      .toList(),
+                                ),
+                              ))
                           .toList(),
                     ),
                   ),

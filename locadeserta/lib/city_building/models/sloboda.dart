@@ -106,6 +106,11 @@ class Sloboda {
     _innerChanges.add(this);
   }
 
+  void removeCityBuilding(CityBuilding building) {
+    cityBuildings.remove(building);
+    _innerChanges.add(this);
+  }
+
   void makeTurn() {
     var exceptions = [];
     simulate();

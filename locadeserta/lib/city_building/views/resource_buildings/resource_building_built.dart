@@ -8,6 +8,8 @@ import 'package:locadeserta/city_building/views/components/built_building_listvi
 import 'package:locadeserta/city_building/views/components/resource_building_input_view.dart';
 import 'package:locadeserta/city_building/views/components/resource_building_output_view.dart';
 import 'package:locadeserta/city_building/views/components/soft_container.dart';
+import 'package:locadeserta/components/app_bar_custom.dart';
+import 'package:locadeserta/components/narrow_scaffold.dart';
 
 class ResourceBuildingBuiltListItemView extends StatelessWidget {
   final ResourceBuilding building;
@@ -52,27 +54,16 @@ class _ResourceBuildingBuiltState extends State<ResourceBuildingBuilt> {
   Widget build(BuildContext context) {
     var city = widget.city;
     var building = widget.building;
-    return Scaffold(
-      appBar: AppBar(
-          title: Row(
-        mainAxisAlignment: MainAxisAlignment.start,
-//        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Image.asset(
-            buildingTypeToIconPath(building.type),
-            height: 32,
-          ),
-          SizedBox(
-            width: 32,
-          ),
-          Text(
-            buildingTypeToString(
-              building.type,
-            ),
-            style: Theme.of(context).textTheme.title,
-          ),
-        ],
-      )),
+    return NarrowScaffold(
+      title: buildingTypeToString(building.type),
+      actions: [
+        AppBarObject(
+          text: 'Back',
+          onTap: () {
+            Navigator.pop(context);
+          },
+        )
+      ],
       body: SingleChildScrollView(
         child: SoftContainer(
           child: Padding(
@@ -80,11 +71,15 @@ class _ResourceBuildingBuiltState extends State<ResourceBuildingBuilt> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Image.asset(
-                    buildingTypeToIconPath(building.type),
-                    height: 320,
+                InkWell(
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
+                  child: SoftContainer(
+                    child: Image.asset(
+                      buildingTypeToIconPath(building.type),
+                      height: 320,
+                    ),
                   ),
                 ),
                 if (!building.isFull())
