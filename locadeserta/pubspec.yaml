@@ -69,6 +69,7 @@ flutter:
     - images/city_building/resource_buildings/forest.png
     - images/city_building/resource_buildings/river.png
     - images/city_building/resource_buildings/trappershouse.png
+    - images/city_building/resource_buildings/stable.png
     - images/city_building/resources/stone.png
     - images/city_building/resources/wood.png
     - images/city_building/resources/kurin.png

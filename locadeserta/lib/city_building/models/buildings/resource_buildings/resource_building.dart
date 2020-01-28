@@ -61,7 +61,7 @@ String buildingTypeToIconPath(RESOURCE_BUILDING_TYPES type) {
     case RESOURCE_BUILDING_TYPES.MILL: return 'images/city_building/resource_buildings/kurin.png';
     case RESOURCE_BUILDING_TYPES.SMITH: return 'images/city_building/resource_buildings/kurin.png';
     case RESOURCE_BUILDING_TYPES.QUARRY: return 'images/city_building/resource_buildings/quarry.png';
-    case RESOURCE_BUILDING_TYPES.STABLES: return 'images/city_building/resource_buildings/kurin.png';
+    case RESOURCE_BUILDING_TYPES.STABLES: return 'images/city_building/resource_buildings/stable.png';
     case RESOURCE_BUILDING_TYPES.IRON_MINE: return 'images/city_building/resource_buildings/iron_mine.png';
     case RESOURCE_BUILDING_TYPES.TRAPPER_HOUSE: return 'images/city_building/resource_buildings/trappershouse.png';
   }
