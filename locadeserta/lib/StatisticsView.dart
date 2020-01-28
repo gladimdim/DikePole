@@ -59,21 +59,21 @@ class _StatisticsViewState extends State<StatisticsView> {
                       children: [
                         ListTile(
                           title: Text(LDLocalizations.registeredUsers,
-                              style: Theme.of(context).textTheme.headline6),
+                              style: Theme.of(context).textTheme.title),
                           subtitle: Text("$userCount",
-                              style: Theme.of(context).textTheme.bodyText2),
+                              style: Theme.of(context).textTheme.body1),
                         )
                       ]..addAll(storyStats.keys
                           .map(
                             (key) => ListTile(
                               title: Text(
                                 LDLocalizations.labelStoryTitle + ": $key",
-                                style: Theme.of(context).textTheme.headline6,
+                                style: Theme.of(context).textTheme.title,
                               ),
                               subtitle: Text(
                                 LDLocalizations.timesRead +
                                     ": ${storyStats[key]}",
-                                style: Theme.of(context).textTheme.headline6,
+                                style: Theme.of(context).textTheme.title,
                               ),
                             ),
                           )

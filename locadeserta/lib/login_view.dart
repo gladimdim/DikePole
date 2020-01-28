@@ -110,7 +110,7 @@ class _LoginViewState extends State<LoginView> {
                         fontSize: 15.0,
                         fontWeight: FontWeight.bold,
                         backgroundColor: Theme.of(context).backgroundColor,
-                        color: Theme.of(context).textTheme.headline6.color,
+                        color: Theme.of(context).textTheme.title.color,
                       ),
                     ),
                     onTap: () async {
