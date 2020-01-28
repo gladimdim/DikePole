@@ -132,6 +132,9 @@ class Sloboda {
     cityBuildings.forEach((cb) {
       Map<CITY_PROPERTIES, int> generated = cb.generate();
       generated.entries.forEach((e) {
+        if (e.key == CITY_PROPERTIES.CITIZENS) {
+          citizens.add(Citizen());
+        }
         properties[e.key] += e.value;
       });
     });
