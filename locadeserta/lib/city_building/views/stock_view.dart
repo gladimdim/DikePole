@@ -7,9 +7,9 @@ import 'package:locadeserta/extensions/list.dart';
 
 class StockMiniView extends StatelessWidget {
   final Stock stock;
-  final Map<RESOURCE_TYPES, int> simulation;
+  final Map<RESOURCE_TYPES, int> stockSimulation;
 
-  StockMiniView({@required this.stock, @required this.simulation});
+  StockMiniView({@required this.stock, @required this.stockSimulation});
 
   @override
   Widget build(BuildContext context) {
@@ -31,8 +31,11 @@ class StockMiniView extends StatelessWidget {
                     fontSize: 12,
                   ),
                 ),
-                if (simulation[key] > 0) Icon(Icons.arrow_upward, color: Colors.green,),
-                if (simulation[key] < 0) Icon(Icons.arrow_downward, color: Colors.red,),
+                SaldoViewShower(
+                  value: stockSimulation[key],
+                  reference: stock.getByType(key),
+                  showValue: false,
+                ),
               ],
             );
           }).toList(),
@@ -44,9 +47,11 @@ class StockMiniView extends StatelessWidget {
 
 class StockFullView extends StatelessWidget {
   final Stock stock;
-  final Map<RESOURCE_TYPES, int> simulation;
+  final Map<RESOURCE_TYPES, int> stockSimulation;
 
-  StockFullView({@required this.stock, @required this.simulation});
+  StockFullView(
+      {@required this.stock,
+      @required this.stockSimulation,});
 
   @override
   Widget build(BuildContext context) {
@@ -78,14 +83,10 @@ class StockFullView extends StatelessWidget {
                                 type: key,
                                 amount: stock.getByType(key),
                               ),
-                              if (simulation[key] > 0) ...[
-                                Icon(Icons.arrow_upward, color: Colors.green,),
-                                Text(simulation[key].toString())
-                              ],
-                              if (simulation[key] < 0) ...[
-                                Icon(Icons.arrow_downward, color: Colors.red,),
-                                Text(simulation[key].toString()),
-                              ]
+                              SaldoViewShower(
+                                  value: stockSimulation[key],
+                                  reference: stock.getByType(key),
+                                  showValue: true),
                             ],
                           ),
                         )
@@ -98,5 +99,38 @@ class StockFullView extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+class SaldoViewShower extends StatelessWidget {
+  final int value;
+  final int reference;
+  final bool showValue;
+
+  SaldoViewShower({this.value, this.reference, this.showValue = true});
+
+  @override
+  Widget build(BuildContext context) {
+    var up = value - reference > 0;
+    var diffValue = value - reference;
+    if (value - reference == 0) {
+      return Container();
+    }
+    return Row(children: <Widget>[
+      if (up) ...[
+        Icon(
+          Icons.arrow_upward,
+          color: Colors.green,
+        ),
+        if (showValue) Text(diffValue.toString())
+      ],
+      if (!up) ...[
+        Icon(
+          Icons.arrow_downward,
+          color: Colors.red,
+        ),
+        if (showValue) Text(diffValue.toString()),
+      ]
+    ]);
   }
 }

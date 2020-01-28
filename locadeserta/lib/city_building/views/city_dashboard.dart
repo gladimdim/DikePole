@@ -46,7 +46,10 @@ class _CityDashboardState extends State<CityDashboard> {
               height: 20,
             ),
             SoftContainer(
-              child: StockFullView(stock: widget.city.stock, simulation: widget.city.simulate(),),
+              child: StockFullView(
+                stock: widget.city.stock,
+                stockSimulation: widget.city.simulateStock(),
+              ),
             ),
             SizedBox(
               height: 20,
@@ -88,7 +91,7 @@ class _CityDashboardState extends State<CityDashboard> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text("Free citizens: "),
+                    Text("Not occupied citizens: "),
                     Text(
                       widget.city.citizens
                           .where((citizen) => !citizen.occupied())
@@ -115,9 +118,17 @@ class _CityDashboardState extends State<CityDashboard> {
                             Text(
                               cityPropertiesToString(v),
                             ),
-                            Text(
-                              widget.city.properties[v].toString(),
-                            )
+                            Row(children: [
+                              SizedBox(
+                                width: 32,
+                              ),
+                              Text(widget.city.properties[v].toString()),
+                              SaldoViewShower(
+                                value: widget.city.simulateCityProps()[v],
+                                reference: widget.city.properties[v],
+                                showValue: true,
+                              )
+                            ]),
                           ],
                         ),
                       )
@@ -131,4 +142,3 @@ class _CityDashboardState extends State<CityDashboard> {
     );
   }
 }
-

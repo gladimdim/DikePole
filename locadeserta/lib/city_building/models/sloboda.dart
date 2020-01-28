@@ -113,7 +113,7 @@ class Sloboda {
 
   void makeTurn() {
     var exceptions = [];
-    simulate();
+    simulateStock();
     List<Producable> list = [...naturalResources, ...resourceBuildings];
 
     list.forEach((resBuilding) {
@@ -140,7 +140,22 @@ class Sloboda {
     });
   }
 
-  Map<RESOURCE_TYPES, int> simulate() {
+  Map<CITY_PROPERTIES, int> simulateCityProps() {
+    Map<CITY_PROPERTIES, int> newMap =
+        cityBuildings.fold(Map.from(properties), (Map value, cb) {
+      var prod = cb.produces;
+      if (value.containsKey(prod)) {
+        value[prod] += cb.outputAmount;
+      } else {
+        value[prod] = properties[prod];
+      }
+      return value;
+    });
+
+    return newMap;
+  }
+
+  Map<RESOURCE_TYPES, int> simulateStock() {
     List<Producable> list = [...naturalResources, ...resourceBuildings];
 
     Map requires = list.fold({}, (Map value, building) {
@@ -171,10 +186,10 @@ class Sloboda {
       return value;
     });
 
-    Map<RESOURCE_TYPES, int> diff = Map();
+    Map<RESOURCE_TYPES, int> newStock = Map();
     RESOURCE_TYPES.values.forEach((type) {
-      if (!diff.containsKey(type)) {
-        diff[type] = 0;
+      if (!newStock.containsKey(type)) {
+        newStock[type] = 0;
       }
       if (!produces.containsKey(type)) {
         produces[type] = 0;
@@ -183,13 +198,14 @@ class Sloboda {
         requires[type] = 0;
       }
       try {
-        diff[type] = produces[type] - requires[type];
+        newStock[type] =
+            produces[type] - requires[type] + stock.getByType(type);
       } catch (e) {
         print(e);
       }
     });
 
-    return diff;
+    return newStock;
   }
 
   void dispose() {
