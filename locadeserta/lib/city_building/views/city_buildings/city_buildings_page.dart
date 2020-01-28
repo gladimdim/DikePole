@@ -22,27 +22,26 @@ class _CityBuildingsPageState extends State<CityBuildingsPage> {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
-          ...city.cityBuildings
-              .map(
-                (cb) => Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: BuiltBuildingListView(
-                    title: cityBuildingTypeToString(cb.type),
-                    buildingIconPath: cityTypeToIconPath(cb.type),
-                    producesIconPath: cityPropertiesToIconPath(cb.produces),
-                    amount: 1,
-                    onPress: () {
-                      Navigator.pushNamed(
-                          context, CityBuildingBuilt.routeName,
-                          arguments: CityBuildingBuiltArguments(
-                            city: city,
-                            building: cb,
-                          ));
-                    },
-                  ),
+          ...city.cityBuildings.map(
+            (cb) {
+              return Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: BuiltBuildingListView(
+                  title: cityBuildingTypeToString(cb.type),
+                  buildingIconPath: cityTypeToIconPath(cb.type),
+                  producesIconPath: cityPropertiesToIconPath(cb.produces),
+                  amount: 1,
+                  onPress: () {
+                    Navigator.pushNamed(context, CityBuildingBuilt.routeName,
+                        arguments: CityBuildingBuiltArguments(
+                          city: city,
+                          building: cb,
+                        ));
+                  },
                 ),
-              )
-              .toList(),
+              );
+            },
+          ).toList(),
           ...CITY_BUILDING_TYPES.values
               .map(
                 (v) => InkWell(

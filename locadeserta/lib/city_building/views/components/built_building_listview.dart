@@ -12,10 +12,10 @@ class BuiltBuildingListView extends StatelessWidget {
 
   BuiltBuildingListView(
       {this.onPress,
-      this.buildingIconPath,
-      this.title,
-      this.producesIconPath,
-      this.amount});
+      @required this.buildingIconPath,
+      @required this.title,
+      @required this.producesIconPath,
+      this.amount = 1});
 
   @override
   Widget build(BuildContext context) {
