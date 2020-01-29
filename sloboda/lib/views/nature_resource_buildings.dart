@@ -29,7 +29,7 @@ class _NatureResourceBuildingScreenState
       title: building.toString(),
       actions: [
         AppBarObject(
-          text: 'Back',
+          child: Text('Back'),
           onTap: () {
             Navigator.pop(context);
           },

@@ -89,7 +89,7 @@ class _AppBarCustomState extends State<AppBarCustom> {
   Widget _appBarObjectToButton(AppBarObject object, BuildContext context) {
     return AppBarButton(
       onTap: _callbackerHandler(object.onTap),
-      text: object.text,
+      child: object.child,
       color: Theme.of(context).primaryColor,
     );
   }
@@ -108,7 +108,7 @@ class _AppBarCustomState extends State<AppBarCustom> {
 
 class AppBarObject {
   final VoidCallback onTap;
-  final String text;
+  final Widget child;
 
-  AppBarObject({@required this.text, @required this.onTap});
+  AppBarObject({@required this.child, @required this.onTap});
 }

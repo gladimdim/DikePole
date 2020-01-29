@@ -58,7 +58,7 @@ class _ResourceBuildingBuiltState extends State<ResourceBuildingBuilt> {
       title: buildingTypeToString(building.type),
       actions: [
         AppBarObject(
-          text: 'Back',
+          child: Text('Back'),
           onTap: () {
             Navigator.pop(context);
           },

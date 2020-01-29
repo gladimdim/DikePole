@@ -70,7 +70,7 @@ class _CityGameState extends State<CityGame> {
               ),
               actions: [
                 AppBarObject(
-                    text: 'Change Lang',
+                    child: Text('Change Lang'),
                     onTap: () {
                       // Navigator.pop(context);
                     })
@@ -103,7 +103,11 @@ class _CityGameState extends State<CityGame> {
                                       ),
                                     ),
                                   if (index == 0) SizedBox(width: 50),
-                                  Text(_pageTitles[index], style: Theme.of(context).textTheme.headline6,),
+                                  Text(
+                                    _pageTitles[index],
+                                    style:
+                                        Theme.of(context).textTheme.headline6,
+                                  ),
                                   if (index != _pageTitles.length - 1)
                                     SoftContainer(
                                       child: IconButton(

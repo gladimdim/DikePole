@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 class AppBarButton extends StatelessWidget {
   final VoidCallback onTap;
   final Color color;
-  final String text;
+  final Widget child;
 
-  AppBarButton({this.onTap, this.color, this.text});
+  AppBarButton({this.onTap, this.color, this.child});
 
   @override
   Widget build(BuildContext context) {
@@ -14,12 +14,7 @@ class AppBarButton extends StatelessWidget {
       onPressed: onTap,
       child: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Center(
-          child: Text(
-            text,
-            style: Theme.of(context).textTheme.bodyText2
-          ),
-        ),
+        child: Center(child: child),
       ),
     );
   }

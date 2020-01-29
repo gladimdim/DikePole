@@ -21,7 +21,7 @@ class ResourceDetailsScreen extends StatelessWidget {
       title: resourceTypesToString(type),
       actions: [
         AppBarObject(
-          text: 'Back',
+          child: Text('Back'),
           onTap: () {
             Navigator.pop(context);
           },

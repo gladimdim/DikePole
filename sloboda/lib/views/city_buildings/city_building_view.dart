@@ -52,7 +52,7 @@ class CityBuildingDetailsScreen extends StatelessWidget {
       title: cityBuildingTypeToString(type),
       actions: [
         AppBarObject(
-            text: 'Back',
+            child: Text('Back'),
             onTap: () {
               Navigator.pop(context);
             })
