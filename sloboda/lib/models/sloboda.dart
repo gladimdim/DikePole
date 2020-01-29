@@ -93,13 +93,6 @@ class Sloboda {
     return citizens.where((citizen) => !citizen.occupied()).toList();
   }
 
-  void removeResourceBuildingByType(RESOURCE_BUILDING_TYPES type) {
-    var building = resourceBuildings.lastWhere((b) => b.type == type);
-    building.removeWorker();
-    resourceBuildings.remove(building);
-    _innerChanges.add(this);
-  }
-
   void removeResourceBuilding(ResourceBuilding building) {
     resourceBuildings.remove(building);
     building.destroy();

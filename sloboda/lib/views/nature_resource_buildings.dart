@@ -102,7 +102,7 @@ class _NatureResourceBuildingScreenState
                                       onPressed: !building.isEmpty()
                                           ? () {
                                               setState(() {
-                                                building.removeWorker();
+                                                building.removeWorker(h);
                                               });
                                             }
                                           : null,

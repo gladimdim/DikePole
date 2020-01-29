@@ -127,7 +127,7 @@ class _ResourceBuildingBuiltState extends State<ResourceBuildingBuilt> {
                                       onPressed: !building.isEmpty()
                                           ? () {
                                               setState(() {
-                                                building.removeWorker();
+                                                building.removeWorker(h);
                                               });
                                             }
                                           : null,

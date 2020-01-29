@@ -41,13 +41,13 @@ class Producable {
     citizen.assignedTo = this;
   }
 
-  Citizen removeWorker() {
-    var freed = assignedHumans.isNotEmpty ? assignedHumans.removeLast() : null;
-    if (freed != null) {
-      freed.free();
+  Citizen removeWorker(Citizen h) {
+    assignedHumans.remove(h);
+    if (h != null) {
+      h.free();
     }
 
-    return freed;
+    return h;
   }
 
   void generate(Stock stock) {
