@@ -38,6 +38,18 @@ class Sloboda {
       citizens.add(Citizen());
     }
     changes = _innerChanges.stream;
+
+    for (var nr in naturalResources) {
+      nr.changes.stream.listen(_buildingChangesListener);
+    }
+
+    for (var rb in resourceBuildings) {
+      rb.changes.stream.listen(_buildingChangesListener);
+    }
+  }
+
+  _buildingChangesListener(event) {
+    _innerChanges.add(this);
   }
 
   bool hasFreeCitizens() {
@@ -48,7 +60,6 @@ class Sloboda {
     map.entries.forEach((e) {
       stock.removeFromType(e.key, e.value);
     });
-
     _innerChanges.add(this);
   }
 
@@ -60,6 +71,7 @@ class Sloboda {
       } else if (buildable is CityBuilding) {
         cityBuildings.add(buildable);
       }
+
       _innerChanges.add(this);
     }
   }

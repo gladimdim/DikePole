@@ -1,9 +1,11 @@
+import 'package:rxdart/rxdart.dart';
 import 'package:sloboda/models/buildings/resource_buildings/resource_building.dart';
 import 'package:sloboda/models/citizen.dart';
 import 'package:sloboda/models/resources/resource.dart';
 import 'package:sloboda/models/stock.dart';
 
 class Producable {
+  BehaviorSubject changes = BehaviorSubject();
   RESOURCE_TYPES produces;
   Map<RESOURCE_TYPES, int> requires = Map();
   List<Citizen> assignedHumans = [];
@@ -39,6 +41,8 @@ class Producable {
     }
     assignedHumans.add(citizen);
     citizen.assignedTo = this;
+
+    changes.add(this);
   }
 
   Citizen removeWorker(Citizen h) {
@@ -46,6 +50,8 @@ class Producable {
     if (h != null) {
       h.free();
     }
+
+    changes.add(this);
 
     return h;
   }
@@ -75,5 +81,10 @@ class Producable {
       executors.forEach((executor) => executor());
     }
     stock.addToType(produces, assignedHumans.length * workMultiplier);
+  }
+
+  void destroy() {
+    assignedHumans.forEach((citizen) => citizen.free());
+    changes.close();
   }
 }

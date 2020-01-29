@@ -35,10 +35,6 @@ abstract class ResourceBuilding with Producable implements Buildable<RESOURCE_TY
     }
   }
 
-  void destroy() {
-    assignedHumans.forEach((citizen) => citizen.free());
-  }
-
 }
 
 enum RESOURCE_BUILDING_TYPES { SMITH, FIELD, MILL, QUARRY, STABLES, IRON_MINE, TRAPPER_HOUSE }
