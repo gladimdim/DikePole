@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:sloboda/models/abstract/buildable.dart';
 import 'package:sloboda/views/resource_view.dart';
@@ -16,7 +17,7 @@ class BuildableRequiredToBuildView extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
-        Text('Requires to build'),
+        Text('Requires to build', style: Theme.of(context).textTheme.headline6,),
         Column(
           children: building.requiredToBuild.entries
               .toList()

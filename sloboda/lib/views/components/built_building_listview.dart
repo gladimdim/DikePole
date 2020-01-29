@@ -33,7 +33,9 @@ class BuiltBuildingListView extends StatelessWidget {
                 ),
                 Text(
                   title,
-                  style: TextStyle(fontSize: 24),
+                  style: Theme.of(context).textTheme.headline6.merge(
+                        TextStyle(fontSize: 24),
+                      ),
                 ),
                 Row(
                   children: <Widget>[

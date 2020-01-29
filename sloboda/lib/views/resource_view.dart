@@ -209,7 +209,7 @@ class ResourceImageView extends StatelessWidget {
             '${resourceTypesToImagePath(type)}',
             height: 64,
           ),
-          if (amount != null) Text('x $amount'),
+          if (amount != null) Text('x $amount', style: Theme.of(context).textTheme.bodyText2,),
         ],
       ),
     );

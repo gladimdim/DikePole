@@ -45,3 +45,20 @@ flutter:
     - images/city_buildings/kurin.png
     - images/city_buildings/wall.png
     - images/city_buildings/watch_tower.png
+
+  fonts:
+    - family: Roboto
+      fonts:
+        - asset: fonts/Roboto/Roboto-Regular.ttf
+    - family: Roboto-Bold
+      fonts:
+        - asset: fonts/Roboto/Roboto-Bold.ttf
+    - family: Raleway
+      fonts:
+        - asset: fonts/Raleway/Raleway-Regular.ttf
+    - family: Raleway-Bold
+      fonts:
+        - asset: fonts/Raleway/Raleway-Bold.ttf
+    - family: Raleway-Black
+      fonts:
+        - asset: fonts/Raleway/Raleway-Black.ttf

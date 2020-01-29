@@ -88,7 +88,7 @@ class _ResourceBuildingBuiltState extends State<CityBuildingBuilt> {
                     height: 64,
                     child: SoftContainer(
                       child: SlideableButton(
-                        child: Center(child: Text('Destroy building')),
+                        child: Center(child: Text('Destroy building',  style: Theme.of(context).textTheme.headline6,)),
                         onPress: () {
                           city.removeCityBuilding(building);
                           Navigator.pop(context);

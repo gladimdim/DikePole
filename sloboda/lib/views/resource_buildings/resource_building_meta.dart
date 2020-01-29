@@ -114,7 +114,7 @@ class _ResourceBuildingMetaViewState extends State<ResourceBuildingMetaView> {
                       child: Container(
                         height: 64,
                         child: Center(
-                          child: Text('Build'),
+                          child: Text('Build', style: Theme.of(context).textTheme.headline6,),
                         ),
                       ),
                       onPress: widget.onBuildPressed,

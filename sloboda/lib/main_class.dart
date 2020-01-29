@@ -59,15 +59,15 @@ var whiteTheme = ThemeData(
   unselectedWidgetColor: Colors.black,
   textTheme: TextTheme(
     bodyText2: TextStyle(
-      fontFamily: "Raleway-Bold",
-      fontSize: 18,
+      fontFamily: "Raleway",
+      fontSize: 22,
       color: Colors.black,
     ),
     headline6: TextStyle(
       color: Colors.black,
-      fontSize: 20.0,
+      fontSize: 24.0,
       fontWeight: FontWeight.bold,
-      fontFamily: 'Roboto',
+      fontFamily: 'Roboto-Bold',
     ),
     button: TextStyle(
       fontFamily: 'Montserrat',

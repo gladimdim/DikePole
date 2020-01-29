@@ -35,7 +35,7 @@ class _CityDashboardState extends State<CityDashboard> {
                     height: 64,
                     child: SoftContainer(
                       child: Center(
-                        child: Text('Make Turn'),
+                        child: Text('Make Turn', style: Theme.of(context).textTheme.headline6,),
                       ),
                     ),
                   ),
