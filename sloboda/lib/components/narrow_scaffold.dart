@@ -37,10 +37,7 @@ class _NarrowScaffoldState extends State<NarrowScaffold> {
                 height: MediaQuery.of(context).size.height,
                 child: Padding(
                   padding: EdgeInsets.only(top: APP_BAR_HEIGHT + 8),
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: widget.body,
-                  ),
+                  child: widget.body,
                 ),
               ),
               if (expanded)
