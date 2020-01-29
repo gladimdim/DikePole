@@ -48,8 +48,9 @@ class _AppBarCustomState extends State<AppBarCustom> {
                   Padding(
                     padding: EdgeInsets.only(left: 10),
                     child: widget.titleView != null
-                        ? SizedBox(
-                            width: MediaQuery.of(context).size.width * 0.7,
+                        ? Container(
+                            constraints:
+                                BoxConstraints(maxWidth: MediaQuery.of(context).size.width * 0.85),
                             child: widget.titleView,
                           )
                         : Text(
