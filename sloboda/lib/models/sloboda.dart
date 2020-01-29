@@ -68,6 +68,8 @@ class Sloboda {
       _removeFromStock(buildable.requiredToBuild);
       if (buildable is ResourceBuilding) {
         resourceBuildings.add(buildable);
+        Producable producable = buildable;
+        producable.changes.stream.listen(_buildingChangesListener);
       } else if (buildable is CityBuilding) {
         cityBuildings.add(buildable);
       }

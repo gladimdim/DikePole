@@ -30,10 +30,8 @@ class _CityGameState extends State<CityGame> {
 
     city = Sloboda();
     city.name = 'Dimitrova';
-    city.resourceBuildings
-        .add(ResourceBuilding.fromType(RESOURCE_BUILDING_TYPES.FIELD));
-    city.resourceBuildings
-        .add(ResourceBuilding.fromType(RESOURCE_BUILDING_TYPES.MILL));
+    city.buildBuilding(ResourceBuilding.fromType(RESOURCE_BUILDING_TYPES.FIELD));
+    city.buildBuilding(ResourceBuilding.fromType(RESOURCE_BUILDING_TYPES.MILL));
 
     _topPageController = PageController(initialPage: 0, viewportFraction: 1);
 //    ..addListener(_onTopScroll);
