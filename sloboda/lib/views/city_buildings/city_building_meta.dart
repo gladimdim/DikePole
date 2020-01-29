@@ -34,7 +34,7 @@ class _CityBuildingMetaViewState extends State<CityBuildingMetaView> {
                   '${cityBuildingTypeToString(widget.type)}',
                   style: Theme.of(context)
                       .textTheme
-                      .title
+                      .headline6
                       .merge(TextStyle(fontSize: widget.selected ? 25 : 30)),
                 ),
                 Padding(
@@ -58,12 +58,17 @@ class _CityBuildingMetaViewState extends State<CityBuildingMetaView> {
               SizedBox(
                 height: 35,
               ),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text('Output'),
-                  Text('${cityPropertiesToString(building.produces)}'),
-                ],
+              SoftContainer(
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text('Output'),
+                      Text('${cityPropertiesToString(building.produces)}'),
+                    ],
+                  ),
+                ),
               ),
               SizedBox(
                 height: 35,

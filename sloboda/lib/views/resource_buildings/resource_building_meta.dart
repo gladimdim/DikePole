@@ -28,88 +28,103 @@ class _ResourceBuildingMetaViewState extends State<ResourceBuildingMetaView> {
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: SoftContainer(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget>[
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Text(
-                    '${buildingTypeToString(widget.type)}',
-                    style: Theme.of(context)
-                        .textTheme
-                        .title
-                        .merge(TextStyle(fontSize: 30)),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Image.asset(
-                      buildingTypeToIconPath(widget.type),
-                      height: 320,
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: <Widget>[
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Text(
+                      '${buildingTypeToString(widget.type)}',
+                      style: Theme.of(context)
+                          .textTheme
+                          .headline6
+                          .merge(TextStyle(fontSize: 30)),
                     ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Image.asset(
+                        buildingTypeToIconPath(widget.type),
+                        height: 320,
+                      ),
+                    ),
+                  ],
+                ),
+                if (widget.selected)
+                  SoftContainer(
+                    child: Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: Text(
+                        getDescriptionForResourceBuildingType(building.type),
+                      ),
+                    ),
+                  ),
+                if (widget.selected)
+                  SizedBox(
+                    height: 35,
+                  ),
+                if (widget.selected) ...[
+                  SoftContainer(
+                    child: Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: BuildableRequiredToBuildView(building: building),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 35,
+                  ),
+                  SoftContainer(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text('Max number of workers'),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text('${building.maxWorkers}x'),
+                            Icon(Icons.person),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(
+                    height: 35,
+                  ),
+                  if (building.requires.isNotEmpty)
+                    SoftContainer(
+                      child: ResourceBuildingInputView(building: building),
+                    ),
+                  SizedBox(
+                    height: 35,
+                  ),
+                  SoftContainer(
+                      child: ResourceBuildingOutputView(building: building)),
+                  SizedBox(
+                    height: 35,
                   ),
                 ],
-              ),
-              if (widget.selected) ...[
-                SoftContainer(
-                  child: Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: BuildableRequiredToBuildView(building: building),
-                  ),
-                ),
-                SizedBox(
-                  height: 35,
-                ),
-                SoftContainer(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text('Max number of workers'),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text('${building.maxWorkers}x'),
-                          Icon(Icons.person),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-                SizedBox(
-                  height: 35,
-                ),
-                if (building.requires.isNotEmpty)
+                if (widget.onBuildPressed != null)
                   SoftContainer(
-                    child: ResourceBuildingInputView(building: building),
-                  ),
-                SizedBox(
-                  height: 35,
-                ),
-                ResourceBuildingOutputView(building: building),
-                SizedBox(
-                  height: 35,
-                ),
-              ],
-              if (widget.onBuildPressed != null)
-                SoftContainer(
-                  child: SlideableButton(
-                    direction: Direction.Left,
-                    child: Container(
-                      height: 64,
-                      child: Center(
-                        child: Text('Build'),
+                    child: SlideableButton(
+                      direction: Direction.Left,
+                      child: Container(
+                        height: 64,
+                        child: Center(
+                          child: Text('Build'),
+                        ),
                       ),
+                      onPress: widget.onBuildPressed,
                     ),
-                    onPress: widget.onBuildPressed,
                   ),
-                ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
     );
   }
 }
-
-

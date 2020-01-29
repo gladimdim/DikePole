@@ -48,8 +48,10 @@ class _CityGameState extends State<CityGame> {
   }
 
   _goToPage(int page) {
-    _topPageController.animateToPage(page, duration: Duration(milliseconds: 150), curve: Curves.decelerate);
-    _mainPageController.animateToPage(page, duration: Duration(milliseconds: 40), curve: Curves.decelerate);
+    _topPageController.animateToPage(page,
+        duration: Duration(milliseconds: 150), curve: Curves.decelerate);
+    _mainPageController.animateToPage(page,
+        duration: Duration(milliseconds: 40), curve: Curves.decelerate);
   }
 
   @override
@@ -62,12 +64,15 @@ class _CityGameState extends State<CityGame> {
           child: Theme(
             data: Theme.of(context).copyWith(backgroundColor: Colors.grey[300]),
             child: NarrowScaffold(
-              titleView: StockMiniView(stock: city.stock, stockSimulation: city.simulateStock(),),
+              titleView: StockMiniView(
+                stock: city.stock,
+                stockSimulation: city.simulateStock(),
+              ),
               actions: [
                 AppBarObject(
-                    text: 'Back',
+                    text: 'Change Lang',
                     onTap: () {
-                      Navigator.pop(context);
+                      // Navigator.pop(context);
                     })
               ],
               body: Column(
@@ -81,11 +86,13 @@ class _CityGameState extends State<CityGame> {
                       itemCount: 3,
                       itemBuilder: (context, index) {
                         return Padding(
-                          padding: const EdgeInsets.all(8.0),
+                          padding: const EdgeInsets.only(
+                              left: 22.0, right: 22.0, bottom: 16),
                           child: Center(
                             child: SoftContainer(
                               child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: <Widget>[
                                   if (index != 0)
                                     SoftContainer(

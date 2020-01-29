@@ -37,7 +37,7 @@ class _NatureResourceBuildingScreenState
           ),
           Text(
             building.toString(),
-            style: Theme.of(context).textTheme.title,
+            style: Theme.of(context).textTheme.headline6,
           ),
         ],
       )),

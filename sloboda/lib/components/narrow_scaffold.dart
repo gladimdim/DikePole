@@ -28,29 +28,38 @@ class _NarrowScaffoldState extends State<NarrowScaffold> {
     return Scaffold(
       backgroundColor: Theme.of(context).backgroundColor,
       body: SafeArea(
-        child: Stack(
-          children: [
-            Padding(
-              padding: EdgeInsets.only(top: APP_BAR_HEIGHT + 8),
-              child: widget.body,
-            ),
-            if (expanded)
+        child: Container(
+          height: MediaQuery.of(context).size.height,
+          color: Colors.grey[100],
+          child: Stack(
+            children: [
               SizedBox(
                 height: MediaQuery.of(context).size.height,
-                child: new BackdropFilter(
-                  filter: new ui.ImageFilter.blur(sigmaX: 1.5, sigmaY: 1.5),
-                  child: new Container(
-                    //you can change opacity with color here(I used black) for background.
-                    decoration: new BoxDecoration(
-                      color: Colors.black.withOpacity(0.2),
-                    ),
-                    child: Container(child: GestureDetector(onTap: () {
-                      setState(() {
-                        expanded = false;
-                      });
-                    })),
+                child: Padding(
+                  padding: EdgeInsets.only(top: APP_BAR_HEIGHT + 8),
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: widget.body,
                   ),
                 ),
+              ),
+              if (expanded)
+                SizedBox(
+                  height: MediaQuery.of(context).size.height,
+                  child: new BackdropFilter(
+                    filter: new ui.ImageFilter.blur(sigmaX: 1.5, sigmaY: 1.5),
+                    child: new Container(
+                      //you can change opacity with color here(I used black) for background.
+                      decoration: new BoxDecoration(
+                        color: Colors.black.withOpacity(0.2),
+                      ),
+                      child: Container(child: GestureDetector(onTap: () {
+                        setState(() {
+                          expanded = false;
+                        });
+                      })),
+                    ),
+                  ),
 //              child: Opacity(
 //                opacity: 0.8,
 //                child: Container(
@@ -64,19 +73,20 @@ class _NarrowScaffoldState extends State<NarrowScaffold> {
 //                  )
 //                ),
 //              ),
+                ),
+              AppBarCustom(
+                title: widget.title,
+                titleView: widget.titleView,
+                appBarButtons: widget.actions,
+                expanded: expanded,
+                onExpanded: (expand) {
+                  setState(() {
+                    expanded = expand;
+                  });
+                },
               ),
-            AppBarCustom(
-              title: widget.title,
-              titleView: widget.titleView,
-              appBarButtons: widget.actions,
-              expanded: expanded,
-              onExpanded: (expand) {
-                setState(() {
-                  expanded = expand;
-                });
-              },
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

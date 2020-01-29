@@ -54,7 +54,7 @@ class _AppBarCustomState extends State<AppBarCustom> {
                           )
                         : Text(
                             widget.title,
-                            style: Theme.of(context).textTheme.title,
+                            style: Theme.of(context).textTheme.headline6,
                             textAlign: TextAlign.center,
                           ),
                   ),

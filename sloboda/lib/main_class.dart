@@ -19,12 +19,12 @@ var blackTheme = ThemeData(
   fontFamily: 'Roboto',
   unselectedWidgetColor: Colors.white,
   textTheme: TextTheme(
-    body1: TextStyle(
+    bodyText2: TextStyle(
       fontFamily: "Raleway-Bold",
       fontSize: 18,
       color: Colors.white,
     ),
-    title: TextStyle(
+    headline6: TextStyle(
       fontSize: 20,
       fontWeight: FontWeight.bold,
       color: Colors.white,
@@ -53,17 +53,17 @@ var blackTheme = ThemeData(
 
 var whiteTheme = ThemeData(
   primaryColor: Colors.black,
-  backgroundColor: Colors.white,
+  backgroundColor: Colors.grey[100],
   accentColor: Colors.black,
   fontFamily: 'Roboto',
   unselectedWidgetColor: Colors.black,
   textTheme: TextTheme(
-    body1: TextStyle(
+    bodyText2: TextStyle(
       fontFamily: "Raleway-Bold",
       fontSize: 18,
       color: Colors.black,
     ),
-    title: TextStyle(
+    headline6: TextStyle(
       color: Colors.black,
       fontSize: 20.0,
       fontWeight: FontWeight.bold,
@@ -92,7 +92,7 @@ class _SlobodaAppState extends State<SlobodaApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Loca Deserta',
+      title: 'Sloboda - City Building Game Set in Ukraine XVII century',
       theme: whiteTheme,
       initialRoute: CityGame.routeName,
       debugShowCheckedModeBanner: false,

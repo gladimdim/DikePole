@@ -76,12 +76,12 @@ class ResourceDetailsView extends StatelessWidget {
                 ),
                 SoftContainer(child: Text('Some description')),
                 SizedBox(
-                  height: 15,
+                  height: 5,
                 ),
                 if (requiredProd.isNotEmpty) ...[
                   Center(child: Text('Required for production by')),
                   SizedBox(
-                    height: 15,
+                    height: 35,
                   ),
                   SoftContainer(
                     child: Column(
@@ -104,7 +104,7 @@ class ResourceDetailsView extends StatelessWidget {
                   )
                 ],
                 SizedBox(
-                  height: 15,
+                  height: 35,
                 ),
                 if (requiredToBuild.isNotEmpty) ...[
                   Center(child: Text('Required to build by')),
@@ -132,6 +132,9 @@ class ResourceDetailsView extends StatelessWidget {
                   ),
                 ],
                 if (producedBy.isNotEmpty) ...[
+                  SizedBox(
+                    height: 35,
+                  ),
                   Center(child: Text('Produced by')),
                   SizedBox(
                     height: 15,

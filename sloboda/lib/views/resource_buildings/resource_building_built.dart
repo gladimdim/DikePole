@@ -82,6 +82,9 @@ class _ResourceBuildingBuiltState extends State<ResourceBuildingBuilt> {
                     ),
                   ),
                 ),
+                SizedBox(
+                  height: 35,
+                ),
                 if (!building.isFull())
                   SoftContainer(
                     child: SlideableButton(
@@ -98,10 +101,10 @@ class _ResourceBuildingBuiltState extends State<ResourceBuildingBuilt> {
                       ),
                     ),
                   ),
-                SizedBox(
-                  height: 32,
-                ),
-                if (building.assignedHumans.isNotEmpty)
+                if (building.assignedHumans.isNotEmpty) ...[
+                  SizedBox(
+                    height: 35,
+                  ),
                   SoftContainer(
                     child: Padding(
                       padding: const EdgeInsets.all(16.0),
@@ -138,6 +141,7 @@ class _ResourceBuildingBuiltState extends State<ResourceBuildingBuilt> {
                       ]),
                     ),
                   ),
+                ],
                 SizedBox(
                   height: 32,
                 ),
