@@ -71,7 +71,7 @@ class _NatureResourceBuildingScreenState
                           : null,
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
-                        child: Center(child: Text('Add worker')),
+                        child: Center(child: Text('Add worker', style: Theme.of(context).textTheme.headline6,)),
                       ),
                     ),
                   ),

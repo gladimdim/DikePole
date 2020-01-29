@@ -45,9 +45,7 @@ class BuiltBuildingListView extends StatelessWidget {
                     ),
                     Text(
                       'x $amount',
-                      style: TextStyle(
-                        fontSize: 18,
-                      ),
+                      style: Theme.of(context).textTheme.bodyText2,
                     ),
                     Icon(Icons.arrow_right),
                   ],

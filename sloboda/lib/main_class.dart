@@ -59,7 +59,7 @@ var whiteTheme = ThemeData(
   unselectedWidgetColor: Colors.black,
   textTheme: TextTheme(
     bodyText2: TextStyle(
-      fontFamily: "Raleway",
+      fontFamily: "Raleway-Bold",
       fontSize: 22,
       color: Colors.black,
     ),
