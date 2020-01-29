@@ -1,3 +1,5 @@
+import 'dart:math';
+
 extension Divide<T> on List<T> {
   List<List<T>> divideBy(int number) {
     List<T> list = this;
@@ -12,5 +14,14 @@ extension Divide<T> on List<T> {
     }
 
     return result;
+  }
+}
+
+extension TakeRandom<T> on List<T> {
+  T takeRandom() {
+    int max = this.length;
+    Random random = Random();
+    int next = random.nextInt(max);
+    return this[next];
   }
 }
