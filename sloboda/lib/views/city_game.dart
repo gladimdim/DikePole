@@ -86,8 +86,7 @@ class _CityGameState extends State<CityGame> {
                       itemCount: 3,
                       itemBuilder: (context, index) {
                         return Padding(
-                          padding: const EdgeInsets.only(
-                              left: 22.0, right: 22.0, bottom: 16),
+                          padding: const EdgeInsets.all(16.0),
                           child: Center(
                             child: SoftContainer(
                               child: Row(

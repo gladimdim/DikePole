@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sloboda/animations/slideable_button.dart';
+import 'package:sloboda/components/app_bar_custom.dart';
+import 'package:sloboda/components/narrow_scaffold.dart';
 import 'package:sloboda/models/buildings/resource_buildings/nature_resource.dart';
 import 'package:sloboda/models/sloboda.dart';
 import 'package:sloboda/views/components/resource_building_output_view.dart';
@@ -23,24 +25,16 @@ class _NatureResourceBuildingScreenState
   Widget build(BuildContext context) {
     var city = widget.city;
     var building = widget.building;
-    return Scaffold(
-      appBar: AppBar(
-          title: Row(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          Image.asset(
-            building.getIconPath(),
-            height: 32,
-          ),
-          SizedBox(
-            width: 32,
-          ),
-          Text(
-            building.toString(),
-            style: Theme.of(context).textTheme.headline6,
-          ),
-        ],
-      )),
+    return NarrowScaffold(
+      title: building.toString(),
+      actions: [
+        AppBarObject(
+          text: 'Back',
+          onTap: () {
+            Navigator.pop(context);
+          },
+        )
+      ],
       body: SingleChildScrollView(
         child: SoftContainer(
           child: Padding(
@@ -48,22 +42,32 @@ class _NatureResourceBuildingScreenState
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Image.asset(
-                    building.getIconPath(),
-                    height: 320,
+                InkWell(
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
+                  child: SoftContainer(
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Image.asset(
+                        building.getIconPath(),
+                        height: 320,
+                      ),
+                    ),
                   ),
                 ),
-                if (!building.isFull())
+                if (!building.isFull()) ...[
+                  SizedBox(
+                    height: 35,
+                  ),
                   SoftContainer(
                     child: SlideableButton(
                       onPress: !building.isFull()
                           ? () {
-                        setState(() {
-                          building.addWorker(city.getFirstFreeCitizen());
-                        });
-                      }
+                              setState(() {
+                                building.addWorker(city.getFirstFreeCitizen());
+                              });
+                            }
                           : null,
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
@@ -71,6 +75,7 @@ class _NatureResourceBuildingScreenState
                       ),
                     ),
                   ),
+                ],
                 SizedBox(
                   height: 32,
                 ),
@@ -81,12 +86,12 @@ class _NatureResourceBuildingScreenState
                       child: Column(children: [
                         Center(child: Text('Assigned workers')),
                         ...building.assignedHumans.map(
-                              (h) {
+                          (h) {
                             return Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: Row(
                                 mainAxisAlignment:
-                                MainAxisAlignment.spaceBetween,
+                                    MainAxisAlignment.spaceBetween,
                                 children: <Widget>[
                                   Text(
                                     h.name,
@@ -96,10 +101,10 @@ class _NatureResourceBuildingScreenState
                                       icon: Icon(Icons.remove),
                                       onPressed: !building.isEmpty()
                                           ? () {
-                                        setState(() {
-                                          building.removeWorker();
-                                        });
-                                      }
+                                              setState(() {
+                                                building.removeWorker();
+                                              });
+                                            }
                                           : null,
                                     ),
                                   ),
