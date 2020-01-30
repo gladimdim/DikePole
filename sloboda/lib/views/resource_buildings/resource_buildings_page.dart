@@ -7,7 +7,6 @@ import 'package:sloboda/views/components/built_building_listview.dart';
 import 'package:sloboda/views/nature_resource_buildings.dart';
 import 'package:sloboda/views/resource_buildings/resource_building_built.dart';
 import 'package:sloboda/views/resource_buildings/resource_building_meta.dart';
-import 'package:sloboda/views/components/soft_container.dart';
 
 class ResourceBuildingsPage extends StatefulWidget {
   @override
@@ -28,21 +27,20 @@ class _ResourceBuildingsPageState extends State<ResourceBuildingsPage> {
             ...city.naturalResources.map<Widget>((el) {
               return Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: SoftContainer(
-                    child: BuiltBuildingListView(
+                child: BuiltBuildingListView(
                   title: el.toString(),
                   buildingIconPath: el.getIconPath(),
                   producesIconPath: resourceTypesToImagePath(el.produces),
                   amount: el.outputAmount,
                   onPress: () {
-                    Navigator.pushNamed(
-                        context, NatureResourceBuildingScreen.routeName,
-                        arguments: NatureResourceBuildingArguments(
-                          city: city,
-                          building: el,
-                        ));
+                Navigator.pushNamed(
+                    context, NatureResourceBuildingScreen.routeName,
+                    arguments: NatureResourceBuildingArguments(
+                      city: city,
+                      building: el,
+                    ));
                   },
-                )),
+                ),
               );
             }).toList(),
             SizedBox(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:sloboda/animations/slideable_button.dart';
 import 'package:sloboda/components/title_text.dart';
 import 'package:sloboda/inherited_city.dart';
 import 'package:sloboda/models/buildings/resource_buildings/resource_building.dart';
@@ -70,9 +71,53 @@ class _CityGameState extends State<CityGame> {
                 ),
               ),
               drawer: Drawer(
-                child: StockFullView(
-                  stock: city.stock,
-                  stockSimulation: city.simulateStock(),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: <Widget>[
+                    StockFullView(
+                      stock: city.stock,
+                      stockSimulation: city.simulateStock(),
+                    ),
+                    Divider(),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: SoftContainer(
+                        child: SlideableButton(
+                          direction: Direction.Left,
+                          onPress: () {
+                            _goToPage(0);
+                          },
+                          child: Center(child: TitleText('Overview')),
+                        ),
+                      ),
+                    ),
+                    Divider(),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: SoftContainer(
+                        child: SlideableButton(
+                          direction: Direction.Left,
+                          onPress: () {
+                            _goToPage(1);
+                          },
+                          child: Center(child: TitleText('Resource Buildings')),
+                        ),
+                      ),
+                    ),
+                    Divider(),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: SoftContainer(
+                        child: SlideableButton(
+                          direction: Direction.Left,
+                          onPress: () {
+                            _goToPage(2);
+                          },
+                          child: Center(child: TitleText('City Buildings')),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
               body: Column(

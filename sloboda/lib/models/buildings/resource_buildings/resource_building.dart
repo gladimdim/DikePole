@@ -78,11 +78,11 @@ String buildingTypeToImagePath(RESOURCE_BUILDING_TYPES type) {
 String getDescriptionForResourceBuildingType(RESOURCE_BUILDING_TYPES type) {
   switch (type) {
     case RESOURCE_BUILDING_TYPES.FIELD: return 'Assign cossacks to produce Food.';
-    case RESOURCE_BUILDING_TYPES.MILL: return 'Uses food to produce gold.';
-    case RESOURCE_BUILDING_TYPES.SMITH: return 'Uses food, gunpowder and iron to produce firearms.';
-    case RESOURCE_BUILDING_TYPES.QUARRY: return 'Uses food to produce stone. Required for city buildings';
-    case RESOURCE_BUILDING_TYPES.STABLES: return 'Uses food to produce Horses. If you want to raid other lands, you must get some horses.';
-    case RESOURCE_BUILDING_TYPES.IRON_MINE: return 'Uses food to produce iron. Iron is used to produce firearms. If you want to fight, create few iron mines.';
+    case RESOURCE_BUILDING_TYPES.MILL: return 'Worker consumes food to produce gold.';
+    case RESOURCE_BUILDING_TYPES.SMITH: return 'Worker consumes food, gunpowder and iron to produce firearms.';
+    case RESOURCE_BUILDING_TYPES.QUARRY: return 'Worker consumes food to produce stone. Required for city buildings';
+    case RESOURCE_BUILDING_TYPES.STABLES: return 'Worker consumes food to produce Horses. If you want to raid other lands, you must get some horses.';
+    case RESOURCE_BUILDING_TYPES.IRON_MINE: return 'Worker consumes food to produce iron. Iron is used to produce firearms. If you want to fight, create few iron mines.';
     case RESOURCE_BUILDING_TYPES.TRAPPER_HOUSE: return 'Hunts animals. Skins them for Fur. Fur can be sold for money at marketplaces.';
   }
 }
