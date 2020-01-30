@@ -91,10 +91,10 @@ class _ResourceBuildingBuiltState extends State<ResourceBuildingBuilt> {
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Center(
-                            child: Text(
-                          'Add worker',
-                          style: Theme.of(context).textTheme.headline6,
-                        )),
+                          child: TitleText(
+                            'Add worker',
+                          ),
+                        ),
                       ),
                     ),
                   ),
@@ -167,9 +167,8 @@ class _ResourceBuildingBuiltState extends State<ResourceBuildingBuilt> {
                   child: SoftContainer(
                     child: SlideableButton(
                       child: Center(
-                          child: Text(
+                          child: TitleText(
                         'Destroy building',
-                        style: Theme.of(context).textTheme.headline6,
                       )),
                       onPress: () {
                         city.removeResourceBuilding(building);

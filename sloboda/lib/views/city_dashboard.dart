@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:sloboda/animations/slideable_button.dart';
+import 'package:sloboda/components/title_text.dart';
 import 'package:sloboda/models/buildings/city_buildings/city_building.dart';
 import 'package:sloboda/models/sloboda.dart';
 import 'package:sloboda/views/components/soft_container.dart';
@@ -35,7 +36,9 @@ class _CityDashboardState extends State<CityDashboard> {
                     height: 64,
                     child: SoftContainer(
                       child: Center(
-                        child: Text('Make Turn', style: Theme.of(context).textTheme.headline6,),
+                        child: TitleText(
+                          'Make Turn',
+                        ),
                       ),
                     ),
                   ),

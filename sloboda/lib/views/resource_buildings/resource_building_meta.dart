@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:sloboda/animations/slideable_button.dart';
+import 'package:sloboda/components/title_text.dart';
 import 'package:sloboda/models/buildings/resource_buildings/resource_building.dart';
 import 'package:sloboda/views/components/resource_building_input_view.dart';
 import 'package:sloboda/views/components/resource_building_output_view.dart';
@@ -114,7 +115,9 @@ class _ResourceBuildingMetaViewState extends State<ResourceBuildingMetaView> {
                       child: Container(
                         height: 64,
                         child: Center(
-                          child: Text('Build', style: Theme.of(context).textTheme.headline6,),
+                          child: TitleText(
+                            'Build',
+                          ),
                         ),
                       ),
                       onPress: widget.onBuildPressed,
