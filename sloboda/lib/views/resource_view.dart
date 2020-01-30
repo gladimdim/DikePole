@@ -202,7 +202,7 @@ class ResourceImageView extends StatelessWidget {
         children: <Widget>[
           Image.asset(
             '${resourceTypesToIconPath(type)}',
-            height: 64,
+            height: 32,
           ),
           if (amount != null)
             Text(
