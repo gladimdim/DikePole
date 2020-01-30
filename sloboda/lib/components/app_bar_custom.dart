@@ -49,14 +49,18 @@ class _AppBarCustomState extends State<AppBarCustom> {
                     padding: EdgeInsets.only(left: 10),
                     child: widget.titleView != null
                         ? Container(
-                            constraints:
-                                BoxConstraints(maxWidth: MediaQuery.of(context).size.width * 0.85),
+                            constraints: BoxConstraints(
+                                maxWidth:
+                                    MediaQuery.of(context).size.width * 0.85),
                             child: widget.titleView,
                           )
-                        : Text(
-                            widget.title,
-                            style: Theme.of(context).textTheme.headline6,
-                            textAlign: TextAlign.center,
+                        : Container(
+                            constraints: BoxConstraints(minWidth: 200),
+                            child: Text(
+                              widget.title,
+                              style: Theme.of(context).textTheme.headline6,
+                              textAlign: TextAlign.center,
+                            ),
                           ),
                   ),
                   if (widget.appBarButtons != null)

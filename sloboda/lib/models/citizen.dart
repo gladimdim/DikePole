@@ -19,6 +19,10 @@ class Citizen {
   _generateName() {
     name = '${firstNames.takeRandom()} ${lastName.takeRandom()}';
   }
+
+  static getIconPath() {
+    return 'images/city_buildings/citizen_64.png';
+  }
 }
 
 List firstNames = [

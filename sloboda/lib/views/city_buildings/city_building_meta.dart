@@ -40,7 +40,7 @@ class _CityBuildingMetaViewState extends State<CityBuildingMetaView> {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Image.asset(
-                    cityTypeToIconPath(widget.type),
+                    cityTypeToImagePath(widget.type),
                     height: 320,
                   ),
                 ),

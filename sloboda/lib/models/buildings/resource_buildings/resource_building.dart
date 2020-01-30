@@ -53,6 +53,18 @@ String buildingTypeToString(RESOURCE_BUILDING_TYPES type) {
 
 String buildingTypeToIconPath(RESOURCE_BUILDING_TYPES type) {
   switch (type) {
+    case RESOURCE_BUILDING_TYPES.FIELD: return 'images/resource_buildings/field_64.png';
+    case RESOURCE_BUILDING_TYPES.MILL: return 'images/resource_buildings/kurin_64.png';
+    case RESOURCE_BUILDING_TYPES.SMITH: return 'images/resource_buildings/kurin_64.png';
+    case RESOURCE_BUILDING_TYPES.QUARRY: return 'images/resource_buildings/quarry_64.png';
+    case RESOURCE_BUILDING_TYPES.STABLES: return 'images/resource_buildings/stable_64.png';
+    case RESOURCE_BUILDING_TYPES.IRON_MINE: return 'images/resource_buildings/iron_mine_64.png';
+    case RESOURCE_BUILDING_TYPES.TRAPPER_HOUSE: return 'images/resource_buildings/trappershouse_64.png';
+  }
+}
+
+String buildingTypeToImagePath(RESOURCE_BUILDING_TYPES type) {
+  switch (type) {
     case RESOURCE_BUILDING_TYPES.FIELD: return 'images/resource_buildings/field.png';
     case RESOURCE_BUILDING_TYPES.MILL: return 'images/resource_buildings/kurin.png';
     case RESOURCE_BUILDING_TYPES.SMITH: return 'images/resource_buildings/kurin.png';

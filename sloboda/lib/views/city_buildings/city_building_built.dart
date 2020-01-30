@@ -65,7 +65,7 @@ class _ResourceBuildingBuiltState extends State<CityBuildingBuilt> {
                     },
                     child: SoftContainer(
                       child: Image.asset(
-                        cityTypeToIconPath(building.type),
+                        cityTypeToImagePath(building.type),
                         height: 320,
                       ),
                     ),

@@ -64,13 +64,13 @@ String cityPropertiesToString(CITY_PROPERTIES prop) {
 String cityPropertiesToIconPath(CITY_PROPERTIES prop) {
   switch (prop) {
     case CITY_PROPERTIES.CITIZENS:
-      return 'images/city_buildings/watch_tower.png';
+      return 'images/city_buildings/citizen_64.png';
     case CITY_PROPERTIES.DEFENSE:
-      return 'images/city_buildings/watch_tower.png';
+      return 'images/city_buildings/watch_tower_64.png';
     case CITY_PROPERTIES.FAITH:
-      return 'images/city_buildings/watch_tower.png';
+      return 'images/city_buildings/watch_tower_64.png';
     case CITY_PROPERTIES.GLORY:
-      return 'images/city_buildings/watch_tower.png';
+      return 'images/city_buildings/watch_tower_64.png';
   }
 }
 
@@ -92,6 +92,21 @@ String cityBuildingTypeToString(CITY_BUILDING_TYPES type) {
 String cityTypeToIconPath(CITY_BUILDING_TYPES type) {
   switch (type) {
     case CITY_BUILDING_TYPES.WATCH_TOWER:
+      return 'images/city_buildings/watch_tower_64.png';
+    case CITY_BUILDING_TYPES.TOWER:
+      return 'images/city_buildings/kurin_64.png';
+    case CITY_BUILDING_TYPES.HOUSE:
+      return 'images/city_buildings/kurin_64.png';
+    case CITY_BUILDING_TYPES.WALL:
+      return 'images/city_buildings/wall_64.png';
+    case CITY_BUILDING_TYPES.CHURCH:
+      return 'images/city_buildings/kurin_64.png';
+  }
+}
+
+String cityTypeToImagePath(CITY_BUILDING_TYPES type) {
+  switch (type) {
+    case CITY_BUILDING_TYPES.WATCH_TOWER:
       return 'images/city_buildings/watch_tower.png';
     case CITY_BUILDING_TYPES.TOWER:
       return 'images/city_buildings/kurin.png';
@@ -103,3 +118,4 @@ String cityTypeToIconPath(CITY_BUILDING_TYPES type) {
       return 'images/city_buildings/kurin.png';
   }
 }
+

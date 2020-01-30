@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class SoftContainer extends StatelessWidget {
@@ -18,6 +19,12 @@ class SoftContainer extends StatelessWidget {
       decoration: BoxDecoration(
         color: Colors.grey[100],
 //          shape: BoxShape.rectangle,
+        border: kIsWeb
+            ? Border.all(
+                color: Theme.of(context).primaryColor,
+                width: 3.0,
+              )
+            : null,
         borderRadius: onlyTop
             ? BorderRadius.only(
                 topLeft: Radius.circular(borderRadiusValue),
@@ -25,29 +32,33 @@ class SoftContainer extends StatelessWidget {
             : BorderRadius.all(
                 Radius.circular(borderRadiusValue),
               ),
-        boxShadow: [
-          BoxShadow(
-              color: Colors.grey[600],
-              offset: Offset(4.0, 4.0),
-              blurRadius: 15.0,
-              spreadRadius: .3),
-          BoxShadow(
-              color: Colors.white,
-              offset: Offset(-4.0, -4.0),
-              blurRadius: 15.0,
-              spreadRadius: 0.3)
-        ],
-        gradient: LinearGradient(
-          begin: Alignment.centerLeft,
-          end: Alignment.centerRight,
-          colors: [
-            Colors.grey[100],
-            Colors.grey[200],
-            Colors.grey[300],
-            Colors.grey[300],
-          ],
-          stops: [0.1, 0.6, 0.8, 0.9],
-        ),
+        boxShadow: kIsWeb
+            ? null
+            : [
+                BoxShadow(
+                    color: Colors.grey[600],
+                    offset: Offset(4.0, 4.0),
+                    blurRadius: 15.0,
+                    spreadRadius: .3),
+                BoxShadow(
+                    color: Colors.white,
+                    offset: Offset(-4.0, -4.0),
+                    blurRadius: 15.0,
+                    spreadRadius: 0.3)
+              ],
+        gradient: kIsWeb
+            ? null
+            : LinearGradient(
+                begin: Alignment.centerLeft,
+                end: Alignment.centerRight,
+                colors: [
+                  Colors.grey[100],
+                  Colors.grey[200],
+                  Colors.grey[300],
+                  Colors.grey[300],
+                ],
+                stops: [0.1, 0.6, 0.8, 0.9],
+              ),
       ),
       child: child,
     );

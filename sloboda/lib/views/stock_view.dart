@@ -22,13 +22,13 @@ class StockMiniView extends StatelessWidget {
             return Row(
               children: <Widget>[
                 Image.asset(
-                  resourceTypesToImagePath(key),
-                  width: 24,
+                  resourceTypesToIconPath(key),
+                  width: 18,
                 ),
                 Text(
-                  '${resourceTypesToString(key)}: ${stock.getByType(key)} ',
+                  '${stock.getByType(key)} ',
                   style: TextStyle(
-                    fontSize: 12,
+                    fontSize: 18,
                   ),
                 ),
                 SaldoViewShower(

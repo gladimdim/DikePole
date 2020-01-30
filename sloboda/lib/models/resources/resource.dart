@@ -74,6 +74,32 @@ String resourceTypesToString(RESOURCE_TYPES type) {
   }
 }
 
+String resourceTypesToIconPath(RESOURCE_TYPES type) {
+  switch (type) {
+    case RESOURCE_TYPES.FOOD:
+      return 'images/resources/food_64.png';
+    case RESOURCE_TYPES.MONEY:
+      return 'images/resources/money_64.png';
+    case RESOURCE_TYPES.WOOD:
+      return 'images/resources/wood_64.png';
+    case RESOURCE_TYPES.STONE:
+      return 'images/resources/stone_64.png';
+    case RESOURCE_TYPES.NITER:
+      return 'images/resources/niter_64.png';
+    case RESOURCE_TYPES.FUR:
+      return 'images/resources/fur_64.png';
+    case RESOURCE_TYPES.FIREARM:
+      return 'images/resources/firearm_64.png';
+    case RESOURCE_TYPES.HORSE:
+      return 'images/resources/horse_64.png';
+    case RESOURCE_TYPES.IRON_ORE:
+      return 'images/resources/iron_ore_64.png';
+    case RESOURCE_TYPES.FISH:
+      return 'images/resources/fish_64.png';
+
+  }
+}
+
 String resourceTypesToImagePath(RESOURCE_TYPES type) {
   switch (type) {
     case RESOURCE_TYPES.FOOD:
@@ -87,7 +113,7 @@ String resourceTypesToImagePath(RESOURCE_TYPES type) {
     case RESOURCE_TYPES.NITER:
       return 'images/resources/niter.png';
     case RESOURCE_TYPES.FUR:
-      return 'images/resources/fur2.png';
+      return 'images/resources/fur.png';
     case RESOURCE_TYPES.FIREARM:
       return 'images/resources/firearm.png';
     case RESOURCE_TYPES.HORSE:

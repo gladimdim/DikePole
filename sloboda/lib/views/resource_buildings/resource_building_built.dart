@@ -21,7 +21,7 @@ class ResourceBuildingBuiltListItemView extends StatelessWidget {
     Sloboda city = InheritedCity.of(context).city;
     return BuiltBuildingListView(
       title: buildingTypeToString(building.type),
-      producesIconPath: resourceTypesToImagePath(building.produces),
+      producesIconPath: resourceTypesToIconPath(building.produces),
       amount: building.outputAmount,
       buildingIconPath: buildingTypeToIconPath(building.type),
       onPress: () {
@@ -77,7 +77,7 @@ class _ResourceBuildingBuiltState extends State<ResourceBuildingBuilt> {
                   },
                   child: SoftContainer(
                     child: Image.asset(
-                      buildingTypeToIconPath(building.type),
+                      buildingTypeToImagePath(building.type),
                       height: 320,
                     ),
                   ),
