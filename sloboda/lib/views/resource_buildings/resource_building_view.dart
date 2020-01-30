@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:sloboda/components/title_text.dart';
 import 'package:sloboda/models/buildings/resource_buildings/resource_building.dart';
 import 'package:sloboda/views/components/soft_container.dart';
 import 'package:sloboda/views/resource_buildings/resource_building_meta.dart';
-import 'package:sloboda/components/app_bar_custom.dart';
-import 'package:sloboda/components/narrow_scaffold.dart';
 
 class ResourceBuildingImageView extends StatelessWidget {
   final RESOURCE_BUILDING_TYPES type;
@@ -42,21 +41,16 @@ class ResourceBuildingDetailsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return NarrowScaffold(
+    return Scaffold(
       body: SingleChildScrollView(
         child: ResourceBuildingMetaView(
           type: type,
           selected: true,
         ),
       ),
-      title: buildingTypeToString(type),
-      actions: [
-        AppBarObject(
-            child: Text('Back'),
-            onTap: () {
-              Navigator.pop(context);
-            })
-      ],
+      appBar: AppBar(
+        title: TitleText(buildingTypeToString(type)),
+      ),
     );
   }
 }

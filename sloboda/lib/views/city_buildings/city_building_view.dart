@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:sloboda/components/title_text.dart';
 import 'package:sloboda/models/buildings/city_buildings/city_building.dart';
 import 'package:sloboda/views/city_buildings/city_building_meta.dart';
 import 'package:sloboda/views/components/soft_container.dart';
-import 'package:sloboda/components/app_bar_custom.dart';
-import 'package:sloboda/components/narrow_scaffold.dart';
 
 class CityBuildingImageView extends StatelessWidget {
   final CITY_BUILDING_TYPES type;
@@ -42,21 +41,18 @@ class CityBuildingDetailsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return NarrowScaffold(
+    return Scaffold(
+      appBar: AppBar(
+        title: TitleText(
+          cityBuildingTypeToString(type),
+        ),
+      ),
       body: SingleChildScrollView(
         child: CityBuildingMetaView(
           type: type,
           selected: true,
         ),
       ),
-      title: cityBuildingTypeToString(type),
-      actions: [
-        AppBarObject(
-            child: Text('Back'),
-            onTap: () {
-              Navigator.pop(context);
-            })
-      ],
     );
   }
 }

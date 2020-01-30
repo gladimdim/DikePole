@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:sloboda/components/title_text.dart';
 import 'package:sloboda/inherited_city.dart';
 import 'package:sloboda/models/buildings/resource_buildings/resource_building.dart';
 import 'package:sloboda/models/sloboda.dart';
@@ -8,8 +9,6 @@ import 'package:sloboda/views/city_dashboard.dart';
 import 'package:sloboda/views/resource_buildings/resource_buildings_page.dart';
 import 'package:sloboda/views/components/soft_container.dart';
 import 'package:sloboda/views/stock_view.dart';
-import 'package:sloboda/components/app_bar_custom.dart';
-import 'package:sloboda/components/narrow_scaffold.dart';
 
 class CityGame extends StatefulWidget {
   static const routeName = "/city_game";
@@ -30,7 +29,8 @@ class _CityGameState extends State<CityGame> {
 
     city = Sloboda();
     city.name = 'Dimitrova';
-    city.buildBuilding(ResourceBuilding.fromType(RESOURCE_BUILDING_TYPES.FIELD));
+    city.buildBuilding(
+        ResourceBuilding.fromType(RESOURCE_BUILDING_TYPES.FIELD));
     city.buildBuilding(ResourceBuilding.fromType(RESOURCE_BUILDING_TYPES.MILL));
 
     _topPageController = PageController(initialPage: 0, viewportFraction: 1);
@@ -61,18 +61,20 @@ class _CityGameState extends State<CityGame> {
           city: city,
           child: Theme(
             data: Theme.of(context).copyWith(backgroundColor: Colors.grey[300]),
-            child: NarrowScaffold(
-              titleView: StockMiniView(
-                stock: city.stock,
-                stockSimulation: city.simulateStock(),
+            child: Scaffold(
+              appBar: AppBar(
+                backgroundColor: Colors.grey[300],
+                title: StockMiniView(
+                  stock: city.stock,
+                  stockSimulation: city.simulateStock(),
+                ),
               ),
-              actions: [
-                AppBarObject(
-                    child: Text('Change Lang'),
-                    onTap: () {
-                      // Navigator.pop(context);
-                    })
-              ],
+              drawer: Drawer(
+                child: StockFullView(
+                  stock: city.stock,
+                  stockSimulation: city.simulateStock(),
+                ),
+              ),
               body: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: <Widget>[
@@ -101,10 +103,8 @@ class _CityGameState extends State<CityGame> {
                                       ),
                                     ),
                                   if (index == 0) SizedBox(width: 50),
-                                  Text(
+                                  TitleText(
                                     _pageTitles[index],
-                                    style:
-                                        Theme.of(context).textTheme.headline6,
                                   ),
                                   if (index != _pageTitles.length - 1)
                                     SoftContainer(

@@ -1,11 +1,10 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:sloboda/components/title_text.dart';
 import 'package:sloboda/models/buildings/resource_buildings/resource_building.dart';
 import 'package:sloboda/models/resources/resource.dart';
 import 'package:sloboda/views/components/soft_container.dart';
 import 'package:sloboda/views/resource_buildings/resource_building_view.dart';
-import 'package:sloboda/components/app_bar_custom.dart';
-import 'package:sloboda/components/narrow_scaffold.dart';
 import 'package:sloboda/extensions/list.dart';
 
 class ResourceDetailsScreen extends StatelessWidget {
@@ -16,17 +15,13 @@ class ResourceDetailsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return NarrowScaffold(
-      body: ResourceDetailsView(type: type),
-      title: resourceTypesToString(type),
-      actions: [
-        AppBarObject(
-          child: Text('Back'),
-          onTap: () {
-            Navigator.pop(context);
-          },
+    return Scaffold(
+      appBar: AppBar(
+        title: TitleText(
+          resourceTypesToString(type),
         ),
-      ],
+      ),
+      body: ResourceDetailsView(type: type),
     );
   }
 }
@@ -209,7 +204,11 @@ class ResourceImageView extends StatelessWidget {
             '${resourceTypesToIconPath(type)}',
             height: 64,
           ),
-          if (amount != null) Text('x $amount', style: Theme.of(context).textTheme.bodyText2,),
+          if (amount != null)
+            Text(
+              'x $amount',
+              style: Theme.of(context).textTheme.bodyText2,
+            ),
         ],
       ),
     );

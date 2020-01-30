@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sloboda/animations/slideable_button.dart';
-import 'package:sloboda/components/app_bar_custom.dart';
-import 'package:sloboda/components/narrow_scaffold.dart';
+import 'package:sloboda/components/title_text.dart';
 import 'package:sloboda/models/buildings/resource_buildings/nature_resource.dart';
 import 'package:sloboda/models/sloboda.dart';
 import 'package:sloboda/views/components/resource_building_output_view.dart';
@@ -25,16 +24,10 @@ class _NatureResourceBuildingScreenState
   Widget build(BuildContext context) {
     var city = widget.city;
     var building = widget.building;
-    return NarrowScaffold(
-      title: building.toString(),
-      actions: [
-        AppBarObject(
-          child: Text('Back'),
-          onTap: () {
-            Navigator.pop(context);
-          },
-        )
-      ],
+    return Scaffold(
+      appBar: AppBar(
+        title: TitleText(building.toString()),
+      ),
       body: SingleChildScrollView(
         child: SoftContainer(
           child: Padding(
@@ -71,7 +64,9 @@ class _NatureResourceBuildingScreenState
                           : null,
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
-                        child: Center(child: Text('Add worker', style: Theme.of(context).textTheme.headline6,)),
+                        child: Center(
+                          child: TitleText('Add worker'),
+                        ),
                       ),
                     ),
                   ),

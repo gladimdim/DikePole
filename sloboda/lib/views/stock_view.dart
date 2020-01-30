@@ -26,10 +26,10 @@ class StockMiniView extends StatelessWidget {
                   width: 18,
                 ),
                 Text(
-                  '${stock.getByType(key)} ',
-                  style: TextStyle(
-                    fontSize: 18,
-                  ),
+                  '${resourceTypesToString(key)}: ${stock.getByType(key)} ',
+                  style: Theme.of(context).textTheme.bodyText2.copyWith(
+                        fontSize: 18,
+                      ),
                 ),
                 SaldoViewShower(
                   value: stockSimulation[key],
@@ -49,9 +49,10 @@ class StockFullView extends StatelessWidget {
   final Stock stock;
   final Map<RESOURCE_TYPES, int> stockSimulation;
 
-  StockFullView(
-      {@required this.stock,
-      @required this.stockSimulation,});
+  StockFullView({
+    @required this.stock,
+    @required this.stockSimulation,
+  });
 
   @override
   Widget build(BuildContext context) {

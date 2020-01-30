@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:sloboda/animations/slideable_button.dart';
+import 'package:sloboda/components/title_text.dart';
 import 'package:sloboda/models/buildings/city_buildings/city_building.dart';
 import 'package:sloboda/models/sloboda.dart';
 import 'package:sloboda/views/city_buildings/city_building_output_view.dart';
 import 'package:sloboda/views/components/built_building_listview.dart';
 import 'package:sloboda/views/components/soft_container.dart';
-import 'package:sloboda/components/app_bar_custom.dart';
-import 'package:sloboda/components/narrow_scaffold.dart';
 
 class CityBuildingBuiltListItemView extends StatelessWidget {
   final CityBuilding building;
@@ -40,16 +39,12 @@ class _ResourceBuildingBuiltState extends State<CityBuildingBuilt> {
   Widget build(BuildContext context) {
     var city = widget.city;
     var building = widget.building;
-    return NarrowScaffold(
-      title: cityBuildingTypeToString(building.type),
-      actions: [
-        AppBarObject(
-          child: Text('Back'),
-          onTap: () {
-            Navigator.pop(context);
-          },
+    return Scaffold(
+      appBar: AppBar(
+        title: TitleText(
+          cityBuildingTypeToString(building.type),
         ),
-      ],
+      ),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
@@ -88,7 +83,11 @@ class _ResourceBuildingBuiltState extends State<CityBuildingBuilt> {
                     height: 64,
                     child: SoftContainer(
                       child: SlideableButton(
-                        child: Center(child: Text('Destroy building',  style: Theme.of(context).textTheme.headline6,)),
+                        child: Center(
+                            child: Text(
+                          'Destroy building',
+                          style: Theme.of(context).textTheme.headline6,
+                        )),
                         onPress: () {
                           city.removeCityBuilding(building);
                           Navigator.pop(context);
