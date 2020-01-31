@@ -12,7 +12,7 @@ class Citizen {
     _generateName();
   }
 
-  bool occupied() {
+  get occupied {
     return assignedTo != null;
   }
 

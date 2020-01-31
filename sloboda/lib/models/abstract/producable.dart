@@ -32,7 +32,7 @@ class Producable {
   }
 
   void addWorker(Citizen citizen) {
-    if (citizen.occupied()) {
+    if (citizen.occupied) {
       return;
     }
 
@@ -58,14 +58,14 @@ class Producable {
 
   void generate(Stock stock) {
     if (!hasWorkers()) {
-      return;
+      throw NoWorkersAssignedException('Building has no assigned workers.');
     }
 
     if (requires.entries.length > 0) {
       var executors = [];
       // check if stock satisfies the required input
       for (var reqRes in requires.entries) {
-        var inStock = stock.getByType(reqRes.key);
+        var inStock = stock.getByType(reqRes.key) ?? 0;
         var requiredToProduce = reqRes.value * assignedHumans.length * workMultiplier;
         if (requiredToProduce > inStock) {
           throw NotEnoughResourceException(
@@ -86,5 +86,9 @@ class Producable {
   void destroy() {
     assignedHumans.forEach((citizen) => citizen.free());
     changes.close();
+  }
+
+  String toString() {
+    throw 'Must Implement';
   }
 }

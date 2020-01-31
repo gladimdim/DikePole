@@ -97,7 +97,7 @@ class _CityDashboardState extends State<CityDashboard> {
                     Text("Not occupied citizens: "),
                     Text(
                       widget.city.citizens
-                          .where((citizen) => !citizen.occupied())
+                          .where((citizen) => !citizen.occupied)
                           .toList()
                           .length
                           .toString(),

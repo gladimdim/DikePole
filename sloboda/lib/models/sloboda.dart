@@ -28,6 +28,8 @@ class Sloboda {
     River(),
   ];
 
+  final List events = [];
+
   final Stock stock = Stock();
 
   BehaviorSubject _innerChanges = BehaviorSubject();
@@ -53,7 +55,7 @@ class Sloboda {
   }
 
   bool hasFreeCitizens() {
-    return citizens.where((citizen) => !citizen.occupied()).length > 0;
+    return citizens.where((citizen) => !citizen.occupied).length > 0;
   }
 
   _removeFromStock(Map<RESOURCE_TYPES, int> map) {
@@ -95,7 +97,7 @@ class Sloboda {
   }
 
   Citizen getFirstFreeCitizen() {
-    var free = citizens.where((citizen) => !citizen.occupied()).toList();
+    var free = citizens.where((citizen) => !citizen.occupied).toList();
     if (free.isEmpty) {
       throw 'No free citizens';
     } else {
@@ -104,7 +106,7 @@ class Sloboda {
   }
 
   List<Citizen> getAllFreeCitizens() {
-    return citizens.where((citizen) => !citizen.occupied()).toList();
+    return citizens.where((citizen) => !citizen.occupied).toList();
   }
 
   void removeResourceBuilding(ResourceBuilding building) {
@@ -127,13 +129,14 @@ class Sloboda {
       try {
         resBuilding.generate(stock);
       } catch (e) {
-        exceptions.add(e);
+        exceptions.add(
+            'Building ${resBuilding.toString()} could not generate output: ${e.cause}');
       }
     });
 
     _innerChanges.add(this);
     if (exceptions.isNotEmpty) {
-      print(exceptions);
+      events.addAll(exceptions);
     }
 
     cityBuildings.forEach((cb) {

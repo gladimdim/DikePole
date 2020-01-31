@@ -35,6 +35,10 @@ abstract class ResourceBuilding with Producable implements Buildable<RESOURCE_TY
     }
   }
 
+  String toString() {
+    return buildingTypeToString(type);
+  }
+
 }
 
 enum RESOURCE_BUILDING_TYPES { SMITH, FIELD, MILL, QUARRY, STABLES, IRON_MINE, TRAPPER_HOUSE }
