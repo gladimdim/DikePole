@@ -1,10 +1,19 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
-class Divider extends StatelessWidget {
+class VDivider extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       height: 35,
+    );
+  }
+}
+
+class HDivider extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: 35,
     );
   }
 }

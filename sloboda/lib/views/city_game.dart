@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:sloboda/animations/slideable_button.dart';
+import 'package:sloboda/components/divider.dart';
 import 'package:sloboda/components/title_text.dart';
 import 'package:sloboda/inherited_city.dart';
 import 'package:sloboda/models/buildings/resource_buildings/resource_building.dart';
 import 'package:sloboda/models/sloboda.dart';
 import 'package:sloboda/views/city_buildings/city_buildings_page.dart';
 import 'package:sloboda/views/city_dashboard.dart';
+import 'package:sloboda/views/components/arrow_right.dart';
 import 'package:sloboda/views/resource_buildings/resource_buildings_page.dart';
 import 'package:sloboda/views/components/soft_container.dart';
 import 'package:sloboda/views/stock_view.dart';
@@ -78,7 +80,7 @@ class _CityGameState extends State<CityGame> {
                       stock: city.stock,
                       stockSimulation: city.simulateStock(),
                     ),
-                    Divider(),
+                    VDivider(),
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: SoftContainer(
@@ -91,7 +93,7 @@ class _CityGameState extends State<CityGame> {
                         ),
                       ),
                     ),
-                    Divider(),
+                    VDivider(),
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: SoftContainer(
@@ -104,7 +106,7 @@ class _CityGameState extends State<CityGame> {
                         ),
                       ),
                     ),
-                    Divider(),
+                    VDivider(),
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: SoftContainer(
@@ -141,27 +143,27 @@ class _CityGameState extends State<CityGame> {
                                   if (index != 0)
                                     SoftContainer(
                                       child: IconButton(
-                                        icon: Icon(Icons.arrow_back),
+                                        icon: ArrowLeft(),
                                         onPressed: () {
                                           _goToPage(index - 1);
                                         },
                                       ),
                                     ),
-                                  if (index == 0) SizedBox(width: 50),
+                                  if (index == 0) HDivider(),
                                   TitleText(
                                     _pageTitles[index],
                                   ),
                                   if (index != _pageTitles.length - 1)
                                     SoftContainer(
                                       child: IconButton(
-                                        icon: Icon(Icons.arrow_forward),
+                                        icon: ArrowRight(),
                                         onPressed: () {
                                           _goToPage(index + 1);
                                         },
                                       ),
                                     ),
                                   if (index == _pageTitles.length - 1)
-                                    SizedBox(width: 50),
+                                    HDivider(),
                                 ],
                               ),
                             ),

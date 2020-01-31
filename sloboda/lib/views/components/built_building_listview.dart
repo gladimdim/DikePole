@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:sloboda/animations/slideable_button.dart';
+import 'package:sloboda/components/divider.dart';
 import 'package:sloboda/views/components/soft_container.dart';
 
 class BuiltBuildingListView extends StatelessWidget {
@@ -47,7 +48,11 @@ class BuiltBuildingListView extends StatelessWidget {
                       'x $amount',
                       style: Theme.of(context).textTheme.bodyText2,
                     ),
-                    Icon(Icons.arrow_right),
+                    HDivider(),
+                    Image.asset(
+                      'images/ui/arrow_right.png',
+                      height: 32,
+                    ),
                   ],
                 ),
               ],
