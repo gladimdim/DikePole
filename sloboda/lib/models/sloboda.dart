@@ -3,6 +3,7 @@ import 'package:sloboda/models/abstract/producable.dart';
 import 'package:sloboda/models/buildings/resource_buildings/nature_resource.dart';
 import 'package:sloboda/models/buildings/resource_buildings/resource_building.dart';
 import 'package:sloboda/models/citizen.dart';
+import 'package:sloboda/models/city_event.dart';
 import 'package:sloboda/models/resources/resource.dart';
 import 'package:sloboda/models/buildings/city_buildings/city_building.dart';
 import 'package:sloboda/models/stock.dart';
@@ -11,6 +12,8 @@ import 'package:rxdart/rxdart.dart';
 class Sloboda {
   String name;
   int foundedYear = 1550;
+  int currentYear = 1550;
+  CITY_SEASONS currentSeason = CITY_SEASONS.SPRING;
   List<CityBuilding> cityBuildings = [
     CityBuilding.fromType(CITY_BUILDING_TYPES.HOUSE),
   ];
@@ -28,7 +31,7 @@ class Sloboda {
     River(),
   ];
 
-  final List events = [];
+  final List<CityEvent> events = [];
 
   Stock stock;
 
@@ -132,15 +135,18 @@ class Sloboda {
       try {
         resBuilding.generate(stock);
       } catch (e) {
-        exceptions.add(
-            '${e.cause}');
+        exceptions.add('${e.cause}');
       }
     });
 
     _innerChanges.add(this);
-    if (exceptions.isNotEmpty) {
-      events.addAll(exceptions);
-    }
+    events.add(
+      CityEvent(
+        messages: exceptions,
+        yearHappened: currentYear,
+        season: currentSeason,
+      ),
+    );
 
     cityBuildings.forEach((cb) {
       Map<CITY_PROPERTIES, int> generated = cb.generate();
@@ -151,6 +157,15 @@ class Sloboda {
         properties[e.key] += e.value;
       });
     });
+
+    _moveToNextSeason();
+  }
+
+  _moveToNextSeason() {
+    currentSeason = nextSeason(currentSeason);
+    if (currentSeason == CITY_SEASONS.WINTER) {
+      currentYear++;
+    }
   }
 
   Map<CITY_PROPERTIES, int> simulateCityProps() {
@@ -219,6 +234,21 @@ class Sloboda {
     });
 
     return newStock;
+  }
+
+  CITY_SEASONS nextSeason(CITY_SEASONS currentSeason) {
+    switch (currentSeason) {
+      case (CITY_SEASONS.SPRING):
+        return CITY_SEASONS.SUMMER;
+      case (CITY_SEASONS.SUMMER):
+        return CITY_SEASONS.AUTUMN;
+      case (CITY_SEASONS.AUTUMN):
+        return CITY_SEASONS.WINTER;
+      case (CITY_SEASONS.WINTER):
+        return CITY_SEASONS.SPRING;
+      default:
+        return CITY_SEASONS.SPRING;
+    }
   }
 
   void dispose() {

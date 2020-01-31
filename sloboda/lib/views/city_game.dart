@@ -5,10 +5,12 @@ import 'package:sloboda/components/divider.dart';
 import 'package:sloboda/components/title_text.dart';
 import 'package:sloboda/inherited_city.dart';
 import 'package:sloboda/models/buildings/resource_buildings/resource_building.dart';
+import 'package:sloboda/models/city_event.dart';
 import 'package:sloboda/models/sloboda.dart';
 import 'package:sloboda/views/city_buildings/city_buildings_page.dart';
 import 'package:sloboda/views/city_dashboard.dart';
 import 'package:sloboda/views/components/arrow_right.dart';
+import 'package:sloboda/views/events_view.dart';
 import 'package:sloboda/views/resource_buildings/resource_buildings_page.dart';
 import 'package:sloboda/views/components/soft_container.dart';
 import 'package:sloboda/views/stock_view.dart';
@@ -24,7 +26,7 @@ class _CityGameState extends State<CityGame> {
   Sloboda city;
   PageController _topPageController;
   PageController _mainPageController;
-  final _pageTitles = ['Overview', 'Resource Buildings', 'City Buildings'];
+  final _pageTitles = ['Events', 'Overview', 'Resource Buildings', 'City Buildings'];
 
   @override
   initState() {
@@ -36,10 +38,9 @@ class _CityGameState extends State<CityGame> {
         ResourceBuilding.fromType(RESOURCE_BUILDING_TYPES.FIELD));
     city.buildBuilding(ResourceBuilding.fromType(RESOURCE_BUILDING_TYPES.MILL));
 
-    _topPageController = PageController(initialPage: 0, viewportFraction: 1);
-//    ..addListener(_onTopScroll);
+    _topPageController = PageController(initialPage: 1, viewportFraction: 1);
 
-    _mainPageController = PageController(initialPage: 0)
+    _mainPageController = PageController(initialPage: 1)
       ..addListener(_onMainScroll);
   }
 
@@ -89,7 +90,7 @@ class _CityGameState extends State<CityGame> {
                           onPress: () {
                             _goToPage(0);
                           },
-                          child: Center(child: TitleText('Overview')),
+                          child: Center(child: TitleText(_pageTitles[1])),
                         ),
                       ),
                     ),
@@ -102,7 +103,7 @@ class _CityGameState extends State<CityGame> {
                           onPress: () {
                             _goToPage(1);
                           },
-                          child: Center(child: TitleText('Resource Buildings')),
+                          child: Center(child: TitleText(_pageTitles[2])),
                         ),
                       ),
                     ),
@@ -115,7 +116,7 @@ class _CityGameState extends State<CityGame> {
                           onPress: () {
                             _goToPage(2);
                           },
-                          child: Center(child: TitleText('City Buildings')),
+                          child: Center(child: TitleText(_pageTitles[3])),
                         ),
                       ),
                     ),
@@ -130,7 +131,7 @@ class _CityGameState extends State<CityGame> {
                     child: PageView.builder(
                       physics: NeverScrollableScrollPhysics(),
                       controller: _topPageController,
-                      itemCount: 3,
+                      itemCount: _pageTitles.length,
                       itemBuilder: (context, index) {
                         return Padding(
                           padding: const EdgeInsets.all(16.0),
@@ -151,7 +152,7 @@ class _CityGameState extends State<CityGame> {
                                     ),
                                   if (index == 0) HDivider(),
                                   TitleText(
-                                    _pageTitles[index],
+                                    index == 1 ? '${citySeasonToString(city.currentSeason)} of year ${city.currentYear}' : _pageTitles[index],
                                   ),
                                   if (index != _pageTitles.length - 1)
                                     SoftContainer(
@@ -177,11 +178,15 @@ class _CityGameState extends State<CityGame> {
                     child: PageView.builder(
                       controller: _mainPageController,
                       scrollDirection: Axis.horizontal,
-                      itemCount: 3,
+                      itemCount: _pageTitles.length,
                       itemBuilder: (context, index) {
-                        if (index == 1) {
+                        if (index == 2) {
                           return ResourceBuildingsPage();
                         } else if (index == 0) {
+                          return EventsView(
+                            events: city.events,
+                          );
+                        } else if (index == 1) {
                           return CityDashboard(
                             city: city,
                           );
