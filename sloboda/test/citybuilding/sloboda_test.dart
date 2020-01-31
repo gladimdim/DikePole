@@ -2,14 +2,16 @@ import 'package:sloboda/models/buildings/city_buildings/city_building.dart';
 import 'package:sloboda/models/buildings/city_buildings/house.dart';
 import 'package:sloboda/models/buildings/resource_buildings/mill.dart';
 import 'package:sloboda/models/buildings/resource_buildings/resource_building.dart';
+import 'package:sloboda/models/buildings/resource_buildings/smith.dart';
 import 'package:sloboda/models/citizen.dart';
 import 'package:sloboda/models/resources/resource.dart';
 import 'package:sloboda/models/sloboda.dart';
+import 'package:sloboda/models/stock.dart';
 import 'package:test/test.dart';
 
 void main() {
   group("Can be initialized with default params", () {
-    var city = Sloboda(name: 'Dmitrova');
+    var city = Sloboda(name: 'Dmitrova', stock: Stock());
     test("Inits", () {
       expect(city, isNotNull);
       expect(city.name, equals('Dmitrova'));
@@ -119,6 +121,23 @@ void main() {
           expect(
             city.events.length,
             equals(5),
+          );
+        },
+      );
+
+      test(
+        'Generates one additional event when Smith has no IRON for input',
+            () {
+          var smith = Smith();
+          city.buildBuilding(smith);
+          smith.addWorker(city.getFirstFreeCitizen());
+          // iron is 1 before this turn
+          city.makeTurn();
+          // iron is 0 after this turn
+          city.makeTurn();
+          expect(
+            city.events.length,
+            equals(6),
           );
         },
       );

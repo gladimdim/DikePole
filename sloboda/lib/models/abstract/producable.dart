@@ -58,7 +58,7 @@ class Producable {
 
   void generate(Stock stock) {
     if (!hasWorkers()) {
-      throw NoWorkersAssignedException('Building has no assigned workers.');
+      throw NoWorkersAssignedException('${toString()} has no assigned workers.');
     }
 
     if (requires.entries.length > 0) {
@@ -69,7 +69,7 @@ class Producable {
         var requiredToProduce = reqRes.value * assignedHumans.length * workMultiplier;
         if (requiredToProduce > inStock) {
           throw NotEnoughResourceException(
-              'There is no enough ${reqRes.key} in stock');
+              '${this.toString()}: More qty ${requiredToProduce - inStock} of ${resourceTypesToString(reqRes.key)} is required');
         } else {
           executors.add(() {
             stock.removeFromType(reqRes.key, requiredToProduce);

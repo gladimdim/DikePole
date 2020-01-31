@@ -30,12 +30,15 @@ class Sloboda {
 
   final List events = [];
 
-  final Stock stock = Stock();
+  Stock stock;
 
   BehaviorSubject _innerChanges = BehaviorSubject();
   ValueStream changes;
 
-  Sloboda({this.name}) {
+  Sloboda({this.name, this.stock}) {
+    if (stock == null) {
+      stock = Stock();
+    }
     for (var i = 0; i < properties[CITY_PROPERTIES.CITIZENS]; i++) {
       citizens.add(Citizen());
     }
@@ -130,7 +133,7 @@ class Sloboda {
         resBuilding.generate(stock);
       } catch (e) {
         exceptions.add(
-            'Building ${resBuilding.toString()} could not generate output: ${e.cause}');
+            '${e.cause}');
       }
     });
 
