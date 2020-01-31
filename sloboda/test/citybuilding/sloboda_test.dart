@@ -17,7 +17,7 @@ void main() {
 
     test("Inits with default stock", () {
       expect(city.stock.getResourceTypesKeys().length, equals(10));
-      expect(city.stock.getByType(RESOURCE_TYPES.FOOD), equals(50));
+      expect(city.stock.getByType(RESOURCE_TYPES.FOOD), equals(20));
     });
 
     test("Inits with 15 citizens", () {
@@ -62,9 +62,9 @@ void main() {
 
     test("makeTurn for city with Field, Smith with 1 worker", () {
       city.makeTurn();
-      expect(city.stock.getByType(RESOURCE_TYPES.FOOD), equals(53));
-      expect(city.stock.getByType(RESOURCE_TYPES.FIREARM), equals(6));
-      expect(city.stock.getByType(RESOURCE_TYPES.NITER), equals(19));
+      expect(city.stock.getByType(RESOURCE_TYPES.FOOD), equals(23));
+      expect(city.stock.getByType(RESOURCE_TYPES.FIREARM), equals(2));
+      expect(city.stock.getByType(RESOURCE_TYPES.NITER), equals(4));
     });
 
     test("makeTurn for city with Field with 2 workers, Smith with 1 worker",
@@ -72,26 +72,56 @@ void main() {
       field.addWorker(city.citizens[2]);
       city.makeTurn();
       expect(city.getAllFreeCitizens().length, 14);
-      expect(city.stock.getByType(RESOURCE_TYPES.FOOD), equals(61));
+      expect(city.stock.getByType(RESOURCE_TYPES.FOOD), equals(33));
     });
   });
 
-  group('City events management', () {
-    var city = Sloboda(name: 'Dimitrova');
-    var field = ResourceBuilding.fromType(RESOURCE_BUILDING_TYPES.FIELD);
-    city.buildBuilding(field);
-    field.addWorker(Citizen());
+  group(
+    'City events management',
+    () {
+      var city = Sloboda(name: 'Dimitrova');
+      var field = ResourceBuilding.fromType(RESOURCE_BUILDING_TYPES.FIELD);
+      city.buildBuilding(field);
 
-    test('City inits without events', () {
-      expect(city.events.isEmpty, true);
-    });
+      test('City inits without events', () {
+        expect(city.events.isEmpty, true);
+      });
 
-    test('Generates two events for no workers assigned to default Forest and River', () {
-      city.makeTurn();
-      expect(
-        city.events.length,
-        equals(2),
+      test(
+        'Generates three events for no workers assigned to default Forest and River and new Field',
+        () {
+          city.makeTurn();
+          expect(
+            city.events.length,
+            equals(3),
+          );
+        },
       );
-    });
-  });
+
+      test(
+        'Generates two more events for no workers assigned to default Forest and River',
+        () {
+          field.addWorker(Citizen());
+          city.makeTurn();
+          expect(
+            city.events.length,
+            equals(5),
+          );
+        },
+      );
+
+      test(
+        'Generates no additional events when Forest and River have workers',
+        () {
+          city.naturalResources[0].addWorker(city.getFirstFreeCitizen());
+          city.naturalResources[1].addWorker(city.getFirstFreeCitizen());
+          city.makeTurn();
+          expect(
+            city.events.length,
+            equals(5),
+          );
+        },
+      );
+    },
+  );
 }
