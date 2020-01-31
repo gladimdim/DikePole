@@ -66,6 +66,7 @@ class _CityGameState extends State<CityGame> {
           child: Theme(
             data: Theme.of(context).copyWith(backgroundColor: Colors.grey[300]),
             child: Scaffold(
+              backgroundColor: Colors.grey[300],
               appBar: AppBar(
                 backgroundColor: Colors.grey[300],
                 title: StockMiniView(
