@@ -14,5 +14,6 @@ String citySeasonToString(CITY_SEASONS season) {
     case CITY_SEASONS.SPRING: return 'Spring';
     case CITY_SEASONS.SUMMER: return 'Summer';
     case CITY_SEASONS.WINTER: return 'Winter';
+    default: throw 'Season $season is not recognized';
   }
 }

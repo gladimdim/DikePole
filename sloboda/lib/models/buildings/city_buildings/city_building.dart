@@ -26,6 +26,7 @@ abstract class CityBuilding implements Buildable<RESOURCE_TYPES> {
         return WatchTower();
       case CITY_BUILDING_TYPES.WALL:
         return Wall();
+      default: throw 'Building $type is not recognized';
     }
   }
 
@@ -43,6 +44,7 @@ String cityTypeToString (CITY_BUILDING_TYPES type) {
     case CITY_BUILDING_TYPES.HOUSE: return 'House';
     case CITY_BUILDING_TYPES.TOWER: return 'Tower';
     case CITY_BUILDING_TYPES.WATCH_TOWER: return 'Watch Tower';
+    default: throw 'Building $type is not recognized';
   }
 }
 
@@ -58,6 +60,7 @@ String cityPropertiesToString(CITY_PROPERTIES prop) {
       return 'Faith';
     case CITY_PROPERTIES.GLORY:
       return 'Glory';
+    default: throw 'City prop $prop is not recognized';
   }
 }
 
@@ -71,6 +74,7 @@ String cityPropertiesToIconPath(CITY_PROPERTIES prop) {
       return 'images/city_buildings/watch_tower_64.png';
     case CITY_PROPERTIES.GLORY:
       return 'images/city_buildings/watch_tower_64.png';
+    default: throw 'City property $prop is not recognized';
   }
 }
 
@@ -86,6 +90,7 @@ String cityBuildingTypeToString(CITY_BUILDING_TYPES type) {
       return 'Church';
     case CITY_BUILDING_TYPES.WALL:
       return 'Wall';
+    default: throw 'City building $type is not recognized';
   }
 }
 
@@ -101,6 +106,7 @@ String cityTypeToIconPath(CITY_BUILDING_TYPES type) {
       return 'images/city_buildings/wall_64.png';
     case CITY_BUILDING_TYPES.CHURCH:
       return 'images/city_buildings/kurin_64.png';
+    default: throw 'City $type is not recognized';
   }
 }
 
@@ -116,6 +122,7 @@ String cityTypeToImagePath(CITY_BUILDING_TYPES type) {
       return 'images/city_buildings/wall.png';
     case CITY_BUILDING_TYPES.CHURCH:
       return 'images/city_buildings/kurin.png';
+    default: throw 'Building $type is not recognized';
   }
 }
 

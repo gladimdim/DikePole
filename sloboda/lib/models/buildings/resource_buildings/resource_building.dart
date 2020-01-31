@@ -32,6 +32,7 @@ abstract class ResourceBuilding with Producable implements Buildable<RESOURCE_TY
         return IronMine();
       case RESOURCE_BUILDING_TYPES.TRAPPER_HOUSE:
         return TrapperHouse();
+      default: throw 'Resource Type not Recognized';
     }
   }
 
@@ -52,6 +53,7 @@ String buildingTypeToString(RESOURCE_BUILDING_TYPES type) {
     case RESOURCE_BUILDING_TYPES.STABLES: return 'Stables';
     case RESOURCE_BUILDING_TYPES.IRON_MINE: return 'Iron mine';
     case RESOURCE_BUILDING_TYPES.TRAPPER_HOUSE: return 'Trapper\'s Cabin';
+    default: throw 'Building $type is not recognized';
   }
 }
 
@@ -64,6 +66,7 @@ String buildingTypeToIconPath(RESOURCE_BUILDING_TYPES type) {
     case RESOURCE_BUILDING_TYPES.STABLES: return 'images/resource_buildings/stable_64.png';
     case RESOURCE_BUILDING_TYPES.IRON_MINE: return 'images/resource_buildings/iron_mine_64.png';
     case RESOURCE_BUILDING_TYPES.TRAPPER_HOUSE: return 'images/resource_buildings/trappershouse_64.png';
+    default: throw 'Building $type is not recognized';
   }
 }
 
@@ -76,6 +79,7 @@ String buildingTypeToImagePath(RESOURCE_BUILDING_TYPES type) {
     case RESOURCE_BUILDING_TYPES.STABLES: return 'images/resource_buildings/stable.png';
     case RESOURCE_BUILDING_TYPES.IRON_MINE: return 'images/resource_buildings/iron_mine.png';
     case RESOURCE_BUILDING_TYPES.TRAPPER_HOUSE: return 'images/resource_buildings/trappershouse.png';
+    default: throw 'Building $type is not recognized';
   }
 }
 
@@ -88,6 +92,7 @@ String getDescriptionForResourceBuildingType(RESOURCE_BUILDING_TYPES type) {
     case RESOURCE_BUILDING_TYPES.STABLES: return 'Worker consumes food to produce Horses. If you want to raid other lands, you must get some horses.';
     case RESOURCE_BUILDING_TYPES.IRON_MINE: return 'Worker consumes food to produce iron. Iron is used to produce firearms. If you want to fight, create few iron mines.';
     case RESOURCE_BUILDING_TYPES.TRAPPER_HOUSE: return 'Hunts animals. Skins them for Fur. Fur can be sold for money at marketplaces.';
+    default: throw 'Building $type is not recognized';
   }
 }
 

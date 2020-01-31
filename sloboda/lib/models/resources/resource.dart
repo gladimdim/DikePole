@@ -96,6 +96,7 @@ String resourceTypesToIconPath(RESOURCE_TYPES type) {
       return 'images/resources/iron_ore_64.png';
     case RESOURCE_TYPES.FISH:
       return 'images/resources/fish_64.png';
+    default: throw 'Resource $type is not recognized';
 
   }
 }
@@ -122,6 +123,7 @@ String resourceTypesToImagePath(RESOURCE_TYPES type) {
       return 'images/resources/iron_ore.png';
     case RESOURCE_TYPES.FISH:
       return 'images/resources/fish.png';
+    default: throw 'Resource $type is not recognized';
 
   }
 }
