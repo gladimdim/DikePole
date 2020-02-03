@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:sloboda/loaders/url_parser.dart';
+import 'package:sloboda/models/app_preferences.dart';
 
 class LocaleSelection extends StatefulWidget {
   final Function(Locale locale) onLocaleChanged;
@@ -38,6 +40,10 @@ class _LocaleSelectionState extends State<LocaleSelection> {
   }
 
   void _setNewLocale(String newValue) async {
-    widget.onLocaleChanged(Locale(newValue));
+    UrlParser.updateLanguage(newValue);
+    await AppPreferences.instance.setUILanguage(newValue);
+    if (widget.onLocaleChanged != null) {
+      widget.onLocaleChanged(Locale(newValue));
+    }
   }
 }

@@ -10,8 +10,10 @@ dependencies:
   flutter:
     sdk: flutter
   rxdart: ^0.23.1
-
+  shared_preferences: ^0.5.6
+  url_launcher: 5.4.1
   cupertino_icons: ^0.1.2
+  fluri: ^1.2.8
 
 dev_dependencies:
   flutter_test:
