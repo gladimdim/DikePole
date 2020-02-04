@@ -3,6 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'package:sloboda/animations/slideable_button.dart';
 import 'package:sloboda/components/title_text.dart';
 import 'package:sloboda/models/buildings/city_buildings/city_building.dart';
+import 'package:sloboda/models/sloboda_localizations.dart';
 import 'package:sloboda/views/components/buildable_requires_to_build.dart';
 import 'package:sloboda/views/components/soft_container.dart';
 
@@ -65,7 +66,7 @@ class _CityBuildingMetaViewState extends State<CityBuildingMetaView> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text('Output'),
+                      Text(SlobodaLocalizations.output),
                       Text('${cityPropertiesToString(building.produces)}'),
                     ],
                   ),
@@ -82,7 +83,7 @@ class _CityBuildingMetaViewState extends State<CityBuildingMetaView> {
                   child: Container(
                       height: 64,
                       child: Center(
-                        child: TitleText('Build'),
+                        child: TitleText(SlobodaLocalizations.build),
                       )),
                   onPress: widget.onBuildPressed,
                 ),

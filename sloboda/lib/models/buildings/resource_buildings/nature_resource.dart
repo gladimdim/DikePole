@@ -1,5 +1,6 @@
 import 'package:sloboda/models/abstract/producable.dart';
 import 'package:sloboda/models/resources/resource.dart';
+import 'package:sloboda/models/sloboda_localizations.dart';
 
 enum NATURAL_RESOURCES { RIVER, FOREST }
 
@@ -26,7 +27,7 @@ class Forest extends NaturalResource {
   }
 
   String toString() {
-    return 'Forest';
+    return SlobodaLocalizations.getForKey('resources.forest');
   }
 }
 

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sloboda/models/resources/resource.dart';
+import 'package:sloboda/models/sloboda_localizations.dart';
 import 'package:sloboda/models/stock.dart';
 import 'package:sloboda/views/components/lined_container.dart';
 import 'package:sloboda/views/resource_view.dart';
@@ -26,7 +27,7 @@ class StockMiniView extends StatelessWidget {
                   width: 18,
                 ),
                 Text(
-                  '${resourceTypesToString(key)}: ${stock.getByType(key)} ',
+                  '${SlobodaLocalizations.getForKey(resourceTypesToString(key))}: ${stock.getByType(key)} ',
                   style: Theme.of(context).textTheme.bodyText2.copyWith(
                         fontSize: 18,
                       ),
@@ -64,7 +65,7 @@ class StockFullView extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             Text(
-              'Stock',
+              SlobodaLocalizations.stock,
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 25,

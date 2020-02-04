@@ -3,6 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'package:sloboda/animations/slideable_button.dart';
 import 'package:sloboda/components/title_text.dart';
 import 'package:sloboda/models/buildings/resource_buildings/resource_building.dart';
+import 'package:sloboda/models/sloboda_localizations.dart';
 import 'package:sloboda/views/components/resource_building_input_view.dart';
 import 'package:sloboda/views/components/resource_building_output_view.dart';
 import 'package:sloboda/views/components/buildable_requires_to_build.dart';
@@ -116,7 +117,7 @@ class _ResourceBuildingMetaViewState extends State<ResourceBuildingMetaView> {
                         height: 64,
                         child: Center(
                           child: TitleText(
-                            'Build',
+                            SlobodaLocalizations.build,
                           ),
                         ),
                       ),

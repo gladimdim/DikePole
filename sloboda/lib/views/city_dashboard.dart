@@ -4,6 +4,7 @@ import 'package:sloboda/animations/slideable_button.dart';
 import 'package:sloboda/components/title_text.dart';
 import 'package:sloboda/models/buildings/city_buildings/city_building.dart';
 import 'package:sloboda/models/sloboda.dart';
+import 'package:sloboda/models/sloboda_localizations.dart';
 import 'package:sloboda/views/components/soft_container.dart';
 import 'package:sloboda/views/stock_view.dart';
 
@@ -37,7 +38,7 @@ class _CityDashboardState extends State<CityDashboard> {
                     child: SoftContainer(
                       child: Center(
                         child: TitleText(
-                          'Make Turn',
+                          SlobodaLocalizations.makeTurn,
                         ),
                       ),
                     ),

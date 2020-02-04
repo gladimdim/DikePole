@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sloboda/models/buildings/city_buildings/city_building.dart';
 import 'package:sloboda/models/citizen.dart';
+import 'package:sloboda/models/sloboda_localizations.dart';
 
 class CityBuildingOutputView extends StatelessWidget {
   final CityBuilding building;
@@ -12,7 +13,7 @@ class CityBuildingOutputView extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text('Output'),
+        Text(SlobodaLocalizations.output),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[

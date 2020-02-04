@@ -1,5 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:sloboda/models/abstract/producable.dart';
+import 'package:sloboda/models/sloboda_localizations.dart';
 import 'package:sloboda/views/resource_view.dart';
 
 class ResourceBuildingOutputView extends StatelessWidget {
@@ -16,7 +17,7 @@ class ResourceBuildingOutputView extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text('Output'),
+        Text(SlobodaLocalizations.output),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[

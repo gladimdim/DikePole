@@ -1,5 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:sloboda/models/buildings/resource_buildings/resource_building.dart';
+import 'package:sloboda/models/sloboda_localizations.dart';
 import 'package:sloboda/views/resource_view.dart';
 import 'package:sloboda/extensions/list.dart';
 
@@ -17,7 +18,7 @@ class ResourceBuildingInputView extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
-        Text('Input'),
+        Text(SlobodaLocalizations.input),
         Column(
             children: building.requires.entries
                 .toList()

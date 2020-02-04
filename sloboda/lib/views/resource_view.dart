@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:sloboda/components/title_text.dart';
 import 'package:sloboda/models/buildings/resource_buildings/resource_building.dart';
 import 'package:sloboda/models/resources/resource.dart';
+import 'package:sloboda/models/sloboda_localizations.dart';
 import 'package:sloboda/views/components/soft_container.dart';
 import 'package:sloboda/views/resource_buildings/resource_building_view.dart';
 import 'package:sloboda/extensions/list.dart';
@@ -18,7 +19,7 @@ class ResourceDetailsScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: TitleText(
-          resourceTypesToString(type),
+          SlobodaLocalizations.getForKey(resourceTypesToString(type)),
         ),
       ),
       body: ResourceDetailsView(type: type),
@@ -74,7 +75,9 @@ class ResourceDetailsView extends StatelessWidget {
                   height: 5,
                 ),
                 if (requiredProd.isNotEmpty) ...[
-                  Center(child: Text('Required for production by')),
+                  Center(
+                    child: Text(SlobodaLocalizations.requiredForProductionBy),
+                  ),
                   SizedBox(
                     height: 35,
                   ),
@@ -102,7 +105,9 @@ class ResourceDetailsView extends StatelessWidget {
                   height: 35,
                 ),
                 if (requiredToBuild.isNotEmpty) ...[
-                  Center(child: Text('Required to build by')),
+                  Center(
+                    child: Text(SlobodaLocalizations.requiredToBuildBy),
+                  ),
                   SizedBox(
                     height: 15,
                   ),
