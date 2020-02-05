@@ -160,15 +160,15 @@ class _CityGameState extends State<CityGame> {
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: <Widget>[
                         Expanded(
-                          flex: 2,
+                          flex: 1,
                           child: PageView.builder(
                             physics: NeverScrollableScrollPhysics(),
                             controller: _topPageController,
                             itemCount: _pageTitles().length,
                             itemBuilder: (context, index) {
-                              return Padding(
-                                padding: const EdgeInsets.all(16.0),
-                                child: Center(
+                              return Center(
+                                child: Padding(
+                                  padding: const EdgeInsets.all(16.0),
                                   child: SoftContainer(
                                     child: Row(
                                       mainAxisAlignment:
@@ -186,7 +186,7 @@ class _CityGameState extends State<CityGame> {
                                         if (index == 0) HDivider(),
                                         TitleText(
                                           index == 1
-                                              ? '${citySeasonToString(city.currentSeason)} of year ${city.currentYear}'
+                                              ? '${SlobodaLocalizations.getForKey(citySeasonToString(city.currentSeason))} ${city.currentYear}'
                                               : _pageTitles()[index],
                                         ),
                                         if (index != _pageTitles().length - 1)

@@ -14,7 +14,7 @@ String getDefaultOrUrlLanguage() {
       SlobodaLocalizations.supportedLanguageCodes.contains(savedLangCode)) {
     return savedLangCode;
   } else {
-    return 'uk';
+    return 'en';
   }
 }
 
@@ -104,10 +104,17 @@ class SlobodaLocalizations {
 
   static getForKey(String key) {
     final split = key.split('.');
-    switch (split[0]) {
-      case 'resourceBuildings': return resourceBuildingsLocalizations[split[1]];
-      case 'resources': return resourceLocalizations[split[1]];
-      default: return key;
+    if (split.length > 1) {
+      switch (split[0]) {
+        case 'resourceBuildings':
+          return resourceBuildingsLocalizations[split[1]];
+        case 'resources':
+          return resourceLocalizations[split[1]];
+        default:
+          return key;
+      }
+    } else {
+      return _localizedValues[locale.languageCode][split[0]];
     }
 
   }
@@ -125,6 +132,13 @@ class SlobodaLocalizations {
       'input': 'Input',
       'build': 'Build',
       'makeTurn': 'Make Turn',
+      'maxNumberOfWorkers': 'Max number of workers',
+      'notOccupiedCitizens': 'Free citizens',
+      'summer': 'Summer',
+      'winter': 'Winter',
+      'spring': 'Spring',
+      'autumn': 'Autumn',
+      'nothingHappened': 'Nothing happened',
     },
     'uk': {
       'overview': 'Головна',
@@ -138,6 +152,13 @@ class SlobodaLocalizations {
       'input': 'Потребує',
       'build': 'Побудувати',
       'makeTurn': 'Закінчити сезон',
+      'maxNumberOfWorkers': 'Вміщує робочих',
+      'notOccupiedCitizens': 'Вільні робочі',
+      'summer': 'Літо',
+      'winter': 'Зима',
+      'spring': 'Весна',
+      'autumn': 'Осінь',
+      'nothingHappened': 'Нічого не відбулося',
     }
   };
 
@@ -189,5 +210,20 @@ class SlobodaLocalizations {
   static String get makeTurn {
     return _localizedValues[SlobodaLocalizations.locale.languageCode]
         ['makeTurn'];
+  }
+
+  static String get maxNumberOfWorkers {
+    return _localizedValues[SlobodaLocalizations.locale.languageCode]
+    ['maxNumberOfWorkers'];
+  }
+
+  static String get notOccupiedCitizens {
+    return _localizedValues[SlobodaLocalizations.locale.languageCode]
+    ['notOccupiedCitizens'];
+  }
+
+  static String get nothingHappened {
+    return _localizedValues[SlobodaLocalizations.locale.languageCode]
+    ['nothingHappened'];
   }
 }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:sloboda/animations/slideable_button.dart';
 import 'package:sloboda/components/divider.dart';
+import 'package:sloboda/components/title_text.dart';
 import 'package:sloboda/views/components/soft_container.dart';
 
 class BuiltBuildingListView extends StatelessWidget {
@@ -32,11 +33,8 @@ class BuiltBuildingListView extends StatelessWidget {
                 Image.asset(
                   buildingIconPath,
                 ),
-                Text(
+                TitleText(
                   title,
-                  style: Theme.of(context).textTheme.headline6.merge(
-                        TextStyle(fontSize: 24),
-                      ),
                 ),
                 Row(
                   children: <Widget>[
@@ -45,7 +43,7 @@ class BuiltBuildingListView extends StatelessWidget {
                       height: 32,
                     ),
                     Text(
-                      'x $amount',
+                      ' $amount',
                       style: Theme.of(context).textTheme.bodyText2,
                     ),
                     HDivider(),

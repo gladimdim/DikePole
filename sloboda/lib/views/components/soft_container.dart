@@ -17,8 +17,6 @@ class SoftContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: Colors.grey[100],
-//          shape: BoxShape.rectangle,
         border: kIsWeb
             ? Border.all(
                 color: Theme.of(context).primaryColor,
@@ -55,9 +53,8 @@ class SoftContainer extends StatelessWidget {
                   Colors.grey[100],
                   Colors.grey[200],
                   Colors.grey[300],
-                  Colors.grey[300],
                 ],
-                stops: [0.1, 0.6, 0.8, 0.9],
+                stops: [0.1, 0.6, 0.8],
               ),
       ),
       child: child,

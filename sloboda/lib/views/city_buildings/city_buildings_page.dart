@@ -44,26 +44,29 @@ class _CityBuildingsPageState extends State<CityBuildingsPage> {
           ).toList(),
           ...CITY_BUILDING_TYPES.values
               .map(
-                (v) => InkWell(
-                  onTap: () {
-                    setState(() {
-                      if (selected == v) {
-                        selected = null;
-                      } else {
-                        selected = v;
-                      }
-                    });
-                  },
-                  child: CityBuildingMetaView(
-                    type: v,
-                    selected: selected == v,
-                    onBuildPressed: () {
-                      try {
-                        city.buildBuilding(CityBuilding.fromType(v));
-                      } catch (e) {
-                        print('Cannot build. Missing: $e');
-                      }
+                (v) => Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: InkWell(
+                    onTap: () {
+                      setState(() {
+                        if (selected == v) {
+                          selected = null;
+                        } else {
+                          selected = v;
+                        }
+                      });
                     },
+                    child: CityBuildingMetaView(
+                      type: v,
+                      selected: selected == v,
+                      onBuildPressed: () {
+                        try {
+                          city.buildBuilding(CityBuilding.fromType(v));
+                        } catch (e) {
+                          print('Cannot build. Missing: $e');
+                        }
+                      },
+                    ),
                   ),
                 ),
               )

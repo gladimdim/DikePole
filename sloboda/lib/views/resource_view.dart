@@ -211,7 +211,7 @@ class ResourceImageView extends StatelessWidget {
           ),
           if (amount != null)
             Text(
-              'x $amount',
+              ' $amount',
               style: Theme.of(context).textTheme.bodyText2,
             ),
         ],

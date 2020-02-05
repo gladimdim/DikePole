@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:sloboda/components/divider.dart';
+import 'package:sloboda/components/title_text.dart';
 import 'package:sloboda/models/city_event.dart';
+import 'package:sloboda/models/sloboda_localizations.dart';
 import 'package:sloboda/views/components/soft_container.dart';
 
 class EventsView extends StatelessWidget {
@@ -20,21 +22,21 @@ class EventsView extends StatelessWidget {
         return SoftContainer(
           child: Column(
             children: <Widget>[
-              Text(
-                  'In ${citySeasonToString(event.season)} of year ${event.yearHappened}'),
+              TitleText(
+                  '${SlobodaLocalizations.getForKey(citySeasonToString(event.season))} ${event.yearHappened}'),
               if (event.messages.isNotEmpty)
                 Column(
                   children: event.messages
                       .map((m) => Text(
                             m,
-                            style: Theme.of(context).textTheme.bodyText1,
+                            style: Theme.of(context).textTheme.bodyText2,
                           ))
                       .toList(),
                 ),
               if (event.messages.isEmpty)
                 Text(
-                  'Nothing happened',
-                  style: Theme.of(context).textTheme.bodyText1,
+                  SlobodaLocalizations.nothingHappened,
+                  style: Theme.of(context).textTheme.bodyText2,
                 ),
             ],
           ),

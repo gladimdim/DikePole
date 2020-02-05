@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:sloboda/animations/slideable_button.dart';
+import 'package:sloboda/components/button_text.dart';
 import 'package:sloboda/components/title_text.dart';
 import 'package:sloboda/models/buildings/resource_buildings/resource_building.dart';
+import 'package:sloboda/models/citizen.dart';
 import 'package:sloboda/models/sloboda_localizations.dart';
 import 'package:sloboda/views/components/resource_building_input_view.dart';
 import 'package:sloboda/views/components/resource_building_output_view.dart';
@@ -39,18 +41,14 @@ class _ResourceBuildingMetaViewState extends State<ResourceBuildingMetaView> {
                 Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    Text(
+                    TitleText(
                       '${buildingTypeToString(widget.type)}',
-                      style: Theme.of(context)
-                          .textTheme
-                          .headline6
-                          .merge(TextStyle(fontSize: 30)),
                     ),
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Image.asset(
                         buildingTypeToImagePath(widget.type),
-                        height: 320,
+                        height: widget.selected ? 256 : 128,
                       ),
                     ),
                   ],
@@ -82,12 +80,12 @@ class _ResourceBuildingMetaViewState extends State<ResourceBuildingMetaView> {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text('Max number of workers'),
+                        Text(SlobodaLocalizations.maxNumberOfWorkers),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Text('${building.maxWorkers}x'),
-                            Icon(Icons.person),
+                            Image.asset(Citizen.getIconPath()),
+                            Text(' ${building.maxWorkers}'),
                           ],
                         ),
                       ],
@@ -116,7 +114,7 @@ class _ResourceBuildingMetaViewState extends State<ResourceBuildingMetaView> {
                       child: Container(
                         height: 64,
                         child: Center(
-                          child: TitleText(
+                          child: ButtonText(
                             SlobodaLocalizations.build,
                           ),
                         ),

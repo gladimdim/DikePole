@@ -10,10 +10,10 @@ enum CITY_SEASONS { AUTUMN, WINTER, SPRING, SUMMER}
 
 String citySeasonToString(CITY_SEASONS season) {
   switch (season) {
-    case CITY_SEASONS.AUTUMN: return 'Autumn';
-    case CITY_SEASONS.SPRING: return 'Spring';
-    case CITY_SEASONS.SUMMER: return 'Summer';
-    case CITY_SEASONS.WINTER: return 'Winter';
+    case CITY_SEASONS.AUTUMN: return 'autumn';
+    case CITY_SEASONS.SPRING: return 'spring';
+    case CITY_SEASONS.SUMMER: return 'summer';
+    case CITY_SEASONS.WINTER: return 'winter';
     default: throw 'Season $season is not recognized';
   }
 }

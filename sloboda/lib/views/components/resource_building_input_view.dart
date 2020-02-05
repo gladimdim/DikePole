@@ -32,7 +32,7 @@ class ResourceBuildingInputView extends StatelessWidget {
                       ResourceImageView(
                         type: e.key,
                       ),
-                      Text('x ${e.value * multiplier * building.workMultiplier}'),
+                      Text(' ${e.value * multiplier * building.workMultiplier}'),
                     ],
                   ))
                       .toList());

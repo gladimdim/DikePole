@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sloboda/components/title_text.dart';
 import 'package:sloboda/models/resources/resource.dart';
 import 'package:sloboda/models/sloboda_localizations.dart';
 import 'package:sloboda/models/stock.dart';
@@ -64,12 +65,8 @@ class StockFullView extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            Text(
+            TitleText(
               SlobodaLocalizations.stock,
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: 25,
-              ),
             ),
             ...stock.getResourceTypesKeys().divideBy(2).map<Widget>(
               (List keys) {

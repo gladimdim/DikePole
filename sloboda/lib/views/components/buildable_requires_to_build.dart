@@ -18,7 +18,7 @@ class BuildableRequiredToBuildView extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
-        Text(SlobodaLocalizations.requiredToBuildBy, style: Theme.of(context).textTheme.headline6,),
+        Text(SlobodaLocalizations.requiredToBuildBy),
         Column(
           children: building.requiredToBuild.entries
               .toList()
@@ -32,7 +32,7 @@ class BuildableRequiredToBuildView extends StatelessWidget {
                               ResourceImageView(
                                 type: e.key,
                               ),
-                              Text('x ${e.value}'),
+                              Text(' ${e.value}'),
                             ],
                           ))
                       .toList(),

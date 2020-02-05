@@ -59,7 +59,7 @@ var whiteTheme = ThemeData(
   unselectedWidgetColor: Colors.black,
   textTheme: TextTheme(
     bodyText2: TextStyle(
-      fontFamily: "Raleway-Bold",
+      fontFamily: "Raleway",
       fontSize: 22,
       color: Colors.black,
     ),
@@ -67,11 +67,11 @@ var whiteTheme = ThemeData(
       color: Colors.black,
       fontSize: 24.0,
       fontWeight: FontWeight.bold,
-      fontFamily: 'Roboto-Bold',
+      fontFamily: 'Roboto',
     ),
     button: TextStyle(
-      fontFamily: 'Montserrat',
-      fontSize: 20.0,
+      fontFamily: 'Raleway-Bold',
+      fontSize: 30.0,
       fontWeight: FontWeight.bold,
       color: Colors.black,
     ),

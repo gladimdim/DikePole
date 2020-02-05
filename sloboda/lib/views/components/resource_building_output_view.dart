@@ -24,7 +24,7 @@ class ResourceBuildingOutputView extends StatelessWidget {
             ResourceImageView(
               type: building.produces,
             ),
-            Text('x ${building.workMultiplier * multiplier}'),
+            Text(' ${building.workMultiplier * multiplier}'),
           ],
         ),
       ],

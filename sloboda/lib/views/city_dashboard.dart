@@ -64,7 +64,7 @@ class _CityDashboardState extends State<CityDashboard> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text("Resource buildings: "),
+                    TitleText(SlobodaLocalizations.resourceBuildings),
                     Text(
                       widget.city.resourceBuildings.length.toString(),
                     )
@@ -81,7 +81,7 @@ class _CityDashboardState extends State<CityDashboard> {
                 child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text("City Buildings: "),
+                      TitleText(SlobodaLocalizations.cityBuildings),
                       Text(widget.city.cityBuildings.length.toString()),
                     ]),
               ),
@@ -95,7 +95,7 @@ class _CityDashboardState extends State<CityDashboard> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text("Not occupied citizens: "),
+                    TitleText(SlobodaLocalizations.notOccupiedCitizens),
                     Text(
                       widget.city.citizens
                           .where((citizen) => !citizen.occupied)
@@ -119,7 +119,7 @@ class _CityDashboardState extends State<CityDashboard> {
                         (v) => Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: <Widget>[
-                            Text(
+                            TitleText(
                               cityPropertiesToString(v),
                             ),
                             Row(children: [
