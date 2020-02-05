@@ -42,7 +42,6 @@ flutter:
     - images/resource_buildings/mill_64.png
     - images/resources/stone.png
     - images/resources/wood.png
-    - images/resources/kurin.png
     - images/resources/niter.png
     - images/resources/food.png
     - images/resources/money.png
@@ -53,7 +52,6 @@ flutter:
     - images/resources/firearm.png
     - images/resources/stone_64.png
     - images/resources/wood_64.png
-    - images/resources/kurin_64.png
     - images/resources/niter_64.png
     - images/resources/food_64.png
     - images/resources/money_64.png
