@@ -29,7 +29,7 @@ class StockMiniView extends StatelessWidget {
                 ),
                 Text(
                   '${SlobodaLocalizations.getForKey(resourceTypesToString(key))}: ${stock.getByType(key)} ',
-                  style: Theme.of(context).textTheme.bodyText2.copyWith(
+                  style: Theme.of(context).textTheme.bodyText1.copyWith(
                         fontSize: 18,
                       ),
                 ),
