@@ -119,7 +119,7 @@ class _CityGameState extends State<CityGame> {
                               child: SlideableButton(
                                 direction: Direction.Left,
                                 onPress: () {
-                                  _goToPage(0);
+                                  _goToPage(1);
                                 },
                                 child: Center(child: TitleText(_pageTitles()[1])),
                               ),
@@ -132,7 +132,7 @@ class _CityGameState extends State<CityGame> {
                               child: SlideableButton(
                                 direction: Direction.Left,
                                 onPress: () {
-                                  _goToPage(1);
+                                  _goToPage(2);
                                 },
                                 child: Center(child: TitleText(_pageTitles()[2])),
                               ),
@@ -145,7 +145,7 @@ class _CityGameState extends State<CityGame> {
                               child: SlideableButton(
                                 direction: Direction.Left,
                                 onPress: () {
-                                  _goToPage(2);
+                                  _goToPage(3);
                                 },
                                 child: Center(child: TitleText(_pageTitles()[3])),
                               ),
