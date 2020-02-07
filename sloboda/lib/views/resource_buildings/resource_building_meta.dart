@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:sloboda/animations/slideable_button.dart';
 import 'package:sloboda/components/button_text.dart';
+import 'package:sloboda/components/title_text.dart';
 import 'package:sloboda/models/buildings/resource_buildings/resource_building.dart';
 import 'package:sloboda/models/citizen.dart';
 import 'package:sloboda/models/sloboda_localizations.dart';
@@ -40,6 +41,9 @@ class _ResourceBuildingMetaViewState extends State<ResourceBuildingMetaView> {
                 Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
+                    TitleText(
+                      building.toLocalizedString(),
+                    ),
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Image.asset(

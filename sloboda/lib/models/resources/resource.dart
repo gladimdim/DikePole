@@ -20,7 +20,7 @@ class Resource {
   }
 
   static Resource createSulfur() {
-    return Resource(RESOURCE_TYPES.NITER);
+    return Resource(RESOURCE_TYPES.POWDER);
   }
 
   static Resource createFur() {
@@ -41,7 +41,7 @@ enum RESOURCE_TYPES {
   WOOD,
   FOOD,
   STONE,
-  NITER,
+  POWDER,
   FUR,
   FISH,
   FIREARM,
@@ -59,8 +59,8 @@ String resourceTypesToKey(RESOURCE_TYPES type) {
       return 'resources.wood';
     case RESOURCE_TYPES.STONE:
       return 'resources.stone';
-    case RESOURCE_TYPES.NITER:
-      return 'resources.niter';
+    case RESOURCE_TYPES.POWDER:
+      return 'resources.powder';
     case RESOURCE_TYPES.FUR:
       return 'resources.fur';
     case RESOURCE_TYPES.FIREARM:
@@ -90,7 +90,7 @@ String resourceTypesToIconPath(RESOURCE_TYPES type) {
       return 'images/resources/wood_64.png';
     case RESOURCE_TYPES.STONE:
       return 'images/resources/stone_64.png';
-    case RESOURCE_TYPES.NITER:
+    case RESOURCE_TYPES.POWDER:
       return 'images/resources/niter_64.png';
     case RESOURCE_TYPES.FUR:
       return 'images/resources/fur_64.png';
@@ -117,7 +117,7 @@ String resourceTypesToImagePath(RESOURCE_TYPES type) {
       return 'images/resources/wood.png';
     case RESOURCE_TYPES.STONE:
       return 'images/resources/stone.png';
-    case RESOURCE_TYPES.NITER:
+    case RESOURCE_TYPES.POWDER:
       return 'images/resources/niter.png';
     case RESOURCE_TYPES.FUR:
       return 'images/resources/fur.png';

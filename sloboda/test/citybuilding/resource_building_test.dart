@@ -10,7 +10,7 @@ void main() {
     Stock stock = Stock({
       RESOURCE_TYPES.FOOD: 5,
       RESOURCE_TYPES.FIREARM: 0,
-      RESOURCE_TYPES.NITER: 1,
+      RESOURCE_TYPES.POWDER: 1,
       RESOURCE_TYPES.IRON_ORE: 1,
     });
 

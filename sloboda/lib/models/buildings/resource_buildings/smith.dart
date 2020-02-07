@@ -12,6 +12,6 @@ class Smith extends ResourceBuilding {
   Map<RESOURCE_TYPES, int> requires = {
     RESOURCE_TYPES.FOOD: 2,
     RESOURCE_TYPES.IRON_ORE: 1,
-    RESOURCE_TYPES.NITER: 1,
+    RESOURCE_TYPES.POWDER: 1,
   };
 }

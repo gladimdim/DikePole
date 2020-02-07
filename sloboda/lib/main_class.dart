@@ -52,9 +52,9 @@ var blackTheme = ThemeData(
 );
 
 var whiteTheme = ThemeData(
-  primaryColor: Colors.teal,
-  backgroundColor: Colors.teal,
-  scaffoldBackgroundColor: Colors.teal,
+  primaryColor: Colors.grey[300],
+  backgroundColor: Colors.grey[300],
+  scaffoldBackgroundColor: Colors.grey[300],
   accentColor: Colors.black,
   fontFamily: 'Roboto',
   unselectedWidgetColor: Colors.black,

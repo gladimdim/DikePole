@@ -28,7 +28,7 @@ class StockMiniView extends StatelessWidget {
                   width: 18,
                 ),
                 Text(
-                  '${SlobodaLocalizations.getForKey(localizedResourceByType(key))}: ${stock.getByType(key)} ',
+                  '${localizedResourceByType(key)}: ${stock.getByType(key)} ',
                   style: Theme.of(context).textTheme.bodyText1.copyWith(
                         fontSize: 18,
                       ),
