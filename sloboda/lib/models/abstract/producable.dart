@@ -69,7 +69,7 @@ class Producable {
         var requiredToProduce = reqRes.value * assignedHumans.length * workMultiplier;
         if (requiredToProduce > inStock) {
           throw NotEnoughResourceException(
-              '${this.toString()}: More qty ${requiredToProduce - inStock} of ${resourceTypesToString(reqRes.key)} is required');
+              '${this.toString()}: More qty ${requiredToProduce - inStock} of ${localizedResourceByType(reqRes.key)} is required');
         } else {
           executors.add(() {
             stock.removeFromType(reqRes.key, requiredToProduce);
@@ -88,7 +88,7 @@ class Producable {
     changes.close();
   }
 
-  String toString() {
+  String toLocalizedString() {
     throw 'Must Implement';
   }
 }

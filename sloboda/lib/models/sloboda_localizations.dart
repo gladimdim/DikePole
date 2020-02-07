@@ -18,8 +18,22 @@ String getDefaultOrUrlLanguage() {
   }
 }
 
-class ResourceLocalizations {
-  static Map<String, Map<String, String>> _localizedMap = {
+class InternalLocalizations {
+  Map<String, Map<String, String>> _localizedMap;
+
+  String operator [](String key) {
+    final lang = _localizedMap[SlobodaLocalizations.locale.languageCode];
+
+    if (lang.containsKey(key)) {
+      return lang[key];
+    } else {
+      return key;
+    }
+  }
+}
+
+class ResourceLocalizations extends InternalLocalizations {
+  Map<String, Map<String, String>> _localizedMap = {
     'en': {
       'food': 'Food',
       'stone': 'Stone',
@@ -45,21 +59,10 @@ class ResourceLocalizations {
       'firearm': 'Самопал'
     }
   };
-
-  String operator [](String key) {
-    final lang =
-    _localizedMap[SlobodaLocalizations.locale.languageCode];
-
-    if (lang.containsKey(key)) {
-      return lang[key];
-    } else {
-      return key;
-    }
-  }
 }
 
-class ResourceBuildingsLocalizations {
-  static Map<String, Map<String, String>> _localizedMap = {
+class ResourceBuildingsLocalizations extends InternalLocalizations {
+  Map<String, Map<String, String>> _localizedMap = {
     'en': {
       'mill': 'Mill',
       'field': 'Field',
@@ -79,17 +82,19 @@ class ResourceBuildingsLocalizations {
       'trapperCabin': 'Хата уходника',
     }
   };
+}
 
-  String operator [](String key) {
-    final lang =
-    _localizedMap[SlobodaLocalizations.locale.languageCode];
-
-    if (lang.containsKey(key)) {
-      return lang[key];
-    } else {
-      return key;
+class NatureResourceBuildingsLocalizations extends InternalLocalizations {
+  Map<String, Map<String, String>> _localizedMap = {
+    'en': {
+      'forest': 'Forest',
+      'river': 'River',
+    },
+    'uk': {
+      'forest': 'Ліс',
+      'river': 'Річка',
     }
-  }
+  };
 }
 
 class SlobodaLocalizations {
@@ -99,6 +104,8 @@ class SlobodaLocalizations {
       ResourceBuildingsLocalizations();
 
   static ResourceLocalizations resourceLocalizations = ResourceLocalizations();
+
+  static NatureResourceBuildingsLocalizations natureResourceLocalizations = NatureResourceBuildingsLocalizations();
 
   static Locale locale = Locale(getDefaultOrUrlLanguage());
 
@@ -110,13 +117,13 @@ class SlobodaLocalizations {
           return resourceBuildingsLocalizations[split[1]];
         case 'resources':
           return resourceLocalizations[split[1]];
+        case 'natureResources': return natureResourceLocalizations[split[1]];
         default:
           return key;
       }
     } else {
       return _localizedValues[locale.languageCode][split[0]];
     }
-
   }
 
   static Map<String, Map<String, String>> _localizedValues = {
@@ -214,16 +221,16 @@ class SlobodaLocalizations {
 
   static String get maxNumberOfWorkers {
     return _localizedValues[SlobodaLocalizations.locale.languageCode]
-    ['maxNumberOfWorkers'];
+        ['maxNumberOfWorkers'];
   }
 
   static String get notOccupiedCitizens {
     return _localizedValues[SlobodaLocalizations.locale.languageCode]
-    ['notOccupiedCitizens'];
+        ['notOccupiedCitizens'];
   }
 
   static String get nothingHappened {
     return _localizedValues[SlobodaLocalizations.locale.languageCode]
-    ['nothingHappened'];
+        ['nothingHappened'];
   }
 }

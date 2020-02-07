@@ -25,10 +25,10 @@ class _ResourceBuildingsPageState extends State<ResourceBuildingsPage> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             ...city.naturalResources.map<Widget>((el) {
-              return Padding(
-                padding: const EdgeInsets.all(8.0),
+              return Container(
+                padding: EdgeInsets.all(8.0),
                 child: BuiltBuildingListView(
-                  title: el.toString(),
+                  title: el.toLocalizedString(),
                   buildingIconPath: el.getIconPath(),
                   producesIconPath: resourceTypesToImagePath(el.produces),
                   amount: el.outputAmount,

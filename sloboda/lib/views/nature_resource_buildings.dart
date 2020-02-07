@@ -26,7 +26,8 @@ class _NatureResourceBuildingScreenState
     var building = widget.building;
     return Scaffold(
       appBar: AppBar(
-        title: TitleText(building.toString()),
+        backgroundColor: Theme.of(context).backgroundColor,
+        title: TitleText(building.toLocalizedString()),
       ),
       body: SingleChildScrollView(
         child: SoftContainer(

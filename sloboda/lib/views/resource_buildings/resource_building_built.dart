@@ -19,7 +19,7 @@ class ResourceBuildingBuiltListItemView extends StatelessWidget {
   Widget build(BuildContext context) {
     Sloboda city = InheritedCity.of(context).city;
     return BuiltBuildingListView(
-      title: buildingTypeToString(building.type),
+      title: localizedBuildingTypeName(building.type),
       producesIconPath: resourceTypesToIconPath(building.produces),
       amount: building.outputAmount,
       buildingIconPath: buildingTypeToIconPath(building.type),
@@ -54,8 +54,10 @@ class _ResourceBuildingBuiltState extends State<ResourceBuildingBuilt> {
     var city = widget.city;
     var building = widget.building;
     return Scaffold(
+      backgroundColor: Theme.of(context).backgroundColor,
       appBar: AppBar(
-        title: TitleText(buildingTypeToString(building.type)),
+        backgroundColor: Theme.of(context).backgroundColor,
+        title: TitleText(localizedBuildingTypeName(building.type)),
       ),
       body: SingleChildScrollView(
         child: SoftContainer(

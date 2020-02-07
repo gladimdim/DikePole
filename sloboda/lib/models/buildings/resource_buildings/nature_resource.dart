@@ -11,6 +11,10 @@ class NaturalResource with Producable {
   String getIconPath() {
     return 'images/resource_buildings/mill.png';
   }
+
+  String toLocalizedString() {
+    throw 'Must be implemented by a child';
+  }
 }
 
 class Forest extends NaturalResource {
@@ -26,8 +30,12 @@ class Forest extends NaturalResource {
     return 'images/resource_buildings/forest.png';
   }
 
-  String toString() {
-    return SlobodaLocalizations.getForKey('resources.forest');
+  String getKey() {
+    return 'natureResources.forest';
+  }
+
+  String toLocalizedString() {
+    return SlobodaLocalizations.getForKey(getKey());
   }
 }
 
@@ -44,7 +52,11 @@ class River extends NaturalResource {
     return 'images/resource_buildings/river.png';
   }
 
-  String toString() {
-    return 'River';
+  String getKey() {
+    return 'natureResources.river';
+  }
+
+  String toLocalizedString() {
+    return SlobodaLocalizations.getForKey(getKey());
   }
 }

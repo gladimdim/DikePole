@@ -84,19 +84,17 @@ class _CityGameState extends State<CityGame> {
             future: _appPreferencesInit(),
             builder: (context, snapshot) {
               if (snapshot.hasData) {
-                return Theme(
-                  data: Theme.of(context)
-                      .copyWith(backgroundColor: Colors.grey[300]),
-                  child: Scaffold(
-                    backgroundColor: Colors.grey[300],
-                    appBar: AppBar(
-                      backgroundColor: Colors.grey[300],
-                      title: StockMiniView(
-                        stock: city.stock,
-                        stockSimulation: city.simulateStock(),
-                      ),
+                return Scaffold(
+                  appBar: AppBar(
+                    backgroundColor: Theme.of(context).backgroundColor,
+                    title: StockMiniView(
+                      stock: city.stock,
+                      stockSimulation: city.simulateStock(),
                     ),
-                    drawer: Drawer(
+                  ),
+                  drawer: Drawer(
+                    child: Container(
+                      color: Theme.of(context).backgroundColor,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: <Widget>[
@@ -156,20 +154,23 @@ class _CityGameState extends State<CityGame> {
                         ],
                       ),
                     ),
-                    body: Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: <Widget>[
-                        Expanded(
-                          flex: 1,
-                          child: PageView.builder(
-                            physics: NeverScrollableScrollPhysics(),
-                            controller: _topPageController,
-                            itemCount: _pageTitles().length,
-                            itemBuilder: (context, index) {
-                              return Center(
-                                child: Padding(
-                                  padding: const EdgeInsets.all(16.0),
-                                  child: SoftContainer(
+                  ),
+                  body: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: <Widget>[
+                      Expanded(
+                        flex: 1,
+                        child: PageView.builder(
+                          physics: NeverScrollableScrollPhysics(),
+                          controller: _topPageController,
+                          itemCount: _pageTitles().length,
+                          itemBuilder: (context, index) {
+                            return Center(
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: SoftContainer(
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(8.0),
                                     child: Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceBetween,
@@ -204,35 +205,35 @@ class _CityGameState extends State<CityGame> {
                                     ),
                                   ),
                                 ),
+                              ),
+                            );
+                          },
+                        ),
+                      ),
+                      Expanded(
+                        flex: 9,
+                        child: PageView.builder(
+                          controller: _mainPageController,
+                          scrollDirection: Axis.horizontal,
+                          itemCount: _pageTitles().length,
+                          itemBuilder: (context, index) {
+                            if (index == 2) {
+                              return ResourceBuildingsPage();
+                            } else if (index == 0) {
+                              return EventsView(
+                                events: city.events,
                               );
-                            },
-                          ),
+                            } else if (index == 1) {
+                              return CityDashboard(
+                                city: city,
+                              );
+                            } else {
+                              return CityBuildingsPage();
+                            }
+                          },
                         ),
-                        Expanded(
-                          flex: 9,
-                          child: PageView.builder(
-                            controller: _mainPageController,
-                            scrollDirection: Axis.horizontal,
-                            itemCount: _pageTitles().length,
-                            itemBuilder: (context, index) {
-                              if (index == 2) {
-                                return ResourceBuildingsPage();
-                              } else if (index == 0) {
-                                return EventsView(
-                                  events: city.events,
-                                );
-                              } else if (index == 1) {
-                                return CityDashboard(
-                                  city: city,
-                                );
-                              } else {
-                                return CityBuildingsPage();
-                              }
-                            },
-                          ),
-                        ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                 );
               } else {

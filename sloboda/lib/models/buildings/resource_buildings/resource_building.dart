@@ -37,32 +37,36 @@ abstract class ResourceBuilding with Producable implements Buildable<RESOURCE_TY
     }
   }
 
-  String toString() {
-    return buildingTypeToString(type);
+  String toLocalizedString() {
+    return localizedBuildingTypeName(type);
   }
 
 }
 
 enum RESOURCE_BUILDING_TYPES { SMITH, FIELD, MILL, QUARRY, STABLES, IRON_MINE, TRAPPER_HOUSE }
 
-String buildingTypeToString(RESOURCE_BUILDING_TYPES type) {
+String buildingTypeToKey (RESOURCE_BUILDING_TYPES type) {
   switch (type) {
-    case RESOURCE_BUILDING_TYPES.FIELD: return SlobodaLocalizations.getForKey('resourceBuildings.field');
-    case RESOURCE_BUILDING_TYPES.MILL: return SlobodaLocalizations.getForKey('resourceBuildings.mill');
-    case RESOURCE_BUILDING_TYPES.SMITH:  return SlobodaLocalizations.getForKey('resourceBuildings.smith');
-    case RESOURCE_BUILDING_TYPES.QUARRY: return SlobodaLocalizations.getForKey('resourceBuildings.quarry');
-    case RESOURCE_BUILDING_TYPES.STABLES: return SlobodaLocalizations.getForKey('resourceBuildings.stables');
-    case RESOURCE_BUILDING_TYPES.IRON_MINE: return SlobodaLocalizations.getForKey('resourceBuildings.ironMine');
-    case RESOURCE_BUILDING_TYPES.TRAPPER_HOUSE: return SlobodaLocalizations.getForKey('resourceBuildings.trapperCabin');
+    case RESOURCE_BUILDING_TYPES.FIELD: return 'resourceBuildings.field';
+    case RESOURCE_BUILDING_TYPES.MILL:  return 'resourceBuildings.mill';
+    case RESOURCE_BUILDING_TYPES.SMITH:  return 'resourceBuildings.smith';
+    case RESOURCE_BUILDING_TYPES.QUARRY: return 'resourceBuildings.quarry';
+    case RESOURCE_BUILDING_TYPES.STABLES: return 'resourceBuildings.stables';
+    case RESOURCE_BUILDING_TYPES.IRON_MINE: return 'resourceBuildings.ironMine';
+    case RESOURCE_BUILDING_TYPES.TRAPPER_HOUSE: return'resourceBuildings.trapperCabin';
     default: throw 'Building $type is not recognized';
   }
+}
+
+String localizedBuildingTypeName(RESOURCE_BUILDING_TYPES type) {
+  return SlobodaLocalizations.getForKey(buildingTypeToKey(type));
 }
 
 String buildingTypeToIconPath(RESOURCE_BUILDING_TYPES type) {
   switch (type) {
     case RESOURCE_BUILDING_TYPES.FIELD: return 'images/resource_buildings/field_64.png';
     case RESOURCE_BUILDING_TYPES.MILL: return 'images/resource_buildings/mill_64.png';
-    case RESOURCE_BUILDING_TYPES.SMITH: return 'images/resource_buildings/kurin_64.png';
+    case RESOURCE_BUILDING_TYPES.SMITH: return 'images/resource_buildings/mill_64.png';
     case RESOURCE_BUILDING_TYPES.QUARRY: return 'images/resource_buildings/quarry_64.png';
     case RESOURCE_BUILDING_TYPES.STABLES: return 'images/resource_buildings/stable_64.png';
     case RESOURCE_BUILDING_TYPES.IRON_MINE: return 'images/resource_buildings/iron_mine_64.png';
@@ -75,7 +79,7 @@ String buildingTypeToImagePath(RESOURCE_BUILDING_TYPES type) {
   switch (type) {
     case RESOURCE_BUILDING_TYPES.FIELD: return 'images/resource_buildings/field.png';
     case RESOURCE_BUILDING_TYPES.MILL: return 'images/resource_buildings/mill.png';
-    case RESOURCE_BUILDING_TYPES.SMITH: return 'images/resource_buildings/kurin.png';
+    case RESOURCE_BUILDING_TYPES.SMITH: return 'images/resource_buildings/mill.png';
     case RESOURCE_BUILDING_TYPES.QUARRY: return 'images/resource_buildings/quarry.png';
     case RESOURCE_BUILDING_TYPES.STABLES: return 'images/resource_buildings/stable.png';
     case RESOURCE_BUILDING_TYPES.IRON_MINE: return 'images/resource_buildings/iron_mine.png';

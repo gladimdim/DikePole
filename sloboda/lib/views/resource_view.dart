@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:sloboda/components/divider.dart';
 import 'package:sloboda/components/title_text.dart';
 import 'package:sloboda/models/buildings/resource_buildings/resource_building.dart';
 import 'package:sloboda/models/resources/resource.dart';
@@ -17,9 +18,11 @@ class ResourceDetailsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Theme.of(context).backgroundColor,
       appBar: AppBar(
+        backgroundColor: Theme.of(context).backgroundColor,
         title: TitleText(
-          SlobodaLocalizations.getForKey(resourceTypesToString(type)),
+          localizedResourceByType(type),
         ),
       ),
       body: ResourceDetailsView(type: type),
@@ -67,13 +70,9 @@ class ResourceDetailsView extends StatelessWidget {
                     ),
                   ),
                 ),
-                SizedBox(
-                  height: 15,
-                ),
+                VDivider(),
                 SoftContainer(child: Text('Some description')),
-                SizedBox(
-                  height: 5,
-                ),
+                VDivider(),
                 if (requiredProd.isNotEmpty) ...[
                   Center(
                     child: Text(SlobodaLocalizations.requiredForProductionBy),
@@ -99,12 +98,10 @@ class ResourceDetailsView extends StatelessWidget {
                               ))
                           .toList(),
                     ),
-                  )
+                  ),
                 ],
-                SizedBox(
-                  height: 35,
-                ),
                 if (requiredToBuild.isNotEmpty) ...[
+                  VDivider(),
                   Center(
                     child: Text(SlobodaLocalizations.requiredToBuildBy),
                   ),
@@ -193,28 +190,31 @@ class ResourceImageView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () {
-        Navigator.pushNamed(
-          context,
-          ResourceDetailsScreen.routeName,
-          arguments: ResourceDetailsScreenArguments(
-            type: type,
-          ),
-        );
-      },
-      child: Row(
-        children: <Widget>[
-          Image.asset(
-            '${resourceTypesToIconPath(type)}',
-            height: 32,
-          ),
-          if (amount != null)
-            Text(
-              ' $amount',
-              style: Theme.of(context).textTheme.bodyText2,
+    return Tooltip(
+      message: localizedResourceByType(type),
+      child: InkWell(
+        onTap: () {
+          Navigator.pushNamed(
+            context,
+            ResourceDetailsScreen.routeName,
+            arguments: ResourceDetailsScreenArguments(
+              type: type,
             ),
-        ],
+          );
+        },
+        child: Row(
+          children: <Widget>[
+            Image.asset(
+              '${resourceTypesToIconPath(type)}',
+              height: 32,
+            ),
+            if (amount != null)
+              Text(
+                ' $amount',
+                style: Theme.of(context).textTheme.bodyText2,
+              ),
+          ],
+        ),
       ),
     );
   }

@@ -1,3 +1,5 @@
+import 'package:sloboda/models/sloboda_localizations.dart';
+
 class Resource {
   int quantity = 1;
   int name;
@@ -47,7 +49,7 @@ enum RESOURCE_TYPES {
   IRON_ORE
 }
 
-String resourceTypesToString(RESOURCE_TYPES type) {
+String resourceTypesToKey(RESOURCE_TYPES type) {
   switch (type) {
     case RESOURCE_TYPES.FOOD:
       return 'resources.food';
@@ -74,6 +76,10 @@ String resourceTypesToString(RESOURCE_TYPES type) {
   }
 }
 
+String localizedResourceByType(RESOURCE_TYPES type) {
+  return SlobodaLocalizations.getForKey(resourceTypesToKey(type));
+}
+
 String resourceTypesToIconPath(RESOURCE_TYPES type) {
   switch (type) {
     case RESOURCE_TYPES.FOOD:
@@ -96,8 +102,8 @@ String resourceTypesToIconPath(RESOURCE_TYPES type) {
       return 'images/resources/iron_ore_64.png';
     case RESOURCE_TYPES.FISH:
       return 'images/resources/fish_64.png';
-    default: throw 'Resource $type is not recognized';
-
+    default:
+      throw 'Resource $type is not recognized';
   }
 }
 
@@ -123,7 +129,7 @@ String resourceTypesToImagePath(RESOURCE_TYPES type) {
       return 'images/resources/iron_ore.png';
     case RESOURCE_TYPES.FISH:
       return 'images/resources/fish.png';
-    default: throw 'Resource $type is not recognized';
-
+    default:
+      throw 'Resource $type is not recognized';
   }
 }

@@ -21,10 +21,10 @@ class BuiltBuildingListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SoftContainer(
-      child: SlideableButton(
-        child: Container(
-          height: 64,
+    return SlideableButton(
+      child: Container(
+        height: 64,
+        child: SoftContainer(
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Row(
@@ -57,8 +57,8 @@ class BuiltBuildingListView extends StatelessWidget {
             ),
           ),
         ),
-        onPress: onPress,
       ),
+      onPress: onPress,
     );
   }
 }

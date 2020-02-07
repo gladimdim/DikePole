@@ -11,21 +11,24 @@ class ResourceBuildingImageView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: SoftContainer(
-        child: InkWell(
-          onTap: () {
-            Navigator.pushNamed(
-              context,
-              ResourceBuildingDetailsScreen.routeName,
-              arguments: ResourceBuildingDetailsScreenArguments(
-                type: type,
-              ),
-            );
-          },
-          child: Image.asset(
-            '${buildingTypeToIconPath(type)}',
-            height: 64,
+    return Tooltip(
+      message: localizedBuildingTypeName(type),
+      child: Container(
+        child: SoftContainer(
+          child: InkWell(
+            onTap: () {
+              Navigator.pushNamed(
+                context,
+                ResourceBuildingDetailsScreen.routeName,
+                arguments: ResourceBuildingDetailsScreenArguments(
+                  type: type,
+                ),
+              );
+            },
+            child: Image.asset(
+              '${buildingTypeToIconPath(type)}',
+              height: 64,
+            ),
           ),
         ),
       ),
@@ -49,7 +52,8 @@ class ResourceBuildingDetailsScreen extends StatelessWidget {
         ),
       ),
       appBar: AppBar(
-        title: TitleText(buildingTypeToString(type)),
+        backgroundColor: Theme.of(context).backgroundColor,
+        title: TitleText(localizedBuildingTypeName(type)),
       ),
     );
   }
