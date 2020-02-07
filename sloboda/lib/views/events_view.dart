@@ -12,36 +12,39 @@ class EventsView extends StatelessWidget {
 
 
   Widget build(BuildContext context) {
-    return ListView.separated(
-      itemCount: events.length,
-      separatorBuilder: (context, index) {
-        return VDivider();
-      },
-      itemBuilder: (context, index) {
-        final event = events[events.length - 1 - index];
-        return SoftContainer(
-          child: Column(
-            children: <Widget>[
-              TitleText(
-                  '${SlobodaLocalizations.getForKey(citySeasonToString(event.season))} ${event.yearHappened}'),
-              if (event.messages.isNotEmpty)
-                Column(
-                  children: event.messages
-                      .map((m) => Text(
-                            m,
-                            style: Theme.of(context).textTheme.bodyText2,
-                          ))
-                      .toList(),
-                ),
-              if (event.messages.isEmpty)
-                Text(
-                  SlobodaLocalizations.nothingHappened,
-                  style: Theme.of(context).textTheme.bodyText2,
-                ),
-            ],
-          ),
-        );
-      },
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: ListView.separated(
+        itemCount: events.length,
+        separatorBuilder: (context, index) {
+          return VDivider();
+        },
+        itemBuilder: (context, index) {
+          final event = events[events.length - 1 - index];
+          return SoftContainer(
+            child: Column(
+              children: <Widget>[
+                TitleText(
+                    '${SlobodaLocalizations.getForKey(citySeasonToString(event.season))} ${event.yearHappened}'),
+                if (event.messages.isNotEmpty)
+                  Column(
+                    children: event.messages
+                        .map((m) => Text(
+                              m,
+                              style: Theme.of(context).textTheme.bodyText2,
+                            ))
+                        .toList(),
+                  ),
+                if (event.messages.isEmpty)
+                  Text(
+                    SlobodaLocalizations.nothingHappened,
+                    style: Theme.of(context).textTheme.bodyText2,
+                  ),
+              ],
+            ),
+          );
+        },
+      ),
     );
   }
 }

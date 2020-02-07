@@ -58,7 +58,7 @@ class Producable {
 
   void generate(Stock stock) {
     if (!hasWorkers()) {
-      throw NoWorkersAssignedException('${toString()} has no assigned workers.');
+      throw NoWorkersAssignedException('${toLocalizedString()} has no assigned workers.');
     }
 
     if (requires.entries.length > 0) {
