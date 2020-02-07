@@ -6,6 +6,7 @@ import 'package:sloboda/models/citizen.dart';
 import 'package:sloboda/models/city_event.dart';
 import 'package:sloboda/models/resources/resource.dart';
 import 'package:sloboda/models/buildings/city_buildings/city_building.dart';
+import 'package:sloboda/models/sloboda_localizations.dart';
 import 'package:sloboda/models/stock.dart';
 import 'package:rxdart/rxdart.dart';
 
@@ -88,17 +89,17 @@ class Sloboda {
 
   bool canBuildResourceBuilding(Buildable b) {
     var required = b.requiredToBuild;
-    var missing = [];
+    Map<String, int> missing = {};
     required.entries.forEach((r) {
       if (r.value > stock.getByType(r.key)) {
-        missing.add({r.key: r.value - stock.getByType(r.key)});
+        missing[resourceTypesToKey(r.key)] = r.value - stock.getByType(r.key);
       }
     });
 
     if (missing.isEmpty) {
       return true;
     } else {
-      throw missing;
+      throw MissingResources(missing);
     }
   }
 
@@ -253,5 +254,18 @@ class Sloboda {
 
   void dispose() {
     _innerChanges.close();
+  }
+}
+
+class MissingResources implements Exception {
+  final Map<String, int> causes;
+
+  MissingResources(this.causes);
+
+
+  String toLocalizedString() {
+    return causes.entries.map((c) {
+      return '${SlobodaLocalizations.getForKey(c.key)}: ${c.value}';
+    }).toList().toString();
   }
 }

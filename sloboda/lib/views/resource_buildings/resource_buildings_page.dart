@@ -68,7 +68,8 @@ class _ResourceBuildingsPageState extends State<ResourceBuildingsPage> {
                         try {
                           city.buildBuilding(ResourceBuilding.fromType(value));
                         } catch (e) {
-                          print('Cannot build. Missing: $e');
+                          final snackBar = SnackBar(content: Text('Cannot build. Missing: ${e.toLocalizedString()}'));
+                          Scaffold.of(context).showSnackBar(snackBar);
                         }
                       }),
                   onTap: () {

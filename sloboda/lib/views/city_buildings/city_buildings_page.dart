@@ -63,7 +63,8 @@ class _CityBuildingsPageState extends State<CityBuildingsPage> {
                         try {
                           city.buildBuilding(CityBuilding.fromType(v));
                         } catch (e) {
-                          print('Cannot build. Missing: $e');
+                          final snackBar = SnackBar(content: Text('Cannot build. Missing: ${e.toLocalizedString()}'));
+                          Scaffold.of(context).showSnackBar(snackBar);
                         }
                       },
                     ),
