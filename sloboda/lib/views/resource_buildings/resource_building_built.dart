@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sloboda/animations/slideable_button.dart';
+import 'package:sloboda/components/button_text.dart';
 import 'package:sloboda/components/title_text.dart';
 import 'package:sloboda/inherited_city.dart';
 import 'package:sloboda/models/buildings/resource_buildings/resource_building.dart';
@@ -109,7 +110,8 @@ class _ResourceBuildingBuiltState extends State<ResourceBuildingBuilt> {
                     child: Padding(
                       padding: const EdgeInsets.all(16.0),
                       child: Column(children: [
-                        Center(child: Text(SlobodaLocalizations.assignedWorkers)),
+                        Center(
+                            child: Text(SlobodaLocalizations.assignedWorkers)),
                         ...building.assignedHumans.map(
                           (h) {
                             return Padding(
@@ -170,8 +172,8 @@ class _ResourceBuildingBuiltState extends State<ResourceBuildingBuilt> {
                   child: SoftContainer(
                     child: SlideableButton(
                       child: Center(
-                          child: TitleText(
-                        'Destroy building',
+                          child: ButtonText(
+                        SlobodaLocalizations.destroyBuilding,
                       )),
                       onPress: () {
                         city.removeResourceBuilding(building);

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:async/async.dart';
 import 'package:flutter/rendering.dart';
 import 'package:sloboda/animations/slideable_button.dart';
+import 'package:sloboda/components/button_text.dart';
 import 'package:sloboda/components/divider.dart';
 import 'package:sloboda/components/title_text.dart';
 import 'package:sloboda/inherited_city.dart';
@@ -94,9 +95,10 @@ class _CityGameState extends State<CityGame> {
                     ),
                   ),
                   drawer: Drawer(
-                    child: SingleChildScrollView(
-                      child: Container(
-                        color: Theme.of(context).backgroundColor,
+                    child: Container(
+                      height: MediaQuery.of(context).size.height,
+                      color: Theme.of(context).backgroundColor,
+                      child: SingleChildScrollView(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.stretch,
                           children: <Widget>[
@@ -109,12 +111,31 @@ class _CityGameState extends State<CityGame> {
                                 });
                               },
                             ),
-                            VDivider(),
-                            StockFullView(
-                              stock: city.stock,
-                              stockSimulation: city.simulateStock(),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: SoftContainer(
+                                child: StockFullView(
+                                  stock: city.stock,
+                                  stockSimulation: city.simulateStock(),
+                                ),
+                              ),
                             ),
-                            VDivider(),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: SoftContainer(
+                                child: SlideableButton(
+                                  direction: Direction.Left,
+                                  child: Center(
+                                    child: ButtonText(
+                                      SlobodaLocalizations.makeTurn,
+                                    ),
+                                  ),
+                                  onPress: () {
+                                    city.makeTurn();
+                                  },
+                                ),
+                              ),
+                            ),
                             Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: SoftContainer(
@@ -124,11 +145,10 @@ class _CityGameState extends State<CityGame> {
                                     _goToPage(1);
                                   },
                                   child:
-                                      Center(child: TitleText(_pageTitles()[1])),
+                                      Center(child: ButtonText(_pageTitles()[1])),
                                 ),
                               ),
                             ),
-                            VDivider(),
                             Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: SoftContainer(
@@ -138,11 +158,10 @@ class _CityGameState extends State<CityGame> {
                                     _goToPage(2);
                                   },
                                   child:
-                                      Center(child: TitleText(_pageTitles()[2])),
+                                      Center(child: ButtonText(_pageTitles()[2])),
                                 ),
                               ),
                             ),
-                            VDivider(),
                             Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: SoftContainer(
@@ -152,7 +171,7 @@ class _CityGameState extends State<CityGame> {
                                     _goToPage(3);
                                   },
                                   child:
-                                      Center(child: TitleText(_pageTitles()[3])),
+                                      Center(child: ButtonText(_pageTitles()[3])),
                                 ),
                               ),
                             ),
@@ -165,46 +184,52 @@ class _CityGameState extends State<CityGame> {
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: <Widget>[
                       Expanded(
-                        flex: 2,
+                        flex: 1,
                         child: PageView.builder(
                           physics: NeverScrollableScrollPhysics(),
                           controller: _topPageController,
                           itemCount: _pageTitles().length,
                           itemBuilder: (context, index) {
-                            return Center(
-                              child: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: SoftContainer(
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: <Widget>[
-                                        if (index != 0)
-                                          SoftContainer(
-                                            child: IconButton(
-                                              icon: ArrowLeft(),
-                                              onPressed: () {
-                                                _goToPage(index - 1);
-                                              },
+                            return Container(
+                              height: 64,
+                              child: Center(
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: SoftContainer(
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: <Widget>[
+                                          if (index != 0)
+                                            Expanded(
+                                              flex: 1,
+                                              child: SoftContainer(
+                                                child: IconButton(
+                                                  icon: ArrowLeft(),
+                                                  onPressed: () {
+                                                    _goToPage(index - 1);
+                                                  },
+                                                ),
+                                              ),
+                                            ),
+                                          HDivider(),
+                                          Expanded(
+                                            flex: 4,
+                                            child: TitleText(
+                                              index == 1
+                                                  ? '${SlobodaLocalizations.getForKey(citySeasonToString(city.currentSeason))} ${city.currentYear}'
+                                                  : _pageTitles()[index],
                                             ),
                                           ),
-                                        if (index == 0) HDivider(),
-                                        TitleText(
-                                          index == 1
-                                              ? '${SlobodaLocalizations.getForKey(citySeasonToString(city.currentSeason))} ${city.currentYear}'
-                                              : _pageTitles()[index],
-                                        ),
-                                        SlideableButton(
-                                          onPress: () {
-                                            city.makeTurn();
-                                          },
-                                          child: Container(
-                                            height: 64,
+                                          Expanded(
+                                            flex: 2,
                                             child: SoftContainer(
-                                              child: Padding(
-                                                padding: const EdgeInsets.all(8.0),
+                                              child: SlideableButton(
+                                                onPress: () {
+                                                  city.makeTurn();
+                                                },
                                                 child: Center(
                                                   child: TitleText(
                                                     SlobodaLocalizations.makeTurn,
@@ -213,19 +238,23 @@ class _CityGameState extends State<CityGame> {
                                               ),
                                             ),
                                           ),
-                                        ),
-                                        if (index != _pageTitles().length - 1)
-                                          SoftContainer(
-                                            child: IconButton(
-                                              icon: ArrowRight(),
-                                              onPressed: () {
-                                                _goToPage(index + 1);
-                                              },
-                                            ),
-                                          ),
-                                        if (index == _pageTitles().length - 1)
                                           HDivider(),
-                                      ],
+                                          if (index != _pageTitles().length - 1)
+                                            Expanded(
+                                              flex: 1,
+                                              child: SoftContainer(
+                                                child: IconButton(
+                                                  icon: ArrowRight(),
+                                                  onPressed: () {
+                                                    _goToPage(index + 1);
+                                                  },
+                                                ),
+                                              ),
+                                            ),
+                                          if (index == _pageTitles().length - 1)
+                                            HDivider(),
+                                        ],
+                                      ),
                                     ),
                                   ),
                                 ),

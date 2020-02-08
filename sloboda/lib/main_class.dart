@@ -61,18 +61,18 @@ var whiteTheme = ThemeData(
   textTheme: TextTheme(
     bodyText2: TextStyle(
       fontFamily: "Raleway",
-      fontSize: 22,
+      fontSize: 16,
       color: Colors.black,
     ),
     headline6: TextStyle(
       color: Colors.black,
-      fontSize: 30.0,
+      fontSize: 20.0,
       fontWeight: FontWeight.bold,
       fontFamily: 'Roboto',
     ),
     button: TextStyle(
       fontFamily: 'Raleway-Bold',
-      fontSize: 24.0,
+      fontSize: 16.0,
       fontWeight: FontWeight.bold,
       color: Colors.black,
     ),

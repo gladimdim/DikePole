@@ -3,6 +3,7 @@ import 'package:sloboda/animations/slideable_button.dart';
 import 'package:sloboda/components/title_text.dart';
 import 'package:sloboda/models/buildings/city_buildings/city_building.dart';
 import 'package:sloboda/models/sloboda.dart';
+import 'package:sloboda/models/sloboda_localizations.dart';
 import 'package:sloboda/views/city_buildings/city_building_output_view.dart';
 import 'package:sloboda/views/components/built_building_listview.dart';
 import 'package:sloboda/views/components/soft_container.dart';
@@ -15,7 +16,7 @@ class CityBuildingBuiltListItemView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BuiltBuildingListView(
-      title: cityBuildingTypeToString(building.type),
+      title: localizedCityBuildingByType(building.type),
       buildingIconPath: cityTypeToIconPath(building.type),
       producesIconPath: cityPropertiesToIconPath(building.produces),
       amount: 1,
@@ -42,7 +43,7 @@ class _ResourceBuildingBuiltState extends State<CityBuildingBuilt> {
     return Scaffold(
       appBar: AppBar(
         title: TitleText(
-          cityBuildingTypeToString(building.type),
+          localizedCityBuildingByType(building.type),
         ),
       ),
       body: SingleChildScrollView(
@@ -85,7 +86,7 @@ class _ResourceBuildingBuiltState extends State<CityBuildingBuilt> {
                       child: SlideableButton(
                         child: Center(
                             child: TitleText(
-                          'Destroy building',
+                          SlobodaLocalizations.destroyBuilding,
                         )),
                         onPress: () {
                           city.removeCityBuilding(building);

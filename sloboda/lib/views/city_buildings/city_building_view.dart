@@ -44,7 +44,7 @@ class CityBuildingDetailsScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: TitleText(
-          cityBuildingTypeToString(type),
+          localizedCityBuildingByType(type),
         ),
       ),
       body: SingleChildScrollView(

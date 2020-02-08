@@ -32,6 +32,25 @@ class InternalLocalizations {
   }
 }
 
+class CityBuildingLocalizations extends InternalLocalizations {
+  Map<String, Map<String, String>> _localizedMap = {
+    'en': {
+      'house': 'House',
+      'wall': 'Wall',
+      'tower': 'Tower',
+      'watchTower': 'Watch Tower',
+      'church': 'Church',
+    },
+    'uk': {
+      'house': 'Курінь',
+      'wall': 'Частокол',
+      'tower': 'Башта',
+      'watchTower': 'Хфігура',
+      'church': 'Церква',
+    }
+  };
+}
+
 class ResourceLocalizations extends InternalLocalizations {
   Map<String, Map<String, String>> _localizedMap = {
     'en': {
@@ -107,6 +126,8 @@ class SlobodaLocalizations {
 
   static ResourceLocalizations resourceLocalizations = ResourceLocalizations();
 
+  static CityBuildingLocalizations cityBuildingLocalizations = CityBuildingLocalizations();
+
   static NatureResourceBuildingsLocalizations natureResourceLocalizations = NatureResourceBuildingsLocalizations();
 
   static Locale locale = Locale(getDefaultOrUrlLanguage());
@@ -120,6 +141,7 @@ class SlobodaLocalizations {
         case 'resources':
           return resourceLocalizations[split[1]];
         case 'natureResources': return natureResourceLocalizations[split[1]];
+        case 'cityBuildings': return cityBuildingLocalizations[split[1]];
         default:
           return key;
       }
@@ -149,6 +171,7 @@ class SlobodaLocalizations {
       'autumn': 'Autumn',
       'nothingHappened': 'Nothing happened',
       'assignedWorkers': 'Assigned workers',
+      'destroyBuilding': 'Destroy Building',
     },
     'uk': {
       'overview': 'Головна',
@@ -169,7 +192,8 @@ class SlobodaLocalizations {
       'spring': 'Весна',
       'autumn': 'Осінь',
       'nothingHappened': 'Нічого не відбулося',
-      'assignedWorkers': 'Працівники'
+      'assignedWorkers': 'Працівники',
+      'destroyBuilding': 'Зруйнувати будівлю',
     }
   };
 
@@ -241,5 +265,10 @@ class SlobodaLocalizations {
   static String get assignedWorkers {
     return _localizedValues[SlobodaLocalizations.locale.languageCode]
     ['assignedWorkers'];
+  }
+
+  static String get destroyBuilding {
+    return _localizedValues[SlobodaLocalizations.locale.languageCode]
+    ['destroyBuilding'];
   }
 }

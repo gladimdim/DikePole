@@ -37,7 +37,7 @@ class _CityBuildingMetaViewState extends State<CityBuildingMetaView> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     Text(
-                      '${cityBuildingTypeToString(widget.type)}',
+                      '${localizedCityBuildingByType(widget.type)}',
                       style: Theme.of(context)
                           .textTheme
                           .headline6

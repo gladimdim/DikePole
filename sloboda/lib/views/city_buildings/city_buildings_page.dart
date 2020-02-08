@@ -27,7 +27,7 @@ class _CityBuildingsPageState extends State<CityBuildingsPage> {
               return Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: BuiltBuildingListView(
-                  title: cityBuildingTypeToString(cb.type),
+                  title: localizedCityBuildingByType(cb.type),
                   buildingIconPath: cityTypeToIconPath(cb.type),
                   producesIconPath: cityPropertiesToIconPath(cb.produces),
                   amount: 1,

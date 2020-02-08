@@ -5,6 +5,7 @@ import 'package:sloboda/models/buildings/city_buildings/tower.dart';
 import 'package:sloboda/models/buildings/city_buildings/wall.dart';
 import 'package:sloboda/models/buildings/city_buildings/watch_tower.dart';
 import 'package:sloboda/models/resources/resource.dart';
+import 'package:sloboda/models/sloboda_localizations.dart';
 
 abstract class CityBuilding implements Buildable<RESOURCE_TYPES> {
   CITY_BUILDING_TYPES type;
@@ -37,17 +38,6 @@ abstract class CityBuilding implements Buildable<RESOURCE_TYPES> {
 
 enum CITY_BUILDING_TYPES { HOUSE, CHURCH, TOWER, WATCH_TOWER, WALL }
 
-String cityTypeToString (CITY_BUILDING_TYPES type) {
-  switch (type) {
-    case CITY_BUILDING_TYPES.WALL: return 'Wall';
-    case CITY_BUILDING_TYPES.CHURCH: return 'Church';
-    case CITY_BUILDING_TYPES.HOUSE: return 'House';
-    case CITY_BUILDING_TYPES.TOWER: return 'Tower';
-    case CITY_BUILDING_TYPES.WATCH_TOWER: return 'Watch Tower';
-    default: throw 'Building $type is not recognized';
-  }
-}
-
 enum CITY_PROPERTIES { FAITH, DEFENSE, GLORY, CITIZENS }
 
 String cityPropertiesToString(CITY_PROPERTIES prop) {
@@ -78,20 +68,26 @@ String cityPropertiesToIconPath(CITY_PROPERTIES prop) {
   }
 }
 
-String cityBuildingTypeToString(CITY_BUILDING_TYPES type) {
+
+
+String cityBuildingTypesToKey(CITY_BUILDING_TYPES type) {
   switch (type) {
     case CITY_BUILDING_TYPES.WATCH_TOWER:
-      return 'Watch Tower';
+      return 'cityBuildings.watchTower';
     case CITY_BUILDING_TYPES.TOWER:
-      return 'Tower';
+      return 'cityBuildings.tower';
     case CITY_BUILDING_TYPES.HOUSE:
-      return 'House';
+      return 'cityBuildings.house';
     case CITY_BUILDING_TYPES.CHURCH:
-      return 'Church';
+      return 'cityBuildings.church';
     case CITY_BUILDING_TYPES.WALL:
-      return 'Wall';
+      return 'cityBuildings.wall';
     default: throw 'City building $type is not recognized';
   }
+}
+
+String localizedCityBuildingByType(CITY_BUILDING_TYPES type) {
+  return SlobodaLocalizations.getForKey(cityBuildingTypesToKey(type));
 }
 
 String cityTypeToIconPath(CITY_BUILDING_TYPES type) {
@@ -99,7 +95,7 @@ String cityTypeToIconPath(CITY_BUILDING_TYPES type) {
     case CITY_BUILDING_TYPES.WATCH_TOWER:
       return 'images/city_buildings/watch_tower_64.png';
     case CITY_BUILDING_TYPES.TOWER:
-      return 'images/city_buildings/kurin_64.png';
+      return 'images/city_buildings/watch_tower_64.png';
     case CITY_BUILDING_TYPES.HOUSE:
       return 'images/city_buildings/kurin_64.png';
     case CITY_BUILDING_TYPES.WALL:
@@ -115,7 +111,7 @@ String cityTypeToImagePath(CITY_BUILDING_TYPES type) {
     case CITY_BUILDING_TYPES.WATCH_TOWER:
       return 'images/city_buildings/watch_tower.png';
     case CITY_BUILDING_TYPES.TOWER:
-      return 'images/city_buildings/kurin.png';
+      return 'images/city_buildings/watch_tower.png';
     case CITY_BUILDING_TYPES.HOUSE:
       return 'images/city_buildings/kurin.png';
     case CITY_BUILDING_TYPES.WALL:
