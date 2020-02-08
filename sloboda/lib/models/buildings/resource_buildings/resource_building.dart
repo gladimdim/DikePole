@@ -4,6 +4,7 @@ import 'package:sloboda/models/buildings/resource_buildings/field.dart';
 import 'package:sloboda/models/buildings/resource_buildings/hunting_house.dart';
 import 'package:sloboda/models/buildings/resource_buildings/iron_mine.dart';
 import 'package:sloboda/models/buildings/resource_buildings/mill.dart';
+import 'package:sloboda/models/buildings/resource_buildings/powder_cellar.dart';
 import 'package:sloboda/models/buildings/resource_buildings/quarry.dart';
 import 'package:sloboda/models/buildings/resource_buildings/smith.dart';
 import 'package:sloboda/models/buildings/resource_buildings/stables.dart';
@@ -33,6 +34,8 @@ abstract class ResourceBuilding with Producable implements Buildable<RESOURCE_TY
         return IronMine();
       case RESOURCE_BUILDING_TYPES.TRAPPER_HOUSE:
         return TrapperHouse();
+      case RESOURCE_BUILDING_TYPES.POWDER_CELLAR:
+        return PowderCellar();
       default: throw 'Resource Type not Recognized';
     }
   }
@@ -43,7 +46,7 @@ abstract class ResourceBuilding with Producable implements Buildable<RESOURCE_TY
 
 }
 
-enum RESOURCE_BUILDING_TYPES { SMITH, FIELD, MILL, QUARRY, STABLES, IRON_MINE, TRAPPER_HOUSE }
+enum RESOURCE_BUILDING_TYPES { SMITH, FIELD, MILL, QUARRY, STABLES, IRON_MINE, TRAPPER_HOUSE, POWDER_CELLAR }
 
 String buildingTypeToKey (RESOURCE_BUILDING_TYPES type) {
   switch (type) {
@@ -54,6 +57,7 @@ String buildingTypeToKey (RESOURCE_BUILDING_TYPES type) {
     case RESOURCE_BUILDING_TYPES.STABLES: return 'resourceBuildings.stables';
     case RESOURCE_BUILDING_TYPES.IRON_MINE: return 'resourceBuildings.ironMine';
     case RESOURCE_BUILDING_TYPES.TRAPPER_HOUSE: return'resourceBuildings.trapperCabin';
+    case RESOURCE_BUILDING_TYPES.POWDER_CELLAR: return'resourceBuildings.powderCellar';
     default: throw 'Building $type is not recognized';
   }
 }
@@ -71,6 +75,7 @@ String buildingTypeToIconPath(RESOURCE_BUILDING_TYPES type) {
     case RESOURCE_BUILDING_TYPES.STABLES: return 'images/resource_buildings/stable_64.png';
     case RESOURCE_BUILDING_TYPES.IRON_MINE: return 'images/resource_buildings/iron_mine_64.png';
     case RESOURCE_BUILDING_TYPES.TRAPPER_HOUSE: return 'images/resource_buildings/trappershouse_64.png';
+    case RESOURCE_BUILDING_TYPES.POWDER_CELLAR: return 'images/resource_buildings/powder_cellar_64.png';
     default: throw 'Building $type is not recognized';
   }
 }
@@ -84,6 +89,7 @@ String buildingTypeToImagePath(RESOURCE_BUILDING_TYPES type) {
     case RESOURCE_BUILDING_TYPES.STABLES: return 'images/resource_buildings/stable.png';
     case RESOURCE_BUILDING_TYPES.IRON_MINE: return 'images/resource_buildings/iron_mine.png';
     case RESOURCE_BUILDING_TYPES.TRAPPER_HOUSE: return 'images/resource_buildings/trappershouse.png';
+    case RESOURCE_BUILDING_TYPES.POWDER_CELLAR: return 'images/resource_buildings/powder_cellar.png';
     default: throw 'Building $type is not recognized';
   }
 }
@@ -97,6 +103,8 @@ String getDescriptionForResourceBuildingType(RESOURCE_BUILDING_TYPES type) {
     case RESOURCE_BUILDING_TYPES.STABLES: return 'Worker consumes food to produce Horses. If you want to raid other lands, you must get some horses.';
     case RESOURCE_BUILDING_TYPES.IRON_MINE: return 'Worker consumes food to produce iron. Iron is used to produce firearms. If you want to fight, create few iron mines.';
     case RESOURCE_BUILDING_TYPES.TRAPPER_HOUSE: return 'Hunts animals. Skins them for Fur. Fur can be sold for money at marketplaces.';
+    case RESOURCE_BUILDING_TYPES.POWDER_CELLAR: return 'Produces Gun Powder. Used for makeing guns.';
+
     default: throw 'Building $type is not recognized';
   }
 }

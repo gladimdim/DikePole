@@ -66,13 +66,13 @@ var whiteTheme = ThemeData(
     ),
     headline6: TextStyle(
       color: Colors.black,
-      fontSize: 24.0,
+      fontSize: 30.0,
       fontWeight: FontWeight.bold,
       fontFamily: 'Roboto',
     ),
     button: TextStyle(
       fontFamily: 'Raleway-Bold',
-      fontSize: 30.0,
+      fontSize: 24.0,
       fontWeight: FontWeight.bold,
       color: Colors.black,
     ),

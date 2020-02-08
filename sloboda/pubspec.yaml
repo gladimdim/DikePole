@@ -33,6 +33,7 @@ flutter:
     - images/resource_buildings/trappershouse.png
     - images/resource_buildings/stable.png
     - images/resource_buildings/mill.png
+    - images/resource_buildings/powder_cellar.png
     - images/resource_buildings/iron_mine_64.png
     - images/resource_buildings/field_64.png
     - images/resource_buildings/quarry_64.png
@@ -41,9 +42,10 @@ flutter:
     - images/resource_buildings/trappershouse_64.png
     - images/resource_buildings/stable_64.png
     - images/resource_buildings/mill_64.png
+    - images/resource_buildings/powder_cellar_64.png
     - images/resources/stone.png
     - images/resources/wood.png
-    - images/resources/niter.png
+    - images/resources/powder.png
     - images/resources/food.png
     - images/resources/money.png
     - images/resources/fur.png
@@ -53,7 +55,7 @@ flutter:
     - images/resources/firearm.png
     - images/resources/stone_64.png
     - images/resources/wood_64.png
-    - images/resources/niter_64.png
+    - images/resources/powder_64.png
     - images/resources/food_64.png
     - images/resources/money_64.png
     - images/resources/fur_64.png

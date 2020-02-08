@@ -71,6 +71,7 @@ class ResourceBuildingsLocalizations extends InternalLocalizations {
       'stables': 'Stables',
       'ironMine': 'Iron Mine',
       'trapperCabin': 'Trapper\'s Cabin',
+      'powderCellar': 'Powder Cellar',
     },
     'uk': {
       'mill': 'Млин',
@@ -80,6 +81,7 @@ class ResourceBuildingsLocalizations extends InternalLocalizations {
       'stables': 'Конюшня',
       'ironMine': 'Рудня',
       'trapperCabin': 'Хата уходника',
+      'powderCellar': 'Пороховий льох'
     }
   };
 }

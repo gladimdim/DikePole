@@ -91,7 +91,7 @@ String resourceTypesToIconPath(RESOURCE_TYPES type) {
     case RESOURCE_TYPES.STONE:
       return 'images/resources/stone_64.png';
     case RESOURCE_TYPES.POWDER:
-      return 'images/resources/niter_64.png';
+      return 'images/resources/powder.png';
     case RESOURCE_TYPES.FUR:
       return 'images/resources/fur_64.png';
     case RESOURCE_TYPES.FIREARM:
@@ -118,7 +118,7 @@ String resourceTypesToImagePath(RESOURCE_TYPES type) {
     case RESOURCE_TYPES.STONE:
       return 'images/resources/stone.png';
     case RESOURCE_TYPES.POWDER:
-      return 'images/resources/niter.png';
+      return 'images/resources/powder.png';
     case RESOURCE_TYPES.FUR:
       return 'images/resources/fur.png';
     case RESOURCE_TYPES.FIREARM:

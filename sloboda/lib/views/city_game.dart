@@ -159,7 +159,7 @@ class _CityGameState extends State<CityGame> {
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: <Widget>[
                       Expanded(
-                        flex: 1,
+                        flex: 2,
                         child: PageView.builder(
                           physics: NeverScrollableScrollPhysics(),
                           controller: _topPageController,
