@@ -5,6 +5,7 @@ import 'package:sloboda/inherited_city.dart';
 import 'package:sloboda/models/buildings/resource_buildings/resource_building.dart';
 import 'package:sloboda/models/resources/resource.dart';
 import 'package:sloboda/models/sloboda.dart';
+import 'package:sloboda/models/sloboda_localizations.dart';
 import 'package:sloboda/views/components/built_building_listview.dart';
 import 'package:sloboda/views/components/resource_building_input_view.dart';
 import 'package:sloboda/views/components/resource_building_output_view.dart';
@@ -108,7 +109,7 @@ class _ResourceBuildingBuiltState extends State<ResourceBuildingBuilt> {
                     child: Padding(
                       padding: const EdgeInsets.all(16.0),
                       child: Column(children: [
-                        Center(child: Text('Assigned workers')),
+                        Center(child: Text(SlobodaLocalizations.assignedWorkers)),
                         ...building.assignedHumans.map(
                           (h) {
                             return Padding(

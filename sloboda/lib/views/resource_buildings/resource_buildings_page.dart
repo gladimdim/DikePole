@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:sloboda/components/divider.dart';
 import 'package:sloboda/inherited_city.dart';
 import 'package:sloboda/models/buildings/resource_buildings/resource_building.dart';
 import 'package:sloboda/models/resources/resource.dart';
@@ -43,9 +44,7 @@ class _ResourceBuildingsPageState extends State<ResourceBuildingsPage> {
                 ),
               );
             }).toList(),
-            SizedBox(
-              height: 32,
-            ),
+            VDivider(),
             ...city.resourceBuildings
                 .map<Widget>(
                   (building) => Padding(

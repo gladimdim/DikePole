@@ -33,11 +33,11 @@ class _CityGameState extends State<CityGame> {
   PageController _topPageController;
   PageController _mainPageController;
   GenerateTitles _pageTitles = () => [
-    SlobodaLocalizations.events,
-    SlobodaLocalizations.overview,
-    SlobodaLocalizations.resourceBuildings,
-    SlobodaLocalizations.cityBuildings,
-  ];
+        SlobodaLocalizations.events,
+        SlobodaLocalizations.overview,
+        SlobodaLocalizations.resourceBuildings,
+        SlobodaLocalizations.cityBuildings,
+      ];
 
   final AsyncMemoizer _appPreferencesInitter = AsyncMemoizer();
 
@@ -85,6 +85,7 @@ class _CityGameState extends State<CityGame> {
             builder: (context, snapshot) {
               if (snapshot.hasData) {
                 return Scaffold(
+                  backgroundColor: Theme.of(context).backgroundColor,
                   appBar: AppBar(
                     backgroundColor: Theme.of(context).backgroundColor,
                     title: StockMiniView(
@@ -93,65 +94,70 @@ class _CityGameState extends State<CityGame> {
                     ),
                   ),
                   drawer: Drawer(
-                    child: Container(
-                      color: Theme.of(context).backgroundColor,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: <Widget>[
-                          VDivider(),
-                          LocaleSelection(
-                            locale: SlobodaLocalizations.locale,
-                            onLocaleChanged: (Locale locale) {
-                              setState(() {
-                                SlobodaLocalizations.locale = locale;
-                              });
-                            },
-                          ),
-                          VDivider(),
-                          StockFullView(
-                            stock: city.stock,
-                            stockSimulation: city.simulateStock(),
-                          ),
-                          VDivider(),
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: SoftContainer(
-                              child: SlideableButton(
-                                direction: Direction.Left,
-                                onPress: () {
-                                  _goToPage(1);
-                                },
-                                child: Center(child: TitleText(_pageTitles()[1])),
+                    child: SingleChildScrollView(
+                      child: Container(
+                        color: Theme.of(context).backgroundColor,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          children: <Widget>[
+                            VDivider(),
+                            LocaleSelection(
+                              locale: SlobodaLocalizations.locale,
+                              onLocaleChanged: (Locale locale) {
+                                setState(() {
+                                  SlobodaLocalizations.locale = locale;
+                                });
+                              },
+                            ),
+                            VDivider(),
+                            StockFullView(
+                              stock: city.stock,
+                              stockSimulation: city.simulateStock(),
+                            ),
+                            VDivider(),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: SoftContainer(
+                                child: SlideableButton(
+                                  direction: Direction.Left,
+                                  onPress: () {
+                                    _goToPage(1);
+                                  },
+                                  child:
+                                      Center(child: TitleText(_pageTitles()[1])),
+                                ),
                               ),
                             ),
-                          ),
-                          VDivider(),
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: SoftContainer(
-                              child: SlideableButton(
-                                direction: Direction.Left,
-                                onPress: () {
-                                  _goToPage(2);
-                                },
-                                child: Center(child: TitleText(_pageTitles()[2])),
+                            VDivider(),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: SoftContainer(
+                                child: SlideableButton(
+                                  direction: Direction.Left,
+                                  onPress: () {
+                                    _goToPage(2);
+                                  },
+                                  child:
+                                      Center(child: TitleText(_pageTitles()[2])),
+                                ),
                               ),
                             ),
-                          ),
-                          VDivider(),
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: SoftContainer(
-                              child: SlideableButton(
-                                direction: Direction.Left,
-                                onPress: () {
-                                  _goToPage(3);
-                                },
-                                child: Center(child: TitleText(_pageTitles()[3])),
+                            VDivider(),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: SoftContainer(
+                                child: SlideableButton(
+                                  direction: Direction.Left,
+                                  onPress: () {
+                                    _goToPage(3);
+                                  },
+                                  child:
+                                      Center(child: TitleText(_pageTitles()[3])),
+                                ),
                               ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
                   ),
@@ -189,6 +195,24 @@ class _CityGameState extends State<CityGame> {
                                           index == 1
                                               ? '${SlobodaLocalizations.getForKey(citySeasonToString(city.currentSeason))} ${city.currentYear}'
                                               : _pageTitles()[index],
+                                        ),
+                                        SlideableButton(
+                                          onPress: () {
+                                            city.makeTurn();
+                                          },
+                                          child: Container(
+                                            height: 64,
+                                            child: SoftContainer(
+                                              child: Padding(
+                                                padding: const EdgeInsets.all(8.0),
+                                                child: Center(
+                                                  child: TitleText(
+                                                    SlobodaLocalizations.makeTurn,
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                          ),
                                         ),
                                         if (index != _pageTitles().length - 1)
                                           SoftContainer(

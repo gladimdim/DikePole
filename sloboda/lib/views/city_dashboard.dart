@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:sloboda/animations/slideable_button.dart';
 import 'package:sloboda/components/title_text.dart';
 import 'package:sloboda/models/buildings/city_buildings/city_building.dart';
 import 'package:sloboda/models/sloboda.dart';
@@ -26,29 +25,7 @@ class _CityDashboardState extends State<CityDashboard> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
-            SoftContainer(
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: SlideableButton(
-                  onPress: () {
-                    widget.city.makeTurn();
-                  },
-                  child: Container(
-                    height: 64,
-                    child: SoftContainer(
-                      child: Center(
-                        child: TitleText(
-                          SlobodaLocalizations.makeTurn,
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-            ),
-            SizedBox(
-              height: 20,
-            ),
+
             SoftContainer(
               child: StockFullView(
                 stock: widget.city.stock,

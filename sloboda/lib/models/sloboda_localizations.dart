@@ -140,7 +140,7 @@ class SlobodaLocalizations {
       'output': 'Output',
       'input': 'Input',
       'build': 'Build',
-      'makeTurn': 'Make Turn',
+      'makeTurn': 'Turn',
       'maxNumberOfWorkers': 'Max number of workers',
       'notOccupiedCitizens': 'Free citizens',
       'summer': 'Summer',
@@ -148,6 +148,7 @@ class SlobodaLocalizations {
       'spring': 'Spring',
       'autumn': 'Autumn',
       'nothingHappened': 'Nothing happened',
+      'assignedWorkers': 'Assigned workers',
     },
     'uk': {
       'overview': 'Головна',
@@ -160,7 +161,7 @@ class SlobodaLocalizations {
       'output': 'Виробляє',
       'input': 'Потребує',
       'build': 'Побудувати',
-      'makeTurn': 'Закінчити сезон',
+      'makeTurn': 'Хід',
       'maxNumberOfWorkers': 'Вміщує робочих',
       'notOccupiedCitizens': 'Вільні робочі',
       'summer': 'Літо',
@@ -168,6 +169,7 @@ class SlobodaLocalizations {
       'spring': 'Весна',
       'autumn': 'Осінь',
       'nothingHappened': 'Нічого не відбулося',
+      'assignedWorkers': 'Працівники'
     }
   };
 
@@ -234,5 +236,10 @@ class SlobodaLocalizations {
   static String get nothingHappened {
     return _localizedValues[SlobodaLocalizations.locale.languageCode]
         ['nothingHappened'];
+  }
+
+  static String get assignedWorkers {
+    return _localizedValues[SlobodaLocalizations.locale.languageCode]
+    ['assignedWorkers'];
   }
 }
