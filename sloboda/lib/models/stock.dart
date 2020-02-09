@@ -50,4 +50,14 @@ class Stock {
       RESOURCE_TYPES.FISH: 0,
     });
   }
+
+  operator +(Stock aStock) {
+    if (aStock != null) {
+      this._stock.forEach((key, _) {
+        if (aStock.getByType(key) != null) {
+          this.addToType(key, aStock.getByType(key));
+        }
+      });
+    }
+  }
 }

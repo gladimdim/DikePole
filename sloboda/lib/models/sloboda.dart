@@ -132,7 +132,18 @@ class Sloboda {
 
   void _runAttachedEvents() {
     for (var _event in _nextRandomEvents) {
-      _event();
+      RandomEventMessage event = _event();
+      this.stock + event.stock;
+      events.add(
+        CityEvent(
+          messages: [
+            SlobodaLocalizations.getForKey(event.messageKey),
+          ],
+          stock: event.stock,
+          season: currentSeason,
+          yearHappened: currentYear,
+        ),
+      );
     }
 
     _nextRandomEvents.clear();
@@ -154,12 +165,13 @@ class Sloboda {
     });
 
     _innerChanges.add(this);
-    final currentCityEvent = CityEvent(
-      messages: exceptions,
-      yearHappened: currentYear,
-      season: currentSeason,
+    events.add(
+      CityEvent(
+        messages: exceptions,
+        yearHappened: currentYear,
+        season: currentSeason,
+      ),
     );
-    events.add(currentCityEvent);
 
     cityBuildings.forEach((cb) {
       Map<CITY_PROPERTIES, int> generated = cb.generate();
@@ -180,13 +192,31 @@ class Sloboda {
 
       for (var event in _events) {
         if (event != null) {
-          currentCityEvent.messages
-              .add(SlobodaLocalizations.getForKey(event.localizedKey));
+          events.add(
+            CityEvent(
+              messages: [
+                SlobodaLocalizations.getForKey(event.localizedKey),
+              ],
+              season: currentSeason,
+              yearHappened: currentYear,
+            ),
+          );
           if (event is ChoicableRandomTurnEvent) {
             Function f = event.makeChoice(true, this);
             _nextRandomEvents.add(f);
           } else {
-            event.execute(this);
+            RandomEventMessage eventResult = event.execute(this)();
+            this.stock + eventResult.stock;
+            events.add(
+              CityEvent(
+                messages: [
+                  SlobodaLocalizations.getForKey(eventResult.messageKey),
+                ],
+                stock: eventResult.stock,
+                yearHappened: currentYear,
+                season: currentSeason,
+              ),
+            );
           }
         }
       }

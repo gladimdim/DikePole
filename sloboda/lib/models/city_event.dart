@@ -1,9 +1,12 @@
+import 'package:sloboda/models/stock.dart';
+
 class CityEvent {
   final int yearHappened;
   final CITY_SEASONS season;
   final List messages;
+  final Stock stock;
 
-  CityEvent({this.yearHappened, this.messages, this.season});
+  CityEvent({this.yearHappened, this.messages, this.season, this.stock});
 }
 
 enum CITY_SEASONS { AUTUMN, WINTER, SPRING, SUMMER}

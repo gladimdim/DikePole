@@ -123,10 +123,26 @@ class RandomEventLocalizations extends InternalLocalizations {
     'en': {
       'koshoviyPohid': 'Quick raid.',
       'tartarRaid': 'Tatars raided your Sloboda.',
+      'successTartarRaid':
+          'Tartar raid was a big failure for them. You managed to kill their warriors. Enjoy your loot!',
+      'failureTartarRaid':
+          'Tartars did a great raid on your lands. Couple Slobodas were burnt, people enslaved. Next time prepare for them.',
+      'successKoshoviyPohid':
+      'Your raid to the Tartars Lands was successful. Enjoy your loot!',
+      'failureKoshoviyPohid':
+      'Your raid to the Tartars Lands failed. You lost some resources.',
     },
     'uk': {
       'koshoviyPohid': 'Кошовий похід на татар.',
       'tartarRaid': 'Татари напали на нашу Слободу.',
+      'successTartarRaid':
+          'Татари здійснили на вас успішний набіг. Сусідні слободи попалено, людей забрано у рабство. Наступного разу готуйтесь до нього.',
+      'failureTartarRaid':
+          'Ваші сили вчасно помітили татар в степу і підготувались до відсічі. Декількох татар застрелено, інші покидали речі і втіклі. Молодець!',
+      'successKoshoviyPohid':
+      'Ви чудово сходили на татар. Застали їз зненацька і без всякого супротиву попалили їм курені, набравши добра. Вітаємо!',
+      'failureKoshoviyPohid':
+      'Ваш рейд на татар зазнав поразки. Кіш було розбито. Ви втратили ресурси.',
     }
   };
 }
@@ -139,9 +155,14 @@ class SlobodaLocalizations {
 
   static ResourceLocalizations resourceLocalizations = ResourceLocalizations();
 
-  static CityBuildingLocalizations cityBuildingLocalizations = CityBuildingLocalizations();
+  static CityBuildingLocalizations cityBuildingLocalizations =
+      CityBuildingLocalizations();
 
-  static NatureResourceBuildingsLocalizations natureResourceLocalizations = NatureResourceBuildingsLocalizations();
+  static NatureResourceBuildingsLocalizations natureResourceLocalizations =
+      NatureResourceBuildingsLocalizations();
+
+  static RandomEventLocalizations randomEventLocalizations =
+      RandomEventLocalizations();
 
   static Locale locale = Locale(getDefaultOrUrlLanguage());
 
@@ -153,8 +174,12 @@ class SlobodaLocalizations {
           return resourceBuildingsLocalizations[split[1]];
         case 'resources':
           return resourceLocalizations[split[1]];
-        case 'natureResources': return natureResourceLocalizations[split[1]];
-        case 'cityBuildings': return cityBuildingLocalizations[split[1]];
+        case 'natureResources':
+          return natureResourceLocalizations[split[1]];
+        case 'cityBuildings':
+          return cityBuildingLocalizations[split[1]];
+        case 'randomTurnEvent':
+          return randomEventLocalizations[split[1]];
         default:
           return key;
       }
@@ -277,11 +302,11 @@ class SlobodaLocalizations {
 
   static String get assignedWorkers {
     return _localizedValues[SlobodaLocalizations.locale.languageCode]
-    ['assignedWorkers'];
+        ['assignedWorkers'];
   }
 
   static String get destroyBuilding {
     return _localizedValues[SlobodaLocalizations.locale.languageCode]
-    ['destroyBuilding'];
+        ['destroyBuilding'];
   }
 }

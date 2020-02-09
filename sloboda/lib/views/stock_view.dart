@@ -33,11 +33,12 @@ class StockMiniView extends StatelessWidget {
                         fontSize: 18,
                       ),
                 ),
-                SaldoViewShower(
-                  value: stockSimulation[key],
-                  reference: stock.getByType(key),
-                  showValue: false,
-                ),
+                if (stockSimulation != null)
+                  SaldoViewShower(
+                    value: stockSimulation[key],
+                    reference: stock.getByType(key),
+                    showValue: false,
+                  ),
               ],
             );
           }).toList(),

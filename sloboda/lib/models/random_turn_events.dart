@@ -1,10 +1,25 @@
+import 'dart:math';
+
 import 'package:sloboda/models/buildings/city_buildings/city_building.dart';
 import 'package:sloboda/models/resources/resource.dart';
 import 'package:sloboda/models/sloboda.dart';
+import 'package:sloboda/models/stock.dart';
+
+class RandomEventMessage {
+  final Stock stock;
+  final String messageKey;
+
+  RandomEventMessage({this.stock, this.messageKey});
+}
 
 class RandomTurnEvent {
   String localizedKey;
   List<Function> conditions;
+  Stock stockSuccess;
+  Stock stockFailure;
+
+  String successMessageKey;
+  String failureMessageKey;
 
   bool satisfiesConditions(Sloboda city) {
     for (var func in conditions) {
@@ -36,7 +51,8 @@ abstract class ChoicableRandomTurnEvent extends RandomTurnEvent {
   }
 
   Function postExecute(Sloboda city) {
-    return () {};
+    return () => RandomEventMessage(
+        stock: stockSuccess, messageKey: this.successMessageKey);
   }
 
   Function makeChoice(bool yes, Sloboda city) {
@@ -52,8 +68,24 @@ abstract class ChoicableRandomTurnEvent extends RandomTurnEvent {
 }
 
 class KoshoviyPohid extends ChoicableRandomTurnEvent {
+  String successMessageKey = 'randomTurnEvent.successKoshoviyPohid';
+  String failureMessageKey = 'randomTurnEvent.failureKoshoviyPohid';
+  Stock stockSuccess = Stock(
+    {
+      RESOURCE_TYPES.FOOD: 10,
+      RESOURCE_TYPES.MONEY: 10,
+    },
+  );
+
+  Stock stockFailure = Stock({
+    RESOURCE_TYPES.FOOD: -10,
+    RESOURCE_TYPES.FIREARM: -5,
+  });
+
   String localizedKey = 'randomTurnEvent.koshoviyPohid';
+
   String localizedQuestionKey = 'randomTurnEvent.koshoviyPohidQuestion';
+
   List<Function> conditions = [
     (Sloboda city) {
       return city.stock.getByType(RESOURCE_TYPES.FIREARM) >= 1;
@@ -65,25 +97,33 @@ class KoshoviyPohid extends ChoicableRandomTurnEvent {
 
   @override
   bool canHappen(Sloboda city) {
-    return satisfiesConditions(city);
-  }
-
-  Function execute(Sloboda city) {
-    return () {
-      city.properties[CITY_PROPERTIES.GLORY] += 1;
-    };
-  }
-
-  Function postExecute(Sloboda city) {
-    return () {
-      city.stock.addToType(RESOURCE_TYPES.MONEY, 10);
-      city.stock.addToType((RESOURCE_TYPES.FOOD), 30);
-    };
+    if (satisfiesConditions(city)) {
+      final r = Random();
+      final v = r.nextInt(10);
+      return v >= 5;
+    } else {
+      return false;
+    }
   }
 }
 
-class TartarsRaid extends ChoicableRandomTurnEvent {
+class TartarsRaid extends RandomTurnEvent {
+  String successMessageKey = 'randomTurnEvent.successTartarRaid';
+  String failureMessageKey = 'randomTurnEvent.failureTartarRaid';
   String localizedKey = 'randomTurnEvent.tartarRaid';
+
+  Stock stockFailure = Stock(
+    {
+      RESOURCE_TYPES.FOOD: 20,
+      RESOURCE_TYPES.HORSE: 3,
+    },
+  );
+
+  Stock stockSuccess = Stock({
+    RESOURCE_TYPES.FOOD: -10,
+    RESOURCE_TYPES.MONEY: -5,
+  });
+
   List<Function> conditions = [
     (Sloboda city) {
       return city.stock.getByType(RESOURCE_TYPES.MONEY) >= 0;
@@ -95,25 +135,24 @@ class TartarsRaid extends ChoicableRandomTurnEvent {
 
   Function execute(Sloboda city) {
     return () {
-      city.properties[CITY_PROPERTIES.GLORY] += 1;
-      city.properties[CITY_PROPERTIES.FAITH] += 1;
-    };
-  }
+      final r = Random().nextInt(10);
+      if (r > 8) {
+        return  RandomEventMessage(
+            stock: stockFailure, messageKey: this.failureMessageKey);
+      } else {
+        return RandomEventMessage(
+            stock: stockSuccess, messageKey: this.successMessageKey);
+      }
 
-  Function postExecute(Sloboda city) {
-    return () {
-      city.stock.addToType(RESOURCE_TYPES.MONEY, 10);
-      city.stock.addToType((RESOURCE_TYPES.FOOD), 30);
     };
   }
 
   @override
   bool canHappen(Sloboda city) {
     if (satisfiesConditions(city)) {
-//      final r = Random();
-//      final v = r.nextInt(20);
-//      return v >= 5;
-      return true;
+      final r = Random();
+      final v = r.nextInt(20);
+      return v >= 15;
     } else {
       return false;
     }
