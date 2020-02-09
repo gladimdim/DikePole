@@ -4,6 +4,7 @@ import 'package:sloboda/models/buildings/resource_buildings/nature_resource.dart
 import 'package:sloboda/models/buildings/resource_buildings/resource_building.dart';
 import 'package:sloboda/models/citizen.dart';
 import 'package:sloboda/models/city_event.dart';
+import 'package:sloboda/models/random_turn_events.dart';
 import 'package:sloboda/models/resources/resource.dart';
 import 'package:sloboda/models/buildings/city_buildings/city_building.dart';
 import 'package:sloboda/models/sloboda_localizations.dart';
@@ -38,6 +39,8 @@ class Sloboda {
 
   BehaviorSubject _innerChanges = BehaviorSubject();
   ValueStream changes;
+
+  List<Function> _nextRandomEvents = [];
 
   Sloboda({this.name, this.stock}) {
     if (stock == null) {
@@ -127,7 +130,17 @@ class Sloboda {
     _innerChanges.add(this);
   }
 
+  void _runAttachedEvents() {
+    for (var _event in _nextRandomEvents) {
+      _event();
+    }
+
+    _nextRandomEvents.clear();
+  }
+
   void makeTurn() {
+    _runAttachedEvents();
+
     var exceptions = [];
     simulateStock();
     List<Producable> list = [...naturalResources, ...resourceBuildings];
@@ -141,13 +154,12 @@ class Sloboda {
     });
 
     _innerChanges.add(this);
-    events.add(
-      CityEvent(
-        messages: exceptions,
-        yearHappened: currentYear,
-        season: currentSeason,
-      ),
+    final currentCityEvent = CityEvent(
+      messages: exceptions,
+      yearHappened: currentYear,
+      season: currentSeason,
     );
+    events.add(currentCityEvent);
 
     cityBuildings.forEach((cb) {
       Map<CITY_PROPERTIES, int> generated = cb.generate();
@@ -158,6 +170,29 @@ class Sloboda {
         properties[e.key] += e.value;
       });
     });
+
+    // generate random events
+
+    try {
+      final _events = RandomTurnEvent.allEvents.where((event) {
+        return event.canHappen(this);
+      });
+
+      for (var event in _events) {
+        if (event != null) {
+          currentCityEvent.messages
+              .add(SlobodaLocalizations.getForKey(event.localizedKey));
+          if (event is ChoicableRandomTurnEvent) {
+            Function f = event.makeChoice(true, this);
+            _nextRandomEvents.add(f);
+          } else {
+            event.execute(this);
+          }
+        }
+      }
+    } catch (e) {
+      print(e);
+    }
 
     _moveToNextSeason();
   }
@@ -262,10 +297,12 @@ class MissingResources implements Exception {
 
   MissingResources(this.causes);
 
-
   String toLocalizedString() {
-    return causes.entries.map((c) {
-      return '${SlobodaLocalizations.getForKey(c.key)}: ${c.value}';
-    }).toList().toString();
+    return causes.entries
+        .map((c) {
+          return '${SlobodaLocalizations.getForKey(c.key)}: ${c.value}';
+        })
+        .toList()
+        .toString();
   }
 }

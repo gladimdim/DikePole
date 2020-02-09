@@ -118,6 +118,19 @@ class NatureResourceBuildingsLocalizations extends InternalLocalizations {
   };
 }
 
+class RandomEventLocalizations extends InternalLocalizations {
+  Map<String, Map<String, String>> _localizedMap = {
+    'en': {
+      'koshoviyPohid': 'Quick raid.',
+      'tartarRaid': 'Tatars raided your Sloboda.',
+    },
+    'uk': {
+      'koshoviyPohid': 'Кошовий похід на татар.',
+      'tartarRaid': 'Татари напали на нашу Слободу.',
+    }
+  };
+}
+
 class SlobodaLocalizations {
   static List supportedLanguageCodes = ['uk', 'en'];
 

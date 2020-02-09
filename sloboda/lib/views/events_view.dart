@@ -11,6 +11,7 @@ class EventsView extends StatelessWidget {
   EventsView({this.events});
 
 
+
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(16.0),
@@ -23,9 +24,12 @@ class EventsView extends StatelessWidget {
           final event = events[events.length - 1 - index];
           return SoftContainer(
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
-                TitleText(
-                    '${SlobodaLocalizations.getForKey(citySeasonToString(event.season))} ${event.yearHappened}'),
+                Center(
+                  child: TitleText(
+                      '${SlobodaLocalizations.getForKey(citySeasonToString(event.season))} ${event.yearHappened}'),
+                ),
                 if (event.messages.isNotEmpty)
                   Column(
                     children: event.messages
