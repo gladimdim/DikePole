@@ -121,28 +121,42 @@ class NatureResourceBuildingsLocalizations extends InternalLocalizations {
 class RandomEventLocalizations extends InternalLocalizations {
   Map<String, Map<String, String>> _localizedMap = {
     'en': {
-      'koshoviyPohid': 'Quick raid.',
+      'koshoviyPohid':
+          'Quick raid to tartar lands. You have a chance to get glory, money and resources.',
+      'koshoviyPohidQuestion':
+          'Messenger from Sich: Koshoviy prepares for the huge raid into the Crimea. He asks whether you want to join. Glory and resources await you!',
+      'koshoviyPohidYes':
+          'You decided to join the Koshoviy raid into the Crimea. The cossacks dispatched. Let\'s wait on their return!',
+      'koshoviyPohidNo':
+          'You decided to not participat ein Koshoviy raid into the Crimea. The cossacks stayed home and continued on their duties.',
       'tartarRaid': 'Tatars raided your Sloboda.',
       'successTartarRaid':
           'Tartar raid was a big failure for them. You managed to kill their warriors. Enjoy your loot!',
       'failureTartarRaid':
           'Tartars did a great raid on your lands. Couple Slobodas were burnt, people enslaved. Next time prepare for them.',
       'successKoshoviyPohid':
-      'Your raid to the Tartars Lands was successful. Enjoy your loot!',
+          'Your raid to the Tartars Lands was successful. Enjoy your loot!',
       'failureKoshoviyPohid':
-      'Your raid to the Tartars Lands failed. You lost some resources.',
+          'Your raid to the Tartars Lands failed. You lost some resources.',
     },
     'uk': {
-      'koshoviyPohid': 'Кошовий похід на татар.',
+      'koshoviyPohid':
+          'Прийміть участь у Кошовому похіді на татар. У вас є шанс здобути славу, гроші і інші ресурси.',
+      'koshoviyPohidQuestion':
+          'Вістка з Січі: кошовий готується до походу на Крим. Запрошує всіх охочих до слави і багатства.',
+      'koshoviyPohidYes':
+            'Ви вирішили приєднатися до Кошового походу в Крим! Попрощавшись з козаками, ви стали чекати на їх повернення.',
+      'koshoviyPohidNo':
+          'Ви віришил не приєднуватися до Кошового походу в Крим. Козаки залишились вдома займатися господарством.',
       'tartarRaid': 'Татари напали на нашу Слободу.',
       'successTartarRaid':
           'Татари здійснили на вас успішний набіг. Сусідні слободи попалено, людей забрано у рабство. Наступного разу готуйтесь до нього.',
       'failureTartarRaid':
           'Ваші сили вчасно помітили татар в степу і підготувались до відсічі. Декількох татар застрелено, інші покидали речі і втіклі. Молодець!',
       'successKoshoviyPohid':
-      'Ви чудово сходили на татар. Застали їз зненацька і без всякого супротиву попалили їм курені, набравши добра. Вітаємо!',
+          'Ви чудово сходили на татар. Застали їз зненацька і без всякого супротиву попалили їм курені, набравши добра. Вітаємо!',
       'failureKoshoviyPohid':
-      'Ваш рейд на татар зазнав поразки. Кіш було розбито. Ви втратили ресурси.',
+          'Ваш рейд на татар зазнав поразки. Кіш було розбито. Ви втратили ресурси.',
     }
   };
 }

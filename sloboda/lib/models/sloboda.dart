@@ -149,6 +149,32 @@ class Sloboda {
     _nextRandomEvents.clear();
   }
 
+  List getChoicableRandomEvents() {
+    final _events = RandomTurnEvent.allEvents.where((event) {
+      return event.canHappen(this) && event is ChoicableRandomTurnEvent;
+    }).toList();
+
+    return _events;
+  }
+
+  void addChoicableEventWithAnswer(bool yes, ChoicableRandomTurnEvent event) {
+    events.add(
+      CityEvent(
+        messages: [
+          SlobodaLocalizations.getForKey(
+              yes ? event.localizedKeyYes : event.localizedKeyNo),
+        ],
+        season: currentSeason,
+        yearHappened: currentYear,
+      ),
+    );
+  }
+
+  void runChoicableEventResult(ChoicableRandomTurnEvent event) {
+    Function f = event.makeChoice(true, this);
+    _nextRandomEvents.add(f);
+  }
+
   void makeTurn() {
     _runAttachedEvents();
 
@@ -187,7 +213,7 @@ class Sloboda {
 
     try {
       final _events = RandomTurnEvent.allEvents.where((event) {
-        return event.canHappen(this);
+        return event.canHappen(this) && !(event is ChoicableRandomTurnEvent);
       });
 
       for (var event in _events) {
@@ -201,23 +227,19 @@ class Sloboda {
               yearHappened: currentYear,
             ),
           );
-          if (event is ChoicableRandomTurnEvent) {
-            Function f = event.makeChoice(true, this);
-            _nextRandomEvents.add(f);
-          } else {
-            RandomEventMessage eventResult = event.execute(this)();
-            this.stock + eventResult.stock;
-            events.add(
-              CityEvent(
-                messages: [
-                  SlobodaLocalizations.getForKey(eventResult.messageKey),
-                ],
-                stock: eventResult.stock,
-                yearHappened: currentYear,
-                season: currentSeason,
-              ),
-            );
-          }
+
+          RandomEventMessage eventResult = event.execute(this)();
+          this.stock + eventResult.stock;
+          events.add(
+            CityEvent(
+              messages: [
+                SlobodaLocalizations.getForKey(eventResult.messageKey),
+              ],
+              stock: eventResult.stock,
+              yearHappened: currentYear,
+              season: currentSeason,
+            ),
+          );
         }
       }
     } catch (e) {

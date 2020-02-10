@@ -7,6 +7,7 @@ import 'package:sloboda/components/divider.dart';
 import 'package:sloboda/components/title_text.dart';
 import 'package:sloboda/inherited_city.dart';
 import 'package:sloboda/models/app_preferences.dart';
+import 'package:sloboda/models/random_turn_events.dart';
 import 'package:sloboda/models/sloboda_localizations.dart';
 import 'package:sloboda/views/locale_selection.dart';
 import 'package:sloboda/models/buildings/resource_buildings/resource_building.dart';
@@ -123,17 +124,7 @@ class _CityGameState extends State<CityGame> {
                             Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: SoftContainer(
-                                child: SlideableButton(
-                                  direction: Direction.Left,
-                                  child: Center(
-                                    child: ButtonText(
-                                      SlobodaLocalizations.makeTurn,
-                                    ),
-                                  ),
-                                  onPress: () {
-                                    city.makeTurn();
-                                  },
-                                ),
+                                child: _makeTurn(context),
                               ),
                             ),
                             Padding(
@@ -144,8 +135,8 @@ class _CityGameState extends State<CityGame> {
                                   onPress: () {
                                     _goToPage(1);
                                   },
-                                  child:
-                                      Center(child: ButtonText(_pageTitles()[1])),
+                                  child: Center(
+                                      child: ButtonText(_pageTitles()[1])),
                                 ),
                               ),
                             ),
@@ -157,8 +148,8 @@ class _CityGameState extends State<CityGame> {
                                   onPress: () {
                                     _goToPage(2);
                                   },
-                                  child:
-                                      Center(child: ButtonText(_pageTitles()[2])),
+                                  child: Center(
+                                      child: ButtonText(_pageTitles()[2])),
                                 ),
                               ),
                             ),
@@ -170,8 +161,8 @@ class _CityGameState extends State<CityGame> {
                                   onPress: () {
                                     _goToPage(3);
                                   },
-                                  child:
-                                      Center(child: ButtonText(_pageTitles()[3])),
+                                  child: Center(
+                                      child: ButtonText(_pageTitles()[3])),
                                 ),
                               ),
                             ),
@@ -226,16 +217,7 @@ class _CityGameState extends State<CityGame> {
                                           Expanded(
                                             flex: 2,
                                             child: SoftContainer(
-                                              child: SlideableButton(
-                                                onPress: () {
-                                                  city.makeTurn();
-                                                },
-                                                child: Center(
-                                                  child: TitleText(
-                                                    SlobodaLocalizations.makeTurn,
-                                                  ),
-                                                ),
-                                              ),
+                                              child: _makeTurn(context),
                                             ),
                                           ),
                                           HDivider(),
@@ -299,6 +281,57 @@ class _CityGameState extends State<CityGame> {
     );
   }
 
+  Future<DialogAnswer> _askForEvent(
+      BuildContext context, ChoicableRandomTurnEvent event) async {
+    DialogAnswer result = await showDialog<DialogAnswer>(
+        context: context,
+        builder: (context) {
+          return SimpleDialog(
+            title: Text(
+              SlobodaLocalizations.getForKey(event.localizedQuestionKey),
+            ),
+            children: <Widget>[
+              SimpleDialogOption(
+                onPressed: () => Navigator.pop(context, DialogAnswer.YES),
+                child: Text('yes'),
+              ),
+              SimpleDialogOption(
+                onPressed: () => Navigator.pop(context, DialogAnswer.NO),
+                child: Text('no'),
+              ),
+            ],
+          );
+        });
+
+    return result;
+  }
+
+  Widget _makeTurn(BuildContext context) {
+    return SlideableButton(
+      direction: Direction.Left,
+      child: Center(
+        child: ButtonText(
+          SlobodaLocalizations.makeTurn,
+        ),
+      ),
+      onPress: () async {
+        List choicableEvents = city.getChoicableRandomEvents();
+
+        if (choicableEvents.isNotEmpty) {
+          DialogAnswer result = await _askForEvent(context, choicableEvents[0]);
+          city.addChoicableEventWithAnswer(
+              result == DialogAnswer.YES, choicableEvents[0]);
+          city.makeTurn();
+          if (result == DialogAnswer.YES) {
+            city.runChoicableEventResult(choicableEvents[0]);
+          }
+        } else {
+          city.makeTurn();
+        }
+      },
+    );
+  }
+
   @override
   void dispose() {
     _topPageController.dispose();
@@ -306,3 +339,5 @@ class _CityGameState extends State<CityGame> {
     super.dispose();
   }
 }
+
+enum DialogAnswer { YES, NO }

@@ -45,14 +45,17 @@ class RandomTurnEvent {
 
 abstract class ChoicableRandomTurnEvent extends RandomTurnEvent {
   String localizedQuestionKey;
+  String localizedKeyYes;
+  String localizedKeyNo;
 
   Function execute(Sloboda city) {
     return () {};
   }
 
   Function postExecute(Sloboda city) {
+    var r = Random().nextInt(10);
     return () => RandomEventMessage(
-        stock: stockSuccess, messageKey: this.successMessageKey);
+        stock: r > 5 ? stockSuccess : stockFailure, messageKey: r > 5 ? this.successMessageKey : this.failureMessageKey);
   }
 
   Function makeChoice(bool yes, Sloboda city) {
@@ -70,6 +73,9 @@ abstract class ChoicableRandomTurnEvent extends RandomTurnEvent {
 class KoshoviyPohid extends ChoicableRandomTurnEvent {
   String successMessageKey = 'randomTurnEvent.successKoshoviyPohid';
   String failureMessageKey = 'randomTurnEvent.failureKoshoviyPohid';
+  String localizedKeyYes = 'randomTurnEvent.koshoviyPohidYes';
+  String localizedKeyNo = 'randomTurnEvent.koshoviyPohidNo';
+
   Stock stockSuccess = Stock(
     {
       RESOURCE_TYPES.FOOD: 10,
