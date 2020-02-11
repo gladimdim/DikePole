@@ -26,10 +26,16 @@ class Stock {
 
   addToType(RESOURCE_TYPES type, int amount) {
     _stock[type] = _stock[type] + amount;
+    if (_stock[type] < 0) {
+      _stock[type] = 0;
+    }
   }
 
   removeFromType(RESOURCE_TYPES type, int amount) {
     _stock[type] = _stock[type] - amount;
+    if (_stock[type] < 0) {
+      _stock[type] = 0;
+    }
   }
 
   List getResourceTypesKeys() {
