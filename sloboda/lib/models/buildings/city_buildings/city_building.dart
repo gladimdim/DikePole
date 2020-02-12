@@ -101,7 +101,7 @@ String cityTypeToIconPath(CITY_BUILDING_TYPES type) {
     case CITY_BUILDING_TYPES.WALL:
       return 'images/city_buildings/wall_64.png';
     case CITY_BUILDING_TYPES.CHURCH:
-      return 'images/city_buildings/kurin_64.png';
+      return 'images/city_buildings/church_64.png';
     default: throw 'City $type is not recognized';
   }
 }
@@ -117,7 +117,7 @@ String cityTypeToImagePath(CITY_BUILDING_TYPES type) {
     case CITY_BUILDING_TYPES.WALL:
       return 'images/city_buildings/wall.png';
     case CITY_BUILDING_TYPES.CHURCH:
-      return 'images/city_buildings/kurin.png';
+      return 'images/city_buildings/church.png';
     default: throw 'Building $type is not recognized';
   }
 }
