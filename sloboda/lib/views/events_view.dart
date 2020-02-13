@@ -48,9 +48,15 @@ class EventsView extends StatelessWidget {
               padding: const EdgeInsets.all(8.0),
               child: SoftContainer(
                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    TitleText(
-                        '${SlobodaLocalizations.getForKey(event.season.toLocalizedKey())} ${event.yearHappened}'),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Center(
+                        child: TitleText(
+                            '${SlobodaLocalizations.getForKey(event.season.toLocalizedKey())} ${event.yearHappened}'),
+                      ),
+                    ),
                     ...event.events.map((RandomEventMessage e) {
                       return Padding(
                         padding: const EdgeInsets.all(8.0),

@@ -154,6 +154,22 @@ class Sloboda {
     return _events;
   }
 
+  void addChoicableEventWithAnswer(bool yes, ChoicableRandomTurnEvent event) {
+    events.add(
+      CityEvent(
+        season: currentSeason,
+        yearHappened: currentYear,
+        events: [
+          RandomEventMessage(
+            stock: null,
+            event: event,
+            messageKey: event.choiceToStringKey(yes),
+          )
+        ],
+      ),
+    );
+  }
+
   void runChoicableEventResult(ChoicableRandomTurnEvent event) {
     Function f = event.makeChoice(true, this);
     _nextRandomEvents.add(f);
@@ -175,14 +191,18 @@ class Sloboda {
     });
 
     _innerChanges.add(this);
-//    events.add(
-//      CityEvent(
-//        event: null,
-//        messages: exceptions,
-//        yearHappened: currentYear,
-//        season: currentSeason,
-//      ),
-//    );
+    events.add(
+      CityEvent(
+        events: exceptions.map((e) {
+          return RandomEventMessage(
+            event: null,
+            messageKey: e,
+          );
+        }).toList(),
+        yearHappened: currentYear,
+        season: currentSeason,
+      ),
+    );
 
     cityBuildings.forEach((cb) {
       Map<CITY_PROPERTIES, int> generated = cb.generate();

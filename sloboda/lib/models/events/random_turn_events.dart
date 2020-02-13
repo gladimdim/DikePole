@@ -6,7 +6,6 @@ import 'package:sloboda/models/resources/resource.dart';
 import 'package:sloboda/models/sloboda.dart';
 import 'package:sloboda/models/stock.dart';
 
-
 class RandomEventMessage {
   final Stock stock;
   final String messageKey;
@@ -73,6 +72,10 @@ abstract class ChoicableRandomTurnEvent extends RandomTurnEvent {
       };
     }
   }
+
+  String choiceToStringKey(bool yes) {
+    return yes ? localizedKeyYes : localizedKeyNo;
+  }
 }
 
 class KoshoviyPohid extends ChoicableRandomTurnEvent {
@@ -111,7 +114,7 @@ class KoshoviyPohid extends ChoicableRandomTurnEvent {
     if (satisfiesConditions(city)) {
       final r = Random();
       final v = r.nextInt(10);
-      return v >= 0;
+      return v >= 8;
     } else {
       return false;
     }
@@ -137,10 +140,13 @@ class TartarsRaid extends RandomTurnEvent {
 
   List<Function> conditions = [
     (Sloboda city) {
-      return city.stock.getByType(RESOURCE_TYPES.MONEY) >= 0;
+      return city.stock.getByType(RESOURCE_TYPES.FOOD) >= 50;
     },
     (Sloboda city) {
-      return city.citizens.length > 10;
+      return city.stock.getByType(RESOURCE_TYPES.MONEY) >= 10;
+    },
+    (Sloboda city) {
+      return city.citizens.length > 20;
     }
   ];
 
@@ -166,7 +172,7 @@ class TartarsRaid extends RandomTurnEvent {
     if (satisfiesConditions(city)) {
       final r = Random();
       final v = r.nextInt(20);
-      return v >= 0;
+      return v >= 5;
     } else {
       return false;
     }
