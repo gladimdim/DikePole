@@ -1,16 +1,30 @@
-import 'package:sloboda/models/stock.dart';
+import 'package:sloboda/models/events/random_turn_events.dart';
+import 'package:flutter/foundation.dart';
 
 class CityEvent {
   final int yearHappened;
   final CitySeason season;
-  final List messages;
-  final Stock stock;
+  final List<RandomEventMessage> events;
 
-  CityEvent({this.yearHappened, this.messages, this.season, this.stock});
+  CityEvent(
+      {this.yearHappened,
+      this.season,
+      @required this.events});
+
+  static CityEvent copyFrom(CityEvent event) {
+    return CityEvent(
+        yearHappened: event.yearHappened,
+        season: event.season,
+        events: event.events);
+  }
 }
 
 abstract class CitySeason {
   CITY_SEASONS get type;
+
+  set type(t) {
+    throw 'Type cannot be changed';
+  }
 
   String toLocalizedKey();
 
@@ -18,7 +32,9 @@ abstract class CitySeason {
 }
 
 class WinterSeason extends CitySeason {
-  CITY_SEASONS type = CITY_SEASONS.WINTER;
+  CITY_SEASONS get type {
+    return CITY_SEASONS.WINTER;
+  }
 
   String toLocalizedKey() {
     return 'winter';
@@ -26,7 +42,9 @@ class WinterSeason extends CitySeason {
 }
 
 class SpringSeason extends CitySeason {
-  CITY_SEASONS type = CITY_SEASONS.SPRING;
+  CITY_SEASONS get type {
+    return CITY_SEASONS.SPRING;
+  }
 
   String toLocalizedKey() {
     return 'spring';
@@ -34,7 +52,9 @@ class SpringSeason extends CitySeason {
 }
 
 class SummerSeason extends CitySeason {
-  CITY_SEASONS type = CITY_SEASONS.SUMMER;
+  CITY_SEASONS get type {
+    return CITY_SEASONS.SUMMER;
+  }
 
   String toLocalizedKey() {
     return 'summer';
@@ -42,7 +62,9 @@ class SummerSeason extends CitySeason {
 }
 
 class AutumnSeason extends CitySeason {
-  CITY_SEASONS type = CITY_SEASONS.AUTUMN;
+  CITY_SEASONS get type {
+    return CITY_SEASONS.AUTUMN;
+  }
 
   String toLocalizedKey() {
     return 'autumn';

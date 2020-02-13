@@ -136,11 +136,8 @@ class Sloboda {
       this.stock + event.stock;
       events.add(
         CityEvent(
-          messages: [
-            SlobodaLocalizations.getForKey(event.messageKey),
-          ],
-          stock: event.stock,
           season: currentSeason,
+          events: [event],
           yearHappened: currentYear,
         ),
       );
@@ -155,19 +152,6 @@ class Sloboda {
     }).toList();
 
     return _events;
-  }
-
-  void addChoicableEventWithAnswer(bool yes, ChoicableRandomTurnEvent event) {
-    events.add(
-      CityEvent(
-        messages: [
-          SlobodaLocalizations.getForKey(
-              yes ? event.localizedKeyYes : event.localizedKeyNo),
-        ],
-        season: currentSeason,
-        yearHappened: currentYear,
-      ),
-    );
   }
 
   void runChoicableEventResult(ChoicableRandomTurnEvent event) {
@@ -191,13 +175,14 @@ class Sloboda {
     });
 
     _innerChanges.add(this);
-    events.add(
-      CityEvent(
-        messages: exceptions,
-        yearHappened: currentYear,
-        season: currentSeason,
-      ),
-    );
+//    events.add(
+//      CityEvent(
+//        event: null,
+//        messages: exceptions,
+//        yearHappened: currentYear,
+//        season: currentSeason,
+//      ),
+//    );
 
     cityBuildings.forEach((cb) {
       Map<CITY_PROPERTIES, int> generated = cb.generate();
@@ -218,24 +203,19 @@ class Sloboda {
 
       for (var event in _events) {
         if (event != null) {
-          events.add(
-            CityEvent(
-              messages: [
-                SlobodaLocalizations.getForKey(event.localizedKey),
-              ],
-              season: currentSeason,
-              yearHappened: currentYear,
-            ),
-          );
+//          events.add(
+//            CityEvent(
+//              events: [event],
+//              season: currentSeason,
+//              yearHappened: currentYear,
+//            ),
+//          );
 
           RandomEventMessage eventResult = event.execute(this)();
           this.stock + eventResult.stock;
           events.add(
             CityEvent(
-              messages: [
-                SlobodaLocalizations.getForKey(eventResult.messageKey),
-              ],
-              stock: eventResult.stock,
+              events: [eventResult],
               yearHappened: currentYear,
               season: currentSeason,
             ),

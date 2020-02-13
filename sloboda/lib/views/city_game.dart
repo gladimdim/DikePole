@@ -318,8 +318,8 @@ class _CityGameState extends State<CityGame> {
 
         if (choicableEvents.isNotEmpty) {
           DialogAnswer result = await _askForEvent(context, choicableEvents[0]);
-          city.addChoicableEventWithAnswer(
-              result == DialogAnswer.YES, choicableEvents[0]);
+//          city.addChoicableEventWithAnswer(
+//              result == DialogAnswer.YES, choicableEvents[0]);
           city.makeTurn();
           if (result == DialogAnswer.YES) {
             city.runChoicableEventResult(choicableEvents[0]);
