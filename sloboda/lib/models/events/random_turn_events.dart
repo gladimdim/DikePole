@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:flutter/cupertino.dart';
 import 'package:sloboda/models/buildings/city_buildings/city_building.dart';
 import 'package:sloboda/models/resources/resource.dart';
 import 'package:sloboda/models/sloboda.dart';
@@ -8,11 +9,12 @@ import 'package:sloboda/models/stock.dart';
 class RandomEventMessage {
   final Stock stock;
   final String messageKey;
+  final RandomTurnEvent event;
 
-  RandomEventMessage({this.stock, this.messageKey});
+  RandomEventMessage({this.stock, this.messageKey, @required this.event});
 }
 
-class RandomTurnEvent {
+abstract class RandomTurnEvent {
   String localizedKey;
   List<Function> conditions;
   Stock stockSuccess;
@@ -55,7 +57,9 @@ abstract class ChoicableRandomTurnEvent extends RandomTurnEvent {
   Function postExecute(Sloboda city) {
     var r = Random().nextInt(10);
     return () => RandomEventMessage(
-        stock: r > 5 ? stockSuccess : stockFailure, messageKey: r > 5 ? this.successMessageKey : this.failureMessageKey);
+        event: this,
+        stock: r > 5 ? stockSuccess : stockFailure,
+        messageKey: r > 5 ? this.successMessageKey : this.failureMessageKey);
   }
 
   Function makeChoice(bool yes, Sloboda city) {
@@ -143,13 +147,16 @@ class TartarsRaid extends RandomTurnEvent {
     return () {
       final r = Random().nextInt(10);
       if (r > 8) {
-        return  RandomEventMessage(
-            stock: stockFailure, messageKey: this.failureMessageKey);
+        return RandomEventMessage(
+            event: this,
+            stock: stockFailure,
+            messageKey: this.failureMessageKey);
       } else {
         return RandomEventMessage(
-            stock: stockSuccess, messageKey: this.successMessageKey);
+            event: this,
+            stock: stockSuccess,
+            messageKey: this.successMessageKey);
       }
-
     };
   }
 

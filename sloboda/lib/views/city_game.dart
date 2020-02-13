@@ -7,11 +7,10 @@ import 'package:sloboda/components/divider.dart';
 import 'package:sloboda/components/title_text.dart';
 import 'package:sloboda/inherited_city.dart';
 import 'package:sloboda/models/app_preferences.dart';
-import 'package:sloboda/models/random_turn_events.dart';
+import 'package:sloboda/models/events/random_turn_events.dart';
 import 'package:sloboda/models/sloboda_localizations.dart';
 import 'package:sloboda/views/locale_selection.dart';
 import 'package:sloboda/models/buildings/resource_buildings/resource_building.dart';
-import 'package:sloboda/models/city_event.dart';
 import 'package:sloboda/models/sloboda.dart';
 import 'package:sloboda/views/city_buildings/city_buildings_page.dart';
 import 'package:sloboda/views/city_dashboard.dart';
@@ -210,7 +209,7 @@ class _CityGameState extends State<CityGame> {
                                             flex: 4,
                                             child: TitleText(
                                               index == 1
-                                                  ? '${SlobodaLocalizations.getForKey(citySeasonToString(city.currentSeason))} ${city.currentYear}'
+                                                  ? '${SlobodaLocalizations.getForKey(city.currentSeason.toLocalizedKey())} ${city.currentYear}'
                                                   : _pageTitles()[index],
                                             ),
                                           ),

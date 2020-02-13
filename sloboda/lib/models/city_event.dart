@@ -2,21 +2,51 @@ import 'package:sloboda/models/stock.dart';
 
 class CityEvent {
   final int yearHappened;
-  final CITY_SEASONS season;
+  final CitySeason season;
   final List messages;
   final Stock stock;
 
   CityEvent({this.yearHappened, this.messages, this.season, this.stock});
 }
 
-enum CITY_SEASONS { AUTUMN, WINTER, SPRING, SUMMER}
+abstract class CitySeason {
+  CITY_SEASONS get type;
 
-String citySeasonToString(CITY_SEASONS season) {
-  switch (season) {
-    case CITY_SEASONS.AUTUMN: return 'autumn';
-    case CITY_SEASONS.SPRING: return 'spring';
-    case CITY_SEASONS.SUMMER: return 'summer';
-    case CITY_SEASONS.WINTER: return 'winter';
-    default: throw 'Season $season is not recognized';
+  String toLocalizedKey();
+
+  CitySeason();
+}
+
+class WinterSeason extends CitySeason {
+  CITY_SEASONS type = CITY_SEASONS.WINTER;
+
+  String toLocalizedKey() {
+    return 'winter';
   }
 }
+
+class SpringSeason extends CitySeason {
+  CITY_SEASONS type = CITY_SEASONS.SPRING;
+
+  String toLocalizedKey() {
+    return 'spring';
+  }
+}
+
+class SummerSeason extends CitySeason {
+  CITY_SEASONS type = CITY_SEASONS.SUMMER;
+
+  String toLocalizedKey() {
+    return 'summer';
+  }
+}
+
+class AutumnSeason extends CitySeason {
+  CITY_SEASONS type = CITY_SEASONS.AUTUMN;
+
+  String toLocalizedKey() {
+    return 'autumn';
+  }
+}
+
+enum CITY_SEASONS { AUTUMN, WINTER, SPRING, SUMMER }

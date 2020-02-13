@@ -30,7 +30,7 @@ class EventsView extends StatelessWidget {
                   children: <Widget>[
                     Center(
                       child: TitleText(
-                          '${SlobodaLocalizations.getForKey(citySeasonToString(event.season))} ${event.yearHappened}'),
+                          '${SlobodaLocalizations.getForKey(event.season.toLocalizedKey())} ${event.yearHappened}'),
                     ),
                     if (event.messages.isNotEmpty)
                       Column(

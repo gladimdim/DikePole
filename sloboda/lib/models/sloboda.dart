@@ -4,7 +4,7 @@ import 'package:sloboda/models/buildings/resource_buildings/nature_resource.dart
 import 'package:sloboda/models/buildings/resource_buildings/resource_building.dart';
 import 'package:sloboda/models/citizen.dart';
 import 'package:sloboda/models/city_event.dart';
-import 'package:sloboda/models/random_turn_events.dart';
+import 'package:sloboda/models/events/random_turn_events.dart';
 import 'package:sloboda/models/resources/resource.dart';
 import 'package:sloboda/models/buildings/city_buildings/city_building.dart';
 import 'package:sloboda/models/sloboda_localizations.dart';
@@ -15,7 +15,7 @@ class Sloboda {
   String name;
   int foundedYear = 1550;
   int currentYear = 1550;
-  CITY_SEASONS currentSeason = CITY_SEASONS.SPRING;
+  CitySeason currentSeason = WinterSeason();
   List<CityBuilding> cityBuildings = [
     CityBuilding.fromType(CITY_BUILDING_TYPES.HOUSE),
   ];
@@ -324,18 +324,18 @@ class Sloboda {
     return newStock;
   }
 
-  CITY_SEASONS nextSeason(CITY_SEASONS currentSeason) {
-    switch (currentSeason) {
-      case (CITY_SEASONS.SPRING):
-        return CITY_SEASONS.SUMMER;
-      case (CITY_SEASONS.SUMMER):
-        return CITY_SEASONS.AUTUMN;
-      case (CITY_SEASONS.AUTUMN):
-        return CITY_SEASONS.WINTER;
-      case (CITY_SEASONS.WINTER):
-        return CITY_SEASONS.SPRING;
+  CitySeason nextSeason(CitySeason currentSeason) {
+    switch (currentSeason.runtimeType) {
+      case (SpringSeason):
+        return SummerSeason();
+      case (SummerSeason):
+        return AutumnSeason();
+      case (AutumnSeason):
+        return WinterSeason();
+      case (WinterSeason):
+        return SpringSeason();
       default:
-        return CITY_SEASONS.SPRING;
+        return SpringSeason();
     }
   }
 
