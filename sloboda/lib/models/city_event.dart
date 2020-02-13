@@ -6,16 +6,14 @@ class CityEvent {
   final CitySeason season;
   final List<RandomEventMessage> events;
 
-  CityEvent(
-      {this.yearHappened,
-      this.season,
-      @required this.events});
+  CityEvent({this.yearHappened, this.season, @required this.events});
 
   static CityEvent copyFrom(CityEvent event) {
     return CityEvent(
-        yearHappened: event.yearHappened,
-        season: event.season,
-        events: event.events);
+      yearHappened: event.yearHappened,
+      season: event.season,
+      events: List.from(event.events),
+    );
   }
 }
 
