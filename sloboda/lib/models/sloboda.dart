@@ -148,7 +148,7 @@ class Sloboda {
 
   List getChoicableRandomEvents() {
     final _events = RandomTurnEvent.allEvents.where((event) {
-      return event.canHappen(this) && event is ChoicableRandomTurnEvent;
+      return  event is ChoicableRandomTurnEvent && event.canHappen(this);
     }).toList();
 
     return _events;
@@ -173,6 +173,13 @@ class Sloboda {
   void runChoicableEventResult(ChoicableRandomTurnEvent event) {
     Function f = event.makeChoice(true, this);
     _nextRandomEvents.add(f);
+  }
+
+  Citizen addCitizens({amount = 1}) {
+    for (var i = 0; i < amount; i++) {
+      citizens.add(Citizen());
+      properties[CITY_PROPERTIES.CITIZENS]++;
+    }
   }
 
   void makeTurn() {

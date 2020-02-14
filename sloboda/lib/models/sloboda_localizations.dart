@@ -138,6 +138,13 @@ class RandomEventLocalizations extends InternalLocalizations {
           'Your raid to the Tartars Lands was successful. Enjoy your loot!',
       'failureKoshoviyPohid':
           'Your raid to the Tartars Lands failed. You lost some resources.',
+      'saranaInvasion': 'Locust invasion.',
+      'successSaranaInvasion':
+          'Locust invaded your lands. The grain is destroyed, you lost some food and horses.',
+      'failureSaranaInvasion':
+          'Locust invaded nearby lands. You were lucky the wind blew to the east. You can continue doing your own business.',
+      'successChildrenPopulation':
+          'Happy news came from your settlement! A lot of kids were born this spring and they are all healthy and ready to protect you!',
     },
     'uk': {
       'koshoviyPohid':
@@ -145,7 +152,7 @@ class RandomEventLocalizations extends InternalLocalizations {
       'koshoviyPohidQuestion':
           'Вістка з Січі: кошовий готується до походу на Крим. Запрошує всіх охочих до слави й багатства.',
       'koshoviyPohidYes':
-            'Ви вирішили приєднатися до Кошового походу в Крим! Попрощавшись з козаками, ви стали чекати на їх повернення.',
+          'Ви вирішили приєднатися до Кошового походу в Крим! Попрощавшись з козаками, ви стали чекати на їх повернення.',
       'koshoviyPohidNo':
           'Ви вирішили не приєднуватися до Кошового походу в Крим. Козаки залишились вдома займатися господарством.',
       'tartarRaid': 'Татари напали на нашу Слободу.',
@@ -157,6 +164,17 @@ class RandomEventLocalizations extends InternalLocalizations {
           'Ви чудово сходили на татар. Застали їз зненацька і без всякого супротиву попалили їм курені, набравши добра. Вітаємо!',
       'failureKoshoviyPohid':
           'Ваш рейд на татар зазнав поразки. Кіш було розбито. Ви втратили ресурси.',
+      'saranaInvasion': 'Нашестя сарани.',
+      'successSaranaInvasion':
+          'Сарана налетіла на ваші угіддя. Поїла поля. Тепер вам і вашим коням немає чого їсти. Ви втратили їжу і декілька коней.',
+      'failureSaranaInvasion':
+          'Сарана пролетіла на горизонті. Вам пощастило, що вітер дув на схід. Тепер ви можете продовжити займатися своїми справами.',
+      'successChildrenPopulation':
+          'Щаслива звістка з вашого селища. Народилося багато дітей. Всі вони здорові і готові швидко рости, щоб стати у стрій з дорослими до оборони рідного краю.',
+      'successSteppeFire':
+          'Татари підпалили степ. Ви кинули усі сили, щоб врятувати худобу і урожай. Але стихія в цей раз виявилася сильнішою за ваші потуги. Вогонь дійшов до селища і ви втратили збіжжя, коней, деревину та трохи пороху.',
+      'failureSteppeFire':
+          'Татари підпалили степ. Ви кинули усі сили, щоб врятувати худобу і урожай. Вчасно підпаливши степ з іншої сторони, ви відвели загрозу від вашого селища. За те ви вполювали вигнану дичину і спіймали декілька диких коней, які ховалися від вогню біля вашого поселення.',
     }
   };
 }
@@ -224,6 +242,8 @@ class SlobodaLocalizations {
       'nothingHappened': 'Nothing happened',
       'assignedWorkers': 'Assigned workers',
       'destroyBuilding': 'Destroy Building',
+      'yesToRandomEvent': 'Yes, join event.',
+      'noToRandomEvent': 'No, leave me alone',
     },
     'uk': {
       'overview': 'Головна',
@@ -246,6 +266,8 @@ class SlobodaLocalizations {
       'nothingHappened': 'Нічого не відбулося',
       'assignedWorkers': 'Працівники',
       'destroyBuilding': 'Зруйнувати будівлю',
+      'yesToRandomEvent': 'Так, приєднатися до події.',
+      'noToRandomEvent': 'Ні, в цей раз пропущу.',
     }
   };
 
@@ -322,5 +344,15 @@ class SlobodaLocalizations {
   static String get destroyBuilding {
     return _localizedValues[SlobodaLocalizations.locale.languageCode]
         ['destroyBuilding'];
+  }
+
+  static String get yesToRandomEvent {
+    return _localizedValues[SlobodaLocalizations.locale.languageCode]
+        ['yesToRandomEvent'];
+  }
+
+  static String get noToRandomEvent {
+    return _localizedValues[SlobodaLocalizations.locale.languageCode]
+        ['noToRandomEvent'];
   }
 }

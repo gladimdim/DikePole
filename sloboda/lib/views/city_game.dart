@@ -292,11 +292,11 @@ class _CityGameState extends State<CityGame> {
             children: <Widget>[
               SimpleDialogOption(
                 onPressed: () => Navigator.pop(context, DialogAnswer.YES),
-                child: Text('yes'),
+                child: Text(SlobodaLocalizations.yesToRandomEvent),
               ),
               SimpleDialogOption(
                 onPressed: () => Navigator.pop(context, DialogAnswer.NO),
-                child: Text('no'),
+                child: Text(SlobodaLocalizations.noToRandomEvent),
               ),
             ],
           );

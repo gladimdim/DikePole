@@ -62,7 +62,10 @@ class EventsView extends StatelessWidget {
                         padding: const EdgeInsets.all(8.0),
                         child: Column(
                           children: <Widget>[
-                            Text(SlobodaLocalizations.getForKey(e.messageKey)),
+                            Text(
+                              SlobodaLocalizations.getForKey(e.messageKey),
+                              textAlign: TextAlign.center,
+                            ),
                             if (e.stock != null)
                               StockMiniView(
                                 stock: e.stock,

@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
 import 'package:sloboda/models/buildings/city_buildings/city_building.dart';
+import 'package:sloboda/models/city_event.dart';
 import 'package:sloboda/models/resources/resource.dart';
 import 'package:sloboda/models/sloboda.dart';
 import 'package:sloboda/models/stock.dart';
@@ -37,12 +38,18 @@ abstract class RandomTurnEvent {
   }
 
   bool canHappen(Sloboda city) {
-    throw UnimplementedError();
+    return satisfiesConditions(city);
   }
 
   RandomTurnEvent({this.localizedKey});
 
-  static List<RandomTurnEvent> allEvents = [KoshoviyPohid(), TartarsRaid()];
+  static List<RandomTurnEvent> allEvents = [
+    KoshoviyPohid(),
+    TartarsRaid(),
+    SaranaInvasion(),
+    ChildrenPopulation(),
+    SteppeFire(),
+  ];
 }
 
 abstract class ChoicableRandomTurnEvent extends RandomTurnEvent {
@@ -143,10 +150,10 @@ class TartarsRaid extends RandomTurnEvent {
       return city.stock.getByType(RESOURCE_TYPES.FOOD) >= 50;
     },
     (Sloboda city) {
-      return city.stock.getByType(RESOURCE_TYPES.MONEY) >= 10;
+      return city.stock.getByType(RESOURCE_TYPES.MONEY) >= 100;
     },
     (Sloboda city) {
-      return city.citizens.length > 20;
+      return city.citizens.length > 40;
     }
   ];
 
@@ -170,11 +177,144 @@ class TartarsRaid extends RandomTurnEvent {
   @override
   bool canHappen(Sloboda city) {
     if (satisfiesConditions(city)) {
-      final r = Random();
-      final v = r.nextInt(20);
-      return v >= 5;
+      return Random().nextInt(100) <= 5;
     } else {
       return false;
     }
+  }
+}
+
+class SaranaInvasion extends RandomTurnEvent {
+  String successMessageKey = 'randomTurnEvent.successSaranaInvasion';
+  String failureMessageKey = 'randomTurnEvent.failureSaranaInvasion';
+  String localizedKey = 'randomTurnEvent.saranaInvasion';
+
+  Stock stockSuccess = Stock(
+    {
+      RESOURCE_TYPES.FOOD: -5,
+      RESOURCE_TYPES.HORSE: -1,
+    },
+  );
+
+  Stock stockFailure = Stock(
+    {},
+  );
+
+  List<Function> conditions = [
+    (Sloboda city) {
+      return city.currentSeason is SpringSeason;
+    },
+  ];
+
+  Function execute(Sloboda city) {
+    return () {
+      final r = Random().nextInt(10);
+      if (r >= 4) {
+        return RandomEventMessage(
+            event: this,
+            stock: stockFailure,
+            messageKey: this.failureMessageKey);
+      } else {
+        return RandomEventMessage(
+            event: this,
+            stock: stockSuccess,
+            messageKey: this.successMessageKey);
+      }
+    };
+  }
+
+  @override
+  bool canHappen(Sloboda city) {
+    if (satisfiesConditions(city)) {
+      return Random().nextInt(100) <= 5;
+    } else {
+      return false;
+    }
+  }
+}
+
+class ChildrenPopulation extends RandomTurnEvent {
+  String successMessageKey = 'randomTurnEvent.successChildrenPopulation';
+  String localizedKey = 'randomTurnEvent.childrenPopulation';
+
+  Stock stockSuccess = Stock(
+    {},
+  );
+
+  Stock stockFailure = Stock(
+    {},
+  );
+
+  List<Function> conditions = [
+    (Sloboda city) {
+      return city.currentYear % 5 == 0;
+    },
+    (Sloboda city) {
+      return city.currentSeason is SpringSeason;
+    }
+  ];
+
+  Function execute(Sloboda city) {
+    return () {
+      city.addCitizens(amount: 5);
+
+      return RandomEventMessage(
+        event: this,
+        stock: stockSuccess,
+        messageKey: this.successMessageKey,
+      );
+    };
+  }
+}
+
+class SteppeFire extends RandomTurnEvent {
+  String successMessageKey = 'randomTurnEvent.successSteppeFire';
+  String failureMessageKey = 'randomTurnEvent.failureSteppeFire';
+  String localizedKey = 'randomTurnEvent.steppeFire';
+
+  Stock stockSuccess = Stock(
+    {
+      RESOURCE_TYPES.FOOD: -5,
+      RESOURCE_TYPES.WOOD: -20,
+      RESOURCE_TYPES.POWDER: -30,
+      RESOURCE_TYPES.HORSE: -2,
+    },
+  );
+
+  Stock stockFailure = Stock(
+    {
+      RESOURCE_TYPES.FOOD: 20,
+      RESOURCE_TYPES.WOOD: 10,
+      RESOURCE_TYPES.HORSE: 10,
+    },
+  );
+
+  List<Function> conditions = [
+    (Sloboda city) {
+      return city.currentSeason is SummerSeason;
+    }
+  ];
+
+  Function execute(Sloboda city) {
+    return () {
+      if (Random().nextInt(100) <= 50) {
+        return RandomEventMessage(
+          event: this,
+          stock: stockSuccess,
+          messageKey: this.successMessageKey,
+        );
+      } else {
+        return RandomEventMessage(
+          event: this,
+          stock: stockFailure,
+          messageKey: this.failureMessageKey,
+        );
+      }
+
+    };
+  }
+
+  bool canHappen(Sloboda city) {
+    return Random().nextInt(100) <= 20 && satisfiesConditions(city);
   }
 }
