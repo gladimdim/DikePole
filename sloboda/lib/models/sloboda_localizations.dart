@@ -128,7 +128,7 @@ class RandomEventLocalizations extends InternalLocalizations {
       'koshoviyPohidYes':
           'You decided to join the Koshoviy raid into the Crimea. The cossacks dispatched. Let\'s wait on their return!',
       'koshoviyPohidNo':
-          'You decided to not participat ein Koshoviy raid into the Crimea. The cossacks stayed home and continued on their duties.',
+          'You decided not to participate in Koshoviy raid into the Crimea. The cossacks stayed home and continued on their duties.',
       'tartarRaid': 'Tatars raided your Sloboda.',
       'successTartarRaid':
           'Tartar raid was a big failure for them. You managed to kill their warriors. Enjoy your loot!',
@@ -143,8 +143,14 @@ class RandomEventLocalizations extends InternalLocalizations {
           'Locust invaded your lands. The grain is destroyed, you lost some food and horses.',
       'failureSaranaInvasion':
           'Locust invaded nearby lands. You were lucky the wind blew to the east. You can continue doing your own business.',
-      'successChildrenPopulation':
+      'childrenPopulation':
           'Happy news came from your settlement! A lot of kids were born this spring and they are all healthy and ready to protect you!',
+      'successSteppeFire':
+          'The Tatars set fire to the steppe. You threw all your might to save the cattle and the harvest. But this time the element turned out to be stronger than your best. The fire reached the village and you lost grain, horses, wood and a bit of gunpowder.',
+      'failureSteppeFire':
+          'The Tatars set fire to the steppe. You threw all your might to save the cattle and the harvest. In time to set fire to the steppe on the other side, you have removed the threat from your village. For that, you hunted the exiled game and caught several wild horses that were hiding from the fire near your settlement.',
+      'runnersFromSuppresion':
+          'In the occupied part of Ukraine peasant performances took place again in order to overthrow the Poles\' yoke. After a few weeks, the Poles defeated the rebels and began to persecute the Ukrainians even more strongly. Fugitives with your own property have come to you on free lands. Now your village is getting stronger. Get ready to avenge your hurt!',
     },
     'uk': {
       'koshoviyPohid':
@@ -169,12 +175,14 @@ class RandomEventLocalizations extends InternalLocalizations {
           'Сарана налетіла на ваші угіддя. Поїла поля. Тепер вам і вашим коням немає чого їсти. Ви втратили їжу і декілька коней.',
       'failureSaranaInvasion':
           'Сарана пролетіла на горизонті. Вам пощастило, що вітер дув на схід. Тепер ви можете продовжити займатися своїми справами.',
-      'successChildrenPopulation':
+      'childrenPopulation':
           'Щаслива звістка з вашого селища. Народилося багато дітей. Всі вони здорові і готові швидко рости, щоб стати у стрій з дорослими до оборони рідного краю.',
       'successSteppeFire':
           'Татари підпалили степ. Ви кинули усі сили, щоб врятувати худобу і урожай. Але стихія в цей раз виявилася сильнішою за ваші потуги. Вогонь дійшов до селища і ви втратили збіжжя, коней, деревину та трохи пороху.',
       'failureSteppeFire':
           'Татари підпалили степ. Ви кинули усі сили, щоб врятувати худобу і урожай. Вчасно підпаливши степ з іншої сторони, ви відвели загрозу від вашого селища. За те ви вполювали вигнану дичину і спіймали декілька диких коней, які ховалися від вогню біля вашого поселення.',
+      'runnersFromSuppresion':
+          'На окупованій частині України знову відбулися селянські виступи з метою скинути ярмо поляків. Після декількох тижнів поляки розбили повстанців і почали ще сильніші гоніння на українців. До вас, на вільні землі, прийшли утікачі з власним майном. Тепер ваше селище стає ще сильнішим. Готуйтеся помститися за кривду!',
     }
   };
 }
@@ -216,7 +224,8 @@ class SlobodaLocalizations {
           return key;
       }
     } else {
-      return _localizedValues[locale.languageCode][split[0]];
+      final translatedValue = _localizedValues[locale.languageCode][split[0]];
+      return translatedValue != null ? translatedValue : split[0];
     }
   }
 

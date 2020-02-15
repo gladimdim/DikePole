@@ -258,7 +258,7 @@ class Sloboda {
 
   _moveToNextSeason() {
     currentSeason = nextSeason(currentSeason);
-    if (currentSeason == CITY_SEASONS.WINTER) {
+    if (currentSeason is WinterSeason) {
       currentYear++;
     }
   }
