@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
+import 'package:sloboda/models/buildings/city_buildings/church.dart';
 import 'package:sloboda/models/buildings/city_buildings/city_building.dart';
 import 'package:sloboda/models/city_event.dart';
 import 'package:sloboda/models/resources/resource.dart';
@@ -56,6 +57,7 @@ abstract class RandomTurnEvent {
     ChildrenPopulation(),
     SteppeFire(),
     RunnersFromSuppression(),
+    SettlersArrived(),
   ];
 }
 
@@ -343,6 +345,42 @@ class RunnersFromSuppression extends RandomTurnEvent {
     },
     (Sloboda city) {
       return city.currentYear % 3 == 0;
+    }
+  ];
+
+  bool canHappen(Sloboda city) {
+    return Random().nextInt(100) <= 20 && satisfiesConditions(city);
+  }
+}
+
+class SettlersArrived extends RandomTurnEvent {
+  String localizedKey = 'randomTurnEvent.settlersArrived';
+
+  Stock stockSuccess = Stock(
+    {
+      RESOURCE_TYPES.FOOD: 40,
+      RESOURCE_TYPES.WOOD: 20,
+      RESOURCE_TYPES.FIREARM: 15,
+      RESOURCE_TYPES.HORSE: 10,
+      RESOURCE_TYPES.IRON_ORE: 10,
+      RESOURCE_TYPES.STONE: 10,
+    },
+  );
+
+  List<Function> conditions = [
+    (Sloboda city) {
+      return city.currentSeason is AutumnSeason;
+    },
+    (Sloboda city) {
+      return city.properties[CITY_PROPERTIES.GLORY] > 20;
+    },
+    (Sloboda city) {
+      try {
+        city.cityBuildings.firstWhere((element) => element is Church);
+        return true;
+      } catch (e) {
+        return false;
+      }
     }
   ];
 

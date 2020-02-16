@@ -151,6 +151,7 @@ class RandomEventLocalizations extends InternalLocalizations {
           'The Tatars set fire to the steppe. You threw all your might to save the cattle and the harvest. In time to set fire to the steppe on the other side, you have removed the threat from your village. For that, you hunted the exiled game and caught several wild horses that were hiding from the fire near your settlement.',
       'runnersFromSuppresion':
           'In the occupied part of Ukraine peasant performances took place again in order to overthrow the Poles\' yoke. After a few weeks, the Poles defeated the rebels and began to persecute the Ukrainians even more strongly. Fugitives with your own property have come to you on free lands. Now your village is getting stronger. Get ready to avenge your hurt!',
+      'settlersArrived': 'A group of migrants from the north came to you. They fled from the lords throughout the village. Considering that your village is already well known and has a church, they have decided to join you. They took everything they needed with you. Now your Sloboda has become even stronger.',
     },
     'uk': {
       'koshoviyPohid':
@@ -183,6 +184,7 @@ class RandomEventLocalizations extends InternalLocalizations {
           'Татари підпалили степ. Ви кинули усі сили, щоб врятувати худобу і урожай. Вчасно підпаливши степ з іншої сторони, ви відвели загрозу від вашого селища. За те ви вполювали вигнану дичину і спіймали декілька диких коней, які ховалися від вогню біля вашого поселення.',
       'runnersFromSuppresion':
           'На окупованій частині України знову відбулися селянські виступи з метою скинути ярмо поляків. Після декількох тижнів поляки розбили повстанців і почали ще сильніші гоніння на українців. До вас, на вільні землі, прийшли утікачі з власним майном. Тепер ваше селище стає ще сильнішим. Готуйтеся помститися за кривду!',
+      'settlersArrived': 'До вас прийшла група переселенців з півночі. Вони втікли від панів всім селом. Враховуючи, що ваше селище доволі відоме уже та має церкву, вони вирішили приєднатися до вас. З собою вони взяли все необхідне. Тепер ваша Слобода стала ще сильнішою.',
     }
   };
 }

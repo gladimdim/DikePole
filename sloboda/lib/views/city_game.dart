@@ -46,6 +46,7 @@ class _CityGameState extends State<CityGame> {
   initState() {
     super.initState();
 
+//    city = Sloboda(stock: Stock.bigStock());
     city = Sloboda();
     city.name = 'Dimitrova';
     city.buildBuilding(
