@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:sloboda/models/buildings/city_buildings/church.dart';
 import 'package:sloboda/models/buildings/city_buildings/city_building.dart';
 import 'package:sloboda/models/city_event.dart';
+import 'package:sloboda/models/city_properties.dart';
 import 'package:sloboda/models/resources/resource.dart';
 import 'package:sloboda/models/sloboda.dart';
 import 'package:sloboda/models/stock.dart';
@@ -49,7 +50,8 @@ abstract class RandomTurnEvent {
   bool canHappen(Sloboda city) {
     bool canHappen =
         Random().nextInt(100) < probability && satisfiesConditions(city);
-    debugPrint('Event: $localizedKey satisfies: ${satisfiesConditions(city)}, will happen: $canHappen');
+    debugPrint(
+        'Event: $localizedKey satisfies: ${satisfiesConditions(city)}, will happen: $canHappen');
     return canHappen;
   }
 
@@ -93,9 +95,7 @@ abstract class ChoicableRandomTurnEvent extends RandomTurnEvent {
       this.execute(city);
       return this.postExecute(city);
     } else {
-      return () {
-        city.properties[CITY_PROPERTIES.GLORY] -= 1;
-      };
+      return () {};
     }
   }
 
@@ -142,7 +142,7 @@ class KoshoviyPohid extends ChoicableRandomTurnEvent {
     return () {
       bool success = r <= 80;
       if (success) {
-        city.properties[CITY_PROPERTIES.GLORY] += 10;
+        city.props + CityProps({CITY_PROPERTIES.GLORY: 10});
       }
       return RandomEventMessage(
           event: this,
@@ -187,13 +187,13 @@ class TartarsRaid extends RandomTurnEvent {
     return () {
       final r = Random().nextInt(10);
       if (r > 8) {
-        city.properties[CITY_PROPERTIES.GLORY] -= 1;
+        city.props + CityProps({CITY_PROPERTIES.GLORY: - 1});
         return RandomEventMessage(
             event: this,
             stock: stockFailure,
             messageKey: this.failureMessageKey);
       } else {
-        city.properties[CITY_PROPERTIES.GLORY] += 5;
+        city.props + CityProps({CITY_PROPERTIES.GLORY: 5});
         return RandomEventMessage(
             event: this,
             stock: stockSuccess,
@@ -369,7 +369,7 @@ class SettlersArrived extends RandomTurnEvent {
       return city.currentSeason is AutumnSeason;
     },
     (Sloboda city) {
-      return city.properties[CITY_PROPERTIES.GLORY] > 20;
+      return city.props.getByType(CITY_PROPERTIES.GLORY) > 20;
     },
     (Sloboda city) {
       try {
@@ -384,7 +384,7 @@ class SettlersArrived extends RandomTurnEvent {
 
 class GuestsFromSich extends RandomTurnEvent {
   String localizedKey = 'randomTurnEvent.guestsFromSich';
-  int probability = 10;
+  int probability = 30;
 
   Stock stockSuccess = Stock(
     {
@@ -400,7 +400,7 @@ class GuestsFromSich extends RandomTurnEvent {
       return city.currentSeason is WinterSeason;
     },
     (Sloboda city) {
-      return city.properties[CITY_PROPERTIES.GLORY] > 10;
+      return city.props.getByType(CITY_PROPERTIES.GLORY) > 10;
     },
   ];
 }

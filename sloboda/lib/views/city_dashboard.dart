@@ -103,10 +103,10 @@ class _CityDashboardState extends State<CityDashboard> {
                               SizedBox(
                                 width: 32,
                               ),
-                              Text(widget.city.properties[v].toString()),
+                              Text(widget.city.props.getByType(v).toString()),
                               SaldoViewShower(
                                 value: widget.city.simulateCityProps()[v],
-                                reference: widget.city.properties[v],
+                                reference: widget.city.props.getByType(v),
                                 showValue: true,
                               )
                             ]),

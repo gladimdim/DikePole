@@ -23,7 +23,7 @@ void main() {
     });
 
     test("Inits with 15 citizens", () {
-      expect(city.properties[CITY_PROPERTIES.CITIZENS], equals(15));
+      expect(city.props.getByType(CITY_PROPERTIES.CITIZENS), equals(15));
     });
 
     test("Inits with default buildings", () {

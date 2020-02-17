@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:async/async.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter/foundation.dart';
+
 import 'package:sloboda/animations/slideable_button.dart';
 import 'package:sloboda/components/button_text.dart';
 import 'package:sloboda/components/divider.dart';
 import 'package:sloboda/components/title_text.dart';
 import 'package:sloboda/inherited_city.dart';
 import 'package:sloboda/models/app_preferences.dart';
+import 'package:sloboda/models/city_properties.dart';
 import 'package:sloboda/models/events/random_turn_events.dart';
 import 'package:sloboda/models/sloboda_localizations.dart';
 import 'package:sloboda/models/stock.dart';
@@ -47,8 +50,11 @@ class _CityGameState extends State<CityGame> {
   initState() {
     super.initState();
 
-//    city = Sloboda(stock: Stock.bigStock());
-    city = Sloboda();
+    if (kReleaseMode) {
+      city = Sloboda();
+    } else {
+      city = Sloboda(stock: Stock.bigStock(), props: CityProps.bigProps());
+    }
     city.name = 'Dimitrova';
     city.buildBuilding(
         ResourceBuilding.fromType(RESOURCE_BUILDING_TYPES.FIELD));

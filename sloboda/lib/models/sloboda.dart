@@ -4,6 +4,7 @@ import 'package:sloboda/models/buildings/resource_buildings/nature_resource.dart
 import 'package:sloboda/models/buildings/resource_buildings/resource_building.dart';
 import 'package:sloboda/models/citizen.dart';
 import 'package:sloboda/models/city_event.dart';
+import 'package:sloboda/models/city_properties.dart';
 import 'package:sloboda/models/events/random_turn_events.dart';
 import 'package:sloboda/models/resources/resource.dart';
 import 'package:sloboda/models/buildings/city_buildings/city_building.dart';
@@ -20,12 +21,6 @@ class Sloboda {
     CityBuilding.fromType(CITY_BUILDING_TYPES.HOUSE),
   ];
   List<Citizen> citizens = [];
-  Map<CITY_PROPERTIES, int> properties = {
-    CITY_PROPERTIES.GLORY: 1,
-    CITY_PROPERTIES.DEFENSE: 1,
-    CITY_PROPERTIES.CITIZENS: 15,
-    CITY_PROPERTIES.FAITH: 1,
-  };
 
   List<ResourceBuilding> resourceBuildings = [];
   List<NaturalResource> naturalResources = [
@@ -36,17 +31,21 @@ class Sloboda {
   final List<CityEvent> events = [];
 
   Stock stock;
+  CityProps props;
 
   BehaviorSubject _innerChanges = BehaviorSubject();
   ValueStream changes;
 
   List<Function> _nextRandomEvents = [];
 
-  Sloboda({this.name, this.stock}) {
+  Sloboda({this.name, this.stock, this.props}) {
     if (stock == null) {
       stock = Stock();
     }
-    for (var i = 0; i < properties[CITY_PROPERTIES.CITIZENS]; i++) {
+    if (props == null) {
+      props = CityProps();
+    }
+    for (var i = 0; i < props.getByType(CITY_PROPERTIES.CITIZENS); i++) {
       citizens.add(Citizen());
     }
     changes = _innerChanges.stream;
@@ -148,7 +147,7 @@ class Sloboda {
 
   List getChoicableRandomEvents() {
     final _events = RandomTurnEvent.allEvents.where((event) {
-      return  event is ChoicableRandomTurnEvent && event.canHappen(this);
+      return event is ChoicableRandomTurnEvent && event.canHappen(this);
     }).toList();
 
     return _events;
@@ -175,10 +174,10 @@ class Sloboda {
     _nextRandomEvents.add(f);
   }
 
-  Citizen addCitizens({amount = 1}) {
+  void addCitizens({amount = 1}) {
     for (var i = 0; i < amount; i++) {
       citizens.add(Citizen());
-      properties[CITY_PROPERTIES.CITIZENS]++;
+      props.addToType(CITY_PROPERTIES.CITIZENS, 1);
     }
   }
 
@@ -217,7 +216,7 @@ class Sloboda {
         if (e.key == CITY_PROPERTIES.CITIZENS) {
           citizens.add(Citizen());
         }
-        properties[e.key] += e.value;
+        props.addToType(e.key, e.value);
       });
     });
 
@@ -265,12 +264,12 @@ class Sloboda {
 
   Map<CITY_PROPERTIES, int> simulateCityProps() {
     Map<CITY_PROPERTIES, int> newMap =
-        cityBuildings.fold(Map.from(properties), (Map value, cb) {
+        cityBuildings.fold(props.asMap(), (Map value, cb) {
       var prod = cb.produces;
       if (value.containsKey(prod)) {
         value[prod] += cb.outputAmount;
       } else {
-        value[prod] = properties[prod];
+        value[prod] = props.getByType(prod);
       }
       return value;
     });
