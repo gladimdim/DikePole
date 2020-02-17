@@ -25,6 +25,8 @@ abstract class RandomTurnEvent {
   String successMessageKey;
   String failureMessageKey;
 
+  int probability = 0;
+
   bool satisfiesConditions(Sloboda city) {
     for (var func in conditions) {
       if (!func(city)) {
@@ -45,7 +47,10 @@ abstract class RandomTurnEvent {
   }
 
   bool canHappen(Sloboda city) {
-    return satisfiesConditions(city);
+    bool canHappen =
+        Random().nextInt(100) < probability && satisfiesConditions(city);
+    debugPrint('Event: $localizedKey satisfies: ${satisfiesConditions(city)}, will happen: $canHappen');
+    return canHappen;
   }
 
   RandomTurnEvent({this.localizedKey});
@@ -58,6 +63,7 @@ abstract class RandomTurnEvent {
     SteppeFire(),
     RunnersFromSuppression(),
     SettlersArrived(),
+    GuestsFromSich(),
   ];
 }
 
@@ -72,10 +78,14 @@ abstract class ChoicableRandomTurnEvent extends RandomTurnEvent {
 
   Function postExecute(Sloboda city) {
     var r = Random().nextInt(10);
-    return () => RandomEventMessage(
-        event: this,
-        stock: r > 5 ? stockSuccess : stockFailure,
-        messageKey: r > 5 ? this.successMessageKey : this.failureMessageKey);
+    return () {
+      bool success = r > 8;
+      return RandomEventMessage(
+          event: this,
+          stock: success ? stockSuccess : stockFailure,
+          messageKey:
+              success ? this.successMessageKey : this.failureMessageKey);
+    };
   }
 
   Function makeChoice(bool yes, Sloboda city) {
@@ -99,6 +109,8 @@ class KoshoviyPohid extends ChoicableRandomTurnEvent {
   String failureMessageKey = 'randomTurnEvent.failureKoshoviyPohid';
   String localizedKeyYes = 'randomTurnEvent.koshoviyPohidYes';
   String localizedKeyNo = 'randomTurnEvent.koshoviyPohidNo';
+
+  int probability = 30;
 
   Stock stockSuccess = Stock(
     {
@@ -125,15 +137,19 @@ class KoshoviyPohid extends ChoicableRandomTurnEvent {
     }
   ];
 
-  @override
-  bool canHappen(Sloboda city) {
-    if (satisfiesConditions(city)) {
-      final r = Random();
-      final v = r.nextInt(10);
-      return v >= 8;
-    } else {
-      return false;
-    }
+  Function postExecute(Sloboda city) {
+    var r = Random().nextInt(100);
+    return () {
+      bool success = r <= 80;
+      if (success) {
+        city.properties[CITY_PROPERTIES.GLORY] += 10;
+      }
+      return RandomEventMessage(
+          event: this,
+          stock: success ? stockSuccess : stockFailure,
+          messageKey:
+              success ? this.successMessageKey : this.failureMessageKey);
+    };
   }
 }
 
@@ -141,6 +157,7 @@ class TartarsRaid extends RandomTurnEvent {
   String successMessageKey = 'randomTurnEvent.successTartarRaid';
   String failureMessageKey = 'randomTurnEvent.failureTartarRaid';
   String localizedKey = 'randomTurnEvent.tartarRaid';
+  int probability = 5;
 
   Stock stockFailure = Stock(
     {
@@ -170,11 +187,13 @@ class TartarsRaid extends RandomTurnEvent {
     return () {
       final r = Random().nextInt(10);
       if (r > 8) {
+        city.properties[CITY_PROPERTIES.GLORY] -= 1;
         return RandomEventMessage(
             event: this,
             stock: stockFailure,
             messageKey: this.failureMessageKey);
       } else {
+        city.properties[CITY_PROPERTIES.GLORY] += 5;
         return RandomEventMessage(
             event: this,
             stock: stockSuccess,
@@ -182,20 +201,12 @@ class TartarsRaid extends RandomTurnEvent {
       }
     };
   }
-
-  @override
-  bool canHappen(Sloboda city) {
-    if (satisfiesConditions(city)) {
-      return Random().nextInt(100) <= 5;
-    } else {
-      return false;
-    }
-  }
 }
 
 class SaranaInvasion extends RandomTurnEvent {
   String successMessageKey = 'randomTurnEvent.successSaranaInvasion';
   String failureMessageKey = 'randomTurnEvent.failureSaranaInvasion';
+  int probability = 5;
 
   Stock stockSuccess = Stock(
     {
@@ -230,20 +241,11 @@ class SaranaInvasion extends RandomTurnEvent {
       }
     };
   }
-
-  @override
-  bool canHappen(Sloboda city) {
-    if (satisfiesConditions(city)) {
-      return Random().nextInt(100) <= 5;
-    } else {
-      return false;
-    }
-  }
 }
 
 class ChildrenPopulation extends RandomTurnEvent {
   String localizedKey = 'randomTurnEvent.childrenPopulation';
-
+  int probability = 100;
   Stock stockSuccess = Stock(
     {},
   );
@@ -278,6 +280,7 @@ class SteppeFire extends RandomTurnEvent {
   String successMessageKey = 'randomTurnEvent.successSteppeFire';
   String failureMessageKey = 'randomTurnEvent.failureSteppeFire';
   String localizedKey = 'randomTurnEvent.steppeFire';
+  int probability = 20;
 
   Stock stockSuccess = Stock(
     {
@@ -319,14 +322,11 @@ class SteppeFire extends RandomTurnEvent {
       }
     };
   }
-
-  bool canHappen(Sloboda city) {
-    return Random().nextInt(100) <= 20 && satisfiesConditions(city);
-  }
 }
 
 class RunnersFromSuppression extends RandomTurnEvent {
   String localizedKey = 'randomTurnEvent.runnersFromSuppresion';
+  int probability = 20;
 
   Stock stockSuccess = Stock(
     {
@@ -347,14 +347,11 @@ class RunnersFromSuppression extends RandomTurnEvent {
       return city.currentYear % 3 == 0;
     }
   ];
-
-  bool canHappen(Sloboda city) {
-    return Random().nextInt(100) <= 20 && satisfiesConditions(city);
-  }
 }
 
 class SettlersArrived extends RandomTurnEvent {
   String localizedKey = 'randomTurnEvent.settlersArrived';
+  int probability = 20;
 
   Stock stockSuccess = Stock(
     {
@@ -383,8 +380,27 @@ class SettlersArrived extends RandomTurnEvent {
       }
     }
   ];
+}
 
-  bool canHappen(Sloboda city) {
-    return Random().nextInt(100) <= 20 && satisfiesConditions(city);
-  }
+class GuestsFromSich extends RandomTurnEvent {
+  String localizedKey = 'randomTurnEvent.guestsFromSich';
+  int probability = 10;
+
+  Stock stockSuccess = Stock(
+    {
+      RESOURCE_TYPES.FOOD: 40,
+      RESOURCE_TYPES.FIREARM: 20,
+      RESOURCE_TYPES.HORSE: 10,
+      RESOURCE_TYPES.POWDER: 20,
+    },
+  );
+
+  List<Function> conditions = [
+    (Sloboda city) {
+      return city.currentSeason is WinterSeason;
+    },
+    (Sloboda city) {
+      return city.properties[CITY_PROPERTIES.GLORY] > 10;
+    },
+  ];
 }

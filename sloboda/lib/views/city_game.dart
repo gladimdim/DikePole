@@ -9,6 +9,7 @@ import 'package:sloboda/inherited_city.dart';
 import 'package:sloboda/models/app_preferences.dart';
 import 'package:sloboda/models/events/random_turn_events.dart';
 import 'package:sloboda/models/sloboda_localizations.dart';
+import 'package:sloboda/models/stock.dart';
 import 'package:sloboda/views/locale_selection.dart';
 import 'package:sloboda/models/buildings/resource_buildings/resource_building.dart';
 import 'package:sloboda/models/sloboda.dart';
