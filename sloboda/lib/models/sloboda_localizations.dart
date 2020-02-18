@@ -151,8 +151,13 @@ class RandomEventLocalizations extends InternalLocalizations {
           'The Tatars set fire to the steppe. You threw all your might to save the cattle and the harvest. In time to set fire to the steppe on the other side, you have removed the threat from your village. For that, you hunted the exiled game and caught several wild horses that were hiding from the fire near your settlement.',
       'runnersFromSuppresion':
           'In the occupied part of Ukraine peasant performances took place again in order to overthrow the Poles\' yoke. After a few weeks, the Poles defeated the rebels and began to persecute the Ukrainians even more strongly. Fugitives with your own property have come to you on free lands. Now your village is getting stronger. Get ready to avenge your hurt!',
-      'settlersArrived': 'A group of migrants from the north came to you. They fled from the lords throughout the village. Considering that your village is already well known and has a church, they have decided to join you. They took everything they needed with you. Now your Sloboda has become even stronger.',
-      'guestsFromSich': 'With the first snow cossacks from Sich arrived at your Sloboda. Your village is quite famous amongst the Sich, so they decided to spend the winter with you. They brought great gifts with them.',
+      'settlersArrived':
+          'A group of migrants from the north came to you. They fled from the lords throughout the village. Considering that your village is already well known and has a church, they have decided to join you. They took everything they needed with you. Now your Sloboda has become even stronger.',
+      'guestsFromSich':
+          'With the first snow cossacks from Sich arrived at your Sloboda. Your village is quite famous amongst the Sich, so they decided to spend the winter with you. They brought great gifts with them.',
+      'successChambulCapture': 'Your Cossacks spotted the Tatars\' chambul. Seeing that they were few, they attacked them. After a short skirmish, the Tatars fled. Horses are now yours.',
+      'failureChambulCapture':
+          'Your Cossacks spotted the Tatars\' chambul. Before the attack, another group came to the Tatars. Your Cossacks did not dare to fight and left.',
     },
     'uk': {
       'koshoviyPohid':
@@ -185,8 +190,14 @@ class RandomEventLocalizations extends InternalLocalizations {
           'Татари підпалили степ. Ви кинули усі сили, щоб врятувати худобу і урожай. Вчасно підпаливши степ з іншої сторони, ви відвели загрозу від вашого селища. За те ви вполювали вигнану дичину і спіймали декілька диких коней, які ховалися від вогню біля вашого поселення.',
       'runnersFromSuppresion':
           'На окупованій частині України знову відбулися селянські виступи з метою скинути ярмо поляків. Після декількох тижнів поляки розбили повстанців і почали ще сильніші гоніння на українців. До вас, на вільні землі, прийшли утікачі з власним майном. Тепер ваше селище стає ще сильнішим. Готуйтеся помститися за кривду!',
-      'settlersArrived': 'До вас прийшла група переселенців з півночі. Вони втікли від панів всім селом. Враховуючи, що ваше селище доволі відоме уже та має церкву, вони вирішили приєднатися до вас. З собою вони взяли все необхідне. Тепер ваша Слобода стала ще сильнішою.',
-      'guestsFromSich': 'З першим снігом до вас прийшли запорожці на зимівлю. Ваше селище доволі відоме серед січовиків. То ж вони вирішили у вас перебути зиму. З собою козаки принесли вам подарунки. Готуйтеся до літніх боїв.',
+      'settlersArrived':
+          'До вас прийшла група переселенців з півночі. Вони втікли від панів всім селом. Враховуючи, що ваше селище доволі відоме уже та має церкву, вони вирішили приєднатися до вас. З собою вони взяли все необхідне. Тепер ваша Слобода стала ще сильнішою.',
+      'guestsFromSich':
+          'З першим снігом до вас прийшли запорожці на зимівлю. Ваше селище доволі відоме серед січовиків. То ж вони вирішили у вас перебути зиму. З собою козаки принесли вам подарунки. Готуйтеся до літніх боїв.',
+      'successChambulCapture':
+          'Ваші козаки помітили чамбул татар. Упевнившись, що їх було мало, вони напали на них. Після короткої сутички татари утікли. Чамбул коней тепер ваш.',
+      'failureChambulCapture':
+          'Ваші козаки помітили чамбул татар. Перед самою атакою до татар підійшла ще одна група. Ваші козаки не наважилися вступати у сутичку і відійшли.',
     }
   };
 }
@@ -373,6 +384,6 @@ class SlobodaLocalizations {
 
   static String get addWorker {
     return _localizedValues[SlobodaLocalizations.locale.languageCode]
-    ['addWorker'];
+        ['addWorker'];
   }
 }

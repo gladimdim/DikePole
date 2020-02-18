@@ -66,6 +66,7 @@ abstract class RandomTurnEvent {
     RunnersFromSuppression(),
     SettlersArrived(),
     GuestsFromSich(),
+    ChambulCapture(),
   ];
 }
 
@@ -134,6 +135,14 @@ class KoshoviyPohid extends ChoicableRandomTurnEvent {
     },
     (Sloboda city) {
       return city.citizens.length > 10;
+    },
+    (Sloboda city) {
+    bool canHappen =
+       city.events
+          .where(happenedInYearFn(city.currentYear))
+          .where(eventHappenedFn<KoshoviyPohid>())
+          .isEmpty;
+    return canHappen;
     }
   ];
 
@@ -187,7 +196,7 @@ class TartarsRaid extends RandomTurnEvent {
     return () {
       final r = Random().nextInt(10);
       if (r > 8) {
-        city.props + CityProps({CITY_PROPERTIES.GLORY: - 1});
+        city.props + CityProps({CITY_PROPERTIES.GLORY: -1});
         return RandomEventMessage(
             event: this,
             stock: stockFailure,
@@ -403,4 +412,50 @@ class GuestsFromSich extends RandomTurnEvent {
       return city.props.getByType(CITY_PROPERTIES.GLORY) > 10;
     },
   ];
+}
+
+class ChambulCapture extends RandomTurnEvent {
+  String successMessageKey = 'randomTurnEvent.successChambulCapture';
+  String failureMessageKey = 'randomTurnEvent.failureChambulCapture';
+  String localizedKey = 'randomTurnEvent.steppeFire';
+  int probability = 20;
+
+  Stock stockSuccess = Stock(
+    {
+      RESOURCE_TYPES.HORSE: 20,
+    },
+  );
+
+  List<Function> conditions = [
+    (Sloboda city) {
+      return city.currentSeason is AutumnSeason;
+    }
+  ];
+
+  Function execute(Sloboda city) {
+    return () {
+      if (Random().nextInt(100) <= 50) {
+        return RandomEventMessage(
+          event: this,
+          stock: stockSuccess,
+          messageKey: this.successMessageKey,
+        );
+      } else {
+        return RandomEventMessage(
+          event: this,
+          stock: stockFailure,
+          messageKey: this.failureMessageKey,
+        );
+      }
+    };
+  }
+}
+
+Function eventHappenedFn<EventType>() {
+  return (CityEvent event) =>
+      event.events.where((subEvent) => subEvent.event is EventType).isNotEmpty;
+}
+
+Function happenedInYearFn(int year) {
+  return (CityEvent event) => event.yearHappened == year;
 }
