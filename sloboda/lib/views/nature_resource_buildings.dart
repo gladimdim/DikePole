@@ -3,6 +3,7 @@ import 'package:sloboda/animations/slideable_button.dart';
 import 'package:sloboda/components/title_text.dart';
 import 'package:sloboda/models/buildings/resource_buildings/nature_resource.dart';
 import 'package:sloboda/models/sloboda.dart';
+import 'package:sloboda/models/sloboda_localizations.dart';
 import 'package:sloboda/views/components/resource_building_output_view.dart';
 import 'package:sloboda/views/components/soft_container.dart';
 
@@ -66,7 +67,7 @@ class _NatureResourceBuildingScreenState
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Center(
-                          child: TitleText('Add worker'),
+                          child: TitleText(SlobodaLocalizations.addWorker),
                         ),
                       ),
                     ),
@@ -80,7 +81,7 @@ class _NatureResourceBuildingScreenState
                     child: Padding(
                       padding: const EdgeInsets.all(16.0),
                       child: Column(children: [
-                        Center(child: Text('Assigned workers')),
+                        Center(child: Text(SlobodaLocalizations.assignedWorkers)),
                         ...building.assignedHumans.map(
                           (h) {
                             return Padding(

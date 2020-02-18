@@ -68,11 +68,13 @@ flutter:
     - images/city_buildings/wall.png
     - images/city_buildings/watch_tower.png
     - images/city_buildings/church.png
+    - images/city_buildings/tower.png
     - images/city_buildings/citizen_64.png
     - images/city_buildings/kurin_64.png
     - images/city_buildings/wall_64.png
     - images/city_buildings/watch_tower_64.png
     - images/city_buildings/church_64.png
+    - images/city_buildings/tower_64.png
     # UI part
     - images/ui/arrow_right.png
 

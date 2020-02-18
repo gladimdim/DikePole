@@ -257,6 +257,7 @@ class SlobodaLocalizations {
       'destroyBuilding': 'Destroy Building',
       'yesToRandomEvent': 'Yes, join event.',
       'noToRandomEvent': 'No, leave me alone',
+      'addWorker': 'Add worker',
     },
     'uk': {
       'overview': 'Головна',
@@ -281,6 +282,7 @@ class SlobodaLocalizations {
       'destroyBuilding': 'Зруйнувати будівлю',
       'yesToRandomEvent': 'Так, приєднатися до події.',
       'noToRandomEvent': 'Ні, в цей раз пропущу.',
+      'addWorker': 'Додати робітника',
     }
   };
 
@@ -367,5 +369,10 @@ class SlobodaLocalizations {
   static String get noToRandomEvent {
     return _localizedValues[SlobodaLocalizations.locale.languageCode]
         ['noToRandomEvent'];
+  }
+
+  static String get addWorker {
+    return _localizedValues[SlobodaLocalizations.locale.languageCode]
+    ['addWorker'];
   }
 }

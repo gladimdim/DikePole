@@ -96,7 +96,7 @@ class _ResourceBuildingBuiltState extends State<ResourceBuildingBuilt> {
                         padding: const EdgeInsets.all(8.0),
                         child: Center(
                           child: TitleText(
-                            'Add worker',
+                            SlobodaLocalizations.addWorker,
                           ),
                         ),
                       ),
