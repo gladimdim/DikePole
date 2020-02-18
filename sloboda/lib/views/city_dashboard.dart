@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:sloboda/components/divider.dart';
 import 'package:sloboda/components/title_text.dart';
 import 'package:sloboda/models/buildings/city_buildings/city_building.dart';
+import 'package:sloboda/models/city_properties.dart';
 import 'package:sloboda/models/sloboda.dart';
 import 'package:sloboda/models/sloboda_localizations.dart';
 import 'package:sloboda/views/components/soft_container.dart';
@@ -25,7 +27,6 @@ class _CityDashboardState extends State<CityDashboard> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
-
             SoftContainer(
               child: StockFullView(
                 stock: widget.city.stock,
@@ -97,12 +98,10 @@ class _CityDashboardState extends State<CityDashboard> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: <Widget>[
                             TitleText(
-                              cityPropertiesToString(v),
+                              cityPropsToLocalizedString(v),
                             ),
                             Row(children: [
-                              SizedBox(
-                                width: 32,
-                              ),
+                              HDivider(),
                               Text(widget.city.props.getByType(v).toString()),
                               SaldoViewShower(
                                 value: widget.city.simulateCityProps()[v],

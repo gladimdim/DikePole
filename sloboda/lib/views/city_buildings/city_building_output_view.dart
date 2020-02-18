@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sloboda/models/buildings/city_buildings/city_building.dart';
 import 'package:sloboda/models/citizen.dart';
+import 'package:sloboda/models/city_properties.dart';
 import 'package:sloboda/models/sloboda_localizations.dart';
 
 class CityBuildingOutputView extends StatelessWidget {
@@ -22,7 +23,7 @@ class CityBuildingOutputView extends StatelessWidget {
                     Citizen.getIconPath(),
                     width: 64,
                   )
-                : Text(cityPropertiesToString(building.produces)),
+                : Text(cityPropsToLocalizedString(building.produces)),
           ],
         ),
       ],

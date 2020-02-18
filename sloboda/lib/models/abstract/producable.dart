@@ -2,6 +2,7 @@ import 'package:rxdart/rxdart.dart';
 import 'package:sloboda/models/buildings/resource_buildings/resource_building.dart';
 import 'package:sloboda/models/citizen.dart';
 import 'package:sloboda/models/resources/resource.dart';
+import 'package:sloboda/models/sloboda_localizations.dart';
 import 'package:sloboda/models/stock.dart';
 
 class Producable {
@@ -58,7 +59,7 @@ class Producable {
 
   void generate(Stock stock) {
     if (!hasWorkers()) {
-      throw NoWorkersAssignedException('${toLocalizedString()} has no assigned workers.');
+      throw NoWorkersAssignedException('${toLocalizedString()} ${SlobodaLocalizations.hasNoAssignedWorkers}');
     }
 
     if (requires.entries.length > 0) {

@@ -155,7 +155,8 @@ class RandomEventLocalizations extends InternalLocalizations {
           'A group of migrants from the north came to you. They fled from the lords throughout the village. Considering that your village is already well known and has a church, they have decided to join you. They took everything they needed with you. Now your Sloboda has become even stronger.',
       'guestsFromSich':
           'With the first snow cossacks from Sich arrived at your Sloboda. Your village is quite famous amongst the Sich, so they decided to spend the winter with you. They brought great gifts with them.',
-      'successChambulCapture': 'Your Cossacks spotted the Tatars\' chambul. Seeing that they were few, they attacked them. After a short skirmish, the Tatars fled. Horses are now yours.',
+      'successChambulCapture':
+          'Your Cossacks spotted the Tatars\' chambul. Seeing that they were few, they attacked them. After a short skirmish, the Tatars fled. Horses aref now yours.',
       'failureChambulCapture':
           'Your Cossacks spotted the Tatars\' chambul. Before the attack, another group came to the Tatars. Your Cossacks did not dare to fight and left.',
     },
@@ -174,7 +175,7 @@ class RandomEventLocalizations extends InternalLocalizations {
       'failureTartarRaid':
           'Ваші сили вчасно помітили татар в степу і підготувались до відсічі. Декількох татар застрелено, інші покидали речі і втіклі. Молодець!',
       'successKoshoviyPohid':
-          'Ви чудово сходили на татар. Застали їз зненацька і без всякого супротиву попалили їм курені, набравши добра. Вітаємо!',
+          'Ви чудово сходили на татар. Застали їх зненацька і без всякого супротиву попалили їм курені, набравши добра. Вітаємо!',
       'failureKoshoviyPohid':
           'Ваш рейд на татар зазнав поразки. Кіш було розбито. Ви втратили ресурси.',
       'saranaInvasion': 'Нашестя сарани.',
@@ -187,7 +188,7 @@ class RandomEventLocalizations extends InternalLocalizations {
       'successSteppeFire':
           'Татари підпалили степ. Ви кинули усі сили, щоб врятувати худобу і урожай. Але стихія в цей раз виявилася сильнішою за ваші потуги. Вогонь дійшов до селища і ви втратили збіжжя, коней, деревину та трохи пороху.',
       'failureSteppeFire':
-          'Татари підпалили степ. Ви кинули усі сили, щоб врятувати худобу і урожай. Вчасно підпаливши степ з іншої сторони, ви відвели загрозу від вашого селища. За те ви вполювали вигнану дичину і спіймали декілька диких коней, які ховалися від вогню біля вашого поселення.',
+          'Татари підпалили степ. Ви кинули усі сили, щоб врятувати худобу і урожай. Вчасно підпаливши степ з іншої сторони, ви відвели загрозу від вашого селища. Одночасно ви вполювали вигнану дичину і спіймали декілька диких коней, які ховалися від вогню біля вашого поселення.',
       'runnersFromSuppresion':
           'На окупованій частині України знову відбулися селянські виступи з метою скинути ярмо поляків. Після декількох тижнів поляки розбили повстанців і почали ще сильніші гоніння на українців. До вас, на вільні землі, прийшли утікачі з власним майном. Тепер ваше селище стає ще сильнішим. Готуйтеся помститися за кривду!',
       'settlersArrived':
@@ -269,6 +270,11 @@ class SlobodaLocalizations {
       'yesToRandomEvent': 'Yes, join event.',
       'noToRandomEvent': 'No, leave me alone',
       'addWorker': 'Add worker',
+      'hasNoAssignedWorker': 'has no assigned workers.',
+      'glory': 'Glory',
+      'faith': 'Faith',
+      'citizens': 'Citizens',
+      'defense': 'Defense level',
     },
     'uk': {
       'overview': 'Головна',
@@ -294,6 +300,11 @@ class SlobodaLocalizations {
       'yesToRandomEvent': 'Так, приєднатися до події.',
       'noToRandomEvent': 'Ні, в цей раз пропущу.',
       'addWorker': 'Додати робітника',
+      'hasNoAssignedWorkers': 'не має призначених робітників.',
+      'glory': 'Слава',
+      'faith': 'Віра',
+      'citizens': 'Жителі',
+      'defense': 'Рівень захисту',
     }
   };
 
@@ -385,5 +396,28 @@ class SlobodaLocalizations {
   static String get addWorker {
     return _localizedValues[SlobodaLocalizations.locale.languageCode]
         ['addWorker'];
+  }
+
+  static String get hasNoAssignedWorkers {
+    return _localizedValues[SlobodaLocalizations.locale.languageCode]
+        ['hasNoAssignedWorkers'];
+  }
+
+  static String get glory {
+    return _localizedValues[SlobodaLocalizations.locale.languageCode]['glory'];
+  }
+
+  static String get faith {
+    return _localizedValues[SlobodaLocalizations.locale.languageCode]['faith'];
+  }
+
+  static String get defense {
+    return _localizedValues[SlobodaLocalizations.locale.languageCode]
+        ['defense'];
+  }
+
+  static String get citizens {
+    return _localizedValues[SlobodaLocalizations.locale.languageCode]
+        ['citizens'];
   }
 }

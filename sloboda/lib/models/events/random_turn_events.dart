@@ -426,10 +426,15 @@ class ChambulCapture extends RandomTurnEvent {
     },
   );
 
+  Stock stockFailure = Stock({});
+
   List<Function> conditions = [
     (Sloboda city) {
       return city.currentSeason is AutumnSeason;
-    }
+    },
+    (Sloboda city) {
+    return city.stock.getByType(RESOURCE_TYPES.FIREARM) >= 5;
+    },
   ];
 
   Function execute(Sloboda city) {

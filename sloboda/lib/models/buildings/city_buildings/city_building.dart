@@ -40,19 +40,6 @@ enum CITY_BUILDING_TYPES { HOUSE, CHURCH, TOWER, WATCH_TOWER, WALL }
 
 enum CITY_PROPERTIES { FAITH, DEFENSE, GLORY, CITIZENS }
 
-String cityPropertiesToString(CITY_PROPERTIES prop) {
-  switch (prop) {
-    case CITY_PROPERTIES.CITIZENS:
-      return 'Citizens';
-    case CITY_PROPERTIES.DEFENSE:
-      return 'Defense';
-    case CITY_PROPERTIES.FAITH:
-      return 'Faith';
-    case CITY_PROPERTIES.GLORY:
-      return 'Glory';
-    default: throw 'City prop $prop is not recognized';
-  }
-}
 
 String cityPropertiesToIconPath(CITY_PROPERTIES prop) {
   switch (prop) {

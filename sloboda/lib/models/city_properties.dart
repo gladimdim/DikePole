@@ -1,4 +1,5 @@
 import 'package:sloboda/models/buildings/city_buildings/city_building.dart';
+import 'package:sloboda/models/sloboda_localizations.dart';
 
 class CityProps {
   Map<CITY_PROPERTIES, int> _props = {
@@ -57,5 +58,15 @@ class CityProps {
         }
       });
     }
+  }
+}
+
+String cityPropsToLocalizedString(CITY_PROPERTIES type) {
+  switch (type) {
+    case CITY_PROPERTIES.GLORY: return SlobodaLocalizations.glory;
+    case CITY_PROPERTIES.CITIZENS: return SlobodaLocalizations.citizens;
+    case CITY_PROPERTIES.FAITH: return SlobodaLocalizations.faith;
+    case CITY_PROPERTIES.DEFENSE: return SlobodaLocalizations.defense;
+    default: throw 'City property $type is not recognized';
   }
 }
