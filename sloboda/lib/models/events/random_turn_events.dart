@@ -1,6 +1,6 @@
 import 'dart:math';
 
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:sloboda/models/buildings/city_buildings/church.dart';
 import 'package:sloboda/models/buildings/city_buildings/city_building.dart';
 import 'package:sloboda/models/city_event.dart';
@@ -67,6 +67,8 @@ abstract class RandomTurnEvent {
     SettlersArrived(),
     GuestsFromSich(),
     ChambulCapture(),
+    MerchantVisit(),
+    UniteWithNeighbours(),
   ];
 }
 
@@ -137,12 +139,11 @@ class KoshoviyPohid extends ChoicableRandomTurnEvent {
       return city.citizens.length > 10;
     },
     (Sloboda city) {
-    bool canHappen =
-       city.events
+      bool canHappen = city.events
           .where(happenedInYearFn(city.currentYear))
           .where(eventHappenedFn<KoshoviyPohid>())
           .isEmpty;
-    return canHappen;
+      return canHappen;
     }
   ];
 
@@ -417,7 +418,6 @@ class GuestsFromSich extends RandomTurnEvent {
 class ChambulCapture extends RandomTurnEvent {
   String successMessageKey = 'randomTurnEvent.successChambulCapture';
   String failureMessageKey = 'randomTurnEvent.failureChambulCapture';
-  String localizedKey = 'randomTurnEvent.steppeFire';
   int probability = 20;
 
   Stock stockSuccess = Stock(
@@ -433,7 +433,7 @@ class ChambulCapture extends RandomTurnEvent {
       return city.currentSeason is AutumnSeason;
     },
     (Sloboda city) {
-    return city.stock.getByType(RESOURCE_TYPES.FIREARM) >= 5;
+      return city.stock.getByType(RESOURCE_TYPES.FIREARM) >= 5;
     },
   ];
 
@@ -454,6 +454,90 @@ class ChambulCapture extends RandomTurnEvent {
       }
     };
   }
+}
+
+class MerchantVisit extends RandomTurnEvent {
+  String localizedKey = 'randomTurnEvent.merchantVisit';
+  int probability = 100;
+
+  Function execute(Sloboda city) {
+    var fur = city.stock.getByType(
+      RESOURCE_TYPES.FUR,
+    );
+
+    var fish = city.stock.getByType(
+      RESOURCE_TYPES.FISH,
+    );
+    var stock = Stock({
+      RESOURCE_TYPES.FUR: -fur,
+      RESOURCE_TYPES.FISH: -fish,
+      RESOURCE_TYPES.MONEY: (fur + fish),
+    });
+    return () {
+      return RandomEventMessage(
+        event: this,
+        stock: stock,
+        messageKey: this.localizedKey,
+      );
+    };
+  }
+
+  List<Function> conditions = [
+    (Sloboda city) {
+      return city.currentSeason is AutumnSeason;
+    },
+    (Sloboda city) {
+      return city.stock.getByType(RESOURCE_TYPES.FUR) >= 20;
+    },
+    (Sloboda city) {
+      return city.stock.getByType(RESOURCE_TYPES.FISH) >= 20;
+    }
+  ];
+}
+
+class UniteWithNeighbours extends RandomTurnEvent {
+  String localizedKey = 'randomTurnEvent.uniteWithNeighbours';
+  int probability = 100;
+
+  Stock stockSuccess = Stock({
+    RESOURCE_TYPES.FUR: 30,
+    RESOURCE_TYPES.FISH: 30,
+    RESOURCE_TYPES.MONEY: 50,
+    RESOURCE_TYPES.FOOD: 100,
+    RESOURCE_TYPES.WOOD: 100,
+    RESOURCE_TYPES.STONE: 100,
+  });
+
+  Function execute(Sloboda city) {
+    return () {
+      city.addCitizens(amount: 20);
+      return RandomEventMessage(
+        event: this,
+        stock: stockSuccess,
+        messageKey: this.localizedKey,
+      );
+    };
+  }
+
+  List<Function> conditions = [
+    (Sloboda city) {
+      try {
+        city.cityBuildings.firstWhere((element) => element is Church);
+        return true;
+      } catch (e) {
+        return false;
+      }
+    },
+    (Sloboda city) {
+      return city.events.where(eventHappenedFn<UniteWithNeighbours>()).isEmpty;
+    },
+    (Sloboda city) {
+      return city.props.getByType(CITY_PROPERTIES.GLORY) > 20;
+    },
+        (Sloboda city) {
+      return city.props.getByType(CITY_PROPERTIES.DEFENSE) > 20;
+    }
+  ];
 }
 
 Function eventHappenedFn<EventType>() {

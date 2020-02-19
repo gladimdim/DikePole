@@ -159,6 +159,8 @@ class RandomEventLocalizations extends InternalLocalizations {
           'Your Cossacks spotted the Tatars\' chambul. Seeing that they were few, they attacked them. After a short skirmish, the Tatars fled. Horses aref now yours.',
       'failureChambulCapture':
           'Your Cossacks spotted the Tatars\' chambul. Before the attack, another group came to the Tatars. Your Cossacks did not dare to fight and left.',
+      'merchantVisit': 'A merchant came to visit you on the trip from the Crimea to Lithuania. He bought fur and fish from you. After resting for a week, the merchant headed further to Kyiv.',
+      'uniteWithNeighbours': 'Your efforts have given fruites. Due to the fact that your village is quite successful, has a church and can defend itself against the Tatars, the Cossacks from a nearby winter camp decided to move to you.',
     },
     'uk': {
       'koshoviyPohid':
@@ -199,6 +201,8 @@ class RandomEventLocalizations extends InternalLocalizations {
           'Ваші козаки помітили чамбул татар. Упевнившись, що їх було мало, вони напали на них. Після короткої сутички татари утікли. Чамбул коней тепер ваш.',
       'failureChambulCapture':
           'Ваші козаки помітили чамбул татар. Перед самою атакою до татар підійшла ще одна група. Ваші козаки не наважилися вступати у сутичку і відійшли.',
+      'merchantVisit': 'По дорозі з Криму в Литву до вас завітав торговець. Він викупив у вас хутра й рибу. Відпочивши тиждень, торговець попрямував далі в Київ.',
+      'uniteWithNeighbours': 'Ваші потуги далися взнаки. Через те, що ваше селище доволі успішне, має церкву і може боронитися від татар, козаки з сусіднього зимовника вирішили переселитися до вас',
     }
   };
 }
