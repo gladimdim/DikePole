@@ -24,7 +24,7 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   assets:
-    # city building
+    # resource buildings
     - images/resource_buildings/iron_mine.png
     - images/resource_buildings/field.png
     - images/resource_buildings/quarry.png
@@ -43,6 +43,7 @@ flutter:
     - images/resource_buildings/stable_64.png
     - images/resource_buildings/mill_64.png
     - images/resource_buildings/powder_cellar_64.png
+    # resources
     - images/resources/stone.png
     - images/resources/wood.png
     - images/resources/powder.png
@@ -63,6 +64,7 @@ flutter:
     - images/resources/fish_64.png
     - images/resources/horse_64.png
     - images/resources/firearm_64.png
+    # city buildings
     - images/city_buildings/citizen.png
     - images/city_buildings/kurin.png
     - images/city_buildings/wall.png
@@ -75,6 +77,9 @@ flutter:
     - images/city_buildings/watch_tower_64.png
     - images/city_buildings/church_64.png
     - images/city_buildings/tower_64.png
+    # city props
+    - images/city_props/glory.png
+    - images/city_props/glory_64.png
     # UI part
     - images/ui/arrow_right.png
 

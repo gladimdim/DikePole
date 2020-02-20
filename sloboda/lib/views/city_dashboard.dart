@@ -6,6 +6,7 @@ import 'package:sloboda/models/buildings/city_buildings/city_building.dart';
 import 'package:sloboda/models/city_properties.dart';
 import 'package:sloboda/models/sloboda.dart';
 import 'package:sloboda/models/sloboda_localizations.dart';
+import 'package:sloboda/views/city_property.dart';
 import 'package:sloboda/views/components/soft_container.dart';
 import 'package:sloboda/views/stock_view.dart';
 
@@ -95,20 +96,28 @@ class _CityDashboardState extends State<CityDashboard> {
                   children: CITY_PROPERTIES.values
                       .map(
                         (v) => Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
-                            TitleText(
-                              cityPropsToLocalizedString(v),
+                            Expanded(
+                              flex: 7,
+                              child: CityProperty(
+                                property: v,
+                              ),
                             ),
-                            Row(children: [
-                              HDivider(),
-                              Text(widget.city.props.getByType(v).toString()),
-                              SaldoViewShower(
-                                value: widget.city.simulateCityProps()[v],
-                                reference: widget.city.props.getByType(v),
-                                showValue: true,
-                              )
-                            ]),
+                            Expanded(
+                              flex: 3,
+                              child: Row(
+                                children: [
+                                  HDivider(),
+                                  Text(widget.city.props.getByType(v).toString()),
+                                  SaldoViewShower(
+                                    value: widget.city.simulateCityProps()[v],
+                                    reference: widget.city.props.getByType(v),
+                                    showValue: true,
+                                  )
+                                ],
+                              ),
+                            ),
                           ],
                         ),
                       )

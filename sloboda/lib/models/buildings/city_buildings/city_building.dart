@@ -50,7 +50,7 @@ String cityPropertiesToIconPath(CITY_PROPERTIES prop) {
     case CITY_PROPERTIES.FAITH:
       return 'images/city_buildings/watch_tower_64.png';
     case CITY_PROPERTIES.GLORY:
-      return 'images/city_buildings/watch_tower_64.png';
+      return 'images/city_props/glory_64.png';
     default: throw 'City property $prop is not recognized';
   }
 }
