@@ -4,6 +4,7 @@ import 'package:sloboda/components/title_text.dart';
 import 'package:sloboda/models/city_event.dart';
 import 'package:sloboda/models/events/random_turn_events.dart';
 import 'package:sloboda/models/sloboda_localizations.dart';
+import 'package:sloboda/views/city_props_view.dart';
 import 'package:sloboda/views/components/soft_container.dart';
 import 'package:sloboda/views/stock_view.dart';
 
@@ -70,7 +71,12 @@ class EventsView extends StatelessWidget {
                               StockMiniView(
                                 stock: e.stock,
                                 stockSimulation: null,
-                              )
+                              ),
+                            if (e.cityProps != null)
+                              CityPropsMiniView(
+                                props: e.cityProps,
+                              ),
+
                           ],
                         ),
                       );

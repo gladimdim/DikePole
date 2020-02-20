@@ -5,6 +5,7 @@ import 'package:sloboda/models/buildings/city_buildings/church.dart';
 import 'package:sloboda/models/buildings/city_buildings/city_building.dart';
 import 'package:sloboda/models/city_event.dart';
 import 'package:sloboda/models/city_properties.dart';
+import 'package:sloboda/models/events/random_choicable_events.dart';
 import 'package:sloboda/models/resources/resource.dart';
 import 'package:sloboda/models/sloboda.dart';
 import 'package:sloboda/models/stock.dart';
@@ -13,8 +14,13 @@ class RandomEventMessage {
   final Stock stock;
   final String messageKey;
   final RandomTurnEvent event;
+  final CityProps cityProps;
 
-  RandomEventMessage({this.stock, this.messageKey, @required this.event});
+  RandomEventMessage(
+      {this.stock,
+      @required this.messageKey,
+      @required this.event,
+      this.cityProps});
 }
 
 abstract class RandomTurnEvent {
@@ -69,98 +75,8 @@ abstract class RandomTurnEvent {
     ChambulCapture(),
     MerchantVisit(),
     UniteWithNeighbours(),
+    HelpNeighbours(),
   ];
-}
-
-abstract class ChoicableRandomTurnEvent extends RandomTurnEvent {
-  String localizedQuestionKey;
-  String localizedKeyYes;
-  String localizedKeyNo;
-
-  Function execute(Sloboda city) {
-    return () {};
-  }
-
-  Function postExecute(Sloboda city) {
-    var r = Random().nextInt(10);
-    return () {
-      bool success = r > 8;
-      return RandomEventMessage(
-          event: this,
-          stock: success ? stockSuccess : stockFailure,
-          messageKey:
-              success ? this.successMessageKey : this.failureMessageKey);
-    };
-  }
-
-  Function makeChoice(bool yes, Sloboda city) {
-    if (yes) {
-      this.execute(city);
-      return this.postExecute(city);
-    } else {
-      return () {};
-    }
-  }
-
-  String choiceToStringKey(bool yes) {
-    return yes ? localizedKeyYes : localizedKeyNo;
-  }
-}
-
-class KoshoviyPohid extends ChoicableRandomTurnEvent {
-  String successMessageKey = 'randomTurnEvent.successKoshoviyPohid';
-  String failureMessageKey = 'randomTurnEvent.failureKoshoviyPohid';
-  String localizedKeyYes = 'randomTurnEvent.koshoviyPohidYes';
-  String localizedKeyNo = 'randomTurnEvent.koshoviyPohidNo';
-
-  int probability = 30;
-
-  Stock stockSuccess = Stock(
-    {
-      RESOURCE_TYPES.FOOD: 10,
-      RESOURCE_TYPES.MONEY: 10,
-    },
-  );
-
-  Stock stockFailure = Stock({
-    RESOURCE_TYPES.FOOD: -10,
-    RESOURCE_TYPES.FIREARM: -5,
-  });
-
-  String localizedKey = 'randomTurnEvent.koshoviyPohid';
-
-  String localizedQuestionKey = 'randomTurnEvent.koshoviyPohidQuestion';
-
-  List<Function> conditions = [
-    (Sloboda city) {
-      return city.stock.getByType(RESOURCE_TYPES.FIREARM) >= 1;
-    },
-    (Sloboda city) {
-      return city.citizens.length > 10;
-    },
-    (Sloboda city) {
-      bool canHappen = city.events
-          .where(happenedInYearFn(city.currentYear))
-          .where(eventHappenedFn<KoshoviyPohid>())
-          .isEmpty;
-      return canHappen;
-    }
-  ];
-
-  Function postExecute(Sloboda city) {
-    var r = Random().nextInt(100);
-    return () {
-      bool success = r <= 80;
-      if (success) {
-        city.props + CityProps({CITY_PROPERTIES.GLORY: 10});
-      }
-      return RandomEventMessage(
-          event: this,
-          stock: success ? stockSuccess : stockFailure,
-          messageKey:
-              success ? this.successMessageKey : this.failureMessageKey);
-    };
-  }
 }
 
 class TartarsRaid extends RandomTurnEvent {
@@ -197,14 +113,14 @@ class TartarsRaid extends RandomTurnEvent {
     return () {
       final r = Random().nextInt(10);
       if (r > 8) {
-        city.props + CityProps({CITY_PROPERTIES.GLORY: -1});
         return RandomEventMessage(
             event: this,
             stock: stockFailure,
+            cityProps: CityProps({CITY_PROPERTIES.GLORY: -1}),
             messageKey: this.failureMessageKey);
       } else {
-        city.props + CityProps({CITY_PROPERTIES.GLORY: 5});
         return RandomEventMessage(
+            cityProps: CityProps({CITY_PROPERTIES.GLORY: 5}),
             event: this,
             stock: stockSuccess,
             messageKey: this.successMessageKey);
@@ -534,7 +450,7 @@ class UniteWithNeighbours extends RandomTurnEvent {
     (Sloboda city) {
       return city.props.getByType(CITY_PROPERTIES.GLORY) > 20;
     },
-        (Sloboda city) {
+    (Sloboda city) {
       return city.props.getByType(CITY_PROPERTIES.DEFENSE) > 20;
     }
   ];
@@ -547,4 +463,8 @@ Function eventHappenedFn<EventType>() {
 
 Function happenedInYearFn(int year) {
   return (CityEvent event) => event.yearHappened == year;
+}
+
+Function happenedInLastYears(int amountOfYearsBack, int currentYear) {
+  return (CityEvent event) => ((currentYear - event.yearHappened) > amountOfYearsBack);
 }

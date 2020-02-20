@@ -159,8 +159,21 @@ class RandomEventLocalizations extends InternalLocalizations {
           'Your Cossacks spotted the Tatars\' chambul. Seeing that they were few, they attacked them. After a short skirmish, the Tatars fled. Horses aref now yours.',
       'failureChambulCapture':
           'Your Cossacks spotted the Tatars\' chambul. Before the attack, another group came to the Tatars. Your Cossacks did not dare to fight and left.',
-      'merchantVisit': 'A merchant came to visit you on the trip from the Crimea to Lithuania. He bought fur and fish from you. After resting for a week, the merchant headed further to Kyiv.',
-      'uniteWithNeighbours': 'Your efforts have given fruites. Due to the fact that your village is quite successful, has a church and can defend itself against the Tatars, the Cossacks from a nearby winter camp decided to move to you.',
+      'merchantVisit':
+          'A merchant came to visit you on the trip from the Crimea to Lithuania. He bought fur and fish from you. After resting for a week, the merchant headed further to Kyiv.',
+      'uniteWithNeighbours':
+          'Your efforts have given fruites. Due to the fact that your village is quite successful, has a church and can defend itself against the Tatars, the Cossacks from a nearby winter camp decided to move to you.',
+      'successHelpNeighbours':
+          'Your squad, after a quick march, entered the battle at the most important moment. The defenders heard the shots and made a desperate outing outside the stockade. The Tatars were thus attacked from two sides and quickly escaped. After the fight the Head of the Sloboda could not hold back tears. Thanks to your settlement, one hundred orthodox souls were saved. In gratitude, the settlers gave you money. The glory of your Sloboda got even louder!',
+      'failureHelpNeighbours':
+          'Your squad didn\'t have enough hours to help the neighbors. The Tatars tore the palisade and began to plunder the settlement. When they saw your squad, they threw a yasser and fled with resources only. Scattering all the enemies around, the detachment entered the burned village. The Cossack corpse lay everywhere. The Tatars spared no one: old men, women, children. All lay in puddles of blood. The village is completely destroyed. Five surviving families have collected the remains of your belongings and together with your detachment have gone to your Sloboda. Your Cossacks have buried their dead and strangers and have gone back. Time for revenge soon.',
+      'HelpNeighboursQuestion':
+          'Alarm! Your scouts picked up a wounded Cossack, who reported the terrible news: a Tatar detachment suddenly came upon a nearby settlement. All the Cossacks were in the fields, so few people became defensive. Time goes by for hours to see if the settlement can withstand. Will you help your neighbors?',
+      'HelpNeighbours': 'Decide whether to help neighbors repel the Tatar invasion.',
+      'HelpNeighboursYes':
+          'When you hit the trumpets, you gathered all the Cossacks and immediately marched. All the inhabitants of the settlement closed behind the palisade. From small to large they poured into the ditch and said goodbye to the Cossacks who lit the steppe.',
+      'HelpNeighboursNo':
+          'After thinking, you decided to save your people. The neighbors are too late to help.',
     },
     'uk': {
       'koshoviyPohid':
@@ -177,7 +190,7 @@ class RandomEventLocalizations extends InternalLocalizations {
       'failureTartarRaid':
           'Ваші сили вчасно помітили татар в степу і підготувались до відсічі. Декількох татар застрелено, інші покидали речі і втіклі. Молодець!',
       'successKoshoviyPohid':
-          'Ви чудово сходили на татар. Застали їх зненацька і без всякого супротиву попалили їм курені, набравши добра. Вітаємо!',
+          'Похід на татар був вдалим. Застали їх зненацька і без всякого супротиву попалили їм курені, набравши добра. Вітаємо!',
       'failureKoshoviyPohid':
           'Ваш рейд на татар зазнав поразки. Кіш було розбито. Ви втратили ресурси.',
       'saranaInvasion': 'Нашестя сарани.',
@@ -201,8 +214,21 @@ class RandomEventLocalizations extends InternalLocalizations {
           'Ваші козаки помітили чамбул татар. Упевнившись, що їх було мало, вони напали на них. Після короткої сутички татари утікли. Чамбул коней тепер ваш.',
       'failureChambulCapture':
           'Ваші козаки помітили чамбул татар. Перед самою атакою до татар підійшла ще одна група. Ваші козаки не наважилися вступати у сутичку і відійшли.',
-      'merchantVisit': 'По дорозі з Криму в Литву до вас завітав торговець. Він викупив у вас хутра й рибу. Відпочивши тиждень, торговець попрямував далі в Київ.',
-      'uniteWithNeighbours': 'Ваші потуги далися взнаки. Через те, що ваше селище доволі успішне, має церкву і може боронитися від татар, козаки з сусіднього зимовника вирішили переселитися до вас',
+      'merchantVisit':
+          'По дорозі з Криму в Литву до вас завітав торговець. Він викупив у вас хутра й рибу. Відпочивши тиждень, торговець попрямував далі в Київ.',
+      'uniteWithNeighbours':
+          'Ваші потуги далися взнаки. Через те, що ваше селище доволі успішне, має церкву і може боронитися від татар, козаки з сусіднього зимовника вирішили переселитися до вас',
+      'successHelpNeighbours':
+          'Ваш загін після швидкого маршу вступив у бій в самий важливий момент. Оборонці почули постріли й зробили відчайдушну вилазку за межі частоколу. Таким чином татари були атаковані з двох сторін та швидко прийнялися втікати назад. Після бою староста не міг стримати сліз. Завдяки вашій слободі сто православних душ було врятовано. В знак подяки слободяне подарували вам гроші. Слава про вашу Слободу стала ще гучнішою!',
+      'failureHelpNeighbours':
+          'Ваш загін не встиг всього декілька годин, щоб допомогти сусідам. Татари роздерли частокол та почали грабувати селище. Побачивши ваш загін, вони кинули ясир й втікли лише з ресурсами. Розсіявши всі чамбули навколо, загін зайшов в спалене селище. Скрізь лежав труп козака. Татари не пощадили нікого: старі, жінки, діти. Всі лежали забиті в калюжах крові. Селище повністю зруйноване. П\'ять уцілілих сімей зібрали залишики речей та разом з вашим загоном вирушили до вашої Слободи. Ваші козаки поховали своїх й чужих загиблих та вирушили назад. Час помсти незабаром.',
+      'HelpNeighboursQuestion':
+          'Тривога! Ваші роз\'їзди підібрали пораненого козака, який сповістив страшну новину: чамбул татар наскочив зненацька на сусідню слободу. Всі козаки були в полях, тому до оборони стало мало людей. Час іде на години, чи зможе слобода вистояти. Ви допоможете своїм сусідам?',
+      'HelpNeighbours': 'Вирішуйте, чи допомогти сусідам відбити навалу татар.',
+      'HelpNeighboursYes':
+          'Ударивши в сурми, ви зібрали всіх козаків і негайно виступили до маршу. Всі жителі слободи закрилися за частоколом. Від малу до велика висипали на рів та прощалися з козаками, які закурили степ.',
+      'HelpNeighboursNo':
+          'Поміркувавши, ви вирішили зберегти своїх людей. Сусідам уже піздно допомогати.',
     }
   };
 }
@@ -307,7 +333,7 @@ class SlobodaLocalizations {
       'hasNoAssignedWorkers': 'не має призначених робітників.',
       'glory': 'Слава',
       'faith': 'Віра',
-      'citizens': 'Жителі',
+      'citizens': 'Козаки',
       'defense': 'Рівень захисту',
     }
   };

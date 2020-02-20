@@ -37,7 +37,7 @@ class CityProps {
     }
   }
 
-  List getPropTypesKeys() {
+  List<CITY_PROPERTIES> getPropTypesKeys() {
     return _props.keys.toList();
   }
 

@@ -5,12 +5,14 @@ import 'package:sloboda/models/buildings/resource_buildings/resource_building.da
 import 'package:sloboda/models/citizen.dart';
 import 'package:sloboda/models/city_event.dart';
 import 'package:sloboda/models/city_properties.dart';
+import 'package:sloboda/models/events/random_choicable_events.dart';
 import 'package:sloboda/models/events/random_turn_events.dart';
 import 'package:sloboda/models/resources/resource.dart';
 import 'package:sloboda/models/buildings/city_buildings/city_building.dart';
 import 'package:sloboda/models/sloboda_localizations.dart';
 import 'package:sloboda/models/stock.dart';
 import 'package:rxdart/rxdart.dart';
+import 'package:sloboda/extensions/list.dart';
 
 class Sloboda {
   String name;
@@ -133,6 +135,16 @@ class Sloboda {
     for (var _event in _nextRandomEvents) {
       RandomEventMessage event = _event();
       this.stock + event.stock;
+      this.props + event.cityProps;
+      final includesCitizens = event.cityProps.getByType(CITY_PROPERTIES.CITIZENS);
+      if (includesCitizens != null) {
+        if (includesCitizens > 0) {
+          this.addCitizens(
+              amount: event.cityProps.getByType(CITY_PROPERTIES.CITIZENS));
+        } else {
+          this.removeCitizens(amount: includesCitizens);
+        }
+      }
       events.add(
         CityEvent(
           season: currentSeason,
@@ -174,10 +186,17 @@ class Sloboda {
     _nextRandomEvents.add(f);
   }
 
+  void removeCitizens({amount}) {
+    for (var i = 0; i < amount; i++) {
+      final c = citizens.takeRandom();
+      c.free();
+      citizens.remove(c);
+    }
+  }
+
   void addCitizens({amount = 1}) {
     for (var i = 0; i < amount; i++) {
       citizens.add(Citizen());
-      props.addToType(CITY_PROPERTIES.CITIZENS, 1);
     }
   }
 

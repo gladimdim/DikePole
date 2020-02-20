@@ -3,7 +3,6 @@ import 'package:flutter/widgets.dart';
 import 'package:sloboda/components/divider.dart';
 import 'package:sloboda/components/title_text.dart';
 import 'package:sloboda/models/buildings/city_buildings/city_building.dart';
-import 'package:sloboda/models/city_properties.dart';
 import 'package:sloboda/models/sloboda.dart';
 import 'package:sloboda/models/sloboda_localizations.dart';
 import 'package:sloboda/views/city_property.dart';
@@ -96,7 +95,7 @@ class _CityDashboardState extends State<CityDashboard> {
                   children: CITY_PROPERTIES.values
                       .map(
                         (v) => Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: <Widget>[
                             Expanded(
                               flex: 7,
@@ -107,6 +106,7 @@ class _CityDashboardState extends State<CityDashboard> {
                             Expanded(
                               flex: 3,
                               child: Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
                                 children: [
                                   HDivider(),
                                   Text(widget.city.props.getByType(v).toString()),
