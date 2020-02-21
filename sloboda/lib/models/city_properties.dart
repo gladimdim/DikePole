@@ -63,10 +63,30 @@ class CityProps {
 
 String cityPropsToLocalizedString(CITY_PROPERTIES type) {
   switch (type) {
-    case CITY_PROPERTIES.GLORY: return SlobodaLocalizations.glory;
-    case CITY_PROPERTIES.CITIZENS: return SlobodaLocalizations.citizens;
-    case CITY_PROPERTIES.FAITH: return SlobodaLocalizations.faith;
-    case CITY_PROPERTIES.DEFENSE: return SlobodaLocalizations.defense;
-    default: throw 'City property $type is not recognized';
+    case CITY_PROPERTIES.GLORY:
+      return SlobodaLocalizations.glory;
+    case CITY_PROPERTIES.CITIZENS:
+      return SlobodaLocalizations.citizens;
+    case CITY_PROPERTIES.FAITH:
+      return SlobodaLocalizations.faith;
+    case CITY_PROPERTIES.DEFENSE:
+      return SlobodaLocalizations.defense;
+    default:
+      throw 'City property $type is not recognized';
+  }
+}
+
+String cityPropertiesToIconPath(CITY_PROPERTIES prop) {
+  switch (prop) {
+    case CITY_PROPERTIES.CITIZENS:
+      return 'images/city_buildings/citizen_64.png';
+    case CITY_PROPERTIES.DEFENSE:
+      return 'images/city_props/defense_64.png';
+    case CITY_PROPERTIES.FAITH:
+      return 'images/city_props/faith_64.png';
+    case CITY_PROPERTIES.GLORY:
+      return 'images/city_props/glory_64.png';
+    default:
+      throw 'City property $prop is not recognized';
   }
 }

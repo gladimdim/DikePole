@@ -80,6 +80,10 @@ flutter:
     # city props
     - images/city_props/glory.png
     - images/city_props/glory_64.png
+    - images/city_props/defense.png
+    - images/city_props/defense_64.png
+    - images/city_props/faith.png
+    - images/city_props/faith_64.png
     # UI part
     - images/ui/arrow_right.png
 

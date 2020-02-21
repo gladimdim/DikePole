@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:sloboda/models/buildings/city_buildings/city_building.dart';
 import 'package:sloboda/models/city_properties.dart';
 
 class CityPropsMiniView extends StatelessWidget {
