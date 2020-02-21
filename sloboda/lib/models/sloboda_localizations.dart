@@ -1,6 +1,7 @@
 import 'dart:core';
-import 'package:sloboda/loaders/url_parser.dart';
+
 import 'package:flutter/material.dart';
+import 'package:sloboda/loaders/url_parser.dart';
 import 'package:sloboda/models/app_preferences.dart';
 
 var version = "0.010";
@@ -169,11 +170,23 @@ class RandomEventLocalizations extends InternalLocalizations {
           'Your squad didn\'t have enough hours to help the neighbors. The Tatars tore the palisade and began to plunder the settlement. When they saw your squad, they threw a yasser and fled with resources only. Scattering all the enemies around, the detachment entered the burned village. The Cossack corpse lay everywhere. The Tatars spared no one: old men, women, children. All lay in puddles of blood. The village is completely destroyed. Five surviving families have collected the remains of your belongings and together with your detachment have gone to your Sloboda. Your Cossacks have buried their dead and strangers and have gone back. Time for revenge soon.',
       'HelpNeighboursQuestion':
           'Alarm! Your scouts picked up a wounded Cossack, who reported the terrible news: a Tatar detachment suddenly came upon a nearby settlement. All the Cossacks were in the fields, so few people became defensive. Time goes by for hours to see if the settlement can withstand. Will you help your neighbors?',
-      'HelpNeighbours': 'Decide whether to help neighbors repel the Tatar invasion.',
+      'HelpNeighbours':
+          'Decide whether to help neighbors repel the Tatar invasion.',
       'HelpNeighboursYes':
           'When you hit the trumpets, you gathered all the Cossacks and immediately marched. All the inhabitants of the settlement closed behind the palisade. From small to large they poured into the ditch and said goodbye to the Cossacks who lit the steppe.',
       'HelpNeighboursNo':
           'After thinking, you decided to save your people. The neighbors are too late to help.',
+      'successBuyPrisoners':
+          'Your ambassadors successfully negotiated with the Tatars and bought five prisoners. They all returned back to the settlement.',
+      'failureBuyPrisoners':
+          'As a result of misunderstanding, the Tatars treated your detachment hostile and attacked you. Fortunately, during the pursuit of your Cossacks in the steppe, you saw another journey. By joining forces, you have broken the Tatars\' squad. They returned to their camp and released all prisoners. Everybody in Loca Deserta will remember this tale when greedy tartars lost everything.',
+      'BuyPrisonersYes':
+          'You ordered a small squad of negotiators to be sent out. There is a chance to buy the prisoners cheaper than in the Crimea without intermediaries.',
+      'BuyPrisonersNo':
+          'This may be a trap, you decide not to send ambassadors to negotiate.',
+      'BuyPrisoners': 'Buy captives from captivity.',
+      'BuyPrisonersQuestion':
+          'You have learned that there are Tatars with Ukrainian prisoners nearby. You can try buying them from slavery. This is a dangerous thing, as Tatars can attack you.',
     },
     'uk': {
       'koshoviyPohid':
@@ -229,6 +242,17 @@ class RandomEventLocalizations extends InternalLocalizations {
           'Ударивши в сурми, ви зібрали всіх козаків і негайно виступили до маршу. Всі жителі слободи закрилися за частоколом. Від малу до велика висипали на рів та прощалися з козаками, які закурили степ.',
       'HelpNeighboursNo':
           'Поміркувавши, ви вирішили зберегти своїх людей. Сусідам уже піздно допомогати.',
+      'successBuyPrisoners':
+          'Ваші посли успішно провели перемовини з татарами та викупили п\'ять бранців. Всі разом повернулися назад в слободу.',
+      'failureBuyPrisoners':
+          'В результаті непорозуміння татари віднеслись до вашого загону вороже і атакували вас. На щастя, під час переслідування ваших козаків в степу вас побачив інший роз\'їзд. Об\'єднавши зусилля, ви розбили чамбул татар. Повернулись до їх табору й звільнили всіх бранців. Про цю оказію життя будуть ще довго згадувати з посмішкою всі козаки. Як татари погнались за слободянами, а знайшли свою смерть.',
+      'BuyPrisonersYes':
+          'Ви наказали вислалити невеликий загін слободян для перемовин. Є шанс викупити бранців дешевше ніж в Криму без посередників.',
+      'BuyPrisonersNo':
+          'Це може бути пасткою, ви вирішили не висилати послів для перемовин.',
+      'BuyPrisoners': 'Викупіти бранців з полону.',
+      'BuyPrisonersQuestion':
+          'Вам стало відомо, що недалеко стоїть чамбул татар з бранцями. Ви можете спробувати викупити їх. Справа ця небезпечна, так як татари можуть напасти на вас.',
     }
   };
 }
@@ -300,7 +324,7 @@ class SlobodaLocalizations {
       'yesToRandomEvent': 'Yes, join event.',
       'noToRandomEvent': 'No, leave me alone',
       'addWorker': 'Add worker',
-      'hasNoAssignedWorker': 'has no assigned workers.',
+      'hasNoAssignedWorkers': 'has no assigned workers.',
       'glory': 'Glory',
       'faith': 'Faith',
       'citizens': 'Citizens',

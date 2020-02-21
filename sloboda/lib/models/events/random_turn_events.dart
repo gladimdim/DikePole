@@ -76,6 +76,7 @@ abstract class RandomTurnEvent {
     MerchantVisit(),
     UniteWithNeighbours(),
     HelpNeighbours(),
+    BuyPrisoners(),
   ];
 }
 
@@ -466,5 +467,6 @@ Function happenedInYearFn(int year) {
 }
 
 Function happenedInLastYears(int amountOfYearsBack, int currentYear) {
-  return (CityEvent event) => ((currentYear - event.yearHappened) > amountOfYearsBack);
+  return (CityEvent event) =>
+      ((currentYear - event.yearHappened) > amountOfYearsBack);
 }

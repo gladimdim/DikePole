@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:sloboda/models/buildings/city_buildings/city_building.dart';
+import 'package:sloboda/models/city_event.dart';
 import 'package:sloboda/models/city_properties.dart';
 import 'package:sloboda/models/events/random_turn_events.dart';
 import 'package:sloboda/models/resources/resource.dart';
@@ -145,6 +146,56 @@ class HelpNeighbours extends ChoicableRandomTurnEvent {
       bool canHappen = city.events
           .where((event) => !happenedInLastYears(3, city.currentYear)(event))
           .where(eventHappenedFn<HelpNeighbours>())
+          .isEmpty;
+      return canHappen;
+    }
+  ];
+}
+
+class BuyPrisoners extends ChoicableRandomTurnEvent {
+  String successMessageKey = 'randomTurnEvent.successBuyPrisoners';
+  String failureMessageKey = 'randomTurnEvent.failureBuyPrisoners';
+  String localizedKeyYes = 'randomTurnEvent.BuyPrisonersYes';
+  String localizedKeyNo = 'randomTurnEvent.BuyPrisonersNo';
+
+  int probability = 100;
+
+  Stock stockSuccess = Stock({
+    RESOURCE_TYPES.MONEY: -40,
+  });
+
+  Stock stockFailure = Stock({
+    RESOURCE_TYPES.MONEY: 20,
+  });
+
+  CityProps cityPropsSuccess = CityProps(
+    {
+      CITY_PROPERTIES.GLORY: 10,
+      CITY_PROPERTIES.CITIZENS: 5,
+      CITY_PROPERTIES.FAITH: 10,
+    },
+  );
+  CityProps cityPropsFailure = CityProps(
+    {
+      CITY_PROPERTIES.GLORY: 40,
+      CITY_PROPERTIES.FAITH: 20,
+      CITY_PROPERTIES.CITIZENS: 15,
+    },
+  );
+
+  int successRate = 30;
+
+  String localizedKey = 'randomTurnEvent.BuyPrisoners';
+  String localizedQuestionKey = 'randomTurnEvent.BuyPrisonersQuestion';
+
+  List<Function> conditions = [
+    (Sloboda city) {
+      return city.currentSeason is AutumnSeason;
+    },
+    (Sloboda city) {
+      bool canHappen = city.events
+          .where((event) => !happenedInLastYears(3, city.currentYear)(event))
+          .where(eventHappenedFn<BuyPrisoners>())
           .isEmpty;
       return canHappen;
     }
