@@ -94,7 +94,7 @@ class KoshoviyPohid extends ChoicableRandomTurnEvent {
     (Sloboda city) {
       bool canHappen = city.events
           .where((event) => !happenedInLastYears(2, city.currentYear)(event))
-          .where(eventHappenedFn<HelpNeighbours>())
+          .where(eventHappenedFn<KoshoviyPohid>())
           .isEmpty;
       return canHappen;
     }
@@ -168,18 +168,16 @@ class BuyPrisoners extends ChoicableRandomTurnEvent {
     RESOURCE_TYPES.MONEY: 20,
   });
 
-  CityProps cityPropsSuccess = CityProps(
+  CityProps cityPropsFailure = CityProps(
     {
       CITY_PROPERTIES.GLORY: 10,
-      CITY_PROPERTIES.CITIZENS: 5,
+      CITY_PROPERTIES.CITIZENS: 15,
       CITY_PROPERTIES.FAITH: 10,
     },
   );
-  CityProps cityPropsFailure = CityProps(
+  CityProps cityPropsSuccess = CityProps(
     {
-      CITY_PROPERTIES.GLORY: 40,
-      CITY_PROPERTIES.FAITH: 20,
-      CITY_PROPERTIES.CITIZENS: 15,
+      CITY_PROPERTIES.CITIZENS: 5,
     },
   );
 
@@ -196,6 +194,57 @@ class BuyPrisoners extends ChoicableRandomTurnEvent {
       bool canHappen = city.events
           .where((event) => !happenedInLastYears(3, city.currentYear)(event))
           .where(eventHappenedFn<BuyPrisoners>())
+          .isEmpty;
+      return canHappen;
+    }
+  ];
+}
+
+class AttackChambul extends ChoicableRandomTurnEvent {
+  String successMessageKey = 'randomTurnEvent.successAttackChambul';
+  String failureMessageKey = 'randomTurnEvent.failureAttackChambul';
+  String localizedKeyYes = 'randomTurnEvent.AttackChambulYes';
+  String localizedKeyNo = 'randomTurnEvent.AttackChambulNo';
+
+  int probability = 40;
+
+  Stock stockSuccess = Stock({
+    RESOURCE_TYPES.HORSE: 20,
+    RESOURCE_TYPES.MONEY: 40,
+  });
+
+  Stock stockFailure = Stock({
+    RESOURCE_TYPES.HORSE: -20,
+    RESOURCE_TYPES.FIREARM: -20,
+  });
+
+  CityProps cityPropsSuccess = CityProps(
+    {
+      CITY_PROPERTIES.GLORY: 40,
+      CITY_PROPERTIES.FAITH: 10,
+    },
+  );
+  CityProps cityPropsFailure = CityProps(
+    {
+      CITY_PROPERTIES.GLORY: -20,
+      CITY_PROPERTIES.FAITH: -5,
+      CITY_PROPERTIES.CITIZENS: -20,
+    },
+  );
+
+  int successRate = 50;
+
+  String localizedKey = 'randomTurnEvent.AttackChambul';
+  String localizedQuestionKey = 'randomTurnEvent.AttackChambulQuestion';
+
+  List<Function> conditions = [
+    (Sloboda city) {
+      return city.currentSeason is AutumnSeason;
+    },
+    (Sloboda city) {
+      bool canHappen = city.events
+          .where((event) => !happenedInLastYears(3, city.currentYear)(event))
+          .where(eventHappenedFn<AttackChambul>())
           .isEmpty;
       return canHappen;
     }

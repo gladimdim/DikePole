@@ -29,10 +29,14 @@ abstract class RandomTurnEvent {
   Stock stockSuccess;
   Stock stockFailure;
 
+  CityProps cityPropsSuccess;
+  CityProps cityPropsFailure;
+
   String successMessageKey;
   String failureMessageKey;
 
   int probability = 0;
+  int successRate = 0;
 
   bool satisfiesConditions(Sloboda city) {
     for (var func in conditions) {
@@ -44,12 +48,15 @@ abstract class RandomTurnEvent {
   }
 
   Function execute(Sloboda city) {
+    var r = Random().nextInt(100);
     return () {
+      bool success = r <= successRate;
       return RandomEventMessage(
-        event: this,
-        stock: stockSuccess,
-        messageKey: this.localizedKey,
-      );
+          event: this,
+          stock: success ? stockSuccess : stockFailure,
+          cityProps: success ? cityPropsSuccess : cityPropsFailure,
+          messageKey:
+              success ? this.successMessageKey : this.failureMessageKey);
     };
   }
 
@@ -77,6 +84,7 @@ abstract class RandomTurnEvent {
     UniteWithNeighbours(),
     HelpNeighbours(),
     BuyPrisoners(),
+    AttackChambul(),
   ];
 }
 
@@ -84,7 +92,8 @@ class TartarsRaid extends RandomTurnEvent {
   String successMessageKey = 'randomTurnEvent.successTartarRaid';
   String failureMessageKey = 'randomTurnEvent.failureTartarRaid';
   String localizedKey = 'randomTurnEvent.tartarRaid';
-  int probability = 5;
+  int probability = 20;
+  int successRate = 20;
 
   Stock stockFailure = Stock(
     {
@@ -94,9 +103,12 @@ class TartarsRaid extends RandomTurnEvent {
   );
 
   Stock stockSuccess = Stock({
-    RESOURCE_TYPES.FOOD: -10,
-    RESOURCE_TYPES.MONEY: -5,
+    RESOURCE_TYPES.FOOD: -30,
+    RESOURCE_TYPES.MONEY: -50,
   });
+
+  CityProps cityPropsSuccess = CityProps({CITY_PROPERTIES.GLORY: -10});
+  CityProps cityPropsFailure = CityProps({CITY_PROPERTIES.GLORY: 10});
 
   List<Function> conditions = [
     (Sloboda city) {
@@ -109,36 +121,19 @@ class TartarsRaid extends RandomTurnEvent {
       return city.citizens.length > 40;
     }
   ];
-
-  Function execute(Sloboda city) {
-    return () {
-      final r = Random().nextInt(10);
-      if (r > 8) {
-        return RandomEventMessage(
-            event: this,
-            stock: stockFailure,
-            cityProps: CityProps({CITY_PROPERTIES.GLORY: -1}),
-            messageKey: this.failureMessageKey);
-      } else {
-        return RandomEventMessage(
-            cityProps: CityProps({CITY_PROPERTIES.GLORY: 5}),
-            event: this,
-            stock: stockSuccess,
-            messageKey: this.successMessageKey);
-      }
-    };
-  }
 }
 
 class SaranaInvasion extends RandomTurnEvent {
+  String localizedKey = 'randomTurnEvent.saranaInvasion';
   String successMessageKey = 'randomTurnEvent.successSaranaInvasion';
   String failureMessageKey = 'randomTurnEvent.failureSaranaInvasion';
-  int probability = 5;
+  int probability = 50;
+  int successRate = 40;
 
   Stock stockSuccess = Stock(
     {
-      RESOURCE_TYPES.FOOD: -5,
-      RESOURCE_TYPES.HORSE: -1,
+      RESOURCE_TYPES.FOOD: -50,
+      RESOURCE_TYPES.HORSE: -10,
     },
   );
 
@@ -151,28 +146,12 @@ class SaranaInvasion extends RandomTurnEvent {
       return city.currentSeason is SpringSeason;
     },
   ];
-
-  Function execute(Sloboda city) {
-    return () {
-      final r = Random().nextInt(10);
-      if (r >= 4) {
-        return RandomEventMessage(
-            event: this,
-            stock: stockFailure,
-            messageKey: this.failureMessageKey);
-      } else {
-        return RandomEventMessage(
-            event: this,
-            stock: stockSuccess,
-            messageKey: this.successMessageKey);
-      }
-    };
-  }
 }
 
 class ChildrenPopulation extends RandomTurnEvent {
   String localizedKey = 'randomTurnEvent.childrenPopulation';
   int probability = 100;
+  int successRate = 100;
   Stock stockSuccess = Stock(
     {},
   );
@@ -180,6 +159,8 @@ class ChildrenPopulation extends RandomTurnEvent {
   Stock stockFailure = Stock(
     {},
   );
+
+  CityProps cityPropsSuccess = CityProps({CITY_PROPERTIES.CITIZENS: 5});
 
   List<Function> conditions = [
     (Sloboda city) {
@@ -192,11 +173,10 @@ class ChildrenPopulation extends RandomTurnEvent {
 
   Function execute(Sloboda city) {
     return () {
-      city.addCitizens(amount: 5);
-
       return RandomEventMessage(
         event: this,
         stock: stockSuccess,
+        cityProps: cityPropsSuccess,
         messageKey: this.localizedKey,
       );
     };
@@ -208,6 +188,7 @@ class SteppeFire extends RandomTurnEvent {
   String failureMessageKey = 'randomTurnEvent.failureSteppeFire';
   String localizedKey = 'randomTurnEvent.steppeFire';
   int probability = 20;
+  int successRate = 50;
 
   Stock stockSuccess = Stock(
     {
@@ -231,29 +212,12 @@ class SteppeFire extends RandomTurnEvent {
       return city.currentSeason is SummerSeason;
     }
   ];
-
-  Function execute(Sloboda city) {
-    return () {
-      if (Random().nextInt(100) <= 50) {
-        return RandomEventMessage(
-          event: this,
-          stock: stockSuccess,
-          messageKey: this.successMessageKey,
-        );
-      } else {
-        return RandomEventMessage(
-          event: this,
-          stock: stockFailure,
-          messageKey: this.failureMessageKey,
-        );
-      }
-    };
-  }
 }
 
 class RunnersFromSuppression extends RandomTurnEvent {
-  String localizedKey = 'randomTurnEvent.runnersFromSuppresion';
+  String successMessageKey = 'randomTurnEvent.runnersFromSuppresion';
   int probability = 20;
+  int successRate = 100;
 
   Stock stockSuccess = Stock(
     {
@@ -277,8 +241,9 @@ class RunnersFromSuppression extends RandomTurnEvent {
 }
 
 class SettlersArrived extends RandomTurnEvent {
-  String localizedKey = 'randomTurnEvent.settlersArrived';
+  String successMessageKey = 'randomTurnEvent.settlersArrived';
   int probability = 20;
+  int successRate = 100;
 
   Stock stockSuccess = Stock(
     {
@@ -310,8 +275,9 @@ class SettlersArrived extends RandomTurnEvent {
 }
 
 class GuestsFromSich extends RandomTurnEvent {
-  String localizedKey = 'randomTurnEvent.guestsFromSich';
+  String successMessageKey = 'randomTurnEvent.guestsFromSich';
   int probability = 30;
+  int successRate = 100;
 
   Stock stockSuccess = Stock(
     {
@@ -336,6 +302,7 @@ class ChambulCapture extends RandomTurnEvent {
   String successMessageKey = 'randomTurnEvent.successChambulCapture';
   String failureMessageKey = 'randomTurnEvent.failureChambulCapture';
   int probability = 20;
+  int successRate = 50;
 
   Stock stockSuccess = Stock(
     {
@@ -353,24 +320,6 @@ class ChambulCapture extends RandomTurnEvent {
       return city.stock.getByType(RESOURCE_TYPES.FIREARM) >= 5;
     },
   ];
-
-  Function execute(Sloboda city) {
-    return () {
-      if (Random().nextInt(100) <= 50) {
-        return RandomEventMessage(
-          event: this,
-          stock: stockSuccess,
-          messageKey: this.successMessageKey,
-        );
-      } else {
-        return RandomEventMessage(
-          event: this,
-          stock: stockFailure,
-          messageKey: this.failureMessageKey,
-        );
-      }
-    };
-  }
 }
 
 class MerchantVisit extends RandomTurnEvent {
@@ -427,10 +376,10 @@ class UniteWithNeighbours extends RandomTurnEvent {
 
   Function execute(Sloboda city) {
     return () {
-      city.addCitizens(amount: 20);
       return RandomEventMessage(
         event: this,
         stock: stockSuccess,
+        cityProps: CityProps({CITY_PROPERTIES.CITIZENS: 20}),
         messageKey: this.localizedKey,
       );
     };

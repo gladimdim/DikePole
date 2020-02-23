@@ -187,6 +187,17 @@ class RandomEventLocalizations extends InternalLocalizations {
       'BuyPrisoners': 'Buy captives from captivity.',
       'BuyPrisonersQuestion':
           'You have learned that there are Tatars with Ukrainian prisoners nearby. You can try buying them from slavery. This is a dangerous thing, as Tatars can attack you.',
+      'successAttackChambul':
+          'Your unit detained the Tatars near the Black Tomb. Hiding in the grass, the Cossacks waited for the Tatars to come up and shoot them. The surviving Tatars resisted, but the Cossacks managed to take them to the acran. Running horses were quickly seized in the steppe and led to Sloboda.',
+      'failureAttackChambul':
+          'The Cossacks wanted to catch the Tatars\' suddenly under the Black Tomb. But the Tatars were ahead of them and ambushed themselves. With their arrows falling, their cavalry attacked from the flank and broke up the detachment. You have lost the good soldiers-defenders of Ukraine. The earth is down to them.',
+      'AttackChambulYes':
+          'You have ordered to send twenty Cossacks to attack the Tatars. According to scouts, a herd of horses protects a dozen Tatars, they will be easy to deal with. The Cossacks flew to the Black Tomb to ambush.',
+      'AttackChambulNo':
+          'You were mistrustful of the words of a scout that there seemed to be only ten Tatars guarding a herd of horses. It can be a trap. You decided not to attack the Tatars.',
+      'AttackChambul': 'Scouts saw Tatars in the steppe near the Black Tomb.',
+      'AttackChambulQuestion':
+          'At sunrise a scout reported to you. He saw the Tatars\' squad of ten warriors. They lead the horses to pastures. You have a chance to squeeze them and pick up the horses yourself. Do you want to send your regimenent to take horses from them?'
     },
     'uk': {
       'koshoviyPohid':
@@ -199,9 +210,9 @@ class RandomEventLocalizations extends InternalLocalizations {
           'Ви вирішили не приєднуватися до Кошового походу в Крим. Козаки залишились вдома займатися господарством.',
       'tartarRaid': 'Татари напали на нашу Слободу.',
       'successTartarRaid':
-          'Татари здійснили на вас успішний набіг. Сусідні слободи попалено, людей забрано у рабство. Наступного разу готуйтесь до нього.',
+          'Татари здійснили на вас успішний набіг. Сусідні слободи попалено, людей забрано у рабство. Частина людей встигла закритись за укріпленням. Наступного разу готуйтесь до нього.',
       'failureTartarRaid':
-          'Ваші сили вчасно помітили татар в степу і підготувались до відсічі. Декількох татар застрелено, інші покидали речі і втіклі. Молодець!',
+          'На сході сонця на вас раптово напали татари. Ваші розвідники вчасно помітили татар в степу і підготувались до відсічі. Декількох татар застрелено, інші покидали речі і втіклі. Молодець!',
       'successKoshoviyPohid':
           'Похід на татар був вдалим. Застали їх зненацька і без всякого супротиву попалили їм курені, набравши добра. Вітаємо!',
       'failureKoshoviyPohid':
@@ -253,6 +264,18 @@ class RandomEventLocalizations extends InternalLocalizations {
       'BuyPrisoners': 'Викупіти бранців з полону.',
       'BuyPrisonersQuestion':
           'Вам стало відомо, що недалеко стоїть чамбул татар з бранцями. Ви можете спробувати викупити їх. Справа ця небезпечна, так як татари можуть напасти на вас.',
+      'successAttackChambul':
+          'Ваш загін підстеріг татар біля Чорної Могили. Заховавшись в траві, козаки почекали, коли татари підійдуть впритул і розстріляли їх. Уцілілі татари чинили опір, але козакам вдалося взяти їх на акран. Коней, які розбіглись, швидко схопили в степу і повели до Слободи.',
+      'failureAttackChambul':
+          'Козаки хотіли застати зненацька чамбул татар під Чорною Могилою. Але татари випередили їх і самі влаштували засідку. Засипавши козаків стрілами, їхня кіннота атакувала з флангу і розбила загін. Ви втратили гарних воїнів-захисників України. Земля їм пухом.',
+      'AttackChambulYes':
+          'Ви розпорядилися вислати двадцять козаків для атакування чамбула татар. Зі слів розвідників, табун коней охороняє десяток татар, з ними буде легко справитися. Козаки полетіли до Чорної Могили, щоб влаштувати засідку.',
+      'AttackChambulNo':
+          'Ви з недовірою віднеслися до слів розвідника, що начебто там лише десять татар охороняє табун коней. Це може бути пасткою. Ви вирішили не нападати на татар.',
+      'AttackChambul':
+          'Розвідники побачили чамбул татар в степу біля Чорної Могили',
+      'AttackChambulQuestion':
+          'Зі сходом сонця до вас прискакав розвідник. Він побачили чамбул татар кількістю десять воїнів. Вони ведуть коней на пасовища. У вас є щанс пошарпать їх та забрати коней собі. Чи хочете ви вислати загін для відбиття коней?'
     }
   };
 }
