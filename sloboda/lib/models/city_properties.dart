@@ -43,7 +43,7 @@ class CityProps {
 
   static CityProps bigProps() {
     return CityProps({
-      CITY_PROPERTIES.CITIZENS: 150,
+      CITY_PROPERTIES.CITIZENS: 300,
       CITY_PROPERTIES.GLORY: 150,
       CITY_PROPERTIES.FAITH: 150,
       CITY_PROPERTIES.DEFENSE: 150,

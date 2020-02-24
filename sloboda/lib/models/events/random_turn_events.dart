@@ -85,6 +85,7 @@ abstract class RandomTurnEvent {
     HelpNeighbours(),
     BuyPrisoners(),
     AttackChambul(),
+    TrapChambulOnWayBack(),
   ];
 }
 

@@ -33,6 +33,14 @@ abstract class ChoicableRandomTurnEvent extends RandomTurnEvent {
     };
   }
 
+  static bool onceInYears<T>(Sloboda city, int year) {
+    bool canHappen = city.events
+        .where((event) => !happenedInLastYears(year, city.currentYear)(event))
+        .where(eventHappenedFn<T>())
+        .isEmpty;
+    return canHappen;
+  }
+
   Function makeChoice(bool yes, Sloboda city) {
     if (yes) {
       this.execute(city);
@@ -92,11 +100,7 @@ class KoshoviyPohid extends ChoicableRandomTurnEvent {
       return city.citizens.length > 10;
     },
     (Sloboda city) {
-      bool canHappen = city.events
-          .where((event) => !happenedInLastYears(2, city.currentYear)(event))
-          .where(eventHappenedFn<KoshoviyPohid>())
-          .isEmpty;
-      return canHappen;
+      return ChoicableRandomTurnEvent.onceInYears<KoshoviyPohid>(city, 2);
     }
   ];
 }
@@ -143,11 +147,7 @@ class HelpNeighbours extends ChoicableRandomTurnEvent {
       return city.stock.getByType(RESOURCE_TYPES.HORSE) >= 10;
     },
     (Sloboda city) {
-      bool canHappen = city.events
-          .where((event) => !happenedInLastYears(3, city.currentYear)(event))
-          .where(eventHappenedFn<HelpNeighbours>())
-          .isEmpty;
-      return canHappen;
+      return ChoicableRandomTurnEvent.onceInYears<HelpNeighbours>(city, 3);
     }
   ];
 }
@@ -191,11 +191,7 @@ class BuyPrisoners extends ChoicableRandomTurnEvent {
       return city.currentSeason is AutumnSeason;
     },
     (Sloboda city) {
-      bool canHappen = city.events
-          .where((event) => !happenedInLastYears(3, city.currentYear)(event))
-          .where(eventHappenedFn<BuyPrisoners>())
-          .isEmpty;
-      return canHappen;
+      return ChoicableRandomTurnEvent.onceInYears<BuyPrisoners>(city, 3);
     }
   ];
 }
@@ -242,11 +238,65 @@ class AttackChambul extends ChoicableRandomTurnEvent {
       return city.currentSeason is AutumnSeason;
     },
     (Sloboda city) {
-      bool canHappen = city.events
-          .where((event) => !happenedInLastYears(3, city.currentYear)(event))
-          .where(eventHappenedFn<AttackChambul>())
-          .isEmpty;
-      return canHappen;
+      return ChoicableRandomTurnEvent.onceInYears<AttackChambul>(city, 2);
+    }
+  ];
+}
+
+class TrapChambulOnWayBack extends ChoicableRandomTurnEvent {
+  String successMessageKey = 'randomTurnEvent.successTrapChambulOnWayBack';
+  String failureMessageKey = 'randomTurnEvent.failureTrapChambulOnWayBack';
+  String localizedKeyYes = 'randomTurnEvent.TrapChambulOnWayBackYes';
+  String localizedKeyNo = 'randomTurnEvent.TrapChambulOnWayBackNo';
+
+  int probability = 50;
+
+  Stock stockSuccess = Stock({
+    RESOURCE_TYPES.HORSE: 50,
+    RESOURCE_TYPES.MONEY: 200,
+  });
+
+  Stock stockFailure = Stock({
+    RESOURCE_TYPES.HORSE: -50,
+    RESOURCE_TYPES.FIREARM: -50,
+  });
+
+  CityProps cityPropsSuccess = CityProps(
+    {
+      CITY_PROPERTIES.GLORY: 80,
+      CITY_PROPERTIES.FAITH: 20,
+      CITY_PROPERTIES.CITIZENS: 40,
+    },
+  );
+  CityProps cityPropsFailure = CityProps(
+    {
+      CITY_PROPERTIES.GLORY: -50,
+      CITY_PROPERTIES.FAITH: -40,
+      CITY_PROPERTIES.CITIZENS: -80,
+    },
+  );
+
+  int successRate = 50;
+
+  String localizedKey = 'randomTurnEvent.TrapChambulOnWayBack';
+  String localizedQuestionKey = 'randomTurnEvent.TrapChambulOnWayBackQuestion';
+
+  List<Function> conditions = [
+    (Sloboda city) {
+      return city.currentSeason is SummerSeason;
+    },
+    (Sloboda city) {
+      return city.props.getByType(CITY_PROPERTIES.CITIZENS) > 300;
+    },
+    (Sloboda city) {
+      return city.stock.getByType(RESOURCE_TYPES.FIREARM) > 100;
+    },
+    (Sloboda city) {
+      return city.stock.getByType(RESOURCE_TYPES.HORSE) > 100;
+    },
+    (Sloboda city) {
+      return ChoicableRandomTurnEvent.onceInYears<TrapChambulOnWayBack>(
+          city, 7);
     }
   ];
 }

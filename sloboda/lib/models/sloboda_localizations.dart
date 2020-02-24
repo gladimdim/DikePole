@@ -197,7 +197,18 @@ class RandomEventLocalizations extends InternalLocalizations {
           'You were mistrustful of the words of a scout that there seemed to be only ten Tatars guarding a herd of horses. It can be a trap. You decided not to attack the Tatars.',
       'AttackChambul': 'Scouts saw Tatars in the steppe near the Black Tomb.',
       'AttackChambulQuestion':
-          'At sunrise a scout reported to you. He saw the Tatars\' squad of ten warriors. They lead the horses to pastures. You have a chance to squeeze them and pick up the horses yourself. Do you want to send your regimenent to take horses from them?'
+          'At sunrise a scout reported to you. He saw the Tatars\' squad of ten warriors. They lead the horses to pastures. You have a chance to squeeze them and pick up the horses yourself. Do you want to send your regimenent to take horses from them?',
+      'successTrapChambulOnWayBack':
+          'The Cossacks caught the Tatars before they all joined the forces. With the first battle, the Cossacks scattered the first great Tatar regimenet, and the next day cut straight to the leg the second part. A large number of prisoners refused to return to the lords and dispersed through the farms and winter camps. Some of the people asked you to go to Sloboda. Fairy tales and stories about your settlement are known even in Podillya.',
+      'failureTrapChambulOnWayBack':
+          'Not all units had time to join the Cossacks. Having accepted an unequal battle with the Tatars at the crossing, the Cossacks almost overthrew the Tatar army, but at the last moment another squad came to the Tatars and smashed our forces. The losses are very large. Sloboda lost many heroes ...',
+      'TrapChambulOnWayBackYes':
+          'After consulting with your foreman, you decided to put in a squad all the Cossacks who can hold weapons. Protecting Ukrainian Lands is Above All! Your squad got enough resources and weapons for the big fight. You said goodbye to the hundreds who left in the morning to connect with the Cossacks.',
+      'TrapChambulOnWayBackNo':
+          'You and the sergeant agreed that a huge chunk of the border with the Tatars cannot be left without defense and the messengers were refused. They understood you and moved to the core forces.',
+      'TrapChambulOnWayBack': 'The Tatars\' massive invasion of the Podillia.',
+      'TrapChambulOnWayBackQuestion':
+          'Two Cossacks rushed from Sich. The Zaporozhian troops became aware of the Tartars\' huge raid on Podillya. They are now returning back to the Crimea with a thousand yasirs and a huge cart of loot. Koshoviy asks everyone who can join the Orthodox army and break up the infidel army on the Black Way. Knowing that your Sloboda is large enough, he counts on your help.',
     },
     'uk': {
       'koshoviyPohid':
@@ -265,7 +276,7 @@ class RandomEventLocalizations extends InternalLocalizations {
       'BuyPrisonersQuestion':
           'Вам стало відомо, що недалеко стоїть чамбул татар з бранцями. Ви можете спробувати викупити їх. Справа ця небезпечна, так як татари можуть напасти на вас.',
       'successAttackChambul':
-          'Ваш загін підстеріг татар біля Чорної Могили. Заховавшись в траві, козаки почекали, коли татари підійдуть впритул і розстріляли їх. Уцілілі татари чинили опір, але козакам вдалося взяти їх на акран. Коней, які розбіглись, швидко схопили в степу і повели до Слободи.',
+          'Ваш загін підстеріг татар біля Чорної Могили. Заховавшись в траві, козаки почекали, коли татари підійдуть впритул і розстріляли їх. Уцілілі татари чинили опір, але козакам вдалося взяти їх на аркан. Коней, які розбіглись, швидко схопили в степу і повели до Слободи.',
       'failureAttackChambul':
           'Козаки хотіли застати зненацька чамбул татар під Чорною Могилою. Але татари випередили їх і самі влаштували засідку. Засипавши козаків стрілами, їхня кіннота атакувала з флангу і розбила загін. Ви втратили гарних воїнів-захисників України. Земля їм пухом.',
       'AttackChambulYes':
@@ -275,7 +286,18 @@ class RandomEventLocalizations extends InternalLocalizations {
       'AttackChambul':
           'Розвідники побачили чамбул татар в степу біля Чорної Могили',
       'AttackChambulQuestion':
-          'Зі сходом сонця до вас прискакав розвідник. Він побачили чамбул татар кількістю десять воїнів. Вони ведуть коней на пасовища. У вас є щанс пошарпать їх та забрати коней собі. Чи хочете ви вислати загін для відбиття коней?'
+          'Зі сходом сонця до вас прискакав розвідник. Він побачили чамбул татар кількістю десять воїнів. Вони ведуть коней на пасовища. У вас є щанс пошарпать їх та забрати коней собі. Чи хочете ви вислати загін для відбиття коней?',
+      'successTrapChambulOnWayBack':
+          'Запорожці застали татар ще до того, як вони всі з\'єдналися в одне військо. З першим боєм козаки розсипали перший великий чамбул татар, а на наступний день прямо на переправі вирізали до ноги другу частину. Велика кількість бранців відмовилась повертатится назад до панів та розійшлася по хуторам і зимовниках. Частина подолян попросилась до вас в Слободу. Казки і оповіді про вашу слободу знають навіть на Поділлі.',
+      'failureTrapChambulOnWayBack':
+          'Не всі загони встигли приєднатися до запорожців. Прийнявши не рівний бій з татарами на переправі, козаки майже скинули татарське військо, але в останній момент до татар прийшов ще один чамбул та розбив наш кіш. Втрати дуже великі. Слобода втратила багато героїв...',
+      'TrapChambulOnWayBackYes':
+          'Порадившись зі своєю старшиною, ви вирішили виставити в загін всіх козаків, які можуть тримати зброю. Захист українських земель перед усім! Видавши запаси їжі і зброї, ви попрощались з сотнями, які рано вранці вирушили на з\'єднання з запорожцями.',
+      'TrapChambulOnWayBackNo':
+          'Ви і старшина дійшло згоди, що не можна залишати без оборони величезний шмат кордону з татарами і відмовили посланцям. Вони вас зрозуміли і поскакали до основних сил.',
+      'TrapChambulOnWayBack': 'Грандіозна навала татар на Поділля.',
+      'TrapChambulOnWayBackQuestion':
+          'З Січі примчали два козаки. Війську Запорозькому стало відомо про величезний набіг татар на Поділля. Вони зараз повертаються назад в Крим з тисячею ясиру і величезним обозом награбованого. Кошовий просить всіх хто може приєднатися до православного війська і на Чорному Шляху розбити військо обрізаних. Знаючи, що ваша Слобода доволі велика, він розраховує на вашу допомогу.',
     }
   };
 }
