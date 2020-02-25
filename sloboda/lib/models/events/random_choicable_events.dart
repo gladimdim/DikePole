@@ -191,6 +191,9 @@ class BuyPrisoners extends ChoicableRandomTurnEvent {
       return city.currentSeason is AutumnSeason;
     },
     (Sloboda city) {
+      return city.stock.getByType(RESOURCE_TYPES.MONEY) > 40;
+    },
+    (Sloboda city) {
       return ChoicableRandomTurnEvent.onceInYears<BuyPrisoners>(city, 3);
     }
   ];
@@ -297,6 +300,119 @@ class TrapChambulOnWayBack extends ChoicableRandomTurnEvent {
     (Sloboda city) {
       return ChoicableRandomTurnEvent.onceInYears<TrapChambulOnWayBack>(
           city, 7);
+    }
+  ];
+}
+
+class HelpDefendSich extends ChoicableRandomTurnEvent {
+  String successMessageKey = 'randomTurnEvent.successHelpDefendSich';
+  String failureMessageKey = 'randomTurnEvent.failureHelpDefendSich';
+  String localizedKeyYes = 'randomTurnEvent.HelpDefendSichYes';
+  String localizedKeyNo = 'randomTurnEvent.HelpDefendSichNo';
+
+  int probability = 50;
+
+  Stock stockSuccess = Stock({
+    RESOURCE_TYPES.HORSE: 10,
+    RESOURCE_TYPES.FIREARM: 10,
+  });
+
+  Stock stockFailure = Stock({
+    RESOURCE_TYPES.HORSE: 5,
+    RESOURCE_TYPES.FIREARM: 5,
+  });
+
+  CityProps cityPropsSuccess = CityProps(
+    {
+      CITY_PROPERTIES.GLORY: 10,
+      CITY_PROPERTIES.FAITH: 5,
+    },
+  );
+  CityProps cityPropsFailure = CityProps(
+    {
+      CITY_PROPERTIES.GLORY: 5,
+      CITY_PROPERTIES.FAITH: 1,
+    },
+  );
+
+  int successRate = 80;
+
+  String localizedKey = 'randomTurnEvent.HelpDefendSich';
+  String localizedQuestionKey = 'randomTurnEvent.HelpDefendSichQuestion';
+
+  List<Function> conditions = [
+    (Sloboda city) {
+      return city.currentSeason is SpringSeason;
+    },
+    (Sloboda city) {
+      return city.props.getByType(CITY_PROPERTIES.CITIZENS) > 30;
+    },
+    (Sloboda city) {
+      return city.stock.getByType(RESOURCE_TYPES.FIREARM) > 5;
+    },
+    (Sloboda city) {
+      return ChoicableRandomTurnEvent.onceInYears<HelpDefendSich>(city, 4);
+    }
+  ];
+}
+
+class AttackPolishLands extends ChoicableRandomTurnEvent {
+  String successMessageKey = 'randomTurnEvent.successAttackPolishLands';
+  String failureMessageKey = 'randomTurnEvent.failureAttackPolishLands';
+  String localizedKeyYes = 'randomTurnEvent.AttackPolishLandsYes';
+  String localizedKeyNo = 'randomTurnEvent.AttackPolishLandsNo';
+
+  int probability = 50;
+
+  Stock stockSuccess = Stock({
+    RESOURCE_TYPES.HORSE: 50,
+    RESOURCE_TYPES.FIREARM: 50,
+    RESOURCE_TYPES.MONEY: 250,
+    RESOURCE_TYPES.FOOD: 100,
+  });
+
+  Stock stockFailure = Stock({
+    RESOURCE_TYPES.HORSE: -50,
+    RESOURCE_TYPES.FIREARM: -50,
+    RESOURCE_TYPES.FOOD: -100,
+  });
+
+  CityProps cityPropsSuccess = CityProps(
+    {
+      CITY_PROPERTIES.GLORY: 50,
+      CITY_PROPERTIES.FAITH: 30,
+    },
+  );
+  CityProps cityPropsFailure = CityProps(
+    {
+      CITY_PROPERTIES.GLORY: -70,
+      CITY_PROPERTIES.FAITH: -40,
+    },
+  );
+
+  int successRate = 80;
+
+  String localizedKey = 'randomTurnEvent.AttackPolishLands';
+  String localizedQuestionKey = 'randomTurnEvent.AttackPolishLandsQuestion';
+
+  List<Function> conditions = [
+    (Sloboda city) {
+      return city.currentSeason is SpringSeason;
+    },
+    (Sloboda city) {
+      return city.props.getByType(CITY_PROPERTIES.CITIZENS) > 50;
+    },
+    (Sloboda city) {
+      return city.stock.getByType(RESOURCE_TYPES.FIREARM) > 50;
+    },
+    (Sloboda city) {
+      return city.stock.getByType(RESOURCE_TYPES.HORSE) > 50;
+    },
+    (Sloboda city) {
+      return city.stock.getByType(RESOURCE_TYPES.FOOD) > 200;
+    },
+    (Sloboda city) {
+      return ChoicableRandomTurnEvent.onceInYears<AttackPolishLands>(city, 7);
     }
   ];
 }

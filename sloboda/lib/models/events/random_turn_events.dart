@@ -86,6 +86,7 @@ abstract class RandomTurnEvent {
     BuyPrisoners(),
     AttackChambul(),
     TrapChambulOnWayBack(),
+    HelpDefendSich(),
   ];
 }
 
@@ -117,6 +118,9 @@ class TartarsRaid extends RandomTurnEvent {
     },
     (Sloboda city) {
       return city.stock.getByType(RESOURCE_TYPES.MONEY) >= 100;
+    },
+    (Sloboda city) {
+      return !(city.currentSeason is WinterSeason);
     },
     (Sloboda city) {
       return city.citizens.length > 40;
@@ -294,7 +298,7 @@ class GuestsFromSich extends RandomTurnEvent {
       return city.currentSeason is WinterSeason;
     },
     (Sloboda city) {
-      return city.props.getByType(CITY_PROPERTIES.GLORY) > 10;
+      return city.props.getByType(CITY_PROPERTIES.GLORY) > 50;
     },
   ];
 }

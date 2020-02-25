@@ -209,6 +209,24 @@ class RandomEventLocalizations extends InternalLocalizations {
       'TrapChambulOnWayBack': 'The Tatars\' massive invasion of the Podillia.',
       'TrapChambulOnWayBackQuestion':
           'Two Cossacks rushed from Sich. The Zaporozhian troops became aware of the Tartars\' huge raid on Podillya. They are now returning back to the Crimea with a thousand yasirs and a huge cart of loot. Koshoviy asks everyone who can join the Orthodox army and break up the infidel army on the Black Way. Knowing that your Sloboda is large enough, he counts on your help.',
+      'successHelpDefendSich':
+          'Your cossacks returned back from defending Sich. The tartars were not seen.',
+      'failureHelpDefendSich':
+          'Your squad, together with other cossack successfully defended the Sich. Local bandits knew the main force was away and decided to steal horses. After they saw cossacks they quickly retreated',
+      'HelpDefendSichYes': 'Give a squad for defending Sich.',
+      'HelpDefendSichNo': 'Deny giving cossacks to Sich.',
+      'HelpDefendSich': 'Defend Sich while the main forces are away.',
+      'HelpDefendSichQuestion':
+          'Cossacks from Sich asked you to give you some Cossacks who could defend the Sich during their maritime tour of the Turks. Since your Sloboda is not big yet, you are not being invited for raid.',
+      'successAttackPolishLands':
+          'The Lyakhs decided to attack the Cossacks from the march, but their cavalry was struck by gunfire behind the carts. Quickly making a flank attack with a cavalry, the Cossacks ended the defeat of the Polish punchers. They got their camp and went back to Ukraine.',
+      'failureAttackPolishLands':
+          'It was not possible to get the polish forces from the march. Both armies camped and began trench warfare. The resources of the Cossacks ended faster and after negotiations with the Poles, the Cossacks gave them the officers and laid down their weapons. Lyakh did not observe the terms of the contract and severely punished the Cossacks. The Zaporozhye army will not soon gather strength for another such adventure.',
+      'AttackPolishLandsYes': 'Issue a big horse squad to help Sichoviki.',
+      'AttackPolishLandsNo': 'Deny. Stay on the border with Tartars.',
+      'AttackPolishLands': 'Raid the Poland lands',
+      'AttackPolishLandsQuestion':
+          'The Zaporozhye Cossacks decided to attack polish lands. The magnates have amassed many soldiers to strike a pre-emptive blow at the Ukrainians. Therefore, the Sich calls all the Cossacks to raid the Poland. Since your village has sufficient resources of people and horses, it can join the raid.',
     },
     'uk': {
       'koshoviyPohid':
@@ -298,6 +316,25 @@ class RandomEventLocalizations extends InternalLocalizations {
       'TrapChambulOnWayBack': 'Грандіозна навала татар на Поділля.',
       'TrapChambulOnWayBackQuestion':
           'З Січі примчали два козаки. Війську Запорозькому стало відомо про величезний набіг татар на Поділля. Вони зараз повертаються назад в Крим з тисячею ясиру і величезним обозом награбованого. Кошовий просить всіх хто може приєднатися до православного війська і на Чорному Шляху розбити військо обрізаних. Знаючи, що ваша Слобода доволі велика, він розраховує на вашу допомогу.',
+      'successHelpDefendSich':
+          'Ваша залога на Січі повернулась назад без всяких пригод.',
+      'failureHelpDefendSich':
+          'Ваша залога, разом з іншими козаками, відігнали розбишак, які хотіли пошарпати Січ, поки основні сили були на морі. Злякавшись, що Січ не порожня, розбишаки утікли світ за очі.',
+      'HelpDefendSichYes': 'Дати козаків для залоги.',
+      'HelpDefendSichNo': 'Відмовити січовикам.',
+      'HelpDefendSich': 'Дати козаків для залоги на Січі.',
+      'HelpDefendSichQuestion':
+          'Січовики попросили видати вам трохи козаків, які б могли обороняти Січ під час їх морського походу на турків. Так, як ваша Слобода ще не велика, то вас не беруть з собою в похід.',
+      'successAttackPolishLands':
+          'Ляхи вирішили атакувати козаків з наскоку, але їх кавалерія була розбита рушничним вогнем з-за возів. Швидко зробивши флангову атаку кіннотою, козаки завершили погром польських карателів. Здобули їх табір і відійшли назад, в Україну.',
+      'failureAttackPolishLands':
+          'Взяти ляхів з наскоку не вийшло. Обидві армії стали таборами і почали вести окопну війну. Ресурси у козаків закінчилися швидше і після перемовин з поляками козаки видали старшину і склали зброю. Ляхи не дотримали умов договору і жорстко покарали козаків. Запорозьке військо не скоро набере сил на ще одну таку оказію...',
+      'AttackPolishLandsYes':
+          'Вислати загін кінних козаків на допомогу січовикам.',
+      'AttackPolishLandsNo': 'Залишитись на сторожі кордону з татарами.',
+      'AttackPolishLands': 'Похід на Польшу.',
+      'AttackPolishLandsQuestion':
+          'Запорозьке товариство вирішило напасти на короні землі. Магнати накопчили багато солдат, щоб зробити упереджувальний удар по українцях. Тому кошовий скликає всіх козаків до походу на Польшу. Так як ваше село має досталь ресурсів людей і коней, то воно може приєднатися до походу.',
     }
   };
 }
