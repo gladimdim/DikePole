@@ -40,7 +40,7 @@ class _CityDashboardState extends State<CityDashboard> {
                   children: [
                     SlideableButton(
                       child: widget.city.hasShootingRange
-                          ? Text('Train cossacks')
+                          ? Text(SlobodaLocalizations.trainCossacks)
                           : Text('Build shooting range'),
                       onPress: () async {
                         if (widget.city.hasShootingRange) {

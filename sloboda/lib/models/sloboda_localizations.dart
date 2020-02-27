@@ -41,6 +41,7 @@ class CityBuildingLocalizations extends InternalLocalizations {
       'tower': 'Tower',
       'watchTower': 'Watch Tower',
       'church': 'Church',
+      'shootingRange': 'Shooting Range',
     },
     'uk': {
       'house': 'Курінь',
@@ -48,6 +49,7 @@ class CityBuildingLocalizations extends InternalLocalizations {
       'tower': 'Башта',
       'watchTower': 'Хфігура',
       'church': 'Церква',
+      'shootingRange': 'Стрілецький майданчик'
     }
   };
 }
@@ -411,6 +413,7 @@ class SlobodaLocalizations {
       'faith': 'Faith',
       'citizens': 'Citizens',
       'defense': 'Defense level',
+      'trainCossacks': 'Traing cossacks',
     },
     'uk': {
       'overview': 'Головна',
@@ -441,6 +444,7 @@ class SlobodaLocalizations {
       'faith': 'Віра',
       'citizens': 'Робітники',
       'defense': 'Рівень захисту',
+      'trainCossacks': 'Спорядити козаків'
     }
   };
 
@@ -555,5 +559,10 @@ class SlobodaLocalizations {
   static String get citizens {
     return _localizedValues[SlobodaLocalizations.locale.languageCode]
         ['citizens'];
+  }
+
+  static String get trainCossacks {
+    return _localizedValues[SlobodaLocalizations.locale.languageCode]
+        ['trainCossacks'];
   }
 }

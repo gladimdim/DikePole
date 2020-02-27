@@ -1,26 +1,27 @@
 import 'dart:collection';
 
 abstract class ComparableMaps<T> {
-  Map<T, int> map = {};
+  Map<T, int> _map = {};
 
   ComparableMaps([Map<T, int> props]) {
     if (props != null) {
-      map = Map.from(props);
+      _map = Map.from(props);
     }
   }
 
   List<T> getTypeKeys() {
-    return map.keys.toList();
+    return _map.keys.toList();
   }
 
   operator <(ComparableMaps<T> anotherMap) {
-    if (anotherMap.map.keys.length > this.map.keys.length) {
+    if (anotherMap._map.keys.length < this._map.keys.length) {
       return false;
     }
-    var queue = Queue.from(this.map.keys);
+    var queue = Queue.from(this._map.keys);
     while (queue.isNotEmpty) {
       var element = queue.removeFirst();
-      if (anotherMap.map[element] > this.map[element]) {
+      var localValue = this._map[element];
+      if (anotherMap._map[element] < (localValue == null ? 0 : localValue)) {
         return false;
       }
     }
@@ -28,13 +29,14 @@ abstract class ComparableMaps<T> {
   }
 
   operator >(ComparableMaps<T> anotherMap) {
-    if (anotherMap.map.keys.length > this.map.keys.length) {
+    if (anotherMap._map.keys.length > this._map.keys.length) {
       return false;
     }
-    var queue = Queue.from(this.map.keys);
+    var queue = Queue.from(this._map.keys);
     while (queue.isNotEmpty) {
       var element = queue.removeFirst();
-      if (anotherMap.map[element] < this.map[element]) {
+      var localValue = this._map[element];
+      if (anotherMap._map[element] > (localValue == null ? 0 : localValue)) {
         return false;
       }
     }
@@ -42,30 +44,30 @@ abstract class ComparableMaps<T> {
   }
 
   getByType(T type) {
-    return this.map[type];
+    return this._map[type];
   }
 
   addToType(T type, int amount) {
-    map[type] = map[type] + amount;
-    if (map[type] < 0) {
-      map[type] = 0;
+    _map[type] = _map[type] + amount;
+    if (_map[type] < 0) {
+      _map[type] = 0;
     }
   }
 
   Map<T, int> asMap() {
-    return Map.from(map);
+    return Map.from(_map);
   }
 
   removeFromType(T type, int amount) {
-    map[type] = map[type] - amount;
-    if (map[type] < 0) {
-      map[type] = 0;
+    _map[type] = _map[type] - amount;
+    if (_map[type] < 0) {
+      _map[type] = 0;
     }
   }
 
   operator +(ComparableMaps another) {
     if (another != null) {
-      this.map.forEach((key, _) {
+      this._map.forEach((key, _) {
         if (another.getByType(key) != null) {
           this.addToType(key, another.getByType(key));
         }
@@ -75,7 +77,7 @@ abstract class ComparableMaps<T> {
 
   operator -(ComparableMaps another) {
     if (another != null) {
-      this.map.forEach((key, _) {
+      this._map.forEach((key, _) {
         if (another.getByType(key) != null) {
           this.removeFromType(key, another.getByType(key));
         }

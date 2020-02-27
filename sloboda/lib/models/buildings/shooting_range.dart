@@ -10,9 +10,12 @@ import 'package:sloboda/models/resources/resource.dart';
 import 'package:sloboda/models/sloboda.dart';
 import 'package:sloboda/models/sloboda_localizations.dart';
 import 'package:sloboda/models/stock.dart';
+import 'package:sloboda/views/city_property.dart';
 import 'package:sloboda/views/components/soft_container.dart';
+import 'package:sloboda/views/stock_view.dart';
 
 class ShootingRange implements Buildable<RESOURCE_TYPES> {
+  String localizedKey = 'cityBuildings.shootingRange';
   CITY_PROPERTIES produces = CITY_PROPERTIES.COSSACKS;
   Map<RESOURCE_TYPES, int> requiredToBuild = {
     RESOURCE_TYPES.FOOD: 50,
@@ -61,17 +64,10 @@ class ShootingRange implements Buildable<RESOURCE_TYPES> {
                         Column(
                           children: <Widget>[
                             SlideableButton(
-                              child: ButtonText('Train cossacks'),
+                              child: ButtonText(
+                                  SlobodaLocalizations.trainCossacks),
                               onPress: () {
-                                city.stock - requiresForCossack;
-                                city.props +
-                                    CityProps(
-                                      {
-                                        CITY_PROPERTIES.CITIZENS: -1,
-                                        CITY_PROPERTIES.COSSACKS: 1,
-                                      },
-                                    );
-                                callback();
+                                _tryToCreateCossack(city, callback);
                               },
                             ),
                           ],
@@ -86,63 +82,61 @@ class ShootingRange implements Buildable<RESOURCE_TYPES> {
                 SoftContainer(
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: Column(
-                      children: [
-                        ...requiresForCossack.getTypeKeys().map((type) {
-                          return Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: <Widget>[
-                              TitleText(localizedResourceByType(type)),
-                              TitleText(requiresForCossack
-                                  .getByType(type)
-                                  .toString()),
-                            ],
-                          );
-                        }),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            TitleText(
-                              SlobodaLocalizations.citizens,
-                            ),
-                            TitleText(
-                              '${city.props.getByType(CITY_PROPERTIES.CITIZENS)}',
-                            ),
-                          ],
+                    child: StockFullView(
+                      stock: requiresForCossack,
+                      stockSimulation: null,
+                    ),
+                  ),
+                ),
+                VDivider(),
+                SoftContainer(
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        Expanded(
+                          flex: 9,
+                          child: CityProperty(
+                            property: CITY_PROPERTIES.CITIZENS,
+                          ),
+                        ),
+                        Expanded(
+                          flex: 1,
+                          child: Text(city.props
+                              .getByType(CITY_PROPERTIES.CITIZENS)
+                              .toString()),
                         ),
                       ],
                     ),
                   ),
                 ),
                 VDivider(),
-                TitleText(
-                  SlobodaLocalizations.stock,
-                ),
-                VDivider(),
                 SoftContainer(
-                    child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Column(
-                      children: [
-                    RESOURCE_TYPES.FIREARM,
-                    RESOURCE_TYPES.FOOD,
-                    RESOURCE_TYPES.HORSE
-                  ].map((type) {
-                    return Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        TitleText(localizedResourceByType(type)),
-                        TitleText(city.stock.getByType(type).toString()),
-                      ],
-                    );
-                  }).toList()),
-                )),
+                  child: StockFullView(
+                    stock: city.stock,
+                  ),
+                ),
               ],
             ),
           ),
         ),
       ),
     );
+  }
+
+  void _tryToCreateCossack(Sloboda city, Function callback) {
+    if (canProduceCossack(city.props, city.stock)) {
+      city.stock - requiresForCossack;
+      city.removeCitizens(amount: 1);
+      city.props +
+          CityProps(
+            {
+              CITY_PROPERTIES.COSSACKS: 1,
+            },
+          );
+      callback();
+    }
   }
 
   get icon {

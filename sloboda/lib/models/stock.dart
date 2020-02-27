@@ -2,7 +2,7 @@ import 'package:sloboda/models/abstract/comparable_maps.dart';
 import 'package:sloboda/models/resources/resource.dart';
 
 class Stock extends ComparableMaps<RESOURCE_TYPES> {
-  Map<RESOURCE_TYPES, int> map = {
+  Map<RESOURCE_TYPES, int> _map = {
     RESOURCE_TYPES.FOOD: 20,
     RESOURCE_TYPES.FIREARM: 1,
     RESOURCE_TYPES.WOOD: 15,

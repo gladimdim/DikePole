@@ -54,7 +54,7 @@ class StockFullView extends StatelessWidget {
 
   StockFullView({
     @required this.stock,
-    @required this.stockSimulation,
+    this.stockSimulation = null,
   });
 
   @override
@@ -83,10 +83,11 @@ class StockFullView extends StatelessWidget {
                                 type: key,
                                 amount: stock.getByType(key),
                               ),
-                              SaldoViewShower(
-                                  value: stockSimulation[key],
-                                  reference: stock.getByType(key),
-                                  showValue: true),
+                              if (stockSimulation != null)
+                                SaldoViewShower(
+                                    value: stockSimulation[key],
+                                    reference: stock.getByType(key),
+                                    showValue: true),
                             ],
                           ),
                         )

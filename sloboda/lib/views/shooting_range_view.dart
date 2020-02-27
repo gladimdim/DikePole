@@ -3,6 +3,7 @@ import 'package:sloboda/components/title_text.dart';
 import 'package:sloboda/models/buildings/shooting_range.dart';
 import 'package:sloboda/models/city_properties.dart';
 import 'package:sloboda/models/sloboda.dart';
+import 'package:sloboda/models/sloboda_localizations.dart';
 import 'package:sloboda/views/components/built_building_listview.dart';
 
 class ShootingRangeView extends StatelessWidget {
@@ -13,7 +14,7 @@ class ShootingRangeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BuiltBuildingListView(
-      title: 'Shooting Range',
+      title: SlobodaLocalizations.getForKey(building.localizedKey),
       buildingIconPath: building.icon,
       producesIconPath: cityPropertiesToIconPath(building.produces),
       amount: 1,
@@ -38,10 +39,14 @@ class _ShootingRangeBuiltState extends State<ShootingRangeBuilt> {
     var building = widget.building;
     return Scaffold(
       appBar: AppBar(
-        title: TitleText('Shooting range'),
+        title: TitleText(
+          SlobodaLocalizations.getForKey(building.localizedKey),
+        ),
       ),
       body: building.build(context, () {
-        setState(() {});
+        setState(() {
+          print('updated');
+        });
       }, widget.city),
     );
   }
