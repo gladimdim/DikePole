@@ -71,12 +71,14 @@ flutter:
     - images/city_buildings/watch_tower.png
     - images/city_buildings/church.png
     - images/city_buildings/tower.png
+    - images/city_buildings/shooting_range.png
     - images/city_buildings/citizen_64.png
     - images/city_buildings/kurin_64.png
     - images/city_buildings/wall_64.png
     - images/city_buildings/watch_tower_64.png
     - images/city_buildings/church_64.png
     - images/city_buildings/tower_64.png
+    - images/city_buildings/shooting_range_64.png
     # city props
     - images/city_props/glory.png
     - images/city_props/glory_64.png

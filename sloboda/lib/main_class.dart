@@ -6,6 +6,7 @@ import 'package:sloboda/views/nature_resource_buildings.dart';
 import 'package:sloboda/views/resource_buildings/resource_building_built.dart';
 import 'package:sloboda/views/resource_buildings/resource_building_view.dart';
 import 'package:sloboda/views/resource_view.dart';
+import 'package:sloboda/views/shooting_range_view.dart';
 
 class SlobodaApp extends StatefulWidget {
   @override
@@ -109,6 +110,8 @@ class _SlobodaAppState extends State<SlobodaApp> {
             ExtractCityBuildingBuiltArguments(),
         NatureResourceBuildingScreen.routeName: (context) =>
             ExtractNatureResourceBuildingArguments(),
+        ShootingRangeBuilt.routeName: (context) =>
+            ExtractShootingRangeBuiltArguments(),
       },
     );
   }

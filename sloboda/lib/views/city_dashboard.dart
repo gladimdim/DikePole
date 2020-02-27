@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
+import 'package:sloboda/animations/slideable_button.dart';
 import 'package:sloboda/components/divider.dart';
 import 'package:sloboda/components/title_text.dart';
+import 'package:sloboda/models/buildings/shooting_range.dart';
 import 'package:sloboda/models/city_properties.dart';
 import 'package:sloboda/models/sloboda.dart';
 import 'package:sloboda/models/sloboda_localizations.dart';
 import 'package:sloboda/views/city_property.dart';
 import 'package:sloboda/views/components/soft_container.dart';
+import 'package:sloboda/views/shooting_range_view.dart';
 import 'package:sloboda/views/stock_view.dart';
 
 class CityDashboard extends StatefulWidget {
@@ -25,8 +29,33 @@ class _CityDashboardState extends State<CityDashboard> {
       child: Padding(
         padding: const EdgeInsets.all(18.0),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
+            SoftContainer(
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    SlideableButton(
+                      child: Text('Train cossacks'),
+                      onPress: () {
+                        Navigator.pushNamed(
+                          context,
+                          ShootingRangeBuilt.routeName,
+                          arguments: ShootingRangeViewArguments(
+                            city: widget.city,
+                            building: ShootingRange(),
+                          ),
+                        );
+                      },
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            VDivider(),
             SoftContainer(
               child: StockFullView(
                 stock: widget.city.stock,
