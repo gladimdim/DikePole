@@ -1,5 +1,8 @@
+import 'package:rxdart/rxdart.dart';
+import 'package:sloboda/extensions/list.dart';
 import 'package:sloboda/models/abstract/buildable.dart';
 import 'package:sloboda/models/abstract/producable.dart';
+import 'package:sloboda/models/buildings/city_buildings/city_building.dart';
 import 'package:sloboda/models/buildings/resource_buildings/nature_resource.dart';
 import 'package:sloboda/models/buildings/resource_buildings/resource_building.dart';
 import 'package:sloboda/models/citizen.dart';
@@ -8,11 +11,8 @@ import 'package:sloboda/models/city_properties.dart';
 import 'package:sloboda/models/events/random_choicable_events.dart';
 import 'package:sloboda/models/events/random_turn_events.dart';
 import 'package:sloboda/models/resources/resource.dart';
-import 'package:sloboda/models/buildings/city_buildings/city_building.dart';
 import 'package:sloboda/models/sloboda_localizations.dart';
 import 'package:sloboda/models/stock.dart';
-import 'package:rxdart/rxdart.dart';
-import 'package:sloboda/extensions/list.dart';
 
 class Sloboda {
   String name;
@@ -136,7 +136,8 @@ class Sloboda {
       RandomEventMessage event = _event();
       this.stock + event.stock;
       this.props + event.cityProps;
-      final includesCitizens = event.cityProps.getByType(CITY_PROPERTIES.CITIZENS);
+      final includesCitizens =
+          event.cityProps.getByType(CITY_PROPERTIES.CITIZENS);
       if (includesCitizens != null) {
         if (includesCitizens > 0) {
           this.addCitizens(

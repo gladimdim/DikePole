@@ -1,5 +1,6 @@
-import 'package:sloboda/models/buildings/city_buildings/city_building.dart';
 import 'package:sloboda/models/sloboda_localizations.dart';
+
+enum CITY_PROPERTIES { FAITH, DEFENSE, GLORY, CITIZENS, COSSACKS }
 
 class CityProps {
   Map<CITY_PROPERTIES, int> _props = {
@@ -7,6 +8,7 @@ class CityProps {
     CITY_PROPERTIES.DEFENSE: 1,
     CITY_PROPERTIES.CITIZENS: 15,
     CITY_PROPERTIES.FAITH: 1,
+    CITY_PROPERTIES.COSSACKS: 0,
   };
 
   Map<CITY_PROPERTIES, int> asMap() {
@@ -47,6 +49,7 @@ class CityProps {
       CITY_PROPERTIES.GLORY: 150,
       CITY_PROPERTIES.FAITH: 150,
       CITY_PROPERTIES.DEFENSE: 150,
+      CITY_PROPERTIES.COSSACKS: 150,
     });
   }
 
@@ -71,8 +74,8 @@ String cityPropsToLocalizedString(CITY_PROPERTIES type) {
       return SlobodaLocalizations.faith;
     case CITY_PROPERTIES.DEFENSE:
       return SlobodaLocalizations.defense;
-    default:
-      throw 'City property $type is not recognized';
+    case CITY_PROPERTIES.COSSACKS:
+      return 'Cossacks';
   }
 }
 
@@ -86,7 +89,7 @@ String cityPropertiesToIconPath(CITY_PROPERTIES prop) {
       return 'images/city_props/faith_64.png';
     case CITY_PROPERTIES.GLORY:
       return 'images/city_props/glory_64.png';
-    default:
-      throw 'City property $prop is not recognized';
+    case CITY_PROPERTIES.COSSACKS:
+      return 'images/city_props/citizen_64.png';
   }
 }

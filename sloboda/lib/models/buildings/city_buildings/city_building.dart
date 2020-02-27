@@ -4,6 +4,7 @@ import 'package:sloboda/models/buildings/city_buildings/house.dart';
 import 'package:sloboda/models/buildings/city_buildings/tower.dart';
 import 'package:sloboda/models/buildings/city_buildings/wall.dart';
 import 'package:sloboda/models/buildings/city_buildings/watch_tower.dart';
+import 'package:sloboda/models/city_properties.dart';
 import 'package:sloboda/models/resources/resource.dart';
 import 'package:sloboda/models/sloboda_localizations.dart';
 
@@ -38,8 +39,6 @@ abstract class CityBuilding implements Buildable<RESOURCE_TYPES> {
 }
 
 enum CITY_BUILDING_TYPES { HOUSE, CHURCH, TOWER, WATCH_TOWER, WALL }
-
-enum CITY_PROPERTIES { FAITH, DEFENSE, GLORY, CITIZENS }
 
 String cityBuildingTypesToKey(CITY_BUILDING_TYPES type) {
   switch (type) {

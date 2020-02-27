@@ -1,4 +1,5 @@
 import 'package:sloboda/models/buildings/city_buildings/city_building.dart';
+import 'package:sloboda/models/city_properties.dart';
 import 'package:sloboda/models/resources/resource.dart';
 
 class Wall extends CityBuilding {

@@ -38,10 +38,8 @@ class _CityBuildingMetaViewState extends State<CityBuildingMetaView> {
                   children: <Widget>[
                     Text(
                       '${localizedCityBuildingByType(widget.type)}',
-                      style: Theme.of(context)
-                          .textTheme
-                          .headline6
-                          .merge(TextStyle(fontSize: widget.selected ? 30 : 25)),
+                      style: Theme.of(context).textTheme.headline6.merge(
+                          TextStyle(fontSize: widget.selected ? 30 : 25)),
                     ),
                     Padding(
                       padding: const EdgeInsets.all(8.0),

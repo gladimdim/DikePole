@@ -84,6 +84,8 @@ flutter:
     - images/city_props/defense_64.png
     - images/city_props/faith.png
     - images/city_props/faith_64.png
+    - images/city_props/citizen.png
+    - images/city_props/citizen_64.png
     # UI part
     - images/ui/arrow_right.png
 

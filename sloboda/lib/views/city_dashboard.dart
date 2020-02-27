@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:sloboda/components/divider.dart';
 import 'package:sloboda/components/title_text.dart';
-import 'package:sloboda/models/buildings/city_buildings/city_building.dart';
+import 'package:sloboda/models/city_properties.dart';
 import 'package:sloboda/models/sloboda.dart';
 import 'package:sloboda/models/sloboda_localizations.dart';
 import 'package:sloboda/views/city_property.dart';
@@ -109,7 +109,9 @@ class _CityDashboardState extends State<CityDashboard> {
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 children: [
                                   HDivider(),
-                                  Text(widget.city.props.getByType(v).toString()),
+                                  Text(widget.city.props
+                                      .getByType(v)
+                                      .toString()),
                                   SaldoViewShower(
                                     value: widget.city.simulateCityProps()[v],
                                     reference: widget.city.props.getByType(v),

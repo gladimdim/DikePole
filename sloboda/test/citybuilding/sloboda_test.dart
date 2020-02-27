@@ -1,9 +1,9 @@
-import 'package:sloboda/models/buildings/city_buildings/city_building.dart';
 import 'package:sloboda/models/buildings/city_buildings/house.dart';
 import 'package:sloboda/models/buildings/resource_buildings/mill.dart';
 import 'package:sloboda/models/buildings/resource_buildings/resource_building.dart';
 import 'package:sloboda/models/buildings/resource_buildings/smith.dart';
 import 'package:sloboda/models/citizen.dart';
+import 'package:sloboda/models/city_properties.dart';
 import 'package:sloboda/models/resources/resource.dart';
 import 'package:sloboda/models/sloboda.dart';
 import 'package:sloboda/models/stock.dart';
@@ -127,7 +127,7 @@ void main() {
 
       test(
         'Generates one additional event when Smith has no IRON for input',
-            () {
+        () {
           var smith = Smith();
           city.buildBuilding(smith);
           smith.addWorker(city.getFirstFreeCitizen());

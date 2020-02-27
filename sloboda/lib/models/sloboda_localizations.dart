@@ -439,7 +439,7 @@ class SlobodaLocalizations {
       'hasNoAssignedWorkers': 'не має призначених робітників.',
       'glory': 'Слава',
       'faith': 'Віра',
-      'citizens': 'Козаки',
+      'citizens': 'Робітники',
       'defense': 'Рівень захисту',
     }
   };
