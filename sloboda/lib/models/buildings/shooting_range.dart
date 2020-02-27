@@ -10,7 +10,6 @@ import 'package:sloboda/models/resources/resource.dart';
 import 'package:sloboda/models/sloboda.dart';
 import 'package:sloboda/models/sloboda_localizations.dart';
 import 'package:sloboda/models/stock.dart';
-import 'package:sloboda/views/city_property.dart';
 import 'package:sloboda/views/components/soft_container.dart';
 import 'package:sloboda/views/stock_view.dart';
 
@@ -94,19 +93,15 @@ class ShootingRange implements Buildable<RESOURCE_TYPES> {
                     padding: const EdgeInsets.all(8.0),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        Expanded(
-                          flex: 9,
-                          child: CityProperty(
-                            property: CITY_PROPERTIES.CITIZENS,
-                          ),
-                        ),
-                        Expanded(
-                          flex: 1,
-                          child: Text(city.props
-                              .getByType(CITY_PROPERTIES.CITIZENS)
-                              .toString()),
-                        ),
+                      children: [
+                        TitleText(SlobodaLocalizations.notOccupiedCitizens),
+                        Text(
+                          city.citizens
+                              .where((citizen) => !citizen.occupied)
+                              .toList()
+                              .length
+                              .toString(),
+                        )
                       ],
                     ),
                   ),
