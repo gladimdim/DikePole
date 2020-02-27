@@ -4,7 +4,6 @@ import 'package:sloboda/models/buildings/shooting_range.dart';
 import 'package:sloboda/models/city_properties.dart';
 import 'package:sloboda/models/sloboda.dart';
 import 'package:sloboda/views/components/built_building_listview.dart';
-import 'package:sloboda/views/components/soft_container.dart';
 
 class ShootingRangeView extends StatelessWidget {
   final ShootingRange building;
@@ -41,35 +40,9 @@ class _ShootingRangeBuiltState extends State<ShootingRangeBuilt> {
       appBar: AppBar(
         title: TitleText('Shooting range'),
       ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: SoftContainer(
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: <Widget>[
-                  InkWell(
-                    onTap: () {
-                      Navigator.pop(context);
-                    },
-                    child: SoftContainer(
-                      child: Image.asset(
-                        building.image,
-                        height: 320,
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 32,
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ),
-      ),
+      body: building.build(context, () {
+        setState(() {});
+      }, widget.city),
     );
   }
 }

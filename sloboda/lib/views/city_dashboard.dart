@@ -39,16 +39,21 @@ class _CityDashboardState extends State<CityDashboard> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     SlideableButton(
-                      child: Text('Train cossacks'),
-                      onPress: () {
-                        Navigator.pushNamed(
-                          context,
-                          ShootingRangeBuilt.routeName,
-                          arguments: ShootingRangeViewArguments(
-                            city: widget.city,
-                            building: ShootingRange(),
-                          ),
-                        );
+                      child: widget.city.hasShootingRange
+                          ? Text('Train cossacks')
+                          : Text('Build shooting range'),
+                      onPress: () async {
+                        if (widget.city.hasShootingRange) {
+                          await Navigator.pushNamed(
+                            context,
+                            ShootingRangeBuilt.routeName,
+                            arguments: ShootingRangeViewArguments(
+                              city: widget.city,
+                              building: ShootingRange(),
+                            ),
+                          );
+                          setState(() {});
+                        }
                       },
                     ),
                   ],

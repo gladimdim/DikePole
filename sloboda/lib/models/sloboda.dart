@@ -30,6 +30,8 @@ class Sloboda {
     River(),
   ];
 
+  bool hasShootingRange = true;
+
   final List<CityEvent> events = [];
 
   Stock stock;
