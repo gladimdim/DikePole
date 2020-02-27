@@ -13,7 +13,7 @@ class CityPropsMiniView extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.only(top: 6.0),
         child: Row(
-          children: props.getPropTypesKeys().map<Widget>((key) {
+          children: props.getTypeKeys().map<Widget>((key) {
             return Row(
               children: <Widget>[
                 Image.asset(

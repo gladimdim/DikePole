@@ -19,11 +19,16 @@ class ShootingRange implements Buildable<RESOURCE_TYPES> {
     RESOURCE_TYPES.WOOD: 30,
   };
 
-  Map<RESOURCE_TYPES, int> requiresForCossack = {
+  Stock requiresForCossack = Stock({
     RESOURCE_TYPES.FOOD: 10,
     RESOURCE_TYPES.FIREARM: 1,
     RESOURCE_TYPES.HORSE: 1,
-  };
+  });
+
+  bool canProduceCossack(CityProps cityProps, Stock stock) {
+    return requiresForCossack < stock &&
+        cityProps.getByType(CITY_PROPERTIES.CITIZENS) >= 1;
+  }
 
   Widget build(BuildContext context, Function callback, Sloboda city) {
     return SingleChildScrollView(
@@ -58,12 +63,7 @@ class ShootingRange implements Buildable<RESOURCE_TYPES> {
                             SlideableButton(
                               child: ButtonText('Train cossacks'),
                               onPress: () {
-                                city.stock +
-                                    Stock(
-                                      requiresForCossack.map(
-                                        (key, value) => MapEntry(key, -value),
-                                      ),
-                                    );
+                                city.stock - requiresForCossack;
                                 city.props +
                                     CityProps(
                                       {
@@ -88,12 +88,14 @@ class ShootingRange implements Buildable<RESOURCE_TYPES> {
                     padding: const EdgeInsets.all(8.0),
                     child: Column(
                       children: [
-                        ...requiresForCossack.keys.map((type) {
+                        ...requiresForCossack.getTypeKeys().map((type) {
                           return Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: <Widget>[
                               TitleText(localizedResourceByType(type)),
-                              TitleText(requiresForCossack[type].toString()),
+                              TitleText(requiresForCossack
+                                  .getByType(type)
+                                  .toString()),
                             ],
                           );
                         }),

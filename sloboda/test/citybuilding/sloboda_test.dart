@@ -18,7 +18,7 @@ void main() {
     });
 
     test("Inits with default stock", () {
-      expect(city.stock.getResourceTypesKeys().length, equals(10));
+      expect(city.stock.getTypeKeys().length, equals(10));
       expect(city.stock.getByType(RESOURCE_TYPES.FOOD), equals(20));
     });
 

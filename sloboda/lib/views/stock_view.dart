@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:sloboda/components/title_text.dart';
+import 'package:sloboda/extensions/list.dart';
 import 'package:sloboda/models/resources/resource.dart';
 import 'package:sloboda/models/sloboda_localizations.dart';
 import 'package:sloboda/models/stock.dart';
 import 'package:sloboda/views/components/lined_container.dart';
 import 'package:sloboda/views/resource_view.dart';
-import 'package:sloboda/extensions/list.dart';
 
 class StockMiniView extends StatelessWidget {
   final Stock stock;
@@ -20,7 +20,7 @@ class StockMiniView extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.only(top: 6.0),
         child: Row(
-          children: stock.getResourceTypesKeys().map<Widget>((key) {
+          children: stock.getTypeKeys().map<Widget>((key) {
             return Row(
               children: <Widget>[
                 Image.asset(
@@ -69,7 +69,7 @@ class StockFullView extends StatelessWidget {
             TitleText(
               SlobodaLocalizations.stock,
             ),
-            ...stock.getResourceTypesKeys().divideBy(2).map<Widget>(
+            ...stock.getTypeKeys().divideBy(2).map<Widget>(
               (List keys) {
                 return LineContainer(
                   child: Row(

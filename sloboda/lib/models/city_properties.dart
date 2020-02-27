@@ -1,9 +1,10 @@
+import 'package:sloboda/models/abstract/comparable_maps.dart';
 import 'package:sloboda/models/sloboda_localizations.dart';
 
 enum CITY_PROPERTIES { FAITH, DEFENSE, GLORY, CITIZENS, COSSACKS }
 
-class CityProps {
-  Map<CITY_PROPERTIES, int> _props = {
+class CityProps extends ComparableMaps<CITY_PROPERTIES> {
+  Map<CITY_PROPERTIES, int> map = {
     CITY_PROPERTIES.GLORY: 1,
     CITY_PROPERTIES.DEFENSE: 1,
     CITY_PROPERTIES.CITIZENS: 15,
@@ -11,37 +12,7 @@ class CityProps {
     CITY_PROPERTIES.COSSACKS: 0,
   };
 
-  Map<CITY_PROPERTIES, int> asMap() {
-    return Map.from(_props);
-  }
-
-  CityProps([Map<CITY_PROPERTIES, int> props]) {
-    if (props != null) {
-      _props = props;
-    }
-  }
-
-  getByType(CITY_PROPERTIES type) {
-    return _props[type];
-  }
-
-  addToType(CITY_PROPERTIES type, int amount) {
-    _props[type] = _props[type] + amount;
-    if (_props[type] < 0) {
-      _props[type] = 0;
-    }
-  }
-
-  removeFromType(CITY_PROPERTIES type, int amount) {
-    _props[type] = _props[type] - amount;
-    if (_props[type] < 0) {
-      _props[type] = 0;
-    }
-  }
-
-  List<CITY_PROPERTIES> getPropTypesKeys() {
-    return _props.keys.toList();
-  }
+  CityProps([Map<CITY_PROPERTIES, int> options]) : super(options);
 
   static CityProps bigProps() {
     return CityProps({
@@ -51,16 +22,6 @@ class CityProps {
       CITY_PROPERTIES.DEFENSE: 150,
       CITY_PROPERTIES.COSSACKS: 150,
     });
-  }
-
-  operator +(CityProps aProps) {
-    if (aProps != null) {
-      this._props.forEach((key, _) {
-        if (aProps.getByType(key) != null) {
-          this.addToType(key, aProps.getByType(key));
-        }
-      });
-    }
   }
 }
 
