@@ -3,6 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'package:sloboda/animations/slideable_button.dart';
 import 'package:sloboda/components/button_text.dart';
 import 'package:sloboda/components/divider.dart';
+import 'package:sloboda/components/full_width_container.dart';
 import 'package:sloboda/components/title_text.dart';
 import 'package:sloboda/models/abstract/buildable.dart';
 import 'package:sloboda/models/city_properties.dart';
@@ -10,6 +11,7 @@ import 'package:sloboda/models/resources/resource.dart';
 import 'package:sloboda/models/sloboda.dart';
 import 'package:sloboda/models/sloboda_localizations.dart';
 import 'package:sloboda/models/stock.dart';
+import 'package:sloboda/views/city_props_view.dart';
 import 'package:sloboda/views/components/soft_container.dart';
 import 'package:sloboda/views/stock_view.dart';
 
@@ -54,24 +56,38 @@ class ShootingRange implements Buildable<RESOURCE_TYPES> {
                   ),
                 ),
                 VDivider(),
+                FullWidth(
+                  child: SoftContainer(
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Center(
+                        child: CityPropsMiniView(
+                          props: CityProps(
+                            values: {
+                              CITY_PROPERTIES.COSSACKS:
+                                  city.props.getByType(CITY_PROPERTIES.COSSACKS)
+                            },
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                VDivider(),
                 SoftContainer(
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Column(
-                          children: <Widget>[
-                            SlideableButton(
-                              child: ButtonText(
-                                  SlobodaLocalizations.trainCossacks),
-                              onPress: () {
+                    child: FullWidth(
+                      child: SlideableButton(
+                        child: Center(
+                            child:
+                                ButtonText(SlobodaLocalizations.trainCossacks)),
+                        onPress: canProduceCossack(city.props, city.stock)
+                            ? () {
                                 _tryToCreateCossack(city, callback);
-                              },
-                            ),
-                          ],
-                        ),
-                      ],
+                              }
+                            : null,
+                      ),
                     ),
                   ),
                 ),

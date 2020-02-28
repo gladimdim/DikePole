@@ -5,6 +5,7 @@ import 'package:flutter/rendering.dart';
 import 'package:sloboda/animations/slideable_button.dart';
 import 'package:sloboda/components/button_text.dart';
 import 'package:sloboda/components/divider.dart';
+import 'package:sloboda/components/full_width_container.dart';
 import 'package:sloboda/inherited_city.dart';
 import 'package:sloboda/models/app_preferences.dart';
 import 'package:sloboda/models/buildings/resource_buildings/resource_building.dart';
@@ -72,80 +73,105 @@ class _CityGameState extends State<CityGame> {
             future: _appPreferencesInit(),
             builder: (context, snapshot) {
               if (snapshot.hasData) {
-                return DefaultTabController(
-                  length: 4,
-                  child: Scaffold(
-                    backgroundColor: Theme.of(context).backgroundColor,
-                    appBar: AppBar(
-                      bottom: TabBar(
-                        tabs: [
-                          Tab(
-                            text: _pageTitles()[0],
-                          ),
-                          Tab(
-                            text: _pageTitles()[1],
-                          ),
-                          Tab(
-                            text: _pageTitles()[2],
-                          ),
-                          Tab(
-                            text: _pageTitles()[3],
-                          ),
-                        ],
-                      ),
-                      backgroundColor: Theme.of(context).backgroundColor,
-                      title: StockMiniView(
-                        stock: city.stock,
-                        stockSimulation: city.simulateStock(),
-                      ),
-                    ),
-                    drawer: Drawer(
-                      child: Container(
-                        height: MediaQuery.of(context).size.height,
-                        color: Theme.of(context).backgroundColor,
-                        child: SingleChildScrollView(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.stretch,
-                            children: <Widget>[
-                              VDivider(),
-                              LocaleSelection(
-                                locale: SlobodaLocalizations.locale,
-                                onLocaleChanged: (Locale locale) {
-                                  setState(() {
-                                    SlobodaLocalizations.locale = locale;
-                                  });
-                                },
+                return Scaffold(
+                  backgroundColor: Theme.of(context).backgroundColor,
+                  body: Column(
+                    children: <Widget>[
+                      Expanded(
+                        flex: 9,
+                        child: DefaultTabController(
+                          length: 4,
+                          child: Scaffold(
+                            backgroundColor: Theme.of(context).backgroundColor,
+                            appBar: AppBar(
+                              bottom: TabBar(
+                                tabs: [
+                                  Tab(
+                                    text: _pageTitles()[0],
+                                  ),
+                                  Tab(
+                                    text: _pageTitles()[1],
+                                  ),
+                                  Tab(
+                                    text: _pageTitles()[2],
+                                  ),
+                                  Tab(
+                                    text: _pageTitles()[3],
+                                  ),
+                                ],
                               ),
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: SoftContainer(
-                                  child: StockFullView(
-                                    stock: city.stock,
-                                    stockSimulation: city.simulateStock(),
+                              backgroundColor:
+                                  Theme.of(context).backgroundColor,
+                              title: StockMiniView(
+                                stock: city.stock,
+                                stockSimulation: city.simulateStock(),
+                              ),
+                            ),
+                            drawer: Drawer(
+                              child: Container(
+                                height: MediaQuery.of(context).size.height,
+                                color: Theme.of(context).backgroundColor,
+                                child: SingleChildScrollView(
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.stretch,
+                                    children: <Widget>[
+                                      VDivider(),
+                                      LocaleSelection(
+                                        locale: SlobodaLocalizations.locale,
+                                        onLocaleChanged: (Locale locale) {
+                                          setState(() {
+                                            SlobodaLocalizations.locale =
+                                                locale;
+                                          });
+                                        },
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: SoftContainer(
+                                          child: StockFullView(
+                                            stock: city.stock,
+                                            stockSimulation:
+                                                city.simulateStock(),
+                                          ),
+                                        ),
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: SoftContainer(
+                                          child: _makeTurn(context),
+                                        ),
+                                      ),
+                                    ],
                                   ),
                                 ),
                               ),
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: SoftContainer(
-                                  child: _makeTurn(context),
+                            ),
+                            body: TabBarView(
+                              children: <Widget>[
+                                CityDashboard(city: city),
+                                EventsView(
+                                  events: city.events,
                                 ),
-                              ),
-                            ],
+                                ResourceBuildingsPage(),
+                                CityBuildingsPage(),
+                              ],
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                    body: TabBarView(
-                      children: <Widget>[
-                        CityDashboard(city: city),
-                        EventsView(
-                          events: city.events,
+                      Expanded(
+                        flex: 1,
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: SoftContainer(
+                            child: FullWidth(
+                              child: _makeTurn(context),
+                            ),
+                          ),
                         ),
-                        ResourceBuildingsPage(),
-                        CityBuildingsPage(),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                 );
               } else {
@@ -184,28 +210,34 @@ class _CityGameState extends State<CityGame> {
   }
 
   Widget _makeTurn(BuildContext context) {
-    return SlideableButton(
-      direction: Direction.Left,
-      child: Center(
-        child: ButtonText(
-          SlobodaLocalizations.makeTurn,
+    return SoftContainer(
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: SlideableButton(
+          direction: Direction.Left,
+          child: Center(
+            child: ButtonText(
+              SlobodaLocalizations.makeTurn,
+            ),
+          ),
+          onPress: () async {
+            List choicableEvents = city.getChoicableRandomEvents();
+
+            if (choicableEvents.isNotEmpty) {
+              DialogAnswer result =
+                  await _askForEvent(context, choicableEvents[0]);
+              city.addChoicableEventWithAnswer(
+                  result == DialogAnswer.YES, choicableEvents[0]);
+              city.makeTurn();
+              if (result == DialogAnswer.YES) {
+                city.runChoicableEventResult(choicableEvents[0]);
+              }
+            } else {
+              city.makeTurn();
+            }
+          },
         ),
       ),
-      onPress: () async {
-        List choicableEvents = city.getChoicableRandomEvents();
-
-        if (choicableEvents.isNotEmpty) {
-          DialogAnswer result = await _askForEvent(context, choicableEvents[0]);
-          city.addChoicableEventWithAnswer(
-              result == DialogAnswer.YES, choicableEvents[0]);
-          city.makeTurn();
-          if (result == DialogAnswer.YES) {
-            city.runChoicableEventResult(choicableEvents[0]);
-          }
-        } else {
-          city.makeTurn();
-        }
-      },
     );
   }
 }

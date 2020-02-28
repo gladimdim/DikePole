@@ -1,6 +1,6 @@
+import 'package:clay_containers/clay_containers.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:clay_containers/clay_containers.dart';
 
 class SoftContainer extends StatelessWidget {
   final Widget child;

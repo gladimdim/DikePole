@@ -395,7 +395,7 @@ class SlobodaLocalizations {
       'output': 'Output',
       'input': 'Input',
       'build': 'Build',
-      'makeTurn': 'Turn',
+      'makeTurn': 'Make Turn',
       'maxNumberOfWorkers': 'Max number of workers',
       'notOccupiedCitizens': 'Free citizens',
       'summer': 'Summer',
@@ -414,6 +414,7 @@ class SlobodaLocalizations {
       'citizens': 'Citizens',
       'defense': 'Defense level',
       'trainCossacks': 'Traing cossacks',
+      'cossacks': 'Cossacks',
     },
     'uk': {
       'overview': 'Головна',
@@ -426,7 +427,7 @@ class SlobodaLocalizations {
       'output': 'Виробляє',
       'input': 'Потребує',
       'build': 'Побудувати',
-      'makeTurn': 'Хід',
+      'makeTurn': 'Зробити хід',
       'maxNumberOfWorkers': 'Вміщує робочих',
       'notOccupiedCitizens': 'Вільні робочі',
       'summer': 'Літо',
@@ -444,7 +445,8 @@ class SlobodaLocalizations {
       'faith': 'Віра',
       'citizens': 'Робітники',
       'defense': 'Рівень захисту',
-      'trainCossacks': 'Спорядити козаків'
+      'trainCossacks': 'Спорядити козаків',
+      'cossacks': 'Козаки',
     }
   };
 
@@ -564,5 +566,10 @@ class SlobodaLocalizations {
   static String get trainCossacks {
     return _localizedValues[SlobodaLocalizations.locale.languageCode]
         ['trainCossacks'];
+  }
+
+  static String get cossacks {
+    return _localizedValues[SlobodaLocalizations.locale.languageCode]
+        ['cossacks'];
   }
 }

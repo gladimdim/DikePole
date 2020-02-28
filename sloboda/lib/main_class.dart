@@ -73,7 +73,7 @@ var whiteTheme = ThemeData(
     ),
     button: TextStyle(
       fontFamily: 'Raleway-Bold',
-      fontSize: 16.0,
+      fontSize: 24.0,
       fontWeight: FontWeight.bold,
       color: Colors.black,
     ),

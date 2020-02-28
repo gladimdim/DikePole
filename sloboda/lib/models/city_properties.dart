@@ -1,4 +1,4 @@
-import 'package:sloboda/models/abstract/comparable_maps.dart';
+import 'package:sloboda/models/abstract/stockable.dart';
 import 'package:sloboda/models/sloboda_localizations.dart';
 
 enum CITY_PROPERTIES { FAITH, DEFENSE, GLORY, CITIZENS, COSSACKS }
@@ -37,7 +37,7 @@ String cityPropsToLocalizedString(CITY_PROPERTIES type) {
     case CITY_PROPERTIES.DEFENSE:
       return SlobodaLocalizations.defense;
     case CITY_PROPERTIES.COSSACKS:
-      return 'Cossacks';
+      return SlobodaLocalizations.cossacks;
   }
 }
 

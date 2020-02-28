@@ -1,4 +1,4 @@
-import 'package:sloboda/models/abstract/comparable_maps.dart';
+import 'package:sloboda/models/abstract/stockable.dart';
 import 'package:sloboda/models/resources/resource.dart';
 
 class Stock extends Stockable<RESOURCE_TYPES> {
