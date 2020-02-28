@@ -1,13 +1,13 @@
+import 'package:sloboda/models/buildings/resource_buildings/resource_building.dart';
 import 'package:sloboda/models/citizen.dart';
 import 'package:sloboda/models/resources/resource.dart';
 import 'package:sloboda/models/stock.dart';
 import 'package:test/test.dart';
-import 'package:sloboda/models/buildings/resource_buildings/resource_building.dart';
 
 void main() {
   group("Smith Main Tests", () {
     var smith = ResourceBuilding.fromType(RESOURCE_BUILDING_TYPES.SMITH);
-    Stock stock = Stock({
+    Stock stock = Stock(values: {
       RESOURCE_TYPES.FOOD: 5,
       RESOURCE_TYPES.FIREARM: 0,
       RESOURCE_TYPES.POWDER: 1,

@@ -97,19 +97,19 @@ class TartarsRaid extends RandomTurnEvent {
   int successRate = 20;
 
   Stock stockFailure = Stock(
-    {
+    values: {
       RESOURCE_TYPES.FOOD: 20,
       RESOURCE_TYPES.HORSE: 3,
     },
   );
 
-  Stock stockSuccess = Stock({
+  Stock stockSuccess = Stock(values: {
     RESOURCE_TYPES.FOOD: -30,
     RESOURCE_TYPES.MONEY: -50,
   });
 
-  CityProps cityPropsSuccess = CityProps({CITY_PROPERTIES.GLORY: -10});
-  CityProps cityPropsFailure = CityProps({CITY_PROPERTIES.GLORY: 10});
+  CityProps cityPropsSuccess = CityProps(values: {CITY_PROPERTIES.GLORY: -10});
+  CityProps cityPropsFailure = CityProps(values: {CITY_PROPERTIES.GLORY: 10});
 
   List<Function> conditions = [
     (Sloboda city) {
@@ -135,15 +135,13 @@ class SaranaInvasion extends RandomTurnEvent {
   int successRate = 40;
 
   Stock stockSuccess = Stock(
-    {
+    values: {
       RESOURCE_TYPES.FOOD: -50,
       RESOURCE_TYPES.HORSE: -10,
     },
   );
 
-  Stock stockFailure = Stock(
-    {},
-  );
+  Stock stockFailure = Stock();
 
   List<Function> conditions = [
     (Sloboda city) {
@@ -156,15 +154,11 @@ class ChildrenPopulation extends RandomTurnEvent {
   String localizedKey = 'randomTurnEvent.childrenPopulation';
   int probability = 100;
   int successRate = 100;
-  Stock stockSuccess = Stock(
-    {},
-  );
+  Stock stockSuccess = Stock();
 
-  Stock stockFailure = Stock(
-    {},
-  );
+  Stock stockFailure = Stock();
 
-  CityProps cityPropsSuccess = CityProps({CITY_PROPERTIES.CITIZENS: 5});
+  CityProps cityPropsSuccess = CityProps(values: {CITY_PROPERTIES.CITIZENS: 5});
 
   List<Function> conditions = [
     (Sloboda city) {
@@ -195,7 +189,7 @@ class SteppeFire extends RandomTurnEvent {
   int successRate = 50;
 
   Stock stockSuccess = Stock(
-    {
+    values: {
       RESOURCE_TYPES.FOOD: -5,
       RESOURCE_TYPES.WOOD: -20,
       RESOURCE_TYPES.POWDER: -30,
@@ -204,7 +198,7 @@ class SteppeFire extends RandomTurnEvent {
   );
 
   Stock stockFailure = Stock(
-    {
+    values: {
       RESOURCE_TYPES.FOOD: 20,
       RESOURCE_TYPES.WOOD: 10,
       RESOURCE_TYPES.HORSE: 10,
@@ -224,7 +218,7 @@ class RunnersFromSuppression extends RandomTurnEvent {
   int successRate = 100;
 
   Stock stockSuccess = Stock(
-    {
+    values: {
       RESOURCE_TYPES.FOOD: 15,
       RESOURCE_TYPES.WOOD: 10,
       RESOURCE_TYPES.FIREARM: 5,
@@ -250,7 +244,7 @@ class SettlersArrived extends RandomTurnEvent {
   int successRate = 100;
 
   Stock stockSuccess = Stock(
-    {
+    values: {
       RESOURCE_TYPES.FOOD: 40,
       RESOURCE_TYPES.WOOD: 20,
       RESOURCE_TYPES.FIREARM: 15,
@@ -284,7 +278,7 @@ class GuestsFromSich extends RandomTurnEvent {
   int successRate = 100;
 
   Stock stockSuccess = Stock(
-    {
+    values: {
       RESOURCE_TYPES.FOOD: 40,
       RESOURCE_TYPES.FIREARM: 20,
       RESOURCE_TYPES.HORSE: 10,
@@ -309,12 +303,12 @@ class ChambulCapture extends RandomTurnEvent {
   int successRate = 50;
 
   Stock stockSuccess = Stock(
-    {
+    values: {
       RESOURCE_TYPES.HORSE: 20,
     },
   );
 
-  Stock stockFailure = Stock({});
+  Stock stockFailure = Stock();
 
   List<Function> conditions = [
     (Sloboda city) {
@@ -338,7 +332,7 @@ class MerchantVisit extends RandomTurnEvent {
     var fish = city.stock.getByType(
       RESOURCE_TYPES.FISH,
     );
-    var stock = Stock({
+    var stock = Stock(values: {
       RESOURCE_TYPES.FUR: -fur,
       RESOURCE_TYPES.FISH: -fish,
       RESOURCE_TYPES.MONEY: (fur + fish),
@@ -369,7 +363,7 @@ class UniteWithNeighbours extends RandomTurnEvent {
   String localizedKey = 'randomTurnEvent.uniteWithNeighbours';
   int probability = 100;
 
-  Stock stockSuccess = Stock({
+  Stock stockSuccess = Stock(values: {
     RESOURCE_TYPES.FUR: 30,
     RESOURCE_TYPES.FISH: 30,
     RESOURCE_TYPES.MONEY: 50,
@@ -383,7 +377,7 @@ class UniteWithNeighbours extends RandomTurnEvent {
       return RandomEventMessage(
         event: this,
         stock: stockSuccess,
-        cityProps: CityProps({CITY_PROPERTIES.CITIZENS: 20}),
+        cityProps: CityProps(values: {CITY_PROPERTIES.CITIZENS: 20}),
         messageKey: this.localizedKey,
       );
     };

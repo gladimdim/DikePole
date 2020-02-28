@@ -1,27 +1,26 @@
-import 'package:flutter/material.dart';
 import 'package:async/async.dart';
-import 'package:flutter/rendering.dart';
 import 'package:flutter/foundation.dart';
-
+import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:sloboda/animations/slideable_button.dart';
 import 'package:sloboda/components/button_text.dart';
 import 'package:sloboda/components/divider.dart';
 import 'package:sloboda/components/title_text.dart';
 import 'package:sloboda/inherited_city.dart';
 import 'package:sloboda/models/app_preferences.dart';
+import 'package:sloboda/models/buildings/resource_buildings/resource_building.dart';
 import 'package:sloboda/models/city_properties.dart';
 import 'package:sloboda/models/events/random_choicable_events.dart';
+import 'package:sloboda/models/sloboda.dart';
 import 'package:sloboda/models/sloboda_localizations.dart';
 import 'package:sloboda/models/stock.dart';
-import 'package:sloboda/views/locale_selection.dart';
-import 'package:sloboda/models/buildings/resource_buildings/resource_building.dart';
-import 'package:sloboda/models/sloboda.dart';
 import 'package:sloboda/views/city_buildings/city_buildings_page.dart';
 import 'package:sloboda/views/city_dashboard.dart';
 import 'package:sloboda/views/components/arrow_right.dart';
-import 'package:sloboda/views/events_view.dart';
-import 'package:sloboda/views/resource_buildings/resource_buildings_page.dart';
 import 'package:sloboda/views/components/soft_container.dart';
+import 'package:sloboda/views/events_view.dart';
+import 'package:sloboda/views/locale_selection.dart';
+import 'package:sloboda/views/resource_buildings/resource_buildings_page.dart';
 import 'package:sloboda/views/stock_view.dart';
 
 class CityGame extends StatefulWidget {

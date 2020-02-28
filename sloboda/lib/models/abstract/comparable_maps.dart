@@ -1,6 +1,7 @@
 import 'dart:collection';
 
 abstract class ComparableMaps<T> {
+  static const Map<dynamic, int> defaultValues = {};
   Map<T, int> _map = {};
 
   ComparableMaps([Map<T, int> props]) {

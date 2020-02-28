@@ -63,24 +63,24 @@ class KoshoviyPohid extends ChoicableRandomTurnEvent {
   int probability = 30;
 
   Stock stockSuccess = Stock(
-    {
+    values: {
       RESOURCE_TYPES.FOOD: 10,
       RESOURCE_TYPES.MONEY: 10,
     },
   );
 
-  Stock stockFailure = Stock({
+  Stock stockFailure = Stock(values: {
     RESOURCE_TYPES.FOOD: -10,
     RESOURCE_TYPES.FIREARM: -5,
   });
 
   CityProps cityPropsSuccess = CityProps(
-    {
+    values: {
       CITY_PROPERTIES.GLORY: 10,
     },
   );
   CityProps cityPropsFailure = CityProps(
-    {
+    values: {
       CITY_PROPERTIES.GLORY: -5,
       CITY_PROPERTIES.CITIZENS: -10,
     },
@@ -113,24 +113,24 @@ class HelpNeighbours extends ChoicableRandomTurnEvent {
   int probability = 100;
 
   Stock stockSuccess = Stock(
-    {
+    values: {
       RESOURCE_TYPES.MONEY: 30,
       RESOURCE_TYPES.HORSE: 5,
       RESOURCE_TYPES.FUR: 10,
     },
   );
 
-  Stock stockFailure = Stock({
+  Stock stockFailure = Stock(values: {
     RESOURCE_TYPES.FOOD: -10,
     RESOURCE_TYPES.FIREARM: -5,
     RESOURCE_TYPES.HORSE: -5,
   });
 
   CityProps cityPropsSuccess = CityProps(
-    {CITY_PROPERTIES.GLORY: 10, CITY_PROPERTIES.CITIZENS: 5},
+    values: {CITY_PROPERTIES.GLORY: 10, CITY_PROPERTIES.CITIZENS: 5},
   );
   CityProps cityPropsFailure = CityProps(
-    {CITY_PROPERTIES.GLORY: 5, CITY_PROPERTIES.CITIZENS: -5},
+    values: {CITY_PROPERTIES.GLORY: 5, CITY_PROPERTIES.CITIZENS: -5},
   );
 
   int successRate = 80;
@@ -159,23 +159,23 @@ class BuyPrisoners extends ChoicableRandomTurnEvent {
 
   int probability = 100;
 
-  Stock stockSuccess = Stock({
+  Stock stockSuccess = Stock(values: {
     RESOURCE_TYPES.MONEY: -40,
   });
 
-  Stock stockFailure = Stock({
+  Stock stockFailure = Stock(values: {
     RESOURCE_TYPES.MONEY: 20,
   });
 
   CityProps cityPropsFailure = CityProps(
-    {
+    values: {
       CITY_PROPERTIES.GLORY: 10,
       CITY_PROPERTIES.CITIZENS: 15,
       CITY_PROPERTIES.FAITH: 10,
     },
   );
   CityProps cityPropsSuccess = CityProps(
-    {
+    values: {
       CITY_PROPERTIES.CITIZENS: 5,
     },
   );
@@ -206,24 +206,24 @@ class AttackChambul extends ChoicableRandomTurnEvent {
 
   int probability = 40;
 
-  Stock stockSuccess = Stock({
+  Stock stockSuccess = Stock(values: {
     RESOURCE_TYPES.HORSE: 20,
     RESOURCE_TYPES.MONEY: 40,
   });
 
-  Stock stockFailure = Stock({
+  Stock stockFailure = Stock(values: {
     RESOURCE_TYPES.HORSE: -20,
     RESOURCE_TYPES.FIREARM: -20,
   });
 
   CityProps cityPropsSuccess = CityProps(
-    {
+    values: {
       CITY_PROPERTIES.GLORY: 40,
       CITY_PROPERTIES.FAITH: 10,
     },
   );
   CityProps cityPropsFailure = CityProps(
-    {
+    values: {
       CITY_PROPERTIES.GLORY: -20,
       CITY_PROPERTIES.FAITH: -5,
       CITY_PROPERTIES.CITIZENS: -20,
@@ -253,25 +253,25 @@ class TrapChambulOnWayBack extends ChoicableRandomTurnEvent {
 
   int probability = 50;
 
-  Stock stockSuccess = Stock({
+  Stock stockSuccess = Stock(values: {
     RESOURCE_TYPES.HORSE: 50,
     RESOURCE_TYPES.MONEY: 200,
   });
 
-  Stock stockFailure = Stock({
+  Stock stockFailure = Stock(values: {
     RESOURCE_TYPES.HORSE: -50,
     RESOURCE_TYPES.FIREARM: -50,
   });
 
   CityProps cityPropsSuccess = CityProps(
-    {
+    values: {
       CITY_PROPERTIES.GLORY: 80,
       CITY_PROPERTIES.FAITH: 20,
       CITY_PROPERTIES.CITIZENS: 40,
     },
   );
   CityProps cityPropsFailure = CityProps(
-    {
+    values: {
       CITY_PROPERTIES.GLORY: -50,
       CITY_PROPERTIES.FAITH: -40,
       CITY_PROPERTIES.CITIZENS: -80,
@@ -311,24 +311,24 @@ class HelpDefendSich extends ChoicableRandomTurnEvent {
 
   int probability = 50;
 
-  Stock stockSuccess = Stock({
+  Stock stockSuccess = Stock(values: {
     RESOURCE_TYPES.HORSE: 10,
     RESOURCE_TYPES.FIREARM: 10,
   });
 
-  Stock stockFailure = Stock({
+  Stock stockFailure = Stock(values: {
     RESOURCE_TYPES.HORSE: 5,
     RESOURCE_TYPES.FIREARM: 5,
   });
 
   CityProps cityPropsSuccess = CityProps(
-    {
+    values: {
       CITY_PROPERTIES.GLORY: 10,
       CITY_PROPERTIES.FAITH: 5,
     },
   );
   CityProps cityPropsFailure = CityProps(
-    {
+    values: {
       CITY_PROPERTIES.GLORY: 5,
       CITY_PROPERTIES.FAITH: 1,
     },
@@ -363,27 +363,27 @@ class AttackPolishLands extends ChoicableRandomTurnEvent {
 
   int probability = 50;
 
-  Stock stockSuccess = Stock({
+  Stock stockSuccess = Stock(values: {
     RESOURCE_TYPES.HORSE: 50,
     RESOURCE_TYPES.FIREARM: 50,
     RESOURCE_TYPES.MONEY: 250,
     RESOURCE_TYPES.FOOD: 100,
   });
 
-  Stock stockFailure = Stock({
+  Stock stockFailure = Stock(values: {
     RESOURCE_TYPES.HORSE: -50,
     RESOURCE_TYPES.FIREARM: -50,
     RESOURCE_TYPES.FOOD: -100,
   });
 
   CityProps cityPropsSuccess = CityProps(
-    {
+    values: {
       CITY_PROPERTIES.GLORY: 50,
       CITY_PROPERTIES.FAITH: 30,
     },
   );
   CityProps cityPropsFailure = CityProps(
-    {
+    values: {
       CITY_PROPERTIES.GLORY: -70,
       CITY_PROPERTIES.FAITH: -40,
     },

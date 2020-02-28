@@ -21,7 +21,7 @@ class ShootingRange implements Buildable<RESOURCE_TYPES> {
     RESOURCE_TYPES.WOOD: 30,
   };
 
-  Stock requiresForCossack = Stock({
+  Stock requiresForCossack = Stock(values: {
     RESOURCE_TYPES.FOOD: 10,
     RESOURCE_TYPES.FIREARM: 1,
     RESOURCE_TYPES.HORSE: 1,
@@ -126,7 +126,7 @@ class ShootingRange implements Buildable<RESOURCE_TYPES> {
       city.removeCitizens(amount: 1);
       city.props +
           CityProps(
-            {
+            values: {
               CITY_PROPERTIES.COSSACKS: 1,
             },
           );
