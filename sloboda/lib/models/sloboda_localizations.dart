@@ -387,8 +387,8 @@ class SlobodaLocalizations {
     'en': {
       'overview': 'Overview',
       'events': 'Events',
-      'resourceBuildings': 'Resource Buildings',
-      'cityBuildings': 'Town Buildings',
+      'resources': 'Resources',
+      'cityBuildings': 'Town',
       'stock': 'Stock',
       'requiredForProductionBy': 'Required for production by',
       'requiredToBuildBy': 'Required for building',
@@ -418,8 +418,8 @@ class SlobodaLocalizations {
     'uk': {
       'overview': 'Головна',
       'events': 'Події',
-      'resourceBuildings': 'Ресурсні будівлі',
-      'cityBuildings': 'Міські будівлі',
+      'resources': 'Ресурси',
+      'cityBuildings': 'Будівлі',
       'stock': 'Склад',
       'requiredForProductionBy': 'Потребується у виробництві',
       'requiredToBuildBy': 'Потребується для будування',
@@ -453,9 +453,9 @@ class SlobodaLocalizations {
         ['overview'];
   }
 
-  static String get resourceBuildings {
+  static String get resources {
     return _localizedValues[SlobodaLocalizations.locale.languageCode]
-        ['resourceBuildings'];
+        ['resources'];
   }
 
   static String get cityBuildings {

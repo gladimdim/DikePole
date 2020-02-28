@@ -1,7 +1,7 @@
 import 'package:sloboda/models/abstract/comparable_maps.dart';
 import 'package:sloboda/models/resources/resource.dart';
 
-class Stock extends ComparableMaps<RESOURCE_TYPES> {
+class Stock extends Stockable<RESOURCE_TYPES> {
   static const Map<RESOURCE_TYPES, int> defaultValues = {
     RESOURCE_TYPES.FOOD: 20,
     RESOURCE_TYPES.FIREARM: 1,

@@ -3,7 +3,7 @@ import 'package:sloboda/models/sloboda_localizations.dart';
 
 enum CITY_PROPERTIES { FAITH, DEFENSE, GLORY, CITIZENS, COSSACKS }
 
-class CityProps extends ComparableMaps<CITY_PROPERTIES> {
+class CityProps extends Stockable<CITY_PROPERTIES> {
   static const Map<CITY_PROPERTIES, int> defaultValues = {
     CITY_PROPERTIES.GLORY: 1,
     CITY_PROPERTIES.DEFENSE: 1,

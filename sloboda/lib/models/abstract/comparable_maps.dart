@@ -1,10 +1,10 @@
 import 'dart:collection';
 
-abstract class ComparableMaps<T> {
+abstract class Stockable<T> {
   static const Map<dynamic, int> defaultValues = {};
   Map<T, int> _map = {};
 
-  ComparableMaps([Map<T, int> props]) {
+  Stockable([Map<T, int> props]) {
     if (props != null) {
       _map = Map.from(props);
     }
@@ -14,7 +14,7 @@ abstract class ComparableMaps<T> {
     return _map.keys.toList();
   }
 
-  operator <(ComparableMaps<T> anotherMap) {
+  operator <(Stockable<T> anotherMap) {
     if (anotherMap._map.keys.length < this._map.keys.length) {
       return false;
     }
@@ -29,7 +29,7 @@ abstract class ComparableMaps<T> {
     return true;
   }
 
-  operator >(ComparableMaps<T> anotherMap) {
+  operator >(Stockable<T> anotherMap) {
     if (anotherMap._map.keys.length > this._map.keys.length) {
       return false;
     }
@@ -66,7 +66,7 @@ abstract class ComparableMaps<T> {
     }
   }
 
-  operator +(ComparableMaps another) {
+  operator +(Stockable another) {
     if (another != null) {
       this._map.forEach((key, _) {
         if (another.getByType(key) != null) {
@@ -76,7 +76,7 @@ abstract class ComparableMaps<T> {
     }
   }
 
-  operator -(ComparableMaps another) {
+  operator -(Stockable another) {
     if (another != null) {
       this._map.forEach((key, _) {
         if (another.getByType(key) != null) {

@@ -76,7 +76,7 @@ class _CityDashboardState extends State<CityDashboard> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    TitleText(SlobodaLocalizations.resourceBuildings),
+                    TitleText(SlobodaLocalizations.resources),
                     Text(
                       widget.city.resourceBuildings.length.toString(),
                     )
