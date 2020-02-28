@@ -160,14 +160,16 @@ class _CityGameState extends State<CityGame> {
                           ),
                         ),
                       ),
-                      Expanded(
-                        flex: 1,
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: SoftContainer(
-                            child: FullWidth(
-                              child: _makeTurn(context),
-                            ),
+                      Padding(
+                        padding: const EdgeInsets.only(
+                          left: 16,
+                          right: 16,
+                          top: 16,
+                          bottom: 24.0,
+                        ),
+                        child: SoftContainer(
+                          child: FullWidth(
+                            child: _makeTurn(context),
                           ),
                         ),
                       ),

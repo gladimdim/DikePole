@@ -229,6 +229,14 @@ class RandomEventLocalizations extends InternalLocalizations {
       'AttackPolishLands': 'Raid the Poland lands',
       'AttackPolishLandsQuestion':
           'The Zaporozhye Cossacks decided to attack polish lands. The magnates have amassed many soldiers to strike a pre-emptive blow at the Ukrainians. Therefore, the Sich calls all the Cossacks to raid the Poland. Since your village has sufficient resources of people and horses, it can join the raid.',
+      'successSendMoneyToSchoolInKaniv':
+          'You donated money to expand school in Kanev. Now more Cossack children will be able to receive education. A bright mind in children is the future of Ukraine.',
+      'SendMoneyToSchoolInKanivYes': 'Donate money for school.',
+      'SendMoneyToSchoolInKanivNo': 'Refuse to give money.',
+      'SendMoneyToSchoolInKaniv':
+          'Donation of money for expanding school in Kanev.',
+      'SendMoneyToSchoolInKanivQuestion':
+          'You got cossacks as a guests. They ask for donation to enhance the school in Kanev. The lands are becoming more populated and there is no enough space for new pupils.',
     },
     'uk': {
       'koshoviyPohid':
@@ -337,6 +345,15 @@ class RandomEventLocalizations extends InternalLocalizations {
       'AttackPolishLands': 'Похід на Польшу.',
       'AttackPolishLandsQuestion':
           'Запорозьке товариство вирішило напасти на короні землі. Магнати накопчили багато солдат, щоб зробити упереджувальний удар по українцях. Тому кошовий скликає всіх козаків до походу на Польшу. Так як ваше село має досталь ресурсів людей і коней, то воно може приєднатися до походу.',
+      'successSendMoneyToSchoolInKaniv':
+          'Ви пожертвували гроші для розширення школи у Каневі. Тепер ще більше козацьких дітей зможуть отримати освіту. Світлий розум у дітей - це майбутнє України.',
+      'SendMoneyToSchoolInKanivYes':
+          'Ви виділили кошти на школу в Каневі. Посланці поїхали до Канева з зібраними коштами.',
+      'SendMoneyToSchoolInKanivNo':
+          'Ви відмовили у пожертві грошей на школу. Посланці поїхали далі по інших слободах збирати кошти.',
+      'SendMoneyToSchoolInKaniv': 'Пожертва грошей на школу в Каневі.',
+      'SendMoneyToSchoolInKanivQuestion':
+          'До вас прибули козаки, які збирають на розбудову школи у Каневі. Просять допомогти по можливості. Навчені діти зможуть краще протистояти ієзуїтській чумі на наших землях.',
     }
   };
 }

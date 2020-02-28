@@ -86,6 +86,7 @@ abstract class RandomTurnEvent {
     AttackChambul(),
     TrapChambulOnWayBack(),
     HelpDefendSich(),
+    SendMoneyToSchoolInKaniv(),
   ];
 }
 

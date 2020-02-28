@@ -415,3 +415,40 @@ class AttackPolishLands extends ChoicableRandomTurnEvent {
     }
   ];
 }
+
+class SendMoneyToSchoolInKaniv extends ChoicableRandomTurnEvent {
+  String successMessageKey = 'randomTurnEvent.successSendMoneyToSchoolInKaniv';
+  String localizedKeyYes = 'randomTurnEvent.SendMoneyToSchoolInKanivYes';
+  String localizedKeyNo = 'randomTurnEvent.SendMoneyToSchoolInKanivNo';
+
+  int probability = 100;
+  int successRate = 100;
+
+  Stock stockSuccess = Stock(values: {
+    RESOURCE_TYPES.MONEY: -40,
+  });
+
+  CityProps cityPropsSuccess = CityProps(
+    values: {
+      CITY_PROPERTIES.GLORY: 20,
+      CITY_PROPERTIES.FAITH: 20,
+    },
+  );
+
+  String localizedKey = 'randomTurnEvent.SendMoneyToSchoolInKaniv';
+  String localizedQuestionKey =
+      'randomTurnEvent.SendMoneyToSchoolInKanivQuestion';
+
+  List<Function> conditions = [
+    (Sloboda city) {
+      return city.currentSeason is WinterSeason;
+    },
+    (Sloboda city) {
+      return city.stock.getByType(RESOURCE_TYPES.MONEY) >= 40;
+    },
+    (Sloboda city) {
+      return ChoicableRandomTurnEvent.onceInYears<SendMoneyToSchoolInKaniv>(
+          city, 3);
+    }
+  ];
+}
