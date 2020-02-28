@@ -15,8 +15,11 @@ class Stock extends Stockable<RESOURCE_TYPES> {
     RESOURCE_TYPES.FISH: 0,
   };
 
-  Stock({Map<RESOURCE_TYPES, int> values = Stock.defaultValues})
-      : super(values);
+  Stock({Map<RESOURCE_TYPES, int> values}) : super(values);
+
+  static defaultStock() {
+    return Stock(values: defaultValues);
+  }
 
   static Stock bigStock() {
     return Stock(values: {

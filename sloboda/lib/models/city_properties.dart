@@ -12,8 +12,11 @@ class CityProps extends Stockable<CITY_PROPERTIES> {
     CITY_PROPERTIES.COSSACKS: 0,
   };
 
-  CityProps({Map<CITY_PROPERTIES, int> values = CityProps.defaultValues})
-      : super(values);
+  CityProps({Map<CITY_PROPERTIES, int> values}) : super(values);
+
+  static CityProps defaultProps() {
+    return CityProps(values: defaultValues);
+  }
 
   static CityProps bigProps() {
     return CityProps(values: {

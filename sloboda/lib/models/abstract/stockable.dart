@@ -1,10 +1,9 @@
 import 'dart:collection';
 
 abstract class Stockable<T> {
-  static const Map<dynamic, int> defaultValues = {};
   Map<T, int> _map = {};
 
-  Stockable([Map<T, int> props]) {
+  Stockable(Map<T, int> props) {
     if (props != null) {
       _map = Map.from(props);
     }
