@@ -8,7 +8,12 @@ var version = "0.010";
 
 String getDefaultOrUrlLanguage() {
   var urlLang = UrlParser.getLanguage();
-  final savedLangCode = AppPreferences.instance.getUILanguage();
+  var savedLangCode;
+  try {
+    AppPreferences.instance.getUILanguage();
+  } catch (e) {
+    savedLangCode = 'uk';
+  }
   if (SlobodaLocalizations.supportedLanguageCodes.contains(urlLang)) {
     return urlLang;
   } else if (savedLangCode != null &&
@@ -430,7 +435,7 @@ class SlobodaLocalizations {
       'faith': 'Faith',
       'citizens': 'Citizens',
       'defense': 'Defense level',
-      'trainCossacks': 'Traing cossacks',
+      'trainCossacks': 'Train cossacks',
       'cossacks': 'Cossacks',
     },
     'uk': {

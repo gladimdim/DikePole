@@ -13,8 +13,7 @@ class Producable {
   int maxWorkers = 5;
   int workMultiplier = 1;
 
-  get outputAmount =>
-     workMultiplier * assignedHumans.length;
+  get outputAmount => workMultiplier * assignedHumans.length;
 
   bool hasWorkers() {
     return assignedHumans.isNotEmpty;
@@ -59,7 +58,10 @@ class Producable {
 
   void generate(Stock stock) {
     if (!hasWorkers()) {
-      throw NoWorkersAssignedException('${toLocalizedString()} ${SlobodaLocalizations.hasNoAssignedWorkers}');
+      throw NoWorkersAssignedException(
+        building: this,
+        cause: SlobodaLocalizations.hasNoAssignedWorkers,
+      );
     }
 
     if (requires.entries.length > 0) {
@@ -67,10 +69,11 @@ class Producable {
       // check if stock satisfies the required input
       for (var reqRes in requires.entries) {
         var inStock = stock.getByType(reqRes.key) ?? 0;
-        var requiredToProduce = reqRes.value * assignedHumans.length * workMultiplier;
+        var requiredToProduce =
+            reqRes.value * assignedHumans.length * workMultiplier;
         if (requiredToProduce > inStock) {
           throw NotEnoughResourceException(
-              '${this.toLocalizedString()}: More ${requiredToProduce - inStock} of ${localizedResourceByType(reqRes.key)} is required');
+              'More ${requiredToProduce - inStock} of ${reqRes.key} is required');
         } else {
           executors.add(() {
             stock.removeFromType(reqRes.key, requiredToProduce);

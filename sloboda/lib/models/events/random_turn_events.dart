@@ -9,13 +9,13 @@ import 'package:sloboda/models/resources/resource.dart';
 import 'package:sloboda/models/sloboda.dart';
 import 'package:sloboda/models/stock.dart';
 
-class RandomEventMessage {
+class EventMessage {
   final Stock stock;
-  final String messageKey;
+  String messageKey;
   final RandomTurnEvent event;
   final CityProps cityProps;
 
-  RandomEventMessage(
+  EventMessage(
       {this.stock,
       @required this.messageKey,
       @required this.event,
@@ -50,7 +50,7 @@ abstract class RandomTurnEvent {
     var r = Random().nextInt(100);
     return () {
       bool success = r <= successRate;
-      return RandomEventMessage(
+      return EventMessage(
           event: this,
           stock: success ? stockSuccess : stockFailure,
           cityProps: success ? cityPropsSuccess : cityPropsFailure,
@@ -172,7 +172,7 @@ class ChildrenPopulation extends RandomTurnEvent {
 
   Function execute(Sloboda city) {
     return () {
-      return RandomEventMessage(
+      return EventMessage(
         event: this,
         stock: stockSuccess,
         cityProps: cityPropsSuccess,
@@ -339,7 +339,7 @@ class MerchantVisit extends RandomTurnEvent {
       RESOURCE_TYPES.MONEY: (fur + fish),
     });
     return () {
-      return RandomEventMessage(
+      return EventMessage(
         event: this,
         stock: stock,
         messageKey: this.localizedKey,
@@ -375,7 +375,7 @@ class UniteWithNeighbours extends RandomTurnEvent {
 
   Function execute(Sloboda city) {
     return () {
-      return RandomEventMessage(
+      return EventMessage(
         event: this,
         stock: stockSuccess,
         cityProps: CityProps(values: {CITY_PROPERTIES.CITIZENS: 20}),
@@ -406,8 +406,7 @@ class UniteWithNeighbours extends RandomTurnEvent {
 }
 
 Function eventHappenedFn<EventType>() {
-  return (CityEvent event) =>
-      event.events.where((subEvent) => subEvent.event is EventType).isNotEmpty;
+  return (CityEvent event) => event.sourceEvent.event is EventType;
 }
 
 Function happenedInYearFn(int year) {

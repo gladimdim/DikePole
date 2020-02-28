@@ -23,7 +23,7 @@ abstract class ChoicableRandomTurnEvent extends RandomTurnEvent {
     var r = Random().nextInt(100);
     return () {
       bool success = r <= successRate;
-      return RandomEventMessage(
+      return EventMessage(
           event: this,
           stock: success ? stockSuccess : stockFailure,
           cityProps: success ? cityPropsSuccess : cityPropsFailure,

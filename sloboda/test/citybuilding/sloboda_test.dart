@@ -11,7 +11,7 @@ import 'package:test/test.dart';
 
 void main() {
   group("Can be initialized with default params", () {
-    var city = Sloboda(name: 'Dmitrova', stock: Stock());
+    var city = Sloboda(name: 'Dmitrova', stock: Stock.defaultStock());
     test("Inits", () {
       expect(city, isNotNull);
       expect(city.name, equals('Dmitrova'));
@@ -93,6 +93,11 @@ void main() {
         'Generates three events for no workers assigned to default Forest and River and new Field',
         () {
           city.makeTurn();
+          expect(
+            city.events.length,
+            equals(1),
+          );
+
           expect(
             city.events.length,
             equals(3),

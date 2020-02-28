@@ -1,18 +1,18 @@
-import 'package:sloboda/models/events/random_turn_events.dart';
 import 'package:flutter/foundation.dart';
+import 'package:sloboda/models/events/random_turn_events.dart';
 
 class CityEvent {
   final int yearHappened;
   final CitySeason season;
-  final List<RandomEventMessage> events;
+  final EventMessage sourceEvent;
 
-  CityEvent({this.yearHappened, this.season, @required this.events});
+  CityEvent({this.yearHappened, this.season, @required this.sourceEvent});
 
   static CityEvent copyFrom(CityEvent event) {
     return CityEvent(
       yearHappened: event.yearHappened,
       season: event.season,
-      events: List.from(event.events),
+      sourceEvent: event.sourceEvent,
     );
   }
 }

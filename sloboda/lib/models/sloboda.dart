@@ -44,10 +44,10 @@ class Sloboda {
 
   Sloboda({this.name, this.stock, this.props}) {
     if (stock == null) {
-      stock = Stock();
+      stock = Stock.defaultStock();
     }
     if (props == null) {
-      props = CityProps();
+      props = CityProps.defaultProps();
     }
     for (var i = 0; i < props.getByType(CITY_PROPERTIES.CITIZENS); i++) {
       citizens.add(Citizen());
@@ -135,7 +135,7 @@ class Sloboda {
 
   void _runAttachedEvents() {
     for (var _event in _nextRandomEvents) {
-      RandomEventMessage event = _event();
+      EventMessage event = _event();
       this.stock + event.stock;
       this.props + event.cityProps;
       final includesCitizens =
@@ -151,7 +151,7 @@ class Sloboda {
       events.add(
         CityEvent(
           season: currentSeason,
-          events: [event],
+          sourceEvent: event,
           yearHappened: currentYear,
         ),
       );
@@ -173,13 +173,11 @@ class Sloboda {
       CityEvent(
         season: currentSeason,
         yearHappened: currentYear,
-        events: [
-          RandomEventMessage(
-            stock: null,
-            event: event,
-            messageKey: event.choiceToStringKey(yes),
-          )
-        ],
+        sourceEvent: EventMessage(
+          stock: null,
+          event: event,
+          messageKey: event.choiceToStringKey(yes),
+        ),
       ),
     );
   }
@@ -219,18 +217,18 @@ class Sloboda {
     });
 
     _innerChanges.add(this);
-    events.add(
-      CityEvent(
-        events: exceptions.map((e) {
-          return RandomEventMessage(
+    for (var exception in exceptions) {
+      events.add(
+        CityEvent(
+          sourceEvent: EventMessage(
             event: null,
-            messageKey: e,
-          );
-        }).toList(),
-        yearHappened: currentYear,
-        season: currentSeason,
-      ),
-    );
+            messageKey: exception,
+          ),
+          yearHappened: currentYear,
+          season: currentSeason,
+        ),
+      );
+    }
 
     cityBuildings.forEach((cb) {
       Map<CITY_PROPERTIES, int> generated = cb.generate();
@@ -259,11 +257,11 @@ class Sloboda {
 //            ),
 //          );
 
-          RandomEventMessage eventResult = event.execute(this)();
+          EventMessage eventResult = event.execute(this)();
           this.stock + eventResult.stock;
           events.add(
             CityEvent(
-              events: [eventResult],
+              sourceEvent: eventResult,
               yearHappened: currentYear,
               season: currentSeason,
             ),
