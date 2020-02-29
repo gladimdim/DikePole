@@ -9,8 +9,13 @@ class AppPreferences {
   String _languageCode = 'languageCode';
 
   Future init() async {
-    _preferences = await SharedPreferences.getInstance();
-    return _preferences;
+    try {
+      _preferences = await SharedPreferences.getInstance();
+      return _preferences;
+    } catch (e) {
+      print(e);
+      return {};
+    }
   }
 
   bool getDarkTheme() {
