@@ -88,6 +88,7 @@ abstract class RandomTurnEvent {
     HelpDefendSich(),
     SendMoneyToSchoolInKaniv(),
     SendMerchantToKanev(),
+    AttackCatholicChurches(),
   ];
 }
 

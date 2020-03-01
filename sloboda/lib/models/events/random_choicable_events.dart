@@ -501,3 +501,52 @@ class SendMerchantToKanev extends ChoicableRandomTurnEvent {
     };
   }
 }
+
+class AttackCatholicChurches extends ChoicableRandomTurnEvent {
+  String successMessageKey = 'randomTurnEvent.successAttackCatholicChurches';
+  String failureMessageKey = 'randomTurnEvent.failureAttackCatholicChurches';
+  String localizedKeyYes = 'randomTurnEvent.AttackCatholicChurchesYes';
+  String localizedKeyNo = 'randomTurnEvent.AttackCatholicChurchesNo';
+
+  int probability = 100;
+
+  Stock stockSuccess = Stock(values: {
+    RESOURCE_TYPES.HORSE: 10,
+    RESOURCE_TYPES.FIREARM: 10,
+    RESOURCE_TYPES.MONEY: 150,
+    RESOURCE_TYPES.FOOD: 80,
+  });
+
+  CityProps cityPropsSuccess = CityProps(
+    values: {
+      CITY_PROPERTIES.GLORY: 20,
+      CITY_PROPERTIES.FAITH: 20,
+    },
+  );
+  CityProps cityPropsFailure = CityProps(
+    values: {
+      CITY_PROPERTIES.COSSACKS: -10,
+      CITY_PROPERTIES.GLORY: -20,
+      CITY_PROPERTIES.FAITH: -20,
+    },
+  );
+
+  int successRate = 75;
+
+  String localizedKey = 'randomTurnEvent.AttackCatholicChurches';
+  String localizedQuestionKey =
+      'randomTurnEvent.AttackCatholicChurchesQuestion';
+
+  List<Function> conditions = [
+    (Sloboda city) {
+      return city.currentSeason is WinterSeason;
+    },
+    (Sloboda city) {
+      return city.props.getByType(CITY_PROPERTIES.COSSACKS) > 20;
+    },
+    (Sloboda city) {
+      return ChoicableRandomTurnEvent.onceInYears<AttackCatholicChurches>(
+          city, 3);
+    }
+  ];
+}

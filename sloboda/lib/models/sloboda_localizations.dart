@@ -253,6 +253,17 @@ class RandomEventLocalizations extends InternalLocalizations {
       'SendMerchantToKanev': 'Send tranding journey to the Kaniv.',
       'SendMerchantToKanevQuestion':
           'You got a lot of fish and fur. You can send a trading journey to the Kaniv and sell the goods. The steppes are not calm, so there is a risk of encountering bandits',
+      'successAttackCatholicChurches':
+          'At night, hundreds of Cossacks, along with Orthodox priests, entered the church. The Catholics dispatched a group of soldiers, but after a short skirmish, they all ran away. You received their small cart and rich gifts from the Metropolitan. The sacred cause for the return of Ukrainian lands and churches is in full swing.',
+      'failureAttackCatholicChurches':
+          'Someone warned the plans of the Metropolitan\'s plans. You were met by an armed company of Jesuits. There was a short melee fight. Metropolitan forces were dispersed. You have lost several Cossacks killed.',
+      'AttackCatholicChurchesYes':
+          'You are pleased to assist the Metropolitan in this holy cause. You sent 20 Cossacks to help him.',
+      'AttackCatholicChurchesNo':
+          'Your main goal is to defend against the Tatars. Let the priests decide their church affairs themselves.',
+      'AttackCatholicChurches': 'Reflect the Orthodox parish from Catholics.',
+      'AttackCatholicChurchesQuestion':
+          'The more blessed Metropolitan of Kiev, Sylvester Belkevich, asks the Cossack Society to repatriate a parish occupied by Catholics near the Bila Tserkva. He asks with the help of your armed presence to persuade the Polands to return the church back to the possession of the Orthodox metropolis.',
     },
     'uk': {
       'koshoviyPohid':
@@ -382,6 +393,17 @@ class RandomEventLocalizations extends InternalLocalizations {
       'SendMerchantToKanev': 'Відіслати валку з товаром до Канева.',
       'SendMerchantToKanevQuestion':
           'У вас накопичилось багато риби і хутра. Можна відіслати валку до Канева, щоб продати весь товар і отримати гроші. В степу зараз не спокійно, то ж вибір за вами.',
+      'successAttackCatholicChurches':
+          'Вночі сотня козаків разом з православними священиками увійшла до церкви. Католики вирядили загін жовнірів, але після короткої сутички вони всі розбіглися. Вам дістався їх невеличкий обоз і багаті дари від митрополита. Священа справа по поверненню українських земель і церков іде повним ходом.',
+      'failureAttackCatholicChurches':
+          'Хтось попередив ляхів про замисел митрополита. Вас зустріла озброєна чота ієзуїтів. Стався короткий рукопашний бій. Сили митрополита були відкинуті. Ви втратили декілька козаків забитими.',
+      'AttackCatholicChurchesYes':
+          'Ви з радістю вирішили допомогти митрополиту у цій святій справі. На допомогу йому ви вислали 20 козаків.',
+      'AttackCatholicChurchesNo':
+          'Ваша головна мета - оборона від татар. Свої церковні справи нехай попи вирішують самі.',
+      'AttackCatholicChurches': 'Відбити православну парафію у католиків.',
+      'AttackCatholicChurchesQuestion':
+          'Благословеніший митрополит Києва Сильвестр Белькевич просить козацьке товариство відбити окуповану католиками парафію біля Білої Церкви. Він просить за допомогою вашої збройної присутністю переконати ляхів повернути церкву назад у володіння Православної метрополії.',
     }
   };
 }
