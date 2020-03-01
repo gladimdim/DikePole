@@ -87,6 +87,7 @@ abstract class RandomTurnEvent {
     TrapChambulOnWayBack(),
     HelpDefendSich(),
     SendMoneyToSchoolInKaniv(),
+    SendMerchantToKanev(),
   ];
 }
 
@@ -336,7 +337,7 @@ class MerchantVisit extends RandomTurnEvent {
     var stock = Stock(values: {
       RESOURCE_TYPES.FUR: -fur,
       RESOURCE_TYPES.FISH: -fish,
-      RESOURCE_TYPES.MONEY: (fur + fish),
+      RESOURCE_TYPES.MONEY: (fur + fish) * 2,
     });
     return () {
       return EventMessage(

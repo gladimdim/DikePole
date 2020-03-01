@@ -10,7 +10,7 @@ String getDefaultOrUrlLanguage() {
   var urlLang = UrlParser.getLanguage();
   var savedLangCode;
   try {
-    AppPreferences.instance.getUILanguage();
+    savedLangCode = AppPreferences.instance.getUILanguage();
   } catch (e) {
     savedLangCode = 'uk';
   }
@@ -242,6 +242,17 @@ class RandomEventLocalizations extends InternalLocalizations {
           'Donation of money for expanding school in Kanev.',
       'SendMoneyToSchoolInKanivQuestion':
           'You got cossacks as a guests. They ask for donation to enhance the school in Kanev. The lands are becoming more populated and there is no enough space for new pupils.',
+      'successSendMerchantToKanev':
+          'The squad with goods successfully arrived at Kaniv. They sold all the fish and furs and returned back.',
+      'failureSendMerchantToKanev':
+          'Your journey was attacked by road bandits. The goods were stolen. Happily, no one was wounded or killed.',
+      'SendMerchantToKanevYes':
+          'Cossacks loaded all the fish and fur and departed to the Kaniv with the first sun rays.',
+      'SendMerchantToKanevNo':
+          'You heard there are some bandits in steppe. You decided to keep the goods and try the trade them in next season.',
+      'SendMerchantToKanev': 'Send tranding journey to the Kaniv.',
+      'SendMerchantToKanevQuestion':
+          'You got a lot of fish and fur. You can send a trading journey to the Kaniv and sell the goods. The steppes are not calm, so there is a risk of encountering bandits',
     },
     'uk': {
       'koshoviyPohid':
@@ -335,8 +346,9 @@ class RandomEventLocalizations extends InternalLocalizations {
           'Ваша залога на Січі повернулась назад без всяких пригод.',
       'failureHelpDefendSich':
           'Ваша залога, разом з іншими козаками, відігнали розбишак, які хотіли пошарпати Січ, поки основні сили були на морі. Злякавшись, що Січ не порожня, розбишаки утікли світ за очі.',
-      'HelpDefendSichYes': 'Дати козаків для залоги.',
-      'HelpDefendSichNo': 'Відмовити січовикам.',
+      'HelpDefendSichYes': 'Загін козаків вирушів разом з січовиками на Січ.',
+      'HelpDefendSichNo':
+          'Ви відмовили січовикам. Необхідно мати козаків для оборони слободи.',
       'HelpDefendSich': 'Дати козаків для залоги на Січі.',
       'HelpDefendSichQuestion':
           'Січовики попросили видати вам трохи козаків, які б могли обороняти Січ під час їх морського походу на турків. Так, як ваша Слобода ще не велика, то вас не беруть з собою в похід.',
@@ -359,6 +371,17 @@ class RandomEventLocalizations extends InternalLocalizations {
       'SendMoneyToSchoolInKaniv': 'Пожертва грошей на школу в Каневі.',
       'SendMoneyToSchoolInKanivQuestion':
           'До вас прибули козаки, які збирають на розбудову школи у Каневі. Просять допомогти по можливості. Навчені діти зможуть краще протистояти ієзуїтській чумі на наших землях.',
+      'successSendMerchantToKanev':
+          'Валка з товаром з успіхом дійшла до Канева. Продавши всю рибу і хутра, вона вирушили назад.',
+      'failureSendMerchantToKanev':
+          'Валка з товаром була атакована розбійниками. Весь товар був пограбований, але, на щастя, ніхто не постраждав.',
+      'SendMerchantToKanevYes':
+          'Козаки повантажили всю рибу і хутра на вози і невеликою валкою пішли зі сходом сонця на Канів.',
+      'SendMerchantToKanevNo':
+          'Зараз неспокійно в степу. Дуже багато розбишак і татар вештається то тут то там. Ви вирішили перечекати кращого сезону.',
+      'SendMerchantToKanev': 'Відіслати валку з товаром до Канева.',
+      'SendMerchantToKanevQuestion':
+          'У вас накопичилось багато риби і хутра. Можна відіслати валку до Канева, щоб продати весь товар і отримати гроші. В степу зараз не спокійно, то ж вибір за вами.',
     }
   };
 }

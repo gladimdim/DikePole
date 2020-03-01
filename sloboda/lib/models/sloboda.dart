@@ -138,14 +138,16 @@ class Sloboda {
       EventMessage event = _event();
       this.stock + event.stock;
       this.props + event.cityProps;
-      final includesCitizens =
-          event.cityProps.getByType(CITY_PROPERTIES.CITIZENS);
-      if (includesCitizens != null) {
-        if (includesCitizens > 0) {
-          this.addCitizens(
-              amount: event.cityProps.getByType(CITY_PROPERTIES.CITIZENS));
-        } else {
-          this.removeCitizens(amount: includesCitizens);
+      if (event.cityProps != null) {
+        final includesCitizens =
+            event.cityProps.getByType(CITY_PROPERTIES.CITIZENS);
+        if (includesCitizens != null) {
+          if (includesCitizens > 0) {
+            this.addCitizens(
+                amount: event.cityProps.getByType(CITY_PROPERTIES.CITIZENS));
+          } else {
+            this.removeCitizens(amount: includesCitizens);
+          }
         }
       }
       events.add(

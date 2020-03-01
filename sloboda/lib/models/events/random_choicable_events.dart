@@ -452,3 +452,52 @@ class SendMoneyToSchoolInKaniv extends ChoicableRandomTurnEvent {
     }
   ];
 }
+
+class SendMerchantToKanev extends ChoicableRandomTurnEvent {
+  String successMessageKey = 'randomTurnEvent.successSendMerchantToKanev';
+  String failureMessageKey = 'randomTurnEvent.failureSendMerchantToKanev';
+  String localizedKeyYes = 'randomTurnEvent.SendMerchantToKanevYes';
+  String localizedKeyNo = 'randomTurnEvent.SendMerchantToKanevNo';
+
+  int probability = 100;
+  int successRate = 80;
+
+  String localizedKey = 'randomTurnEvent.SendMerchantToKanev';
+
+  String localizedQuestionKey = 'randomTurnEvent.SendMerchantToKanevQuestion';
+
+  List<Function> conditions = [
+    (Sloboda city) {
+      return city.stock.getByType(RESOURCE_TYPES.FUR) >= 20;
+    },
+    (Sloboda city) {
+      return city.stock.getByType(RESOURCE_TYPES.FISH) >= 30;
+    },
+    (Sloboda city) {
+      return ChoicableRandomTurnEvent.onceInYears<SendMerchantToKanev>(city, 2);
+    }
+  ];
+
+  Function postExecute(Sloboda city) {
+    var r = Random().nextInt(100);
+    return () {
+      bool success = r <= successRate;
+      var furTotal = city.stock.getByType(RESOURCE_TYPES.FUR);
+      var fishTotal = city.stock.getByType(RESOURCE_TYPES.FISH);
+      var stock = Stock(values: {
+        RESOURCE_TYPES.FUR: -furTotal,
+        RESOURCE_TYPES.FISH: -fishTotal,
+      });
+
+      if (success) {
+        stock.addToType(RESOURCE_TYPES.MONEY, (furTotal + fishTotal) * 2);
+      }
+      return EventMessage(
+          event: this,
+          stock: stock,
+          cityProps: null,
+          messageKey:
+              success ? this.successMessageKey : this.failureMessageKey);
+    };
+  }
+}

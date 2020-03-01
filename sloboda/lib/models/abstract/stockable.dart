@@ -48,6 +48,9 @@ abstract class Stockable<T> {
   }
 
   addToType(T type, int amount) {
+    if (_map[type] == null) {
+      _map[type] = 0;
+    }
     _map[type] = _map[type] + amount;
     if (_map[type] < 0) {
       _map[type] = 0;
@@ -59,6 +62,9 @@ abstract class Stockable<T> {
   }
 
   removeFromType(T type, int amount) {
+    if (_map[type] == null) {
+      return;
+    }
     _map[type] = _map[type] - amount;
     if (_map[type] < 0) {
       _map[type] = 0;
