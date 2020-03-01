@@ -55,6 +55,21 @@ String cityPropertiesToIconPath(CITY_PROPERTIES prop) {
     case CITY_PROPERTIES.GLORY:
       return 'images/city_props/glory_64.png';
     case CITY_PROPERTIES.COSSACKS:
-      return 'images/city_props/citizen_64.png';
+      return 'images/city_props/cossack_64.png';
+  }
+}
+
+String cityPropertiesToImagePath(CITY_PROPERTIES prop) {
+  switch (prop) {
+    case CITY_PROPERTIES.CITIZENS:
+      return 'images/city_buildings/citizen.png';
+    case CITY_PROPERTIES.DEFENSE:
+      return 'images/city_props/defense.png';
+    case CITY_PROPERTIES.FAITH:
+      return 'images/city_props/faith.png';
+    case CITY_PROPERTIES.GLORY:
+      return 'images/city_props/glory.png';
+    case CITY_PROPERTIES.COSSACKS:
+      return 'images/city_props/cossack.png';
   }
 }

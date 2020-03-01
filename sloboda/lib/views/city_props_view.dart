@@ -18,7 +18,7 @@ class CityPropsMiniView extends StatelessWidget {
               children: <Widget>[
                 Image.asset(
                   cityPropertiesToIconPath(key),
-                  width: 18,
+                  width: 64,
                 ),
                 Text(
                   '${cityPropsToLocalizedString(key)}: ${props.getByType(key)} ',
