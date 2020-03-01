@@ -64,14 +64,13 @@ class KoshoviyPohid extends ChoicableRandomTurnEvent {
 
   Stock stockSuccess = Stock(
     values: {
-      RESOURCE_TYPES.FOOD: 10,
-      RESOURCE_TYPES.MONEY: 10,
+      RESOURCE_TYPES.FOOD: 30,
+      RESOURCE_TYPES.MONEY: 30,
     },
   );
 
   Stock stockFailure = Stock(values: {
-    RESOURCE_TYPES.FOOD: -10,
-    RESOURCE_TYPES.FIREARM: -5,
+    RESOURCE_TYPES.FOOD: -30,
   });
 
   CityProps cityPropsSuccess = CityProps(
@@ -82,7 +81,7 @@ class KoshoviyPohid extends ChoicableRandomTurnEvent {
   CityProps cityPropsFailure = CityProps(
     values: {
       CITY_PROPERTIES.GLORY: -5,
-      CITY_PROPERTIES.CITIZENS: -10,
+      CITY_PROPERTIES.COSSACKS: -10,
     },
   );
   int successRate = 80;
@@ -93,7 +92,7 @@ class KoshoviyPohid extends ChoicableRandomTurnEvent {
 
   List<Function> conditions = [
     (Sloboda city) {
-      return city.stock.getByType(RESOURCE_TYPES.FIREARM) >= 1;
+      return city.props.getByType(CITY_PROPERTIES.COSSACKS) > 15;
     },
     (Sloboda city) {
       return city.citizens.length > 10;
@@ -122,7 +121,6 @@ class HelpNeighbours extends ChoicableRandomTurnEvent {
 
   Stock stockFailure = Stock(values: {
     RESOURCE_TYPES.FOOD: -10,
-    RESOURCE_TYPES.FIREARM: -5,
     RESOURCE_TYPES.HORSE: -5,
   });
 
@@ -130,7 +128,7 @@ class HelpNeighbours extends ChoicableRandomTurnEvent {
     values: {CITY_PROPERTIES.GLORY: 10, CITY_PROPERTIES.CITIZENS: 5},
   );
   CityProps cityPropsFailure = CityProps(
-    values: {CITY_PROPERTIES.GLORY: 5, CITY_PROPERTIES.CITIZENS: -5},
+    values: {CITY_PROPERTIES.GLORY: 5, CITY_PROPERTIES.COSSACKS: -5},
   );
 
   int successRate = 80;
@@ -140,10 +138,7 @@ class HelpNeighbours extends ChoicableRandomTurnEvent {
 
   List<Function> conditions = [
     (Sloboda city) {
-      return city.stock.getByType(RESOURCE_TYPES.FIREARM) >= 10;
-    },
-    (Sloboda city) {
-      return city.stock.getByType(RESOURCE_TYPES.HORSE) >= 10;
+      return city.props.getByType(CITY_PROPERTIES.COSSACKS) > 15;
     },
     (Sloboda city) {
       return ChoicableRandomTurnEvent.onceInYears<HelpNeighbours>(city, 3);
@@ -211,10 +206,7 @@ class AttackChambul extends ChoicableRandomTurnEvent {
     RESOURCE_TYPES.MONEY: 40,
   });
 
-  Stock stockFailure = Stock(values: {
-    RESOURCE_TYPES.HORSE: -20,
-    RESOURCE_TYPES.FIREARM: -20,
-  });
+  Stock stockFailure = Stock(values: {});
 
   CityProps cityPropsSuccess = CityProps(
     values: {
@@ -226,7 +218,7 @@ class AttackChambul extends ChoicableRandomTurnEvent {
     values: {
       CITY_PROPERTIES.GLORY: -20,
       CITY_PROPERTIES.FAITH: -5,
-      CITY_PROPERTIES.CITIZENS: -20,
+      CITY_PROPERTIES.COSSACKS: -10,
     },
   );
 
@@ -238,6 +230,9 @@ class AttackChambul extends ChoicableRandomTurnEvent {
   List<Function> conditions = [
     (Sloboda city) {
       return city.currentSeason is AutumnSeason;
+    },
+    (Sloboda city) {
+      return city.props.getByType(CITY_PROPERTIES.COSSACKS) > 25;
     },
     (Sloboda city) {
       return ChoicableRandomTurnEvent.onceInYears<AttackChambul>(city, 2);
@@ -256,6 +251,8 @@ class TrapChambulOnWayBack extends ChoicableRandomTurnEvent {
   Stock stockSuccess = Stock(values: {
     RESOURCE_TYPES.HORSE: 50,
     RESOURCE_TYPES.MONEY: 200,
+    RESOURCE_TYPES.FOOD: 100,
+    RESOURCE_TYPES.POWDER: 30,
   });
 
   Stock stockFailure = Stock(values: {
@@ -274,7 +271,7 @@ class TrapChambulOnWayBack extends ChoicableRandomTurnEvent {
     values: {
       CITY_PROPERTIES.GLORY: -50,
       CITY_PROPERTIES.FAITH: -40,
-      CITY_PROPERTIES.CITIZENS: -80,
+      CITY_PROPERTIES.COSSACKS: -80,
     },
   );
 
@@ -288,13 +285,7 @@ class TrapChambulOnWayBack extends ChoicableRandomTurnEvent {
       return city.currentSeason is SummerSeason;
     },
     (Sloboda city) {
-      return city.props.getByType(CITY_PROPERTIES.CITIZENS) > 300;
-    },
-    (Sloboda city) {
-      return city.stock.getByType(RESOURCE_TYPES.FIREARM) > 100;
-    },
-    (Sloboda city) {
-      return city.stock.getByType(RESOURCE_TYPES.HORSE) > 100;
+      return city.props.getByType(CITY_PROPERTIES.COSSACKS) >= 80;
     },
     (Sloboda city) {
       return ChoicableRandomTurnEvent.onceInYears<TrapChambulOnWayBack>(
@@ -311,15 +302,9 @@ class HelpDefendSich extends ChoicableRandomTurnEvent {
 
   int probability = 50;
 
-  Stock stockSuccess = Stock(values: {
-    RESOURCE_TYPES.HORSE: 10,
-    RESOURCE_TYPES.FIREARM: 10,
-  });
+  Stock stockSuccess = Stock(values: {});
 
-  Stock stockFailure = Stock(values: {
-    RESOURCE_TYPES.HORSE: 5,
-    RESOURCE_TYPES.FIREARM: 5,
-  });
+  Stock stockFailure = Stock(values: {});
 
   CityProps cityPropsSuccess = CityProps(
     values: {
@@ -344,10 +329,7 @@ class HelpDefendSich extends ChoicableRandomTurnEvent {
       return city.currentSeason is SpringSeason;
     },
     (Sloboda city) {
-      return city.props.getByType(CITY_PROPERTIES.CITIZENS) > 30;
-    },
-    (Sloboda city) {
-      return city.stock.getByType(RESOURCE_TYPES.FIREARM) > 5;
+      return city.props.getByType(CITY_PROPERTIES.COSSACKS) > 5;
     },
     (Sloboda city) {
       return ChoicableRandomTurnEvent.onceInYears<HelpDefendSich>(city, 4);
@@ -364,15 +346,11 @@ class AttackPolishLands extends ChoicableRandomTurnEvent {
   int probability = 50;
 
   Stock stockSuccess = Stock(values: {
-    RESOURCE_TYPES.HORSE: 50,
-    RESOURCE_TYPES.FIREARM: 50,
     RESOURCE_TYPES.MONEY: 250,
     RESOURCE_TYPES.FOOD: 100,
   });
 
   Stock stockFailure = Stock(values: {
-    RESOURCE_TYPES.HORSE: -50,
-    RESOURCE_TYPES.FIREARM: -50,
     RESOURCE_TYPES.FOOD: -100,
   });
 
@@ -386,6 +364,7 @@ class AttackPolishLands extends ChoicableRandomTurnEvent {
     values: {
       CITY_PROPERTIES.GLORY: -70,
       CITY_PROPERTIES.FAITH: -40,
+      CITY_PROPERTIES.COSSACKS: -30,
     },
   );
 
@@ -399,13 +378,7 @@ class AttackPolishLands extends ChoicableRandomTurnEvent {
       return city.currentSeason is SpringSeason;
     },
     (Sloboda city) {
-      return city.props.getByType(CITY_PROPERTIES.CITIZENS) > 50;
-    },
-    (Sloboda city) {
-      return city.stock.getByType(RESOURCE_TYPES.FIREARM) > 50;
-    },
-    (Sloboda city) {
-      return city.stock.getByType(RESOURCE_TYPES.HORSE) > 50;
+      return city.props.getByType(CITY_PROPERTIES.COSSACKS) > 50;
     },
     (Sloboda city) {
       return city.stock.getByType(RESOURCE_TYPES.FOOD) > 200;
@@ -511,8 +484,6 @@ class AttackCatholicChurches extends ChoicableRandomTurnEvent {
   int probability = 100;
 
   Stock stockSuccess = Stock(values: {
-    RESOURCE_TYPES.HORSE: 10,
-    RESOURCE_TYPES.FIREARM: 10,
     RESOURCE_TYPES.MONEY: 150,
     RESOURCE_TYPES.FOOD: 80,
   });
@@ -547,6 +518,58 @@ class AttackCatholicChurches extends ChoicableRandomTurnEvent {
     (Sloboda city) {
       return ChoicableRandomTurnEvent.onceInYears<AttackCatholicChurches>(
           city, 3);
+    }
+  ];
+}
+
+class HelpDefendAgainstCatholicRaiders extends ChoicableRandomTurnEvent {
+  String successMessageKey =
+      'randomTurnEvent.successHelpDefendAgainstCatholicRaiders';
+  String failureMessageKey =
+      'randomTurnEvent.failureHelpDefendAgainstCatholicRaiders';
+  String localizedKeyYes =
+      'randomTurnEvent.HelpDefendAgainstCatholicRaidersYes';
+  String localizedKeyNo = 'randomTurnEvent.HelpDefendAgainstCatholicRaidersNo';
+
+  int probability = 100;
+
+  Stock stockSuccess = Stock(values: {
+    RESOURCE_TYPES.MONEY: 350,
+    RESOURCE_TYPES.FOOD: 140,
+    RESOURCE_TYPES.POWDER: 30,
+    RESOURCE_TYPES.FUR: 30,
+  });
+
+  CityProps cityPropsSuccess = CityProps(
+    values: {
+      CITY_PROPERTIES.COSSACKS: -3,
+      CITY_PROPERTIES.GLORY: 50,
+      CITY_PROPERTIES.FAITH: 50,
+    },
+  );
+  CityProps cityPropsFailure = CityProps(
+    values: {
+      CITY_PROPERTIES.GLORY: -50,
+      CITY_PROPERTIES.FAITH: -50,
+    },
+  );
+
+  int successRate = 75;
+
+  String localizedKey = 'randomTurnEvent.HelpDefendAgainstCatholicRaiders';
+  String localizedQuestionKey =
+      'randomTurnEvent.HelpDefendAgainstCatholicRaidersQuestion';
+
+  List<Function> conditions = [
+    (Sloboda city) {
+      return city.currentSeason is SummerSeason;
+    },
+    (Sloboda city) {
+      return city.props.getByType(CITY_PROPERTIES.COSSACKS) > 70;
+    },
+    (Sloboda city) {
+      return ChoicableRandomTurnEvent.onceInYears<
+          HelpDefendAgainstCatholicRaiders>(city, 3);
     }
   ];
 }

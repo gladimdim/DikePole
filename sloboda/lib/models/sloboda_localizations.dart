@@ -264,6 +264,17 @@ class RandomEventLocalizations extends InternalLocalizations {
       'AttackCatholicChurches': 'Reflect the Orthodox parish from Catholics.',
       'AttackCatholicChurchesQuestion':
           'The more blessed Metropolitan of Kiev, Sylvester Belkevich, asks the Cossack Society to repatriate a parish occupied by Catholics near the Bila Tserkva. He asks with the help of your armed presence to persuade the Polands to return the church back to the possession of the Orthodox metropolis.',
+      'successHelpDefendAgainstCatholicRaiders':
+          'Early in the morning, Polish mercenaries attempted to incite a crowd to storm Lavra. But the Cossacks used small mobile groups to catch and execute groups paid polish attackers. The perpetrator of the assault hid in St. Andrew\'s Church, but was pulled from there and hung on the descent to Podil. The St. Andrew\'s Church was immediately seized by armed Cossacks and introduced Orthodox priests there. The counter operation was so successful that the Metropolitan offered you a whole treasure of money and things in gratitude for the protection of the Orthodox faith.',
+      'failureHelpDefendAgainstCatholicRaiders':
+          'They were terrified by the strength that came to support Lavra. Hired bandits among the local ran away, and the armed reapers were afraid to join you in the battle. The Metropolitan in gratitude gave you rich gifts. ',
+      'HelpDefendAgainstCatholicRaidersYes':
+          'The Jesuit plague must be stopped. You are pleased to assist the Metropolitan in this holy cause. You sent 50 armed Cossacks to help him.',
+      'HelpDefendAgainstCatholicRaidersNo':
+          'Your main goal is to defend against the Tatars. Let the priests decide their church affairs themselves.',
+      'HelpDefendAgainstCatholicRaiders': 'Protect the Kyiv-Pechersk Lavra.',
+      'HelpDefendAgainstCatholicRaidersQuestion':
+          'Blessed Metropolitan of Kiev Sylvester Belkevich sent messengers to Free Lands. He learned that the polish troopers, along with the Jesuits, were preparing an armed attack to capture the Kyivv-Pechersk Lavra. He requests the deployment of armed Cossacks near Kyiv to help repel the attack.',
     },
     'uk': {
       'koshoviyPohid':
@@ -404,6 +415,17 @@ class RandomEventLocalizations extends InternalLocalizations {
       'AttackCatholicChurches': 'Відбити православну парафію у католиків.',
       'AttackCatholicChurchesQuestion':
           'Благословеніший митрополит Києва Сильвестр Белькевич просить козацьке товариство відбити окуповану католиками парафію біля Білої Церкви. Він просить за допомогою вашої збройної присутністю переконати ляхів повернути церкву назад у володіння Православної метрополії.',
+      'successHelpDefendAgainstCatholicRaiders':
+          'Рано вранці польські найманці зробили спробу підбурити юрбу до штурму Лаври. Але козаци невеликими мобільнами групами відловлювали наймане бидло та польських перевдягнених в козацьке жовнірів й нещадно різали. Зачинщик штурму сховався в Андріївській церкві, але його звідти витягли та повісили на спуску до Подола. Андріївську церкву тут же захопили озброєні козаки і ввели туди правосланих священників. Контр операція була настільки вдалою, що митрополит вам жалував цілий скарб грошей і речей в знак подяки за охорону православної віри.',
+      'failureHelpDefendAgainstCatholicRaiders':
+          'Ляхи злякалися такої сили, яка прийшла на підтримку Лаври. Наймане бидло серед місцевих само розбіглося, а озброєні жовніри побоялися вступати з вами в бій. Митрополит в знак подяки дарував вам багаті подарунки.',
+      'HelpDefendAgainstCatholicRaidersYes':
+          'Ієзуїтська чума має бути зупинена. Ви з радістю вирішили допомогти митрополиту у цій святій справі. На допомогу йому ви вислали 30 озброєних козаків.',
+      'HelpDefendAgainstCatholicRaidersNo':
+          'Ваша головна мета - оборона від татар. Свої церковні справи нехай попи вирішують самі.',
+      'HelpDefendAgainstCatholicRaiders': 'Захистити Києво-Печерську Лавру.',
+      'HelpDefendAgainstCatholicRaidersQuestion':
+          'Благословеніший митрополит Києва Сильвестр Белькевич прислав гінців до вільних земель. Йому стало відомо, що ляхи разом з ієзуїтами готують збройний напад з метою захоплення Києво-Печерської Лаври. Він просить вислать збройних козаків під Київ, щоб допомогти відбити атаку.',
     }
   };
 }
@@ -510,7 +532,7 @@ class SlobodaLocalizations {
       'hasNoAssignedWorkers': 'не має призначених робітників.',
       'glory': 'Слава',
       'faith': 'Віра',
-      'citizens': 'Робітники',
+      'citizens': 'Люди',
       'defense': 'Рівень захисту',
       'trainCossacks': 'Спорядити козаків',
       'cossacks': 'Козаки',

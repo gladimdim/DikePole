@@ -89,6 +89,7 @@ abstract class RandomTurnEvent {
     SendMoneyToSchoolInKaniv(),
     SendMerchantToKanev(),
     AttackCatholicChurches(),
+    HelpDefendAgainstCatholicRaiders(),
   ];
 }
 
@@ -318,7 +319,7 @@ class ChambulCapture extends RandomTurnEvent {
       return city.currentSeason is AutumnSeason;
     },
     (Sloboda city) {
-      return city.stock.getByType(RESOURCE_TYPES.FIREARM) >= 5;
+      return city.props.getByType(CITY_PROPERTIES.COSSACKS) >= 10;
     },
   ];
 }
