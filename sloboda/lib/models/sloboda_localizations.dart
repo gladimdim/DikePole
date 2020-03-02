@@ -504,6 +504,8 @@ class SlobodaLocalizations {
       'defense': 'Defense level',
       'trainCossacks': 'Train cossacks',
       'cossacks': 'Cossacks',
+      'bigSloboda': 'Big Sloboda',
+      'normalSloboda': 'Small Sloboda',
     },
     'uk': {
       'overview': 'Головна',
@@ -536,6 +538,8 @@ class SlobodaLocalizations {
       'defense': 'Рівень захисту',
       'trainCossacks': 'Спорядити козаків',
       'cossacks': 'Козаки',
+      'bigSloboda': 'Велика Слобода',
+      'normalSloboda': 'Маленька Слобода',
     }
   };
 
@@ -660,5 +664,15 @@ class SlobodaLocalizations {
   static String get cossacks {
     return _localizedValues[SlobodaLocalizations.locale.languageCode]
         ['cossacks'];
+  }
+
+  static String get bigSloboda {
+    return _localizedValues[SlobodaLocalizations.locale.languageCode]
+        ['bigSloboda'];
+  }
+
+  static String get normalSloboda {
+    return _localizedValues[SlobodaLocalizations.locale.languageCode]
+        ['normalSloboda'];
   }
 }

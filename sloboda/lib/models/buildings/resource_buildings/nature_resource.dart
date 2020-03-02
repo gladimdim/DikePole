@@ -37,6 +37,10 @@ class Forest extends NaturalResource {
   String toLocalizedString() {
     return SlobodaLocalizations.getForKey(getKey());
   }
+
+  String toString() {
+    return toLocalizedString();
+  }
 }
 
 class River extends NaturalResource {

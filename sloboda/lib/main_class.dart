@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:sloboda/views/city_buildings/city_building_built.dart';
 import 'package:sloboda/views/city_game.dart';
+import 'package:sloboda/views/create_sloboda.dart';
 import 'package:sloboda/views/nature_resource_buildings.dart';
 import 'package:sloboda/views/resource_buildings/resource_building_built.dart';
 import 'package:sloboda/views/resource_buildings/resource_building_view.dart';
@@ -96,10 +97,11 @@ class _SlobodaAppState extends State<SlobodaApp> {
     return MaterialApp(
       title: 'Sloboda - City Building Game Set in Ukraine XVII century',
       theme: whiteTheme,
-      initialRoute: CityGame.routeName,
+      initialRoute: CreateSlobodaView.routeName,
       debugShowCheckedModeBanner: false,
       routes: {
-        CityGame.routeName: (context) => CityGame(),
+        CreateSlobodaView.routeName: (context) => CreateSlobodaView(),
+        CityGame.routeName: (context) => ExtractCityGameArguments(),
         ResourceBuildingBuilt.routeName: (context) =>
             ExtractResourceBuildingBuiltArguments(),
         ResourceDetailsScreen.routeName: (context) =>

@@ -137,7 +137,7 @@ class Sloboda {
     for (var _event in _nextRandomEvents) {
       EventMessage event = _event();
       this.stock + event.stock;
-      this.props + event.cityProps;
+      this.addProps(event.cityProps);
       if (event.cityProps != null) {
         final includesCitizens =
             event.cityProps.getByType(CITY_PROPERTIES.CITIZENS);
@@ -203,10 +203,15 @@ class Sloboda {
     }
   }
 
+  void addProps(CityProps aProps) {
+    props + aProps;
+    _innerChanges.add(this);
+  }
+
   void makeTurn() {
     _runAttachedEvents();
 
-    var exceptions = [];
+    List<NoWorkersAssignedException> exceptions = [];
     simulateStock();
     List<Producable> list = [...naturalResources, ...resourceBuildings];
 
@@ -214,7 +219,7 @@ class Sloboda {
       try {
         resBuilding.generate(stock);
       } catch (e) {
-        exceptions.add('${e.cause}');
+        exceptions.add(e);
       }
     });
 
@@ -224,7 +229,8 @@ class Sloboda {
         CityEvent(
           sourceEvent: EventMessage(
             event: null,
-            messageKey: exception,
+            messageKey:
+                exception.building.toLocalizedString() + ' ' + exception.cause,
           ),
           yearHappened: currentYear,
           season: currentSeason,

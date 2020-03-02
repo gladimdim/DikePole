@@ -140,12 +140,13 @@ class ShootingRange implements Buildable<RESOURCE_TYPES> {
     if (canProduceCossack(city.props, city.stock)) {
       city.stock - requiresForCossack;
       city.removeCitizens(amount: 1);
-      city.props +
-          CityProps(
-            values: {
-              CITY_PROPERTIES.COSSACKS: 1,
-            },
-          );
+      city.addProps(
+        CityProps(
+          values: {
+            CITY_PROPERTIES.COSSACKS: 1,
+          },
+        ),
+      );
       callback();
     }
   }
