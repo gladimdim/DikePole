@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:sloboda/components/divider.dart';
+import 'package:sloboda/components/full_width_container.dart';
 import 'package:sloboda/models/city_properties.dart';
+import 'package:sloboda/views/components/soft_container.dart';
 
 class CityPropsMiniView extends StatelessWidget {
   final CityProps props;
@@ -16,9 +19,18 @@ class CityPropsMiniView extends StatelessWidget {
           children: props.getTypeKeys().map<Widget>((key) {
             return Row(
               children: <Widget>[
-                Image.asset(
-                  cityPropertiesToIconPath(key),
-                  width: 64,
+                InkWell(
+                  child: Image.asset(
+                    cityPropertiesToImagePath(key),
+                    width: 64,
+                  ),
+                  onTap: () async {
+                    await Navigator.pushNamed(
+                      context,
+                      CityPropScreen.routeName,
+                      arguments: CityPropScreenArguments(prop: key),
+                    );
+                  },
                 ),
                 Text(
                   '${cityPropsToLocalizedString(key)}: ${props.getByType(key)} ',
@@ -31,6 +43,83 @@ class CityPropsMiniView extends StatelessWidget {
           }).toList(),
         ),
       ),
+    );
+  }
+}
+
+class CityPropScreen extends StatefulWidget {
+  static String routeName = '/city_prop_details';
+  final CITY_PROPERTIES prop;
+
+  CityPropScreen({this.prop});
+
+  @override
+  _CityPropScreenState createState() => _CityPropScreenState();
+}
+
+class _CityPropScreenState extends State<CityPropScreen> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          cityPropsToLocalizedString(widget.prop),
+        ),
+      ),
+      body: Container(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: <Widget>[
+            VDivider(),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: SoftContainer(
+                child: Image.asset(
+                  cityPropertiesToImagePath(widget.prop),
+                  width: 350,
+                ),
+              ),
+            ),
+            VDivider(),
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: SoftContainer(
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: FullWidth(
+                    child: Center(
+                      child: Text(
+                        '${cityPropsToLocalizedString(widget.prop)}',
+                        style: Theme.of(context).textTheme.bodyText1.copyWith(
+                              fontSize: 18,
+                            ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class CityPropScreenArguments {
+  final CITY_PROPERTIES prop;
+
+  CityPropScreenArguments({this.prop});
+}
+
+class ExtractCityPropScreenArguments extends StatelessWidget {
+  Widget build(BuildContext context) {
+    final CityPropScreenArguments args =
+        ModalRoute.of(context).settings.arguments;
+
+    return CityPropScreen(
+      prop: args.prop,
     );
   }
 }

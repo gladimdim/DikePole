@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:sloboda/views/city_buildings/city_building_built.dart';
 import 'package:sloboda/views/city_game.dart';
+import 'package:sloboda/views/city_props_view.dart';
 import 'package:sloboda/views/create_sloboda.dart';
 import 'package:sloboda/views/nature_resource_buildings.dart';
 import 'package:sloboda/views/resource_buildings/resource_building_built.dart';
@@ -114,6 +115,7 @@ class _SlobodaAppState extends State<SlobodaApp> {
             ExtractNatureResourceBuildingArguments(),
         ShootingRangeBuilt.routeName: (context) =>
             ExtractShootingRangeBuiltArguments(),
+        CityPropScreen.routeName: (context) => ExtractCityPropScreenArguments(),
       },
     );
   }

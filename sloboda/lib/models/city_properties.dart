@@ -62,7 +62,7 @@ String cityPropertiesToIconPath(CITY_PROPERTIES prop) {
 String cityPropertiesToImagePath(CITY_PROPERTIES prop) {
   switch (prop) {
     case CITY_PROPERTIES.CITIZENS:
-      return 'images/city_buildings/citizen.png';
+      return 'images/city_props/citizen.png';
     case CITY_PROPERTIES.DEFENSE:
       return 'images/city_props/defense.png';
     case CITY_PROPERTIES.FAITH:

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:sloboda/components/title_text.dart';
 import 'package:sloboda/models/city_properties.dart';
+import 'package:sloboda/views/city_props_view.dart';
+import 'package:sloboda/views/components/soft_container.dart';
 
 class CityProperty extends StatelessWidget {
   final CITY_PROPERTIES property;
@@ -14,9 +16,20 @@ class CityProperty extends StatelessWidget {
       children: <Widget>[
         Expanded(
           flex: 1,
-          child: Image.asset(
-            cityPropertiesToIconPath(property),
-            height: 64,
+          child: SoftContainer(
+            child: InkWell(
+              child: Image.asset(
+                cityPropertiesToIconPath(property),
+                height: 64,
+              ),
+              onTap: () async {
+                await Navigator.pushNamed(
+                  context,
+                  CityPropScreen.routeName,
+                  arguments: CityPropScreenArguments(prop: property),
+                );
+              },
+            ),
           ),
         ),
         Expanded(
