@@ -93,7 +93,7 @@ String buildingTypeToIconPath(RESOURCE_BUILDING_TYPES type) {
     case RESOURCE_BUILDING_TYPES.MILL:
       return 'images/resource_buildings/mill_64.png';
     case RESOURCE_BUILDING_TYPES.SMITH:
-      return 'images/resource_buildings/mill_64.png';
+      return 'images/resource_buildings/smith_64.png';
     case RESOURCE_BUILDING_TYPES.QUARRY:
       return 'images/resource_buildings/quarry_64.png';
     case RESOURCE_BUILDING_TYPES.STABLES:
@@ -116,7 +116,7 @@ String buildingTypeToImagePath(RESOURCE_BUILDING_TYPES type) {
     case RESOURCE_BUILDING_TYPES.MILL:
       return 'images/resource_buildings/mill.png';
     case RESOURCE_BUILDING_TYPES.SMITH:
-      return 'images/resource_buildings/mill.png';
+      return 'images/resource_buildings/smith.png';
     case RESOURCE_BUILDING_TYPES.QUARRY:
       return 'images/resource_buildings/quarry.png';
     case RESOURCE_BUILDING_TYPES.STABLES:
