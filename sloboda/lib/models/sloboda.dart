@@ -211,7 +211,7 @@ class Sloboda {
   void makeTurn() {
     _runAttachedEvents();
 
-    List<NoWorkersAssignedException> exceptions = [];
+    List<Exception> exceptions = [];
     simulateStock();
     List<Producable> list = [...naturalResources, ...resourceBuildings];
 
@@ -225,17 +225,39 @@ class Sloboda {
 
     _innerChanges.add(this);
     for (var exception in exceptions) {
-      events.add(
-        CityEvent(
-          sourceEvent: EventMessage(
-            event: null,
-            messageKey:
-                exception.building.toLocalizedString() + ' ' + exception.cause,
+      if (exception is NotEnoughWorkers) {
+        events.add(
+          CityEvent(
+            sourceEvent: EventMessage(
+              event: null,
+              messageKey: exception.building.toLocalizedString() +
+                  ' ' +
+                  exception.cause,
+            ),
+            yearHappened: currentYear,
+            season: currentSeason,
           ),
-          yearHappened: currentYear,
-          season: currentSeason,
-        ),
-      );
+        );
+      }
+      if (exception is NotEnoughResourcesException) {
+        events.add(
+          CityEvent(
+            sourceEvent: EventMessage(
+                event: null,
+                messageKey: exception.building.toLocalizedString() +
+                    ' ' +
+                    SlobodaLocalizations.getForKey(exception.localizedKey) +
+                    ' ' +
+                    exception.amount.toString() +
+                    ' ' +
+                    SlobodaLocalizations.getForKey(
+                      resourceTypesToKey(exception.resource),
+                    )),
+            yearHappened: currentYear,
+            season: currentSeason,
+          ),
+        );
+      }
     }
 
     cityBuildings.forEach((cb) {

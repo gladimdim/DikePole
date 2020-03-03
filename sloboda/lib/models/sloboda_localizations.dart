@@ -506,6 +506,7 @@ class SlobodaLocalizations {
       'cossacks': 'Cossacks',
       'bigSloboda': 'Big Sloboda',
       'normalSloboda': 'Small Sloboda',
+      'notEnoughResources': 'has not enough',
     },
     'uk': {
       'overview': 'Головна',
@@ -540,6 +541,7 @@ class SlobodaLocalizations {
       'cossacks': 'Козаки',
       'bigSloboda': 'Велика Слобода',
       'normalSloboda': 'Маленька Слобода',
+      'notEnoughResources': 'недостає'
     }
   };
 

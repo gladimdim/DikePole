@@ -58,7 +58,7 @@ class Producable {
 
   void generate(Stock stock) {
     if (!hasWorkers()) {
-      throw NoWorkersAssignedException(
+      throw NotEnoughWorkers(
         building: this,
         cause: SlobodaLocalizations.hasNoAssignedWorkers,
       );
@@ -72,8 +72,11 @@ class Producable {
         var requiredToProduce =
             reqRes.value * assignedHumans.length * workMultiplier;
         if (requiredToProduce > inStock) {
-          throw NotEnoughResourceException(
-              'More ${requiredToProduce - inStock} of ${reqRes.key} is required');
+          throw NotEnoughResourcesException(
+            building: this,
+            amount: requiredToProduce - inStock,
+            resource: reqRes.key,
+          );
         } else {
           executors.add(() {
             stock.removeFromType(reqRes.key, requiredToProduce);
@@ -95,4 +98,21 @@ class Producable {
   String toLocalizedString() {
     throw 'Must Implement';
   }
+}
+
+class NotEnoughResourcesException implements Exception {
+  final int amount;
+  final RESOURCE_TYPES resource;
+  final Producable building;
+
+  final String localizedKey = 'notEnoughResources';
+
+  NotEnoughResourcesException({this.amount, this.building, this.resource});
+}
+
+class NotEnoughWorkers implements Exception {
+  String cause;
+  Producable building;
+
+  NotEnoughWorkers({this.cause, this.building});
 }

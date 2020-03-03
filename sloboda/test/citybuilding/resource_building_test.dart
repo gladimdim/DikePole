@@ -1,3 +1,4 @@
+import 'package:sloboda/models/abstract/producable.dart';
 import 'package:sloboda/models/buildings/resource_buildings/resource_building.dart';
 import 'package:sloboda/models/citizen.dart';
 import 'package:sloboda/models/resources/resource.dart';
@@ -42,7 +43,7 @@ void main() {
 
     test("Cannot generate resource when no workers assigned", () {
       expect(() => smith.generate(stock),
-          throwsA(TypeMatcher<NoWorkersAssignedException>()));
+          throwsA(TypeMatcher<NotEnoughWorkers>()));
     });
 
     test("Cannot add more workers than allowed", () {

@@ -156,19 +156,6 @@ String getDescriptionForResourceBuildingType(RESOURCE_BUILDING_TYPES type) {
   }
 }
 
-class NotEnoughResourceException implements Exception {
-  String cause;
-
-  NotEnoughResourceException(this.cause);
-}
-
-class NoWorkersAssignedException implements Exception {
-  String cause;
-  Producable building;
-
-  NoWorkersAssignedException({this.cause, this.building});
-}
-
 class BuildingFull implements Exception {
   String cause;
 
