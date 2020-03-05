@@ -30,7 +30,7 @@ class _CityBuildingsPageState extends State<CityBuildingsPage> {
                 child: BuiltBuildingListView(
                   title: localizedCityBuildingByType(cb.type),
                   buildingIconPath: cityTypeToIconPath(cb.type),
-                  producesIconPath: cityPropertiesToIconPath(cb.produces),
+                  producesIconPath: CityProp.fromType(cb.produces).toIconPath(),
                   amount: 1,
                   onPress: () {
                     Navigator.pushNamed(context, CityBuildingBuilt.routeName,

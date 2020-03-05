@@ -38,6 +38,25 @@ class InternalLocalizations {
   }
 }
 
+class CityPropsLocalizations extends InternalLocalizations {
+  Map<String, Map<String, String>> _localizedMap = {
+    'en': {
+      'faith': 'Faith',
+      'glory': 'Glory',
+      'defense': 'Defense',
+      'citizens': 'Citizens',
+      'cossacks': 'Cossacks',
+    },
+    'uk': {
+      'faith': 'Віра',
+      'glory': 'Слава',
+      'defense': 'Захист',
+      'citizens': 'Люди',
+      'cossacks': 'Козаки',
+    }
+  };
+}
+
 class CityBuildingLocalizations extends InternalLocalizations {
   Map<String, Map<String, String>> _localizedMap = {
     'en': {
@@ -447,6 +466,9 @@ class SlobodaLocalizations {
   static RandomEventLocalizations randomEventLocalizations =
       RandomEventLocalizations();
 
+  static CityPropsLocalizations cityPropsLocalizations =
+      CityPropsLocalizations();
+
   static Locale locale = Locale(getDefaultOrUrlLanguage());
 
   static getForKey(String key) {
@@ -461,6 +483,8 @@ class SlobodaLocalizations {
           return natureResourceLocalizations[split[1]];
         case 'cityBuildings':
           return cityBuildingLocalizations[split[1]];
+        case 'cityProps':
+          return cityPropsLocalizations[split[1]];
         case 'randomTurnEvent':
           return randomEventLocalizations[split[1]];
         default:
@@ -638,24 +662,6 @@ class SlobodaLocalizations {
   static String get hasNoAssignedWorkers {
     return _localizedValues[SlobodaLocalizations.locale.languageCode]
         ['hasNoAssignedWorkers'];
-  }
-
-  static String get glory {
-    return _localizedValues[SlobodaLocalizations.locale.languageCode]['glory'];
-  }
-
-  static String get faith {
-    return _localizedValues[SlobodaLocalizations.locale.languageCode]['faith'];
-  }
-
-  static String get defense {
-    return _localizedValues[SlobodaLocalizations.locale.languageCode]
-        ['defense'];
-  }
-
-  static String get citizens {
-    return _localizedValues[SlobodaLocalizations.locale.languageCode]
-        ['citizens'];
   }
 
   static String get trainCossacks {

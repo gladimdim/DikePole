@@ -19,7 +19,7 @@ class CityBuildingBuiltListItemView extends StatelessWidget {
     return BuiltBuildingListView(
       title: localizedCityBuildingByType(building.type),
       buildingIconPath: cityTypeToIconPath(building.type),
-      producesIconPath: cityPropertiesToIconPath(building.produces),
+      producesIconPath: CityProp.fromType(building.produces).toIconPath(),
       amount: 1,
     );
   }

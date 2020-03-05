@@ -23,7 +23,9 @@ class CityBuildingOutputView extends StatelessWidget {
                     Citizen.getIconPath(),
                     width: 64,
                   )
-                : Text(cityPropsToLocalizedString(building.produces)),
+                : Text(
+                    CityProp.fromType(building.produces).toLocalizedString(),
+                  ),
           ],
         ),
       ],

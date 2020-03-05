@@ -16,7 +16,7 @@ class ShootingRangeView extends StatelessWidget {
     return BuiltBuildingListView(
       title: SlobodaLocalizations.getForKey(building.localizedKey),
       buildingIconPath: building.icon,
-      producesIconPath: cityPropertiesToIconPath(building.produces),
+      producesIconPath: CityProp.fromType(building.produces).toIconPath(),
       amount: 1,
     );
   }

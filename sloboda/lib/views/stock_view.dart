@@ -69,7 +69,7 @@ class StockFullView extends StatelessWidget {
             TitleText(
               SlobodaLocalizations.stock,
             ),
-            ...stock.getTypeKeys().divideBy(2).map<Widget>(
+            ...RESOURCE_TYPES.values.divideBy(2).map<Widget>(
               (List keys) {
                 return LineContainer(
                   child: Row(
