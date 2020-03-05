@@ -67,60 +67,62 @@ class _CityPropScreenState extends State<CityPropScreen> {
         ),
       ),
       body: Container(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: <Widget>[
-            VDivider(),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: SoftContainer(
-                child: Image.asset(
-                  CityProp.fromType(widget.prop).toImagePath(),
-                  width: 350,
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: <Widget>[
+              VDivider(),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: SoftContainer(
+                  child: Image.asset(
+                    CityProp.fromType(widget.prop).toImagePath(),
+                    width: 350,
+                  ),
                 ),
               ),
-            ),
-            VDivider(),
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: SoftContainer(
-                child: Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: FullWidth(
-                    child: Center(
-                      child: Text(
-                        CityProp.fromType(widget.prop).toLocalizedString(),
-                        style: Theme.of(context).textTheme.bodyText1.copyWith(
-                              fontSize: 18,
-                            ),
+              VDivider(),
+              Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: SoftContainer(
+                  child: Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: FullWidth(
+                      child: Center(
+                        child: Text(
+                          CityProp.fromType(widget.prop).toLocalizedString(),
+                          style: Theme.of(context).textTheme.bodyText1.copyWith(
+                                fontSize: 18,
+                              ),
+                        ),
                       ),
                     ),
                   ),
                 ),
               ),
-            ),
-            VDivider(),
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: SoftContainer(
-                child: Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: FullWidth(
-                    child: Center(
-                      child: Text(
-                        CityProp.fromType(widget.prop)
-                            .toLocalizedDescriptionString(),
-                        style: Theme.of(context).textTheme.bodyText1.copyWith(
-                              fontSize: 18,
-                            ),
+              VDivider(),
+              Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: SoftContainer(
+                  child: Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: FullWidth(
+                      child: Center(
+                        child: Text(
+                          CityProp.fromType(widget.prop)
+                              .toLocalizedDescriptionString(),
+                          style: Theme.of(context).textTheme.bodyText1.copyWith(
+                                fontSize: 18,
+                              ),
+                        ),
                       ),
                     ),
                   ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

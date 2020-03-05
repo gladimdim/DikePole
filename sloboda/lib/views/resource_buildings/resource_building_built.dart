@@ -22,7 +22,7 @@ class ResourceBuildingBuiltListItemView extends StatelessWidget {
     Sloboda city = InheritedCity.of(context).city;
     return BuiltBuildingListView(
       title: localizedBuildingTypeName(building.type),
-      producesIconPath: resourceTypesToIconPath(building.produces),
+      producesIconPath: ResourceType.fromType(building.produces).toIconPath(),
       amount: building.outputAmount,
       buildingIconPath: buildingTypeToIconPath(building.type),
       onPress: () {

@@ -98,7 +98,8 @@ class Sloboda {
     Map<String, int> missing = {};
     required.entries.forEach((r) {
       if (r.value > stock.getByType(r.key)) {
-        missing[resourceTypesToKey(r.key)] = r.value - stock.getByType(r.key);
+        missing[ResourceType.fromType(r.key).toLocalizedString()] =
+            r.value - stock.getByType(r.key);
       }
     });
 
@@ -243,16 +244,15 @@ class Sloboda {
         events.add(
           CityEvent(
             sourceEvent: EventMessage(
-                event: null,
-                messageKey: exception.building.toLocalizedString() +
-                    ' ' +
-                    SlobodaLocalizations.getForKey(exception.localizedKey) +
-                    ' ' +
-                    exception.amount.toString() +
-                    ' ' +
-                    SlobodaLocalizations.getForKey(
-                      resourceTypesToKey(exception.resource),
-                    )),
+              event: null,
+              messageKey: exception.building.toLocalizedString() +
+                  ' ' +
+                  SlobodaLocalizations.getForKey(exception.localizedKey) +
+                  ' ' +
+                  exception.amount.toString() +
+                  ' ' +
+                  exception.resource.toLocalizedString(),
+            ),
             yearHappened: currentYear,
             season: currentSeason,
           ),

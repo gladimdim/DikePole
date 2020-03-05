@@ -31,15 +31,16 @@ class _ResourceBuildingsPageState extends State<ResourceBuildingsPage> {
                 child: BuiltBuildingListView(
                   title: el.toLocalizedString(),
                   buildingIconPath: el.getIconPath(),
-                  producesIconPath: resourceTypesToImagePath(el.produces),
+                  producesIconPath:
+                      ResourceType.fromType(el.produces).toIconPath(),
                   amount: el.outputAmount,
                   onPress: () {
-                Navigator.pushNamed(
-                    context, NatureResourceBuildingScreen.routeName,
-                    arguments: NatureResourceBuildingArguments(
-                      city: city,
-                      building: el,
-                    ));
+                    Navigator.pushNamed(
+                        context, NatureResourceBuildingScreen.routeName,
+                        arguments: NatureResourceBuildingArguments(
+                          city: city,
+                          building: el,
+                        ));
                   },
                 ),
               );
@@ -67,7 +68,9 @@ class _ResourceBuildingsPageState extends State<ResourceBuildingsPage> {
                         try {
                           city.buildBuilding(ResourceBuilding.fromType(value));
                         } catch (e) {
-                          final snackBar = SnackBar(content: Text('Cannot build. Missing: ${e.toLocalizedString()}'));
+                          final snackBar = SnackBar(
+                              content: Text(
+                                  'Cannot build. Missing: ${e.toLocalizedString()}'));
                           Scaffold.of(context).showSnackBar(snackBar);
                         }
                       }),

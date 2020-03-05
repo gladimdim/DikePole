@@ -24,11 +24,11 @@ class StockMiniView extends StatelessWidget {
             return Row(
               children: <Widget>[
                 Image.asset(
-                  resourceTypesToIconPath(key),
+                  ResourceType.fromType(key).toIconPath(),
                   width: 18,
                 ),
                 Text(
-                  '${localizedResourceByType(key)}: ${stock.getByType(key)} ',
+                  '${ResourceType.fromType(key).toLocalizedString()}: ${stock.getByType(key)} ',
                   style: Theme.of(context).textTheme.bodyText1.copyWith(
                         fontSize: 18,
                       ),

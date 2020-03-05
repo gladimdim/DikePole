@@ -2,12 +2,12 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:sloboda/components/divider.dart';
 import 'package:sloboda/components/title_text.dart';
+import 'package:sloboda/extensions/list.dart';
 import 'package:sloboda/models/buildings/resource_buildings/resource_building.dart';
 import 'package:sloboda/models/resources/resource.dart';
 import 'package:sloboda/models/sloboda_localizations.dart';
 import 'package:sloboda/views/components/soft_container.dart';
 import 'package:sloboda/views/resource_buildings/resource_building_view.dart';
-import 'package:sloboda/extensions/list.dart';
 
 class ResourceDetailsScreen extends StatelessWidget {
   static final routeName = '/city_building/resource_details_view';
@@ -22,7 +22,7 @@ class ResourceDetailsScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Theme.of(context).backgroundColor,
         title: TitleText(
-          localizedResourceByType(type),
+          ResourceType.fromType(type).toLocalizedString(),
         ),
       ),
       body: ResourceDetailsView(type: type),
@@ -65,7 +65,7 @@ class ResourceDetailsView extends StatelessWidget {
                       Navigator.pop(context);
                     },
                     child: Image.asset(
-                      resourceTypesToImagePath(type),
+                      ResourceType.fromType(type).toImagePath(),
                       height: kIsWeb ? 512 : null,
                     ),
                   ),
@@ -191,7 +191,7 @@ class ResourceImageView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Tooltip(
-      message: localizedResourceByType(type),
+      message: ResourceType.fromType(type).toLocalizedString(),
       child: InkWell(
         onTap: () {
           Navigator.pushNamed(
@@ -205,7 +205,7 @@ class ResourceImageView extends StatelessWidget {
         child: Row(
           children: <Widget>[
             Image.asset(
-              '${resourceTypesToIconPath(type)}',
+              ResourceType.fromType(type).toIconPath(),
               width: 32,
             ),
             if (amount != null)

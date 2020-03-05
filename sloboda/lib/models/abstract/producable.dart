@@ -75,7 +75,7 @@ class Producable {
           throw NotEnoughResourcesException(
             building: this,
             amount: requiredToProduce - inStock,
-            resource: reqRes.key,
+            resource: ResourceType.fromType(reqRes.key),
           );
         } else {
           executors.add(() {
@@ -102,7 +102,7 @@ class Producable {
 
 class NotEnoughResourcesException implements Exception {
   final int amount;
-  final RESOURCE_TYPES resource;
+  final ResourceType resource;
   final Producable building;
 
   final String localizedKey = 'notEnoughResources';
