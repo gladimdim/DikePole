@@ -5,7 +5,7 @@ import 'package:sloboda/views/city_props_view.dart';
 import 'package:sloboda/views/components/soft_container.dart';
 
 class CityProperty extends StatelessWidget {
-  final CITY_PROPERTIES property;
+  final CityProp property;
 
   CityProperty({this.property});
 
@@ -19,7 +19,7 @@ class CityProperty extends StatelessWidget {
           child: SoftContainer(
             child: InkWell(
               child: Image.asset(
-                CityProp.fromType(property).toIconPath(),
+                property.toIconPath(),
                 height: 64,
               ),
               onTap: () async {
@@ -35,7 +35,7 @@ class CityProperty extends StatelessWidget {
         Expanded(
           flex: 3,
           child: TitleText(
-            CityProp.fromType(property).toLocalizedString(),
+            property.toLocalizedString(),
           ),
         ),
       ],

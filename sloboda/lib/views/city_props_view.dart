@@ -28,7 +28,11 @@ class CityPropsMiniView extends StatelessWidget {
                     await Navigator.pushNamed(
                       context,
                       CityPropScreen.routeName,
-                      arguments: CityPropScreenArguments(prop: key),
+                      arguments: CityPropScreenArguments(
+                        prop: CityProp.fromType(
+                          key,
+                        ),
+                      ),
                     );
                   },
                 ),
@@ -49,7 +53,7 @@ class CityPropsMiniView extends StatelessWidget {
 
 class CityPropScreen extends StatefulWidget {
   static String routeName = '/city_prop_details';
-  final CITY_PROPERTIES prop;
+  final CityProp prop;
 
   CityPropScreen({this.prop});
 
@@ -63,7 +67,7 @@ class _CityPropScreenState extends State<CityPropScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          CityProp.fromType(widget.prop).toLocalizedString(),
+          widget.prop.toLocalizedString(),
         ),
       ),
       body: Container(
@@ -77,7 +81,7 @@ class _CityPropScreenState extends State<CityPropScreen> {
                 padding: const EdgeInsets.all(8.0),
                 child: SoftContainer(
                   child: Image.asset(
-                    CityProp.fromType(widget.prop).toImagePath(),
+                    widget.prop.toImagePath(),
                     width: 350,
                   ),
                 ),
@@ -91,7 +95,7 @@ class _CityPropScreenState extends State<CityPropScreen> {
                     child: FullWidth(
                       child: Center(
                         child: Text(
-                          CityProp.fromType(widget.prop).toLocalizedString(),
+                          widget.prop.toLocalizedString(),
                           style: Theme.of(context).textTheme.bodyText1.copyWith(
                                 fontSize: 18,
                               ),
@@ -110,8 +114,7 @@ class _CityPropScreenState extends State<CityPropScreen> {
                     child: FullWidth(
                       child: Center(
                         child: Text(
-                          CityProp.fromType(widget.prop)
-                              .toLocalizedDescriptionString(),
+                          widget.prop.toLocalizedDescriptionString(),
                           style: Theme.of(context).textTheme.bodyText1.copyWith(
                                 fontSize: 18,
                               ),
@@ -130,7 +133,7 @@ class _CityPropScreenState extends State<CityPropScreen> {
 }
 
 class CityPropScreenArguments {
-  final CITY_PROPERTIES prop;
+  final CityProp prop;
 
   CityPropScreenArguments({this.prop});
 }

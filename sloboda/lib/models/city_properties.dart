@@ -4,7 +4,8 @@ import 'package:sloboda/models/abstract/stockable.dart';
 enum CITY_PROPERTIES { FAITH, DEFENSE, GLORY, CITIZENS, COSSACKS }
 
 abstract class CityProp extends StockItem<CITY_PROPERTIES> {
-  static StockItem fromType(CITY_PROPERTIES type, [int value]) {
+  static StockItem<CITY_PROPERTIES> fromType(CITY_PROPERTIES type,
+      [int value]) {
     switch (type) {
       case CITY_PROPERTIES.FAITH:
         return CityFaith(value);

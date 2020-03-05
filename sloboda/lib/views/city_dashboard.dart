@@ -134,7 +134,7 @@ class _CityDashboardState extends State<CityDashboard> {
                             Expanded(
                               flex: 7,
                               child: CityProperty(
-                                property: v,
+                                property: CityProp.fromType(v),
                               ),
                             ),
                             Expanded(
