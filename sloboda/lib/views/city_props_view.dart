@@ -21,7 +21,7 @@ class CityPropsMiniView extends StatelessWidget {
               children: <Widget>[
                 InkWell(
                   child: Image.asset(
-                    StockItem.fromType(key).toImagePath(),
+                    CityProp.fromType(key).toImagePath(),
                     width: 64,
                   ),
                   onTap: () async {
@@ -33,7 +33,7 @@ class CityPropsMiniView extends StatelessWidget {
                   },
                 ),
                 Text(
-                  '${StockItem.fromType(key).toLocalizedString()}: ${props.getByType(key)} ',
+                  '${CityProp.fromType(key).toLocalizedString()}: ${props.getByType(key)} ',
                   style: Theme.of(context).textTheme.bodyText1.copyWith(
                         fontSize: 18,
                       ),
@@ -63,7 +63,7 @@ class _CityPropScreenState extends State<CityPropScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          StockItem.fromType(widget.prop).toLocalizedString(),
+          CityProp.fromType(widget.prop).toLocalizedString(),
         ),
       ),
       body: Container(
@@ -76,7 +76,7 @@ class _CityPropScreenState extends State<CityPropScreen> {
               padding: const EdgeInsets.all(8.0),
               child: SoftContainer(
                 child: Image.asset(
-                  StockItem.fromType(widget.prop).toImagePath(),
+                  CityProp.fromType(widget.prop).toImagePath(),
                   width: 350,
                 ),
               ),
@@ -90,7 +90,27 @@ class _CityPropScreenState extends State<CityPropScreen> {
                   child: FullWidth(
                     child: Center(
                       child: Text(
-                        StockItem.fromType(widget.prop).toLocalizedString(),
+                        CityProp.fromType(widget.prop).toLocalizedString(),
+                        style: Theme.of(context).textTheme.bodyText1.copyWith(
+                              fontSize: 18,
+                            ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            VDivider(),
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: SoftContainer(
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: FullWidth(
+                    child: Center(
+                      child: Text(
+                        CityProp.fromType(widget.prop)
+                            .toLocalizedDescriptionString(),
                         style: Theme.of(context).textTheme.bodyText1.copyWith(
                               fontSize: 18,
                             ),

@@ -23,6 +23,12 @@ abstract class StockItem<T> {
 
   String toIconPath();
 
+  static StockItem fromType(type, [int value]) {
+    throw UnimplementedError();
+  }
+}
+
+abstract class CityProp extends StockItem<CITY_PROPERTIES> {
   static StockItem fromType(CITY_PROPERTIES type, [int value]) {
     switch (type) {
       case CITY_PROPERTIES.FAITH:
@@ -39,9 +45,11 @@ abstract class StockItem<T> {
         throw 'Type $type is not recognized';
     }
   }
+
+  CityProp([value]) : super(value);
 }
 
-class CityFaith extends StockItem<CITY_PROPERTIES> {
+class CityFaith extends CityProp {
   String localizedKey = 'cityProps.faith';
   String localizedDescriptionKey = 'cityProps.faithDescription';
   CITY_PROPERTIES type = CITY_PROPERTIES.FAITH;
@@ -57,7 +65,7 @@ class CityFaith extends StockItem<CITY_PROPERTIES> {
   CityFaith([value]) : super(value);
 }
 
-class CityGlory extends StockItem<CITY_PROPERTIES> {
+class CityGlory extends CityProp {
   String localizedKey = 'cityProps.glory';
   String localizedDescriptionKey = 'cityProps.gloryDescription';
   CITY_PROPERTIES type = CITY_PROPERTIES.GLORY;
@@ -73,7 +81,7 @@ class CityGlory extends StockItem<CITY_PROPERTIES> {
   CityGlory([value]) : super(value);
 }
 
-class CityDefense extends StockItem<CITY_PROPERTIES> {
+class CityDefense extends CityProp {
   String localizedKey = 'cityProps.defense';
   String localizedDescriptionKey = 'cityProps.defenseDescription';
   CITY_PROPERTIES type = CITY_PROPERTIES.DEFENSE;
@@ -89,7 +97,7 @@ class CityDefense extends StockItem<CITY_PROPERTIES> {
   CityDefense([value]) : super(value);
 }
 
-class CityCitizens extends StockItem<CITY_PROPERTIES> {
+class CityCitizens extends CityProp {
   String localizedKey = 'cityProps.citizens';
   String localizedDescriptionKey = 'cityProps.citizensDescription';
   CITY_PROPERTIES type = CITY_PROPERTIES.CITIZENS;
@@ -105,7 +113,7 @@ class CityCitizens extends StockItem<CITY_PROPERTIES> {
   CityCitizens([value]) : super(value);
 }
 
-class CityCossacks extends StockItem<CITY_PROPERTIES> {
+class CityCossacks extends CityProp {
   String localizedKey = 'cityProps.cossacks';
   String localizedDescriptionKey = 'cityProps.cossacksDescription';
   CITY_PROPERTIES type = CITY_PROPERTIES.COSSACKS;

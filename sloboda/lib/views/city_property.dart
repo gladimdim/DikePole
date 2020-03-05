@@ -19,7 +19,7 @@ class CityProperty extends StatelessWidget {
           child: SoftContainer(
             child: InkWell(
               child: Image.asset(
-                StockItem.fromType(property).toIconPath(),
+                CityProp.fromType(property).toIconPath(),
                 height: 64,
               ),
               onTap: () async {
@@ -35,7 +35,7 @@ class CityProperty extends StatelessWidget {
         Expanded(
           flex: 3,
           child: TitleText(
-            StockItem.fromType(property).toLocalizedString(),
+            CityProp.fromType(property).toLocalizedString(),
           ),
         ),
       ],
