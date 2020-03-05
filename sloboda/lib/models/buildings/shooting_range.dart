@@ -17,7 +17,7 @@ import 'package:sloboda/views/stock_view.dart';
 
 class ShootingRange implements Buildable<RESOURCE_TYPES> {
   String localizedKey = 'cityBuildings.shootingRange';
-  CITY_PROPERTIES produces = CITY_PROPERTIES.COSSACKS;
+  StockItem<CITY_PROPERTIES> produces = CityCossacks();
   Map<RESOURCE_TYPES, int> requiredToBuild = {
     RESOURCE_TYPES.FOOD: 50,
     RESOURCE_TYPES.WOOD: 30,

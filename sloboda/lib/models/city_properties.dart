@@ -3,13 +3,13 @@ import 'package:sloboda/models/sloboda_localizations.dart';
 
 enum CITY_PROPERTIES { FAITH, DEFENSE, GLORY, CITIZENS, COSSACKS }
 
-abstract class CityProp {
+abstract class StockItem<T> {
   String localizedKey;
   String localizedDescriptionKey;
-  CITY_PROPERTIES type;
+  T type;
   int value;
 
-  CityProp([this.value]);
+  StockItem([this.value]);
 
   String toLocalizedString() {
     return SlobodaLocalizations.getForKey(localizedKey);
@@ -23,7 +23,7 @@ abstract class CityProp {
 
   String toIconPath();
 
-  static CityProp fromType(CITY_PROPERTIES type, [int value]) {
+  static StockItem fromType(CITY_PROPERTIES type, [int value]) {
     switch (type) {
       case CITY_PROPERTIES.FAITH:
         return CityFaith(value);
@@ -41,7 +41,7 @@ abstract class CityProp {
   }
 }
 
-class CityFaith extends CityProp {
+class CityFaith extends StockItem<CITY_PROPERTIES> {
   String localizedKey = 'cityProps.faith';
   String localizedDescriptionKey = 'cityProps.faithDescription';
   CITY_PROPERTIES type = CITY_PROPERTIES.FAITH;
@@ -57,7 +57,7 @@ class CityFaith extends CityProp {
   CityFaith([value]) : super(value);
 }
 
-class CityGlory extends CityProp {
+class CityGlory extends StockItem<CITY_PROPERTIES> {
   String localizedKey = 'cityProps.glory';
   String localizedDescriptionKey = 'cityProps.gloryDescription';
   CITY_PROPERTIES type = CITY_PROPERTIES.GLORY;
@@ -73,7 +73,7 @@ class CityGlory extends CityProp {
   CityGlory([value]) : super(value);
 }
 
-class CityDefense extends CityProp {
+class CityDefense extends StockItem<CITY_PROPERTIES> {
   String localizedKey = 'cityProps.defense';
   String localizedDescriptionKey = 'cityProps.defenseDescription';
   CITY_PROPERTIES type = CITY_PROPERTIES.DEFENSE;
@@ -89,7 +89,7 @@ class CityDefense extends CityProp {
   CityDefense([value]) : super(value);
 }
 
-class CityCitizens extends CityProp {
+class CityCitizens extends StockItem<CITY_PROPERTIES> {
   String localizedKey = 'cityProps.citizens';
   String localizedDescriptionKey = 'cityProps.citizensDescription';
   CITY_PROPERTIES type = CITY_PROPERTIES.CITIZENS;
@@ -105,7 +105,7 @@ class CityCitizens extends CityProp {
   CityCitizens([value]) : super(value);
 }
 
-class CityCossacks extends CityProp {
+class CityCossacks extends StockItem<CITY_PROPERTIES> {
   String localizedKey = 'cityProps.cossacks';
   String localizedDescriptionKey = 'cityProps.cossacksDescription';
   CITY_PROPERTIES type = CITY_PROPERTIES.COSSACKS;

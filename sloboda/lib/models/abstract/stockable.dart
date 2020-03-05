@@ -43,7 +43,7 @@ abstract class Stockable<T> {
     return true;
   }
 
-  getByType(T type) {
+  int getByType(T type) {
     return this._map[type];
   }
 

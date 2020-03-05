@@ -317,9 +317,9 @@ class Sloboda {
         cityBuildings.fold(props.asMap(), (Map value, cb) {
       var prod = cb.produces;
       if (value.containsKey(prod)) {
-        value[prod] += cb.outputAmount;
+        value[prod.type] += cb.outputAmount;
       } else {
-        value[prod] = props.getByType(prod);
+        value[prod.type] = props.getByType(prod.type);
       }
       return value;
     });

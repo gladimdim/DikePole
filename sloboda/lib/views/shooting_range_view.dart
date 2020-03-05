@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sloboda/components/title_text.dart';
 import 'package:sloboda/models/buildings/shooting_range.dart';
-import 'package:sloboda/models/city_properties.dart';
 import 'package:sloboda/models/sloboda.dart';
 import 'package:sloboda/models/sloboda_localizations.dart';
 import 'package:sloboda/views/components/built_building_listview.dart';
@@ -16,7 +15,7 @@ class ShootingRangeView extends StatelessWidget {
     return BuiltBuildingListView(
       title: SlobodaLocalizations.getForKey(building.localizedKey),
       buildingIconPath: building.icon,
-      producesIconPath: CityProp.fromType(building.produces).toIconPath(),
+      producesIconPath: building.produces.toIconPath(),
       amount: 1,
     );
   }

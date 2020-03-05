@@ -3,7 +3,7 @@ import 'package:sloboda/models/city_properties.dart';
 import 'package:sloboda/models/resources/resource.dart';
 
 class Church extends CityBuilding {
-  CITY_PROPERTIES produces = CITY_PROPERTIES.FAITH;
+  StockItem<CITY_PROPERTIES> produces = CityFaith();
   CITY_BUILDING_TYPES type = CITY_BUILDING_TYPES.CHURCH;
   Map<RESOURCE_TYPES, int> requiredToBuild = {
     RESOURCE_TYPES.FOOD: 100,

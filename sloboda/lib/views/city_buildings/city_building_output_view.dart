@@ -24,7 +24,7 @@ class CityBuildingOutputView extends StatelessWidget {
                     width: 64,
                   )
                 : Text(
-                    CityProp.fromType(building.produces).toLocalizedString(),
+                    building.produces.toLocalizedString(),
                   ),
           ],
         ),

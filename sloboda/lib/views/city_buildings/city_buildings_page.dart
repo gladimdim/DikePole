@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:sloboda/inherited_city.dart';
 import 'package:sloboda/models/buildings/city_buildings/city_building.dart';
-import 'package:sloboda/models/city_properties.dart';
 import 'package:sloboda/views/city_buildings/city_building_built.dart';
 import 'package:sloboda/views/city_buildings/city_building_meta.dart';
 import 'package:sloboda/views/components/built_building_listview.dart';
@@ -30,7 +29,7 @@ class _CityBuildingsPageState extends State<CityBuildingsPage> {
                 child: BuiltBuildingListView(
                   title: localizedCityBuildingByType(cb.type),
                   buildingIconPath: cityTypeToIconPath(cb.type),
-                  producesIconPath: CityProp.fromType(cb.produces).toIconPath(),
+                  producesIconPath: cb.produces.toIconPath(),
                   amount: 1,
                   onPress: () {
                     Navigator.pushNamed(context, CityBuildingBuilt.routeName,
