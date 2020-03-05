@@ -6,6 +6,7 @@ import 'package:sloboda/components/divider.dart';
 import 'package:sloboda/components/full_width_container.dart';
 import 'package:sloboda/components/title_text.dart';
 import 'package:sloboda/models/abstract/buildable.dart';
+import 'package:sloboda/models/abstract/stock_item.dart';
 import 'package:sloboda/models/city_properties.dart';
 import 'package:sloboda/models/resources/resource.dart';
 import 'package:sloboda/models/sloboda.dart';

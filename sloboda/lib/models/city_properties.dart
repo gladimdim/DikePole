@@ -1,32 +1,7 @@
+import 'package:sloboda/models/abstract/stock_item.dart';
 import 'package:sloboda/models/abstract/stockable.dart';
-import 'package:sloboda/models/sloboda_localizations.dart';
 
 enum CITY_PROPERTIES { FAITH, DEFENSE, GLORY, CITIZENS, COSSACKS }
-
-abstract class StockItem<T> {
-  String localizedKey;
-  String localizedDescriptionKey;
-  T type;
-  int value;
-
-  StockItem([this.value]);
-
-  String toLocalizedString() {
-    return SlobodaLocalizations.getForKey(localizedKey);
-  }
-
-  String toLocalizedDescriptionString() {
-    return SlobodaLocalizations.getForKey(localizedDescriptionKey);
-  }
-
-  String toImagePath();
-
-  String toIconPath();
-
-  static StockItem fromType(type, [int value]) {
-    throw UnimplementedError();
-  }
-}
 
 abstract class CityProp extends StockItem<CITY_PROPERTIES> {
   static StockItem fromType(CITY_PROPERTIES type, [int value]) {

@@ -1,4 +1,5 @@
 import 'package:sloboda/models/abstract/buildable.dart';
+import 'package:sloboda/models/abstract/stock_item.dart';
 import 'package:sloboda/models/buildings/city_buildings/church.dart';
 import 'package:sloboda/models/buildings/city_buildings/house.dart';
 import 'package:sloboda/models/buildings/city_buildings/tower.dart';
