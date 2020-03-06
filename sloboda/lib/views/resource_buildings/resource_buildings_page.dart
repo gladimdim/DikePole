@@ -3,7 +3,6 @@ import 'package:flutter/widgets.dart';
 import 'package:sloboda/components/divider.dart';
 import 'package:sloboda/inherited_city.dart';
 import 'package:sloboda/models/buildings/resource_buildings/resource_building.dart';
-import 'package:sloboda/models/resources/resource.dart';
 import 'package:sloboda/views/components/built_building_listview.dart';
 import 'package:sloboda/views/nature_resource_buildings.dart';
 import 'package:sloboda/views/resource_buildings/resource_building_built.dart';
@@ -31,8 +30,7 @@ class _ResourceBuildingsPageState extends State<ResourceBuildingsPage> {
                 child: BuiltBuildingListView(
                   title: el.toLocalizedString(),
                   buildingIconPath: el.getIconPath(),
-                  producesIconPath:
-                      ResourceType.fromType(el.produces).toIconPath(),
+                  producesIconPath: el.produces.toIconPath(),
                   amount: el.outputAmount,
                   onPress: () {
                     Navigator.pushNamed(

@@ -80,7 +80,7 @@ class StockFullView extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
                               ResourceImageView(
-                                type: key,
+                                type: ResourceType.fromType(key),
                                 amount: stock.getByType(key),
                               ),
                               if (stockSimulation != null)

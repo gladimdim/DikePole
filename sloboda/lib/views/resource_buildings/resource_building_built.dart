@@ -4,7 +4,6 @@ import 'package:sloboda/components/button_text.dart';
 import 'package:sloboda/components/title_text.dart';
 import 'package:sloboda/inherited_city.dart';
 import 'package:sloboda/models/buildings/resource_buildings/resource_building.dart';
-import 'package:sloboda/models/resources/resource.dart';
 import 'package:sloboda/models/sloboda.dart';
 import 'package:sloboda/models/sloboda_localizations.dart';
 import 'package:sloboda/views/components/built_building_listview.dart';
@@ -22,7 +21,7 @@ class ResourceBuildingBuiltListItemView extends StatelessWidget {
     Sloboda city = InheritedCity.of(context).city;
     return BuiltBuildingListView(
       title: localizedBuildingTypeName(building.type),
-      producesIconPath: ResourceType.fromType(building.produces).toIconPath(),
+      producesIconPath: building.produces.toIconPath(),
       amount: building.outputAmount,
       buildingIconPath: buildingTypeToIconPath(building.type),
       onPress: () {

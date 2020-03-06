@@ -6,7 +6,7 @@ enum NATURAL_RESOURCES { RIVER, FOREST }
 
 class NaturalResource with Producable {
   NATURAL_RESOURCES type;
-  RESOURCE_TYPES produces;
+  ResourceType produces;
 
   String getIconPath() {
     return 'images/resource_buildings/mill.png';
@@ -21,7 +21,7 @@ class Forest extends NaturalResource {
   NATURAL_RESOURCES type = NATURAL_RESOURCES.FOREST;
   int maxWorkers = 100;
   int workMultiplier = 2;
-  RESOURCE_TYPES produces = RESOURCE_TYPES.WOOD;
+  ResourceType produces = Wood();
   Map<RESOURCE_TYPES, int> requires = {
     RESOURCE_TYPES.FOOD: 1,
   };
@@ -47,7 +47,7 @@ class River extends NaturalResource {
   NATURAL_RESOURCES type = NATURAL_RESOURCES.RIVER;
   int maxWorkers = 50;
   int workMultiplier = 2;
-  RESOURCE_TYPES produces = RESOURCE_TYPES.FISH;
+  ResourceType produces = Fish();
   Map<RESOURCE_TYPES, int> requires = {
     RESOURCE_TYPES.FOOD: 1,
   };

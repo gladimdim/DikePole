@@ -102,27 +102,60 @@ class ResourceLocalizations extends InternalLocalizations {
   Map<String, Map<String, String>> _localizedMap = {
     'en': {
       'food': 'Food',
+      'foodDescription': 'Used in all productions. Can be produced by Fields.',
       'stone': 'Stone',
+      'stoneDescription':
+          'Used to build city defenses. Can be produced in Stone mines.',
       'wood': 'Wood',
+      'woodDescription':
+          'Used to build all buildings. Can be produced in Forest.',
       'ore': 'Ore',
+      'oreDescription': 'Used to create firearms. Can be produced in Ore Mine.',
       'money': 'Money',
+      'moneyDescription':
+          'Used to be sent to the Sich to support defenders of Ukraine. Can be earned in battles, raids or in Mill.',
       'horse': 'Horse',
+      'horse':
+          'Used to create cossacks. Can be earned in events, raids. Can be produced in Stables.',
       'powder': 'Powder',
+      'powderDescription':
+          'Used to create firearms. Can be produced in Cellar Powder.',
       'fur': 'Fur',
+      'furDescription': 'Used for traiding. Can be produced by Trapper House.',
       'fish': 'Fish',
+      'fishDescription': 'Used to trading. Can be produced in River.',
       'firearm': 'Firearm',
+      'firearmDescription':
+          'Used to create cossacks. Can be produced by Smith.',
     },
     'uk': {
       'food': 'Їжа',
+      'foodDeascription':
+          'Потребується для всіх виробництв. Може бути здобута в бою або вирощена не полях.',
       'stone': 'Каміння',
+      'stoneDescription':
+          'Потребується у побудові обороних споруд. Добувається в Каменярні.',
       'wood': 'Дерево',
+      'woodDescription': 'Потребується у побудові споруд. Добувається в Лісі.',
       'ore': 'Руда',
+      'oreDescription': 'Потребується для самопалів. Добувається в Рудні.',
       'money': 'Гроші',
+      'moneyDescription':
+          'Їх можна відсилати на Січ для підтримки оборонців України. Можна здобувати в боях, подіях або використовуючи Млини.',
       'horse': 'Коні',
+      'horseDescription':
+          'Потребується для спорядження козаків. Добувається в Конюшнях.',
       'powder': 'Порох',
+      'powderDescription':
+          'Потребується для створення самопалів. Добувається в Пороховому Льоху.',
       'fur': 'Хутра',
+      'furDescription':
+          'Використовується для торгівлі. Виробляється в Хаті Уходника.',
       'fish': 'Риба',
-      'firearm': 'Самопал'
+      'fishDescription': 'Використовується для торгівлі. Виробляється в Річці.',
+      'firearm': 'Самопал',
+      'firearmDescription':
+          'Використовується для спорядження козаків. Виробляється в Кузні.'
     }
   };
 }

@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:sloboda/extensions/list.dart';
 import 'package:sloboda/models/abstract/buildable.dart';
+import 'package:sloboda/models/resources/resource.dart';
 import 'package:sloboda/models/sloboda_localizations.dart';
 import 'package:sloboda/views/resource_view.dart';
-import 'package:sloboda/extensions/list.dart';
 
 class BuildableRequiredToBuildView extends StatelessWidget {
   const BuildableRequiredToBuildView({
@@ -30,7 +31,7 @@ class BuildableRequiredToBuildView extends StatelessWidget {
                       .map((e) => Row(
                             children: <Widget>[
                               ResourceImageView(
-                                type: e.key,
+                                type: ResourceType.fromType(e.key),
                               ),
                               Text(' ${e.value}'),
                             ],

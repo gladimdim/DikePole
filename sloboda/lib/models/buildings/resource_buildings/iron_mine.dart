@@ -10,7 +10,7 @@ class IronMine extends ResourceBuilding {
 
   int workMultiplier = 3;
 
-  RESOURCE_TYPES produces = RESOURCE_TYPES.IRON_ORE;
+  ResourceType produces = IronOre();
 
   Map<RESOURCE_TYPES, int> requires = {
     RESOURCE_TYPES.FOOD: 5,

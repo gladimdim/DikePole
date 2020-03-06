@@ -7,7 +7,7 @@ class Smith extends ResourceBuilding {
     RESOURCE_TYPES.WOOD: 3,
     RESOURCE_TYPES.STONE: 3,
   };
-  RESOURCE_TYPES produces = RESOURCE_TYPES.FIREARM;
+  ResourceType produces = FireArm();
 
   Map<RESOURCE_TYPES, int> requires = {
     RESOURCE_TYPES.FOOD: 2,

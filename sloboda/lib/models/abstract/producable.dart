@@ -7,7 +7,7 @@ import 'package:sloboda/models/stock.dart';
 
 class Producable {
   BehaviorSubject changes = BehaviorSubject();
-  RESOURCE_TYPES produces;
+  ResourceType produces;
   Map<RESOURCE_TYPES, int> requires = Map();
   List<Citizen> assignedHumans = [];
   int maxWorkers = 5;
@@ -87,7 +87,7 @@ class Producable {
       // no exception was thrown, we can execute the stock
       executors.forEach((executor) => executor());
     }
-    stock.addToType(produces, assignedHumans.length * workMultiplier);
+    stock.addToType(produces.type, assignedHumans.length * workMultiplier);
   }
 
   void destroy() {

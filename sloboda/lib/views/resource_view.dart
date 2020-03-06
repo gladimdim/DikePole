@@ -11,7 +11,7 @@ import 'package:sloboda/views/resource_buildings/resource_building_view.dart';
 
 class ResourceDetailsScreen extends StatelessWidget {
   static final routeName = '/city_building/resource_details_view';
-  final RESOURCE_TYPES type;
+  final ResourceType type;
 
   ResourceDetailsScreen({this.type});
 
@@ -22,7 +22,7 @@ class ResourceDetailsScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Theme.of(context).backgroundColor,
         title: TitleText(
-          ResourceType.fromType(type).toLocalizedString(),
+          type.toLocalizedString(),
         ),
       ),
       body: ResourceDetailsView(type: type),
@@ -31,7 +31,7 @@ class ResourceDetailsScreen extends StatelessWidget {
 }
 
 class ResourceDetailsView extends StatelessWidget {
-  final RESOURCE_TYPES type;
+  final ResourceType type;
 
   ResourceDetailsView({this.type});
 
@@ -65,13 +65,17 @@ class ResourceDetailsView extends StatelessWidget {
                       Navigator.pop(context);
                     },
                     child: Image.asset(
-                      ResourceType.fromType(type).toImagePath(),
+                      type.toImagePath(),
                       height: kIsWeb ? 512 : null,
                     ),
                   ),
                 ),
                 VDivider(),
-                SoftContainer(child: Text('Some description')),
+                SoftContainer(
+                    child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(type.toLocalizedDescriptionString()),
+                )),
                 VDivider(),
                 if (requiredProd.isNotEmpty) ...[
                   Center(
@@ -166,7 +170,7 @@ class ResourceDetailsView extends StatelessWidget {
 }
 
 class ResourceDetailsScreenArguments {
-  final RESOURCE_TYPES type;
+  final ResourceType type;
 
   ResourceDetailsScreenArguments({this.type});
 }
@@ -183,7 +187,7 @@ class ExtractResourceDetailsScreenArguments extends StatelessWidget {
 }
 
 class ResourceImageView extends StatelessWidget {
-  final RESOURCE_TYPES type;
+  final ResourceType type;
   final int amount;
 
   ResourceImageView({this.type, this.amount});
@@ -191,7 +195,7 @@ class ResourceImageView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Tooltip(
-      message: ResourceType.fromType(type).toLocalizedString(),
+      message: type.toLocalizedString(),
       child: InkWell(
         onTap: () {
           Navigator.pushNamed(
@@ -205,7 +209,7 @@ class ResourceImageView extends StatelessWidget {
         child: Row(
           children: <Widget>[
             Image.asset(
-              ResourceType.fromType(type).toIconPath(),
+              type.toIconPath(),
               width: 32,
             ),
             if (amount != null)

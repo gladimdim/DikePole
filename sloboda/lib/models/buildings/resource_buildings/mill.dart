@@ -12,7 +12,7 @@ class Mill extends ResourceBuilding {
 
   int workMultiplier = 2;
 
-  RESOURCE_TYPES produces = RESOURCE_TYPES.MONEY;
+  ResourceType produces = Money();
 
   Map<RESOURCE_TYPES, int> requires = {
     RESOURCE_TYPES.FOOD: 5,

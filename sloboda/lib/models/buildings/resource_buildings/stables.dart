@@ -10,7 +10,7 @@ class Stables extends ResourceBuilding {
 
   int workMultiplier = 2;
 
-  RESOURCE_TYPES produces = RESOURCE_TYPES.HORSE;
+  ResourceType produces = Horse();
 
   Map<RESOURCE_TYPES, int> requires = {
     RESOURCE_TYPES.FOOD: 10,
