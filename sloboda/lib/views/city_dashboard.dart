@@ -128,33 +128,36 @@ class _CityDashboardState extends State<CityDashboard> {
                 child: Column(
                   children: CITY_PROPERTIES.values
                       .map(
-                        (v) => Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: <Widget>[
-                            Expanded(
-                              flex: 7,
-                              child: CityProperty(
-                                property: CityProp.fromType(v),
+                        (v) => Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: <Widget>[
+                              Expanded(
+                                flex: 7,
+                                child: CityProperty(
+                                  property: CityProp.fromType(v),
+                                ),
                               ),
-                            ),
-                            Expanded(
-                              flex: 3,
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.end,
-                                children: [
-                                  HDivider(),
-                                  Text(widget.city.props
-                                      .getByType(v)
-                                      .toString()),
-                                  SaldoViewShower(
-                                    value: widget.city.simulateCityProps()[v],
-                                    reference: widget.city.props.getByType(v),
-                                    showValue: true,
-                                  )
-                                ],
+                              Expanded(
+                                flex: 3,
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  children: [
+                                    HDivider(),
+                                    Text(widget.city.props
+                                        .getByType(v)
+                                        .toString()),
+                                    SaldoViewShower(
+                                      value: widget.city.simulateCityProps()[v],
+                                      reference: widget.city.props.getByType(v),
+                                      showValue: true,
+                                    )
+                                  ],
+                                ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                       )
                       .toList(),

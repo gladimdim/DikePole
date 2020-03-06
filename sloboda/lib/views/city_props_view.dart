@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:sloboda/components/divider.dart';
 import 'package:sloboda/components/full_width_container.dart';
 import 'package:sloboda/models/city_properties.dart';
 import 'package:sloboda/views/components/soft_container.dart';
@@ -76,7 +75,6 @@ class _CityPropScreenState extends State<CityPropScreen> {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
-              VDivider(),
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: SoftContainer(
@@ -86,26 +84,6 @@ class _CityPropScreenState extends State<CityPropScreen> {
                   ),
                 ),
               ),
-              VDivider(),
-              Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: SoftContainer(
-                  child: Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: FullWidth(
-                      child: Center(
-                        child: Text(
-                          widget.prop.toLocalizedString(),
-                          style: Theme.of(context).textTheme.bodyText1.copyWith(
-                                fontSize: 18,
-                              ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              VDivider(),
               Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: SoftContainer(

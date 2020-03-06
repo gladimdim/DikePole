@@ -42,15 +42,35 @@ class CityPropsLocalizations extends InternalLocalizations {
   Map<String, Map<String, String>> _localizedMap = {
     'en': {
       'faith': 'Faith',
+      'faithDescription':
+          'Faith influences chance of getting certain random events. Produced by the Church. Wins in battles versus impure also raises the Faith. The central Metripolian of Orthodox Church in Kyiv might give you tasks, if your Faith is high.',
       'glory': 'Glory',
+      'gloryDescription':
+          'Glory influences chance of getting certain military random events. Even nearby Slobodas might join your forces and unite with you. The higher the Glory, the more known your settlement is. This means epic events might occur. Can be increased only by participating in events.',
       'defense': 'Defense',
+      'defenseLevel':
+          'Defense. Decreases chances for tartar raids. Can lower the level of damage done by enemy forces. Can be increased by City Defense Buildings.',
       'citizens': 'Citizens',
-      'cossacks': 'Cossacks',
+      'citizensDescription':
+          'Citizens. The moving part of the settlement. They do the work. Can be trained to be the Cossack. They can be killed or taken as prisoners. The Resource Buildings require citizens to be assigned to them in order to produce.',
+      'cossacks': 'Cossack',
+      'cossackDescription':
+          'Cossacks. The defenders of Ukrainian lands. Use Shooting range to train a citizen to become a Cossack. Only cossacks can take part in military events, raids and defending the Settlement. Cannot be converted back to citizen.',
     },
     'uk': {
+      'faithDescription':
+          'Віра впливає на появу певних подій. Підвищується Церквою, а також різними подіями, наприклад у боях з нехристями або під час захисту українських земель. Без Церкви і високої Віри до вас не будуть приходити біженці з окупованих земель. Метрополит Київський може давати вам спеціальні завдання, якщо ваша Віра доволі висока.',
+      'gloryDescription':
+          'Слава здобувається в боях з ворогом. Впливає на вірогідність подій. Чим вища слава, тим більше епічні події стають доступними. ',
+      'defenseDescription':
+          'Рівень захисту. Поки що ні на що ни впливає, але зробимо.',
+      'citizensDescription':
+          'Люди, які живуть у вашій слободі. Працюють на різних ділянках. Можуть стати козаками, якщо їх натренувати на Стрільбищі. Щоб збільшити кількість людей, приймайте участь в різних подіях, збільшуйте показники Слободи, і тоді до вас приєднаються люди. Або ж будуйте курені.',
+      'cossacksDescription':
+          'Козаки. Беруть участь у військових походах, обороні українських земель. Основна діюча сила будь-якої події. Чим більше козаків, тим більші військові рейди вам стають доступні. Козаки тренуються з людей на Стрільбищі.',
       'faith': 'Віра',
       'glory': 'Слава',
-      'defense': 'Захист',
+      'defense': 'Рівень захисту',
       'citizens': 'Люди',
       'cossacks': 'Козаки',
     }
