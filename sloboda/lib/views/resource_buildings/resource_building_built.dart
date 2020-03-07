@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sloboda/animations/slideable_button.dart';
 import 'package:sloboda/components/button_text.dart';
+import 'package:sloboda/components/divider.dart';
 import 'package:sloboda/components/title_text.dart';
 import 'package:sloboda/inherited_city.dart';
 import 'package:sloboda/models/buildings/resource_buildings/resource_building.dart';
@@ -20,10 +21,10 @@ class ResourceBuildingBuiltListItemView extends StatelessWidget {
   Widget build(BuildContext context) {
     Sloboda city = InheritedCity.of(context).city;
     return BuiltBuildingListView(
-      title: localizedBuildingTypeName(building.type),
+      title: building.toLocalizedString(),
       producesIconPath: building.produces.toIconPath(),
       amount: building.outputAmount,
-      buildingIconPath: buildingTypeToIconPath(building.type),
+      buildingIconPath: building.toIconPath(),
       onPress: () {
         Navigator.pushNamed(
           context,
@@ -58,7 +59,9 @@ class _ResourceBuildingBuiltState extends State<ResourceBuildingBuilt> {
       backgroundColor: Theme.of(context).backgroundColor,
       appBar: AppBar(
         backgroundColor: Theme.of(context).backgroundColor,
-        title: TitleText(localizedBuildingTypeName(building.type)),
+        title: TitleText(
+          building.toLocalizedString(),
+        ),
       ),
       body: SingleChildScrollView(
         child: SoftContainer(
@@ -73,14 +76,18 @@ class _ResourceBuildingBuiltState extends State<ResourceBuildingBuilt> {
                   },
                   child: SoftContainer(
                     child: Image.asset(
-                      buildingTypeToImagePath(building.type),
+                      building.toImagePath(),
                       height: 320,
                     ),
                   ),
                 ),
-                SizedBox(
-                  height: 35,
+                VDivider(),
+                SoftContainer(
+                  child: Text(
+                    building.toLocalizedDescriptionString(),
+                  ),
                 ),
+                VDivider(),
                 if (!building.isFull())
                   SoftContainer(
                     child: SlideableButton(

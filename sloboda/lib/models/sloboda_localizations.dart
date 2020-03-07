@@ -144,7 +144,7 @@ class ResourceLocalizations extends InternalLocalizations {
           'Їх можна відсилати на Січ для підтримки оборонців України. Можна здобувати в боях, подіях або використовуючи Млини.',
       'horse': 'Коні',
       'horseDescription':
-          'Потребується для спорядження козаків. Добувається в Конюшнях.',
+          'Потребується для спорядження козаків. Виробляється в Конюшнях.',
       'powder': 'Порох',
       'powderDescription':
           'Потребується для створення самопалів. Добувається в Пороховому Льоху.',
@@ -152,7 +152,7 @@ class ResourceLocalizations extends InternalLocalizations {
       'furDescription':
           'Використовується для торгівлі. Виробляється в Хаті Уходника.',
       'fish': 'Риба',
-      'fishDescription': 'Використовується для торгівлі. Виробляється в Річці.',
+      'fishDescription': 'Використовується для торгівлі. Добувається в Річці.',
       'firearm': 'Самопал',
       'firearmDescription':
           'Використовується для спорядження козаків. Виробляється в Кузні.'
@@ -164,23 +164,45 @@ class ResourceBuildingsLocalizations extends InternalLocalizations {
   Map<String, Map<String, String>> _localizedMap = {
     'en': {
       'mill': 'Mill',
+      'millDescription': 'Earns you money by consuming food.',
       'field': 'Field',
+      'fieldDescription': 'The main food income resource.',
       'quarry': 'Quarry',
+      'quarryDescription': 'Produces stone used for building.',
       'smith': 'Smith',
+      'smithDescription': 'Produces firearms. Needs ore, powder and food.',
       'stables': 'Stables',
+      'stablesDescription':
+          'Produces horses. They are used to convert citizens into cossacks.',
       'ironMine': 'Iron Mine',
+      'ironMineDescription':
+          'Produces iron ore. It is used by the Smith to create firearms for cossacks.',
       'trapperCabin': 'Trapper\'s Cabin',
+      'trapperCabinDescription':
+          'Hunter goes into the woods and catches the wild animals. Produces furs.',
       'powderCellar': 'Powder Cellar',
+      'powderCellarDescription':
+          'Produces powder. It is used by the Smith to create firarms for cossacks.',
     },
     'uk': {
       'mill': 'Млин',
+      'millDescription':
+          'Заробляє вам гроші. Люди приносять сюди збіжжя і платять вам гроші за борошно.',
       'field': 'Поле',
+      'fieldDescription': 'Основний вироблник їжі для вашого селища.',
       'quarry': 'Каменярня',
+      'quarryDescription': 'Виробляє каміння для будівництв.',
       'smith': 'Кузня',
+      'smithDescription': 'Виробляє самопали. Потребує залізо.',
       'stables': 'Конюшня',
+      'stablesDescription': 'Виробляє коней. Вони необхідні козакам.',
       'ironMine': 'Рудня',
+      'ironMineDescription': 'Виробляє залізо для коваля.',
       'trapperCabin': 'Хата уходника',
-      'powderCellar': 'Пороховий льох'
+      'trapperCabinDescription':
+          'Уходник ходить в ліс по дичину. Хутра можна продати за гарні кошти в Каневі.',
+      'powderCellar': 'Пороховий льох',
+      'powderCellarDescription': 'Виробляє порох для виробництва самопалів.'
     }
   };
 }

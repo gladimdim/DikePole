@@ -2,11 +2,22 @@ import 'package:sloboda/models/buildings/resource_buildings/resource_building.da
 import 'package:sloboda/models/resources/resource.dart';
 
 class Smith extends ResourceBuilding {
+  String localizedKey = 'resourceBuildings.smith';
+  String localizedDescriptionKey = 'resourceBuildings.smithDescription';
   RESOURCE_BUILDING_TYPES type = RESOURCE_BUILDING_TYPES.SMITH;
   Map<RESOURCE_TYPES, int> requiredToBuild = {
     RESOURCE_TYPES.WOOD: 3,
     RESOURCE_TYPES.STONE: 3,
   };
+
+  String toIconPath() {
+    return 'images/resource_buildings/smith_64.png';
+  }
+
+  String toImagePath() {
+    return 'images/resource_buildings/smith.png';
+  }
+
   ResourceType produces = FireArm();
 
   Map<RESOURCE_TYPES, int> requires = {

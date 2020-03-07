@@ -95,8 +95,12 @@ class ResourceDetailsView extends StatelessWidget {
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: row
-                                      .map((e) =>
-                                          ResourceBuildingImageView(type: e))
+                                      .map(
+                                        (e) => ResourceBuildingImageView(
+                                          building:
+                                              ResourceBuilding.fromType(e),
+                                        ),
+                                      )
                                       .toList(),
                                 ),
                               ))
@@ -123,8 +127,12 @@ class ResourceDetailsView extends StatelessWidget {
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: row
-                                      .map((e) =>
-                                          ResourceBuildingImageView(type: e))
+                                      .map(
+                                        (e) => ResourceBuildingImageView(
+                                          building:
+                                              ResourceBuilding.fromType(e),
+                                        ),
+                                      )
                                       .toList(),
                                 ),
                               ))
@@ -145,21 +153,26 @@ class ResourceDetailsView extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: producedBy
                           .divideBy(2)
-                          .map((List row) => Padding(
-                                padding: const EdgeInsets.all(16.0),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: row
-                                      .map((e) =>
-                                          ResourceBuildingImageView(type: e))
-                                      .toList(),
-                                ),
-                              ))
+                          .map(
+                            (List row) => Padding(
+                              padding: const EdgeInsets.all(16.0),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: row
+                                    .map(
+                                      (e) => ResourceBuildingImageView(
+                                        building: ResourceBuilding.fromType(e),
+                                      ),
+                                    )
+                                    .toList(),
+                              ),
+                            ),
+                          )
                           .toList(),
                     ),
                   ),
-                ]
+                ],
               ],
             ),
           ),

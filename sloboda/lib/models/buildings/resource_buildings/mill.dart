@@ -2,6 +2,8 @@ import 'package:sloboda/models/buildings/resource_buildings/resource_building.da
 import 'package:sloboda/models/resources/resource.dart';
 
 class Mill extends ResourceBuilding {
+  String localizedKey = 'resourceBuildings.mill';
+  String localizedDescriptionKey = 'resourceBuildings.millDescription';
   RESOURCE_BUILDING_TYPES type = RESOURCE_BUILDING_TYPES.MILL;
 
   Map<RESOURCE_TYPES, int> requiredToBuild = {
@@ -9,6 +11,14 @@ class Mill extends ResourceBuilding {
     RESOURCE_TYPES.STONE: 5,
     RESOURCE_TYPES.WOOD: 5,
   };
+
+  String toIconPath() {
+    return 'images/resource_buildings/mill_64.png';
+  }
+
+  String toImagePath() {
+    return 'images/resource_buildings/mill.png';
+  }
 
   int workMultiplier = 2;
 

@@ -56,15 +56,16 @@ class _ResourceBuildingsPageState extends State<ResourceBuildingsPage> {
                 .toList(),
             // what can we build
             ...RESOURCE_BUILDING_TYPES.values.map((value) {
+              var building = ResourceBuilding.fromType(value);
               return Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: InkWell(
                   child: ResourceBuildingMetaView(
-                      type: value,
+                      building: building,
                       selected: selected == value,
                       onBuildPressed: () {
                         try {
-                          city.buildBuilding(ResourceBuilding.fromType(value));
+                          city.buildBuilding(building);
                         } catch (e) {
                           final snackBar = SnackBar(
                               content: Text(

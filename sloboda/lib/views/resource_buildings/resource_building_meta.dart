@@ -6,18 +6,18 @@ import 'package:sloboda/components/title_text.dart';
 import 'package:sloboda/models/buildings/resource_buildings/resource_building.dart';
 import 'package:sloboda/models/citizen.dart';
 import 'package:sloboda/models/sloboda_localizations.dart';
+import 'package:sloboda/views/components/buildable_requires_to_build.dart';
 import 'package:sloboda/views/components/resource_building_input_view.dart';
 import 'package:sloboda/views/components/resource_building_output_view.dart';
-import 'package:sloboda/views/components/buildable_requires_to_build.dart';
 import 'package:sloboda/views/components/soft_container.dart';
 
 class ResourceBuildingMetaView extends StatefulWidget {
-  final RESOURCE_BUILDING_TYPES type;
+  final ResourceBuilding building;
   final bool selected;
   final VoidCallback onBuildPressed;
 
   ResourceBuildingMetaView(
-      {this.type, this.selected = false, this.onBuildPressed});
+      {this.building, this.selected = false, this.onBuildPressed});
 
   @override
   _ResourceBuildingMetaViewState createState() =>
@@ -27,7 +27,7 @@ class ResourceBuildingMetaView extends StatefulWidget {
 class _ResourceBuildingMetaViewState extends State<ResourceBuildingMetaView> {
   @override
   Widget build(BuildContext context) {
-    var building = ResourceBuilding.fromType(widget.type);
+    var building = widget.building;
     return SoftContainer(
       child: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -47,7 +47,7 @@ class _ResourceBuildingMetaViewState extends State<ResourceBuildingMetaView> {
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Image.asset(
-                        buildingTypeToImagePath(widget.type),
+                        building.toImagePath(),
                         height: widget.selected ? 256 : 128,
                       ),
                     ),
@@ -57,9 +57,7 @@ class _ResourceBuildingMetaViewState extends State<ResourceBuildingMetaView> {
                   SoftContainer(
                     child: Padding(
                       padding: const EdgeInsets.all(16.0),
-                      child: Text(
-                        getDescriptionForResourceBuildingType(building.type),
-                      ),
+                      child: Text(building.toLocalizedDescriptionString()),
                     ),
                   ),
                 if (widget.selected)
