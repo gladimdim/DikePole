@@ -155,7 +155,7 @@ class ResourceLocalizations extends InternalLocalizations {
       'fishDescription': 'Використовується для торгівлі. Добувається в Річці.',
       'firearm': 'Самопал',
       'firearmDescription':
-          'Використовується для спорядження козаків. Виробляється в Кузні.'
+          'Використовується для спорядження козаків. Виробляється в Кузні.',
     }
   };
 }
@@ -606,6 +606,9 @@ class SlobodaLocalizations {
       'bigSloboda': 'Big Sloboda',
       'normalSloboda': 'Small Sloboda',
       'notEnoughResources': 'has not enough',
+      'sendCossacksToSich': 'Send cossacks to Sich',
+      'sichHas': 'Sich has',
+      'reset': 'Reset',
     },
     'uk': {
       'overview': 'Головна',
@@ -640,7 +643,10 @@ class SlobodaLocalizations {
       'cossacks': 'Козаки',
       'bigSloboda': 'Велика Слобода',
       'normalSloboda': 'Маленька Слобода',
-      'notEnoughResources': 'недостає'
+      'notEnoughResources': 'недостає',
+      'sendCossacksToSich': 'Відіслати козаків на Січ',
+      'sichHas': 'На Січі є',
+      'reset': 'Заново',
     }
   };
 
@@ -744,6 +750,11 @@ class SlobodaLocalizations {
         ['trainCossacks'];
   }
 
+  static String get sendCossacksToSich {
+    return _localizedValues[SlobodaLocalizations.locale.languageCode]
+        ['sendCossacksToSich'];
+  }
+
   static String get cossacks {
     return _localizedValues[SlobodaLocalizations.locale.languageCode]
         ['cossacks'];
@@ -757,5 +768,14 @@ class SlobodaLocalizations {
   static String get normalSloboda {
     return _localizedValues[SlobodaLocalizations.locale.languageCode]
         ['normalSloboda'];
+  }
+
+  static String get sichHas {
+    return _localizedValues[SlobodaLocalizations.locale.languageCode]
+        ['sichHas'];
+  }
+
+  static String get reset {
+    return _localizedValues[SlobodaLocalizations.locale.languageCode]['reset'];
   }
 }

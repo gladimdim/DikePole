@@ -48,113 +48,124 @@ class _CityGameState extends State<CityGame> {
           city: city,
           child: Scaffold(
             backgroundColor: Theme.of(context).backgroundColor,
-            body: Column(
-              children: <Widget>[
-                Expanded(
-                  flex: 9,
-                  child: DefaultTabController(
-                    length: 4,
-                    child: Scaffold(
-                      backgroundColor: Theme.of(context).backgroundColor,
-                      appBar: AppBar(
-                        bottom: TabBar(
-                          tabs: _pageTitles()
-                              .map(
-                                (tab) => Tab(
-                                  child: Text(
-                                    tab,
-                                  ),
-                                ),
-                              )
-                              .toList(),
-                        ),
-                        backgroundColor: Theme.of(context).backgroundColor,
-                        title: StockMiniView(
-                          stock: city.stock,
-                          stockSimulation: city.simulateStock(),
-                        ),
-                      ),
-                      drawer: Drawer(
-                        child: Container(
-                          height: MediaQuery.of(context).size.height,
-                          color: Theme.of(context).backgroundColor,
-                          child: SingleChildScrollView(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.stretch,
-                              children: <Widget>[
-                                VDivider(),
-                                LocaleSelection(
-                                  locale: SlobodaLocalizations.locale,
-                                  onLocaleChanged: (Locale locale) {
-                                    setState(() {
-                                      SlobodaLocalizations.locale = locale;
-                                    });
-                                  },
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: SoftContainer(
-                                    child: StockFullView(
-                                      stock: city.stock,
-                                      stockSimulation: city.simulateStock(),
-                                    ),
-                                  ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: SoftContainer(
-                                    child: _makeTurn(context),
-                                  ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: SoftContainer(
-                                    child: FullWidth(
-                                      child: FlatButton(
-                                        child: Text('Reset'),
-                                        onPressed: () {
-                                          Navigator.pushNamedAndRemoveUntil(
-                                              context,
-                                              CreateSlobodaView.routeName,
-                                              (route) => false);
+            body: StreamBuilder(
+                stream: city.changes,
+                builder: (context, snapshot) {
+                  return Column(
+                    children: <Widget>[
+                      Expanded(
+                        flex: 9,
+                        child: DefaultTabController(
+                          length: 4,
+                          child: Scaffold(
+                            backgroundColor: Theme.of(context).backgroundColor,
+                            appBar: AppBar(
+                              bottom: TabBar(
+                                tabs: _pageTitles()
+                                    .map(
+                                      (tab) => Tab(
+                                        child: Text(
+                                          tab,
+                                        ),
+                                      ),
+                                    )
+                                    .toList(),
+                              ),
+                              backgroundColor:
+                                  Theme.of(context).backgroundColor,
+                              title: StockMiniView(
+                                stock: city.stock,
+                                stockSimulation: city.simulateStock(),
+                              ),
+                            ),
+                            drawer: Drawer(
+                              child: Container(
+                                height: MediaQuery.of(context).size.height,
+                                color: Theme.of(context).backgroundColor,
+                                child: SingleChildScrollView(
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.stretch,
+                                    children: <Widget>[
+                                      VDivider(),
+                                      LocaleSelection(
+                                        locale: SlobodaLocalizations.locale,
+                                        onLocaleChanged: (Locale locale) {
+                                          setState(() {
+                                            SlobodaLocalizations.locale =
+                                                locale;
+                                          });
                                         },
                                       ),
-                                    ),
+                                      Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: SoftContainer(
+                                          child: StockFullView(
+                                            stock: city.stock,
+                                            stockSimulation:
+                                                city.simulateStock(),
+                                          ),
+                                        ),
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: SoftContainer(
+                                          child: _makeTurn(context),
+                                        ),
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: SoftContainer(
+                                          child: FullWidth(
+                                            child: FlatButton(
+                                              child: Text(
+                                                  SlobodaLocalizations.reset),
+                                              onPressed: () {
+                                                Navigator
+                                                    .pushNamedAndRemoveUntil(
+                                                        context,
+                                                        CreateSlobodaView
+                                                            .routeName,
+                                                        (route) => false);
+                                              },
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
                                   ),
                                 ),
+                              ),
+                            ),
+                            body: TabBarView(
+                              children: <Widget>[
+                                CityDashboard(city: city),
+                                EventsView(
+                                  events: city.events,
+                                ),
+                                ResourceBuildingsPage(),
+                                CityBuildingsPage(),
                               ],
                             ),
                           ),
                         ),
                       ),
-                      body: TabBarView(
-                        children: <Widget>[
-                          CityDashboard(city: city),
-                          EventsView(
-                            events: city.events,
+                      Padding(
+                        padding: const EdgeInsets.only(
+                          left: 16,
+                          right: 16,
+                          top: 16,
+                          bottom: 24.0,
+                        ),
+                        child: SoftContainer(
+                          child: FullWidth(
+                            child: _makeTurn(context),
                           ),
-                          ResourceBuildingsPage(),
-                          CityBuildingsPage(),
-                        ],
+                        ),
                       ),
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(
-                    left: 16,
-                    right: 16,
-                    top: 16,
-                    bottom: 24.0,
-                  ),
-                  child: SoftContainer(
-                    child: FullWidth(
-                      child: _makeTurn(context),
-                    ),
-                  ),
-                ),
-              ],
-            ),
+                    ],
+                  );
+                }),
           ),
         );
       },

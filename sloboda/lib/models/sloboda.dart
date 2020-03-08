@@ -78,6 +78,16 @@ class Sloboda {
     _innerChanges.add(this);
   }
 
+  removeCossacks(int amount) {
+    final existing = props.getByType(CITY_PROPERTIES.COSSACKS);
+    if (existing < amount) {
+      throw 'Not enough cossacks to send';
+    } else {
+      props.removeFromType(CITY_PROPERTIES.COSSACKS, amount);
+    }
+    _innerChanges.add(this);
+  }
+
   buildBuilding(Buildable buildable) {
     if (canBuildResourceBuilding(buildable)) {
       _removeFromStock(buildable.requiredToBuild);
