@@ -27,6 +27,21 @@ abstract class CitySeason {
   String toLocalizedKey();
 
   CitySeason();
+
+  bool isNextTo(CitySeason another) {
+    switch (runtimeType) {
+      case (SpringSeason):
+        return another is WinterSeason;
+      case (SummerSeason):
+        return another is SpringSeason;
+      case (AutumnSeason):
+        return another is SummerSeason;
+      case (WinterSeason):
+        return another is AutumnSeason;
+      default:
+        return false;
+    }
+  }
 }
 
 class WinterSeason extends CitySeason {

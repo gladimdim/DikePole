@@ -64,8 +64,33 @@ class _CityGameState extends State<CityGame> {
                                 tabs: _pageTitles()
                                     .map(
                                       (tab) => Tab(
-                                        child: Text(
-                                          tab,
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceAround,
+                                          children: <Widget>[
+                                            Text(
+                                              tab,
+                                            ),
+                                            if (tab ==
+                                                SlobodaLocalizations.events)
+                                              Text(
+                                                city.events
+                                                    .where((cityEvent) {
+                                                      return city.currentYear ==
+                                                              cityEvent
+                                                                  .yearHappened &&
+                                                          city.currentSeason
+                                                              .isNextTo(
+                                                                  cityEvent
+                                                                      .season);
+                                                    })
+                                                    .length
+                                                    .toString(),
+                                                style: Theme.of(context)
+                                                    .textTheme
+                                                    .headline6,
+                                              ),
+                                          ],
                                         ),
                                       ),
                                     )

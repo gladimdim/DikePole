@@ -2,15 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:sloboda/components/divider.dart';
 import 'package:sloboda/components/full_width_container.dart';
 import 'package:sloboda/components/title_text.dart';
+import 'package:sloboda/inherited_city.dart';
 import 'package:sloboda/models/city_event.dart';
 import 'package:sloboda/models/sloboda_localizations.dart';
 import 'package:sloboda/views/city_props_view.dart';
 import 'package:sloboda/views/components/soft_container.dart';
 import 'package:sloboda/views/stock_view.dart';
-
-bool compare(CityEvent a, CityEvent b) {
-  return (a.yearHappened == b.yearHappened && a.season == b.season);
-}
 
 Map<String, List<CityEvent>> foldEvents(List<CityEvent> events) {
   Map<String, List<CityEvent>> result = {};
@@ -36,6 +33,8 @@ class EventsView extends StatelessWidget {
   }
 
   Widget build(BuildContext context) {
+    final city = InheritedCity.of(context).city;
+    print(city.currentSeason);
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: SoftContainer(
@@ -74,6 +73,10 @@ class EventsView extends StatelessWidget {
                       ),
                     ),
                     ..._events[key].map((event) {
+                      var textStyle;
+                      if (city.currentSeason.isNextTo(event.season)) {
+                        textStyle = Theme.of(context).textTheme.headline6;
+                      }
                       return Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Column(
@@ -83,6 +86,7 @@ class EventsView extends StatelessWidget {
                                   SlobodaLocalizations.getForKey(
                                       event.sourceEvent.messageKey),
                                   textAlign: TextAlign.center,
+                                  style: textStyle,
                                 ),
                               ),
                               if (event.sourceEvent.stock != null)

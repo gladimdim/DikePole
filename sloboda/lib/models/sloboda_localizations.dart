@@ -189,7 +189,7 @@ class ResourceBuildingsLocalizations extends InternalLocalizations {
       'millDescription':
           'Заробляє вам гроші. Люди приносять сюди збіжжя і платять вам гроші за борошно.',
       'field': 'Поле',
-      'fieldDescription': 'Основний вироблник їжі для вашого селища.',
+      'fieldDescription': 'Основний виробник їжі для вашого селища.',
       'quarry': 'Каменярня',
       'quarryDescription': 'Виробляє каміння для будівництв.',
       'smith': 'Кузня',
