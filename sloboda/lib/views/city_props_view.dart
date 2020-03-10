@@ -5,8 +5,9 @@ import 'package:sloboda/views/components/soft_container.dart';
 
 class CityPropsMiniView extends StatelessWidget {
   final CityProps props;
+  final bool showLabels;
 
-  CityPropsMiniView({@required this.props});
+  CityPropsMiniView({@required this.props, this.showLabels = true});
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +37,7 @@ class CityPropsMiniView extends StatelessWidget {
                   },
                 ),
                 Text(
-                  '${CityProp.fromType(key).toLocalizedString()}: ${props.getByType(key)} ',
+                  '${showLabels ? CityProp.fromType(key).toLocalizedString() : ''}: ${props.getByType(key)} ',
                   style: Theme.of(context).textTheme.bodyText1.copyWith(
                         fontSize: 18,
                       ),
