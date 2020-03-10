@@ -4,7 +4,6 @@ import 'package:sloboda/models/buildings/shooting_range.dart';
 import 'package:sloboda/models/sloboda.dart';
 import 'package:sloboda/models/sloboda_localizations.dart';
 import 'package:sloboda/views/components/built_building_listview.dart';
-import 'package:sloboda/views/sich_stats_view.dart';
 
 class ShootingRangeView extends StatelessWidget {
   final ShootingRange building;
@@ -46,22 +45,9 @@ class _ShootingRangeBuiltState extends State<ShootingRangeBuilt> {
       body: StreamBuilder(
           stream: widget.city.changes,
           builder: (context, snapshot) {
-            return Column(
-              children: <Widget>[
-                Expanded(
-                  flex: 2,
-                  child: SichStatsView(
-                    city: widget.city,
-                  ),
-                ),
-                Expanded(
-                  flex: 6,
-                  child: building.build(context, () {
-                    setState(() {});
-                  }, widget.city),
-                ),
-              ],
-            );
+            return building.build(context, () {
+              setState(() {});
+            }, widget.city);
           }),
     );
   }

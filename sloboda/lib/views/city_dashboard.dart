@@ -3,6 +3,7 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:sloboda/animations/slideable_button.dart';
 import 'package:sloboda/components/divider.dart';
+import 'package:sloboda/components/full_width_container.dart';
 import 'package:sloboda/components/title_text.dart';
 import 'package:sloboda/models/buildings/shooting_range.dart';
 import 'package:sloboda/models/city_properties.dart';
@@ -11,6 +12,7 @@ import 'package:sloboda/models/sloboda_localizations.dart';
 import 'package:sloboda/views/city_property.dart';
 import 'package:sloboda/views/components/soft_container.dart';
 import 'package:sloboda/views/shooting_range_view.dart';
+import 'package:sloboda/views/sich/sich_view.dart';
 import 'package:sloboda/views/stock_view.dart';
 
 class CityDashboard extends StatefulWidget {
@@ -39,24 +41,42 @@ class _CityDashboardState extends State<CityDashboard> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     SlideableButton(
-                      child: widget.city.hasShootingRange
-                          ? Text(SlobodaLocalizations.trainCossacks)
-                          : Text('Build shooting range'),
+                      child: Text(SlobodaLocalizations.trainCossacks),
                       onPress: () async {
-                        if (widget.city.hasShootingRange) {
-                          await Navigator.pushNamed(
-                            context,
-                            ShootingRangeBuilt.routeName,
-                            arguments: ShootingRangeViewArguments(
-                              city: widget.city,
-                              building: ShootingRange(),
-                            ),
-                          );
-                          setState(() {});
-                        }
+                        await Navigator.pushNamed(
+                          context,
+                          ShootingRangeBuilt.routeName,
+                          arguments: ShootingRangeViewArguments(
+                            city: widget.city,
+                            building: ShootingRange(),
+                          ),
+                        );
+                        setState(() {});
                       },
                     ),
                   ],
+                ),
+              ),
+            ),
+            VDivider(),
+            SoftContainer(
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: FullWidth(
+                  child: SlideableButton(
+                    child: Center(
+                      child: Text(SlobodaLocalizations.sichName),
+                    ),
+                    onPress: () async {
+                      await Navigator.pushNamed(
+                        context,
+                        SichScreen.routeName,
+                        arguments: SichScreenArguments(
+                          city: widget.city,
+                        ),
+                      );
+                    },
+                  ),
                 ),
               ),
             ),

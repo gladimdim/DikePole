@@ -37,8 +37,9 @@ class _SichStatsViewState extends State<SichStatsView> {
               child: FullWidth(
                 child: SlideableButton(
                     child: Center(
-                        child: ButtonText(
-                            SlobodaLocalizations.sendCossacksToSich)),
+                      child:
+                          ButtonText(SlobodaLocalizations.sendCossacksToSich),
+                    ),
                     onPress: () async {
                       try {
                         widget.city.removeCossacks(10);

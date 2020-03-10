@@ -4,7 +4,7 @@ import 'package:http/http.dart' as http;
 
 class SichConnector {
   final String statsUrl = '/sichStats';
-  final String root = 'http://localhost:1701';
+  final String root = 'http://192.168.1.199:1701';
   final String send = '/sendSupport';
   final String gold = '/gold';
   final String cossacks = '/cossacks';
