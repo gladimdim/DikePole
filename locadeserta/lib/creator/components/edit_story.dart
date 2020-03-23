@@ -7,11 +7,12 @@ import 'package:locadeserta/components/app_bar_custom.dart';
 import 'package:locadeserta/components/bordered_container.dart';
 import 'package:locadeserta/components/narrow_scaffold.dart';
 import 'package:locadeserta/creator/components/edit_node_sequence_view.dart';
-import 'package:locadeserta/creator/components/text_editor.dart';
 import 'package:locadeserta/creator/components/fat_container.dart';
 import 'package:locadeserta/creator/components/game_view.dart';
-import 'package:locadeserta/loaders/creator_story_persistence.dart';
+import 'package:locadeserta/creator/components/publish_screen.dart';
+import 'package:locadeserta/creator/components/text_editor.dart';
 import 'package:locadeserta/creator/utils/utils.dart';
+import 'package:locadeserta/loaders/creator_story_persistence.dart';
 import 'package:locadeserta/models/Localizations.dart';
 import 'package:locadeserta/models/background_image.dart';
 import 'package:share_extend/share_extend.dart';
@@ -291,6 +292,15 @@ class _EditStoryViewState extends State<EditStoryView> {
               onTap: () {
                 var json = widget.story.toJson();
                 ShareExtend.share(json, "text");
+              }),
+          AppBarObject(
+              text: LDLocalizations.publishUserStory,
+              onTap: () async {
+                await Navigator.pushNamed(
+                  context,
+                  PublishUserStory.routeName,
+                  arguments: PublishStoryViewArguments(story: story),
+                );
               }),
         ]);
   }

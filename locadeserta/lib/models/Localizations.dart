@@ -1,9 +1,10 @@
 import 'dart:core';
-import 'package:locadeserta/loaders/url_parser.dart';
+
 import 'package:flutter/material.dart';
+import 'package:locadeserta/loaders/url_parser.dart';
 import 'package:locadeserta/models/app_preferences.dart';
 
-var version = "1.110";
+var version = "1.111";
 
 String getDefaultOrUrlLanguage() {
   var urlLang = UrlParser.getLanguage();
@@ -12,7 +13,6 @@ String getDefaultOrUrlLanguage() {
     return urlLang;
   } else if (savedLangCode != null &&
       LDLocalizations.supportedLanguageCodes.contains(savedLangCode)) {
-
     return savedLangCode;
   } else {
     return 'uk';
@@ -106,6 +106,9 @@ class LDLocalizations {
       'darkThemeLabel': 'Dark theme',
       'lightThemeLabel': 'Light theme',
       'updateStatsLabel': 'Update Stats',
+      'publishUserStory': 'Publish story',
+      'publishStoryInstructions':
+          'Copy the story by using button below and send the file to the email <gladimdim@gmail.com>.',
     },
     'uk': {
       'continue': 'Продовжити',
@@ -187,6 +190,9 @@ class LDLocalizations {
       'darkThemeLabel': 'Темна тема',
       'lightThemeLabel': 'Світла тема',
       'updateStatsLabel': 'Оновити статистику',
+      'publishUserStory': 'Опублікувати історію',
+      'publishStoryInstructions':
+          'Скопіюйте історію за допомогою кнопки внизу і надішліть файл на пошту <gladimdim@gmail.com>.',
     },
     'pl': {
       'continue': 'Dalej',
@@ -269,6 +275,7 @@ class LDLocalizations {
       'darkThemeLabel': 'Ciemny motyw',
       'lightThemeLabel': 'Lekki motyw',
       'updateStatsLabel': 'Update stats',
+      'publishUserStory': 'Опублікувати історію'
     }
   };
 
@@ -570,5 +577,13 @@ class LDLocalizations {
 
   static String get updateStats {
     return _localizedValues[locale.languageCode]['updateStatsLabel'];
+  }
+
+  static String get publishUserStory {
+    return _localizedValues[locale.languageCode]['publishUserStory'];
+  }
+
+  static String get publishStoryInstructions {
+    return _localizedValues[locale.languageCode]['publishStoryInstructions'];
   }
 }

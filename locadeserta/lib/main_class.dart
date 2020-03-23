@@ -2,19 +2,20 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:locadeserta/InheritedAuth.dart';
 import 'package:locadeserta/StatisticsView.dart';
-import 'package:locadeserta/story_details_view.dart';
-import 'package:locadeserta/creator/components/user_stories_list_view.dart';
 import 'package:locadeserta/creator/components/edit_node_sequence_view.dart';
 import 'package:locadeserta/creator/components/edit_story.dart';
 import 'package:locadeserta/creator/components/game_view.dart';
+import 'package:locadeserta/creator/components/publish_screen.dart';
+import 'package:locadeserta/creator/components/user_stories_list_view.dart';
 import 'package:locadeserta/creator/components/user_story_details_view.dart';
 import 'package:locadeserta/export_pdf_view.dart';
 import 'package:locadeserta/import_gladstories_view.dart';
-import 'package:locadeserta/main_menu.dart';
 import 'package:locadeserta/login_view.dart';
+import 'package:locadeserta/main_menu.dart';
 import 'package:locadeserta/models/Auth.dart' as LDAuth;
 import 'package:locadeserta/models/Localizations.dart';
 import 'package:locadeserta/models/app_preferences.dart';
+import 'package:locadeserta/story_details_view.dart';
 
 final LDAuth.Auth auth = LDAuth.Auth();
 
@@ -149,6 +150,8 @@ class _LocaDesertaAppState extends State<LocaDesertaApp> {
                         child: ExtractUserStoryDetailsViewArguments(),
                         auth: auth,
                       ),
+                  PublishUserStory.routeName: (context) =>
+                      ExtractPlublishStoryViewArguments(),
                 },
               );
             } else {
