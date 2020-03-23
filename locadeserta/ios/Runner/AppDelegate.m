@@ -11,7 +11,6 @@
     FlutterViewController* controller = (FlutterViewController *) self.window.rootViewController;
     
     FlutterMethodChannel *inkChannel = [FlutterMethodChannel methodChannelWithName:@"gladimdim.locadeserta/Ink" binaryMessenger:controller];
-    NSString *storyString;
     [inkChannel setMethodCallHandler:^(FlutterMethodCall * _Nonnull call, FlutterResult result) {
         if ([@"Init" isEqualToString:call.method]) {
             self.storyString = call.arguments;

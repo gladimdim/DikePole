@@ -7,12 +7,11 @@ import 'package:locadeserta/animations/slideable_button.dart';
 import 'package:locadeserta/components/app_bar_custom.dart';
 import 'package:locadeserta/components/bordered_container.dart';
 import 'package:locadeserta/components/narrow_scaffold.dart';
+import 'package:locadeserta/locale_selection.dart';
 import 'package:locadeserta/models/Auth.dart';
 import 'package:locadeserta/models/Localizations.dart';
 import 'package:locadeserta/radiuses.dart';
 import 'package:url_launcher/url_launcher.dart';
-
-import 'package:locadeserta/locale_selection.dart';
 
 class LoginView extends StatefulWidget {
   static const String routeName = "/login_view";
@@ -66,6 +65,30 @@ class _LoginViewState extends State<LoginView> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
+            Center(
+              child: Material(
+                color: Theme.of(context).backgroundColor,
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 8.0),
+                  child: InkWell(
+                    child: Text(
+                      "Loca Deserta Site",
+                      style: TextStyle(
+                        fontSize: 15.0,
+                        fontWeight: FontWeight.bold,
+                        backgroundColor: Theme.of(context).backgroundColor,
+                        color: Theme.of(context).textTheme.title.color,
+                      ),
+                    ),
+                    onTap: () async {
+                      if (await canLaunch("https://locadeserta.com/")) {
+                        await launch("https://locadeserta.com/");
+                      }
+                    },
+                  ),
+                ),
+              ),
+            ),
             Expanded(
               child: Center(
                 child: Padding(
