@@ -29,9 +29,26 @@ exports.playStatistics = functions.https.onRequest(async (req, res) => {
 });
 
 exports.generateStatistics = functions.https.onRequest(async (req, res) => {
-    const userRecords = await auth.listUsers();
-    const userIds = userRecords.users.map((user) => user.uid);
+    const userIds = [];
+    var iter = 0;
+    function listAllUsers(nextPageToken) {
+        return new Promise(function (resolve, reject) {
+            auth.listUsers(1000, nextPageToken).then(async (listUsersResult) => {
+                var ids = listUsersResult.users.map((user) => user.uid);
+                userIds.push(...ids);
+                console.log('Got new users batch: ', listUsersResult.users.length);
+                if (listUsersResult.pageToken) {
+                    // List next batch of users.
+                    await listAllUsers(listUsersResult.pageToken);
+                }
+                resolve();
+            });
+        });
 
+    }
+
+    await listAllUsers();
+    console.log('found user ids: ', userIds.length);
     const start = async () => {
         let storyStats = {};
         const promises = userIds.map(userId => admin.firestore().collection(`/user_states/${userId}/states`).get());
