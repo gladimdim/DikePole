@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AppPreferences {
@@ -27,5 +29,18 @@ class AppPreferences {
 
   Future setUILanguage(String languageCode) async {
     return await _preferences.setString(_languageCode, languageCode);
+  }
+
+  Future getCreatorStories() async {
+    var savedStories = await _preferences.getString('creator_stories');
+    return jsonDecode(savedStories);
+  }
+
+  Future saveStoryStringByName(String name, String content) async {
+    return await _preferences.setString(name, content);
+  }
+
+  String readStoryStringByName(String name) {
+    return _preferences.get(name);
   }
 }

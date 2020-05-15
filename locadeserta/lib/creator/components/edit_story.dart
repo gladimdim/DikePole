@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:gladstoriesengine/gladstoriesengine.dart';
-import 'package:locadeserta/InheritedAuth.dart';
 import 'package:locadeserta/animations/slideable_button.dart';
 import 'package:locadeserta/components/app_bar_custom.dart';
 import 'package:locadeserta/components/bordered_container.dart';
@@ -235,11 +234,8 @@ class _EditStoryViewState extends State<EditStoryView> {
                                 ),
                               );
 
-                              var user = await InheritedAuth.of(context)
-                                  .auth
-                                  .currentUser();
                               await StoryPersistence.instance
-                                  .writeStory(user, widget.story);
+                                  .writeStory(widget.story);
                             },
                             trailing: IconButton(
                               icon: Icon(
@@ -306,8 +302,7 @@ class _EditStoryViewState extends State<EditStoryView> {
   }
 
   _saveStory(BuildContext context) async {
-    var user = await InheritedAuth.of(context).auth.currentUser();
-    await StoryPersistence.instance.writeStory(user, widget.story);
+    await StoryPersistence.instance.writeStory(widget.story);
     setState(() {});
   }
 

@@ -3,11 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:gladstoriesengine/gladstoriesengine.dart';
-import 'package:locadeserta/InheritedAuth.dart';
 import 'package:locadeserta/StatisticsView.dart';
 import 'package:locadeserta/animations/fade_images.dart';
+import 'package:locadeserta/animations/slide_right_navigation.dart';
 import 'package:locadeserta/animations/slideable_button.dart';
-import 'package:locadeserta/story_details_view.dart';
 import 'package:locadeserta/components/app_bar_custom.dart';
 import 'package:locadeserta/components/bordered_container.dart';
 import 'package:locadeserta/components/narrow_scaffold.dart';
@@ -15,14 +14,16 @@ import 'package:locadeserta/components/transforming_page_view.dart';
 import 'package:locadeserta/creator/components/fat_container.dart';
 import 'package:locadeserta/creator/components/game_view.dart';
 import 'package:locadeserta/creator/components/user_stories_list_view.dart';
-import 'package:locadeserta/models/Localizations.dart';
-import 'package:locadeserta/models/background_image.dart';
 import 'package:locadeserta/loaders/catalogs.dart';
-import 'package:locadeserta/waiting_screen.dart';
-import 'package:locadeserta/animations/slide_right_navigation.dart';
 import 'package:locadeserta/loaders/creator_story_persistence.dart'
     as GladStoryPersistence;
+import 'package:locadeserta/models/Localizations.dart';
+import 'package:locadeserta/models/background_image.dart';
 import 'package:locadeserta/radiuses.dart';
+import 'package:locadeserta/story_details_view.dart';
+import 'package:locadeserta/waiting_screen.dart';
+
+import 'loaders/creator_story_persistence.dart';
 
 const LANDING_IMAGE_HEIGHT = 200.0;
 
@@ -119,10 +120,9 @@ class _MainMenuState extends State<MainMenu> with TickerProviderStateMixin {
   }
 
   _fetchData(BuildContext context) {
-    var locale = LDLocalizations.locale;
     return _catalogListMemo.runOnce(() async {
       List<CatalogStory> catalogStories =
-          await CatalogStory.getAvailableCatalogStories(locale.languageCode);
+          await StoryPersistence.instance.getCatalogStories(context);
       return catalogStories
           .where((story) => story.title != "Після Битви")
           .toList();
@@ -213,8 +213,7 @@ class _MainMenuState extends State<MainMenu> with TickerProviderStateMixin {
     );
   }
 
-  _goToStory(CatalogStory story, context) async {
-    var user = await InheritedAuth.of(context).auth.currentUser();
+  _goToStory(CatalogStory catalogStory, context) async {
     setState(() {
       loadingStory = false;
     });
@@ -222,7 +221,7 @@ class _MainMenuState extends State<MainMenu> with TickerProviderStateMixin {
     var storyWithState;
     try {
       storyWithState = await GladStoryPersistence.StoryPersistence.instance
-          .readyStoryStateById(user, story);
+          .readyStoryByCatalog(context, catalogStory);
     } catch (e) {
       print(e);
     }
@@ -232,7 +231,7 @@ class _MainMenuState extends State<MainMenu> with TickerProviderStateMixin {
       SlideRightNavigation(
         widget: GameView(
           story: storyWithState,
-          catalogStory: story,
+          catalogStory: catalogStory,
         ),
       ),
     );

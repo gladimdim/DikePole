@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:gladstoriesengine/gladstoriesengine.dart' as gse;
-import 'package:locadeserta/InheritedAuth.dart';
 import 'package:locadeserta/components/app_bar_custom.dart';
 import 'package:locadeserta/components/bordered_container.dart';
 import 'package:locadeserta/components/narrow_scaffold.dart';
 import 'package:locadeserta/creator/components/edit_story.dart';
-import 'package:locadeserta/creator/story/persistence.dart';
 import 'package:locadeserta/models/Localizations.dart';
+
+import 'file:///C:/Users/gladi/projects/DikePole/locadeserta/lib/models/story_persistence.dart';
 
 class UserStoryDetailsView extends StatefulWidget {
   static String routeName = "/userStoryDetailsView";
@@ -193,8 +193,7 @@ class _UserStoryDetailsViewState extends State<UserStoryDetailsView> {
         AppBarObject(
           text: LDLocalizations.save,
           onTap: () async {
-            var user = InheritedAuth.of(context).auth.user;
-            await StoryPersistence.instance.writeStory(user, widget.story);
+            await StoryPersistence.instance.writeStory(widget.story);
           },
         ),
       ],
@@ -202,13 +201,11 @@ class _UserStoryDetailsViewState extends State<UserStoryDetailsView> {
   }
 
   _onSave(gse.Story newStory) async {
-    var user = InheritedAuth.of(context).auth.user;
-    await StoryPersistence.instance.writeStory(user, newStory);
+    await StoryPersistence.instance.writeStory(newStory);
   }
 
   _deleteStory(gse.Story story) async {
-    var user = InheritedAuth.of(context).auth.user;
-    return await StoryPersistence.instance.deleteStory(user, story);
+    return await StoryPersistence.instance.deleteStory(story);
   }
 
   _goToEditStoryView(gse.Story story, context) async {

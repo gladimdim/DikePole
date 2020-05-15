@@ -1,2 +1,1 @@
-export 'package:locadeserta/creator/story/persistence.dart'
-    if (dart.library.js) 'package:locadeserta/web/creator/story/persistence.dart';
+export 'file:///C:/Users/gladi/projects/DikePole/locadeserta/lib/models/story_persistence.dart';

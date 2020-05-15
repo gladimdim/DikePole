@@ -4,7 +4,6 @@ import 'package:locadeserta/animations/slideable_button.dart';
 import 'package:locadeserta/components/bordered_container.dart';
 import 'package:locadeserta/creator/components/fat_container.dart';
 import 'package:locadeserta/loaders/creator_story_persistence.dart';
-import 'package:locadeserta/models/Auth.dart';
 import 'package:locadeserta/models/Localizations.dart';
 import 'package:locadeserta/models/background_image.dart';
 
@@ -53,8 +52,7 @@ class _ImportGladStoryViewState extends State<ImportGladStoryView> {
                   onPress: () async {
                     var story = Story.fromJson(_controller.text,
                         imageResolver: BackgroundImage.getRandomImageForType);
-                    var user = await Auth().currentUser();
-                    await StoryPersistence.instance.writeStory(user, story);
+                    await StoryPersistence.instance.writeStory(story);
                     Navigator.pop(context);
                   },
                 ),

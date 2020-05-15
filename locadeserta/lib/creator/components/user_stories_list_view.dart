@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:gladstoriesengine/gladstoriesengine.dart';
-import 'package:locadeserta/InheritedAuth.dart';
 import 'package:locadeserta/animations/slideable_button.dart';
 import 'package:locadeserta/components/app_bar_custom.dart';
 import 'package:locadeserta/components/bordered_container.dart';
@@ -101,7 +100,7 @@ class _UserStoriesListState extends State<UserStoriesList> {
         child: Column(
           children: <Widget>[
             FutureBuilder(
-              future: StoryPersistence.instance.getUserStories(),
+              future: StoryPersistence.instance.getCreatorStories(),
               builder: (context, snapshot) {
                 switch (snapshot.connectionState) {
                   case ConnectionState.none:
