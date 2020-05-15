@@ -5,7 +5,6 @@ import 'package:locadeserta/components/app_bar_custom.dart';
 import 'package:locadeserta/components/bordered_container.dart';
 import 'package:locadeserta/components/narrow_scaffold.dart';
 import 'package:locadeserta/locale_selection.dart';
-import 'package:locadeserta/models/Auth.dart';
 import 'package:locadeserta/models/Localizations.dart';
 import 'package:locadeserta/radiuses.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -150,19 +149,6 @@ class _LoginViewState extends State<LoginView> {
             ),
           ),
         ),
-      ),
-    );
-  }
-
-  Widget _buildWelcomeText(User user, context) {
-    var text = user == null
-        ? LDLocalizations.welcomeText
-        : LDLocalizations.greetUserByName(user.displayName);
-
-    return Center(
-      child: Padding(
-        padding: const EdgeInsets.only(top: 16.0),
-        child: Text(text),
       ),
     );
   }

@@ -11,12 +11,9 @@ import 'package:locadeserta/export_pdf_view.dart';
 import 'package:locadeserta/import_gladstories_view.dart';
 import 'package:locadeserta/login_view.dart';
 import 'package:locadeserta/main_menu.dart';
-import 'package:locadeserta/models/Auth.dart' as LDAuth;
 import 'package:locadeserta/models/Localizations.dart';
 import 'package:locadeserta/models/app_preferences.dart';
 import 'package:locadeserta/story_details_view.dart';
-
-final LDAuth.Auth auth = LDAuth.Auth();
 
 class LocaDesertaApp extends StatefulWidget {
   @override
