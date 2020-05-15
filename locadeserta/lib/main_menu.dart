@@ -15,15 +15,14 @@ import 'package:locadeserta/creator/components/fat_container.dart';
 import 'package:locadeserta/creator/components/game_view.dart';
 import 'package:locadeserta/creator/components/user_stories_list_view.dart';
 import 'package:locadeserta/loaders/catalogs.dart';
-import 'package:locadeserta/loaders/creator_story_persistence.dart'
-    as GladStoryPersistence;
 import 'package:locadeserta/models/Localizations.dart';
 import 'package:locadeserta/models/background_image.dart';
+import 'package:locadeserta/models/story_persistence.dart'
+    as GladStoryPersistence;
+import 'package:locadeserta/models/story_persistence.dart';
 import 'package:locadeserta/radiuses.dart';
 import 'package:locadeserta/story_details_view.dart';
 import 'package:locadeserta/waiting_screen.dart';
-
-import 'loaders/creator_story_persistence.dart';
 
 const LANDING_IMAGE_HEIGHT = 200.0;
 

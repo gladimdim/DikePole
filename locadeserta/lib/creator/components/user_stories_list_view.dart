@@ -8,9 +8,8 @@ import 'package:locadeserta/creator/components/fat_container.dart';
 import 'package:locadeserta/creator/components/user_story_details_view.dart';
 import 'package:locadeserta/creator/components/user_story_view.dart';
 import 'package:locadeserta/import_gladstories_view.dart';
-import 'package:locadeserta/loaders/creator_story_persistence.dart';
 import 'package:locadeserta/models/Localizations.dart';
-import 'package:locadeserta/waiting_screen.dart';
+import 'package:locadeserta/models/story_persistence.dart';
 
 class UserStoriesList extends StatefulWidget {
   static const String routeName = "/user_stories_list";
@@ -96,36 +95,14 @@ class _UserStoriesListState extends State<UserStoriesList> {
     return Padding(
       padding: const EdgeInsets.all(2.0),
       child: SingleChildScrollView(
-          child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          children: <Widget>[
-            FutureBuilder(
-              future: StoryPersistence.instance.getCreatorStories(),
-              builder: (context, snapshot) {
-                switch (snapshot.connectionState) {
-                  case ConnectionState.none:
-                  case ConnectionState.active:
-                  case ConnectionState.waiting:
-                    return WaitingScreen();
-                    break;
-                  case ConnectionState.done:
-                    if (snapshot.data == null) {
-                      return Container();
-                    } else {
-                      storyBuilders = snapshot.data;
-                      return Column(
-                        children: _createStoryViews(storyBuilders, context),
-                      );
-                    }
-                    break;
-                }
-                return Container();
-              },
-            )
-          ],
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            children: _createStoryViews(
+                StoryPersistence.instance.getCreatorStories(), context),
+          ),
         ),
-      )),
+      ),
     );
   }
 

@@ -10,11 +10,11 @@ class StoryPersistence {
   StoryPersistence._internal();
   static final StoryPersistence instance = StoryPersistence._internal();
 
-  Future<List<gse.Story>> getCreatorStories() async {
+  List<gse.Story> getCreatorStories() {
     try {
-      var storiesString = await AppPreferences.instance.getCreatorStories();
+      var storiesString = AppPreferences.instance.getCreatorStories();
       Map storiesList = jsonDecode(storiesString);
-      List parsedStories = (storiesList as Map).keys.map((key) {
+      List parsedStories = storiesList.keys.map((key) {
         gse.Story story = gse.Story.fromJson(storiesList[key],
             imageResolver: BackgroundImage.getRandomImageForType);
         return story;
@@ -68,9 +68,9 @@ class StoryPersistence {
   }
 
   Future<gse.Story> readyStoryByCatalog(
-      BuildContext context, CatalogStory catalogStory) async {
+      BuildContext context, CatalogStory catalogStory) async  {
     var storyString =
-        await AppPreferences.instance.readStoryStringByName(catalogStory.title);
+        AppPreferences.instance.readStoryStringByName(catalogStory.title);
     if (storyString == null) {
       storyString = await DefaultAssetBundle.of(context)
           .loadString(catalogStory.storyPath);
