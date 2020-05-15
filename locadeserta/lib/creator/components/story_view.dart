@@ -7,7 +7,6 @@ import 'package:locadeserta/components/BorderedRandomImageForType.dart';
 import 'package:locadeserta/components/bordered_container.dart';
 import 'package:locadeserta/creator/components/fat_container.dart';
 import 'package:locadeserta/creator/utils/utils.dart';
-import 'package:locadeserta/loaders/analytics.dart';
 import 'package:locadeserta/loaders/creator_story_persistence.dart';
 import 'package:locadeserta/models/Localizations.dart';
 import 'package:locadeserta/models/background_image.dart';
@@ -34,11 +33,6 @@ class PassageState extends State<StoryView> with TickerProviderStateMixin {
       widget.currentStory.historyChanges.listen((data) {
         if (!widget.previewMode) {
           _saveStateToStorage(widget.currentStory, context);
-        }
-        if (widget.currentStory.currentPage.isTheEnd() &&
-            !widget.currentStory.currentPage.hasNextNode() &&
-            !widget.previewMode) {
-          Analytics.instance.addStoryToLog(widget.currentStory);
         }
       });
     });
