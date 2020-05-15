@@ -236,6 +236,7 @@ class _EditStoryViewState extends State<EditStoryView> {
 
                               await StoryPersistence.instance
                                   .writeStory(widget.story);
+                              setState(() {});
                             },
                             trailing: IconButton(
                               icon: Icon(
@@ -302,7 +303,7 @@ class _EditStoryViewState extends State<EditStoryView> {
   }
 
   _saveStory(BuildContext context) async {
-    await StoryPersistence.instance.writeStory(widget.story);
+    await StoryPersistence.instance.writeCreatorStory(widget.story);
     setState(() {});
   }
 

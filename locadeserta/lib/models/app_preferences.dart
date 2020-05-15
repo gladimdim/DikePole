@@ -2,6 +2,8 @@ import 'dart:convert';
 
 import 'package:shared_preferences/shared_preferences.dart';
 
+const CREATOR_PREFIX = 'creator_stories';
+
 class AppPreferences {
   AppPreferences._internal();
 
@@ -31,16 +33,33 @@ class AppPreferences {
     return await _preferences.setString(_languageCode, languageCode);
   }
 
-  Future getCreatorStories() async {
-    var savedStories = await _preferences.getString('creator_stories');
-    return jsonDecode(savedStories);
-  }
-
   Future saveStoryStringByName(String name, String content) async {
     return await _preferences.setString(name, content);
   }
 
   String readStoryStringByName(String name) {
     return _preferences.get(name);
+  }
+
+  String getCreatorStories() {
+    var savedStories = _preferences.getString(CREATOR_PREFIX);
+    return savedStories ?? '{}';
+  }
+
+  Future saveCreatorStory(String name, String content) {
+    Map<String, dynamic> stories = jsonDecode(getCreatorStories());
+    stories[name] = content;
+    return _preferences.setString(CREATOR_PREFIX, jsonEncode(stories));
+  }
+
+  Future<bool> deleteCreatorStory(String name) {
+    Map<String, dynamic> stories = jsonDecode(getCreatorStories());
+    stories.remove(name);
+    return _preferences.setString(CREATOR_PREFIX, jsonEncode(stories));
+  }
+
+  String readCreatorStoryStringByName(String name) {
+    Map<String, dynamic> stories = jsonDecode(getCreatorStories());
+    return stories[name];
   }
 }

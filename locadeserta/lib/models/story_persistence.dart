@@ -12,9 +12,10 @@ class StoryPersistence {
 
   Future<List<gse.Story>> getCreatorStories() async {
     try {
-      var stories = await AppPreferences.instance.getCreatorStories();
-      List parsedStories = stories.map((document) {
-        gse.Story story = gse.Story.fromJson(document,
+      var storiesString = await AppPreferences.instance.getCreatorStories();
+      Map storiesList = jsonDecode(storiesString);
+      List parsedStories = (storiesList as Map).keys.map((key) {
+        gse.Story story = gse.Story.fromJson(storiesList[key],
             imageResolver: BackgroundImage.getRandomImageForType);
         return story;
       }).toList();
@@ -56,8 +57,14 @@ class StoryPersistence {
     return true;
   }
 
-  Future deleteStory(gse.Story story) async {
-    // TODO:
+  Future writeCreatorStory(gse.Story story) async {
+    String jsonString = story.toJson();
+    return await AppPreferences.instance
+        .saveCreatorStory(story.title, jsonString);
+  }
+
+  Future<bool> deleteCreatorStory(gse.Story story) {
+    return AppPreferences.instance.deleteCreatorStory(story.title);
   }
 
   Future<gse.Story> readyStoryByCatalog(

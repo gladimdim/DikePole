@@ -65,6 +65,7 @@ class _UserStoriesListState extends State<UserStoriesList> {
                             authors: "Your name"),
                       ),
                     );
+                    setState(() {});
                   } catch (e) {
                     print(
                         "exception happened in navigating to UserStoryDetails: $e");
