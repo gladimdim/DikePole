@@ -7,8 +7,7 @@ import 'package:locadeserta/components/bordered_container.dart';
 import 'package:locadeserta/components/narrow_scaffold.dart';
 import 'package:locadeserta/creator/components/edit_story.dart';
 import 'package:locadeserta/models/Localizations.dart';
-
-import 'file:///C:/Users/gladi/projects/DikePole/locadeserta/lib/models/story_persistence.dart';
+import 'package:locadeserta/models/story_persistence.dart';
 
 class UserStoryDetailsView extends StatefulWidget {
   static String routeName = "/userStoryDetailsView";
