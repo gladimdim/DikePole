@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:gladstoriesengine/gladstoriesengine.dart';
-import 'package:locadeserta/InheritedAuth.dart';
 import 'package:locadeserta/animations/slideable_button.dart';
 import 'package:locadeserta/components/app_bar_custom.dart';
 import 'package:locadeserta/components/bordered_container.dart';
@@ -12,7 +11,7 @@ import 'package:locadeserta/creator/components/game_view.dart';
 import 'package:locadeserta/creator/components/publish_screen.dart';
 import 'package:locadeserta/creator/components/text_editor.dart';
 import 'package:locadeserta/creator/utils/utils.dart';
-import 'package:locadeserta/loaders/creator_story_persistence.dart';
+import 'package:locadeserta/models/story_persistence.dart';
 import 'package:locadeserta/models/Localizations.dart';
 import 'package:locadeserta/models/background_image.dart';
 import 'package:share_extend/share_extend.dart';
@@ -235,11 +234,9 @@ class _EditStoryViewState extends State<EditStoryView> {
                                 ),
                               );
 
-                              var user = await InheritedAuth.of(context)
-                                  .auth
-                                  .currentUser();
                               await StoryPersistence.instance
-                                  .writeStory(user, widget.story);
+                                  .writeStory(widget.story);
+                              setState(() {});
                             },
                             trailing: IconButton(
                               icon: Icon(
@@ -306,8 +303,7 @@ class _EditStoryViewState extends State<EditStoryView> {
   }
 
   _saveStory(BuildContext context) async {
-    var user = await InheritedAuth.of(context).auth.currentUser();
-    await StoryPersistence.instance.writeStory(user, widget.story);
+    await StoryPersistence.instance.writeCreatorStory(widget.story);
     setState(() {});
   }
 
