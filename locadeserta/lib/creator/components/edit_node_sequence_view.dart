@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:gladstoriesengine/gladstoriesengine.dart';
+import 'package:gladstoriesengine/gladstoriesengine.dart' as gse;
 import 'package:locadeserta/creator/components/edit_node_view.dart';
 import 'package:locadeserta/models/Localizations.dart';
 
 class EditNodeSequence extends StatefulWidget {
-  final Page page;
+  final gse.Page page;
   final int startIndex;
 
   EditNodeSequence({@required this.page, this.startIndex = 0});
@@ -51,7 +51,7 @@ class _EditNodeSequenceState extends State<EditNodeSequence> {
 }
 
 class EditPassageViewArguments {
-  final Page page;
+  final gse.Page page;
   final int startIndex;
 
   EditPassageViewArguments({this.page, this.startIndex = 0});

@@ -1,8 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:gladstoriesengine/gladstoriesengine.dart';
+import 'package:locadeserta/loaders/catalogs.dart';
 import 'package:locadeserta/models/Auth.dart';
 import 'package:locadeserta/models/background_image.dart';
-import 'package:locadeserta/loaders/catalogs.dart';
 
 final Firestore storage = Firestore.instance;
 
@@ -11,11 +11,12 @@ class StoryPersistence {
 
   static final StoryPersistence instance = StoryPersistence._internal();
 
-  Future<List<Story>> getUserStories(User user) async {
+  Future<List<Story>> getUserStories() async {
+    var user = {'uid': '123'};
     try {
       var stories = await storage
           .collection("user_stories")
-          .document(user.uid)
+          .document(user['uid'])
           .collection("stories")
           .getDocuments();
       List parsedStories = stories.documents.map((document) {

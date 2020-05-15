@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
-import 'package:gladstoriesengine/gladstoriesengine.dart';
+import 'package:gladstoriesengine/gladstoriesengine.dart' as gse;
 import 'package:locadeserta/InheritedAuth.dart';
 import 'package:locadeserta/components/app_bar_custom.dart';
 import 'package:locadeserta/components/bordered_container.dart';
@@ -12,7 +12,7 @@ import 'package:locadeserta/models/Localizations.dart';
 
 class UserStoryDetailsView extends StatefulWidget {
   static String routeName = "/userStoryDetailsView";
-  final Story story;
+  final gse.Story story;
 
   UserStoryDetailsView({this.story});
 
@@ -132,11 +132,11 @@ class _UserStoryDetailsViewState extends State<UserStoryDetailsView> {
                               _formKey.currentState.save();
                               var story;
                               if (widget.story == null) {
-                                story = Story(
+                                story = gse.Story(
                                   title: _title,
                                   description: _description,
                                   authors: _authors,
-                                  root: Page.generate(),
+                                  root: gse.Page.generate(),
                                 );
                               } else {
                                 story = widget.story;
@@ -201,24 +201,24 @@ class _UserStoryDetailsViewState extends State<UserStoryDetailsView> {
     );
   }
 
-  _onSave(Story newStory) async {
+  _onSave(gse.Story newStory) async {
     var user = InheritedAuth.of(context).auth.user;
     await StoryPersistence.instance.writeStory(user, newStory);
   }
 
-  _deleteStory(Story story) async {
+  _deleteStory(gse.Story story) async {
     var user = InheritedAuth.of(context).auth.user;
     return await StoryPersistence.instance.deleteStory(user, story);
   }
 
-  _goToEditStoryView(Story story, context) async {
+  _goToEditStoryView(gse.Story story, context) async {
     await Navigator.pushNamed(context, ExtractEditStoryViewArguments.routeName,
         arguments: EditStoryViewArguments(story: story));
   }
 }
 
 class UserStoryDetailsViewArguments {
-  final Story story;
+  final gse.Story story;
 
   UserStoryDetailsViewArguments({this.story});
 }
