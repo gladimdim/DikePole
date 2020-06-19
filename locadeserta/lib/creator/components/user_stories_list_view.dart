@@ -9,6 +9,7 @@ import 'package:locadeserta/creator/components/user_story_details_view.dart';
 import 'package:locadeserta/creator/components/user_story_view.dart';
 import 'package:locadeserta/import_gladstories_view.dart';
 import 'package:locadeserta/models/Localizations.dart';
+import 'package:locadeserta/models/background_image.dart';
 import 'package:locadeserta/models/story_persistence.dart';
 
 class UserStoriesList extends StatefulWidget {
@@ -32,62 +33,68 @@ class _UserStoriesListState extends State<UserStoriesList> {
           onTap: () => Navigator.pop(context),
         )
       ],
-      body: Column(
-        children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: BorderedContainer(
-              child: SlideableButton(
-                onPress: () async {
-                  await Navigator.pushNamed(
-                      context, ImportGladStoryView.routeName);
-                },
-                child: FatContainer(
-                  text: LDLocalizations.labelImport,
-                ),
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: BorderedContainer(
-              child: SlideableButton(
-                onPress: () async {
-                  try {
-                    await Navigator.pushNamed(
-                      context,
-                      UserStoryDetailsView.routeName,
-                      arguments: UserStoryDetailsViewArguments(
-                        story: Story(
-                            title: "Your title",
-                            description: "Your description",
-                            authors: "Your name"),
+      body: StreamBuilder(
+          stream: StoryPersistence.instance.changes.stream,
+          builder: (context, data) {
+            return Column(
+              children: <Widget>[
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: BorderedContainer(
+                    child: SlideableButton(
+                      onPress: () async {
+                        await Navigator.pushNamed(
+                            context, ImportGladStoryView.routeName);
+                      },
+                      child: FatContainer(
+                        text: LDLocalizations.labelImport,
                       ),
-                    );
-                    setState(() {});
-                  } catch (e) {
-                    print(
-                        "exception happened in navigating to UserStoryDetails: $e");
-                  }
-                },
-                child: FatContainer(
-                  text: LDLocalizations.createNewStory,
+                    ),
+                  ),
                 ),
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(top: 18.0),
-            child: Text(
-              LDLocalizations.yourExistingStories,
-              style: Theme.of(context).textTheme.title,
-            ),
-          ),
-          Expanded(
-            child: _buildStoryView(context),
-          ),
-        ],
-      ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: BorderedContainer(
+                    child: SlideableButton(
+                      onPress: () async {
+                        try {
+                          await Navigator.pushNamed(
+                            context,
+                            UserStoryDetailsView.routeName,
+                            arguments: UserStoryDetailsViewArguments(
+                              story: Story(
+                                title: "Your title",
+                                description: "Your description",
+                                authors: "Your name",
+                                imageResolver:
+                                    BackgroundImage.getRandomImageForType,
+                              ),
+                            ),
+                          );
+                        } catch (e) {
+                          print(
+                              "exception happened in navigating to UserStoryDetails: $e");
+                        }
+                      },
+                      child: FatContainer(
+                        text: LDLocalizations.createNewStory,
+                      ),
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 18.0),
+                  child: Text(
+                    LDLocalizations.yourExistingStories,
+                    style: Theme.of(context).textTheme.title,
+                  ),
+                ),
+                Expanded(
+                  child: _buildStoryView(context),
+                ),
+              ],
+            );
+          }),
     );
   }
 

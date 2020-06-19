@@ -52,7 +52,7 @@ class _ImportGladStoryViewState extends State<ImportGladStoryView> {
                   onPress: () async {
                     var story = Story.fromJson(_controller.text,
                         imageResolver: BackgroundImage.getRandomImageForType);
-                    await StoryPersistence.instance.writeStory(story);
+                    await StoryPersistence.instance.writeCreatorStory(story);
                     Navigator.pop(context);
                   },
                 ),
