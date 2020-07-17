@@ -11,7 +11,7 @@
           "endType": null,
           "next": [
             {
-              "text": "Чекати на сигнал Трофима",
+              "text": "Чекати на сигнал Трохима",
               "nextPage": {
                 "endType": "ALIVE",
                 "next": [],
