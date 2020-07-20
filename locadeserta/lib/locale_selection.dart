@@ -12,7 +12,6 @@ class LocaleSelection extends StatefulWidget {
 }
 
 class _LocaleSelectionState extends State<LocaleSelection> {
-
   @override
   Widget build(BuildContext context) {
     return _buildLocaleSelection();
@@ -21,20 +20,19 @@ class _LocaleSelectionState extends State<LocaleSelection> {
   Widget _buildLocaleSelection() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
-      children:
-      [
+      children: [
         Radio(
           value: 'uk',
           groupValue: widget.locale.languageCode,
           onChanged: _setNewLocale,
         ),
-        Text('🇺🇦'),
+        Text('UA'),
         Radio(
           value: 'en',
           groupValue: widget.locale.languageCode,
           onChanged: _setNewLocale,
         ),
-        Text('🇺🇸'),
+        Text('ENG'),
       ],
     );
   }
