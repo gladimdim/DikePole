@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:locadeserta/loaders/url_parser.dart';
 import 'package:locadeserta/models/app_preferences.dart';
 
-var version = "1.118";
+var version = "1.120";
 
 String getDefaultOrUrlLanguage() {
   var urlLang = UrlParser.getLanguage();

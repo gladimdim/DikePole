@@ -2,11 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4b0fa447-429f-496d-a835-13243626ddb1" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../locadeserta/lib/creator/components/edit_node_sequence_view.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../locadeserta/lib/creator/components/edit_node_sequence_view.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../locadeserta/lib/creator/components/user_story_details_view.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../locadeserta/lib/creator/components/user_story_details_view.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../locadeserta/lib/generated_plugin_registrant.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../locadeserta/lib/generated_plugin_registrant.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../locadeserta/.flutter-plugins-dependencies" beforeDir="false" afterPath="$PROJECT_DIR$/../locadeserta/.flutter-plugins-dependencies" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../locadeserta/ios/Flutter/flutter_export_environment.sh" beforeDir="false" afterPath="$PROJECT_DIR$/../locadeserta/ios/Flutter/flutter_export_environment.sh" afterDir="false" />
     </list>
-    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -24,21 +22,15 @@
   </component>
   <component name="ProjectId" id="1bw9S0Dj5OgMCZKTL26zp6tDbhb" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
   <component name="PropertiesComponent">
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../locadeserta" />
     <property name="show.migrate.to.gradle.popup" value="false" />
-  </component>
-  <component name="RunDashboard">
-    <option name="ruleStates">
-      <list>
-        <RuleState>
-          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
-        </RuleState>
-        <RuleState>
-          <option name="name" value="StatusDashboardGroupingRule" />
-        </RuleState>
-      </list>
-    </option>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -58,10 +50,18 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>
     </option>
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="518" y="187" key="FileChooserDialogImpl" timestamp="1595791774274">
+      <screen x="0" y="0" width="1474" height="864" />
+    </state>
+    <state x="518" y="187" key="FileChooserDialogImpl/0.0.1474.864@0.0.1474.864" timestamp="1595791774274" />
   </component>
 </project>
