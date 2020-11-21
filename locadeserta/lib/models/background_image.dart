@@ -3,7 +3,6 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:gladstoriesengine/gladstoriesengine.dart';
 
-// from inkle:
 // image: bulrush; image boat; image river; image cossacks, image fight, image steppe, image forest
 class BackgroundImage {
   factory BackgroundImage() => _bgImage;

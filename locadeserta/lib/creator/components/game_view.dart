@@ -8,6 +8,7 @@ import 'package:locadeserta/export_pdf_view.dart';
 import 'package:locadeserta/loaders/catalogs.dart';
 import 'package:locadeserta/models/Localizations.dart';
 import 'package:locadeserta/models/story_persistence.dart';
+import 'package:locadeserta/views/export_to_markdown_view.dart';
 
 class GameView extends StatefulWidget {
   final Story story;
@@ -57,6 +58,25 @@ class _MainViewState extends State<GameView> {
           },
           text: LDLocalizations.shareStory,
         ),
+        AppBarObject(
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => NarrowScaffold(
+                    title: "Markdown export",
+                    actions: [
+                      AppBarObject(
+                        onTap: () => Navigator.pop(context),
+                        text: LDLocalizations.labelBack,
+                      ),
+                    ],
+                    body: ExportToMarkDownView(story: widget.story)),
+              ),
+            );
+          },
+          text: LDLocalizations.labelConvertToMarkdown,
+        )
       ],
       body: Padding(
         padding: const EdgeInsets.only(top: 32.0),
