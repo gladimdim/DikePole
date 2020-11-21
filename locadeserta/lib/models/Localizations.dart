@@ -109,6 +109,8 @@ class LDLocalizations {
       'publishUserStory': 'Publish story',
       'publishStoryInstructions':
           'Copy the story by using button below and send the file to the email <gladimdim@gmail.com>.',
+      'labelNoPassagesAvailable':
+          'There are no passages in this page, return back and add a passage.',
     },
     'uk': {
       'continue': 'Продовжити',
@@ -193,6 +195,8 @@ class LDLocalizations {
       'publishUserStory': 'Опублікувати історію',
       'publishStoryInstructions':
           'Скопіюйте історію за допомогою кнопки внизу і надішліть файл на пошту <gladimdim@gmail.com>.',
+      'labelNoPassagesAvailable':
+          'На цій сторінці немає жодного абзацу. Поверніться назад і додайте хоча б один.',
     },
     'pl': {
       'continue': 'Dalej',
@@ -275,7 +279,9 @@ class LDLocalizations {
       'darkThemeLabel': 'Ciemny motyw',
       'lightThemeLabel': 'Lekki motyw',
       'updateStatsLabel': 'Update stats',
-      'publishUserStory': 'Опублікувати історію'
+      'publishUserStory': 'Опублікувати історію',
+      'labelNoPassagesAvailable':
+          '"There are no passages in this page, return back and add a passage."',
     }
   };
 
@@ -585,5 +591,9 @@ class LDLocalizations {
 
   static String get publishStoryInstructions {
     return _localizedValues[locale.languageCode]['publishStoryInstructions'];
+  }
+
+  static String get labelNoPassagesAvailable {
+    return _localizedValues[locale.languageCode]['labelNoPassagesAvailable'];
   }
 }

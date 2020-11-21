@@ -26,32 +26,36 @@ class _EditNodeSequenceState extends State<EditNodeSequence> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).backgroundColor,
-      body: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: EditNodeView(
-            node: widget.page.getCurrentNode(),
-            onFinished: () {
-              setState(() {
-                moveToNextNode();
-              });
-            },
-            isLastNode: !widget.page.hasNextNode(),
-            onNextPressed: () {
-              setState(() {
-                moveToNextNode();
-              });
-            },
-            onPreviousPressed: () {
-              setState(() {
-                moveToPreviousNode();
-              });
-            },
-            onDeletePressed: () {
-              setState(() {
-                deleteNode();
-              });
-            },
-          )),
+      body: widget.page.nodes.isNotEmpty
+          ? Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: EditNodeView(
+                node: widget.page.getCurrentNode(),
+                onFinished: () {
+                  setState(() {
+                    moveToNextNode();
+                  });
+                },
+                isLastNode: !widget.page.hasNextNode(),
+                onNextPressed: () {
+                  setState(() {
+                    moveToNextNode();
+                  });
+                },
+                onPreviousPressed: () {
+                  setState(() {
+                    moveToPreviousNode();
+                  });
+                },
+                onDeletePressed: widget.page.nodes.isNotEmpty
+                    ? () {
+                        setState(() {
+                          deleteNode();
+                        });
+                      }
+                    : null,
+              ))
+          : Center(child: Text(LDLocalizations.labelNoPassagesAvailable)),
       appBar: AppBar(
         title: Text(
           LDLocalizations.editingPassage,

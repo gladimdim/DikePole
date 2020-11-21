@@ -62,33 +62,32 @@ class _EditNodeViewState extends State<EditNodeView> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      mainAxisAlignment: MainAxisAlignment.end,
                       children: [
-                        InkWell(
-                          child: BorderedContainer(
-                              child: Padding(
-                            padding: const EdgeInsets.all(2.0),
-                            child:
-                                FatContainer(text: LDLocalizations.labelBack),
-                          )),
-                          onTap: widget.onPreviousPressed,
-                        ),
-                        InkWell(
-                          child: BorderedContainer(
-                              child: Padding(
-                            padding: const EdgeInsets.all(2.0),
-                            child: FatContainer(text: LDLocalizations.remove),
-                          )),
-                          onTap: widget.onDeletePressed,
-                        ),
-                        InkWell(
-                          child: BorderedContainer(
-                              child: Padding(
-                            padding: const EdgeInsets.all(2.0),
-                            child: FatContainer(text: LDLocalizations.next),
-                          )),
-                          onTap: widget.onNextPressed,
-                        ),
+                        BorderedContainer(
+                            child: Padding(
+                          padding: const EdgeInsets.all(2.0),
+                          child: IconButton(
+                            icon: Icon(Icons.arrow_back),
+                            onPressed: widget.onPreviousPressed,
+                          ),
+                        )),
+                        BorderedContainer(
+                            child: Padding(
+                          padding: const EdgeInsets.all(2.0),
+                          child: IconButton(
+                            icon: Icon(Icons.delete),
+                            onPressed: widget.onDeletePressed,
+                          ),
+                        )),
+                        BorderedContainer(
+                            child: Padding(
+                          padding: const EdgeInsets.all(2.0),
+                          child: IconButton(
+                            icon: Icon(Icons.arrow_forward),
+                            onPressed: widget.onNextPressed,
+                          ),
+                        )),
                       ],
                     ),
                     Row(
