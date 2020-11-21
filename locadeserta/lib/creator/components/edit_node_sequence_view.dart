@@ -32,21 +32,48 @@ class _EditNodeSequenceState extends State<EditNodeSequence> {
             node: widget.page.getCurrentNode(),
             onFinished: () {
               setState(() {
-                if (!widget.page.hasNextNode()) {
-                  widget.page.addNodeWithText("");
-                }
-                widget.page.nextNode();
+                moveToNextNode();
               });
             },
             isLastNode: !widget.page.hasNextNode(),
+            onNextPressed: () {
+              setState(() {
+                moveToNextNode();
+              });
+            },
+            onPreviousPressed: () {
+              setState(() {
+                moveToPreviousNode();
+              });
+            },
+            onDeletePressed: () {
+              setState(() {
+                deleteNode();
+              });
+            },
           )),
       appBar: AppBar(
         title: Text(
           LDLocalizations.editingPassage,
-          style: Theme.of(context).textTheme.title,
+          style: Theme.of(context).textTheme.headline6,
         ),
       ),
     );
+  }
+
+  void moveToNextNode() {
+    if (!widget.page.hasNextNode()) {
+      widget.page.addNodeWithText("");
+    }
+    widget.page.nextNode();
+  }
+
+  void moveToPreviousNode() {
+    widget.page.previousNode();
+  }
+
+  void deleteNode() {
+    widget.page.deleteCurrentNode();
   }
 }
 

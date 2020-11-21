@@ -26,12 +26,12 @@ var blackTheme = ThemeData(
   fontFamily: 'Roboto',
   unselectedWidgetColor: Colors.white,
   textTheme: TextTheme(
-    body1: TextStyle(
+    bodyText2: TextStyle(
       fontFamily: "Raleway-Bold",
       fontSize: 18,
       color: Colors.white,
     ),
-    title: TextStyle(
+    headline6: TextStyle(
       fontSize: 20,
       fontWeight: FontWeight.bold,
       color: Colors.white,
@@ -65,12 +65,12 @@ var whiteTheme = ThemeData(
   fontFamily: 'Roboto',
   unselectedWidgetColor: Colors.black,
   textTheme: TextTheme(
-    body1: TextStyle(
+    bodyText2: TextStyle(
       fontFamily: "Raleway-Bold",
       fontSize: 18,
       color: Colors.black,
     ),
-    title: TextStyle(
+    headline6: TextStyle(
       color: Colors.black,
       fontSize: 20.0,
       fontWeight: FontWeight.bold,

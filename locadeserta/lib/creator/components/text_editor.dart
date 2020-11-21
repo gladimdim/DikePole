@@ -26,11 +26,11 @@ class _TextEditorState extends State<TextEditor> {
   Widget build(BuildContext context) {
     return TextField(
       keyboardType: TextInputType.multiline,
-      cursorColor: Theme.of(context).textTheme.title.color,
+      cursorColor: Theme.of(context).textTheme.headline6.color,
       focusNode: FocusNode(),
       maxLines: widget.maxLines,
       controller: widget.controller,
-      style: Theme.of(context).textTheme.title,
+      style: Theme.of(context).textTheme.headline6,
       textInputAction:
           widget.showDone ? TextInputAction.done : TextInputAction.next,
       onSubmitted: (text) {

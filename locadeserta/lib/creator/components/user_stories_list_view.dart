@@ -86,7 +86,7 @@ class _UserStoriesListState extends State<UserStoriesList> {
                   padding: const EdgeInsets.only(top: 18.0),
                   child: Text(
                     LDLocalizations.yourExistingStories,
-                    style: Theme.of(context).textTheme.title,
+                    style: Theme.of(context).textTheme.headline6,
                   ),
                 ),
                 Expanded(

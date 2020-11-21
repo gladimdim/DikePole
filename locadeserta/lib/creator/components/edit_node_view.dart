@@ -11,8 +11,18 @@ class EditNodeView extends StatefulWidget {
   final PageNode node;
   final VoidCallback onFinished;
   final bool isLastNode;
+  final VoidCallback onPreviousPressed;
+  final VoidCallback onNextPressed;
+  final VoidCallback onDeletePressed;
 
-  EditNodeView({@required this.node, this.onFinished, this.isLastNode = false});
+  EditNodeView({
+    @required this.node,
+    this.onFinished,
+    this.isLastNode = false,
+    this.onNextPressed,
+    this.onPreviousPressed,
+    this.onDeletePressed,
+  });
 
   @override
   _EditNodeViewState createState() => _EditNodeViewState();
@@ -31,7 +41,7 @@ class _EditNodeViewState extends State<EditNodeView> {
           child: Column(
             children: <Widget>[
               Expanded(
-                flex: 8,
+                flex: 4,
                 child: TextEditor(
                   controller: _setTextToTextEditingController(widget.node.text),
                   text: widget.node.text,
@@ -47,24 +57,59 @@ class _EditNodeViewState extends State<EditNodeView> {
                 ),
               ),
               Expanded(
-                flex: 1,
-                child: Row(
-                  children: <Widget>[
-                    Text(
-                      LDLocalizations.passageWillHaveImage,
-                      style: Theme.of(context).textTheme.title,
+                flex: 2,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        InkWell(
+                          child: BorderedContainer(
+                              child: Padding(
+                            padding: const EdgeInsets.all(2.0),
+                            child:
+                                FatContainer(text: LDLocalizations.labelBack),
+                          )),
+                          onTap: widget.onPreviousPressed,
+                        ),
+                        InkWell(
+                          child: BorderedContainer(
+                              child: Padding(
+                            padding: const EdgeInsets.all(2.0),
+                            child: FatContainer(text: LDLocalizations.remove),
+                          )),
+                          onTap: widget.onDeletePressed,
+                        ),
+                        InkWell(
+                          child: BorderedContainer(
+                              child: Padding(
+                            padding: const EdgeInsets.all(2.0),
+                            child: FatContainer(text: LDLocalizations.next),
+                          )),
+                          onTap: widget.onNextPressed,
+                        ),
+                      ],
                     ),
-                    Checkbox(
-                      value: widget.node.imageType != null,
-                      onChanged: (newValue) {
-                        setState(() {
-                          if (newValue) {
-                            widget.node.imageType = ImageType.BOAT;
-                          } else {
-                            widget.node.imageType = null;
-                          }
-                        });
-                      },
+                    Row(
+                      children: <Widget>[
+                        Text(
+                          LDLocalizations.passageWillHaveImage,
+                          style: Theme.of(context).textTheme.headline6,
+                        ),
+                        Checkbox(
+                          value: widget.node.imageType != null,
+                          onChanged: (newValue) {
+                            setState(() {
+                              if (newValue) {
+                                widget.node.imageType = ImageType.BOAT;
+                              } else {
+                                widget.node.imageType = null;
+                              }
+                            });
+                          },
+                        ),
+                      ],
                     ),
                   ],
                 ),

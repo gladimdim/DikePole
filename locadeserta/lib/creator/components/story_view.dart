@@ -184,7 +184,7 @@ class PassageItemView extends StatelessWidget {
           decoration: getDecorationForContainer(context),
           child: Text(
             historyItem.text == "" ? "The End" : historyItem.text,
-            style: Theme.of(context).textTheme.body1,
+            style: Theme.of(context).textTheme.bodyText2,
           ),
         ),
       ],

@@ -24,7 +24,7 @@ class _ImportGladStoryViewState extends State<ImportGladStoryView> {
       appBar: AppBar(
         title: Text(
           LDLocalizations.exportGladStoryToJson,
-          style: Theme.of(context).textTheme.title,
+          style: Theme.of(context).textTheme.headline6,
         ),
       ),
       body: Padding(
@@ -36,7 +36,7 @@ class _ImportGladStoryViewState extends State<ImportGladStoryView> {
               child: TextField(
                 controller: _controller,
                 maxLines: 15,
-                style: Theme.of(context).textTheme.body1,
+                style: Theme.of(context).textTheme.bodyText2,
               ),
             ),
             Padding(
