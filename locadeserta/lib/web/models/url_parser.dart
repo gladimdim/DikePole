@@ -1,5 +1,4 @@
 import 'dart:js' as js;
-import 'package:fluri/fluri.dart';
 
 class UrlParser {
   static bool isSupported = true;
@@ -23,6 +22,6 @@ class UrlParser {
 
   static String getLanguage() {
     var params = UrlParser.getUrlParams();
-      return params['lang'];
+    return params['lang'];
   }
 }
