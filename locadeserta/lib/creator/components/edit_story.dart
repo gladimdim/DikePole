@@ -224,13 +224,14 @@ class _EditStoryViewState extends State<EditStoryView> {
                                     image: BackgroundImage.getAssetImageForType(
                                         imageType)),
                             onTap: () async {
+                              var nodeIndex =
+                                  story.currentPage.nodes.indexOf(node);
+                              story.currentPage.currentIndex = nodeIndex;
                               await Navigator.pushNamed(
                                 context,
                                 ExtractEditPassageView.routeName,
                                 arguments: EditPassageViewArguments(
                                   page: story.currentPage,
-                                  startIndex:
-                                      story.currentPage.nodes.indexOf(node),
                                 ),
                               );
 

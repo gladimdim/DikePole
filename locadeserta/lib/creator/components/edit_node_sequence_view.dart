@@ -5,23 +5,14 @@ import 'package:locadeserta/models/Localizations.dart';
 
 class EditNodeSequence extends StatefulWidget {
   final gse.Page page;
-  final int startIndex;
 
-  EditNodeSequence({@required this.page, this.startIndex = 0});
+  EditNodeSequence({@required this.page});
 
   @override
   _EditNodeSequenceState createState() => _EditNodeSequenceState();
 }
 
 class _EditNodeSequenceState extends State<EditNodeSequence> {
-  int currentIndex;
-
-  @override
-  void initState() {
-    super.initState();
-    widget.page.currentIndex = widget.startIndex;
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -45,6 +36,11 @@ class _EditNodeSequenceState extends State<EditNodeSequence> {
                 onPreviousPressed: () {
                   setState(() {
                     moveToPreviousNode();
+                  });
+                },
+                onAddNewNextPressed: () {
+                  setState(() {
+                    addNewNext();
                   });
                 },
                 onDeletePressed: widget.page.nodes.isNotEmpty
@@ -79,13 +75,19 @@ class _EditNodeSequenceState extends State<EditNodeSequence> {
   void deleteNode() {
     widget.page.deleteCurrentNode();
   }
+
+  void addNewNext() {
+    widget.page.addNodeWithTextAtIndex("", widget.page.currentIndex + 1);
+    moveToNextNode();
+  }
 }
 
 class EditPassageViewArguments {
   final gse.Page page;
-  final int startIndex;
 
-  EditPassageViewArguments({this.page, this.startIndex = 0});
+  EditPassageViewArguments({
+    this.page,
+  });
 }
 
 class ExtractEditPassageView extends StatelessWidget {
@@ -97,7 +99,6 @@ class ExtractEditPassageView extends StatelessWidget {
 
     return EditNodeSequence(
       page: args.page,
-      startIndex: args.startIndex,
     );
   }
 }

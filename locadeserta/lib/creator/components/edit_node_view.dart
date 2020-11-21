@@ -14,6 +14,7 @@ class EditNodeView extends StatefulWidget {
   final VoidCallback onPreviousPressed;
   final VoidCallback onNextPressed;
   final VoidCallback onDeletePressed;
+  final VoidCallback onAddNewNextPressed;
 
   EditNodeView({
     @required this.node,
@@ -22,6 +23,7 @@ class EditNodeView extends StatefulWidget {
     this.onNextPressed,
     this.onPreviousPressed,
     this.onDeletePressed,
+    this.onAddNewNextPressed,
   });
 
   @override
@@ -78,6 +80,14 @@ class _EditNodeViewState extends State<EditNodeView> {
                           child: IconButton(
                             icon: Icon(Icons.delete),
                             onPressed: widget.onDeletePressed,
+                          ),
+                        )),
+                        BorderedContainer(
+                            child: Padding(
+                          padding: const EdgeInsets.all(2.0),
+                          child: IconButton(
+                            icon: Icon(Icons.create_new_folder),
+                            onPressed: widget.onAddNewNextPressed,
                           ),
                         )),
                         BorderedContainer(
