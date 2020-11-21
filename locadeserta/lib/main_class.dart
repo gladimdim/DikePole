@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:locadeserta/StatisticsView.dart';
 import 'package:locadeserta/creator/components/edit_node_sequence_view.dart';
 import 'package:locadeserta/creator/components/edit_story.dart';
 import 'package:locadeserta/creator/components/game_view.dart';
@@ -139,7 +138,6 @@ class _LocaDesertaAppState extends State<LocaDesertaApp> {
                     ExtractEditPassageView(),
                 ImportGladStoryView.routeName: (context) =>
                     ImportGladStoryView(),
-                StatisticsView.routeName: (context) => StatisticsView(),
                 UserStoryDetailsView.routeName: (context) =>
                     ExtractUserStoryDetailsViewArguments(),
                 PublishUserStory.routeName: (context) =>

@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:gladstoriesengine/gladstoriesengine.dart';
-import 'package:locadeserta/StatisticsView.dart';
 import 'package:locadeserta/animations/fade_images.dart';
 import 'package:locadeserta/animations/slide_right_navigation.dart';
 import 'package:locadeserta/animations/slideable_button.dart';
@@ -108,12 +107,6 @@ class _MainMenuState extends State<MainMenu> with TickerProviderStateMixin {
           },
           text: LDLocalizations.backToMenu,
         ),
-        AppBarObject(
-          text: LDLocalizations.statisticsTitle,
-          onTap: () {
-            Navigator.pushNamed(context, StatisticsView.routeName);
-          },
-        )
       ],
     );
   }
