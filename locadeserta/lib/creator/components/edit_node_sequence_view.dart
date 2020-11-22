@@ -5,56 +5,89 @@ import 'package:locadeserta/models/Localizations.dart';
 
 class EditNodeSequence extends StatefulWidget {
   final gse.Page page;
-  final int startIndex;
 
-  EditNodeSequence({@required this.page, this.startIndex = 0});
+  EditNodeSequence({@required this.page});
 
   @override
   _EditNodeSequenceState createState() => _EditNodeSequenceState();
 }
 
 class _EditNodeSequenceState extends State<EditNodeSequence> {
-  int currentIndex;
-
-  @override
-  void initState() {
-    super.initState();
-    widget.page.currentIndex = widget.startIndex;
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).backgroundColor,
-      body: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: EditNodeView(
-            node: widget.page.getCurrentNode(),
-            onFinished: () {
-              setState(() {
-                if (!widget.page.hasNextNode()) {
-                  widget.page.addNodeWithText("");
-                }
-                widget.page.nextNode();
-              });
-            },
-            isLastNode: !widget.page.hasNextNode(),
-          )),
+      body: widget.page.nodes.isNotEmpty
+          ? Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: EditNodeView(
+                node: widget.page.getCurrentNode(),
+                onFinished: () {
+                  setState(() {
+                    moveToNextNode();
+                  });
+                },
+                isLastNode: !widget.page.hasNextNode(),
+                onNextPressed: () {
+                  setState(() {
+                    moveToNextNode();
+                  });
+                },
+                onPreviousPressed: () {
+                  setState(() {
+                    moveToPreviousNode();
+                  });
+                },
+                onAddNewNextPressed: () {
+                  setState(() {
+                    addNewNext();
+                  });
+                },
+                onDeletePressed: widget.page.nodes.isNotEmpty
+                    ? () {
+                        setState(() {
+                          deleteNode();
+                        });
+                      }
+                    : null,
+              ))
+          : Center(child: Text(LDLocalizations.labelNoPassagesAvailable)),
       appBar: AppBar(
         title: Text(
           LDLocalizations.editingPassage,
-          style: Theme.of(context).textTheme.title,
+          style: Theme.of(context).textTheme.headline6,
         ),
       ),
     );
+  }
+
+  void moveToNextNode() {
+    if (!widget.page.hasNextNode()) {
+      widget.page.addNodeWithText("");
+    }
+    widget.page.nextNode();
+  }
+
+  void moveToPreviousNode() {
+    widget.page.previousNode();
+  }
+
+  void deleteNode() {
+    widget.page.deleteCurrentNode();
+  }
+
+  void addNewNext() {
+    widget.page.addNodeWithTextAtIndex("", widget.page.currentIndex + 1);
+    moveToNextNode();
   }
 }
 
 class EditPassageViewArguments {
   final gse.Page page;
-  final int startIndex;
 
-  EditPassageViewArguments({this.page, this.startIndex = 0});
+  EditPassageViewArguments({
+    this.page,
+  });
 }
 
 class ExtractEditPassageView extends StatelessWidget {
@@ -66,7 +99,6 @@ class ExtractEditPassageView extends StatelessWidget {
 
     return EditNodeSequence(
       page: args.page,
-      startIndex: args.startIndex,
     );
   }
 }

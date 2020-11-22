@@ -108,7 +108,7 @@ class _TransformingPageViewState extends State<TransformingPageView> {
                   ),
                   child: Text(
                     title,
-                    style: Theme.of(context).textTheme.title.merge(
+                    style: Theme.of(context).textTheme.headline6.merge(
                           TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 28,
@@ -142,7 +142,8 @@ class _TransformingPageViewState extends State<TransformingPageView> {
                             child: Text(
                               LDLocalizations.showStoryDetails,
                               style: TextStyle(
-                                color: Theme.of(context).textTheme.title.color,
+                                color:
+                                    Theme.of(context).textTheme.headline6.color,
                                 fontSize: 22.0,
                                 fontWeight: FontWeight.bold,
                               ),
@@ -175,7 +176,8 @@ class _TransformingPageViewState extends State<TransformingPageView> {
                             child: Text(
                               LDLocalizations.startStory,
                               style: TextStyle(
-                                color: Theme.of(context).textTheme.title.color,
+                                color:
+                                    Theme.of(context).textTheme.headline6.color,
                                 fontSize: 22.0,
                                 fontWeight: FontWeight.bold,
                               ),

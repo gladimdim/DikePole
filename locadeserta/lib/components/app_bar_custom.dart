@@ -10,7 +10,11 @@ class AppBarCustom extends StatefulWidget {
   final Function(bool expand) onExpanded;
   final bool expanded;
 
-  AppBarCustom({@required this.appBarButtons, @required this.title, this.onExpanded, this.expanded = false});
+  AppBarCustom(
+      {@required this.appBarButtons,
+      @required this.title,
+      this.onExpanded,
+      this.expanded = false});
 
   @override
   _AppBarCustomState createState() => _AppBarCustomState();
@@ -19,7 +23,8 @@ class AppBarCustom extends StatefulWidget {
 class _AppBarCustomState extends State<AppBarCustom> {
   @override
   Widget build(BuildContext context) {
-    var menuIcon = widget.expanded ? Icons.arrow_drop_up : Icons.arrow_drop_down;
+    var menuIcon =
+        widget.expanded ? Icons.arrow_drop_up : Icons.arrow_drop_down;
     return Positioned(
       top: 0,
       left: 0.0,
@@ -42,7 +47,7 @@ class _AppBarCustomState extends State<AppBarCustom> {
                     padding: EdgeInsets.only(left: 10),
                     child: Text(
                       widget.title,
-                      style: Theme.of(context).textTheme.title,
+                      style: Theme.of(context).textTheme.headline6,
                       textAlign: TextAlign.center,
                     ),
                   ),

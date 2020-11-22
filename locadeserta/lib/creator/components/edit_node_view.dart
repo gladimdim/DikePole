@@ -11,8 +11,20 @@ class EditNodeView extends StatefulWidget {
   final PageNode node;
   final VoidCallback onFinished;
   final bool isLastNode;
+  final VoidCallback onPreviousPressed;
+  final VoidCallback onNextPressed;
+  final VoidCallback onDeletePressed;
+  final VoidCallback onAddNewNextPressed;
 
-  EditNodeView({@required this.node, this.onFinished, this.isLastNode = false});
+  EditNodeView({
+    @required this.node,
+    this.onFinished,
+    this.isLastNode = false,
+    this.onNextPressed,
+    this.onPreviousPressed,
+    this.onDeletePressed,
+    this.onAddNewNextPressed,
+  });
 
   @override
   _EditNodeViewState createState() => _EditNodeViewState();
@@ -31,7 +43,7 @@ class _EditNodeViewState extends State<EditNodeView> {
           child: Column(
             children: <Widget>[
               Expanded(
-                flex: 8,
+                flex: 4,
                 child: TextEditor(
                   controller: _setTextToTextEditingController(widget.node.text),
                   text: widget.node.text,
@@ -47,24 +59,66 @@ class _EditNodeViewState extends State<EditNodeView> {
                 ),
               ),
               Expanded(
-                flex: 1,
-                child: Row(
-                  children: <Widget>[
-                    Text(
-                      LDLocalizations.passageWillHaveImage,
-                      style: Theme.of(context).textTheme.title,
+                flex: 2,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        BorderedContainer(
+                            child: Padding(
+                          padding: const EdgeInsets.all(2.0),
+                          child: IconButton(
+                            icon: Icon(Icons.arrow_back),
+                            onPressed: widget.onPreviousPressed,
+                          ),
+                        )),
+                        BorderedContainer(
+                            child: Padding(
+                          padding: const EdgeInsets.all(2.0),
+                          child: IconButton(
+                            icon: Icon(Icons.delete),
+                            onPressed: widget.onDeletePressed,
+                          ),
+                        )),
+                        BorderedContainer(
+                            child: Padding(
+                          padding: const EdgeInsets.all(2.0),
+                          child: IconButton(
+                            icon: Icon(Icons.create_new_folder),
+                            onPressed: widget.onAddNewNextPressed,
+                          ),
+                        )),
+                        BorderedContainer(
+                            child: Padding(
+                          padding: const EdgeInsets.all(2.0),
+                          child: IconButton(
+                            icon: Icon(Icons.arrow_forward),
+                            onPressed: widget.onNextPressed,
+                          ),
+                        )),
+                      ],
                     ),
-                    Checkbox(
-                      value: widget.node.imageType != null,
-                      onChanged: (newValue) {
-                        setState(() {
-                          if (newValue) {
-                            widget.node.imageType = ImageType.BOAT;
-                          } else {
-                            widget.node.imageType = null;
-                          }
-                        });
-                      },
+                    Row(
+                      children: <Widget>[
+                        Text(
+                          LDLocalizations.passageWillHaveImage,
+                          style: Theme.of(context).textTheme.headline6,
+                        ),
+                        Checkbox(
+                          value: widget.node.imageType != null,
+                          onChanged: (newValue) {
+                            setState(() {
+                              if (newValue) {
+                                widget.node.imageType = ImageType.BOAT;
+                              } else {
+                                widget.node.imageType = null;
+                              }
+                            });
+                          },
+                        ),
+                      ],
                     ),
                   ],
                 ),

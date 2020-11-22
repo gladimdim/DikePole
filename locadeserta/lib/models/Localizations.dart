@@ -79,7 +79,7 @@ class LDLocalizations {
       'optionplaceholder': 'Replace this',
       'gotorootpage': 'Go to root page',
       'addnewpassage': 'Add new passage',
-      'passagewillhaveimage': 'Passage will have image',
+      'passagewillhaveimage': 'Passage image',
       'selectimageforpassage': 'Select image: ',
       'editingpassage': 'Editing passage',
       'previewstory': 'Preview story',
@@ -109,6 +109,11 @@ class LDLocalizations {
       'publishUserStory': 'Publish story',
       'publishStoryInstructions':
           'Copy the story by using button below and send the file to the email <gladimdim@gmail.com>.',
+      'labelNoPassagesAvailable':
+          'There are no passages in this page, return back and add a passage.',
+      'labelShowMarkdownSource': 'Show source',
+      'labelShowMarkdownRendered': 'Show Markdown',
+      'labelConvertToMarkdown': 'Export to Markdown',
     },
     'uk': {
       'continue': 'Продовжити',
@@ -163,7 +168,7 @@ class LDLocalizations {
       'optionplaceholder': 'Замініть це',
       'gotorootpage': 'Назад на головну сторінку',
       'addnewpassage': 'Додати новий абзац',
-      'passagewillhaveimage': 'Абзац буде з картинкою',
+      'passagewillhaveimage': 'Картинка абзацу',
       'selectimageforpassage': 'Виберіть картинку: ',
       'editingpassage': 'Редагування абзацу',
       'previewstory': 'Перегляд історії',
@@ -193,6 +198,11 @@ class LDLocalizations {
       'publishUserStory': 'Опублікувати історію',
       'publishStoryInstructions':
           'Скопіюйте історію за допомогою кнопки внизу і надішліть файл на пошту <gladimdim@gmail.com>.',
+      'labelNoPassagesAvailable':
+          'На цій сторінці немає жодного абзацу. Поверніться назад і додайте хоча б один.',
+      'labelShowMarkdownSource': 'Показати текст',
+      'labelShowMarkdownRendered': 'Показати документ',
+      'labelConvertToMarkdown': 'Експорт в Markdown',
     },
     'pl': {
       'continue': 'Dalej',
@@ -275,7 +285,12 @@ class LDLocalizations {
       'darkThemeLabel': 'Ciemny motyw',
       'lightThemeLabel': 'Lekki motyw',
       'updateStatsLabel': 'Update stats',
-      'publishUserStory': 'Опублікувати історію'
+      'publishUserStory': 'Опублікувати історію',
+      'labelNoPassagesAvailable':
+          '"There are no passages in this page, return back and add a passage."',
+      'labelShowMarkdownSource': 'Show text',
+      'labelShowMarkdownRendered': 'Show markdown',
+      'labelConvertToMarkdown': 'Export to Markdown',
     }
   };
 
@@ -585,5 +600,21 @@ class LDLocalizations {
 
   static String get publishStoryInstructions {
     return _localizedValues[locale.languageCode]['publishStoryInstructions'];
+  }
+
+  static String get labelNoPassagesAvailable {
+    return _localizedValues[locale.languageCode]['labelNoPassagesAvailable'];
+  }
+
+  static String get labelShowMarkdownSource {
+    return _localizedValues[locale.languageCode]['labelShowMarkdownSource'];
+  }
+
+  static String get labelShowMarkdownRendered {
+    return _localizedValues[locale.languageCode]['labelShowMarkdownRendered'];
+  }
+
+  static String get labelConvertToMarkdown {
+    return _localizedValues[locale.languageCode]['labelConvertToMarkdown'];
   }
 }

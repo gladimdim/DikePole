@@ -11,9 +11,9 @@ import 'package:locadeserta/creator/components/game_view.dart';
 import 'package:locadeserta/creator/components/publish_screen.dart';
 import 'package:locadeserta/creator/components/text_editor.dart';
 import 'package:locadeserta/creator/utils/utils.dart';
-import 'package:locadeserta/models/story_persistence.dart';
 import 'package:locadeserta/models/Localizations.dart';
 import 'package:locadeserta/models/background_image.dart';
+import 'package:locadeserta/models/story_persistence.dart';
 import 'package:share_extend/share_extend.dart';
 
 class EditStoryView extends StatefulWidget {
@@ -48,7 +48,7 @@ class _EditStoryViewState extends State<EditStoryView> {
                           icon: Icon(Icons.arrow_back),
                           label: Text(
                             LDLocalizations.labelBack,
-                            style: Theme.of(context).textTheme.title,
+                            style: Theme.of(context).textTheme.headline6,
                           ),
                           onPressed: () {
                             setState(() {
@@ -78,7 +78,7 @@ class _EditStoryViewState extends State<EditStoryView> {
                   Center(
                       child: Text(
                     LDLocalizations.labelIsTheEnd,
-                    style: Theme.of(context).textTheme.title,
+                    style: Theme.of(context).textTheme.headline6,
                   )),
                   if (story.currentPage.isTheEnd()) ...[
                     Radio(
@@ -92,7 +92,7 @@ class _EditStoryViewState extends State<EditStoryView> {
                     ),
                     Center(
                         child: Text(LDLocalizations.labelIsTheEndDead,
-                            style: Theme.of(context).textTheme.title)),
+                            style: Theme.of(context).textTheme.headline6)),
                     Radio(
                       value: EndType.ALIVE,
                       groupValue: story.currentPage.endType,
@@ -104,7 +104,7 @@ class _EditStoryViewState extends State<EditStoryView> {
                     ),
                     Center(
                         child: Text(LDLocalizations.labelIsTheEndAlive,
-                            style: Theme.of(context).textTheme.title))
+                            style: Theme.of(context).textTheme.headline6))
                   ]
                 ],
               ),
@@ -121,14 +121,14 @@ class _EditStoryViewState extends State<EditStoryView> {
                 icon: Icon(Icons.add_box),
                 label: Text(
                   LDLocalizations.labelOptions,
-                  style: Theme.of(context).textTheme.title,
+                  style: Theme.of(context).textTheme.headline6,
                 ),
               ),
             ),
             if (story.currentPage.next.length == 0)
               Text(
                 LDLocalizations.optionsListEmpty,
-                style: Theme.of(context).textTheme.title,
+                style: Theme.of(context).textTheme.headline6,
               ),
             Expanded(
               flex: 3,
@@ -197,7 +197,7 @@ class _EditStoryViewState extends State<EditStoryView> {
                   Icons.add_box,
                 ),
                 label: Text(LDLocalizations.addNewPassage,
-                    style: Theme.of(context).textTheme.title),
+                    style: Theme.of(context).textTheme.headline6),
               ),
             ),
             if (story.currentPage.nodes.length == 0)
@@ -214,7 +214,7 @@ class _EditStoryViewState extends State<EditStoryView> {
                           child: ListTile(
                             title: Text(
                               firstNCharsFromString(node.text, 60),
-                              style: Theme.of(context).textTheme.title,
+                              style: Theme.of(context).textTheme.headline6,
                             ),
                             leading: imageType == null
                                 ? Icon(
@@ -224,13 +224,14 @@ class _EditStoryViewState extends State<EditStoryView> {
                                     image: BackgroundImage.getAssetImageForType(
                                         imageType)),
                             onTap: () async {
+                              var nodeIndex =
+                                  story.currentPage.nodes.indexOf(node);
+                              story.currentPage.currentIndex = nodeIndex;
                               await Navigator.pushNamed(
                                 context,
                                 ExtractEditPassageView.routeName,
                                 arguments: EditPassageViewArguments(
                                   page: story.currentPage,
-                                  startIndex:
-                                      story.currentPage.nodes.indexOf(node),
                                 ),
                               );
 

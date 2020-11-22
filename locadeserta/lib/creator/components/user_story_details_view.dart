@@ -57,7 +57,7 @@ class _UserStoryDetailsViewState extends State<UserStoryDetailsView> {
                 child: Column(
                   children: <Widget>[
                     TextFormField(
-                      style: Theme.of(context).textTheme.body1,
+                      style: Theme.of(context).textTheme.bodyText2,
                       decoration: InputDecoration(
                         icon: Icon(Icons.title,
                             color: Theme.of(context).iconTheme.color),
@@ -71,7 +71,7 @@ class _UserStoryDetailsViewState extends State<UserStoryDetailsView> {
                       },
                     ),
                     TextFormField(
-                      style: Theme.of(context).textTheme.body1,
+                      style: Theme.of(context).textTheme.bodyText2,
                       decoration: InputDecoration(
                         icon: Icon(Icons.description,
                             color: Theme.of(context).iconTheme.color),
@@ -87,7 +87,7 @@ class _UserStoryDetailsViewState extends State<UserStoryDetailsView> {
                           widget.story == null ? "" : widget.story.description,
                     ),
                     TextFormField(
-                      style: Theme.of(context).textTheme.body1,
+                      style: Theme.of(context).textTheme.bodyText2,
                       decoration: InputDecoration(
                         icon: Icon(Icons.person,
                             color: Theme.of(context).iconTheme.color),
@@ -101,7 +101,7 @@ class _UserStoryDetailsViewState extends State<UserStoryDetailsView> {
                           widget.story == null ? "" : widget.story.authors,
                     ),
                     TextFormField(
-                      style: Theme.of(context).textTheme.body1,
+                      style: Theme.of(context).textTheme.bodyText2,
                       decoration: InputDecoration(
                         icon: Icon(Icons.calendar_today),
                         hintText: LDLocalizations.hintFieldYear,

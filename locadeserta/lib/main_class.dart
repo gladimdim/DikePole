@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:locadeserta/StatisticsView.dart';
 import 'package:locadeserta/creator/components/edit_node_sequence_view.dart';
 import 'package:locadeserta/creator/components/edit_story.dart';
 import 'package:locadeserta/creator/components/game_view.dart';
@@ -27,12 +26,12 @@ var blackTheme = ThemeData(
   fontFamily: 'Roboto',
   unselectedWidgetColor: Colors.white,
   textTheme: TextTheme(
-    body1: TextStyle(
+    bodyText2: TextStyle(
       fontFamily: "Raleway-Bold",
       fontSize: 18,
       color: Colors.white,
     ),
-    title: TextStyle(
+    headline6: TextStyle(
       fontSize: 20,
       fontWeight: FontWeight.bold,
       color: Colors.white,
@@ -66,12 +65,12 @@ var whiteTheme = ThemeData(
   fontFamily: 'Roboto',
   unselectedWidgetColor: Colors.black,
   textTheme: TextTheme(
-    body1: TextStyle(
+    bodyText2: TextStyle(
       fontFamily: "Raleway-Bold",
       fontSize: 18,
       color: Colors.black,
     ),
-    title: TextStyle(
+    headline6: TextStyle(
       color: Colors.black,
       fontSize: 20.0,
       fontWeight: FontWeight.bold,
@@ -139,7 +138,6 @@ class _LocaDesertaAppState extends State<LocaDesertaApp> {
                     ExtractEditPassageView(),
                 ImportGladStoryView.routeName: (context) =>
                     ImportGladStoryView(),
-                StatisticsView.routeName: (context) => StatisticsView(),
                 UserStoryDetailsView.routeName: (context) =>
                     ExtractUserStoryDetailsViewArguments(),
                 PublishUserStory.routeName: (context) =>
