@@ -9,12 +9,15 @@ class AppBarCustom extends StatefulWidget {
   final List<AppBarObject> appBarButtons;
   final Function(bool expand) onExpanded;
   final bool expanded;
+  final bool showBackButton;
 
-  AppBarCustom(
-      {@required this.appBarButtons,
-      @required this.title,
-      this.onExpanded,
-      this.expanded = false});
+  AppBarCustom({
+    @required this.appBarButtons,
+    @required this.title,
+    this.onExpanded,
+    this.expanded = false,
+    this.showBackButton = true,
+  });
 
   @override
   _AppBarCustomState createState() => _AppBarCustomState();
@@ -42,22 +45,36 @@ class _AppBarCustomState extends State<AppBarCustom> {
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  Padding(
-                    padding: EdgeInsets.only(left: 10),
-                    child: Text(
-                      widget.title,
-                      style: Theme.of(context).textTheme.headline6,
-                      textAlign: TextAlign.center,
-                    ),
+                children: [
+                  Wrap(
+                    children: <Widget>[
+                      if (widget.showBackButton)
+                        Padding(
+                            padding: EdgeInsets.only(left: 10),
+                            child: InkWell(
+                              child: Icon(Icons.arrow_back_outlined),
+                              onTap: () {
+                                Navigator.pop(context);
+                              },
+                            )),
+                      Padding(
+                        padding: EdgeInsets.only(left: 10),
+                        child: Text(
+                          widget.title,
+                          style: Theme.of(context).textTheme.headline6,
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                    ],
                   ),
-                  ButtonTextIcon(
-                    text: LDLocalizations.menuText,
-                    onTap: _toggleExpandedMenu,
-                    icon: Icon(
-                      menuIcon,
+                  if (widget.appBarButtons.isNotEmpty)
+                    ButtonTextIcon(
+                      text: LDLocalizations.menuText,
+                      onTap: _toggleExpandedMenu,
+                      icon: Icon(
+                        menuIcon,
+                      ),
                     ),
-                  ),
                 ],
               ),
               if (widget.expanded)

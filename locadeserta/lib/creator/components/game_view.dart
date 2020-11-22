@@ -3,6 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'package:gladstoriesengine/gladstoriesengine.dart';
 import 'package:locadeserta/components/app_bar_custom.dart';
 import 'package:locadeserta/components/narrow_scaffold.dart';
+import 'package:locadeserta/creator/components/edit_story.dart';
 import 'package:locadeserta/creator/components/story_view.dart';
 import 'package:locadeserta/export_pdf_view.dart';
 import 'package:locadeserta/loaders/catalogs.dart';
@@ -64,19 +65,23 @@ class _MainViewState extends State<GameView> {
               context,
               MaterialPageRoute(
                 builder: (context) => NarrowScaffold(
-                    title: "Markdown export",
-                    actions: [
-                      AppBarObject(
-                        onTap: () => Navigator.pop(context),
-                        text: LDLocalizations.labelBack,
-                      ),
-                    ],
+                    title: LDLocalizations.labelConvertToMarkdown,
+                    actions: [],
                     body: ExportToMarkDownView(story: widget.story)),
               ),
             );
           },
           text: LDLocalizations.labelConvertToMarkdown,
-        )
+        ),
+        if (widget.catalogStory != null)
+          AppBarObject(
+            onTap: () async {
+              await Navigator.pushNamed(
+                  context, ExtractEditStoryViewArguments.routeName,
+                  arguments: EditStoryViewArguments(story: widget.story));
+            },
+            text: LDLocalizations.labelEditStory,
+          )
       ],
       body: Padding(
         padding: const EdgeInsets.only(top: 32.0),

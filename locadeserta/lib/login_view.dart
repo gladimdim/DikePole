@@ -32,6 +32,7 @@ class _LoginViewState extends State<LoginView> {
     return NarrowScaffold(
       body: _buildBody(context),
       title: LDLocalizations.appTitle,
+      showBackButton: false,
       actions: [
         AppBarObject(
           onTap: () {

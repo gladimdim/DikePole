@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gladstoriesengine/gladstoriesengine.dart';
 import 'package:locadeserta/animations/slideable_button.dart';
-import 'package:locadeserta/components/app_bar_custom.dart';
 import 'package:locadeserta/components/bordered_container.dart';
 import 'package:locadeserta/components/narrow_scaffold.dart';
 import 'package:locadeserta/creator/components/fat_container.dart';
@@ -27,12 +26,7 @@ class _UserStoriesListState extends State<UserStoriesList> {
   Widget build(BuildContext context) {
     return NarrowScaffold(
       title: LDLocalizations.ownStories,
-      actions: [
-        AppBarObject(
-          text: LDLocalizations.backToMenu,
-          onTap: () => Navigator.pop(context),
-        )
-      ],
+      actions: [],
       body: StreamBuilder(
           stream: StoryPersistence.instance.changes.stream,
           builder: (context, data) {

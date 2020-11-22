@@ -73,6 +73,7 @@ class _MainMenuState extends State<MainMenu> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     return NarrowScaffold(
       title: LDLocalizations.appTitle,
+      showBackButton: false,
       body: FractionallySizedBox(
         widthFactor: 1,
         heightFactor: 1.0,
