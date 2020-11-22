@@ -65,9 +65,12 @@ class _ExportToMarkDownViewState extends State<ExportToMarkDownView> {
           Expanded(
             flex: 9,
             child: Container(
-              child: TextField(
-                maxLines: 1000,
-                controller: controller,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: TextField(
+                  maxLines: 2000,
+                  controller: controller,
+                ),
               ),
             ),
           ),
