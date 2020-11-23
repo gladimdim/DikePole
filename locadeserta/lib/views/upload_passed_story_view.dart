@@ -90,6 +90,6 @@ class _UploadPassedStoryViewState extends State<UploadPassedStoryView> {
   }
 
   getFullLink() {
-    return "http://134.122.79.137:9093/passed_stories/$messageText";
+    return "https://dikepole.sloboda.com/passed_stories/$messageText";
   }
 }

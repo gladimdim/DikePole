@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:gladstoriesengine/gladstoriesengine.dart';
 import 'package:http/http.dart' as http;
 
-var url = "http://134.122.79.137:9093";
+var url = "https://dikepole.sloboda.com";
 // var url = "http://localhost:9093";
 
 Future<String> uploadStoryToServer(Story story) async {
