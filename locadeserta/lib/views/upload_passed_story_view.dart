@@ -56,7 +56,7 @@ class _UploadPassedStoryViewState extends State<UploadPassedStoryView> {
         ),
         if (uploading)
           Center(
-            child: Text("File is being uploaded"),
+            child: Text(LDLocalizations.labelFileIsBeingUploaded),
           ),
         if (uploaded && messageText != null)
           Wrap(
@@ -65,7 +65,7 @@ class _UploadPassedStoryViewState extends State<UploadPassedStoryView> {
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Text(
-                    "Open link in browser",
+                    LDLocalizations.labelOpenInBrowser,
                   ),
                 ),
                 onTap: () async {
@@ -89,6 +89,6 @@ class _UploadPassedStoryViewState extends State<UploadPassedStoryView> {
   }
 
   getFullLink() {
-    return "https://dikepole.sloboda.com/passed_stories/$messageText";
+    return "https://dikepole.locadeserta.com/passed_stories/$messageText";
   }
 }

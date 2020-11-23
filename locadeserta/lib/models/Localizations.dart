@@ -117,6 +117,9 @@ class LDLocalizations {
       'labelEditStory': 'Edit Story',
       'labelInstructionsForUploadingStory':
           'Press Upload button to generate unique link.',
+      'labelOpenInBrowser': 'Open in Browser',
+      'labelFileIsBeingUploaded':
+          'File is being uploaded, your link will appear soon.',
     },
     'uk': {
       'continue': 'Продовжити',
@@ -209,6 +212,9 @@ class LDLocalizations {
       'labelEditStory': 'Редагувати історію',
       'labelInstructionsForUploadingStory':
           'Натисніть кнопку, щоб згенерувати унікальне посилання.',
+      'labelOpenInBrowser': 'Відкрити в браузері',
+      'labelFileIsBeingUploaded':
+          'Історія завантажується. Незабаром буде згенероване посилання для вас.'
     },
     'pl': {
       'continue': 'Dalej',
@@ -300,6 +306,9 @@ class LDLocalizations {
       'labelEditStory': 'Edit Story',
       'labelInstructionsForUploadingStory':
           'Press upload button to generate unique link for this story.',
+      'labelOpenInBrowser': 'Open in Browser',
+      'labelFileIsBeingUploaded':
+          'File is being uploaded. Link will be generated soon.',
     }
   };
 
@@ -634,5 +643,13 @@ class LDLocalizations {
   static String get labelInstructionsForUploadingStory {
     return _localizedValues[locale.languageCode]
         ['labelInstructionsForUploadingStory'];
+  }
+
+  static String get labelOpenInBrowser {
+    return _localizedValues[locale.languageCode]['labelOpenInBrowser'];
+  }
+
+  static String get labelFileIsBeingUploaded {
+    return _localizedValues[locale.languageCode]['labelFileIsBeingUploaded'];
   }
 }
