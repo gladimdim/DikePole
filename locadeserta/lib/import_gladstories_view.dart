@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:gladstoriesengine/gladstoriesengine.dart';
 import 'package:locadeserta/animations/slideable_button.dart';
@@ -50,7 +52,7 @@ class _ImportGladStoryViewState extends State<ImportGladStoryView> {
                     ),
                   ),
                   onPress: () async {
-                    var story = Story.fromJson(_controller.text,
+                    var story = Story.fromJson(jsonDecode(_controller.text),
                         imageResolver: BackgroundImage.getRandomImageForType);
                     await StoryPersistence.instance.writeCreatorStory(story);
                     Navigator.pop(context);
