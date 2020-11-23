@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'dart:io';
 
 import 'package:angel_cors/angel_cors.dart';
@@ -8,7 +7,8 @@ import 'package:gladstoriesengine/gladstoriesengine.dart';
 import 'package:nanoid/async/nanoid.dart';
 
 int port = 9093;
-
+var rootFolder = "data";
+var passedStoriesFolder = "passed_stories";
 run() async {
   var app = Angel();
   var http = AngelHttp(app);
@@ -37,15 +37,34 @@ run() async {
 
     var markdown = story.toMarkdownString();
     var id = await nanoid();
-    var file = File("data/passed_stories/$id.md");
+    var file = File("$rootFolder/$passedStoriesFolder/$id.md");
     await file.writeAsString(markdown);
     res.write(id);
   });
 
-  app.get("/family_dashboard/gladkyi", (req, res) async {
-    var state = await File("data/states/gladkyi.json").readAsString();
-    var response = jsonEncode(state);
-    res.headers.addAll({"Content-Type": "application/json; charset=utf-8"});
-    res.write(state);
+  app.get("/passed_stories/:id", (req, res) async {
+    var id = req.params["id"];
+    var markdown =
+        await File("$rootFolder/$passedStoriesFolder/$id.md").readAsString();
+    var indexHtml = """
+        <!doctype html>
+        <html>
+        <head>
+          <meta charset="utf-8"/>
+          <title>Marked in the browser</title>
+        </head>
+        <body>
+          <div id="content"></div>
+          <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+          <script>
+            document.getElementById('content').innerHTML =
+              marked(`$markdown`);
+          </script>
+        </body>
+        </html>
+    """;
+
+    res.headers.addAll({"Content-Type": "text/html; charset=utf-8"});
+    res.write(indexHtml);
   });
 }
