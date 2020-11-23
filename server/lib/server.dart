@@ -12,7 +12,7 @@ var passedStoriesFolder = "passed_stories";
 run() async {
   var app = Angel();
   var http = AngelHttp(app);
-  await http.startServer('134.122.79.137', port);
+  await http.startServer('localhost', port);
   // await http.startServer('localhost', port);
   print("Server started at port $port");
   app.get('/', (req, res) => res.write('Hello, world!'));
