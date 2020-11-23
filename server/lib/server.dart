@@ -36,14 +36,14 @@ run() async {
     }
 
     var markdown = story.toMarkdownString();
-    var id = nanoid();
-    var file = File("passed_stories/$id.md");
+    var id = await nanoid();
+    var file = File("data/passed_stories/$id.md");
     await file.writeAsString(markdown);
     res.write(id);
   });
 
   app.get("/family_dashboard/gladkyi", (req, res) async {
-    var state = await File("states/gladkyi.json").readAsString();
+    var state = await File("data/states/gladkyi.json").readAsString();
     var response = jsonEncode(state);
     res.headers.addAll({"Content-Type": "application/json; charset=utf-8"});
     res.write(state);

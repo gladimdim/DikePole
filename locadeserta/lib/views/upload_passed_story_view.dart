@@ -32,6 +32,8 @@ class _UploadPassedStoryViewState extends State<UploadPassedStoryView> {
             onPressed: () async {
               setState(() {
                 uploading = true;
+                messageText = "";
+                uploaded = false;
               });
               var result;
               try {
