@@ -16,14 +16,14 @@ run() async {
   // await http.startServer('localhost', port);
   print("Server started at port $port");
   app.get('/', (req, res) => res.write('Hello, world!'));
-  app.fallback(dynamicCors((req, res) {
-    return CorsOptions(
-      origin: [
-        req.headers.value('origin') ?? 'http://locadeserta.com',
-        RegExp(r'\.com$'),
-      ],
-    );
-  }));
+  // app.fallback(dynamicCors((req, res) {
+  //   return CorsOptions(
+  //     origin: [
+  //       req.headers.value('origin') ?? 'http://locadeserta.com',
+  //       RegExp(r'\.com$'),
+  //     ],
+  //   );
+  // }));
 
   app.post("/post_story", (req, res) async {
     await req.parseBody();
