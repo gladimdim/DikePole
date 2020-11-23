@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:gladstoriesengine/gladstoriesengine.dart';
 import 'package:locadeserta/components/bordered_container.dart';
 import 'package:locadeserta/server/server.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class UploadPassedStoryView extends StatefulWidget {
   final Story story;
@@ -57,11 +59,37 @@ class _UploadPassedStoryViewState extends State<UploadPassedStoryView> {
           Center(
             child: Text("File is being uploaded"),
           ),
-        if (messageText != null)
-          Center(
-            child: Text(messageText),
+        if (uploaded && messageText != null)
+          Wrap(
+            children: [
+              InkWell(
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    "Open link in browser",
+                  ),
+                ),
+                onTap: () async {
+                  if (await canLaunch(getFullLink())) {
+                    await launch(getFullLink());
+                  }
+                },
+              ),
+              IconButton(
+                icon: Icon(Icons.copy),
+                onPressed: () {
+                  Clipboard.setData(
+                    ClipboardData(text: getFullLink()),
+                  );
+                },
+              )
+            ],
           ),
       ],
     );
+  }
+
+  getFullLink() {
+    return "https://dikepole.locadeserta.com/passed_stories/$messageText";
   }
 }
