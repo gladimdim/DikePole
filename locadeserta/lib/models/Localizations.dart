@@ -114,6 +114,7 @@ class LDLocalizations {
       'labelShowMarkdownSource': 'Show source',
       'labelShowMarkdownRendered': 'Show Markdown',
       'labelConvertToMarkdown': 'Export to Markdown',
+      'labelEditStory': 'Edit Story',
     },
     'uk': {
       'continue': 'Продовжити',
@@ -203,6 +204,7 @@ class LDLocalizations {
       'labelShowMarkdownSource': 'Показати текст',
       'labelShowMarkdownRendered': 'Показати документ',
       'labelConvertToMarkdown': 'Експорт в Markdown',
+      'labelEditStory': 'Редагувати історію',
     },
     'pl': {
       'continue': 'Dalej',
@@ -291,6 +293,7 @@ class LDLocalizations {
       'labelShowMarkdownSource': 'Show text',
       'labelShowMarkdownRendered': 'Show markdown',
       'labelConvertToMarkdown': 'Export to Markdown',
+      'labelEditStory': 'Edit Story',
     }
   };
 
@@ -616,5 +619,9 @@ class LDLocalizations {
 
   static String get labelConvertToMarkdown {
     return _localizedValues[locale.languageCode]['labelConvertToMarkdown'];
+  }
+
+  static String get labelEditStory {
+    return _localizedValues[locale.languageCode]['labelEditStory'];
   }
 }

@@ -14,6 +14,7 @@ import 'package:locadeserta/creator/utils/utils.dart';
 import 'package:locadeserta/models/Localizations.dart';
 import 'package:locadeserta/models/background_image.dart';
 import 'package:locadeserta/models/story_persistence.dart';
+import 'package:locadeserta/views/story_graph_view.dart';
 import 'package:share_extend/share_extend.dart';
 
 class EditStoryView extends StatefulWidget {
@@ -109,21 +110,41 @@ class _EditStoryViewState extends State<EditStoryView> {
                 ],
               ),
             ),
-            Align(
-              alignment: Alignment.centerRight,
-              child: FlatButton.icon(
-                onPressed: () {
-                  setState(() {
-                    story.currentPage
-                        .addNextPageWithText(LDLocalizations.optionPlaceHolder);
-                  });
-                },
-                icon: Icon(Icons.add_box),
-                label: Text(
-                  LDLocalizations.labelOptions,
-                  style: Theme.of(context).textTheme.headline6,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                FlatButton.icon(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => NarrowScaffold(
+                            title: "Tree view",
+                            actions: [],
+                            body: StoryGraphView(story: widget.story)),
+                      ),
+                    );
+                  },
+                  icon: Icon(Icons.account_tree_sharp),
+                  label: Text(
+                    "Tree view",
+                    style: Theme.of(context).textTheme.headline6,
+                  ),
                 ),
-              ),
+                FlatButton.icon(
+                  onPressed: () {
+                    setState(() {
+                      story.currentPage.addNextPageWithText(
+                          LDLocalizations.optionPlaceHolder);
+                    });
+                  },
+                  icon: Icon(Icons.add_box),
+                  label: Text(
+                    LDLocalizations.labelOptions,
+                    style: Theme.of(context).textTheme.headline6,
+                  ),
+                ),
+              ],
             ),
             if (story.currentPage.next.length == 0)
               Text(
