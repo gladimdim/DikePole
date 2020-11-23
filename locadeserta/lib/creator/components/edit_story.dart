@@ -8,7 +8,7 @@ import 'package:locadeserta/components/narrow_scaffold.dart';
 import 'package:locadeserta/creator/components/edit_node_sequence_view.dart';
 import 'package:locadeserta/creator/components/fat_container.dart';
 import 'package:locadeserta/creator/components/game_view.dart';
-import 'package:locadeserta/creator/components/publish_screen.dart';
+import 'package:locadeserta/creator/components/share_to_pdf_screen.dart';
 import 'package:locadeserta/creator/components/text_editor.dart';
 import 'package:locadeserta/creator/utils/utils.dart';
 import 'package:locadeserta/models/Localizations.dart';
@@ -317,7 +317,7 @@ class _EditStoryViewState extends State<EditStoryView> {
               onTap: () async {
                 await Navigator.pushNamed(
                   context,
-                  PublishUserStory.routeName,
+                  ShareUserStoryToPdf.routeName,
                   arguments: PublishStoryViewArguments(story: story),
                 );
               }),

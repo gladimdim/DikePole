@@ -17,17 +17,17 @@ class MarkdownDocument {
   }
 
   MarkdownDocument h1(String value) {
-    _document = _document + '# ${value}\n';
+    _document = _document + '# $value\n';
     return this;
   }
 
   MarkdownDocument h2(String value) {
-    _document = _document + '## ${value}\n';
+    _document = _document + '## $value\n';
     return this;
   }
 
   MarkdownDocument h3(String value) {
-    _document = _document + '### ${value}\n';
+    _document = _document + '### $value\n';
     return this;
   }
 
@@ -35,9 +35,9 @@ class MarkdownDocument {
       [String imageText, bool showText = false]) {
     imageText = imageText ?? '';
     _document = _document +
-        '![${imageText}](https://locadeserta.com/game/assets/${imagePath})';
+        '![$imageText](https://locadeserta.com/game/assets/$imagePath)';
     if (showText) {
-      _document = _document + ' ${imageText}';
+      _document = _document + ' $imageText';
     }
     _document = _document + '\n';
 
@@ -45,12 +45,12 @@ class MarkdownDocument {
   }
 
   MarkdownDocument point(String value) {
-    _document = _document + '- ${value}\n';
+    _document = _document + '- $value\n';
     return this;
   }
 
   MarkdownDocument text(String value) {
-    _document = _document + '${value}\n';
+    _document = _document + '$value\n';
     return this;
   }
 

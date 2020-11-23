@@ -9,17 +9,17 @@ import 'package:locadeserta/creator/components/fat_container.dart';
 import 'package:locadeserta/models/Localizations.dart';
 import 'package:share_extend/share_extend.dart';
 
-class PublishUserStory extends StatefulWidget {
+class ShareUserStoryToPdf extends StatefulWidget {
   static const routeName = "/publish_story";
   final Story story;
 
-  PublishUserStory({this.story});
+  ShareUserStoryToPdf({this.story});
 
   @override
-  _PublishUserStoryState createState() => _PublishUserStoryState();
+  _ShareUserStoryToPdfState createState() => _ShareUserStoryToPdfState();
 }
 
-class _PublishUserStoryState extends State<PublishUserStory> {
+class _ShareUserStoryToPdfState extends State<ShareUserStoryToPdf> {
   @override
   Widget build(BuildContext context) {
     return NarrowScaffold(
@@ -63,7 +63,7 @@ class ExtractPlublishStoryViewArguments extends StatelessWidget {
     final PublishStoryViewArguments args =
         ModalRoute.of(context).settings.arguments;
 
-    return PublishUserStory(
+    return ShareUserStoryToPdf(
       story: args.story,
     );
   }

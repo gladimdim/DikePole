@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:locadeserta/creator/components/edit_node_sequence_view.dart';
 import 'package:locadeserta/creator/components/edit_story.dart';
 import 'package:locadeserta/creator/components/game_view.dart';
-import 'package:locadeserta/creator/components/publish_screen.dart';
+import 'package:locadeserta/creator/components/share_to_pdf_screen.dart';
 import 'package:locadeserta/creator/components/user_stories_list_view.dart';
 import 'package:locadeserta/creator/components/user_story_details_view.dart';
 import 'package:locadeserta/export_pdf_view.dart';
@@ -140,7 +140,7 @@ class _LocaDesertaAppState extends State<LocaDesertaApp> {
                     ImportGladStoryView(),
                 UserStoryDetailsView.routeName: (context) =>
                     ExtractUserStoryDetailsViewArguments(),
-                PublishUserStory.routeName: (context) =>
+                ShareUserStoryToPdf.routeName: (context) =>
                     ExtractPlublishStoryViewArguments(),
               },
             );

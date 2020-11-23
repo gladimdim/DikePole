@@ -47,13 +47,13 @@ class StoryPersistence {
 
   Future writeStoryWithState(gse.Story story) async {
     await AppPreferences.instance
-        .saveStoryStringByName(story.title, story.toStateJson().toString());
+        .saveStoryStringByName(story.title, jsonEncode(story.toStateJson()));
     return true;
   }
 
   Future writeStory(gse.Story story) async {
     await AppPreferences.instance
-        .saveStoryStringByName(story.title, story.toJson().toString());
+        .saveStoryStringByName(story.title, jsonEncode(story.toJson()));
     changes.add(this);
     return true;
   }
@@ -61,7 +61,7 @@ class StoryPersistence {
   Future writeCreatorStory(gse.Story story) async {
     changes.add(this);
     return await AppPreferences.instance
-        .saveCreatorStory(story.title, story.toJson().toString());
+        .saveCreatorStory(story.title, jsonEncode(story.toJson()));
   }
 
   Future<bool> deleteCreatorStory(gse.Story story) async {
@@ -79,8 +79,16 @@ class StoryPersistence {
           .loadString(catalogStory.storyPath);
     }
 
-    gse.Story story = gse.Story.fromJson(jsonDecode(storyString),
-        imageResolver: BackgroundImage.getRandomImageForType);
+    gse.Story story;
+    try {
+      story = gse.Story.fromJson(jsonDecode(storyString),
+          imageResolver: BackgroundImage.getRandomImageForType);
+    } catch (e) {
+      storyString = await DefaultAssetBundle.of(context)
+          .loadString(catalogStory.storyPath);
+      story = gse.Story.fromJson(jsonDecode(storyString),
+          imageResolver: BackgroundImage.getRandomImageForType);
+    }
 
     return story;
   }
