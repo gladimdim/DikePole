@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:gladstoriesengine/gladstoriesengine.dart';
 import 'package:locadeserta/components/bordered_container.dart';
+import 'package:locadeserta/models/Localizations.dart';
 import 'package:locadeserta/server/server.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -25,9 +26,7 @@ class _UploadPassedStoryViewState extends State<UploadPassedStoryView> {
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Center(
-            child: Text(
-                "Press upload button to generate unique url that you can share")),
+        Center(child: Text(LDLocalizations.labelInstructionsForUploadingStory)),
         BorderedContainer(
           child: IconButton(
             icon: Icon(Icons.upload_file),

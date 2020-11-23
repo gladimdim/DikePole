@@ -17,7 +17,7 @@ class StoryPersistence {
       var storiesString = AppPreferences.instance.getCreatorStories();
       Map storiesList = jsonDecode(storiesString);
       List parsedStories = storiesList.keys.map((key) {
-        gse.Story story = gse.Story.fromJson(storiesList[key],
+        gse.Story story = gse.Story.fromJson(jsonDecode(storiesList[key]),
             imageResolver: BackgroundImage.getRandomImageForType);
         return story;
       }).toList();

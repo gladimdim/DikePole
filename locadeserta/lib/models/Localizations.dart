@@ -115,6 +115,8 @@ class LDLocalizations {
       'labelShowMarkdownRendered': 'Show Markdown',
       'labelConvertToMarkdown': 'Export to Markdown',
       'labelEditStory': 'Edit Story',
+      'labelInstructionsForUploadingStory':
+          'Press Upload button to generate unique link.',
     },
     'uk': {
       'continue': 'Продовжити',
@@ -205,6 +207,8 @@ class LDLocalizations {
       'labelShowMarkdownRendered': 'Показати документ',
       'labelConvertToMarkdown': 'Експорт в Markdown',
       'labelEditStory': 'Редагувати історію',
+      'labelInstructionsForUploadingStory':
+          'Натисніть кнопку, щоб згенерувати унікальне посилання.',
     },
     'pl': {
       'continue': 'Dalej',
@@ -287,13 +291,15 @@ class LDLocalizations {
       'darkThemeLabel': 'Ciemny motyw',
       'lightThemeLabel': 'Lekki motyw',
       'updateStatsLabel': 'Update stats',
-      'publishUserStory': 'Опублікувати історію',
+      'publishUserStory': 'Publish user story',
       'labelNoPassagesAvailable':
           '"There are no passages in this page, return back and add a passage."',
       'labelShowMarkdownSource': 'Show text',
       'labelShowMarkdownRendered': 'Show markdown',
       'labelConvertToMarkdown': 'Export to Markdown',
       'labelEditStory': 'Edit Story',
+      'labelInstructionsForUploadingStory':
+          'Press upload button to generate unique link for this story.',
     }
   };
 
@@ -623,5 +629,10 @@ class LDLocalizations {
 
   static String get labelEditStory {
     return _localizedValues[locale.languageCode]['labelEditStory'];
+  }
+
+  static String get labelInstructionsForUploadingStory {
+    return _localizedValues[locale.languageCode]
+        ['labelInstructionsForUploadingStory'];
   }
 }

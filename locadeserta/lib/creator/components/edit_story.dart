@@ -8,13 +8,13 @@ import 'package:locadeserta/components/narrow_scaffold.dart';
 import 'package:locadeserta/creator/components/edit_node_sequence_view.dart';
 import 'package:locadeserta/creator/components/fat_container.dart';
 import 'package:locadeserta/creator/components/game_view.dart';
-import 'package:locadeserta/creator/components/share_to_pdf_screen.dart';
 import 'package:locadeserta/creator/components/text_editor.dart';
 import 'package:locadeserta/creator/utils/utils.dart';
 import 'package:locadeserta/models/Localizations.dart';
 import 'package:locadeserta/models/background_image.dart';
 import 'package:locadeserta/models/story_persistence.dart';
 import 'package:locadeserta/views/story_graph_view.dart';
+import 'package:locadeserta/views/upload_passed_story_view.dart';
 import 'package:share_extend/share_extend.dart';
 
 class EditStoryView extends StatefulWidget {
@@ -313,14 +313,20 @@ class _EditStoryViewState extends State<EditStoryView> {
                 ShareExtend.share(json.toString(), "text");
               }),
           AppBarObject(
-              text: LDLocalizations.publishUserStory,
-              onTap: () async {
-                await Navigator.pushNamed(
-                  context,
-                  ShareUserStoryToPdf.routeName,
-                  arguments: PublishStoryViewArguments(story: story),
-                );
-              }),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => NarrowScaffold(
+                      title: LDLocalizations.shareStory,
+                      actions: [],
+                      showBackButton: true,
+                      body: UploadPassedStoryView(story: widget.story)),
+                ),
+              );
+            },
+            text: LDLocalizations.shareStory,
+          ),
         ]);
   }
 
