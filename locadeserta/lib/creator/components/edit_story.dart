@@ -310,7 +310,7 @@ class _EditStoryViewState extends State<EditStoryView> {
               text: LDLocalizations.exportGladStoryToJson,
               onTap: () {
                 var json = widget.story.toJson();
-                ShareExtend.share(json, "text");
+                ShareExtend.share(json.toString(), "text");
               }),
           AppBarObject(
               text: LDLocalizations.publishUserStory,

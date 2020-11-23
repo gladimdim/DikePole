@@ -5,11 +5,11 @@ import 'package:locadeserta/components/app_bar_custom.dart';
 import 'package:locadeserta/components/narrow_scaffold.dart';
 import 'package:locadeserta/creator/components/edit_story.dart';
 import 'package:locadeserta/creator/components/story_view.dart';
-import 'package:locadeserta/export_pdf_view.dart';
 import 'package:locadeserta/loaders/catalogs.dart';
 import 'package:locadeserta/models/Localizations.dart';
 import 'package:locadeserta/models/story_persistence.dart';
 import 'package:locadeserta/views/export_to_markdown_view.dart';
+import 'package:locadeserta/views/upload_passed_story_view.dart';
 
 class GameView extends StatefulWidget {
   final Story story;
@@ -47,13 +47,28 @@ class _MainViewState extends State<GameView> {
           },
           text: LDLocalizations.reset,
         ),
+        // AppBarObject(
+        //   onTap: () {
+        //     Navigator.pushNamed(
+        //       context,
+        //       ExtractExportGladStoriesPdfViewArguments.routeName,
+        //       arguments: ExportGladStoriesPdfViewArguments(
+        //         story: widget.story,
+        //       ),
+        //     );
+        //   },
+        //   text: LDLocalizations.shareStory,
+        // ),
         AppBarObject(
           onTap: () {
-            Navigator.pushNamed(
+            Navigator.push(
               context,
-              ExtractExportGladStoriesPdfViewArguments.routeName,
-              arguments: ExportGladStoriesPdfViewArguments(
-                story: widget.story,
+              MaterialPageRoute(
+                builder: (context) => NarrowScaffold(
+                    title: LDLocalizations.shareStory,
+                    actions: [],
+                    showBackButton: true,
+                    body: UploadPassedStoryView(story: widget.story)),
               ),
             );
           },

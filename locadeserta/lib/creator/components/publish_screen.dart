@@ -42,7 +42,7 @@ class _PublishUserStoryState extends State<PublishUserStory> {
               child: FatContainer(text: LDLocalizations.shareStory),
               onPress: () {
                 var json = widget.story.toJson();
-                ShareExtend.share(json, "text");
+                ShareExtend.share(json.toString(), "text");
               },
             ),
           )
