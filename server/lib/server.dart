@@ -51,6 +51,11 @@ run() async {
         <head>
           <meta charset="utf-8"/>
           <title>Інтерактивна історія. Дике Поле.</title>
+          <meta property="twitter:card" content="summary_large_image">
+          <meta property="twitter:url" content="https://locadeserta.com">
+          <meta property="twitter:title" content="Інтерактивна історія. Дике Поле. Loca Deserta.">
+          <meta property="twitter:description" content="Loca Deserta: Дике Поле. Інтерактивні історії про Великий Луг. Створий свою власну історію">
+          <meta property="twitter:image" content="https://locadeserta.com/game/assets/images/background/landing/5.jpg">
         </head>
         <body>
           <div>Дике Поле: Козацька Доля. Більше історій тут: <a href="https://locadeserta.com/">Всесвіт Дикого Поля</a></div>
