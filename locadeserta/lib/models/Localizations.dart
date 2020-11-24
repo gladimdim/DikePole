@@ -117,9 +117,12 @@ class LDLocalizations {
       'labelEditStory': 'Edit Story',
       'labelInstructionsForUploadingStory':
           'Press Upload button to generate unique link.',
-      'labelOpenInBrowser': 'Open in Browser',
+      'labelOpenInBrowser': 'Browser',
       'labelFileIsBeingUploaded':
           'File is being uploaded, your link will appear soon.',
+      'labelShareActions': 'Share actions',
+      'labelShareToTwitter': 'Twitter',
+      'labelShareToFacebook': 'Facebook',
     },
     'uk': {
       'continue': 'Продовжити',
@@ -212,9 +215,12 @@ class LDLocalizations {
       'labelEditStory': 'Редагувати історію',
       'labelInstructionsForUploadingStory':
           'Натисніть кнопку, щоб згенерувати унікальне посилання.',
-      'labelOpenInBrowser': 'Відкрити в браузері',
+      'labelOpenInBrowser': 'Браузер',
       'labelFileIsBeingUploaded':
-          'Історія завантажується. Незабаром буде згенероване посилання для вас.'
+          'Історія завантажується. Незабаром буде згенероване посилання для вас.',
+      'labelShareActions': 'Поширення',
+      'labelShareToTwitter': 'Твітнути',
+      'labelShareToFacebook': 'Facebook',
     },
     'pl': {
       'continue': 'Dalej',
@@ -306,9 +312,12 @@ class LDLocalizations {
       'labelEditStory': 'Edit Story',
       'labelInstructionsForUploadingStory':
           'Press upload button to generate unique link for this story.',
-      'labelOpenInBrowser': 'Open in Browser',
+      'labelOpenInBrowser': 'Browser',
       'labelFileIsBeingUploaded':
           'File is being uploaded. Link will be generated soon.',
+      'labelShareActions': 'Share actions',
+      'labelShareToTwitter': 'Twitter',
+      'labelShareToFacebook': 'Facebook',
     }
   };
 
@@ -651,5 +660,17 @@ class LDLocalizations {
 
   static String get labelFileIsBeingUploaded {
     return _localizedValues[locale.languageCode]['labelFileIsBeingUploaded'];
+  }
+
+  static String get labelShareActions {
+    return _localizedValues[locale.languageCode]['labelShareActions'];
+  }
+
+  static String get labelShareToTwitter {
+    return _localizedValues[locale.languageCode]['labelShareToTwitter'];
+  }
+
+  static String get labelShareToFacebook {
+    return _localizedValues[locale.languageCode]['labelShareToFacebook'];
   }
 }
