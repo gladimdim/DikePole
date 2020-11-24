@@ -4,6 +4,7 @@ import 'package:angel_framework/angel_framework.dart';
 import 'package:angel_framework/http.dart';
 import 'package:gladstoriesengine/gladstoriesengine.dart';
 import 'package:nanoid/async/nanoid.dart';
+import 'package:server/static/generate_404.dart';
 import 'package:server/static/generate_html.dart';
 
 int port = 9093;
@@ -36,10 +37,14 @@ run() async {
 
   app.get("/passed_stories/:id", (req, res) async {
     var id = req.params["id"];
-    var markdown =
-        await File("$rootFolder/$passedStoriesFolder/$id.md").readAsString();
-    var indexHtml = generateHtml(markdown);
     res.headers.addAll({"Content-Type": "text/html; charset=utf-8"});
-    res.write(indexHtml);
+    try {
+      var markdown =
+          await File("$rootFolder/$passedStoriesFolder/$id.md").readAsString();
+      var indexHtml = generateHtml(markdown);
+      res.write(indexHtml);
+    } catch (e) {
+      res.write(generate404Response());
+    }
   });
 }
