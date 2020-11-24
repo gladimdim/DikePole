@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:gladstoriesengine/gladstoriesengine.dart';
+import 'package:locadeserta/animations/slideable_button.dart';
 import 'package:locadeserta/components/bordered_container.dart';
+import 'package:locadeserta/creator/components/dividers.dart';
+import 'package:locadeserta/creator/components/fat_container.dart';
 import 'package:locadeserta/models/Localizations.dart';
 import 'package:locadeserta/server/server.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -27,6 +30,7 @@ class _UploadPassedStoryViewState extends State<UploadPassedStoryView> {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Center(child: Text(LDLocalizations.labelInstructionsForUploadingStory)),
+        VDivider(),
         BorderedContainer(
           child: IconButton(
             icon: Icon(Icons.upload_file),
@@ -58,30 +62,89 @@ class _UploadPassedStoryViewState extends State<UploadPassedStoryView> {
           Center(
             child: Text(LDLocalizations.labelFileIsBeingUploaded),
           ),
+        VDivider(),
         if (uploaded && messageText != null)
-          Wrap(
+          Row(
             children: [
-              InkWell(
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text(
-                    LDLocalizations.labelOpenInBrowser,
+              Expanded(
+                flex: 5,
+                child: BorderedContainer(
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: SelectableText(
+                      getFullLink(),
+                    ),
                   ),
                 ),
-                onTap: () async {
-                  if (await canLaunch(getFullLink())) {
-                    await launch(getFullLink());
-                  }
-                },
               ),
-              IconButton(
-                icon: Icon(Icons.copy),
-                onPressed: () {
-                  Clipboard.setData(
-                    ClipboardData(text: getFullLink()),
-                  );
-                },
-              )
+              Expanded(
+                flex: 1,
+                child: IconButton(
+                  icon: Icon(Icons.copy),
+                  onPressed: () {
+                    Clipboard.setData(
+                      ClipboardData(text: getFullLink()),
+                    );
+                  },
+                ),
+              ),
+            ],
+          ),
+        VDivider(),
+        if (uploaded && messageText != null)
+          Column(
+            children: [
+              FatContainer(text: LDLocalizations.labelShareActions),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  SlideableButton(
+                    child: BorderedContainer(
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(
+                          LDLocalizations.labelOpenInBrowser,
+                        ),
+                      ),
+                    ),
+                    onPress: () async {
+                      if (await canLaunch(getFullLink())) {
+                        await launch(getFullLink());
+                      }
+                    },
+                  ),
+                  SlideableButton(
+                    child: BorderedContainer(
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(
+                          LDLocalizations.labelShareToTwitter,
+                        ),
+                      ),
+                    ),
+                    onPress: () async {
+                      if (await canLaunch(getLinkToTwitter())) {
+                        await launch(getLinkToTwitter());
+                      }
+                    },
+                  ),
+                  SlideableButton(
+                    child: BorderedContainer(
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(
+                          LDLocalizations.labelShareToFacebook,
+                        ),
+                      ),
+                    ),
+                    onPress: () async {
+                      if (await canLaunch(getLinkToFacebook())) {
+                        await launch(getLinkToFacebook());
+                      }
+                    },
+                  ),
+                ],
+              ),
             ],
           ),
       ],
@@ -90,5 +153,13 @@ class _UploadPassedStoryViewState extends State<UploadPassedStoryView> {
 
   getFullLink() {
     return "https://dikepole.locadeserta.com/passed_stories/$messageText";
+  }
+
+  getLinkToTwitter() {
+    return "http://twitter.com/share?text=Я закінчив читати інтерактивну історію ${widget.story.title}. Моя версія проходження знаходиться по посиланню &url=${getFullLink()}&hashtags=locadeserta,дикеполе";
+  }
+
+  getLinkToFacebook() {
+    return "https://www.facebook.com/sharer/sharer.php?u=#${getFullLink()}&t=${widget.story.title}";
   }
 }
