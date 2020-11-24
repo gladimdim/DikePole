@@ -15,7 +15,6 @@ import 'package:locadeserta/models/background_image.dart';
 import 'package:locadeserta/models/story_persistence.dart';
 import 'package:locadeserta/views/story_graph_view.dart';
 import 'package:locadeserta/views/story_json_export_view.dart';
-import 'package:locadeserta/views/upload_passed_story_view.dart';
 
 class EditStoryView extends StatefulWidget {
   final Story story;
@@ -35,307 +34,293 @@ class _EditStoryViewState extends State<EditStoryView> {
   Widget build(BuildContext context) {
     var story = widget.story;
     return NarrowScaffold(
-        body: Column(
-          children: <Widget>[
-            Expanded(
-              child: ListView(
-                scrollDirection: Axis.horizontal,
-                children: <Widget>[
-                  if (story.root != story.currentPage)
-                    Align(
-                      alignment: Alignment.centerRight,
-                      child: BorderedContainer(
-                        child: FlatButton.icon(
-                          icon: Icon(Icons.arrow_back),
-                          label: Text(
-                            LDLocalizations.labelBack,
-                            style: Theme.of(context).textTheme.headline6,
-                          ),
-                          onPressed: () {
-                            setState(() {
-                              var parent =
-                                  story.findParentOfPage(story.currentPage);
-                              if (parent != null) {
-                                story.currentPage = parent;
-                              } else {
-                                story.currentPage = story.root;
-                              }
-                            });
-                          },
+      body: Column(
+        children: <Widget>[
+          Expanded(
+            child: ListView(
+              scrollDirection: Axis.horizontal,
+              children: <Widget>[
+                if (story.root != story.currentPage)
+                  Align(
+                    alignment: Alignment.centerRight,
+                    child: BorderedContainer(
+                      child: FlatButton.icon(
+                        icon: Icon(Icons.arrow_back),
+                        label: Text(
+                          LDLocalizations.labelBack,
+                          style: Theme.of(context).textTheme.headline6,
                         ),
+                        onPressed: () {
+                          setState(() {
+                            var parent =
+                                story.findParentOfPage(story.currentPage);
+                            if (parent != null) {
+                              story.currentPage = parent;
+                            } else {
+                              story.currentPage = story.root;
+                            }
+                          });
+                        },
                       ),
                     ),
-                  Checkbox(
-                    activeColor: Theme.of(context).primaryColor,
-                    checkColor: Theme.of(context).backgroundColor,
-                    value: story.currentPage.isTheEnd(),
+                  ),
+                Checkbox(
+                  activeColor: Theme.of(context).primaryColor,
+                  checkColor: Theme.of(context).backgroundColor,
+                  value: story.currentPage.isTheEnd(),
+                  onChanged: (newValue) {
+                    setState(() {
+                      story.currentPage.endType =
+                          newValue ? EndType.ALIVE : null;
+                    });
+                  },
+                ),
+                Center(
+                    child: Text(
+                  LDLocalizations.labelIsTheEnd,
+                  style: Theme.of(context).textTheme.headline6,
+                )),
+                if (story.currentPage.isTheEnd()) ...[
+                  Radio(
+                    value: EndType.DEAD,
+                    groupValue: story.currentPage.endType,
                     onChanged: (newValue) {
                       setState(() {
-                        story.currentPage.endType =
-                            newValue ? EndType.ALIVE : null;
+                        story.currentPage.endType = EndType.DEAD;
                       });
                     },
                   ),
                   Center(
-                      child: Text(
-                    LDLocalizations.labelIsTheEnd,
-                    style: Theme.of(context).textTheme.headline6,
-                  )),
-                  if (story.currentPage.isTheEnd()) ...[
-                    Radio(
-                      value: EndType.DEAD,
-                      groupValue: story.currentPage.endType,
-                      onChanged: (newValue) {
-                        setState(() {
-                          story.currentPage.endType = EndType.DEAD;
-                        });
-                      },
-                    ),
-                    Center(
-                        child: Text(LDLocalizations.labelIsTheEndDead,
-                            style: Theme.of(context).textTheme.headline6)),
-                    Radio(
-                      value: EndType.ALIVE,
-                      groupValue: story.currentPage.endType,
-                      onChanged: (newValue) {
-                        setState(() {
-                          story.currentPage.endType = EndType.ALIVE;
-                        });
-                      },
-                    ),
-                    Center(
-                        child: Text(LDLocalizations.labelIsTheEndAlive,
-                            style: Theme.of(context).textTheme.headline6))
-                  ]
-                ],
-              ),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                FlatButton.icon(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => NarrowScaffold(
-                            title: "Tree view",
-                            actions: [],
-                            body: StoryGraphView(story: widget.story)),
-                      ),
-                    );
-                  },
-                  icon: Icon(Icons.account_tree_sharp),
-                  label: Text(
-                    "Tree view",
-                    style: Theme.of(context).textTheme.headline6,
+                      child: Text(LDLocalizations.labelIsTheEndDead,
+                          style: Theme.of(context).textTheme.headline6)),
+                  Radio(
+                    value: EndType.ALIVE,
+                    groupValue: story.currentPage.endType,
+                    onChanged: (newValue) {
+                      setState(() {
+                        story.currentPage.endType = EndType.ALIVE;
+                      });
+                    },
                   ),
-                ),
-                FlatButton.icon(
-                  onPressed: () {
-                    setState(() {
-                      story.currentPage.addNextPageWithText(
-                          LDLocalizations.optionPlaceHolder);
-                    });
-                  },
-                  icon: Icon(Icons.add_box),
-                  label: Text(
-                    LDLocalizations.labelOptions,
-                    style: Theme.of(context).textTheme.headline6,
-                  ),
-                ),
+                  Center(
+                      child: Text(LDLocalizations.labelIsTheEndAlive,
+                          style: Theme.of(context).textTheme.headline6))
+                ]
               ],
             ),
-            if (story.currentPage.next.length == 0)
-              Text(
-                LDLocalizations.optionsListEmpty,
-                style: Theme.of(context).textTheme.headline6,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              FlatButton.icon(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => NarrowScaffold(
+                          title: "Tree view",
+                          actions: [],
+                          body: StoryGraphView(story: widget.story)),
+                    ),
+                  );
+                },
+                icon: Icon(Icons.account_tree_sharp),
+                label: Text(
+                  "Tree view",
+                  style: Theme.of(context).textTheme.headline6,
+                ),
               ),
-            Expanded(
-              flex: 3,
+              FlatButton.icon(
+                onPressed: () {
+                  setState(() {
+                    story.currentPage
+                        .addNextPageWithText(LDLocalizations.optionPlaceHolder);
+                  });
+                },
+                icon: Icon(Icons.add_box),
+                label: Text(
+                  LDLocalizations.labelOptions,
+                  style: Theme.of(context).textTheme.headline6,
+                ),
+              ),
+            ],
+          ),
+          if (story.currentPage.next.length == 0)
+            Text(
+              LDLocalizations.optionsListEmpty,
+              style: Theme.of(context).textTheme.headline6,
+            ),
+          Expanded(
+            flex: 3,
+            child: SingleChildScrollView(
+              child: Column(
+                children: story.currentPage.next.map((PageNext next) {
+                  if (!_textControllers.containsKey(next)) {
+                    _textControllers[next] = TextEditingController();
+                  }
+                  _textControllers[next].text = next.text;
+                  return Padding(
+                    padding: const EdgeInsets.all(2.0),
+                    child: BorderedContainer(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: <Widget>[
+                          SizedBox(
+                              height: 50,
+                              width: 200,
+                              child: TextEditor(
+                                controller: _textControllers[next],
+                                maxLines: 1,
+                                text: next.text,
+                                onSubmitted: (String newText) {
+                                  next.text = newText;
+                                },
+                                onSave: (newValue) {
+                                  next.text = newValue;
+                                },
+                              )),
+                          IconButton(
+                            icon: Icon(
+                              Icons.keyboard_arrow_right,
+                            ),
+                            onPressed: () {
+                              setState(() {
+                                story.goToNextPage(next);
+                              });
+                            },
+                          ),
+                          IconButton(
+                            onPressed: () {
+                              setState(() {
+                                story.currentPage.removeNextPage(next);
+                              });
+                            },
+                            icon: Icon(Icons.remove_circle),
+                          )
+                        ],
+                      ),
+                    ),
+                  );
+                }).toList(),
+              ),
+            ),
+          ),
+          Align(
+            alignment: Alignment.centerRight,
+            child: FlatButton.icon(
+              onPressed: () {
+                setState(() {
+                  story.currentPage.addNodeWithText("");
+                });
+              },
+              icon: Icon(
+                Icons.add_box,
+              ),
+              label: Text(LDLocalizations.addNewPassage,
+                  style: Theme.of(context).textTheme.headline6),
+            ),
+          ),
+          if (story.currentPage.nodes.length == 0)
+            Text(LDLocalizations.passageListEmpty),
+          Expanded(
+              flex: 6,
               child: SingleChildScrollView(
                 child: Column(
-                  children: story.currentPage.next.map((PageNext next) {
-                    if (!_textControllers.containsKey(next)) {
-                      _textControllers[next] = TextEditingController();
-                    }
-                    _textControllers[next].text = next.text;
+                  children: story.currentPage.nodes.reversed.map((node) {
+                    var imageType = node.imageType;
                     return Padding(
-                      padding: const EdgeInsets.all(2.0),
+                      padding: const EdgeInsets.all(8.0),
                       child: BorderedContainer(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: <Widget>[
-                            SizedBox(
-                                height: 50,
-                                width: 200,
-                                child: TextEditor(
-                                  controller: _textControllers[next],
-                                  maxLines: 1,
-                                  text: next.text,
-                                  onSubmitted: (String newText) {
-                                    next.text = newText;
-                                  },
-                                  onSave: (newValue) {
-                                    next.text = newValue;
-                                  },
-                                )),
-                            IconButton(
-                              icon: Icon(
-                                Icons.keyboard_arrow_right,
+                        child: ListTile(
+                          title: Text(
+                            firstNCharsFromString(node.text, 60),
+                            style: Theme.of(context).textTheme.headline6,
+                          ),
+                          leading: imageType == null
+                              ? Icon(
+                                  Icons.texture,
+                                )
+                              : Image(
+                                  image: BackgroundImage.getAssetImageForType(
+                                      imageType)),
+                          onTap: () async {
+                            var nodeIndex =
+                                story.currentPage.nodes.indexOf(node);
+                            story.currentPage.currentIndex = nodeIndex;
+                            await Navigator.pushNamed(
+                              context,
+                              ExtractEditPassageView.routeName,
+                              arguments: EditPassageViewArguments(
+                                page: story.currentPage,
                               ),
-                              onPressed: () {
-                                setState(() {
-                                  story.goToNextPage(next);
-                                });
-                              },
+                            );
+
+                            await StoryPersistence.instance
+                                .writeStory(widget.story);
+                            setState(() {});
+                          },
+                          trailing: IconButton(
+                            icon: Icon(
+                              Icons.delete,
+                              color: Theme.of(context).primaryColor,
                             ),
-                            IconButton(
-                              onPressed: () {
-                                setState(() {
-                                  story.currentPage.removeNextPage(next);
-                                });
-                              },
-                              icon: Icon(Icons.remove_circle),
-                            )
-                          ],
+                            onPressed: () {
+                              setState(() {
+                                story.currentPage.removeNode(node);
+                              });
+                            },
+                          ),
                         ),
                       ),
                     );
                   }).toList(),
                 ),
+              )),
+          BorderedContainer(
+            child: SlideableButton(
+              child: FatContainer(
+                text: LDLocalizations.startStory,
               ),
-            ),
-            Align(
-              alignment: Alignment.centerRight,
-              child: FlatButton.icon(
-                onPressed: () {
-                  setState(() {
-                    story.currentPage.addNodeWithText("");
-                  });
-                },
-                icon: Icon(
-                  Icons.add_box,
-                ),
-                label: Text(LDLocalizations.addNewPassage,
-                    style: Theme.of(context).textTheme.headline6),
-              ),
-            ),
-            if (story.currentPage.nodes.length == 0)
-              Text(LDLocalizations.passageListEmpty),
-            Expanded(
-                flex: 6,
-                child: SingleChildScrollView(
-                  child: Column(
-                    children: story.currentPage.nodes.reversed.map((node) {
-                      var imageType = node.imageType;
-                      return Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: BorderedContainer(
-                          child: ListTile(
-                            title: Text(
-                              firstNCharsFromString(node.text, 60),
-                              style: Theme.of(context).textTheme.headline6,
-                            ),
-                            leading: imageType == null
-                                ? Icon(
-                                    Icons.texture,
-                                  )
-                                : Image(
-                                    image: BackgroundImage.getAssetImageForType(
-                                        imageType)),
-                            onTap: () async {
-                              var nodeIndex =
-                                  story.currentPage.nodes.indexOf(node);
-                              story.currentPage.currentIndex = nodeIndex;
-                              await Navigator.pushNamed(
-                                context,
-                                ExtractEditPassageView.routeName,
-                                arguments: EditPassageViewArguments(
-                                  page: story.currentPage,
-                                ),
-                              );
-
-                              await StoryPersistence.instance
-                                  .writeStory(widget.story);
-                              setState(() {});
-                            },
-                            trailing: IconButton(
-                              icon: Icon(
-                                Icons.delete,
-                                color: Theme.of(context).primaryColor,
-                              ),
-                              onPressed: () {
-                                setState(() {
-                                  story.currentPage.removeNode(node);
-                                });
-                              },
-                            ),
-                          ),
-                        ),
-                      );
-                    }).toList(),
-                  ),
-                )),
-            BorderedContainer(
-              child: SlideableButton(
-                child: FatContainer(
-                  text: LDLocalizations.startStory,
-                ),
-                onPress: () async {
-                  story.reset();
-                  await Navigator.pushNamed(
-                    context,
-                    ExtractArgumentsGameView.routeName,
-                    arguments: GameViewArguments(story: story),
-                  );
-                  story.reset();
-                },
-              ),
-            )
-          ],
-        ),
-        title: LDLocalizations.createStory,
-        actions: [
-          AppBarObject(
-              text: LDLocalizations.backToStories,
-              onTap: () {
-                Navigator.pop(context);
-              }),
-          AppBarObject(
-            text: LDLocalizations.save,
-            onTap: () => _saveStoryCallback(context),
-          ),
-          AppBarObject(
-              text: LDLocalizations.exportGladStoryToJson,
-              onTap: () {
-                Navigator.push(
+              onPress: () async {
+                story.reset();
+                await Navigator.pushNamed(
                   context,
-                  MaterialPageRoute(
-                    builder: (context) => NarrowScaffold(
-                        title: LDLocalizations.exportGladStoryToJson,
-                        actions: [],
-                        showBackButton: true,
-                        body: StoryJsonExportView(story: widget.story)),
-                  ),
+                  ExtractArgumentsGameView.routeName,
+                  arguments: GameViewArguments(story: story),
                 );
-              }),
-          AppBarObject(
+                story.reset();
+              },
+            ),
+          )
+        ],
+      ),
+      title: LDLocalizations.createStory,
+      actions: [
+        AppBarObject(
+            text: LDLocalizations.backToStories,
+            onTap: () {
+              Navigator.pop(context);
+            }),
+        AppBarObject(
+          text: LDLocalizations.save,
+          onTap: () => _saveStoryCallback(context),
+        ),
+        AppBarObject(
+            text: LDLocalizations.exportGladStoryToJson,
             onTap: () {
               Navigator.push(
                 context,
                 MaterialPageRoute(
                   builder: (context) => NarrowScaffold(
-                      title: LDLocalizations.shareStory,
+                      title: LDLocalizations.exportGladStoryToJson,
                       actions: [],
                       showBackButton: true,
-                      body: UploadPassedStoryView(story: widget.story)),
+                      body: StoryJsonExportView(story: widget.story)),
                 ),
               );
-            },
-            text: LDLocalizations.shareStory,
-          ),
-        ]);
+            }),
+      ],
+    );
   }
 
   _saveStory(BuildContext context) async {
