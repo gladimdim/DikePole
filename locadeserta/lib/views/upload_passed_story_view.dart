@@ -29,7 +29,11 @@ class _UploadPassedStoryViewState extends State<UploadPassedStoryView> {
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Center(child: Text(LDLocalizations.labelInstructionsForUploadingStory)),
+        Center(
+            child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Text(LDLocalizations.labelInstructionsForUploadingStory),
+        )),
         VDivider(),
         BorderedContainer(
           child: IconButton(
@@ -64,31 +68,34 @@ class _UploadPassedStoryViewState extends State<UploadPassedStoryView> {
           ),
         VDivider(),
         if (uploaded && messageText != null)
-          Row(
-            children: [
-              Expanded(
-                flex: 5,
-                child: BorderedContainer(
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: SelectableText(
-                      getFullLink(),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Row(
+              children: [
+                Expanded(
+                  flex: 5,
+                  child: BorderedContainer(
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: SelectableText(
+                        getFullLink(),
+                      ),
                     ),
                   ),
                 ),
-              ),
-              Expanded(
-                flex: 1,
-                child: IconButton(
-                  icon: Icon(Icons.copy),
-                  onPressed: () {
-                    Clipboard.setData(
-                      ClipboardData(text: getFullLink()),
-                    );
-                  },
+                Expanded(
+                  flex: 1,
+                  child: IconButton(
+                    icon: Icon(Icons.copy),
+                    onPressed: () {
+                      Clipboard.setData(
+                        ClipboardData(text: getFullLink()),
+                      );
+                    },
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         VDivider(),
         if (uploaded && messageText != null)
