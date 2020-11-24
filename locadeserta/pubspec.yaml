@@ -1,6 +1,6 @@
 name: locadeserta
 description: Loca Deserta. The life of struggle.
-version: 1.0.121
+version: 1.0.122
 
 environment:
   sdk: ">=2.6.0 <3.0.0"
