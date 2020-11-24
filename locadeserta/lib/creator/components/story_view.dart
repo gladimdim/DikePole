@@ -5,11 +5,13 @@ import 'package:gladstoriesengine/gladstoriesengine.dart';
 import 'package:locadeserta/animations/slideable_button.dart';
 import 'package:locadeserta/components/BorderedRandomImageForType.dart';
 import 'package:locadeserta/components/bordered_container.dart';
+import 'package:locadeserta/components/narrow_scaffold.dart';
 import 'package:locadeserta/creator/components/fat_container.dart';
 import 'package:locadeserta/creator/utils/utils.dart';
 import 'package:locadeserta/models/Localizations.dart';
 import 'package:locadeserta/models/background_image.dart';
 import 'package:locadeserta/models/story_persistence.dart';
+import 'package:locadeserta/views/upload_passed_story_view.dart';
 
 class StoryView extends StatefulWidget {
   final Story currentStory;
@@ -137,14 +139,43 @@ class PassageState extends State<StoryView> with TickerProviderStateMixin {
               .toList(),
           if (!widget.currentStory.canContinue() &&
               widget.currentStory.currentPage.isTheEnd())
-            BorderedContainer(
-              child: SlideableButton(
-                child:
-                    FatContainer(text: LDLocalizations.theEndStartOverQuestion),
-                onPress: () {
-                  widget.currentStory.reset();
-                },
-              ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Expanded(
+                  flex: 1,
+                  child: BorderedContainer(
+                    child: SlideableButton(
+                      child: FatContainer(
+                          text: LDLocalizations.theEndStartOverQuestion),
+                      onPress: () {
+                        widget.currentStory.reset();
+                      },
+                    ),
+                  ),
+                ),
+                Expanded(
+                  flex: 1,
+                  child: BorderedContainer(
+                    child: SlideableButton(
+                      child: FatContainer(text: LDLocalizations.shareStory),
+                      onPress: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => NarrowScaffold(
+                                title: LDLocalizations.shareStory,
+                                actions: [],
+                                showBackButton: true,
+                                body: UploadPassedStoryView(
+                                    story: widget.currentStory)),
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+                ),
+              ],
             ),
         ],
       ),
