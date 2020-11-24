@@ -16,3 +16,4 @@ Cargo.lock
 
 wasm-pack.log
 locadeserta/android/app/key.jks
+locadeserta/.flutter-plugins-dependencies

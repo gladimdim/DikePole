@@ -6,7 +6,6 @@ environment:
   sdk: '>=2.10.0 <3.0.0'
 
 dependencies:
-  angel_cors: ^2.0.0
   nanoid: ^0.1.0
   gladstoriesengine: 0.2.6
 

@@ -1,6 +1,5 @@
 import 'dart:io';
 
-import 'package:angel_cors/angel_cors.dart';
 import 'package:angel_framework/angel_framework.dart';
 import 'package:angel_framework/http.dart';
 import 'package:gladstoriesengine/gladstoriesengine.dart';
@@ -51,9 +50,10 @@ run() async {
         <html>
         <head>
           <meta charset="utf-8"/>
-          <title>Marked in the browser</title>
+          <title>Інтерактивна історія. Дике Поле.</title>
         </head>
         <body>
+          <div>Дике Поле: Козацька Доля. Більше історій тут: <a href="https://locadeserta.com/">Всесвіт Дикого Поля</a></div>
           <div id="content"></div>
           <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
           <script>
