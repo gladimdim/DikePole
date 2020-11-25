@@ -4,6 +4,7 @@ import 'package:angel_framework/angel_framework.dart';
 import 'package:angel_framework/http.dart';
 import 'package:gladstoriesengine/gladstoriesengine.dart';
 import 'package:nanoid/async/nanoid.dart';
+import 'package:server/constants.dart';
 import 'package:server/static/generate_404.dart';
 import 'package:server/static/generate_html.dart';
 
@@ -28,7 +29,7 @@ run() async {
       throw AngelHttpException.notProcessable();
     }
 
-    var markdown = story.toMarkdownString();
+    var markdown = story.toMarkdownString(imagePrefix);
     var id = await nanoid();
     var file = File("$rootFolder/$passedStoriesFolder/$id.md");
     await file.writeAsString(markdown);

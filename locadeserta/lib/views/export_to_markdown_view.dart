@@ -21,7 +21,8 @@ class _ExportToMarkDownViewState extends State<ExportToMarkDownView> {
   @override
   void initState() {
     super.initState();
-    controller.text = widget.story.toMarkdownString();
+    controller.text =
+        widget.story.toMarkdownString("https://locadeserta.com/game/assets");
   }
 
   @override

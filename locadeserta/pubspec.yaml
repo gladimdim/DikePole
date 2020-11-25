@@ -19,7 +19,7 @@ dependencies:
   share_extend: 1.1.9
   tuple: 1.0.3
   http:
-  gladstoriesengine: 0.2.6
+  gladstoriesengine: ^0.2.7
   fluri: 1.3.0
   shared_preferences: 0.5.12+4
   flutter_markdown: ^0.3.5
