@@ -8,3 +8,9 @@ Future<List> fetchStories() async {
   List json = jsonDecode(response.body)["stories"];
   return json;
 }
+
+Future<Map> fetchStory(String url) async {
+  var response = await http.get(url);
+  var json = jsonDecode(response.body);
+  return json;
+}

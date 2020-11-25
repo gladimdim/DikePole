@@ -144,10 +144,10 @@ packages:
   gladstoriesengine:
     dependency: "direct main"
     description:
-      name: gladstoriesengine
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.2.6"
+      path: "../../gladstoriesdart"
+      relative: true
+    source: path
+    version: "0.2.7"
   glob:
     dependency: transitive
     description:

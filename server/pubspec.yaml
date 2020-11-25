@@ -7,7 +7,8 @@ environment:
 
 dependencies:
   nanoid: ^0.1.0
-  gladstoriesengine: 0.2.6
+  gladstoriesengine:
+    path: "../../gladstoriesdart"
 
 dev_dependencies:
   pedantic: ^1.9.0
