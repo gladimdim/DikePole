@@ -9,7 +9,7 @@ Future<String> generateCatalogHtml() async {
   var listOfStories = [];
   await for (FileSystemEntity f in folder.list()) {
     if (f is Directory) {
-      var folderName = f.path.split("$rootFolder/$builtinStories\\")[1];
+      var folderName = f.path.split("$rootFolder/$builtinStories/")[1];
       listOfStories.add(folderName);
     }
   }
