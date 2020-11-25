@@ -3,6 +3,15 @@ import 'dart:math';
 String generateMetaTags() {
   var imageRandom = Random().nextInt(7);
   return """
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-7FCN6S3PRK"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+    
+      gtag('config', 'G-7FCN6S3PRK');
+    </script>
     <meta name="title" content="Інтерактивна історія. Дике Поле. Loca Deserta.">
     <meta name="description" content="Loca Deserta: Дике Поле. Інтерактивні історії про Великий Луг. Створи свою власну історію">
     
