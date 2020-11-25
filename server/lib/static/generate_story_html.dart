@@ -1,14 +1,10 @@
-import 'package:server/static/meta_tags_generator.dart';
+import 'package:server/static/generate_head.dart';
 
-String generateHtml(String markdown) {
+String generateStoryHtml(String markdown) {
   return """
         <!doctype html>
         <html>
-        <head>
-          <meta charset="utf-8"/>
-          <title>Інтерактивна історія. Дике Поле.</title>
-         ${generateMetaTags()}
-         </head>
+       ${generateHead()}
         <body>
           <div>Дике Поле: Козацька Доля. Більше історій тут: <a href="https://locadeserta.com/">Всесвіт Дикого Поля</a></div>
           <div id="content"></div>
