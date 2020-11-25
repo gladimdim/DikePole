@@ -1,3 +1,4 @@
+import 'package:server/static/generateCSSStyles.dart';
 import 'package:server/static/meta_tags_generator.dart';
 
 String generateHead() {
@@ -6,6 +7,7 @@ String generateHead() {
           <meta charset="utf-8"/>
           <title>Інтерактивна історія. Дике Поле.</title>
          ${generateMetaTags()}
+         ${generateCssStyles()}
          </head>
   """;
 }

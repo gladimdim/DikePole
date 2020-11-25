@@ -10,7 +10,6 @@ var builtinStories = "built_in_stories";
 var counterMap = {};
 
 void run() async {
-  // await generateCatalogHtml();
   var stories = await fetchStories();
   await Future.forEach(stories, ((storyCatalog) async {
     var storyPath = urlAssets + "/" + storyCatalog["storyPath"];

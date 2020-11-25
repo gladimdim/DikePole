@@ -7,11 +7,14 @@ import 'package:nanoid/async/nanoid.dart';
 import 'package:server/constants.dart';
 import 'package:server/static/generate_404.dart';
 import 'package:server/static/generate_catalog.dart';
+import 'package:server/static/generate_catalog_story_body_html.dart';
+import 'package:server/static/generate_catalog_story_html.dart';
 import 'package:server/static/generate_story_html.dart';
 
 int port = 9093;
 var rootFolder = "data";
 var passedStoriesFolder = "passed_stories";
+const CATALOG_PATH = "/catalog";
 run() async {
   var app = Angel();
   var http = AngelHttp(app);
@@ -50,10 +53,26 @@ run() async {
     }
   });
 
-  app.get("/catalog", (req, res) async {
+  app.get(CATALOG_PATH, (req, res) async {
     var html = await generateCatalogHtml();
 
     res.headers.addAll({"Content-Type": "text/html; charset=utf-8"});
+    res.write(html);
+  });
+
+  app.get("$CATALOG_PATH/:name", (req, res) async {
+    var name = req.params["name"];
+    res.headers.addAll({"Content-Type": "text/html; charset=utf-8"});
+    var html = await generateCatalogStoryHtml(name);
+    res.write(html);
+  });
+
+  app.get("$CATALOG_PATH/:name/:id", (req, res) async {
+    var name = req.params["name"];
+    var id = req.params["id"];
+
+    res.headers.addAll({"Content-Type": "text/html; charset=utf-8"});
+    var html = await generateCatalogStoryBodyHtml(name, id);
     res.write(html);
   });
 }

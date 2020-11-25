@@ -4,12 +4,12 @@ import 'package:server/generator/story_generator.dart';
 import 'package:server/server.dart';
 import 'package:server/static/generate_head.dart';
 
-Future<String> generateCatalogHtml() async {
-  var folder = Directory("$rootFolder/$builtinStories");
+Future<String> generateCatalogStoryHtml(String name) async {
+  var folder = Directory("$rootFolder/$builtinStories/$name");
   var listOfStories = [];
   await for (FileSystemEntity f in folder.list()) {
-    if (f is Directory) {
-      var folderName = f.path.split("$rootFolder/$builtinStories\\")[1];
+    if (f is File) {
+      var folderName = f.path.split("$rootFolder/$builtinStories/$name\\")[1];
       listOfStories.add(folderName);
     }
   }
@@ -18,19 +18,17 @@ Future<String> generateCatalogHtml() async {
   listOfStories.forEach((element) {
     ul = ul +
         """
-          <li><a href='$CATALOG_PATH/$element'>$element</a></li>
+          <li><a href='$name/$element'>$name/$element</a></li>
         """;
   });
-
-  ul = ul + "\n</ul>";
 
   return """
         <!doctype html>
         <html>
        ${generateHead()}
         <body>
-        <h1>Каталог всіх опублікованих історій з всесвіту <a href="https://locadeserta.com/">Дикого Поля</a></div></h1>
-         <h3>$ul</h3>
+        <h2>Всі варіанти проходжень інтерактивних історій '$name' з всесвіту <a href="https://locadeserta.com/">Дикого Поля</a></div></h2>
+         <h4>$ul</h4>
         </body>
         </html>
     """;
