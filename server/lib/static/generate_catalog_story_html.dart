@@ -15,6 +15,7 @@ Future<String> generateCatalogStoryHtml(String name) async {
   }
 
   var ul = "<ul>\n";
+  listOfStories.sort();
   listOfStories.forEach((element) {
     ul = ul +
         """
