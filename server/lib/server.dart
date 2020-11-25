@@ -6,7 +6,8 @@ import 'package:gladstoriesengine/gladstoriesengine.dart';
 import 'package:nanoid/async/nanoid.dart';
 import 'package:server/constants.dart';
 import 'package:server/static/generate_404.dart';
-import 'package:server/static/generate_html.dart';
+import 'package:server/static/generate_catalog.dart';
+import 'package:server/static/generate_story_html.dart';
 
 int port = 9093;
 var rootFolder = "data";
@@ -42,10 +43,17 @@ run() async {
     try {
       var markdown =
           await File("$rootFolder/$passedStoriesFolder/$id.md").readAsString();
-      var indexHtml = generateHtml(markdown);
+      var indexHtml = generateStoryHtml(markdown);
       res.write(indexHtml);
     } catch (e) {
       res.write(generate404Response());
     }
+  });
+
+  app.get("/catalog", (req, res) async {
+    var html = await generateCatalogHtml();
+
+    res.headers.addAll({"Content-Type": "text/html; charset=utf-8"});
+    res.write(html);
   });
 }
