@@ -21,6 +21,7 @@ import 'package:locadeserta/models/story_persistence.dart'
 import 'package:locadeserta/models/story_persistence.dart';
 import 'package:locadeserta/radiuses.dart';
 import 'package:locadeserta/story_details_view.dart';
+import 'package:locadeserta/views/purgatory_list_view.dart';
 import 'package:locadeserta/waiting_screen.dart';
 
 const LANDING_IMAGE_HEIGHT = 200.0;
@@ -193,6 +194,19 @@ class _MainMenuState extends State<MainMenu> with TickerProviderStateMixin {
                   child: BorderedContainer(
                     child: FatContainer(
                       text: LDLocalizations.createStory,
+                    ),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(4.0),
+                child: SlideableButton(
+                  onPress: () {
+                    Navigator.pushNamed(context, PurgatoryListView.routeName);
+                  },
+                  child: BorderedContainer(
+                    child: FatContainer(
+                      text: LDLocalizations.labelUserStoriesCatalog,
                     ),
                   ),
                 ),

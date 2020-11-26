@@ -14,3 +14,8 @@ Future saveStoryToPurgatory(Story story) async {
   var file = File("$DIR_ROOT/$DIR_PURGATORY/${story.title}");
   await file.writeAsString(jsonEncode(story.toJson()));
 }
+
+Future<String> readPurgatoryStory(String title) async {
+  var contents = await readFileContents("$DIR_ROOT/$DIR_PURGATORY/$title");
+  return contents;
+}

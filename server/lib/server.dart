@@ -97,4 +97,16 @@ run() async {
     await saveStoryToPurgatory(story);
     return true;
   });
+
+  app.get("$PATH_PURGATORY/:name", (req, res) async {
+    var name = req.params["name"];
+    res.headers.addAll({"Content-Type": "text/html; charset=utf-8"});
+    try {
+      var html = await readPurgatoryStory(name);
+      res.write(html);
+      return true;
+    } catch (e) {
+      throw AngelHttpException.notFound();
+    }
+  });
 }

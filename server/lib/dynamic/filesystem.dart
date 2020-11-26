@@ -16,3 +16,8 @@ Future<List> getEntriesInDirOfType<T>(String dir) async {
 String getPathDelimiter() {
   return Platform.isLinux ? "/" : "\\";
 }
+
+Future<String> readFileContents(String path) async {
+  var file = File(path);
+  return await file.readAsString();
+}

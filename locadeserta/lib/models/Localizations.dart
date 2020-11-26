@@ -123,6 +123,7 @@ class LDLocalizations {
       'labelShareActions': 'Share actions',
       'labelShareToTwitter': 'Twitter',
       'labelShareToFacebook': 'Facebook',
+      'labelUserStoriesCatalog': 'List of user stories',
     },
     'uk': {
       'continue': 'Продовжити',
@@ -221,6 +222,7 @@ class LDLocalizations {
       'labelShareActions': 'Поширення',
       'labelShareToTwitter': 'Твітнути',
       'labelShareToFacebook': 'Facebook',
+      'labelUserStoriesCatalog': 'Історії інших користувачів',
     },
     'pl': {
       'continue': 'Dalej',
@@ -318,6 +320,7 @@ class LDLocalizations {
       'labelShareActions': 'Share actions',
       'labelShareToTwitter': 'Twitter',
       'labelShareToFacebook': 'Facebook',
+      'labelUserStoriesCatalog': 'Catalog of user stories',
     }
   };
 
@@ -672,5 +675,9 @@ class LDLocalizations {
 
   static String get labelShareToFacebook {
     return _localizedValues[locale.languageCode]['labelShareToFacebook'];
+  }
+
+  static String get labelUserStoriesCatalog {
+    return _localizedValues[locale.languageCode]['labelUserStoriesCatalog'];
   }
 }
