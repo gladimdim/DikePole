@@ -91,9 +91,11 @@ class _MainViewState extends State<GameView> {
         if (widget.catalogStory != null)
           AppBarObject(
             onTap: () async {
+              var story = Story.fromJson(widget.story.toJson());
+              story.title = story.title + " - 1";
               await Navigator.pushNamed(
                   context, ExtractEditStoryViewArguments.routeName,
-                  arguments: EditStoryViewArguments(story: widget.story));
+                  arguments: EditStoryViewArguments(story: story));
             },
             text: LDLocalizations.labelEditStory,
           )
