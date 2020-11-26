@@ -100,10 +100,10 @@ run() async {
 
   app.get("$PATH_PURGATORY/:name", (req, res) async {
     var name = req.params["name"];
-    res.headers.addAll({"Content-Type": "text/html; charset=utf-8"});
+    res.headers.addAll({"Content-Type": "application/json; charset=utf-8"});
     try {
-      var html = await readPurgatoryStory(name);
-      res.write(html);
+      var jsonString = await readPurgatoryStory(name);
+      res.write(jsonEncode(jsonString));
       return true;
     } catch (e) {
       throw AngelHttpException.notFound();
