@@ -5,6 +5,7 @@ import 'package:angel_framework/http.dart';
 import 'package:gladstoriesengine/gladstoriesengine.dart';
 import 'package:nanoid/async/nanoid.dart';
 import 'package:server/constants.dart';
+import 'package:server/dynamic/purgatory.dart';
 import 'package:server/static/generate_404.dart';
 import 'package:server/static/generate_catalog.dart';
 import 'package:server/static/generate_catalog_story_body_html.dart';
@@ -12,14 +13,11 @@ import 'package:server/static/generate_catalog_story_html.dart';
 import 'package:server/static/generate_story_html.dart';
 
 int port = 9093;
-var rootFolder = "data";
-var passedStoriesFolder = "passed_stories";
-const CATALOG_PATH = "/catalog";
+
 run() async {
   var app = Angel();
   var http = AngelHttp(app);
   await http.startServer('localhost', port);
-  // await http.startServer('localhost', port);
   print("Server started at port $port");
   app.get('/', (req, res) => res.write('Hello, world!'));
 
@@ -35,7 +33,7 @@ run() async {
 
     var markdown = story.toMarkdownString(imagePrefix);
     var id = await nanoid();
-    var file = File("$rootFolder/$passedStoriesFolder/$id.md");
+    var file = File("$DIR_ROOT/$DIR_PASSED_STORIES/$id.md");
     await file.writeAsString(markdown);
     res.write(id);
   });
@@ -45,7 +43,7 @@ run() async {
     res.headers.addAll({"Content-Type": "text/html; charset=utf-8"});
     try {
       var markdown =
-          await File("$rootFolder/$passedStoriesFolder/$id.md").readAsString();
+          await File("$DIR_ROOT/$DIR_PASSED_STORIES/$id.md").readAsString();
       var indexHtml = generateStoryHtml(markdown);
       res.write(indexHtml);
     } catch (e) {
@@ -53,21 +51,27 @@ run() async {
     }
   });
 
-  app.get(CATALOG_PATH, (req, res) async {
+  app.get(PATH_PURGATORY, (req, res) async {
+    res.headers.addAll({"Content-Type": "application/json; charset=utf-8"});
+    var response = await generatePurgatoryList();
+    res.write(response);
+  });
+
+  app.get(PATH_CATALOG, (req, res) async {
     var html = await generateCatalogHtml();
 
     res.headers.addAll({"Content-Type": "text/html; charset=utf-8"});
     res.write(html);
   });
 
-  app.get("$CATALOG_PATH/:name", (req, res) async {
+  app.get("$PATH_CATALOG/:name", (req, res) async {
     var name = req.params["name"];
     res.headers.addAll({"Content-Type": "text/html; charset=utf-8"});
     var html = await generateCatalogStoryHtml(name);
     res.write(html);
   });
 
-  app.get("$CATALOG_PATH/:name/:id", (req, res) async {
+  app.get("$PATH_CATALOG/:name/:id", (req, res) async {
     var name = req.params["name"];
     var id = req.params["id"];
 
