@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:angel_framework/angel_framework.dart';
@@ -51,12 +52,6 @@ run() async {
     }
   });
 
-  app.get(PATH_PURGATORY, (req, res) async {
-    res.headers.addAll({"Content-Type": "application/json; charset=utf-8"});
-    var response = await generatePurgatoryList();
-    res.write(response);
-  });
-
   app.get(PATH_CATALOG, (req, res) async {
     var html = await generateCatalogHtml();
 
@@ -78,5 +73,28 @@ run() async {
     res.headers.addAll({"Content-Type": "text/html; charset=utf-8"});
     var html = await generateCatalogStoryBodyHtml(name, id);
     res.write(html);
+  });
+
+  /**
+   * PURGATORY
+   */
+  app.get(PATH_PURGATORY, (req, res) async {
+    res.headers.addAll({"Content-Type": "application/json; charset=utf-8"});
+    var response = await generatePurgatoryList();
+    res.write(jsonEncode(response));
+  });
+
+  app.post("$PATH_PURGATORY/:name", (req, res) async {
+    res.headers.addAll({"Content-Type": "application/json; charset=utf-8"});
+    await req.parseBody();
+    var body = req.bodyAsMap;
+    Story story;
+    try {
+      story = Story.fromJson(body);
+    } catch (e) {
+      throw AngelHttpException.notProcessable();
+    }
+    await saveStoryToPurgatory(story);
+    return true;
   });
 }
