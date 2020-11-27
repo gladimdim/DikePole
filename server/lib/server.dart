@@ -103,7 +103,7 @@ run() async {
     res.headers.addAll({"Content-Type": "application/json; charset=utf-8"});
     try {
       var jsonString = await readPurgatoryStory(name);
-      res.write(jsonEncode(jsonString));
+      res.write(jsonString);
       return true;
     } catch (e) {
       throw AngelHttpException.notFound();

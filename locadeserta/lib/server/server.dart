@@ -19,3 +19,8 @@ Future<List> getPurgatoryStories() async {
   var result = await http.get("$url/purgatory");
   return jsonDecode(result.body);
 }
+
+Future<Map> getPurgatoryStoryByName(String name) async {
+  var result = await http.get("$url/purgatory/$name");
+  return jsonDecode(result.body);
+}
