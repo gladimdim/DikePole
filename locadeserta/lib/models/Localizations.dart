@@ -123,6 +123,12 @@ class LDLocalizations {
       'labelShareActions': 'Share actions',
       'labelShareToTwitter': 'Twitter',
       'labelShareToFacebook': 'Facebook',
+      'labelUserStoriesCatalog': 'List of user stories',
+      'labelInstructionsForUploadingStoryToPurgatory':
+          'Upload your story to online Purgatory catalog. Your story will be available for every reader! By uploading the story you agree to Free Art License.',
+      'labelUploading': 'Uploading',
+      'labelUploadedPurgatoryStoryInstructions':
+          'Uploaded! Now your story is available for everybody in the "User stories" section of the game.',
     },
     'uk': {
       'continue': 'Продовжити',
@@ -221,6 +227,12 @@ class LDLocalizations {
       'labelShareActions': 'Поширення',
       'labelShareToTwitter': 'Твітнути',
       'labelShareToFacebook': 'Facebook',
+      'labelUserStoriesCatalog': 'Історії інших читачів',
+      'labelInstructionsForUploadingStoryToPurgatory':
+          'Завантажте свою історію в онлайн каталог Чистилища. Ваша історія буде доступна для всіх читачів. Якщо ви завантажуєте вашу історію, то ви автоматично погоджуєтесь на Free Art License.',
+      'labelUploading': 'Завантажуємо',
+      'labelUploadedPurgatoryStoryInstructions':
+          'Завантажено! Тепер ваша історія доступна для всіх читачів в секції "Історії інших читаів".',
     },
     'pl': {
       'continue': 'Dalej',
@@ -318,6 +330,12 @@ class LDLocalizations {
       'labelShareActions': 'Share actions',
       'labelShareToTwitter': 'Twitter',
       'labelShareToFacebook': 'Facebook',
+      'labelUserStoriesCatalog': 'Catalog of user stories',
+      'labelInstructionsForUploadingStoryToPurgatory':
+          'Upload your story to online Purgatory catalog. Your story will be available for every reader! By uploading the story you agree to Free Art License.',
+      'labelUploading': 'Uploading',
+      'labelUploadedPurgatoryStoryInstructions':
+          'Uploaded! Now your story is available for everybody in the "User stories" section of the game.',
     }
   };
 
@@ -672,5 +690,23 @@ class LDLocalizations {
 
   static String get labelShareToFacebook {
     return _localizedValues[locale.languageCode]['labelShareToFacebook'];
+  }
+
+  static String get labelUserStoriesCatalog {
+    return _localizedValues[locale.languageCode]['labelUserStoriesCatalog'];
+  }
+
+  static String get labelInstructionsForUploadingStoryToPurgatory {
+    return _localizedValues[locale.languageCode]
+        ['labelInstructionsForUploadingStoryToPurgatory'];
+  }
+
+  static String get labelUploadedPurgatoryStoryInstructions {
+    return _localizedValues[locale.languageCode]
+        ['labelUploadedPurgatoryStoryInstructions'];
+  }
+
+  static String get labelUploading {
+    return _localizedValues[locale.languageCode]['labelUploading'];
   }
 }

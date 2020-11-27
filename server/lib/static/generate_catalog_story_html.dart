@@ -1,18 +1,12 @@
 import 'dart:io';
 
-import 'package:server/generator/story_generator.dart';
-import 'package:server/server.dart';
+import 'package:server/constants.dart';
+import 'package:server/dynamic/filesystem.dart';
 import 'package:server/static/generate_head.dart';
 
 Future<String> generateCatalogStoryHtml(String name) async {
-  var folder = Directory("$rootFolder/$builtinStories/$name");
-  var listOfStories = [];
-  await for (FileSystemEntity f in folder.list()) {
-    if (f is File) {
-      var folderName = f.path.split("$rootFolder/$builtinStories/$name/")[1];
-      listOfStories.add(folderName);
-    }
-  }
+  var listOfStories = await getEntriesInDirOfType<File>(
+      "$DIR_ROOT/$DIR_BUILT_IN_STORIES/$name");
 
   var ul = "<ul>\n";
   listOfStories.sort();

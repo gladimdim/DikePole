@@ -13,6 +13,7 @@ import 'package:locadeserta/main_menu.dart';
 import 'package:locadeserta/models/Localizations.dart';
 import 'package:locadeserta/models/app_preferences.dart';
 import 'package:locadeserta/story_details_view.dart';
+import 'package:locadeserta/views/purgatory_list_view.dart';
 
 class LocaDesertaApp extends StatefulWidget {
   @override
@@ -142,6 +143,7 @@ class _LocaDesertaAppState extends State<LocaDesertaApp> {
                     ExtractUserStoryDetailsViewArguments(),
                 ShareUserStoryToPdf.routeName: (context) =>
                     ExtractPlublishStoryViewArguments(),
+                PurgatoryListView.routeName: (context) => PurgatoryListView(),
               },
             );
           } else {

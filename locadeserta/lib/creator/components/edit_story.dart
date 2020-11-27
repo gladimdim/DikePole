@@ -13,6 +13,7 @@ import 'package:locadeserta/creator/utils/utils.dart';
 import 'package:locadeserta/models/Localizations.dart';
 import 'package:locadeserta/models/background_image.dart';
 import 'package:locadeserta/models/story_persistence.dart';
+import 'package:locadeserta/views/publish_story_to_purgatory_view.dart';
 import 'package:locadeserta/views/story_graph_view.dart';
 import 'package:locadeserta/views/story_json_export_view.dart';
 
@@ -306,19 +307,35 @@ class _EditStoryViewState extends State<EditStoryView> {
           onTap: () => _saveStoryCallback(context),
         ),
         AppBarObject(
-            text: LDLocalizations.exportGladStoryToJson,
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => NarrowScaffold(
-                      title: LDLocalizations.exportGladStoryToJson,
-                      actions: [],
-                      showBackButton: true,
-                      body: StoryJsonExportView(story: widget.story)),
-                ),
-              );
-            }),
+          text: LDLocalizations.exportGladStoryToJson,
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => NarrowScaffold(
+                    title: LDLocalizations.exportGladStoryToJson,
+                    actions: [],
+                    showBackButton: true,
+                    body: StoryJsonExportView(story: widget.story)),
+              ),
+            );
+          },
+        ),
+        AppBarObject(
+          text: LDLocalizations.publishUserStory,
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => NarrowScaffold(
+                    title: LDLocalizations.publishUserStory,
+                    actions: [],
+                    showBackButton: true,
+                    body: PublishStoryToPurgatoryView(story: widget.story)),
+              ),
+            );
+          },
+        ),
       ],
     );
   }
