@@ -24,3 +24,12 @@ Future<Map> getPurgatoryStoryByName(String name) async {
   var result = await http.get("$url/purgatory/$name");
   return jsonDecode(result.body);
 }
+
+Future<bool> uploadStoryToPurgatoryCatalog(Story story) async {
+  var result = await http.post(
+    "$url/purgatory/${story.title}",
+    body: jsonEncode(story.toJson()),
+    headers: {"content-type": "application/json"},
+  );
+  return result.statusCode == 200;
+}
