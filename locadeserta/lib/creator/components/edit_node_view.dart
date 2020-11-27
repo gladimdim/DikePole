@@ -59,95 +59,100 @@ class _EditNodeViewState extends State<EditNodeView> {
                 ),
               ),
               Expanded(
-                flex: 2,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        BorderedContainer(
-                            child: Padding(
-                          padding: const EdgeInsets.all(2.0),
-                          child: IconButton(
-                            icon: Icon(Icons.arrow_back),
-                            onPressed: widget.onPreviousPressed,
+                flex: 3,
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Row(
+                            children: [
+                              Text(
+                                LDLocalizations.passageWillHaveImage,
+                                style: Theme.of(context).textTheme.headline6,
+                              ),
+                              Checkbox(
+                                value: widget.node.imageType != null,
+                                onChanged: (newValue) {
+                                  setState(() {
+                                    if (newValue) {
+                                      widget.node.imageType = ImageType.BOAT;
+                                    } else {
+                                      widget.node.imageType = null;
+                                    }
+                                  });
+                                },
+                              ),
+                            ],
                           ),
-                        )),
-                        BorderedContainer(
-                            child: Padding(
-                          padding: const EdgeInsets.all(2.0),
-                          child: IconButton(
-                            icon: Icon(Icons.delete),
-                            onPressed: widget.onDeletePressed,
+                          Row(
+                            children: [
+                              BorderedContainer(
+                                  child: Padding(
+                                padding: const EdgeInsets.all(2.0),
+                                child: IconButton(
+                                  icon: Icon(Icons.arrow_back),
+                                  onPressed: widget.onPreviousPressed,
+                                ),
+                              )),
+                              BorderedContainer(
+                                  child: Padding(
+                                padding: const EdgeInsets.all(2.0),
+                                child: IconButton(
+                                  icon: Icon(Icons.delete),
+                                  onPressed: widget.onDeletePressed,
+                                ),
+                              )),
+                              BorderedContainer(
+                                  child: Padding(
+                                padding: const EdgeInsets.all(2.0),
+                                child: IconButton(
+                                  icon: Icon(Icons.create_new_folder),
+                                  onPressed: widget.onAddNewNextPressed,
+                                ),
+                              )),
+                              BorderedContainer(
+                                child: Padding(
+                                  padding: const EdgeInsets.all(2.0),
+                                  child: IconButton(
+                                    icon: Icon(Icons.arrow_forward),
+                                    onPressed: widget.onNextPressed,
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
-                        )),
-                        BorderedContainer(
-                            child: Padding(
-                          padding: const EdgeInsets.all(2.0),
-                          child: IconButton(
-                            icon: Icon(Icons.create_new_folder),
-                            onPressed: widget.onAddNewNextPressed,
-                          ),
-                        )),
-                        BorderedContainer(
-                            child: Padding(
-                          padding: const EdgeInsets.all(2.0),
-                          child: IconButton(
-                            icon: Icon(Icons.arrow_forward),
-                            onPressed: widget.onNextPressed,
-                          ),
-                        )),
-                      ],
-                    ),
-                    Row(
-                      children: <Widget>[
-                        Text(
-                          LDLocalizations.passageWillHaveImage,
-                          style: Theme.of(context).textTheme.headline6,
-                        ),
-                        Checkbox(
-                          value: widget.node.imageType != null,
-                          onChanged: (newValue) {
-                            setState(() {
-                              if (newValue) {
-                                widget.node.imageType = ImageType.BOAT;
-                              } else {
-                                widget.node.imageType = null;
-                              }
-                            });
-                          },
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-              if (widget.node.imageType != null)
-                Expanded(
-                  flex: 1,
-                  child: Row(
-                    children: <Widget>[
-                      Text(
-                        LDLocalizations.selectImageForPassage,
-                        style: TextStyle(
-                          color: Theme.of(context).primaryColor,
-                        ),
+                        ],
                       ),
-                      SizedBox(
-                        width: 20,
-                      ),
-                      ImageSelector(
-                        imageType: widget.node.imageType,
-                        onSelected: (newImageType) {
-                          setState(() {
-                            widget.node.imageType = newImageType;
-                          });
-                        },
-                      ),
+                      if (widget.node.imageType != null)
+                        Row(
+                          children: <Widget>[
+                            Text(
+                              LDLocalizations.selectImageForPassage,
+                              style: TextStyle(
+                                color: Theme.of(context).primaryColor,
+                              ),
+                            ),
+                            SizedBox(
+                              width: 20,
+                            ),
+                            ImageSelector(
+                              imageType: widget.node.imageType,
+                              onSelected: (newImageType) {
+                                setState(() {
+                                  widget.node.imageType = newImageType;
+                                });
+                              },
+                            ),
+                          ],
+                        ),
                     ],
                   ),
                 ),
+              ),
             ],
           ),
         ),
