@@ -1,5 +1,25 @@
-A sample command-line application with an entrypoint in `bin/`, library code
-in `lib/`, and example unit test in `test/`.
+# Generate stories from online catalog:
 
-Created from templates made available by Stagehand under a BSD-style
-[license](https://github.com/dart-lang/stagehand/blob/master/LICENSE).
+Create folders:
+
+```
+mkdir data
+cd data
+mkdir built_in_stories
+mkdir purgatory
+mkdir passed_stories
+```
+Run generator:
+```
+dart ./bin/generate_stories.dart
+```
+
+Run server at port 9093
+
+```
+dart ./bin/server.dart
+```
+
+Go to 
+
+http://localhost:9093/catalog
