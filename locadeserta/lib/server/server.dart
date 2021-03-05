@@ -3,15 +3,19 @@ import 'dart:convert';
 import 'package:gladstoriesengine/gladstoriesengine.dart';
 import 'package:http/http.dart' as http;
 
-var url = "https://dikepole.locadeserta.com";
-// var url = "http://localhost:9093";
+// var url = "https://dikepole.locadeserta.com";
+var url = "http://localhost:9093";
 
 Future<String> uploadStoryToServer(Story story) async {
-  var result = await http.post(Uri.https(url, "/post_story"),
-    body: jsonEncode(story.toStateJson()),
-    headers: {"content-type": "application/json"},
-  );
-  return result.body;
+  try {
+    var result = await http.post(Uri.http(url, "/post_story"),
+      body: jsonEncode(story.toStateJson()),
+      headers: {"content-type": "application/json"},
+    );
+    return result.body;
+  } catch (exception) {
+    print("Error while calling upload story: $exception");
+  }
 }
 
 Future<List> getPurgatoryStories() async {
