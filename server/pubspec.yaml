@@ -7,7 +7,8 @@ environment:
 
 dependencies:
   nanoid: ^0.1.0
-  gladstoriesengine: ^0.2.7
+  gladstoriesengine: 
+    path: ../../gladstoriesdart
   markdown: ^3.0.0
 
 dev_dependencies:

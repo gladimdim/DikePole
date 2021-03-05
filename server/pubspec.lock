@@ -144,10 +144,10 @@ packages:
   gladstoriesengine:
     dependency: "direct main"
     description:
-      name: gladstoriesengine
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.2.7"
+      path: "../../gladstoriesdart"
+      relative: true
+    source: path
+    version: "0.2.8"
   glob:
     dependency: transitive
     description:
@@ -350,7 +350,7 @@ packages:
       name: rxdart
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.24.1"
+    version: "0.26.0"
   shelf:
     dependency: transitive
     description:
@@ -506,4 +506,4 @@ packages:
     source: hosted
     version: "2.2.1"
 sdks:
-  dart: ">=2.10.0 <3.0.0"
+  dart: ">=2.12.0 <3.0.0"
