@@ -45,7 +45,7 @@ class _EditStoryViewState extends State<EditStoryView> {
                   Align(
                     alignment: Alignment.centerRight,
                     child: BorderedContainer(
-                      child: FlatButton.icon(
+                      child: TextButton.icon(
                         icon: Icon(Icons.arrow_back),
                         label: Text(
                           LDLocalizations.labelBack,
@@ -113,7 +113,7 @@ class _EditStoryViewState extends State<EditStoryView> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              FlatButton.icon(
+              TextButton.icon(
                 onPressed: () {
                   Navigator.push(
                     context,
@@ -131,7 +131,7 @@ class _EditStoryViewState extends State<EditStoryView> {
                   style: Theme.of(context).textTheme.headline6,
                 ),
               ),
-              FlatButton.icon(
+              TextButton.icon(
                 onPressed: () {
                   setState(() {
                     story.currentPage
@@ -208,7 +208,7 @@ class _EditStoryViewState extends State<EditStoryView> {
           ),
           Align(
             alignment: Alignment.centerRight,
-            child: FlatButton.icon(
+            child: TextButton.icon(
               onPressed: () {
                 setState(() {
                   story.currentPage.addNodeWithText("");

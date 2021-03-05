@@ -93,7 +93,7 @@ class _ExportToPDFState extends State<ExportToPDF> {
                           SizedBox(
                             height: 150,
                           ),
-                          RaisedButton(
+                          ElevatedButton(
                             child: Text(LDLocalizations.start,
                                 style: TextStyle(
                                     fontWeight: FontWeight.bold,
@@ -254,7 +254,7 @@ class _ExportGladStoriesToPDFState extends State<ExportGladStoriesToPDF> {
                           SizedBox(
                             height: 150,
                           ),
-                          RaisedButton(
+                          ElevatedButton(
                             child: Text(LDLocalizations.start,
                                 style: TextStyle(
                                     fontWeight: FontWeight.bold,

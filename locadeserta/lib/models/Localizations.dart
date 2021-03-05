@@ -339,7 +339,7 @@ class LDLocalizations {
     }
   };
 
-  static String get Continue {
+  static String get labelContinue {
     return _localizedValues[LDLocalizations.locale.languageCode]['continue'];
   }
 

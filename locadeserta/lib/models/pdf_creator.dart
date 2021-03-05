@@ -204,7 +204,7 @@ class PdfGladStoriesCreator {
     var imageItems = this
         .story
         .history
-        .where((historyItem) => historyItem.imagePath != null);
+        .where((historyItem) => historyItem.imagePath.isNotEmpty);
     var counter = 0.0;
     var futuresCompleted = await Future.forEach(imageItems, ((imageItem) async {
       if (_images.containsKey(imageItem.imagePath[1])) {
@@ -305,7 +305,7 @@ class PdfGladStoriesCreator {
   Widget historyToPdf(
       StoryModel.HistoryItem historyItem, Font ttf, Document pdf) {
     var imageContainer;
-    if (historyItem.imagePath != null) {
+    if (historyItem.imagePath.isNotEmpty) {
       var img = _images[historyItem.imagePath[1]];
 
       final image = PdfImage(
@@ -333,7 +333,7 @@ class PdfGladStoriesCreator {
     }
     return Column(
       children: [
-        if (historyItem.imagePath != null) imageContainer,
+        if (historyItem.imagePath.isNotEmpty) imageContainer,
         Container(
           padding: EdgeInsets.all(8.0),
           decoration: BoxDecoration(

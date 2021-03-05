@@ -109,7 +109,7 @@ class _UserStoryDetailsViewState extends State<UserStoryDetailsView> {
                       ),
                       keyboardType: TextInputType.number,
                       inputFormatters: [
-                        WhitelistingTextInputFormatter.digitsOnly
+                        FilteringTextInputFormatter.digitsOnly
                       ],
                       onSaved: (value) {
                         _year = int.parse(value);

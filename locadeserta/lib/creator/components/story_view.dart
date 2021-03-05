@@ -205,7 +205,7 @@ class PassageItemView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
-        if (historyItem.imagePath != null)
+        if (historyItem.imagePath.isNotEmpty)
           BorderedRandomImageByPath(imagePaths: historyItem.imagePath),
         Container(
           alignment: Alignment.topCenter,
