@@ -8,14 +8,14 @@ class TweenImage extends StatefulWidget {
   final AssetImage first;
   final AssetImage last;
   final int duration;
-  final double height;
-  final double width;
+  final double? height;
+  final double? width;
   final BoxFit imageFit;
   final bool repeat;
 
   TweenImage(
-      {@required this.first,
-      @required this.last,
+      {required this.first,
+      required this.last,
       this.duration = 2,
       this.height,
       this.width,
@@ -24,7 +24,7 @@ class TweenImage extends StatefulWidget {
 }
 
 class _TweenImageState extends State<TweenImage> {
-  Playback playback;
+  late Playback playback;
 
   @override
   initState() {

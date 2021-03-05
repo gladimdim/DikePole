@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class FatContainer extends StatelessWidget {
   final String text;
   final Color backgroundColor;
-  FatContainer({@required this.text, this.backgroundColor = Colors.black});
+  FatContainer({required this.text, this.backgroundColor = Colors.black});
 
   @override
   Widget build(BuildContext context) {

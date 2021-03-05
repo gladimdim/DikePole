@@ -86,7 +86,6 @@ class _MainMenuState extends State<MainMenu> with TickerProviderStateMixin {
               case ConnectionState.active:
               case ConnectionState.waiting:
                 return WaitingScreen();
-                break;
               case ConnectionState.done:
                 stories = List.from(snapshot.data);
                 stories.sort(
@@ -96,9 +95,7 @@ class _MainMenuState extends State<MainMenu> with TickerProviderStateMixin {
                 } else {
                   return _buildCatalogView(context, stories);
                 }
-                break;
             }
-            return null;
           },
         ),
       ),

@@ -5,7 +5,7 @@ class AppBarButton extends StatelessWidget {
   final Color color;
   final String text;
 
-  AppBarButton({this.onTap, this.color, this.text});
+  AppBarButton({required this.onTap, required this.color, required this.text});
 
   @override
   Widget build(BuildContext context) {

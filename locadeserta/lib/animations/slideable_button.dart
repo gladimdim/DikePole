@@ -7,8 +7,8 @@ class SlideableButton extends StatefulWidget {
   final Duration duration;
 
   SlideableButton({
-    @required this.child,
-    @required this.onPress,
+    required this.child,
+    required this.onPress,
     this.direction = Direction.Right,
     this.duration = const Duration(milliseconds: 200),
   });
@@ -19,7 +19,7 @@ class SlideableButton extends StatefulWidget {
 
 class _SlideableButtonState extends State<SlideableButton>
     with SingleTickerProviderStateMixin {
-  AnimationController controller;
+  late AnimationController controller;
 
   @override
   void initState() {
@@ -51,7 +51,7 @@ class _SlideableButtonState extends State<SlideableButton>
     ));
 
     return DefaultTextStyle(
-      style: Theme.of(context).textTheme.button,
+      style: Theme.of(context).textTheme.button!,
       child: AnimatedBuilder(
         animation: animation,
         child: widget.child,

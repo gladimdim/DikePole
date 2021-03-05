@@ -343,377 +343,377 @@ class LDLocalizations {
   };
 
   static String get labelContinue {
-    return _localizedValues[LDLocalizations.locale.languageCode]['continue'];
+    return _localizedValues[LDLocalizations.locale.languageCode]!['continue']!;
   }
 
   static String get signInWithGoogle {
-    return _localizedValues[locale.languageCode]['signinwithgoogle'];
+    return _localizedValues[locale.languageCode]!['signinwithgoogle']!;
   }
 
   static String get signOut {
-    return _localizedValues[locale.languageCode]['signout'];
+    return _localizedValues[locale.languageCode]!['signout']!;
   }
 
   static String get next {
-    return _localizedValues[locale.languageCode]['next'];
+    return _localizedValues[locale.languageCode]!['next']!;
   }
 
   static String get appTitle {
-    return _localizedValues[locale.languageCode]['apptitle'];
+    return _localizedValues[locale.languageCode]!['apptitle']!;
   }
 
   static String get view {
-    return _localizedValues[locale.languageCode]['view'];
+    return _localizedValues[locale.languageCode]!['view']!;
   }
 
   static String get start {
-    return _localizedValues[locale.languageCode]['start'];
+    return _localizedValues[locale.languageCode]!['start']!;
   }
 
   static String greetUserByName(String name) {
-    return '${_localizedValues[locale.languageCode]['greet']}, $name';
+    return '${_localizedValues[locale.languageCode]!['greet']}, $name';
   }
 
   static String get versionLabel {
-    return "${_localizedValues[locale.languageCode]['version']}: $version";
+    return "${_localizedValues[locale.languageCode]!['version']}: $version";
   }
 
   static String get loadingStory {
-    return _localizedValues[locale.languageCode]['loadingstory'];
+    return _localizedValues[locale.languageCode]!['loadingstory']!;
   }
 
   static String get startStory {
-    return _localizedValues[locale.languageCode]['startstory'];
+    return _localizedValues[locale.languageCode]!['startstory']!;
   }
 
   static String get lookingForHeroes {
-    return _localizedValues[locale.languageCode]['lookingforheroes'];
+    return _localizedValues[locale.languageCode]!['lookingforheroes']!;
   }
 
   static String get save {
-    return _localizedValues[locale.languageCode]['save'];
+    return _localizedValues[locale.languageCode]!['save']!;
   }
 
   static String get reset {
-    return _localizedValues[locale.languageCode]['reset'];
+    return _localizedValues[locale.languageCode]!['reset']!;
   }
 
   static String get anonLogin {
-    return _localizedValues[locale.languageCode]['anonlogin'];
+    return _localizedValues[locale.languageCode]!['anonlogin']!;
   }
 
   static String get welcomeText {
-    return _localizedValues[locale.languageCode]['welcometext'];
+    return _localizedValues[locale.languageCode]!['welcometext']!;
   }
 
   static String get theEnd {
-    return _localizedValues[locale.languageCode]['theend'];
+    return _localizedValues[locale.languageCode]!['theend']!;
   }
 
   static String get toBeContinued {
-    return _localizedValues[locale.languageCode]['tobecontinued'];
+    return _localizedValues[locale.languageCode]!['tobecontinued']!;
   }
 
   static String get showStoryDetails {
-    return _localizedValues[locale.languageCode]['showstorydetails'];
+    return _localizedValues[locale.languageCode]!['showstorydetails']!;
   }
 
   static String get translationNotYetReady {
-    return _localizedValues[locale.languageCode]['translationnotready'];
+    return _localizedValues[locale.languageCode]!['translationnotready']!;
   }
 
   static String get aboutGame {
-    return _localizedValues[locale.languageCode]['aboutgame'];
+    return _localizedValues[locale.languageCode]!['aboutgame']!;
   }
 
   static String get menuText {
-    return _localizedValues[locale.languageCode]['menu'];
+    return _localizedValues[locale.languageCode]!['menu']!;
   }
 
   static String get backToStories {
-    return _localizedValues[locale.languageCode]['backtostories'];
+    return _localizedValues[locale.languageCode]!['backtostories']!;
   }
 
   static String get backToMenu {
-    return _localizedValues[locale.languageCode]['backtomenu'];
+    return _localizedValues[locale.languageCode]!['backtomenu']!;
   }
 
   static String get authors {
-    return _localizedValues[locale.languageCode]['authors'];
+    return _localizedValues[locale.languageCode]!['authors']!;
   }
 
   static String get storyBegin {
-    return _localizedValues[locale.languageCode]['storybegin'];
+    return _localizedValues[locale.languageCode]!['storybegin']!;
   }
 
   static String get shareStory {
-    return _localizedValues[locale.languageCode]['sharestory'];
+    return _localizedValues[locale.languageCode]!['sharestory']!;
   }
 
   static String get preparingExport {
-    return _localizedValues[locale.languageCode]['preparingexport'];
+    return _localizedValues[locale.languageCode]!['preparingexport']!;
   }
 
   static String get openingShareDialog {
-    return _localizedValues[locale.languageCode]['openingsharedialog'];
+    return _localizedValues[locale.languageCode]!['openingsharedialog']!;
   }
 
   static String get longProcessWarning {
-    return _localizedValues[locale.languageCode]['longprocesswarning'];
+    return _localizedValues[locale.languageCode]!['longprocesswarning']!;
   }
 
   static String get longProcessDescription {
-    return _localizedValues[locale.languageCode]['longprocessdescription'];
+    return _localizedValues[locale.languageCode]!['longprocessdescription']!;
   }
 
   static String get createPdfDocument {
-    return _localizedValues[locale.languageCode]['createpdfdocument'];
+    return _localizedValues[locale.languageCode]!['createpdfdocument']!;
   }
 
   static String get cancel {
-    return _localizedValues[locale.languageCode]['cancel'];
+    return _localizedValues[locale.languageCode]!['cancel']!;
   }
 
   static String get processingImage {
-    return _localizedValues[locale.languageCode]['processingimage'];
+    return _localizedValues[locale.languageCode]!['processingimage']!;
   }
 
   static String get savingExportFile {
-    return _localizedValues[locale.languageCode]['savingexportdocument'];
+    return _localizedValues[locale.languageCode]!['savingexportdocument']!;
   }
 
   static String get enterStoryTitle {
-    return _localizedValues[locale.languageCode]['enterstorytitle'];
+    return _localizedValues[locale.languageCode]!['enterstorytitle']!;
   }
 
   static String get labelStoryTitle {
-    return _localizedValues[locale.languageCode]['labelStoryTitle'];
+    return _localizedValues[locale.languageCode]!['labelStoryTitle']!;
   }
 
   static String get listOfAuthors {
-    return _localizedValues[locale.languageCode]['listofauthors'];
+    return _localizedValues[locale.languageCode]!['listofauthors']!;
   }
 
   static String get labelAuthors {
-    return _localizedValues[locale.languageCode]['labelauthors'];
+    return _localizedValues[locale.languageCode]!['labelauthors']!;
   }
 
   static String get createStory {
-    return _localizedValues[locale.languageCode]['createstory'];
+    return _localizedValues[locale.languageCode]!['createstory']!;
   }
 
   static String get edit {
-    return _localizedValues[locale.languageCode]['edit'];
+    return _localizedValues[locale.languageCode]!['edit']!;
   }
 
   static String get description {
-    return _localizedValues[locale.languageCode]['description'];
+    return _localizedValues[locale.languageCode]!['description']!;
   }
 
   static String get hintDescription {
-    return _localizedValues[locale.languageCode]['hintDescription'];
+    return _localizedValues[locale.languageCode]!['hintDescription']!;
   }
 
   static String get remove {
-    return _localizedValues[locale.languageCode]['remove'];
+    return _localizedValues[locale.languageCode]!['remove']!;
   }
 
   static String get labelOptions {
-    return _localizedValues[locale.languageCode]['labeloptions'];
+    return _localizedValues[locale.languageCode]!['labeloptions']!;
   }
 
   static String get optionPlaceHolder {
-    return _localizedValues[locale.languageCode]['optionplaceholder'];
+    return _localizedValues[locale.languageCode]!['optionplaceholder']!;
   }
 
   static String get goToRootPage {
-    return _localizedValues[locale.languageCode]['gotorootpage'];
+    return _localizedValues[locale.languageCode]!['gotorootpage']!;
   }
 
   static String get addNewPassage {
-    return _localizedValues[locale.languageCode]['addnewpassage'];
+    return _localizedValues[locale.languageCode]!['addnewpassage']!;
   }
 
   static String get passageWillHaveImage {
-    return _localizedValues[locale.languageCode]['passagewillhaveimage'];
+    return _localizedValues[locale.languageCode]!['passagewillhaveimage']!;
   }
 
   static String get selectImageForPassage {
-    return _localizedValues[locale.languageCode]['selectimageforpassage'];
+    return _localizedValues[locale.languageCode]!['selectimageforpassage']!;
   }
 
   static String get editingPassage {
-    return _localizedValues[locale.languageCode]['editingpassage'];
+    return _localizedValues[locale.languageCode]!['editingpassage']!;
   }
 
   static String get previewStory {
-    return _localizedValues[locale.languageCode]['previewstory'];
+    return _localizedValues[locale.languageCode]!['previewstory']!;
   }
 
   static String get optionsListEmpty {
-    return _localizedValues[locale.languageCode]['optionslistempty'];
+    return _localizedValues[locale.languageCode]!['optionslistempty']!;
   }
 
   static String get passageListEmpty {
-    return _localizedValues[locale.languageCode]['passagelistempty'];
+    return _localizedValues[locale.languageCode]!['passagelistempty']!;
   }
 
   static String get labelIsTheEndDead {
-    return _localizedValues[locale.languageCode]['labelistheenddead'];
+    return _localizedValues[locale.languageCode]!['labelistheenddead']!;
   }
 
   static String get labelIsTheEndAlive {
-    return _localizedValues[locale.languageCode]['labelistheendalive'];
+    return _localizedValues[locale.languageCode]!['labelistheendalive']!;
   }
 
   static String get labelIsTheEnd {
-    return _localizedValues[locale.languageCode]['labelistheend'];
+    return _localizedValues[locale.languageCode]!['labelistheend']!;
   }
 
   static String get labelBack {
-    return _localizedValues[locale.languageCode]['labelback'];
+    return _localizedValues[locale.languageCode]!['labelback']!;
   }
 
   static String get exportGladStoryToJson {
-    return _localizedValues[locale.languageCode]['exportgladstorytojson'];
+    return _localizedValues[locale.languageCode]!['exportgladstorytojson']!;
   }
 
   static String get pasteFullJSON {
-    return _localizedValues[locale.languageCode]['pastefulljson'];
+    return _localizedValues[locale.languageCode]!['pastefulljson']!;
   }
 
   static String get labelImport {
-    return _localizedValues[locale.languageCode]['import'];
+    return _localizedValues[locale.languageCode]!['import']!;
   }
 
   static String get statisticsTitle {
-    return _localizedValues[locale.languageCode]['statisticsTitle'];
+    return _localizedValues[locale.languageCode]!['statisticsTitle']!;
   }
 
   static String get theEndStartOverQuestion {
-    return _localizedValues[locale.languageCode]['theendstartoverquestion'];
+    return _localizedValues[locale.languageCode]!['theendstartoverquestion']!;
   }
 
   static String get registeredUsers {
-    return _localizedValues[locale.languageCode]['registeredUsers'];
+    return _localizedValues[locale.languageCode]!['registeredUsers']!;
   }
 
   static String get timesRead {
-    return _localizedValues[locale.languageCode]['timesRead'];
+    return _localizedValues[locale.languageCode]!['timesRead']!;
   }
 
   static String get failedToLoadStats {
-    return _localizedValues[locale.languageCode]['failedToLoadStats'];
+    return _localizedValues[locale.languageCode]!['failedToLoadStats']!;
   }
 
   static String get loadingStats {
-    return _localizedValues[locale.languageCode]['loadingStats'];
+    return _localizedValues[locale.languageCode]!['loadingStats']!;
   }
 
   static String get hintFieldYear {
-    return _localizedValues[locale.languageCode]['hintFieldYear'];
+    return _localizedValues[locale.languageCode]!['hintFieldYear']!;
   }
 
   static String get labelYear {
-    return _localizedValues[locale.languageCode]['labelYear'];
+    return _localizedValues[locale.languageCode]!['labelYear']!;
   }
 
   static String get createNewStory {
-    return _localizedValues[locale.languageCode]['createNewStory'];
+    return _localizedValues[locale.languageCode]!['createNewStory']!;
   }
 
   static String get ownStories {
-    return _localizedValues[locale.languageCode]['ownStories'];
+    return _localizedValues[locale.languageCode]!['ownStories']!;
   }
 
   static String get yourExistingStories {
-    return _localizedValues[locale.languageCode]['yourExistingStories'];
+    return _localizedValues[locale.languageCode]!['yourExistingStories']!;
   }
 
   static String get darkThemeLabel {
-    return _localizedValues[locale.languageCode]['darkThemeLabel'];
+    return _localizedValues[locale.languageCode]!['darkThemeLabel']!;
   }
 
   static String get lightThemeLabel {
-    return _localizedValues[locale.languageCode]['lightThemeLabel'];
+    return _localizedValues[locale.languageCode]!['lightThemeLabel']!;
   }
 
   static String get updateStats {
-    return _localizedValues[locale.languageCode]['updateStatsLabel'];
+    return _localizedValues[locale.languageCode]!['updateStatsLabel']!;
   }
 
   static String get publishUserStory {
-    return _localizedValues[locale.languageCode]['publishUserStory'];
+    return _localizedValues[locale.languageCode]!['publishUserStory']!;
   }
 
   static String get publishStoryInstructions {
-    return _localizedValues[locale.languageCode]['publishStoryInstructions'];
+    return _localizedValues[locale.languageCode]!['publishStoryInstructions']!;
   }
 
   static String get labelNoPassagesAvailable {
-    return _localizedValues[locale.languageCode]['labelNoPassagesAvailable'];
+    return _localizedValues[locale.languageCode]!['labelNoPassagesAvailable']!;
   }
 
   static String get labelShowMarkdownSource {
-    return _localizedValues[locale.languageCode]['labelShowMarkdownSource'];
+    return _localizedValues[locale.languageCode]!['labelShowMarkdownSource']!;
   }
 
   static String get labelShowMarkdownRendered {
-    return _localizedValues[locale.languageCode]['labelShowMarkdownRendered'];
+    return _localizedValues[locale.languageCode]!['labelShowMarkdownRendered']!;
   }
 
   static String get labelConvertToMarkdown {
-    return _localizedValues[locale.languageCode]['labelConvertToMarkdown'];
+    return _localizedValues[locale.languageCode]!['labelConvertToMarkdown']!;
   }
 
   static String get labelEditStory {
-    return _localizedValues[locale.languageCode]['labelEditStory'];
+    return _localizedValues[locale.languageCode]!['labelEditStory']!;
   }
 
   static String get labelInstructionsForUploadingStory {
-    return _localizedValues[locale.languageCode]
-        ['labelInstructionsForUploadingStory'];
+    return _localizedValues[locale.languageCode]!
+        ['labelInstructionsForUploadingStory']!;
   }
 
   static String get labelOpenInBrowser {
-    return _localizedValues[locale.languageCode]['labelOpenInBrowser'];
+    return _localizedValues[locale.languageCode]!['labelOpenInBrowser']!;
   }
 
   static String get labelFileIsBeingUploaded {
-    return _localizedValues[locale.languageCode]['labelFileIsBeingUploaded'];
+    return _localizedValues[locale.languageCode]!['labelFileIsBeingUploaded']!;
   }
 
   static String get labelShareActions {
-    return _localizedValues[locale.languageCode]['labelShareActions'];
+    return _localizedValues[locale.languageCode]!['labelShareActions']!;
   }
 
   static String get labelShareToTwitter {
-    return _localizedValues[locale.languageCode]['labelShareToTwitter'];
+    return _localizedValues[locale.languageCode]!['labelShareToTwitter']!;
   }
 
   static String get labelShareToFacebook {
-    return _localizedValues[locale.languageCode]['labelShareToFacebook'];
+    return _localizedValues[locale.languageCode]!['labelShareToFacebook']!;
   }
 
   static String get labelUserStoriesCatalog {
-    return _localizedValues[locale.languageCode]['labelUserStoriesCatalog'];
+    return _localizedValues[locale.languageCode]!['labelUserStoriesCatalog']!;
   }
 
   static String get labelInstructionsForUploadingStoryToPurgatory {
-    return _localizedValues[locale.languageCode]
-        ['labelInstructionsForUploadingStoryToPurgatory'];
+    return _localizedValues[locale.languageCode]!
+        ['labelInstructionsForUploadingStoryToPurgatory']!;
   }
 
   static String get labelUploadedPurgatoryStoryInstructions {
-    return _localizedValues[locale.languageCode]
-        ['labelUploadedPurgatoryStoryInstructions'];
+    return _localizedValues[locale.languageCode]!
+        ['labelUploadedPurgatoryStoryInstructions']!;
   }
 
   static String get labelUploading {
-    return _localizedValues[locale.languageCode]['labelUploading'];
+    return _localizedValues[locale.languageCode]!['labelUploading']!;
   }
 
   static String get shareStoryToPdf {
-    return _localizedValues[locale.languageCode]['shareStoryToPdf'];
+    return _localizedValues[locale.languageCode]!['shareStoryToPdf']!;
   }
 }

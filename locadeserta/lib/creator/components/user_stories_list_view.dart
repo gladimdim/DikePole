@@ -52,7 +52,7 @@ class _UserStoriesListState extends State<UserStoriesList> {
                     child: SlideableButton(
                       onPress: () async {
                         try {
-                          var root = gse.Page();
+                          var root = gse.Page.empty();
                           await Navigator.pushNamed(
                             context,
                             UserStoryDetailsView.routeName,

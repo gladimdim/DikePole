@@ -17,13 +17,13 @@ class EditNodeView extends StatefulWidget {
   final VoidCallback onAddNewNextPressed;
 
   EditNodeView({
-    @required this.node,
-    this.onFinished,
+    required this.node,
+    required this.onFinished,
     this.isLastNode = false,
-    this.onNextPressed,
-    this.onPreviousPressed,
-    this.onDeletePressed,
-    this.onAddNewNextPressed,
+    required this.onNextPressed,
+    required this.onPreviousPressed,
+    required this.onDeletePressed,
+    required this.onAddNewNextPressed,
   });
 
   @override
@@ -45,8 +45,8 @@ class _EditNodeViewState extends State<EditNodeView> {
               Expanded(
                 flex: 4,
                 child: TextEditor(
-                  controller: _setTextToTextEditingController(widget.node.text),
-                  text: widget.node.text,
+                  controller: _setTextToTextEditingController(widget.node.text!),
+                  text: widget.node.text!,
                   maxLines: 20,
                   onSave: (text) {
                     widget.node.text = text;
@@ -78,7 +78,7 @@ class _EditNodeViewState extends State<EditNodeView> {
                                 value: widget.node.imageType != null,
                                 onChanged: (newValue) {
                                   setState(() {
-                                    if (newValue) {
+                                    if (newValue!) {
                                       widget.node.imageType = ImageType.BOAT;
                                     } else {
                                       widget.node.imageType = null;
@@ -177,7 +177,7 @@ class TextEditorWithButton extends StatefulWidget {
   final int maxLines;
   final Function(String) onSave;
 
-  TextEditorWithButton({this.text, this.onSave, this.maxLines = 25});
+  TextEditorWithButton({required this.text, required this.onSave, this.maxLines = 25});
 
   @override
   _TextEditorState createState() => _TextEditorState();

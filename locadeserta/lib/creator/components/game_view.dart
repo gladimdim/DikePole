@@ -15,7 +15,7 @@ import '../../export_pdf_view.dart';
 
 class GameView extends StatefulWidget {
   final Story story;
-  final CatalogStory catalogStory;
+  final CatalogStory? catalogStory;
 
   GameView({this.story, this.catalogStory});
 
@@ -26,11 +26,8 @@ class GameView extends StatefulWidget {
 class _MainViewState extends State<GameView> {
   @override
   Widget build(BuildContext context) {
-    final title = widget.catalogStory != null
-        ? widget.catalogStory.title
-        : LDLocalizations.previewStory;
     return NarrowScaffold(
-      title: title,
+      title: getTitle(),
       actions: [
         AppBarObject(
           onTap: () => Navigator.pop(context),
@@ -110,6 +107,15 @@ class _MainViewState extends State<GameView> {
         ),
       ),
     );
+  }
+
+  String getTitle() {
+    var catalog = widget.catalogStory;
+    if (catalog != null) {
+      return catalog.title;
+    } else {
+      return LDLocalizations.previewStory;
+    }
   }
 }
 

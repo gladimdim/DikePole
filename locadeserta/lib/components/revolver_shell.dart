@@ -7,14 +7,17 @@ class RevolverShell extends StatefulWidget {
   final double animationValue;
 
   RevolverShell(
-      {this.top, this.bottom, this.middle, this.animationValue = 0.0});
+      {required this.top,
+      required this.bottom,
+      required this.middle,
+      this.animationValue = 0.0});
 
   @override
   _RevolverShellState createState() => _RevolverShellState();
 }
 
 class _RevolverShellState extends State<RevolverShell> {
-  Widget _animatedWidget;
+  late Widget _animatedWidget;
 
   @override
   Widget build(BuildContext context) {

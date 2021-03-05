@@ -12,9 +12,9 @@ class AppBarCustom extends StatefulWidget {
   final bool showBackButton;
 
   AppBarCustom({
-    @required this.appBarButtons,
-    @required this.title,
-    this.onExpanded,
+    required this.appBarButtons,
+    required this.title,
+    required this.onExpanded,
     this.expanded = false,
     this.showBackButton = true,
   });
@@ -119,5 +119,5 @@ class AppBarObject {
   final VoidCallback onTap;
   final String text;
 
-  AppBarObject({@required this.text, @required this.onTap});
+  AppBarObject({required this.text, required this.onTap});
 }

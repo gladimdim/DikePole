@@ -5,7 +5,7 @@ class ImageSelector extends StatefulWidget {
   final ImageType imageType;
   final Function(ImageType) onSelected;
 
-  ImageSelector({this.imageType = ImageType.RIVER, this.onSelected});
+  ImageSelector({this.imageType = ImageType.RIVER, required this.onSelected});
 
   @override
   _ImageSelectorState createState() => _ImageSelectorState();
@@ -29,7 +29,7 @@ class _ImageSelectorState extends State<ImageSelector> {
       value: widget.imageType,
       style: Theme.of(context).textTheme.button,
       onChanged: (newType) {
-        widget.onSelected(newType);
+        widget.onSelected(newType!);
       },
       items: imageTypes.map<DropdownMenuItem<ImageType>>((imageType) {
         return DropdownMenuItem(

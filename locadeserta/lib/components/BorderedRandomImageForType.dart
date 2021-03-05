@@ -35,7 +35,7 @@ class BorderedRandomImageByPath extends StatelessWidget {
   final List imagePaths;
   final bool repeat;
 
-  BorderedRandomImageByPath({this.imagePaths, this.repeat = false});
+  BorderedRandomImageByPath({required this.imagePaths, this.repeat = false});
 
   @override
   Widget build(BuildContext context) {

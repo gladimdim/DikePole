@@ -6,7 +6,7 @@ import 'package:locadeserta/models/Localizations.dart';
 class EditNodeSequence extends StatefulWidget {
   final gse.Page page;
 
-  EditNodeSequence({@required this.page});
+  EditNodeSequence({required this.page});
 
   @override
   _EditNodeSequenceState createState() => _EditNodeSequenceState();
@@ -49,7 +49,7 @@ class _EditNodeSequenceState extends State<EditNodeSequence> {
                           deleteNode();
                         });
                       }
-                    : null,
+                    : () {},
               ))
           : Center(child: Text(LDLocalizations.labelNoPassagesAvailable)),
       appBar: AppBar(
@@ -86,7 +86,7 @@ class EditPassageViewArguments {
   final gse.Page page;
 
   EditPassageViewArguments({
-    this.page,
+    required this.page,
   });
 }
 
@@ -95,7 +95,7 @@ class ExtractEditPassageView extends StatelessWidget {
 
   Widget build(BuildContext context) {
     final EditPassageViewArguments args =
-        ModalRoute.of(context).settings.arguments;
+        ModalRoute.of(context)!.settings.arguments!;
 
     return EditNodeSequence(
       page: args.page,

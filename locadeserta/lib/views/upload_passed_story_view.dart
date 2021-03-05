@@ -12,7 +12,7 @@ import 'package:url_launcher/url_launcher.dart';
 class UploadPassedStoryView extends StatefulWidget {
   final Story story;
 
-  UploadPassedStoryView({this.story});
+  UploadPassedStoryView({required this.story});
 
   @override
   _UploadPassedStoryViewState createState() => _UploadPassedStoryViewState();
@@ -21,7 +21,7 @@ class UploadPassedStoryView extends StatefulWidget {
 class _UploadPassedStoryViewState extends State<UploadPassedStoryView> {
   bool uploaded = false;
   bool uploading = false;
-  String messageText;
+  String? messageText;
 
   @override
   Widget build(BuildContext context) {
