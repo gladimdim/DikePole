@@ -34,10 +34,13 @@ run() async {
       throw AngelHttpException.notProcessable();
     }
 
+    print("preparing to markdown");
     var markdown = story.toMarkdownString(imagePrefix);
+    print("markdown done");
     var id = await nanoid();
     var file = File("$DIR_ROOT/$DIR_PASSED_STORIES/$id.md");
     await file.writeAsString(markdown);
+    print("file saved: $id");
     res.write(id);
   });
 
