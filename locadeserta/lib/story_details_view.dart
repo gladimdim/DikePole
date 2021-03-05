@@ -18,9 +18,9 @@ class StoryDetailsViewArguments {
   final bool expanded;
 
   StoryDetailsViewArguments({
-    this.catalogStory,
-    this.onReadPressed,
-    this.onDetailPressed,
+    required this.catalogStory,
+    required this.onReadPressed,
+    required this.onDetailPressed,
     this.expanded = false,
   });
 }
@@ -36,17 +36,18 @@ class StoryDetailsView extends StatefulWidget {
   _StoryDetailsViewState createState() => _StoryDetailsViewState();
 
   StoryDetailsView(
-      {this.catalogStory,
-      this.onReadPressed,
-      this.onDetailPressed,
+      {
+        required this.catalogStory,
+      required this.onReadPressed,
+      required this.onDetailPressed,
       this.expanded = false,
       this.animationValue = 0.0});
 }
 
 class _StoryDetailsViewState extends State<StoryDetailsView>
     with TickerProviderStateMixin {
-  AssetImage image;
-  AssetImage coloredImage;
+  late AssetImage image;
+  late AssetImage coloredImage;
 
   @override
   void initState() {
@@ -211,7 +212,7 @@ class ExtractStoryDetailsViewArguments extends StatelessWidget {
   static const routeName = "/story_details";
 
   Widget build(BuildContext context) {
-    final StoryDetailsViewArguments args = ModalRoute.of(context).settings.arguments;
+    final StoryDetailsViewArguments args = ModalRoute.of(context)?.settings.arguments as StoryDetailsViewArguments;
 
     return NarrowScaffold(
       actions: [

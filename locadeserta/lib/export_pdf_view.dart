@@ -15,9 +15,9 @@ import 'package:tuple/tuple.dart';
 class ExportToPDF extends StatefulWidget {
   final StoryHistory storyHistory;
   final CatalogStory catalogStory;
-  PdfCreator creator;
+  late PdfCreator creator;
 
-  ExportToPDF({this.catalogStory, this.storyHistory}) {
+  ExportToPDF({required this.catalogStory, required this.storyHistory}) {
     creator = PdfCreator(story: storyHistory);
   }
 

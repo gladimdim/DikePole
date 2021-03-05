@@ -337,7 +337,7 @@ class PdfGladStoriesCreator {
         Container(
           padding: EdgeInsets.all(8.0),
           decoration: BoxDecoration(
-            border: BoxBorder(
+            border: TableBorder(
               width: 2.0,
               left: true,
               right: true,
@@ -346,7 +346,7 @@ class PdfGladStoriesCreator {
             ),
           ),
           child: Center(
-            child: _trueTypeText(historyItem.text, ttf),
+            child: _trueTypeText(historyItem.text!, ttf),
           ),
         ),
       ],

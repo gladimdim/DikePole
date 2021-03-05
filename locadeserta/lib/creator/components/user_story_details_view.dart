@@ -13,7 +13,7 @@ class UserStoryDetailsView extends StatefulWidget {
   static String routeName = "/userStoryDetailsView";
   final gse.Story story;
 
-  UserStoryDetailsView({this.story});
+  UserStoryDetailsView({required this.story});
 
   @override
   _UserStoryDetailsViewState createState() => _UserStoryDetailsViewState();
@@ -21,19 +21,18 @@ class UserStoryDetailsView extends StatefulWidget {
 
 class _UserStoryDetailsViewState extends State<UserStoryDetailsView> {
   final _formKey = GlobalKey<FormState>();
-  String _title;
-  String _description;
-  String _authors;
-  int _year;
+  late String _title;
+  late String _description;
+  late String _authors;
+  late int _year;
 
   @override
   void initState() {
     super.initState();
-    if (widget.story != null && widget.story.year != null) {
-      _year = widget.story.year;
-    } else {
-      _year = 1620;
-    }
+    _title = widget.story.title;
+    _description = widget.story.description;
+    _authors = widget.story.authors;
+    _year = widget.story.year;
   }
 
   @override
@@ -67,7 +66,7 @@ class _UserStoryDetailsViewState extends State<UserStoryDetailsView> {
                       initialValue:
                           widget.story == null ? "" : widget.story.title,
                       onSaved: (value) {
-                        _title = value;
+                        _title = value!;
                       },
                     ),
                     TextFormField(
@@ -79,12 +78,12 @@ class _UserStoryDetailsViewState extends State<UserStoryDetailsView> {
                         labelText: LDLocalizations.description,
                       ),
                       onSaved: (value) {
-                        _description = value;
+                        _description = value!;
                       },
                       minLines: 1,
                       maxLines: 5,
                       initialValue:
-                          widget.story == null ? "" : widget.story.description,
+                          widget.story.description,
                     ),
                     TextFormField(
                       style: Theme.of(context).textTheme.bodyText2,
@@ -95,10 +94,10 @@ class _UserStoryDetailsViewState extends State<UserStoryDetailsView> {
                         labelText: LDLocalizations.labelAuthors,
                       ),
                       onSaved: (value) {
-                        _authors = value;
+                        _authors = value!;
                       },
                       initialValue:
-                          widget.story == null ? "" : widget.story.authors,
+                          widget.story.authors,
                     ),
                     TextFormField(
                       style: Theme.of(context).textTheme.bodyText2,
@@ -112,7 +111,7 @@ class _UserStoryDetailsViewState extends State<UserStoryDetailsView> {
                         FilteringTextInputFormatter.digitsOnly
                       ],
                       onSaved: (value) {
-                        _year = int.parse(value);
+                        _year = int.parse(value!);
                       },
                       initialValue: "$_year",
                     ),
@@ -129,7 +128,7 @@ class _UserStoryDetailsViewState extends State<UserStoryDetailsView> {
                                 size: 30.0,
                               ),
                               onPressed: () {
-                                _formKey.currentState.save();
+                                _formKey.currentState!.save();
                                 var story;
                                 if (widget.story == null) {
                                   var page = gse.Page.generate();
@@ -221,13 +220,13 @@ class _UserStoryDetailsViewState extends State<UserStoryDetailsView> {
 class UserStoryDetailsViewArguments {
   final gse.Story story;
 
-  UserStoryDetailsViewArguments({this.story});
+  UserStoryDetailsViewArguments({required this.story});
 }
 
 class ExtractUserStoryDetailsViewArguments extends StatelessWidget {
   Widget build(BuildContext context) {
     final UserStoryDetailsViewArguments args =
-        ModalRoute.of(context).settings.arguments;
+        ModalRoute.of(context)?.settings.arguments as UserStoryDetailsViewArguments;
 
     return UserStoryDetailsView(
       story: args.story,

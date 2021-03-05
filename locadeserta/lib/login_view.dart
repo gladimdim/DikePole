@@ -17,9 +17,10 @@ class LoginView extends StatefulWidget {
   final bool darkTheme;
 
   LoginView(
-      {this.onContinue,
-      this.onSetLocale,
-      this.onThemeChange,
+      {
+        required this.onContinue,
+      required this.onSetLocale,
+      required this.onThemeChange,
       this.darkTheme = false});
 
   @override
