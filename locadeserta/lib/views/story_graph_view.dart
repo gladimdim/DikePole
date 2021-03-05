@@ -49,7 +49,7 @@ class _StoryGraphViewState extends State<StoryGraphView> {
     return graph;
   }
 
-  Node generateNextNode(Graph graph, Node parent, Story story) {
+  void generateNextNode(Graph graph, Node parent, Story story) {
     var node = Node(storyNodeToGraphNode(story.currentPage.getCurrentNode()));
     if (parent == null) {
       graph.addNode(node);

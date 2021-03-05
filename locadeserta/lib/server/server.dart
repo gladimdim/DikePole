@@ -7,8 +7,7 @@ var url = "https://dikepole.locadeserta.com";
 // var url = "http://localhost:9093";
 
 Future<String> uploadStoryToServer(Story story) async {
-  var result = await http.post(
-    "$url/post_story",
+  var result = await http.post(Uri.https(url, "/post_story"),
     body: jsonEncode(story.toStateJson()),
     headers: {"content-type": "application/json"},
   );
@@ -16,18 +15,18 @@ Future<String> uploadStoryToServer(Story story) async {
 }
 
 Future<List> getPurgatoryStories() async {
-  var result = await http.get("$url/purgatory");
+  var result = await http.get(Uri.https(url, "/purgatory"));
   return jsonDecode(result.body);
 }
 
 Future<Map> getPurgatoryStoryByName(String name) async {
-  var result = await http.get("$url/purgatory/$name");
+  var result = await http.get(Uri.https(url, "purgatory/$name"));
   return jsonDecode(result.body);
 }
 
 Future<bool> uploadStoryToPurgatoryCatalog(Story story) async {
   var result = await http.post(
-    "$url/purgatory/${story.title}",
+    Uri.https(url, "/purgatory/${story.title}"),
     body: jsonEncode(story.toJson()),
     headers: {"content-type": "application/json"},
   );

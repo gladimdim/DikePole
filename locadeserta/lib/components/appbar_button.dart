@@ -9,8 +9,8 @@ class AppBarButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FlatButton(
-      splashColor: color,
+    return TextButton(
+      // splashColor: color,
       onPressed: onTap,
       child: Padding(
         padding: const EdgeInsets.all(8.0),

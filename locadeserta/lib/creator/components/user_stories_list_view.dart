@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gladstoriesengine/gladstoriesengine.dart';
+import 'package:gladstoriesengine/gladstoriesengine.dart' as gse;
 import 'package:locadeserta/animations/slideable_button.dart';
 import 'package:locadeserta/components/bordered_container.dart';
 import 'package:locadeserta/components/narrow_scaffold.dart';
@@ -19,8 +19,8 @@ class UserStoriesList extends StatefulWidget {
 }
 
 class _UserStoriesListState extends State<UserStoriesList> {
-  Story story;
-  List<Story> storyBuilders = [];
+  gse.Story story;
+  List<gse.Story> storyBuilders = [];
 
   @override
   Widget build(BuildContext context) {
@@ -52,16 +52,20 @@ class _UserStoriesListState extends State<UserStoriesList> {
                     child: SlideableButton(
                       onPress: () async {
                         try {
+                          var root = gse.Page();
                           await Navigator.pushNamed(
                             context,
                             UserStoryDetailsView.routeName,
                             arguments: UserStoryDetailsViewArguments(
-                              story: Story(
+                              story: gse.Story(
                                 title: "Your title",
                                 description: "Your description",
                                 authors: "Your name",
+                                year: 2021,
                                 imageResolver:
                                     BackgroundImage.getRandomImageForType,
+                                root: root,
+                                currentPage: root,
                               ),
                             ),
                           );
@@ -107,13 +111,13 @@ class _UserStoriesListState extends State<UserStoriesList> {
     );
   }
 
-  List<Widget> _createStoryViews(List<Story> storyBuilders, context) {
+  List<Widget> _createStoryViews(List<gse.Story> storyBuilders, context) {
     return storyBuilders
         .map((storyBuilder) => _createStoryView(storyBuilder))
         .toList();
   }
 
-  Widget _createStoryView(Story story) {
+  Widget _createStoryView(gse.Story story) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 8.0),
       child: Center(

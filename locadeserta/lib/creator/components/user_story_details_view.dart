@@ -132,11 +132,14 @@ class _UserStoryDetailsViewState extends State<UserStoryDetailsView> {
                                 _formKey.currentState.save();
                                 var story;
                                 if (widget.story == null) {
+                                  var page = gse.Page.generate();
                                   story = gse.Story(
                                     title: _title,
                                     description: _description,
                                     authors: _authors,
-                                    root: gse.Page.generate(),
+                                    root: page,
+                                    currentPage: page,
+                                    year: _year,
                                   );
                                 } else {
                                   story = widget.story;
