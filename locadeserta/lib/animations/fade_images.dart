@@ -45,8 +45,8 @@ class _TweenImageState extends State<TweenImage> {
       child: ControlledAnimation(
         playback: playback,
         duration: Duration(seconds: widget.duration),
-        tween: Tween(begin: 0.0, end: 1.0),
-        builder: (context, value) => Stack(
+        tween: Tween<double>(begin: 0.0, end: 1.0),
+        builder: (context, double value) => Stack(
           children: <Widget>[
             Opacity(
               opacity: 1.0 - value,

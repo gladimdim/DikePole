@@ -9,7 +9,7 @@ import 'package:locadeserta/loaders/catalogs.dart';
 import 'package:locadeserta/models/pdf_creator.dart';
 import 'package:locadeserta/models/story_history.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:share_extend/share_extend.dart';
+import 'package:share/share.dart';
 import 'package:tuple/tuple.dart';
 
 class ExportToPDF extends StatefulWidget {
@@ -122,7 +122,7 @@ class _ExportToPDFState extends State<ExportToPDF> {
       savingToFile = true;
     });
     await file.writeAsBytes(pdf.save());
-    ShareExtend.share(file.path, "pdf");
+    Share.shareFiles([file.path], mimeTypes: ["pdf"]);
   }
 
   Future<String> get _localPath async {
@@ -283,7 +283,7 @@ class _ExportGladStoriesToPDFState extends State<ExportGladStoriesToPDF> {
       savingToFile = true;
     });
     await file.writeAsBytes(pdf.save());
-    ShareExtend.share(file.path, "pdf");
+    Share.shareFiles([file.path], mimeTypes: ["pdf"]);
   }
 
   Future<String> get _localPath async {

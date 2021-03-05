@@ -7,7 +7,7 @@ import 'package:locadeserta/components/bordered_container.dart';
 import 'package:locadeserta/components/narrow_scaffold.dart';
 import 'package:locadeserta/creator/components/fat_container.dart';
 import 'package:locadeserta/models/Localizations.dart';
-import 'package:share_extend/share_extend.dart';
+import 'package:share/share.dart';
 
 class ShareUserStoryToPdf extends StatefulWidget {
   static const routeName = "/publish_story";
@@ -42,7 +42,7 @@ class _ShareUserStoryToPdfState extends State<ShareUserStoryToPdf> {
               child: FatContainer(text: LDLocalizations.shareStory),
               onPress: () {
                 var json = widget.story.toJson();
-                ShareExtend.share(json.toString(), "text");
+                Share.share(json.toString());
               },
             ),
           )

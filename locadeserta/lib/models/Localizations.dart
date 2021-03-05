@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:locadeserta/loaders/url_parser.dart';
 import 'package:locadeserta/models/app_preferences.dart';
 
-var version = "1.123";
+var version = "1.124";
 
 String getDefaultOrUrlLanguage() {
   var urlLang = UrlParser.getLanguage();
@@ -129,6 +129,7 @@ class LDLocalizations {
       'labelUploading': 'Uploading',
       'labelUploadedPurgatoryStoryInstructions':
           'Uploaded! Now your story is available for everybody in the "User stories" section of the game.',
+      'shareStoryToPdf': "Share to PDF",
     },
     'uk': {
       'continue': 'Продовжити',
@@ -233,6 +234,7 @@ class LDLocalizations {
       'labelUploading': 'Завантажуємо',
       'labelUploadedPurgatoryStoryInstructions':
           'Завантажено! Тепер ваша історія доступна для всіх читачів в секції "Історії інших читаів".',
+      "shareStoryToPdf": "Експорт в PDF",
     },
     'pl': {
       'continue': 'Dalej',
@@ -336,6 +338,7 @@ class LDLocalizations {
       'labelUploading': 'Uploading',
       'labelUploadedPurgatoryStoryInstructions':
           'Uploaded! Now your story is available for everybody in the "User stories" section of the game.',
+      "shareStoryToPdf": "Share to PDF",
     }
   };
 
@@ -708,5 +711,9 @@ class LDLocalizations {
 
   static String get labelUploading {
     return _localizedValues[locale.languageCode]['labelUploading'];
+  }
+
+  static String get shareStoryToPdf {
+    return _localizedValues[locale.languageCode]['shareStoryToPdf'];
   }
 }
