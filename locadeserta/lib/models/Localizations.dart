@@ -511,7 +511,7 @@ class LDLocalizations {
   }
 
   static String get hintDescription {
-    return _localizedValues[locale.languageCode]!['hintDescription']!;
+    return _localizedValues[locale.languageCode]!['hintdescription']!;
   }
 
   static String get remove {
