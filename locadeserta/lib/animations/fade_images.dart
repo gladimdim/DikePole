@@ -24,57 +24,31 @@ class TweenImage extends StatefulWidget {
 }
 
 class _TweenImageState extends State<TweenImage> {
-  late Playback playback;
-
-  @override
-  initState() {
-    if (widget.repeat) {
-      playback = Playback.MIRROR;
-    } else {
-      playback = Playback.PLAY_FORWARD;
-    }
-    super.initState();
-  }
-
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        _updatePlayback();
-      },
-      child: ControlledAnimation(
-        playback: playback,
-        duration: Duration(seconds: widget.duration),
-        tween: Tween<double>(begin: 0.0, end: 1.0),
-        builder: (context, double value) => Stack(
-          children: <Widget>[
-            Opacity(
-              opacity: 1.0 - value,
-              child: Image(
-                image: widget.first,
-                fit: widget.imageFit,
-                height: widget.height,
-              ),
+    return PlayAnimation(
+      duration: Duration(seconds: widget.duration),
+      tween: Tween<double>(begin: 0.0, end: 1.0),
+      builder: (context, child, double value) => Stack(
+        children: <Widget>[
+          Opacity(
+            opacity: 1.0 - value,
+            child: Image(
+              image: widget.first,
+              fit: widget.imageFit,
+              height: widget.height,
             ),
-            Opacity(
-              opacity: value,
-              child: Image(
-                image: widget.last,
-                fit: widget.imageFit,
-                height: widget.height,
-              ),
+          ),
+          Opacity(
+            opacity: value,
+            child: Image(
+              image: widget.last,
+              fit: widget.imageFit,
+              height: widget.height,
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
-  }
-
-  void _updatePlayback() {
-    if (playback == Playback.MIRROR) {
-      playback = Playback.PAUSE;
-    } else {
-      playback = Playback.MIRROR;
-    }
   }
 }

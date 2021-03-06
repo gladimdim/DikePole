@@ -70,7 +70,6 @@ class _PurgatoryListViewState extends State<PurgatoryListView> {
         var storyBody = await getPurgatoryStoryByName(stories[index]);
         var story = Story.fromJson(storyBody);
         var catalogStory = CatalogStory(
-          storyPath: ,
           title: story.title,
           description: story.description,
           year: story.year.toString(),

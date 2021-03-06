@@ -22,9 +22,6 @@ double smallestDimension(Size size) {
 }
 
 String firstNCharsFromString(String input, int n) {
-  if (input == null) {
-    return "";
-  }
   if (input.length < n) {
     return input;
   }
@@ -33,9 +30,9 @@ String firstNCharsFromString(String input, int n) {
 }
 
 BoxDecoration getDecorationForContainer(BuildContext context) => BoxDecoration(
-  color: Theme.of(context).backgroundColor,
-  border: Border.all(
-    color: Theme.of(context).primaryColor,
-    width: 3.0,
-  ),
-);
+      color: Theme.of(context).backgroundColor,
+      border: Border.all(
+        color: Theme.of(context).primaryColor,
+        width: 3.0,
+      ),
+    );

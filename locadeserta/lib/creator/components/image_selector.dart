@@ -32,10 +32,11 @@ class _ImageSelectorState extends State<ImageSelector> {
         widget.onSelected(newType!);
       },
       items: imageTypes.map<DropdownMenuItem<ImageType>>((imageType) {
+        var imageTypeString = imageTypeToString(imageType);
         return DropdownMenuItem(
           value: imageType,
           child: Text(
-            imageTypeToString(imageType),
+            imageTypeString!,
           ),
         );
       }).toList(),

@@ -43,13 +43,12 @@ class _UserStoryDetailsViewState extends State<UserStoryDetailsView> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
-            if (widget.story != null)
-              Padding(
-                padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
-                child: Text(
-                  widget.story.title,
-                ),
+            Padding(
+              padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
+              child: Text(
+                widget.story.title,
               ),
+            ),
             BorderedContainer(
               child: Form(
                 key: _formKey,
@@ -125,23 +124,13 @@ class _UserStoryDetailsViewState extends State<UserStoryDetailsView> {
                               onPressed: () {
                                 _formKey.currentState!.save();
                                 var story;
-                                if (widget.story == null) {
-                                  var page = gse.Page.generate();
-                                  story = gse.Story(
-                                    title: _title,
-                                    description: _description,
-                                    authors: _authors,
-                                    root: page,
-                                    currentPage: page,
-                                    year: _year,
-                                  );
-                                } else {
-                                  story = widget.story;
-                                  story.title = _title;
-                                  story.description = _description;
-                                  story.authors = _authors;
-                                  story.year = _year;
-                                }
+
+                                story = widget.story;
+                                story.title = _title;
+                                story.description = _description;
+                                story.authors = _authors;
+                                story.year = _year;
+
                                 _onSave(story);
                               },
                             ),

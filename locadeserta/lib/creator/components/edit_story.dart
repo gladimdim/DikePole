@@ -234,7 +234,7 @@ class _EditStoryViewState extends State<EditStoryView> {
                       child: BorderedContainer(
                         child: ListTile(
                           title: Text(
-                            firstNCharsFromString(node.text, 60),
+                            firstNCharsFromString(node.text!, 60),
                             style: Theme.of(context).textTheme.headline6,
                           ),
                           leading: imageType == null

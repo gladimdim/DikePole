@@ -6,14 +6,14 @@ class CatalogStory {
   final String title;
   final String description;
   final String author;
-  final String storyPath;
+  final String? storyPath;
   final String year;
 
   CatalogStory({
     required this.title,
     required this.description,
     required this.author,
-    required this.storyPath,
+    this.storyPath,
     required this.year,
   });
 

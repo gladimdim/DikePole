@@ -76,7 +76,7 @@ class StoryPersistence {
         AppPreferences.instance.readStoryStringByName(catalogStory.title);
     if (storyString == null) {
       storyString = await DefaultAssetBundle.of(context)
-          .loadString(catalogStory.storyPath);
+          .loadString(catalogStory.storyPath!);
     }
 
     gse.Story story;
@@ -85,7 +85,7 @@ class StoryPersistence {
           imageResolver: BackgroundImage.getRandomImageForType);
     } catch (e) {
       storyString = await DefaultAssetBundle.of(context)
-          .loadString(catalogStory.storyPath);
+          .loadString(catalogStory.storyPath!);
       story = gse.Story.fromJson(jsonDecode(storyString),
           imageResolver: BackgroundImage.getRandomImageForType);
     }

@@ -45,8 +45,9 @@ class _EditNodeViewState extends State<EditNodeView> {
               Expanded(
                 flex: 4,
                 child: TextEditor(
-                  controller: _setTextToTextEditingController(widget.node.text),
-                  text: widget.node.text,
+                  controller:
+                      _setTextToTextEditingController(widget.node.text!),
+                  text: widget.node.text!,
                   maxLines: 20,
                   onSave: (text) {
                     widget.node.text = text;
