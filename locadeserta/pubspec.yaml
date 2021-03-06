@@ -24,6 +24,8 @@ dependencies:
     path: ../../gladstoriesdart
   shared_preferences: ^2.0.3
   flutter_markdown: ^0.6.0
+  # TODO: workaround to fix null safety errors remove once provider is updated
+  path_provider_platform_interface: ^2.0.1
   # graphview: ^0.6.1
 
 dev_dependencies:
