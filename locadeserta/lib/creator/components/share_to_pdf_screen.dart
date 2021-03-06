@@ -13,7 +13,7 @@ class ShareUserStoryToPdf extends StatefulWidget {
   static const routeName = "/publish_story";
   final Story story;
 
-  ShareUserStoryToPdf({this.story});
+  ShareUserStoryToPdf({required this.story});
 
   @override
   _ShareUserStoryToPdfState createState() => _ShareUserStoryToPdfState();
@@ -55,13 +55,13 @@ class _ShareUserStoryToPdfState extends State<ShareUserStoryToPdf> {
 class PublishStoryViewArguments {
   final Story story;
 
-  PublishStoryViewArguments({this.story});
+  PublishStoryViewArguments({required this.story});
 }
 
 class ExtractPlublishStoryViewArguments extends StatelessWidget {
   Widget build(BuildContext context) {
     final PublishStoryViewArguments args =
-        ModalRoute.of(context).settings.arguments;
+        ModalRoute.of(context)!.settings.arguments as PublishStoryViewArguments;
 
     return ShareUserStoryToPdf(
       story: args.story,

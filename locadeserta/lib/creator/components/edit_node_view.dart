@@ -45,8 +45,8 @@ class _EditNodeViewState extends State<EditNodeView> {
               Expanded(
                 flex: 4,
                 child: TextEditor(
-                  controller: _setTextToTextEditingController(widget.node.text!),
-                  text: widget.node.text!,
+                  controller: _setTextToTextEditingController(widget.node.text),
+                  text: widget.node.text,
                   maxLines: 20,
                   onSave: (text) {
                     widget.node.text = text;
@@ -140,7 +140,7 @@ class _EditNodeViewState extends State<EditNodeView> {
                               width: 20,
                             ),
                             ImageSelector(
-                              imageType: widget.node.imageType,
+                              imageType: widget.node.imageType!,
                               onSelected: (newImageType) {
                                 setState(() {
                                   widget.node.imageType = newImageType;
@@ -177,7 +177,8 @@ class TextEditorWithButton extends StatefulWidget {
   final int maxLines;
   final Function(String) onSave;
 
-  TextEditorWithButton({required this.text, required this.onSave, this.maxLines = 25});
+  TextEditorWithButton(
+      {required this.text, required this.onSave, this.maxLines = 25});
 
   @override
   _TextEditorState createState() => _TextEditorState();

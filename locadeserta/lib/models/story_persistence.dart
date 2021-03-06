@@ -16,7 +16,7 @@ class StoryPersistence {
     try {
       var storiesString = AppPreferences.instance.getCreatorStories();
       Map storiesList = jsonDecode(storiesString);
-      List parsedStories = storiesList.keys.map((key) {
+      List<gse.Story> parsedStories = storiesList.keys.map<gse.Story>((key) {
         gse.Story story = gse.Story.fromJson(jsonDecode(storiesList[key]),
             imageResolver: BackgroundImage.getRandomImageForType);
         return story;
@@ -26,7 +26,7 @@ class StoryPersistence {
     } catch (e) {
       print('Exception while calling getUserStories: $e');
     }
-    return null;
+    return [];
   }
 
   Future<List<CatalogStory>> getCatalogStories(BuildContext context) async {
@@ -42,7 +42,7 @@ class StoryPersistence {
     } catch (e) {
       print('Exception while calling get Catalog Stories: $e');
     }
-    return null;
+    return [];
   }
 
   Future writeStoryWithState(gse.Story story) async {

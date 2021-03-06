@@ -36,11 +36,11 @@ class _PurgatoryListViewState extends State<PurgatoryListView> {
             case ConnectionState.waiting:
               return WaitingScreen();
             case ConnectionState.done:
-              var data = snapshot.data;
-              if (data == null || data?.length == 0) {
+              var data = snapshot.data as List;
+              if (data.length == 0) {
                 return Text("Нічого не знайшли");
               } else {
-                stories = List.from(data as List);
+                stories = List.from(data);
                 return _buildCatalogView(context, stories);
               }
           }
@@ -70,6 +70,7 @@ class _PurgatoryListViewState extends State<PurgatoryListView> {
         var storyBody = await getPurgatoryStoryByName(stories[index]);
         var story = Story.fromJson(storyBody);
         var catalogStory = CatalogStory(
+          storyPath: ,
           title: story.title,
           description: story.description,
           year: story.year.toString(),

@@ -21,24 +21,6 @@ class BackgroundImage {
     ImageType.COSSACKS: RandomImage(ImageType.CAMP), // shadowed
   };
 
-  static ImageType imageTypeFromCurrentTags(List<String> variables) {
-    var images = variables.where((variable) {
-      var tagName = variable.split(" ")[0];
-      return tagName == 'image';
-    }).toList();
-
-    var random = Random();
-
-    var tagToTake = images[random.nextInt(images.length)];
-
-    return BackgroundImage.variableToImageType(tagToTake);
-  }
-
-  static ImageType variableToImageType(String variable) {
-    var imageType = variable.split(" ")[1];
-    return imageTypeFromString(imageType);
-  }
-
   static RandomImage getRandomImageForType(ImageType type) {
     return _images[type]!;
   }

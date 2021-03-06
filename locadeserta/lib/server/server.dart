@@ -6,9 +6,10 @@ import 'package:http/http.dart' as http;
 var url = "dikepole.locadeserta.com";
 // var url = "localhost:9093";
 
-Future<String> uploadStoryToServer(Story story) async {
+Future<String?> uploadStoryToServer(Story story) async {
   try {
-    var result = await http.post(Uri.https(url, "/post_story"),
+    var result = await http.post(
+      Uri.https(url, "/post_story"),
       body: jsonEncode(story.toStateJson()),
       headers: {"content-type": "application/json"},
     );
@@ -23,7 +24,7 @@ Future<List> getPurgatoryStories() async {
   return jsonDecode(result.body);
 }
 
-Future<Map> getPurgatoryStoryByName(String name) async {
+Future<Map<String, dynamic>> getPurgatoryStoryByName(String name) async {
   var result = await http.get(Uri.https(url, "purgatory/$name"));
   return jsonDecode(result.body);
 }

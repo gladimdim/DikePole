@@ -63,8 +63,7 @@ class _UserStoryDetailsViewState extends State<UserStoryDetailsView> {
                         hintText: LDLocalizations.enterStoryTitle,
                         labelText: LDLocalizations.labelStoryTitle,
                       ),
-                      initialValue:
-                          widget.story == null ? "" : widget.story.title,
+                      initialValue: widget.story.title,
                       onSaved: (value) {
                         _title = value!;
                       },
@@ -82,8 +81,7 @@ class _UserStoryDetailsViewState extends State<UserStoryDetailsView> {
                       },
                       minLines: 1,
                       maxLines: 5,
-                      initialValue:
-                          widget.story.description,
+                      initialValue: widget.story.description,
                     ),
                     TextFormField(
                       style: Theme.of(context).textTheme.bodyText2,
@@ -96,8 +94,7 @@ class _UserStoryDetailsViewState extends State<UserStoryDetailsView> {
                       onSaved: (value) {
                         _authors = value!;
                       },
-                      initialValue:
-                          widget.story.authors,
+                      initialValue: widget.story.authors,
                     ),
                     TextFormField(
                       style: Theme.of(context).textTheme.bodyText2,
@@ -107,9 +104,7 @@ class _UserStoryDetailsViewState extends State<UserStoryDetailsView> {
                         labelText: LDLocalizations.labelYear,
                       ),
                       keyboardType: TextInputType.number,
-                      inputFormatters: [
-                        FilteringTextInputFormatter.digitsOnly
-                      ],
+                      inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                       onSaved: (value) {
                         _year = int.parse(value!);
                       },
@@ -225,8 +220,9 @@ class UserStoryDetailsViewArguments {
 
 class ExtractUserStoryDetailsViewArguments extends StatelessWidget {
   Widget build(BuildContext context) {
-    final UserStoryDetailsViewArguments args =
-        ModalRoute.of(context)?.settings.arguments as UserStoryDetailsViewArguments;
+    final UserStoryDetailsViewArguments args = ModalRoute.of(context)
+        ?.settings
+        .arguments as UserStoryDetailsViewArguments;
 
     return UserStoryDetailsView(
       story: args.story,

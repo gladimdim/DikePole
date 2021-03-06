@@ -10,7 +10,7 @@ String getDefaultOrUrlLanguage() {
   var urlLang = UrlParser.getLanguage();
   final savedLangCode = AppPreferences.instance.getUILanguage();
   if (LDLocalizations.supportedLanguageCodes.contains(urlLang)) {
-    return urlLang;
+    return urlLang!;
   } else if (savedLangCode != null &&
       LDLocalizations.supportedLanguageCodes.contains(savedLangCode)) {
     return savedLangCode;
@@ -671,8 +671,8 @@ class LDLocalizations {
   }
 
   static String get labelInstructionsForUploadingStory {
-    return _localizedValues[locale.languageCode]!
-        ['labelInstructionsForUploadingStory']!;
+    return _localizedValues[locale.languageCode]![
+        'labelInstructionsForUploadingStory']!;
   }
 
   static String get labelOpenInBrowser {
@@ -700,13 +700,13 @@ class LDLocalizations {
   }
 
   static String get labelInstructionsForUploadingStoryToPurgatory {
-    return _localizedValues[locale.languageCode]!
-        ['labelInstructionsForUploadingStoryToPurgatory']!;
+    return _localizedValues[locale.languageCode]![
+        'labelInstructionsForUploadingStoryToPurgatory']!;
   }
 
   static String get labelUploadedPurgatoryStoryInstructions {
-    return _localizedValues[locale.languageCode]!
-        ['labelUploadedPurgatoryStoryInstructions']!;
+    return _localizedValues[locale.languageCode]![
+        'labelUploadedPurgatoryStoryInstructions']!;
   }
 
   static String get labelUploading {

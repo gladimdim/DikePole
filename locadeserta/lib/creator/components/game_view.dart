@@ -17,7 +17,7 @@ class GameView extends StatefulWidget {
   final Story story;
   final CatalogStory? catalogStory;
 
-  GameView({this.story, this.catalogStory});
+  GameView({required this.story, this.catalogStory});
 
   @override
   _MainViewState createState() => _MainViewState();
@@ -37,7 +37,7 @@ class _MainViewState extends State<GameView> {
           onTap: () async {
             if (widget.catalogStory != null) {
               var templateStory = await StoryPersistence.instance
-                  .readyStoryByCatalog(context, widget.catalogStory);
+                  .readyStoryByCatalog(context, widget.catalogStory!);
               widget.story.root = templateStory.root;
             }
             widget.story.reset();
@@ -46,18 +46,18 @@ class _MainViewState extends State<GameView> {
           },
           text: LDLocalizations.reset,
         ),
-        AppBarObject(
-          onTap: () {
-            Navigator.pushNamed(
-              context,
-              ExtractExportGladStoriesPdfViewArguments.routeName,
-              arguments: ExportGladStoriesPdfViewArguments(
-                story: widget.story,
-              ),
-            );
-          },
-          text: LDLocalizations.shareStoryToPdf,
-        ),
+        // AppBarObject(
+        //   onTap: () {
+        //     Navigator.pushNamed(
+        //       context,
+        //       ExtractExportGladStoriesPdfViewArguments.routeName,
+        //       arguments: ExportGladStoriesPdfViewArguments(
+        //         story: widget.story,
+        //       ),
+        //     );
+        //   },
+        //   text: LDLocalizations.shareStoryToPdf,
+        // ),
         AppBarObject(
           onTap: () {
             Navigator.push(
@@ -122,14 +122,15 @@ class _MainViewState extends State<GameView> {
 class GameViewArguments {
   final Story story;
 
-  GameViewArguments({this.story});
+  GameViewArguments({required this.story});
 }
 
 class ExtractArgumentsGameView extends StatelessWidget {
   static const routeName = "/play";
 
   Widget build(BuildContext context) {
-    final GameViewArguments args = ModalRoute.of(context).settings.arguments;
+    final GameViewArguments args =
+        ModalRoute.of(context)!.settings.arguments as GameViewArguments;
 
     return GameView(
       story: args.story,

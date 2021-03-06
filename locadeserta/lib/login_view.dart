@@ -17,8 +17,7 @@ class LoginView extends StatefulWidget {
   final bool darkTheme;
 
   LoginView(
-      {
-        required this.onContinue,
+      {required this.onContinue,
       required this.onSetLocale,
       required this.onThemeChange,
       this.darkTheme = false});
@@ -64,7 +63,7 @@ class _LoginViewState extends State<LoginView> {
                     fontSize: 15.0,
                     fontWeight: FontWeight.bold,
                     backgroundColor: Theme.of(context).backgroundColor,
-                    color: Theme.of(context).textTheme.headline6.color,
+                    color: Theme.of(context).textTheme.headline6!.color,
                   ),
                 ),
                 onTap: () async {
@@ -118,7 +117,7 @@ class _LoginViewState extends State<LoginView> {
                     fontSize: 15.0,
                     fontWeight: FontWeight.bold,
                     backgroundColor: Theme.of(context).backgroundColor,
-                    color: Theme.of(context).textTheme.headline6.color,
+                    color: Theme.of(context).textTheme.headline6!.color,
                   ),
                 ),
                 onTap: () async {

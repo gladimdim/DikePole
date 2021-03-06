@@ -8,7 +8,7 @@ class AppPreferences {
   AppPreferences._internal();
 
   static final AppPreferences instance = AppPreferences._internal();
-  SharedPreferences _preferences;
+  late SharedPreferences _preferences;
   String _isDarkTheme = 'isDarkTheme';
   String _languageCode = 'languageCode';
 

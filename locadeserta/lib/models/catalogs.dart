@@ -1,5 +1,5 @@
 class Catalog {
-  List<CatalogStory> stories;
+  List<CatalogStory> stories = List.empty(growable: true);
 }
 
 class CatalogStory {
@@ -10,11 +10,11 @@ class CatalogStory {
   final String year;
 
   CatalogStory({
-    this.title,
-    this.description,
-    this.author,
-    this.storyPath,
-    this.year,
+    required this.title,
+    required this.description,
+    required this.author,
+    required this.storyPath,
+    required this.year,
   });
 
   CatalogStory.fromJson(Map<String, dynamic> map)

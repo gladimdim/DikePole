@@ -8,7 +8,7 @@ import 'package:locadeserta/creator/components/text_editor.dart';
 class StoryJsonExportView extends StatefulWidget {
   final Story story;
 
-  StoryJsonExportView({this.story});
+  StoryJsonExportView({required this.story});
 
   @override
   _StoryJsonExportViewState createState() => _StoryJsonExportViewState();
@@ -30,8 +30,11 @@ class _StoryJsonExportViewState extends State<StoryJsonExportView> {
         Expanded(
             flex: 9,
             child: TextEditor(
+              text: controller.text,
               maxLines: 1000,
               controller: controller,
+              onSave: (s) {},
+              onSubmitted: (s) {},
             )),
         Expanded(
             child: IconButton(

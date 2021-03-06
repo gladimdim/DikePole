@@ -2,9 +2,9 @@ import 'dart:convert';
 import 'package:gladstoriesengine/gladstoriesengine.dart';
 
 class StoryHistory {
-  List _history;
+  late List<HistoryItemBase> _history;
 
-  StoryHistory(List history) {
+  StoryHistory(List<HistoryItemBase> history) {
     _history = history;
   }
 
@@ -24,7 +24,7 @@ class StoryHistory {
     _history.clear();
   }
 
-  List getHistory() {
+  List<HistoryItemBase> getHistory() {
     return _history;
   }
 
@@ -100,9 +100,8 @@ ImageType imageTypeFromString(String s) {
       return ImageType.BOAT;
     case "ImageType.STEPPE":
       return ImageType.STEPPE;
-    default:
-      return null;
   }
+  throw "Image type $s was not recognized";
 }
 
 class HistoryItemText extends HistoryItemBase {
@@ -125,7 +124,7 @@ class HistoryItemText extends HistoryItemBase {
 }
 
 abstract class HistoryItemBase {
-  PassageTypes type;
+  late PassageTypes type;
   var value;
   String toJson();
   static fromString(String s) {}

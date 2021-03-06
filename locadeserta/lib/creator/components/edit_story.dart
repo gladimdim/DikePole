@@ -113,24 +113,24 @@ class _EditStoryViewState extends State<EditStoryView> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              TextButton.icon(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => NarrowScaffold(
-                          title: "Tree view",
-                          actions: [],
-                          body: StoryGraphView(story: widget.story)),
-                    ),
-                  );
-                },
-                icon: Icon(Icons.account_tree_sharp),
-                label: Text(
-                  "Tree view",
-                  style: Theme.of(context).textTheme.headline6,
-                ),
-              ),
+              // TextButton.icon(
+              //   onPressed: () {
+              //     Navigator.push(
+              //       context,
+              //       MaterialPageRoute(
+              //         builder: (context) => NarrowScaffold(
+              //             title: "Tree view",
+              //             actions: [],
+              //             body: StoryGraphView(story: widget.story)),
+              //       ),
+              //     );
+              //   },
+              //   icon: Icon(Icons.account_tree_sharp),
+              //   label: Text(
+              //     "Tree view",
+              //     style: Theme.of(context).textTheme.headline6,
+              //   ),
+              // ),
               TextButton.icon(
                 onPressed: () {
                   setState(() {
@@ -234,7 +234,7 @@ class _EditStoryViewState extends State<EditStoryView> {
                       child: BorderedContainer(
                         child: ListTile(
                           title: Text(
-                            firstNCharsFromString(node.text!, 60),
+                            firstNCharsFromString(node.text, 60),
                             style: Theme.of(context).textTheme.headline6,
                           ),
                           leading: imageType == null
@@ -369,7 +369,7 @@ class ExtractEditStoryViewArguments extends StatelessWidget {
 
   Widget build(BuildContext context) {
     final EditStoryViewArguments args =
-        ModalRoute.of(context)?.settings?.arguments;
+        ModalRoute.of(context)?.settings.arguments as EditStoryViewArguments;
 
     return EditStoryView(
       story: args.story,

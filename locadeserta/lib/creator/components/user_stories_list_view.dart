@@ -19,7 +19,6 @@ class UserStoriesList extends StatefulWidget {
 }
 
 class _UserStoriesListState extends State<UserStoriesList> {
-  gse.Story story;
   List<gse.Story> storyBuilders = [];
 
   @override

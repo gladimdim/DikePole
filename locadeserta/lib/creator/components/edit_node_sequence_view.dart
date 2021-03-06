@@ -95,7 +95,7 @@ class ExtractEditPassageView extends StatelessWidget {
 
   Widget build(BuildContext context) {
     final EditPassageViewArguments args =
-        ModalRoute.of(context)!.settings.arguments!;
+        ModalRoute.of(context)!.settings.arguments as EditPassageViewArguments;
 
     return EditNodeSequence(
       page: args.page,
