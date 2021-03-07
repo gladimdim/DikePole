@@ -130,6 +130,11 @@ class LDLocalizations {
       'labelUploadedPurgatoryStoryInstructions':
           'Uploaded! Now your story is available for everybody in the "User stories" section of the game.',
       'shareStoryToPdf': "Share to PDF",
+      'labelOtherGames': 'Other Games',
+      'labelLocadesertaHex': 'Loca Deserta: Hex',
+      'labelLocaDesertaSloboda': 'Loca Deserta: Sloboda',
+      'labelPrivacy': 'For Privacy Policy Tap here.',
+      'labelSiteLink': 'Loca Deserta Universe Site',
     },
     'uk': {
       'continue': 'Продовжити',
@@ -235,6 +240,11 @@ class LDLocalizations {
       'labelUploadedPurgatoryStoryInstructions':
           'Завантажено! Тепер ваша історія доступна для всіх читачів в секції "Історії інших читаів".',
       "shareStoryToPdf": "Експорт в PDF",
+      'labelOtherGames': 'Інші ігри',
+      'labelLocadesertaHex': 'Дике Поле: Ґекс',
+      'labelLocaDesertaSloboda': 'Дике Поле: Слобода',
+      'labelPrivacy': 'Інформація про вашу приватність.',
+      'labelSiteLink': 'Сайт всесвіту Дике Поле',
     },
     'pl': {
       'continue': 'Dalej',
@@ -339,6 +349,11 @@ class LDLocalizations {
       'labelUploadedPurgatoryStoryInstructions':
           'Uploaded! Now your story is available for everybody in the "User stories" section of the game.',
       "shareStoryToPdf": "Share to PDF",
+      'labelOtherGames': 'Other games',
+      'labelLocadesertaHex': 'Loca Deserta: Hex',
+      'labelLocaDesertaSloboda': 'Loca Deserta: Sloboda',
+      'labelPrivacy': 'For Privacy Policy Tap here.',
+      'labelSiteLink': 'Loca Deserta Universe Site',
     }
   };
 
@@ -715,5 +730,27 @@ class LDLocalizations {
 
   static String get shareStoryToPdf {
     return _localizedValues[locale.languageCode]!['shareStoryToPdf']!;
+  }
+
+  static String get labelOtherGames {
+    return _localizedValues[locale.languageCode]!['labelOtherGames']!;
+  }
+
+  static String get labelPrivacy {
+    return _localizedValues[locale.languageCode]!['labelPrivacy']!;
+  }
+
+  static String get labelSiteLink {
+    return _localizedValues[locale.languageCode]!['labelSiteLink']!;
+  }
+
+  static String? getForKey(String key) {
+    final lang = _localizedValues[locale.languageCode]!;
+
+    if (lang.containsKey(key)) {
+      return lang[key];
+    } else {
+      return key;
+    }
   }
 }

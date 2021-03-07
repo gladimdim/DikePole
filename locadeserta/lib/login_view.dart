@@ -7,6 +7,7 @@ import 'package:locadeserta/components/narrow_scaffold.dart';
 import 'package:locadeserta/locale_selection.dart';
 import 'package:locadeserta/models/Localizations.dart';
 import 'package:locadeserta/radiuses.dart';
+import 'package:locadeserta/views/other_games_view.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class LoginView extends StatefulWidget {
@@ -48,7 +49,7 @@ class _LoginViewState extends State<LoginView> {
 
   Widget _buildBody(BuildContext context) {
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
+      crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.start,
       children: <Widget>[
         Center(
@@ -56,21 +57,34 @@ class _LoginViewState extends State<LoginView> {
             color: Theme.of(context).backgroundColor,
             child: Padding(
               padding: const EdgeInsets.only(top: 8.0),
-              child: InkWell(
-                child: Text(
-                  "Loca Deserta Site",
-                  style: TextStyle(
-                    fontSize: 15.0,
-                    fontWeight: FontWeight.bold,
-                    backgroundColor: Theme.of(context).backgroundColor,
-                    color: Theme.of(context).textTheme.headline6!.color,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  InkWell(
+                    child: Text(
+                      LDLocalizations.labelSiteLink,
+                      style: TextStyle(
+                        fontSize: 15.0,
+                        fontWeight: FontWeight.bold,
+                        backgroundColor: Theme.of(context).backgroundColor,
+                        color: Theme.of(context).textTheme.headline6!.color,
+                        decoration: TextDecoration.underline,
+                      ),
+                    ),
+                    onTap: () async {
+                      if (await canLaunch("https://locadeserta.com/")) {
+                        await launch("https://locadeserta.com/");
+                      }
+                    },
                   ),
-                ),
-                onTap: () async {
-                  if (await canLaunch("https://locadeserta.com/")) {
-                    await launch("https://locadeserta.com/");
-                  }
-                },
+                  Text(
+                    LDLocalizations.versionLabel,
+                    style: TextStyle(
+                      fontSize: 15.0,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
               ),
             ),
           ),
@@ -102,34 +116,7 @@ class _LoginViewState extends State<LoginView> {
           onLocaleChanged: _setNewLocale,
           locale: LDLocalizations.locale,
         ),
-        Center(
-          child: Text(LDLocalizations.versionLabel),
-        ),
-        Center(
-          child: Material(
-            color: Theme.of(context).backgroundColor,
-            child: Padding(
-              padding: const EdgeInsets.only(top: 8.0),
-              child: InkWell(
-                child: Text(
-                  "For Privacy Policy Tap here.",
-                  style: TextStyle(
-                    fontSize: 15.0,
-                    fontWeight: FontWeight.bold,
-                    backgroundColor: Theme.of(context).backgroundColor,
-                    color: Theme.of(context).textTheme.headline6!.color,
-                  ),
-                ),
-                onTap: () async {
-                  if (await canLaunch(
-                      "https://locadeserta.com/privacy_policy.html")) {
-                    await launch("https://locadeserta.com/privacy_policy.html");
-                  }
-                },
-              ),
-            ),
-          ),
-        ),
+        BorderedContainer(child: OtherGamesView()),
       ],
     );
   }
