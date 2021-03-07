@@ -7,9 +7,9 @@ class ImageTransition extends StatelessWidget {
   final AssetImage coloredImage;
 
   ImageTransition(
-      {@required this.title,
-      @required this.image,
-      @required this.coloredImage});
+      {required this.title,
+      required this.image,
+      required this.coloredImage});
 
   @override
   Widget build(BuildContext context) {

@@ -35,17 +35,15 @@ class _PurgatoryListViewState extends State<PurgatoryListView> {
             case ConnectionState.active:
             case ConnectionState.waiting:
               return WaitingScreen();
-              break;
             case ConnectionState.done:
-              if (snapshot.data == null || snapshot.data.length == 0) {
+              var data = snapshot.data as List;
+              if (data.length == 0) {
                 return Text("Нічого не знайшли");
               } else {
-                stories = List.from(snapshot.data);
+                stories = List.from(data);
                 return _buildCatalogView(context, stories);
               }
-              break;
           }
-          return null;
         },
       ),
     );
@@ -103,7 +101,7 @@ class _PurgatoryListViewState extends State<PurgatoryListView> {
     );
   }
 
-  _fetchData() {
+  Future _fetchData() {
     return _catalogListMemo.runOnce(() async {
       return await getPurgatoryStories();
     });

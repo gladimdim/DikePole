@@ -8,7 +8,7 @@ class UrlParser {
     print("not implemented in native");
   }
 
-  static String getLanguage() {
+  static String? getLanguage() {
     return null;
   }
 }

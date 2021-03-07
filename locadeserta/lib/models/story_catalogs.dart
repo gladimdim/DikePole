@@ -8,7 +8,11 @@ class CatalogGladStory {
   final String url;
 
   CatalogGladStory(
-      {this.title, this.author, this.description, this.settingYear, this.url});
+      {required this.title,
+      required this.author,
+      required this.description,
+      required this.settingYear,
+      required this.url});
 
   static CatalogGladStory fromJsonMap(Map map) {
     return CatalogGladStory(

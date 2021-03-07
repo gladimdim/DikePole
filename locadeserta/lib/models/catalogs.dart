@@ -1,20 +1,20 @@
 class Catalog {
-  List<CatalogStory> stories;
+  List<CatalogStory> stories = List.empty(growable: true);
 }
 
 class CatalogStory {
   final String title;
   final String description;
   final String author;
-  final String storyPath;
+  final String? storyPath;
   final String year;
 
   CatalogStory({
-    this.title,
-    this.description,
-    this.author,
+    required this.title,
+    required this.description,
+    required this.author,
     this.storyPath,
-    this.year,
+    required this.year,
   });
 
   CatalogStory.fromJson(Map<String, dynamic> map)

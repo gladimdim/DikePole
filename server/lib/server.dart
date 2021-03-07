@@ -27,15 +27,20 @@ run() async {
     var body = req.bodyAsMap;
     Story story;
     try {
+      print("Processing story");
       story = Story.fromJson(body);
+      print("Processing done");
     } catch (e) {
       throw AngelHttpException.notProcessable();
     }
 
+    print("preparing to markdown");
     var markdown = story.toMarkdownString(imagePrefix);
+    print("markdown done");
     var id = await nanoid();
     var file = File("$DIR_ROOT/$DIR_PASSED_STORIES/$id.md");
     await file.writeAsString(markdown);
+    print("file saved: $id");
     res.write(id);
   });
 

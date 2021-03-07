@@ -32,8 +32,7 @@ class MarkdownDocument {
   }
 
   MarkdownDocument image(String imagePath,
-      [String imageText, bool showText = false]) {
-    imageText = imageText ?? '';
+      [String imageText = "", bool showText = false]) {
     _document = _document +
         '![$imageText](https://locadeserta.com/game/assets/$imagePath)';
     if (showText) {

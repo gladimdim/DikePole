@@ -18,7 +18,7 @@ class StoryView extends StatefulWidget {
   final bool previewMode;
 
   StoryView({
-    this.currentStory,
+    required this.currentStory,
     this.previewMode = true,
   });
 
@@ -50,7 +50,7 @@ class PassageState extends State<StoryView> with TickerProviderStateMixin {
         var history = snapshot.data;
         return Column(
           children: [
-            _buildTextSection(history, context),
+            _buildTextSection(history!, context),
             if (widget.currentStory.canContinue()) createContinue(context),
             if (!widget.currentStory.canContinue())
               ...createOptionList(widget.currentStory.currentPage.next),
@@ -96,7 +96,7 @@ class PassageState extends State<StoryView> with TickerProviderStateMixin {
                 });
               },
               child: FatContainer(
-                text: page.text,
+                text: page.text!,
                 backgroundColor: Theme.of(context).primaryColor,
               ),
             ),
@@ -205,7 +205,7 @@ class PassageItemView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
-        if (historyItem.imagePath != null)
+        if (historyItem.imagePath.isNotEmpty)
           BorderedRandomImageByPath(imagePaths: historyItem.imagePath),
         Container(
           alignment: Alignment.topCenter,
@@ -214,7 +214,7 @@ class PassageItemView extends StatelessWidget {
           width: MediaQuery.of(context).size.width * 0.95,
           decoration: getDecorationForContainer(context),
           child: Text(
-            historyItem.text == "" ? "The End" : historyItem.text,
+            historyItem.text == null ? "The End" : historyItem.text!,
             style: Theme.of(context).textTheme.bodyText2,
           ),
         ),

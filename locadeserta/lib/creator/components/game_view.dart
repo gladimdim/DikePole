@@ -11,11 +11,13 @@ import 'package:locadeserta/models/story_persistence.dart';
 import 'package:locadeserta/views/export_to_markdown_view.dart';
 import 'package:locadeserta/views/upload_passed_story_view.dart';
 
+import '../../export_pdf_view.dart';
+
 class GameView extends StatefulWidget {
   final Story story;
-  final CatalogStory catalogStory;
+  final CatalogStory? catalogStory;
 
-  GameView({this.story, this.catalogStory});
+  GameView({required this.story, this.catalogStory});
 
   @override
   _MainViewState createState() => _MainViewState();
@@ -24,11 +26,8 @@ class GameView extends StatefulWidget {
 class _MainViewState extends State<GameView> {
   @override
   Widget build(BuildContext context) {
-    final title = widget.catalogStory != null
-        ? widget.catalogStory.title
-        : LDLocalizations.previewStory;
     return NarrowScaffold(
-      title: title,
+      title: getTitle(),
       actions: [
         AppBarObject(
           onTap: () => Navigator.pop(context),
@@ -38,7 +37,7 @@ class _MainViewState extends State<GameView> {
           onTap: () async {
             if (widget.catalogStory != null) {
               var templateStory = await StoryPersistence.instance
-                  .readyStoryByCatalog(context, widget.catalogStory);
+                  .readyStoryByCatalog(context, widget.catalogStory!);
               widget.story.root = templateStory.root;
             }
             widget.story.reset();
@@ -57,7 +56,7 @@ class _MainViewState extends State<GameView> {
         //       ),
         //     );
         //   },
-        //   text: LDLocalizations.shareStory,
+        //   text: LDLocalizations.shareStoryToPdf,
         // ),
         AppBarObject(
           onTap: () {
@@ -109,19 +108,29 @@ class _MainViewState extends State<GameView> {
       ),
     );
   }
+
+  String getTitle() {
+    var catalog = widget.catalogStory;
+    if (catalog != null) {
+      return catalog.title;
+    } else {
+      return LDLocalizations.previewStory;
+    }
+  }
 }
 
 class GameViewArguments {
   final Story story;
 
-  GameViewArguments({this.story});
+  GameViewArguments({required this.story});
 }
 
 class ExtractArgumentsGameView extends StatelessWidget {
   static const routeName = "/play";
 
   Widget build(BuildContext context) {
-    final GameViewArguments args = ModalRoute.of(context).settings.arguments;
+    final GameViewArguments args =
+        ModalRoute.of(context)!.settings.arguments as GameViewArguments;
 
     return GameView(
       story: args.story,

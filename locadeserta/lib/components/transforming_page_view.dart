@@ -17,9 +17,9 @@ class TransformingPageView<T> extends StatefulWidget {
 
   TransformingPageView({
     this.scrollDirection = Axis.vertical,
-    @required this.onStorySelected,
-    @required this.onDetailsSelected,
-    @required this.titles,
+    required this.onStorySelected,
+    required this.onDetailsSelected,
+    required this.titles,
   });
 
   @override
@@ -28,12 +28,12 @@ class TransformingPageView<T> extends StatefulWidget {
 
 class _TransformingPageViewState extends State<TransformingPageView> {
   double currentPage = 0.0;
-  PageController _pageController;
+  late PageController _pageController;
   Map<String, List<AssetImage>> imageWidgets = {};
 
   void _onScroll() {
     setState(() {
-      currentPage = _pageController.page;
+      currentPage = _pageController.page!;
     });
   }
 
@@ -108,7 +108,7 @@ class _TransformingPageViewState extends State<TransformingPageView> {
                   ),
                   child: Text(
                     title,
-                    style: Theme.of(context).textTheme.headline6.merge(
+                    style: Theme.of(context).textTheme.headline6!.merge(
                           TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 28,
@@ -119,8 +119,8 @@ class _TransformingPageViewState extends State<TransformingPageView> {
               ),
               middle: ImageTransition(
                 title: title,
-                image: imageWidgets[title][0],
-                coloredImage: imageWidgets[title][1],
+                image: imageWidgets[title]![0],
+                coloredImage: imageWidgets[title]![1],
               ),
               bottom: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -143,7 +143,7 @@ class _TransformingPageViewState extends State<TransformingPageView> {
                               LDLocalizations.showStoryDetails,
                               style: TextStyle(
                                 color:
-                                    Theme.of(context).textTheme.headline6.color,
+                                    Theme.of(context).textTheme.headline6!.color,
                                 fontSize: 22.0,
                                 fontWeight: FontWeight.bold,
                               ),
@@ -177,7 +177,7 @@ class _TransformingPageViewState extends State<TransformingPageView> {
                               LDLocalizations.startStory,
                               style: TextStyle(
                                 color:
-                                    Theme.of(context).textTheme.headline6.color,
+                                    Theme.of(context).textTheme.headline6!.color,
                                 fontSize: 22.0,
                                 fontWeight: FontWeight.bold,
                               ),

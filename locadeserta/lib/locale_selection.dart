@@ -6,7 +6,7 @@ class LocaleSelection extends StatefulWidget {
   final Function(Locale locale) onLocaleChanged;
   final Locale locale;
 
-  LocaleSelection({this.locale, this.onLocaleChanged});
+  LocaleSelection({required this.locale, required this.onLocaleChanged});
   @override
   _LocaleSelectionState createState() => _LocaleSelectionState();
 }
@@ -37,7 +37,10 @@ class _LocaleSelectionState extends State<LocaleSelection> {
     );
   }
 
-  void _setNewLocale(String newValue) async {
+  void _setNewLocale(String? newValue) async {
+    if (newValue == null) {
+      return;
+    }
     UrlParser.updateLanguage(newValue);
     await AppPreferences.instance.setUILanguage(newValue);
     widget.onLocaleChanged(Locale(newValue));

@@ -9,7 +9,7 @@ import 'package:locadeserta/server/server.dart';
 class PublishStoryToPurgatoryView extends StatefulWidget {
   final Story story;
 
-  PublishStoryToPurgatoryView({this.story});
+  PublishStoryToPurgatoryView({required this.story});
 
   @override
   _PublishStoryToPurgatoryViewState createState() =>

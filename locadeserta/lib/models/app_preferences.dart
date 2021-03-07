@@ -8,7 +8,7 @@ class AppPreferences {
   AppPreferences._internal();
 
   static final AppPreferences instance = AppPreferences._internal();
-  SharedPreferences _preferences;
+  late SharedPreferences _preferences;
   String _isDarkTheme = 'isDarkTheme';
   String _languageCode = 'languageCode';
 
@@ -25,7 +25,7 @@ class AppPreferences {
     return await _preferences.setBool(_isDarkTheme, isDarkTheme);
   }
 
-  String getUILanguage() {
+  String? getUILanguage() {
     return _preferences.getString(_languageCode);
   }
 
@@ -37,8 +37,8 @@ class AppPreferences {
     return await _preferences.setString(name, content);
   }
 
-  String readStoryStringByName(String name) {
-    return _preferences.get(name);
+  String? readStoryStringByName(String name) {
+    return _preferences.getString(name);
   }
 
   String getCreatorStories() {

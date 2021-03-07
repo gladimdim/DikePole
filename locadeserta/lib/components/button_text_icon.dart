@@ -4,9 +4,14 @@ import 'package:flutter/widgets.dart';
 class ButtonTextIcon extends StatelessWidget {
   final String text;
   final Icon icon;
-  final Color color;
+  final Color? color;
   final VoidCallback onTap;
-  ButtonTextIcon({this.text, this.icon, this.color, this.onTap});
+
+  ButtonTextIcon(
+      {required this.text,
+      required this.icon, this.color,
+      required this.onTap});
+
   @override
   Widget build(BuildContext context) {
     return InkWell(

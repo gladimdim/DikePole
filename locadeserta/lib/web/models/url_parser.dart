@@ -6,7 +6,7 @@ class UrlParser {
   static Map getUrlParams() {
     var uri = Uri.tryParse(js.context['location']['href']);
 
-    return uri.queryParameters;
+    return uri!.queryParameters;
   }
 
   static updateLanguage(String newLocale) {

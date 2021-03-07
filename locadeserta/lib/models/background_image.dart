@@ -21,50 +21,32 @@ class BackgroundImage {
     ImageType.COSSACKS: RandomImage(ImageType.CAMP), // shadowed
   };
 
-  static ImageType imageTypeFromCurrentTags(List<String> variables) {
-    var images = variables.where((variable) {
-      var tagName = variable.split(" ")[0];
-      return tagName == 'image';
-    }).toList();
-
-    var random = Random();
-
-    var tagToTake = images[random.nextInt(images.length)];
-
-    return BackgroundImage.variableToImageType(tagToTake);
-  }
-
-  static ImageType variableToImageType(String variable) {
-    var imageType = variable.split(" ")[1];
-    return imageTypeFromString(imageType);
-  }
-
   static RandomImage getRandomImageForType(ImageType type) {
-    return _images[type];
+    return _images[type]!;
   }
 
   static AssetImage getAssetImageForType(ImageType type) {
-    return _images[type].getAssetImage();
+    return _images[type]!.getAssetImage();
   }
 
   static AssetImage getColoredAssetImageForType(ImageType type) {
-    return _images[type].getAssetImageColored();
+    return _images[type]!.getAssetImageColored();
   }
 
   static void nextRandomForType(ImageType type) {
-    return _images[type].nextRandom();
+    return _images[type]!.nextRandom();
   }
 
   static void resetRandomForType(ImageType type) {
-    return _images[type].resetUsedRandomNumbers();
+    return _images[type]!.resetUsedRandomNumbers();
   }
 }
 
 class RandomImage implements HistoryImage {
   Random _random = Random();
-  int _currentRandom;
-  int _max;
-  List<int> _usedRandomNumbers;
+  late int _currentRandom;
+  late int _max;
+  late List<int> _usedRandomNumbers;
   final ImageType type;
 
   Map<ImageType, String> _imagePrefix = {
@@ -100,7 +82,6 @@ class RandomImage implements HistoryImage {
         break;
       default:
         throw "Not implemented";
-        break;
     }
 
     _currentRandom = _random.nextInt(_max);

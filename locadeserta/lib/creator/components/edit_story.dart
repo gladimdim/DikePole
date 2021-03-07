@@ -21,7 +21,7 @@ class EditStoryView extends StatefulWidget {
   final Story story;
   static const routeName = "/editStories";
 
-  EditStoryView({@required this.story});
+  EditStoryView({required this.story});
 
   @override
   _EditStoryViewState createState() => _EditStoryViewState();
@@ -45,7 +45,7 @@ class _EditStoryViewState extends State<EditStoryView> {
                   Align(
                     alignment: Alignment.centerRight,
                     child: BorderedContainer(
-                      child: FlatButton.icon(
+                      child: TextButton.icon(
                         icon: Icon(Icons.arrow_back),
                         label: Text(
                           LDLocalizations.labelBack,
@@ -72,7 +72,7 @@ class _EditStoryViewState extends State<EditStoryView> {
                   onChanged: (newValue) {
                     setState(() {
                       story.currentPage.endType =
-                          newValue ? EndType.ALIVE : null;
+                          newValue! ? EndType.ALIVE : null;
                     });
                   },
                 ),
@@ -113,25 +113,25 @@ class _EditStoryViewState extends State<EditStoryView> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              FlatButton.icon(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => NarrowScaffold(
-                          title: "Tree view",
-                          actions: [],
-                          body: StoryGraphView(story: widget.story)),
-                    ),
-                  );
-                },
-                icon: Icon(Icons.account_tree_sharp),
-                label: Text(
-                  "Tree view",
-                  style: Theme.of(context).textTheme.headline6,
-                ),
-              ),
-              FlatButton.icon(
+              // TextButton.icon(
+              //   onPressed: () {
+              //     Navigator.push(
+              //       context,
+              //       MaterialPageRoute(
+              //         builder: (context) => NarrowScaffold(
+              //             title: "Tree view",
+              //             actions: [],
+              //             body: StoryGraphView(story: widget.story)),
+              //       ),
+              //     );
+              //   },
+              //   icon: Icon(Icons.account_tree_sharp),
+              //   label: Text(
+              //     "Tree view",
+              //     style: Theme.of(context).textTheme.headline6,
+              //   ),
+              // ),
+              TextButton.icon(
                 onPressed: () {
                   setState(() {
                     story.currentPage
@@ -159,7 +159,7 @@ class _EditStoryViewState extends State<EditStoryView> {
                   if (!_textControllers.containsKey(next)) {
                     _textControllers[next] = TextEditingController();
                   }
-                  _textControllers[next].text = next.text;
+                  _textControllers[next]!.text = next.text!;
                   return Padding(
                     padding: const EdgeInsets.all(2.0),
                     child: BorderedContainer(
@@ -170,9 +170,9 @@ class _EditStoryViewState extends State<EditStoryView> {
                               height: 50,
                               width: 200,
                               child: TextEditor(
-                                controller: _textControllers[next],
+                                controller: _textControllers[next]!,
                                 maxLines: 1,
-                                text: next.text,
+                                text: next.text!,
                                 onSubmitted: (String newText) {
                                   next.text = newText;
                                 },
@@ -208,7 +208,7 @@ class _EditStoryViewState extends State<EditStoryView> {
           ),
           Align(
             alignment: Alignment.centerRight,
-            child: FlatButton.icon(
+            child: TextButton.icon(
               onPressed: () {
                 setState(() {
                   story.currentPage.addNodeWithText("");
@@ -234,7 +234,7 @@ class _EditStoryViewState extends State<EditStoryView> {
                       child: BorderedContainer(
                         child: ListTile(
                           title: Text(
-                            firstNCharsFromString(node.text, 60),
+                            firstNCharsFromString(node.text!, 60),
                             style: Theme.of(context).textTheme.headline6,
                           ),
                           leading: imageType == null
@@ -361,7 +361,7 @@ class _EditStoryViewState extends State<EditStoryView> {
 class EditStoryViewArguments {
   final Story story;
 
-  EditStoryViewArguments({this.story});
+  EditStoryViewArguments({required this.story});
 }
 
 class ExtractEditStoryViewArguments extends StatelessWidget {
@@ -369,7 +369,7 @@ class ExtractEditStoryViewArguments extends StatelessWidget {
 
   Widget build(BuildContext context) {
     final EditStoryViewArguments args =
-        ModalRoute.of(context).settings.arguments;
+        ModalRoute.of(context)?.settings.arguments as EditStoryViewArguments;
 
     return EditStoryView(
       story: args.story,

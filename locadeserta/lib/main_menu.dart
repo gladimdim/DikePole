@@ -40,7 +40,7 @@ class _MainMenuState extends State<MainMenu> with TickerProviderStateMixin {
   var appearanceController;
   var appearanceAnimation;
 
-  List<CatalogStory> stories;
+  List<CatalogStory> stories = List.empty(growable: true);
 
   @override
   void initState() {
@@ -86,19 +86,17 @@ class _MainMenuState extends State<MainMenu> with TickerProviderStateMixin {
               case ConnectionState.active:
               case ConnectionState.waiting:
                 return WaitingScreen();
-                break;
               case ConnectionState.done:
-                stories = List.from(snapshot.data);
+                var data = snapshot.data as List;
+                stories = List.from(data);
                 stories.sort(
                     (story1, story2) => story1.year.compareTo(story2.year));
-                if (snapshot.data == null || snapshot.data.length == 0) {
+                if (data.length == 0) {
                   return _buildEmptyCatalogListView(context);
                 } else {
                   return _buildCatalogView(context, stories);
                 }
-                break;
             }
-            return null;
           },
         ),
       ),
@@ -180,7 +178,7 @@ class _MainMenuState extends State<MainMenu> with TickerProviderStateMixin {
 
     return AnimatedBuilder(
       animation: appearanceAnimation,
-      builder: (BuildContext context, Widget child) {
+      builder: (BuildContext context, Widget? child) {
         return Transform.translate(
           offset: Offset(appearanceAnimation.value, 0.0),
           child: Column(
@@ -211,7 +209,7 @@ class _MainMenuState extends State<MainMenu> with TickerProviderStateMixin {
                   ),
                 ),
               ),
-              Expanded(flex: 1, child: child),
+              Expanded(flex: 1, child: child!),
             ],
           ),
         );

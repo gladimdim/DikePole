@@ -9,7 +9,7 @@ import 'package:locadeserta/models/Localizations.dart';
 class ExportToMarkDownView extends StatefulWidget {
   final Story story;
 
-  ExportToMarkDownView({this.story});
+  ExportToMarkDownView({required this.story});
   @override
   _ExportToMarkDownViewState createState() => _ExportToMarkDownViewState();
 }

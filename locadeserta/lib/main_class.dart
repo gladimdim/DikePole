@@ -126,10 +126,10 @@ class _LocaDesertaAppState extends State<LocaDesertaApp> {
                 MainMenu.routeName: (context) => MainMenu(),
                 ExtractStoryDetailsViewArguments.routeName: (context) =>
                     ExtractStoryDetailsViewArguments(),
-                ExtractExportPdfViewArguments.routeName: (context) =>
-                    ExtractExportPdfViewArguments(),
-                ExtractExportGladStoriesPdfViewArguments.routeName: (context) =>
-                    ExtractExportGladStoriesPdfViewArguments(),
+                // ExtractExportPdfViewArguments.routeName: (context) =>
+                //     ExtractExportPdfViewArguments(),
+                // ExtractExportGladStoriesPdfViewArguments.routeName: (context) =>
+                //     ExtractExportGladStoriesPdfViewArguments(),
                 UserStoriesList.routeName: (context) => UserStoriesList(),
                 ExtractEditStoryViewArguments.routeName: (context) =>
                     ExtractEditStoryViewArguments(),

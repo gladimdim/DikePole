@@ -3,7 +3,7 @@ import 'package:flutter/material.dart' as material;
 class SlideRightNavigation extends material.PageRouteBuilder {
   final material.Widget widget;
 
-  SlideRightNavigation({this.widget})
+  SlideRightNavigation({required this.widget})
       : super(
           pageBuilder: (material.BuildContext context,
               material.Animation<double> animation,

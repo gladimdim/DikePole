@@ -11,9 +11,9 @@ class NarrowScaffold extends StatefulWidget {
   final showBackButton;
 
   NarrowScaffold({
-    this.body,
-    this.actions,
-    @required this.title,
+    required this.body,
+    required this.actions,
+    this.title = "",
     this.showBackButton = true,
   });
 

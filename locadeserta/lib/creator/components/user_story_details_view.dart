@@ -13,7 +13,7 @@ class UserStoryDetailsView extends StatefulWidget {
   static String routeName = "/userStoryDetailsView";
   final gse.Story story;
 
-  UserStoryDetailsView({this.story});
+  UserStoryDetailsView({required this.story});
 
   @override
   _UserStoryDetailsViewState createState() => _UserStoryDetailsViewState();
@@ -21,19 +21,18 @@ class UserStoryDetailsView extends StatefulWidget {
 
 class _UserStoryDetailsViewState extends State<UserStoryDetailsView> {
   final _formKey = GlobalKey<FormState>();
-  String _title;
-  String _description;
-  String _authors;
-  int _year;
+  late String _title;
+  late String _description;
+  late String _authors;
+  late int _year;
 
   @override
   void initState() {
     super.initState();
-    if (widget.story != null && widget.story.year != null) {
-      _year = widget.story.year;
-    } else {
-      _year = 1620;
-    }
+    _title = widget.story.title;
+    _description = widget.story.description;
+    _authors = widget.story.authors;
+    _year = widget.story.year;
   }
 
   @override
@@ -44,13 +43,12 @@ class _UserStoryDetailsViewState extends State<UserStoryDetailsView> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
-            if (widget.story != null)
-              Padding(
-                padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
-                child: Text(
-                  widget.story.title,
-                ),
+            Padding(
+              padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
+              child: Text(
+                widget.story.title,
               ),
+            ),
             BorderedContainer(
               child: Form(
                 key: _formKey,
@@ -64,10 +62,9 @@ class _UserStoryDetailsViewState extends State<UserStoryDetailsView> {
                         hintText: LDLocalizations.enterStoryTitle,
                         labelText: LDLocalizations.labelStoryTitle,
                       ),
-                      initialValue:
-                          widget.story == null ? "" : widget.story.title,
+                      initialValue: widget.story.title,
                       onSaved: (value) {
-                        _title = value;
+                        _title = value!;
                       },
                     ),
                     TextFormField(
@@ -79,12 +76,11 @@ class _UserStoryDetailsViewState extends State<UserStoryDetailsView> {
                         labelText: LDLocalizations.description,
                       ),
                       onSaved: (value) {
-                        _description = value;
+                        _description = value!;
                       },
                       minLines: 1,
                       maxLines: 5,
-                      initialValue:
-                          widget.story == null ? "" : widget.story.description,
+                      initialValue: widget.story.description,
                     ),
                     TextFormField(
                       style: Theme.of(context).textTheme.bodyText2,
@@ -95,10 +91,9 @@ class _UserStoryDetailsViewState extends State<UserStoryDetailsView> {
                         labelText: LDLocalizations.labelAuthors,
                       ),
                       onSaved: (value) {
-                        _authors = value;
+                        _authors = value!;
                       },
-                      initialValue:
-                          widget.story == null ? "" : widget.story.authors,
+                      initialValue: widget.story.authors,
                     ),
                     TextFormField(
                       style: Theme.of(context).textTheme.bodyText2,
@@ -108,11 +103,9 @@ class _UserStoryDetailsViewState extends State<UserStoryDetailsView> {
                         labelText: LDLocalizations.labelYear,
                       ),
                       keyboardType: TextInputType.number,
-                      inputFormatters: [
-                        WhitelistingTextInputFormatter.digitsOnly
-                      ],
+                      inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                       onSaved: (value) {
-                        _year = int.parse(value);
+                        _year = int.parse(value!);
                       },
                       initialValue: "$_year",
                     ),
@@ -129,22 +122,15 @@ class _UserStoryDetailsViewState extends State<UserStoryDetailsView> {
                                 size: 30.0,
                               ),
                               onPressed: () {
-                                _formKey.currentState.save();
+                                _formKey.currentState!.save();
                                 var story;
-                                if (widget.story == null) {
-                                  story = gse.Story(
-                                    title: _title,
-                                    description: _description,
-                                    authors: _authors,
-                                    root: gse.Page.generate(),
-                                  );
-                                } else {
-                                  story = widget.story;
-                                  story.title = _title;
-                                  story.description = _description;
-                                  story.authors = _authors;
-                                  story.year = _year;
-                                }
+
+                                story = widget.story;
+                                story.title = _title;
+                                story.description = _description;
+                                story.authors = _authors;
+                                story.year = _year;
+
                                 _onSave(story);
                               },
                             ),
@@ -218,13 +204,14 @@ class _UserStoryDetailsViewState extends State<UserStoryDetailsView> {
 class UserStoryDetailsViewArguments {
   final gse.Story story;
 
-  UserStoryDetailsViewArguments({this.story});
+  UserStoryDetailsViewArguments({required this.story});
 }
 
 class ExtractUserStoryDetailsViewArguments extends StatelessWidget {
   Widget build(BuildContext context) {
-    final UserStoryDetailsViewArguments args =
-        ModalRoute.of(context).settings.arguments;
+    final UserStoryDetailsViewArguments args = ModalRoute.of(context)
+        ?.settings
+        .arguments as UserStoryDetailsViewArguments;
 
     return UserStoryDetailsView(
       story: args.story,

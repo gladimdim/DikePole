@@ -9,11 +9,11 @@ class TextEditor extends StatefulWidget {
   final bool showDone;
 
   TextEditor({
-    this.text,
+    required this.text,
     this.maxLines = 1,
-    @required this.onSave,
-    @required this.onSubmitted,
-    @required this.controller,
+    required this.onSave,
+    required this.onSubmitted,
+    required this.controller,
     this.showDone = true,
   });
 
@@ -26,7 +26,7 @@ class _TextEditorState extends State<TextEditor> {
   Widget build(BuildContext context) {
     return TextField(
       keyboardType: TextInputType.multiline,
-      cursorColor: Theme.of(context).textTheme.headline6.color,
+      cursorColor: Theme.of(context).textTheme.headline6?.color,
       focusNode: FocusNode(),
       maxLines: widget.maxLines,
       controller: widget.controller,

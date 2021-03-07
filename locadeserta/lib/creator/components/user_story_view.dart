@@ -7,7 +7,7 @@ import 'package:locadeserta/creator/components/user_story_details_view.dart';
 class UserStoryView extends StatefulWidget {
   final Story story;
 
-  UserStoryView({this.story});
+  UserStoryView({required this.story});
   @override
   _UserStoryViewState createState() => _UserStoryViewState();
 }
