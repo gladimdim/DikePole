@@ -26,6 +26,11 @@ var blackTheme = ThemeData(
   accentColor: Colors.white,
   fontFamily: 'Roboto',
   unselectedWidgetColor: Colors.white,
+  textButtonTheme: TextButtonThemeData(
+    style: ButtonStyle(
+      foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
+    ),
+  ),
   textTheme: TextTheme(
     bodyText2: TextStyle(
       fontFamily: "Raleway-Bold",
@@ -65,6 +70,11 @@ var whiteTheme = ThemeData(
   accentColor: Colors.black,
   fontFamily: 'Roboto',
   unselectedWidgetColor: Colors.black,
+  textButtonTheme: TextButtonThemeData(
+    style: ButtonStyle(
+      foregroundColor: MaterialStateProperty.all<Color>(Colors.black),
+    ),
+  ),
   textTheme: TextTheme(
     bodyText2: TextStyle(
       fontFamily: "Raleway-Bold",

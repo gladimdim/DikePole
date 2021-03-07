@@ -138,7 +138,7 @@ class _EditStoryViewState extends State<EditStoryView> {
                         .addNextPageWithText(LDLocalizations.optionPlaceHolder);
                   });
                 },
-                icon: Icon(Icons.add_box),
+                icon: Icon(Icons.add_box,),
                 label: Text(
                   LDLocalizations.labelOptions,
                   style: Theme.of(context).textTheme.headline6,
