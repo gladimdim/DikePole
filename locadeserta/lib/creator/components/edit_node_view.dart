@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gladstoriesengine/gladstoriesengine.dart';
 import 'package:locadeserta/animations/slideable_button.dart';
 import 'package:locadeserta/components/bordered_container.dart';
+import 'package:locadeserta/creator/components/dividers.dart';
 import 'package:locadeserta/creator/components/fat_container.dart';
 import 'package:locadeserta/creator/components/image_selector.dart';
 import 'package:locadeserta/creator/components/text_editor.dart';
@@ -69,63 +70,30 @@ class _EditNodeViewState extends State<EditNodeView> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Row(
-                            children: [
-                              Text(
-                                LDLocalizations.passageWillHaveImage,
-                                style: Theme.of(context).textTheme.headline6,
-                              ),
-                              Checkbox(
-                                value: widget.node.imageType != null,
-                                onChanged: (newValue) {
-                                  setState(() {
-                                    if (newValue!) {
-                                      widget.node.imageType = ImageType.BOAT;
-                                    } else {
-                                      widget.node.imageType = null;
-                                    }
-                                  });
-                                },
-                              ),
-                            ],
+                          Expanded(
+                            flex: 1,
+                            child: Row(
+                              children: [
+                                Text(
+                                  LDLocalizations.passageWillHaveImage,
+                                  style: Theme.of(context).textTheme.headline6,
+                                ),
+                                Checkbox(
+                                  value: widget.node.imageType != null,
+                                  onChanged: (newValue) {
+                                    setState(() {
+                                      if (newValue!) {
+                                        widget.node.imageType = ImageType.BOAT;
+                                      } else {
+                                        widget.node.imageType = null;
+                                      }
+                                    });
+                                  },
+                                ),
+                              ],
+                            ),
                           ),
-                          Row(
-                            children: [
-                              BorderedContainer(
-                                  child: Padding(
-                                padding: const EdgeInsets.all(2.0),
-                                child: IconButton(
-                                  icon: Icon(Icons.arrow_back),
-                                  onPressed: widget.onPreviousPressed,
-                                ),
-                              )),
-                              BorderedContainer(
-                                  child: Padding(
-                                padding: const EdgeInsets.all(2.0),
-                                child: IconButton(
-                                  icon: Icon(Icons.delete),
-                                  onPressed: widget.onDeletePressed,
-                                ),
-                              )),
-                              BorderedContainer(
-                                  child: Padding(
-                                padding: const EdgeInsets.all(2.0),
-                                child: IconButton(
-                                  icon: Icon(Icons.create_new_folder),
-                                  onPressed: widget.onAddNewNextPressed,
-                                ),
-                              )),
-                              BorderedContainer(
-                                child: Padding(
-                                  padding: const EdgeInsets.all(2.0),
-                                  child: IconButton(
-                                    icon: Icon(Icons.arrow_forward),
-                                    onPressed: widget.onNextPressed,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
+
                         ],
                       ),
                       if (widget.node.imageType != null)
@@ -150,6 +118,45 @@ class _EditNodeViewState extends State<EditNodeView> {
                             ),
                           ],
                         ),
+                      VDivider(),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          BorderedContainer(
+                              child: Padding(
+                                padding: const EdgeInsets.all(2.0),
+                                child: IconButton(
+                                  icon: Icon(Icons.arrow_back),
+                                  onPressed: widget.onPreviousPressed,
+                                ),
+                              )),
+                          BorderedContainer(
+                              child: Padding(
+                                padding: const EdgeInsets.all(2.0),
+                                child: IconButton(
+                                  icon: Icon(Icons.delete),
+                                  onPressed: widget.onDeletePressed,
+                                ),
+                              )),
+                          BorderedContainer(
+                              child: Padding(
+                                padding: const EdgeInsets.all(2.0),
+                                child: IconButton(
+                                  icon: Icon(Icons.create_new_folder),
+                                  onPressed: widget.onAddNewNextPressed,
+                                ),
+                              )),
+                          BorderedContainer(
+                            child: Padding(
+                              padding: const EdgeInsets.all(2.0),
+                              child: IconButton(
+                                icon: Icon(Icons.arrow_forward),
+                                onPressed: widget.onNextPressed,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
                     ],
                   ),
                 ),
