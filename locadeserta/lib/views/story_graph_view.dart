@@ -44,14 +44,14 @@ class _StoryGraphViewState extends State<StoryGraphView> {
 
       content.add(
         TreeNode(
-          content: storyNodeToGraphNode(node),
+          content: storyNodeToGraphNode(node, widget.story.currentPage),
         ),
       );
       story.currentPage.nextNode();
     }
     // add last node in page
     content.add(
-      TreeNode(content: storyNodeToGraphNode(page.getCurrentNode())),
+      TreeNode(content: storyNodeToGraphNode(page.getCurrentNode(), widget.story.currentPage)),
     );
     // add interactive options
     // and recursively process the "story flow"
@@ -97,12 +97,12 @@ class _StoryGraphViewState extends State<StoryGraphView> {
   firstWords(String str) {
     var max = 60;
     var length = str.length > max ? max : str.length;
-    return str.substring(0, length) + "...";
+    return str.substring(0, length) + (length < max ? "" : "...");
   }
 
-  storyNodeToGraphNode(gse.PageNode node) {
+  storyNodeToGraphNode(gse.PageNode node, gse.Page page) {
     var hasImage = node.imageType != null;
-    var index = widget.story.currentPage.currentIndex;
+    var index = page.nodes.indexOf(node);
     return InkWell(
       child: Wrap(
         children: [
@@ -115,12 +115,12 @@ class _StoryGraphViewState extends State<StoryGraphView> {
         ],
       ),
       onTap: () async {
-        widget.story.currentPage.currentIndex = index;
+        page.currentIndex = index;
         await Navigator.pushNamed(
           context,
           ExtractEditPassageView.routeName,
           arguments: EditPassageViewArguments(
-            page: widget.story.currentPage,
+            page: page,
           ),
         );
 
