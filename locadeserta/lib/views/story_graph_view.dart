@@ -124,12 +124,10 @@ class _StoryGraphViewState extends State<StoryGraphView> {
           ),
         );
 
-        await StoryPersistence.instance
-            .writeStory(widget.story);
+        await StoryPersistence.instance.writeStory(widget.story);
         setState(() {});
       },
     );
-
   }
 
   borderedText(String text) {
