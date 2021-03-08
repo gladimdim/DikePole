@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_simple_treeview/flutter_simple_treeview.dart';
 import 'package:gladstoriesengine/gladstoriesengine.dart' as gse;
 import 'package:locadeserta/components/bordered_container.dart';
+import 'package:locadeserta/creator/components/edit_node_sequence_view.dart';
+import 'package:locadeserta/models/story_persistence.dart';
 
 class StoryGraphView extends StatefulWidget {
   final gse.Story story;
@@ -13,15 +15,23 @@ class StoryGraphView extends StatefulWidget {
 }
 
 class _StoryGraphViewState extends State<StoryGraphView> {
+  TreeController _controller = TreeController(allNodesExpanded: false);
   double iconSize = 24;
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(child: generateTree(widget.story));
+    return SingleChildScrollView(
+      scrollDirection: Axis.vertical,
+      child: SingleChildScrollView(
+        scrollDirection: Axis.horizontal,
+        child: generateTree(widget.story),
+      ),
+    );
   }
 
   TreeView generateTree(gse.Story story) {
     return TreeView(
+      treeController: _controller,
       nodes: processPage(story.currentPage, story),
     );
   }
@@ -29,64 +39,43 @@ class _StoryGraphViewState extends State<StoryGraphView> {
   List<TreeNode> processPage(gse.Page page, gse.Story story) {
     page.currentIndex = 0;
     List<TreeNode> content = List.empty(growable: true);
-    List<TreeNode> children = List.empty(growable: true);
     while (story.canContinue()) {
+      var node = page.getCurrentNode();
+
       content.add(
-        TreeNode(content: storyNodeToGraphNode(page.getCurrentNode())),
+        TreeNode(
+          content: storyNodeToGraphNode(node),
+        ),
       );
       story.currentPage.nextNode();
     }
-
     // add last node in page
     content.add(
       TreeNode(content: storyNodeToGraphNode(page.getCurrentNode())),
     );
-
-    // add options
-
+    // add interactive options
+    // and recursively process the "story flow"
     var options = page.getNextNodeTexts();
-
     options.forEach((option) {
       var savedPage = story.currentPage;
       story.goToNextPageByText(option);
       content.add(
         TreeNode(
-          content: borderedText(option!),
+          content: Text(option!),
           children: processPage(story.currentPage, story),
         ),
       );
       story.currentPage = savedPage;
     });
 
+    if (story.currentPage.isTheEnd()) {
+      content.add(TreeNode(content: theEndNode(story)));
+    }
+
     return content;
   }
 
-  // void generateNextNode(Graph graph, Node parent, Story story) {
-  //   var node = Node(storyNodeToGraphNode(story.currentPage.getCurrentNode()));
-  //   if (parent == null) {
-  //     graph.addNode(node);
-  //   } else {
-  //     graph.addEdge(parent, node);
-  //   }
-  //   if (story.canContinue()) {
-  //     story.currentPage.nextNode();
-  //     generateNextNode(graph, node, story);
-  //   } else if (story.currentPage.isTheEnd()) {
-  //     graph.addEdge(node, Node(theEndNode(story)));
-  //   } else {
-  //     var savedPage = story.currentPage;
-  //     var options = story.currentPage.next;
-  //     options.forEach((option) {
-  //       var optionNode = Node(borderedText(option.text));
-  //       graph.addEdge(node, optionNode);
-  //       story.goToNextPage(option);
-  //       generateNextNode(graph, optionNode, story);
-  //       story.currentPage = savedPage;
-  //     });
-  //   }
-  // }
-
-  theEndNode(gse.Story story) {
+  Widget theEndNode(gse.Story story) {
     var isAlive = story.currentPage.endType == gse.EndType.ALIVE;
     return Wrap(
       children: [
@@ -106,23 +95,41 @@ class _StoryGraphViewState extends State<StoryGraphView> {
   }
 
   firstWords(String str) {
-    var max = 20;
+    var max = 60;
     var length = str.length > max ? max : str.length;
-    return str.substring(0, length);
+    return str.substring(0, length) + "...";
   }
 
   storyNodeToGraphNode(gse.PageNode node) {
     var hasImage = node.imageType != null;
-    return Wrap(
-      children: [
-        if (hasImage)
-          Icon(
-            Icons.image,
-            size: iconSize,
+    var index = widget.story.currentPage.currentIndex;
+    return InkWell(
+      child: Wrap(
+        children: [
+          if (hasImage)
+            Icon(
+              Icons.image,
+              size: iconSize,
+            ),
+          Text(firstWords(node.text!)),
+        ],
+      ),
+      onTap: () async {
+        widget.story.currentPage.currentIndex = index;
+        await Navigator.pushNamed(
+          context,
+          ExtractEditPassageView.routeName,
+          arguments: EditPassageViewArguments(
+            page: widget.story.currentPage,
           ),
-        borderedText(node.text!),
-      ],
+        );
+
+        await StoryPersistence.instance
+            .writeStory(widget.story);
+        setState(() {});
+      },
     );
+
   }
 
   borderedText(String text) {
