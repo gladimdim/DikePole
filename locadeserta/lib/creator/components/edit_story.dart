@@ -113,7 +113,24 @@ class _EditStoryViewState extends State<EditStoryView> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-
+              TextButton.icon(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => NarrowScaffold(
+                          title: LDLocalizations.labelTreeView,
+                          actions: [],
+                          body: StoryGraphView(story: widget.story)),
+                    ),
+                  );
+                },
+                icon: Icon(Icons.account_tree_sharp),
+                label: Text(
+                  "Tree view",
+                  style: Theme.of(context).textTheme.headline6,
+                ),
+              ),
               TextButton.icon(
                 onPressed: () {
                   setState(() {
