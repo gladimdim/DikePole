@@ -135,6 +135,7 @@ class LDLocalizations {
       'labelLocaDesertaSloboda': 'Loca Deserta: Sloboda',
       'labelPrivacy': 'For Privacy Policy Tap here.',
       'labelSiteLink': 'Loca Deserta Universe Site',
+      'labelTreeView': 'Tree view',
     },
     'uk': {
       'continue': 'Продовжити',
@@ -245,6 +246,7 @@ class LDLocalizations {
       'labelLocaDesertaSloboda': 'Дике Поле: Слобода',
       'labelPrivacy': 'Інформація про вашу приватність.',
       'labelSiteLink': 'Сайт всесвіту Дике Поле',
+      'labelTreeView': 'У вигляді дерева',
     },
     'pl': {
       'continue': 'Dalej',
@@ -354,6 +356,7 @@ class LDLocalizations {
       'labelLocaDesertaSloboda': 'Loca Deserta: Sloboda',
       'labelPrivacy': 'For Privacy Policy Tap here.',
       'labelSiteLink': 'Loca Deserta Universe Site',
+      'labelTreeView': 'Tree View',
     }
   };
 
@@ -742,6 +745,10 @@ class LDLocalizations {
 
   static String get labelSiteLink {
     return _localizedValues[locale.languageCode]!['labelSiteLink']!;
+  }
+
+  static String get labelTreeView {
+    return _localizedValues[locale.languageCode]!['labelTreeView']!;
   }
 
   static String? getForKey(String key) {
