@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:gladstoriesengine/gladstoriesengine.dart';
+import 'package:locadeserta/components/dash_painter.dart';
 import 'package:locadeserta/creator/components/node_editor.dart';
 import 'package:locadeserta/models/Localizations.dart';
 import 'package:locadeserta/models/background_image.dart';
@@ -33,12 +34,26 @@ class _StoryEditViewState extends State<StoryEditView> {
           children: [
             Slidable(
               actionPane: SlidableScrollActionPane(),
-              child: NodeEditor(
-                node: node,
+              child: Row(
+                children: [
+                  if (imageType != null)
+                    Icon(
+                      Icons.image,
+                      size: 32,
+                      color: Theme.of(context).primaryColor,
+                    ),
+                  Expanded(
+                    flex: 10,
+                    child: NodeEditor(
+                      node: node,
+                    ),
+                  ),
+                ],
               ),
               secondaryActions: [
-                IconSlideAction(
-                  icon: Icons.delete,
+                Icon(
+                  Icons.delete,
+                  color: Theme.of(context).primaryColor,
                 ),
               ],
               actions: [
@@ -49,15 +64,39 @@ class _StoryEditViewState extends State<StoryEditView> {
               ],
             ),
             Align(
-              alignment: Alignment.bottomCenter,
-              child: IconButton(
-                icon: Icon(Icons.add),
-                onPressed: () {
-                  setState(() {
-                    page.addNodeWithTextAtIndex(
-                        "Empty", page.nodes.indexOf(node) + 1);
-                  });
-                },
+              alignment: Alignment.topCenter,
+              child: Stack(
+                alignment: Alignment.center,
+                children: [
+                  Container(
+                    width: MediaQuery.of(context).size.width,
+                    // height: 32,
+                    child: CustomPaint(
+                      foregroundPainter: DashPainter(
+                        color: Theme.of(context).primaryColor,
+                      ),
+                    ),
+                  ),
+                  Container(
+                    width: 42,
+                    color: Theme.of(context).backgroundColor,
+                    child: Center(
+                      child: IconButton(
+                        icon: Icon(
+                          Icons.add_box_outlined,
+                          color: Theme.of(context).primaryColor,
+                          size: 24,
+                        ),
+                        onPressed: () {
+                          setState(() {
+                            page.addNodeWithTextAtIndex(
+                                "Empty", page.nodes.indexOf(node) + 1);
+                          });
+                        },
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
           ],

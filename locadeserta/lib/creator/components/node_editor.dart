@@ -11,6 +11,7 @@ class NodeEditor extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      style: Theme.of(context).textTheme.headline6,
       decoration: InputDecoration(
         border: InputBorder.none,
       ),
