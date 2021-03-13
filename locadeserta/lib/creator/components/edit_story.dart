@@ -15,7 +15,6 @@ import 'package:locadeserta/models/background_image.dart';
 import 'package:locadeserta/models/story_persistence.dart';
 import 'package:locadeserta/views/publish_story_to_purgatory_view.dart';
 import 'package:locadeserta/views/story_edit_view.dart';
-import 'package:locadeserta/views/story_graph_view.dart';
 import 'package:locadeserta/views/story_json_export_view.dart';
 
 class EditStoryView extends StatefulWidget {

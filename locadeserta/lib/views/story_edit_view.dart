@@ -3,6 +3,9 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:gladstoriesengine/gladstoriesengine.dart';
 import 'package:locadeserta/components/dash_painter.dart';
 import 'package:locadeserta/creator/components/node_editor.dart';
+import 'package:locadeserta/creator/components/page_next_edit.dart';
+import 'package:locadeserta/creator/components/page_next_editor.dart';
+import 'package:locadeserta/creator/components/separator_with_button.dart';
 import 'package:locadeserta/models/Localizations.dart';
 import 'package:locadeserta/models/background_image.dart';
 
@@ -64,41 +67,15 @@ class _StoryEditViewState extends State<StoryEditView> {
               ],
             ),
             Align(
-              alignment: Alignment.topCenter,
-              child: Stack(
-                alignment: Alignment.center,
-                children: [
-                  Container(
-                    width: MediaQuery.of(context).size.width,
-                    // height: 32,
-                    child: CustomPaint(
-                      foregroundPainter: DashPainter(
-                        color: Theme.of(context).primaryColor,
-                      ),
-                    ),
-                  ),
-                  Container(
-                    width: 42,
-                    color: Theme.of(context).backgroundColor,
-                    child: Center(
-                      child: IconButton(
-                        icon: Icon(
-                          Icons.add_box_outlined,
-                          color: Theme.of(context).primaryColor,
-                          size: 24,
-                        ),
-                        onPressed: () {
-                          setState(() {
-                            page.addNodeWithTextAtIndex(
-                                "Empty", page.nodes.indexOf(node) + 1);
-                          });
-                        },
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
+                alignment: Alignment.topCenter,
+                child: SeparatorWithButton(
+                  onPressed: () {
+                    setState(() {
+                      page.addNodeWithTextAtIndex(
+                          "Порожній", page.nodes.indexOf(node) + 1);
+                    });
+                  },
+                )),
           ],
         );
       },
@@ -110,13 +87,38 @@ class _StoryEditViewState extends State<StoryEditView> {
           onPressed: () {
             setState(
               () {
-                page.addNodeWithText("Empty");
+                page.addNodeWithText("Порожній");
               },
             );
           },
         ),
       );
     }
+    if (page.hasNext()) {
+      page.next.forEach((nextPagePointer) {
+        widgets.add(
+          PageNextEdit(
+            pageNext: nextPagePointer,
+            onDelete: (nextPage) {
+              setState(() {
+                page.removeNextPage(nextPage);
+              });
+            },
+          ),
+        );
+      });
+    }
+
+    widgets.add(
+      SeparatorWithButton(
+        iconData: Icons.create_new_folder,
+        onPressed: () {
+          setState(() {
+            page.addNextPageWithText("Порожньо");
+          });
+        },
+      ),
+    );
     return widgets;
   }
 }
