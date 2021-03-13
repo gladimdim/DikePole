@@ -5,16 +5,16 @@ import 'package:locadeserta/components/bordered_container.dart';
 import 'package:locadeserta/creator/components/edit_node_sequence_view.dart';
 import 'package:locadeserta/models/story_persistence.dart';
 
-class StoryGraphView extends StatefulWidget {
+class StoryTreeView extends StatefulWidget {
   final gse.Story story;
 
-  StoryGraphView({required this.story});
+  StoryTreeView({required this.story});
 
   @override
-  _StoryGraphViewState createState() => _StoryGraphViewState();
+  _StoryTreeViewState createState() => _StoryTreeViewState();
 }
 
-class _StoryGraphViewState extends State<StoryGraphView> {
+class _StoryTreeViewState extends State<StoryTreeView> {
   TreeController _controller = TreeController(allNodesExpanded: false);
   double iconSize = 24;
 
@@ -50,23 +50,29 @@ class _StoryGraphViewState extends State<StoryGraphView> {
       story.currentPage.nextNode();
     }
     // add last node in page
-    content.add(
-      TreeNode(content: storyNodeToGraphNode(page.getCurrentNode(), widget.story.currentPage)),
-    );
-    // add interactive options
-    // and recursively process the "story flow"
-    var options = page.getNextNodeTexts();
-    options.forEach((option) {
-      var savedPage = story.currentPage;
-      story.goToNextPageByText(option);
+    try {
       content.add(
         TreeNode(
-          content: Text(option!),
-          children: processPage(story.currentPage, story),
-        ),
+            content: storyNodeToGraphNode(
+                page.getCurrentNode(), widget.story.currentPage)),
       );
-      story.currentPage = savedPage;
-    });
+    } catch (e) {}
+    // add interactive options
+    // and recursively process the "story flow"
+    if (page.hasNext()) {
+      var options = page.getNextNodeTexts();
+      options.forEach((option) {
+        var savedPage = story.currentPage;
+        story.goToNextPageByText(option);
+        content.add(
+          TreeNode(
+            content: Text(option!),
+            children: processPage(story.currentPage, story),
+          ),
+        );
+        story.currentPage = savedPage;
+      });
+    }
 
     if (story.currentPage.isTheEnd()) {
       content.add(TreeNode(content: theEndNode(story)));

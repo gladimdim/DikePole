@@ -121,7 +121,7 @@ class _EditStoryViewState extends State<EditStoryView> {
                       builder: (context) => NarrowScaffold(
                           title: LDLocalizations.labelTreeView,
                           actions: [],
-                          body: StoryGraphView(story: widget.story)),
+                          body: StoryTreeView(story: widget.story)),
                     ),
                   );
                 },
@@ -138,7 +138,9 @@ class _EditStoryViewState extends State<EditStoryView> {
                         .addNextPageWithText(LDLocalizations.optionPlaceHolder);
                   });
                 },
-                icon: Icon(Icons.add_box,),
+                icon: Icon(
+                  Icons.add_box,
+                ),
                 label: Text(
                   LDLocalizations.labelOptions,
                   style: Theme.of(context).textTheme.headline6,
