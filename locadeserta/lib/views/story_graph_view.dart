@@ -3,6 +3,7 @@ import 'package:flutter_simple_treeview/flutter_simple_treeview.dart';
 import 'package:gladstoriesengine/gladstoriesengine.dart' as gse;
 import 'package:locadeserta/components/bordered_container.dart';
 import 'package:locadeserta/creator/components/edit_node_sequence_view.dart';
+import 'package:locadeserta/models/background_image.dart';
 import 'package:locadeserta/models/story_persistence.dart';
 
 class StoryTreeView extends StatefulWidget {
@@ -109,30 +110,52 @@ class _StoryTreeViewState extends State<StoryTreeView> {
   storyNodeToGraphNode(gse.PageNode node, gse.Page page) {
     var hasImage = node.imageType != null;
     var index = page.nodes.indexOf(node);
-    return InkWell(
-      child: Wrap(
-        children: [
-          if (hasImage)
-            Icon(
-              Icons.image,
-              size: iconSize,
+    return BorderedContainer(
+      child: InkWell(
+        onTap: () async {
+          var nodeIndex = page.nodes.indexOf(node);
+          page.currentIndex = nodeIndex;
+          await Navigator.pushNamed(
+            context,
+            ExtractEditPassageView.routeName,
+            arguments: EditPassageViewArguments(
+              page: page,
             ),
-          Text(firstWords(node.text!)),
-        ],
-      ),
-      onTap: () async {
-        page.currentIndex = index;
-        await Navigator.pushNamed(
-          context,
-          ExtractEditPassageView.routeName,
-          arguments: EditPassageViewArguments(
-            page: page,
-          ),
-        );
+          );
 
-        await StoryPersistence.instance.writeStory(widget.story);
-        setState(() {});
-      },
+          await StoryPersistence.instance.writeStory(widget.story);
+          setState(() {});
+        },
+        child: Row(
+          children: [
+            node.imageType == null
+                ? Icon(
+                    Icons.texture,
+                  )
+                : Image(
+                    image:
+                        BackgroundImage.getAssetImageForType(node.imageType!),
+                    width: 32,
+                  ),
+            Text(node.text!,
+                style: Theme.of(context).textTheme.headline6,
+                maxLines: 20,
+                softWrap: false,
+                overflow: TextOverflow.fade),
+            IconButton(
+              icon: Icon(
+                Icons.delete,
+                color: Theme.of(context).primaryColor,
+              ),
+              onPressed: () {
+                setState(() {
+                  page.removeNode(node);
+                });
+              },
+            ),
+          ],
+        ),
+      ),
     );
   }
 
