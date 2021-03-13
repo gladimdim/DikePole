@@ -54,9 +54,14 @@ class _StoryEditViewState extends State<StoryEditView> {
                 ],
               ),
               secondaryActions: [
-                Icon(
-                  Icons.delete,
+                IconButton(
+                  icon: Icon(Icons.delete),
                   color: Theme.of(context).primaryColor,
+                  onPressed: () {
+                    setState(() {
+                      page.removeNode(node);
+                    });
+                  },
                 ),
               ],
               actions: [
@@ -67,15 +72,19 @@ class _StoryEditViewState extends State<StoryEditView> {
               ],
             ),
             Align(
-                alignment: Alignment.topCenter,
-                child: SeparatorWithButton(
+              alignment: Alignment.topCenter,
+              child: SeparatorWithButton(
+                button: IconButton(
+                  icon: Icon(Icons.add_box_outlined),
                   onPressed: () {
                     setState(() {
                       page.addNodeWithTextAtIndex(
                           "Порожній", page.nodes.indexOf(node) + 1);
                     });
                   },
-                )),
+                ),
+              ),
+            ),
           ],
         );
       },
@@ -111,12 +120,30 @@ class _StoryEditViewState extends State<StoryEditView> {
 
     widgets.add(
       SeparatorWithButton(
-        iconData: Icons.create_new_folder,
-        onPressed: () {
-          setState(() {
-            page.addNextPageWithText("Порожньо");
-          });
-        },
+        button: Container(
+          color: Theme.of(context).backgroundColor,
+          width: 200,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(LDLocalizations.labelAddBranch),
+              IconButton(
+                icon: Icon(
+                  Icons.account_tree_sharp,
+                  color: Theme.of(context).primaryColor,
+                  size: 24,
+                ),
+                onPressed: () {
+                  setState(
+                    () {
+                      page.addNextPageWithText("Порожньо");
+                    },
+                  );
+                },
+              ),
+            ],
+          ),
+        ),
       ),
     );
     return widgets;
