@@ -129,7 +129,7 @@ class _EditStoryViewState extends State<EditStoryView> {
                 },
                 icon: Icon(Icons.account_tree_sharp),
                 label: Text(
-                  "Tree view",
+                  LDLocalizations.labelTreeView,
                   style: Theme.of(context).textTheme.headline6,
                 ),
               ),
