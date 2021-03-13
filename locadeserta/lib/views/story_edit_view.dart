@@ -25,7 +25,7 @@ class _StoryEditViewState extends State<StoryEditView> {
 
   List<Widget> buildTree(BuildContext context) {
     final page = widget.story.currentPage;
-    return page.nodes.map(
+    List<Widget> widgets = page.nodes.map<Widget>(
       (node) {
         return Column(
           children: [
@@ -37,7 +37,6 @@ class _StoryEditViewState extends State<StoryEditView> {
               secondaryActions: [
                 IconSlideAction(
                   icon: Icons.delete,
-                  caption: LDLocalizations.labelEditStory,
                 ),
               ],
             ),
@@ -57,5 +56,18 @@ class _StoryEditViewState extends State<StoryEditView> {
         );
       },
     ).toList();
+    if (widgets.isEmpty) {
+      widgets.add(
+        IconButton(
+          icon: Icon(Icons.add),
+          onPressed: () {
+            setState(() {
+              page.addNodeWithText("Empty");
+            });
+          },
+        ),
+      );
+    }
+    return widgets;
   }
 }
