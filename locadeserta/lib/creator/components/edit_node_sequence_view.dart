@@ -21,7 +21,7 @@ class _EditNodeSequenceState extends State<EditNodeSequence> {
           ? Padding(
               padding: const EdgeInsets.all(8.0),
               child: EditNodeView(
-                node: widget.page.getCurrentNode(),
+                node: widget.page.getCurrentNode()!,
                 onFinished: () {
                   setState(() {
                     moveToNextNode();

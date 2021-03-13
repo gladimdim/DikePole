@@ -67,7 +67,7 @@ class PassageState extends State<StoryView> with TickerProviderStateMixin {
     }
     setState(() {
       var currentImageType =
-          widget.currentStory.currentPage.getCurrentNode().imageType;
+          widget.currentStory.currentPage.getCurrentNode()!.imageType;
       if (currentImageType != null) {
         BackgroundImage.nextRandomForType(currentImageType);
       }

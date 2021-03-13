@@ -14,6 +14,7 @@ import 'package:locadeserta/models/Localizations.dart';
 import 'package:locadeserta/models/background_image.dart';
 import 'package:locadeserta/models/story_persistence.dart';
 import 'package:locadeserta/views/publish_story_to_purgatory_view.dart';
+import 'package:locadeserta/views/story_edit_view.dart';
 import 'package:locadeserta/views/story_graph_view.dart';
 import 'package:locadeserta/views/story_json_export_view.dart';
 
@@ -114,16 +115,17 @@ class _EditStoryViewState extends State<EditStoryView> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               TextButton.icon(
-                onPressed: () {
-                  Navigator.push(
+                onPressed: () async {
+                  await Navigator.push(
                     context,
                     MaterialPageRoute(
                       builder: (context) => NarrowScaffold(
                           title: LDLocalizations.labelTreeView,
                           actions: [],
-                          body: StoryTreeView(story: widget.story)),
+                          body: StoryEditView(story: widget.story)),
                     ),
                   );
+                  setState(() {});
                 },
                 icon: Icon(Icons.account_tree_sharp),
                 label: Text(
