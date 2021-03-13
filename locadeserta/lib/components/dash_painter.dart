@@ -14,7 +14,7 @@ class DashPainter extends CustomPainter {
       ..strokeWidth = 2
       ..style = PaintingStyle.stroke;
     var i = -1;
-    while (++i < dashes) {
+    while (i++ < dashes) {
       double start = dashSize * i * 2;
       var end = start + dashSize;
       canvas.drawLine(Offset(start, 0), Offset(end, 0), paint);
