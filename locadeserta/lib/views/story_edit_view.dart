@@ -51,24 +51,27 @@ class _StoryEditViewState extends State<StoryEditView> {
               style: Theme.of(context).textTheme.headline6,
             ),
             onPressed: () {
-              setState(() {
-                var parent = widget.story.findParentOfPage(page);
-                if (parent != null) {
-                  widget.story.currentPage = parent;
-                } else {
-                  widget.story.currentPage = widget.story.root;
-                }
-              });
+              setState(
+                () {
+                  var parent = widget.story.findParentOfPage(page);
+                  if (parent != null) {
+                    widget.story.currentPage = parent;
+                  } else {
+                    widget.story.currentPage = widget.story.root;
+                  }
+                },
+              );
             },
           ),
         ),
       );
     } else {
-      widgets.add(BorderedContainer(
-          child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Text("..."),
-      )));
+      widgets.add(
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Text(widget.story.title),
+        ),
+      );
     }
     widgets.addAll(
       page.nodes.map<Widget>(
@@ -165,20 +168,27 @@ class _StoryEditViewState extends State<StoryEditView> {
         },
       ),
     );
-    if (widgets.isEmpty) {
+    if (page.nodes.isEmpty) {
       widgets.add(
-        IconButton(
-          icon: Icon(Icons.add),
-          onPressed: () {
-            setState(
-              () {
-                page.addNodeWithText("Порожній");
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(LDLocalizations.labelAddParagraph),
+            IconButton(
+              icon: Icon(Icons.add),
+              onPressed: () {
+                setState(
+                  () {
+                    page.addNodeWithText("Порожній");
+                  },
+                );
               },
-            );
-          },
+            ),
+          ],
         ),
       );
     }
+
     if (page.hasNext()) {
       page.next.forEach((nextPagePointer) {
         widgets.add(
@@ -205,25 +215,25 @@ class _StoryEditViewState extends State<StoryEditView> {
         button: Container(
           color: Theme.of(context).backgroundColor,
           width: 200,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(LDLocalizations.labelAddBranch),
-              IconButton(
-                icon: Icon(
+          child: InkWell(
+            onTap: () {
+              setState(
+                () {
+                  page.addNextPageWithText("Порожньо");
+                },
+              );
+            },
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(LDLocalizations.labelAddBranch),
+                Icon(
                   Icons.account_tree_sharp,
                   color: Theme.of(context).primaryColor,
                   size: 24,
                 ),
-                onPressed: () {
-                  setState(
-                    () {
-                      page.addNextPageWithText("Порожньо");
-                    },
-                  );
-                },
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

@@ -137,6 +137,7 @@ class LDLocalizations {
       'labelSiteLink': 'Loca Deserta Universe Site',
       'labelTreeView': 'Tree view',
       'labelAddBranch': 'Add branch',
+      'labelAddParagraph': 'Add Paragraph',
     },
     'uk': {
       'continue': 'Продовжити',
@@ -249,6 +250,7 @@ class LDLocalizations {
       'labelSiteLink': 'Сайт всесвіту Дике Поле',
       'labelTreeView': 'У вигляді дерева',
       'labelAddBranch': 'Додати гілку',
+      'labelAddParagraph': 'Додати абзац',
     },
     'pl': {
       'continue': 'Dalej',
@@ -360,6 +362,7 @@ class LDLocalizations {
       'labelSiteLink': 'Loca Deserta Universe Site',
       'labelTreeView': 'Tree View',
       'labelAddBranch': 'Add branch',
+      'labelAddParagraph': 'Add Paragraph',
     }
   };
 
@@ -756,6 +759,10 @@ class LDLocalizations {
 
   static String get labelAddBranch {
     return _localizedValues[locale.languageCode]!['labelAddBranch']!;
+  }
+
+  static String get labelAddParagraph {
+    return _localizedValues[locale.languageCode]!['labelAddParagraph']!;
   }
 
   static String? getForKey(String key) {
