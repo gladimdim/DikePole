@@ -6,6 +6,7 @@ class NodeEditor extends StatelessWidget {
   final TextEditingController _textController = TextEditingController();
   NodeEditor({required this.node}) {
     _textController.text = node.text ?? "Empty";
+    _textController.addListener(_textChanged);
   }
 
   @override
@@ -19,5 +20,9 @@ class NodeEditor extends StatelessWidget {
       maxLines: null,
       controller: _textController,
     );
+  }
+
+  void _textChanged() {
+    node.text = _textController.text;
   }
 }

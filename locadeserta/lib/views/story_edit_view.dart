@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:gladstoriesengine/gladstoriesengine.dart';
-import 'package:locadeserta/components/dash_painter.dart';
+import 'package:locadeserta/creator/components/image_selector.dart';
 import 'package:locadeserta/creator/components/node_editor.dart';
 import 'package:locadeserta/creator/components/page_next_edit.dart';
-import 'package:locadeserta/creator/components/page_next_editor.dart';
 import 'package:locadeserta/creator/components/separator_with_button.dart';
 import 'package:locadeserta/models/Localizations.dart';
 import 'package:locadeserta/models/background_image.dart';
@@ -65,10 +64,47 @@ class _StoryEditViewState extends State<StoryEditView> {
                 ),
               ],
               actions: [
-                if (imageType != null)
-                  Image(
-                    image: BackgroundImage.getAssetImageForType(imageType),
-                  )
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Checkbox(
+                      value: node.imageType != null,
+                      onChanged: (newValue) {
+                        setState(
+                          () {
+                            if (newValue!) {
+                              node.imageType = ImageType.BOAT;
+                            } else {
+                              node.imageType = null;
+                            }
+                          },
+                        );
+                      },
+                    ),
+                    Icon(
+                      Icons.image,
+                      size: 32,
+                      color: Theme.of(context).primaryColor,
+                    ),
+                    if (imageType != null)
+                      Row(
+                        children: [
+                          ImageSelector(
+                              imageType: imageType,
+                              onSelected: (newType) {
+                                setState(() {
+                                  node.imageType = newType;
+                                });
+                              }),
+                          Image(
+                            image: BackgroundImage.getAssetImageForType(
+                              imageType,
+                            ),
+                          ),
+                        ],
+                      )
+                  ],
+                ),
               ],
             ),
             Align(

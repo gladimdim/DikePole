@@ -6,6 +6,7 @@ class PageNextEditor extends StatelessWidget {
   final TextEditingController _textController = TextEditingController();
   PageNextEditor({required this.next}) {
     _textController.text = next.text ?? "Порожньо";
+    _textController.addListener(_textChanged);
   }
 
   @override
@@ -19,5 +20,9 @@ class PageNextEditor extends StatelessWidget {
       maxLines: null,
       controller: _textController,
     );
+  }
+
+  _textChanged() {
+    next.text = _textController.text;
   }
 }

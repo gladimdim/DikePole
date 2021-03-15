@@ -11,20 +11,17 @@ class PageNextEdit extends StatelessWidget {
   Widget build(BuildContext context) {
     return Slidable(
       actionPane: SlidableScrollActionPane(),
-      child: Expanded(
-        flex: 10,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            Expanded(flex: 1, child: Icon(Icons.account_tree_sharp)),
-            Expanded(
-              flex: 10,
-              child: PageNextEditor(
-                next: pageNext,
-              ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          Expanded(flex: 1, child: Icon(Icons.account_tree_sharp)),
+          Expanded(
+            flex: 10,
+            child: PageNextEditor(
+              next: pageNext,
             ),
-          ],
-        ),
+          ),
+        ],
       ),
       secondaryActions: [
         IconButton(
