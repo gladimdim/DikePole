@@ -67,7 +67,7 @@ class _StoryEditViewState extends State<StoryEditView> {
       widgets.add(BorderedContainer(
           child: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Text("Pochatok"),
+        child: Text("..."),
       )));
     }
     widgets.addAll(
@@ -106,47 +106,44 @@ class _StoryEditViewState extends State<StoryEditView> {
                   ),
                 ],
                 actions: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Checkbox(
-                        value: node.imageType != null,
-                        onChanged: (newValue) {
-                          setState(
-                            () {
-                              if (newValue!) {
-                                node.imageType = ImageType.BOAT;
-                              } else {
-                                node.imageType = null;
-                              }
-                            },
-                          );
+                  Checkbox(
+                    value: node.imageType != null,
+                    onChanged: (newValue) {
+                      setState(
+                        () {
+                          if (newValue!) {
+                            node.imageType = ImageType.BOAT;
+                          } else {
+                            node.imageType = null;
+                          }
                         },
-                      ),
-                      Icon(
-                        Icons.image,
-                        size: 32,
-                        color: Theme.of(context).primaryColor,
-                      ),
-                      if (imageType != null)
-                        Row(
-                          children: [
-                            ImageSelector(
-                                imageType: imageType,
-                                onSelected: (newType) {
-                                  setState(() {
-                                    node.imageType = newType;
-                                  });
-                                }),
-                            Image(
-                              image: BackgroundImage.getAssetImageForType(
-                                imageType,
-                              ),
-                            ),
-                          ],
-                        )
-                    ],
+                      );
+                    },
                   ),
+                  if (imageType != null)
+                    ImageSelector(
+                      imageType: imageType,
+                      onSelected: (newType) {
+                        setState(
+                          () {
+                            node.imageType = newType;
+                          },
+                        );
+                      },
+                    ),
+                  if (imageType != null)
+                    Image(
+                      image: BackgroundImage.getAssetImageForType(
+                        imageType,
+                      ),
+                      width: 64,
+                    ),
+                  if (imageType == null)
+                    Icon(
+                      Icons.image,
+                      size: 32,
+                      color: Theme.of(context).primaryColor,
+                    ),
                 ],
               ),
               Align(
