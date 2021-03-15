@@ -18,9 +18,16 @@ class StoryEditView extends StatefulWidget {
 }
 
 class _StoryEditViewState extends State<StoryEditView> {
+  ScrollController _scrollController = ScrollController();
+  @override
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
+      controller: _scrollController,
       child: Column(
         children: buildTree(context),
       ),
@@ -147,6 +154,12 @@ class _StoryEditViewState extends State<StoryEditView> {
             onDelete: (nextPage) {
               setState(() {
                 page.removeNextPage(nextPage);
+              });
+            },
+            onSelect: (PageNext next) {
+              setState(() {
+                widget.story.goToNextPage(next);
+                _scrollController.jumpTo(0);
               });
             },
           ),

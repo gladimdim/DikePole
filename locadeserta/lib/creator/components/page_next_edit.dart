@@ -6,11 +6,22 @@ import 'package:locadeserta/creator/components/page_next_editor.dart';
 class PageNextEdit extends StatelessWidget {
   final PageNext pageNext;
   final Function(PageNext) onDelete;
-  PageNextEdit({required this.pageNext, required this.onDelete});
+  final Function(PageNext) onSelect;
+  PageNextEdit({
+    required this.pageNext,
+    required this.onDelete,
+    required this.onSelect,
+  });
   @override
   Widget build(BuildContext context) {
     return Slidable(
       actionPane: SlidableScrollActionPane(),
+      actions: [
+        IconButton(
+          icon: Icon(Icons.edit),
+          onPressed: () => onSelect(pageNext),
+        )
+      ],
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
