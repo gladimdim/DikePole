@@ -43,7 +43,7 @@ class _EditStoryViewState extends State<EditStoryView> {
             await Navigator.pushNamed(
               context,
               ExtractArgumentsGameView.routeName,
-              arguments: GameViewArguments(story: story),
+              arguments: GameViewArguments(story: story, previewMode: true),
             );
             story.reset();
           },

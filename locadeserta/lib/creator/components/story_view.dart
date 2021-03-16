@@ -19,7 +19,7 @@ class StoryView extends StatefulWidget {
 
   StoryView({
     required this.currentStory,
-    this.previewMode = true,
+    this.previewMode = false,
   });
 
   @override
