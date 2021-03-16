@@ -121,18 +121,7 @@ class _UserStoryDetailsViewState extends State<UserStoryDetailsView> {
                                 Icons.save,
                                 size: 30.0,
                               ),
-                              onPressed: () {
-                                _formKey.currentState!.save();
-                                var story;
-
-                                story = widget.story;
-                                story.title = _title;
-                                story.description = _description;
-                                story.authors = _authors;
-                                story.year = _year;
-
-                                _onSave(story);
-                              },
+                              onPressed: saveStory,
                             ),
                           ),
                           Padding(
@@ -196,8 +185,22 @@ class _UserStoryDetailsViewState extends State<UserStoryDetailsView> {
   }
 
   _goToEditStoryView(gse.Story story, context) async {
+    saveStory();
     await Navigator.pushNamed(context, ExtractEditStoryViewArguments.routeName,
         arguments: EditStoryViewArguments(story: story));
+  }
+
+  saveStory() {
+    _formKey.currentState!.save();
+    var story;
+
+    story = widget.story;
+    story.title = _title;
+    story.description = _description;
+    story.authors = _authors;
+    story.year = _year;
+
+    _onSave(story);
   }
 }
 
