@@ -8,6 +8,7 @@ import 'package:locadeserta/creator/components/page_next_edit.dart';
 import 'package:locadeserta/creator/components/separator_with_button.dart';
 import 'package:locadeserta/models/Localizations.dart';
 import 'package:locadeserta/models/background_image.dart';
+import 'package:locadeserta/models/story_persistence.dart';
 
 class StoryEditView extends StatefulWidget {
   final Story story;
@@ -59,6 +60,7 @@ class _StoryEditViewState extends State<StoryEditView> {
                   } else {
                     widget.story.currentPage = widget.story.root;
                   }
+                  StoryPersistence.instance.writeCreatorStory(widget.story);
                 },
               );
             },

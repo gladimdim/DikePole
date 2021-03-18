@@ -17,9 +17,9 @@ class PageNextEdit extends StatelessWidget {
     return Slidable(
       actionPane: SlidableScrollActionPane(),
       actions: [
-        IconButton(
-          icon: Icon(Icons.edit),
-          onPressed: () => onSelect(pageNext),
+        SlideAction(
+          child: Icon(Icons.edit),
+          onTap: () => onSelect(pageNext),
         )
       ],
       child: Row(
@@ -35,9 +35,9 @@ class PageNextEdit extends StatelessWidget {
         ],
       ),
       secondaryActions: [
-        IconButton(
-          onPressed: () => onDelete(pageNext),
-          icon: Icon(
+        SlideAction(
+          onTap: () => onDelete(pageNext),
+          child: Icon(
             Icons.delete,
             color: Theme.of(context).primaryColor,
           ),

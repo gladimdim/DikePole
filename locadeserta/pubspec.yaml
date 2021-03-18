@@ -1,6 +1,6 @@
 name: locadeserta
 description: Loca Deserta. Interactive Stories
-version: 1.0.123
+version: 1.0.124
 publish_to: none
 
 environment:
@@ -20,8 +20,7 @@ dependencies:
   share: ^2.0.0
   tuple: ^2.0.0-nullsafety.0
   http: ^0.13.0
-  gladstoriesengine: 
-    path: ../../gladstoriesdart
+  gladstoriesengine: ^0.3.2
   shared_preferences: ^2.0.3
   flutter_markdown: ^0.6.0
   flutter_simple_treeview: ^3.0.0-nullsafety.1

@@ -188,6 +188,7 @@ class _UserStoryDetailsViewState extends State<UserStoryDetailsView> {
     saveStory();
     await Navigator.pushNamed(context, ExtractEditStoryViewArguments.routeName,
         arguments: EditStoryViewArguments(story: story));
+    saveStory();
   }
 
   saveStory() {
