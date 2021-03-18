@@ -16,8 +16,9 @@ import '../../export_pdf_view.dart';
 class GameView extends StatefulWidget {
   final Story story;
   final CatalogStory? catalogStory;
+  final bool previewMode;
 
-  GameView({required this.story, this.catalogStory});
+  GameView({required this.story, this.catalogStory, required this.previewMode});
 
   @override
   _MainViewState createState() => _MainViewState();
@@ -87,7 +88,7 @@ class _MainViewState extends State<GameView> {
           },
           text: LDLocalizations.labelConvertToMarkdown,
         ),
-        if (widget.catalogStory != null)
+        if (!widget.previewMode)
           AppBarObject(
             onTap: () async {
               var story = Story.fromJson(widget.story.toJson());
@@ -103,7 +104,7 @@ class _MainViewState extends State<GameView> {
         padding: const EdgeInsets.only(top: 32.0),
         child: StoryView(
           currentStory: widget.story,
-          previewMode: widget.catalogStory == null,
+          previewMode: widget.previewMode,
         ),
       ),
     );
@@ -121,8 +122,8 @@ class _MainViewState extends State<GameView> {
 
 class GameViewArguments {
   final Story story;
-
-  GameViewArguments({required this.story});
+  final bool previewMode;
+  GameViewArguments({required this.story, required this.previewMode});
 }
 
 class ExtractArgumentsGameView extends StatelessWidget {
@@ -134,6 +135,7 @@ class ExtractArgumentsGameView extends StatelessWidget {
 
     return GameView(
       story: args.story,
+      previewMode: args.previewMode,
     );
   }
 }

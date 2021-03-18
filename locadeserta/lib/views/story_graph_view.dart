@@ -42,22 +42,23 @@ class _StoryTreeViewState extends State<StoryTreeView> {
     List<TreeNode> content = List.empty(growable: true);
     while (story.canContinue()) {
       var node = page.getCurrentNode();
-
-      content.add(
-        TreeNode(
-          content: storyNodeToGraphNode(node, widget.story.currentPage),
-        ),
-      );
+      if (node != null) {
+        content.add(
+          TreeNode(
+            content: storyNodeToGraphNode(node, widget.story.currentPage),
+          ),
+        );
+      }
       story.currentPage.nextNode();
     }
     // add last node in page
-    try {
+    var lastNode = page.getCurrentNode();
+    if (lastNode != null) {
       content.add(
         TreeNode(
-            content: storyNodeToGraphNode(
-                page.getCurrentNode(), widget.story.currentPage)),
+            content: storyNodeToGraphNode(lastNode, widget.story.currentPage)),
       );
-    } catch (e) {}
+    }
     // add interactive options
     // and recursively process the "story flow"
     if (page.hasNext()) {

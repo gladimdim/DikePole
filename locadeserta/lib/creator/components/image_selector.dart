@@ -37,6 +37,7 @@ class _ImageSelectorState extends State<ImageSelector> {
           value: imageType,
           child: Text(
             imageTypeString!,
+            style: TextStyle(fontSize: 18.0),
           ),
         );
       }).toList(),

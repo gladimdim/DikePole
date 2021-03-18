@@ -237,6 +237,7 @@ class _MainMenuState extends State<MainMenu> with TickerProviderStateMixin {
         widget: GameView(
           story: storyWithState,
           catalogStory: catalogStory,
+          previewMode: false,
         ),
       ),
     );

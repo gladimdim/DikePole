@@ -19,7 +19,7 @@ class StoryView extends StatefulWidget {
 
   StoryView({
     required this.currentStory,
-    this.previewMode = true,
+    this.previewMode = false,
   });
 
   @override
@@ -67,7 +67,7 @@ class PassageState extends State<StoryView> with TickerProviderStateMixin {
     }
     setState(() {
       var currentImageType =
-          widget.currentStory.currentPage.getCurrentNode().imageType;
+          widget.currentStory.currentPage.getCurrentNode()!.imageType;
       if (currentImageType != null) {
         BackgroundImage.nextRandomForType(currentImageType);
       }

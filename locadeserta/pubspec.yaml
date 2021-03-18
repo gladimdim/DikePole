@@ -1,6 +1,6 @@
 name: locadeserta
 description: Loca Deserta. Interactive Stories
-version: 1.0.123
+version: 1.0.124
 publish_to: none
 
 environment:
@@ -20,10 +20,11 @@ dependencies:
   share: ^2.0.0
   tuple: ^2.0.0-nullsafety.0
   http: ^0.13.0
-  gladstoriesengine: ^0.3.1
+  gladstoriesengine: ^0.3.2
   shared_preferences: ^2.0.3
   flutter_markdown: ^0.6.0
   flutter_simple_treeview: ^3.0.0-nullsafety.1
+  flutter_slidable: ^0.6.0-nullsafety.0
   # graphview: ^0.6.1
 
 dev_dependencies:
@@ -35,19 +36,8 @@ flutter_icons:
   android: "launcher_icon"
   ios: true
   image_path: "images/launcher.png"
-
-  # For information on the generic Dart part of this file, see the
-  # following page: https://www.dartlang.org/tools/pub/pubspec
-
-# The following section is specific to Flutter.
 flutter:
-
-  # The following line ensures that the Material Icons font is
-  # included with your application, so that you can use the icons in
-  # the material Icons class.
   uses-material-design: true
-
-  # To add assets to your application, add an assets section, like this:
   assets:
     #
     - images/other/

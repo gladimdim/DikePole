@@ -62,6 +62,7 @@ class _PurgatoryListViewState extends State<PurgatoryListView> {
             widget: GameView(
               story: story,
               catalogStory: null,
+              previewMode: false,
             ),
           ),
         );
@@ -90,6 +91,7 @@ class _PurgatoryListViewState extends State<PurgatoryListView> {
                   widget: GameView(
                     story: story,
                     catalogStory: null,
+                    previewMode: false,
                   ),
                 ),
               );
