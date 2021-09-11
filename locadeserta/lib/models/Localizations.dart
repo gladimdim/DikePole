@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:locadeserta/loaders/url_parser.dart';
 import 'package:locadeserta/models/app_preferences.dart';
 
-var version = "1.124";
+var version = "1.125";
 
 String getDefaultOrUrlLanguage() {
   var urlLang = UrlParser.getLanguage();
@@ -131,8 +131,9 @@ class LDLocalizations {
           'Uploaded! Now your story is available for everybody in the "User stories" section of the game.',
       'shareStoryToPdf': "Share to PDF",
       'labelOtherGames': 'Other Games',
-      'labelLocadesertaHex': 'Loca Deserta: Hex',
-      'labelLocaDesertaSloboda': 'Loca Deserta: Sloboda',
+      'labelLocadesertaHex': 'Hex',
+      'labelLocaDesertaSloboda': 'Sloboda',
+      'labelLocaDesertaChumaki': 'Chumaki',
       'labelPrivacy': 'For Privacy Policy Tap here.',
       'labelSiteLink': 'Loca Deserta Universe Site',
       'labelTreeView': 'Tree view',
@@ -244,8 +245,9 @@ class LDLocalizations {
           'Завантажено! Тепер ваша історія доступна для всіх читачів в секції "Історії інших читаів".',
       "shareStoryToPdf": "Експорт в PDF",
       'labelOtherGames': 'Інші ігри',
-      'labelLocadesertaHex': 'Дике Поле: Ґекс',
-      'labelLocaDesertaSloboda': 'Дике Поле: Слобода',
+      'labelLocadesertaHex': 'Ґекс',
+      'labelLocaDesertaSloboda': 'Слобода',
+      'labelLocaDesertaChumaki': 'Чумаки',
       'labelPrivacy': 'Інформація про вашу приватність.',
       'labelSiteLink': 'Сайт всесвіту Дике Поле',
       'labelTreeView': 'У вигляді дерева',
