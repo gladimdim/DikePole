@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:locadeserta/loaders/url_parser.dart';
 import 'package:locadeserta/models/app_preferences.dart';
 
-var version = "1.124";
+var version = "1.125";
 
 String getDefaultOrUrlLanguage() {
   var urlLang = UrlParser.getLanguage();
@@ -133,6 +133,7 @@ class LDLocalizations {
       'labelOtherGames': 'Other Games',
       'labelLocadesertaHex': 'Loca Deserta: Hex',
       'labelLocaDesertaSloboda': 'Loca Deserta: Sloboda',
+      'labelLocaDesertaChumaki': 'Loca Deserta: Chumaki',
       'labelPrivacy': 'For Privacy Policy Tap here.',
       'labelSiteLink': 'Loca Deserta Universe Site',
       'labelTreeView': 'Tree view',
@@ -246,6 +247,7 @@ class LDLocalizations {
       'labelOtherGames': 'Інші ігри',
       'labelLocadesertaHex': 'Дике Поле: Ґекс',
       'labelLocaDesertaSloboda': 'Дике Поле: Слобода',
+      'labelLocaDesertaChumaki': 'Дике Поле: Чумаки',
       'labelPrivacy': 'Інформація про вашу приватність.',
       'labelSiteLink': 'Сайт всесвіту Дике Поле',
       'labelTreeView': 'У вигляді дерева',

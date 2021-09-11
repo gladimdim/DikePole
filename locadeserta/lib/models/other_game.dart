@@ -31,8 +31,14 @@ class OtherGame {
       OtherGame(
         image: "images/other/locadeserta_sloboda.png",
         titleKey: "labelLocaDesertaSloboda",
-        urlUkr: "http://locadeserta.com/citybuilding",
-        urlEn: "http://locadeserta.com/citybuilding/index_en.html",
+        urlUkr: "https://locadeserta.com/citybuilding",
+        urlEn: "https://locadeserta.com/citybuilding/index_en.html",
+      ),
+      OtherGame(
+        image: "images/other/locadeserta_chumaki.png",
+        titleKey: "labelLocaDesertaChumaki",
+        urlUkr: "https://locadeserta.com/locadesertachumaki",
+        urlEn: "https://locadeserta.com/locadesertachumaki/index_en.html",
       ),
     ];
   }
