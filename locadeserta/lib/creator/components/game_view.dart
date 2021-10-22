@@ -11,8 +11,6 @@ import 'package:locadeserta/models/story_persistence.dart';
 import 'package:locadeserta/views/export_to_markdown_view.dart';
 import 'package:locadeserta/views/upload_passed_story_view.dart';
 
-import '../../export_pdf_view.dart';
-
 class GameView extends StatefulWidget {
   final Story story;
   final CatalogStory? catalogStory;
