@@ -90,10 +90,10 @@ BEGIN
         BLOCK "040904e4"
         BEGIN
             VALUE "CompanyName", "gladimdim" "\0"
-            VALUE "FileDescription", "A new Flutter project." "\0"
+            VALUE "FileDescription", "locadeserta" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
             VALUE "InternalName", "locadeserta" "\0"
-            VALUE "LegalCopyright", "Copyright (C) 2021 gladimdim. All rights reserved." "\0"
+            VALUE "LegalCopyright", "Copyright (C) 2022 gladimdim. All rights reserved." "\0"
             VALUE "OriginalFilename", "locadeserta.exe" "\0"
             VALUE "ProductName", "locadeserta" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"

@@ -31,14 +31,14 @@ if (keystorePropertiesFile.exists()) {
 }
 
 android {
-    compileSdkVersion 29
+    compileSdkVersion 31
     lintOptions {
         disable 'InvalidPackage'
     }
     defaultConfig {
         applicationId "gladimdim.locadeserta"
         minSdkVersion 24
-        targetSdkVersion 30
+        targetSdkVersion 31
         multiDexEnabled true
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
