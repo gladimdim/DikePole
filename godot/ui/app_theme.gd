@@ -1,9 +1,8 @@
 extends Node
 ## Themes of the app, switchable at runtime.
 ##
-## [member background]/[member primary] are the black-and-white colors of the Flutter
-## design (story view, classic screens). The other colors and the label variations
-## Caps…PrimaryText belong to the thin design of the home and story screens.
+## Warm paper and ink for the modern screens; black and white in classic mode.
+## The bundled book font covers both Ukrainian and English.
 
 signal changed
 
@@ -11,6 +10,7 @@ const APP_BAR_HEIGHT := 40.0
 const BORDER := 3
 const BODY_SIZE := 18
 
+const FONT_BOOK := preload("res://ui/fonts/NotoSerif-Regular.ttf")
 const FONT_BODY := preload("res://ui/fonts/Raleway-Bold.ttf")
 const FONT_REGULAR := preload("res://ui/fonts/Roboto-Regular.ttf")
 const FONT_BOLD := preload("res://ui/fonts/Roboto-Bold.ttf")
@@ -47,7 +47,7 @@ func _ready() -> void:
 	_caps_font.base_font = RALEWAY_SEMIBOLD
 	_caps_font.spacing_glyph = 1
 	_wordmark_font = FontVariation.new()
-	_wordmark_font.base_font = RALEWAY_MEDIUM
+	_wordmark_font.base_font = FONT_BOOK
 	_wordmark_font.spacing_glyph = 4
 	_build()
 	AppPrefs.changed.connect(_on_pref_changed)
@@ -69,7 +69,7 @@ func _notification(what: int) -> void:
 
 
 func _on_pref_changed(key: String) -> void:
-	if key in ["themeMode", "isDarkTheme", "textScale"]:
+	if key in ["themeMode", "isDarkTheme", "textScale", "classicLook"]:
 		_rebuild()
 
 
@@ -83,21 +83,25 @@ func _build() -> void:
 	background = Color.BLACK if dark else Color.WHITE
 	primary = Color.WHITE if dark else Color.BLACK
 	if dark:
-		paper = Color("#121211")
-		surface = Color("#1c1b19")
-		ink = Color("#ecEAE4")
-		ink_soft = Color("#9a978f")
-		hairline = Color("#2c2b28")
-		accent = Color("#e0625a")
-		on_accent = Color("#121211")
+		paper = Color("#201b16")
+		surface = Color("#2a231b")
+		ink = Color("#e3d3b5")
+		ink_soft = Color("#b7a486")
+		hairline = Color("#514331")
+		accent = Color("#d38e64")
+		on_accent = Color("#201b16")
 	else:
-		paper = Color("#faf9f6")
-		surface = Color("#f1efea")
-		ink = Color("#1b1a18")
-		ink_soft = Color("#77736b")
-		hairline = Color("#e2dfd8")
-		accent = Color("#a4282c")
+		paper = Color("#eee1c5")
+		surface = Color("#e5d4b2")
+		ink = Color("#352a20")
+		ink_soft = Color("#79654e")
+		hairline = Color("#c9b58f")
+		accent = Color("#8c432d")
 		on_accent = Color("#ffffff")
+
+	if not AppPrefs.classic_look:
+		background = paper
+		primary = ink
 
 	if theme == null:
 		theme = Theme.new()
@@ -112,12 +116,14 @@ func _build() -> void:
 	_label_variation(t, "SmallBold", FONT_BOLD, 15, primary)
 	_label_variation(t, "Plain", FONT_REGULAR, 15, primary)
 
-	_label_variation(t, "Wordmark", _wordmark_font, 14, ink)
+	_label_variation(t, "Book", FONT_BOOK, roundi(19 * AppPrefs.text_scale), ink, 9)
+	_label_variation(t, "BookAction", FONT_BOOK, 17, accent, 5)
+	_label_variation(t, "Wordmark", _wordmark_font, 18, ink)
 	_label_variation(t, "Caps", _caps_font, 12, accent)
-	_label_variation(t, "Display", RALEWAY_LIGHT, 30, ink, 2)
-	_label_variation(t, "H2", RALEWAY_SEMIBOLD, 21, ink)
-	_label_variation(t, "Title", RALEWAY_SEMIBOLD, 17, ink, 1)
-	_label_variation(t, "Body", RALEWAY_REGULAR, 15, ink, 7)
+	_label_variation(t, "Display", FONT_BOOK, 30, ink, 2)
+	_label_variation(t, "H2", FONT_BOOK, 21, ink)
+	_label_variation(t, "Title", FONT_BOOK, 17, ink, 1)
+	_label_variation(t, "Body", FONT_BOOK, 15, ink, 7)
 	_label_variation(t, "Meta", RALEWAY_MEDIUM, 13, ink_soft)
 	_label_variation(t, "Stat", RALEWAY_LIGHT, 24, ink)
 	_label_variation(t, "PrimaryText", RALEWAY_SEMIBOLD, 16, on_accent)

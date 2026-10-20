@@ -30,7 +30,7 @@ func _ready() -> void:
 
 	_thumb = StoryImage.from_spec(BackgroundImages.cover_spec(entry))
 	_thumb.fit = StoryImage.Fit.COVER
-	_thumb.corner_radius = 8.0
+	_thumb.corner_radius = 1.0
 	_thumb.custom_minimum_size = THUMB_SIZE
 	_thumb.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 	_thumb.hero_tag = "story:" + StoryLibrary.story_id(entry)

@@ -2,6 +2,10 @@
 
 Every story image is an **ultra-realistic photograph** that reads like a still from a big-budget historical film shot on location in Ukraine. One image per story node that has an `imageType`, plus one cover per story.
 
+## Khotyn opening: illustrated edition
+
+The three opening illustrations of `hotinska_riznya` (`r/0`, `r/4`, `r/9`) override the photographic direction below at the user's request. Use fine pencil and pen hatching, in the spirit of Abraham van Westerveld's documentary drawings, in sepia/graphite on warm ivory paper. Each image depicts its exact `source_text`: Dmytro awake before the raid; the three Ottoman mortars with their untroubled crews; Dmytro choosing a weapon under a wagon. The full generation prompts are in `prompts/hotinska_riznya.jsonl`. These PNGs use an ink reveal with static composition and no ambient distortion; they stay drawings throughout the animation.
+
 ## 1. Output spec
 
 | | |

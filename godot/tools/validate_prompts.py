@@ -67,8 +67,11 @@ def validate(story_id):
             if e.get("id") in seen:
                 errors.append(f"{where}: duplicate id")
             seen.add(e.get("id"))
-            if e.get("id") and e.get("file") != file_for(e["id"]):
-                errors.append(f"{where}: file should be {file_for(e['id'])}")
+            if e.get("id"):
+                stem, ext = os.path.splitext(e.get("file", ""))
+                expected_stem = os.path.splitext(file_for(e["id"]))[0]
+                if stem != expected_stem or ext.lower() not in {".jpg", ".jpeg", ".png", ".webp"}:
+                    errors.append(f"{where}: file should use stem {expected_stem} and a supported image extension")
             if e.get("aspect_ratio") != "4:3":
                 errors.append(f"{where}: aspect_ratio must be 4:3")
             motion = e.get("motion") or {}

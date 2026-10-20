@@ -82,12 +82,53 @@ func _next_in_reader() -> void:
 	var reader := Router.instance.top() as ReaderScreen
 	if reader == null:
 		return
+	if not AppPrefs.classic_look:
+		reader._reset()
+		await _wait(0.35)
+		_check(reader._writing.writing and reader._writing.visible_characters > 0,
+				"new passage writes progressively")
+		var paragraph_height := reader._writing.size.y
+		var initial_count := reader.story.history.size()
+		await _tap(_find_button("reader_show_text", reader))
+		await _wait(0.1)
+		_check(not reader._writing.writing and reader.story.history.size() == initial_count,
+				"reveal finishes the text without advancing the story")
+		_check(is_equal_approx(paragraph_height, reader._writing.size.y),
+				"writing preserves paragraph layout")
 	var before := reader.story.history.size()
 	var next := _find_button("next", reader)
 	if next:
 		await _tap(next)
 		await _wait(0.8)
 		_check(reader.story.history.size() == before + 1, "Next shows the next passage")
+		if not AppPrefs.classic_look:
+			reader._attach(StoryLibrary.open(reader.entry))
+			await _wait(0.1)
+			_check(not is_instance_valid(reader._writing) or not reader._writing.writing,
+					"saved history appears immediately on resume")
+			reader._reset()
+			await _wait(0.1)
+			reader._reset()
+			await _wait(0.1)
+			_check(reader._history_box.get_child_count() == 1 and reader._writing.writing,
+					"reset during writing replaces the previous animation")
+			reader._attach(StoryLibrary.open(reader.entry), true)
+			await _wait(0.1)
+			_check(not is_instance_valid(reader._writing) or not reader._writing.writing,
+					"even a single saved passage resumes without replaying")
+			while reader.story.can_continue():
+				reader._finish_writing()
+				reader._on_next()
+				await _wait(0.02)
+			reader._finish_writing()
+			await _wait(0.2)
+			if reader.story.current_page.has_next():
+				var path_length := reader.story.path.size()
+				var choices := reader._controls.find_children("*", "Pressable", true, false)
+				await _tap(choices[0])
+				await _wait(0.2)
+				_check(reader.story.path.size() == path_length + 1,
+						"a revealed choice advances to its story branch")
 	else:
 		_check(not reader.story.can_continue(), "the reader shows choices or an ending")
 
@@ -120,9 +161,11 @@ func _touch(point: Vector2, pressed: bool) -> void:
 	await get_tree().process_frame
 
 
-## The SlideableButton whose label is the translation key [param key].
-func _find_button(key: String, root: Node = null) -> SlideableButton:
-	for node in (root if root else get_tree().root).find_children("*", "SlideableButton", true, false):
+## The classic or paper-style action with the translation key [param key].
+func _find_button(key: String, root: Node = null) -> Control:
+	for node in (root if root else get_tree().root).find_children("*", "Control", true, false):
+		if not (node is SlideableButton or node is Pressable):
+			continue
 		for label in node.find_children("*", "Label", true, false):
 			if label.text == key and node.is_visible_in_tree():
 				return node

@@ -34,7 +34,7 @@ static func create(screen_body: Control, screen_title: String, screen_actions: A
 
 func _ready() -> void:
 	UI.fill_parent(self)
-	var background := UI.fill()
+	var background: Control = UI.fill() if AppPrefs.classic_look else PaperBackground.new()
 	UI.fill_parent(background)
 	background.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	add_child(background)
@@ -72,7 +72,7 @@ func _build_bar() -> Control:
 			if event is InputEventMouseButton and not event.pressed:
 				Router.instance.pop())
 		row.add_child(back)
-	var title_label := UI.label(title, &"Headline", translate_title)
+	var title_label := UI.label(title, &"Headline" if AppPrefs.classic_look else &"Title", translate_title)
 	title_label.clip_text = true
 	title_label.text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS
 	title_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
@@ -85,7 +85,7 @@ func _build_bar() -> Control:
 		menu.add_theme_constant_override("separation", 0)
 		menu.size_flags_vertical = Control.SIZE_SHRINK_BEGIN
 		menu.mouse_filter = Control.MOUSE_FILTER_STOP
-		menu.add_child(UI.label("menu"))
+		menu.add_child(UI.label("menu", &"" if AppPrefs.classic_look else &"Meta"))
 		_menu_glyph = Glyph.create(Glyph.Kind.DROP_DOWN)
 		menu.add_child(_menu_glyph)
 		menu.gui_input.connect(func(event: InputEvent) -> void:
@@ -96,7 +96,14 @@ func _build_bar() -> Control:
 	_items = UI.vbox()
 	_items.visible = false
 
-	var bar := UI.bordered(UI.margin(UI.vbox([row, _items]), 0, TOP_PADDING))
+	var bar_content := UI.margin(UI.vbox([row, _items]), 0, TOP_PADDING, 0 if AppPrefs.classic_look else 8, 0 if AppPrefs.classic_look else 8)
+	var bar: Control
+	if AppPrefs.classic_look:
+		bar = UI.bordered(bar_content)
+	else:
+		bar = PanelContainer.new()
+		bar.add_child(UI.fill_parent(PaperBackground.new()))
+		bar.add_child(bar_content)
 	bar.set_anchors_and_offsets_preset(Control.PRESET_TOP_WIDE)
 	return bar
 
@@ -104,7 +111,7 @@ func _build_bar() -> Control:
 ## "text" may be a Callable returning the key, for labels that change (theme toggle).
 func _menu_item(item: Dictionary) -> Control:
 	var key: String = item["text"].call() if item["text"] is Callable else item["text"]
-	var text := UI.centered_label(key, &"ButtonText")
+	var text := UI.centered_label(key, &"ButtonText" if AppPrefs.classic_look else &"BookAction")
 	text.custom_minimum_size.y = ITEM_HEIGHT
 	text.mouse_filter = Control.MOUSE_FILTER_STOP
 	text.gui_input.connect(func(event: InputEvent) -> void:

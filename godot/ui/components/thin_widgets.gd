@@ -33,24 +33,23 @@ static func primary_button(text: String, on_pressed: Callable, translate := true
 	return Pressable.wrap(box, on_pressed)
 
 
-## Quiet outlined button (48 px, radius 12).
+## Quiet text action with a 48 px tap target.
 static func quiet_button(text: String, on_pressed: Callable, translate := true) -> Pressable:
 	var label := UI.centered_label(text, &"ButtonQuiet", translate)
-	var box := panel(func() -> StyleBox: return AppTheme.flat(Color.TRANSPARENT, 12, AppTheme.hairline), label)
+	var box := panel(func() -> StyleBox: return AppTheme.flat(Color.TRANSPARENT), label)
 	box.custom_minimum_size.y = 48
 	return Pressable.wrap(box, on_pressed)
 
 
-## Small rounded pill (filter chips).
+## Text filter tab, with a fine underline for the selected option.
 static func chip(text: String, selected: bool, on_pressed: Callable) -> Pressable:
 	var label := UI.centered_label(text, &"Meta")
 	label.autowrap_mode = TextServer.AUTOWRAP_OFF
 	if selected:
-		label.add_theme_color_override("font_color", AppTheme.paper)
-	var style := func() -> StyleBox:
-		return AppTheme.flat(AppTheme.ink if selected else Color.TRANSPARENT, 16,
-				Color.TRANSPARENT if selected else AppTheme.hairline, 0)
-	var box := panel(style, UI.margin(label, 14, 6, 14, 7))
+		label.add_theme_color_override("font_color", AppTheme.accent)
+	var underline := hairline()
+	underline.color = AppTheme.accent if selected else Color.TRANSPARENT
+	var box := UI.vbox([UI.margin(label, 9, 10, 9, 10), underline])
 	var pressable := Pressable.wrap(box, on_pressed)
 	pressable.size_flags_horizontal = Control.SIZE_SHRINK_BEGIN
 	return pressable

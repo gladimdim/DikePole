@@ -29,10 +29,12 @@ godot --headless --path . --export-debug "Android" build/android/locadeserta-deb
 | `art/` | image style guide, per-story prompts and character bibles, Astra export |
 | `tools/` | prompt listing/validation/export, manifest builder, string extraction |
 
-## Home and story screens (thin design)
+## Home, story screens and paper reader
 
 `screens/home_screen.gd`, `story_row.gd`, `story_screen.gd`, `settings_sheet.gd`; widgets in `ui/components/thin_widgets.gd`, `pressable.gd` and `line_icon.gd`.
 
+- **Paper style:** warm, subtly textured paper, sepia ink and bundled Noto Serif (including Ukrainian). Dark mode uses a warm dark sheet. Filters are underlined text tabs, and reader passages, pictures and actions have no enclosing borders.
+- **Reading:** new passages write themselves onto the page, with brief punctuation pauses and stable line wrapping. *Show full passage* skips the animation without advancing. Saved history appears immediately; reset starts a fresh animation. Choices appear when the passage is fully visible.
 - **Home:** wordmark and settings, a *Continue reading* card (or a welcome card), filters (*All / New / Reading / Finished*), and the stories on a timeline by year. The rail dot shows the status: outline = new, ring = reading, filled = finished. Each row shows the reading time, endings found / total, and a progress line.
 - **Story page:** the list thumbnail flies into a full-bleed cover. Then year and language, title, author, reading time / choices / endings, the description, endings found (without telling which choices lead there), and *Read*, *Continue · N%* or *Start over*.
 - **Settings sheet:** theme (light / dark / system), language, story text size, vibration, classic look.

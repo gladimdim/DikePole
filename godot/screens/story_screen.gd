@@ -18,8 +18,7 @@ static func create(catalog_entry: Dictionary) -> StoryScreen:
 
 
 func _ready() -> void:
-	var background := PanelContainer.new()
-	background.theme_type_variation = &"Paper"
+	var background := PaperBackground.new()
 	background.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	add_child(UI.fill_parent(background))
 	_build()

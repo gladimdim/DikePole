@@ -81,7 +81,11 @@ func next_random_for_type(type: GsImageType.Type) -> void:
 
 
 ## Picture spec for a passage of the story view.
-func passage_spec(paths: PackedStringArray) -> Dictionary:
+func passage_spec(paths: PackedStringArray, node_id := "") -> Dictionary:
+	# Old saves retain their original pool photos. Prefer newly bundled art for
+	# that exact passage without changing the saved story or replaying choices.
+	if not AppPrefs.classic_look and _nodes.has(node_id):
+		return _generated_spec(_nodes[node_id])
 	if paths.size() == 2:
 		if AppPrefs.classic_look:
 			# Flutter TweenImage(first: photo, last: sketch, duration: 6).

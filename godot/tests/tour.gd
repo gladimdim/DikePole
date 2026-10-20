@@ -90,6 +90,33 @@ func _run_home() -> void:
 	Router.instance.pop()
 	await _wait(0.6)
 
+	ReaderScreen.open(_entry("hunting_bears"), true)
+	await _wait(0.7)
+	await _shot("book_writing")
+	var reader: ReaderScreen = Router.instance.top()
+	reader._finish_writing()
+	await _wait(0.3)
+	await _shot("book_page")
+	reader._on_next()
+	await _wait(0.7)
+	await _shot("book_next_writing")
+	while reader.story.can_continue():
+		reader._finish_writing()
+		reader._on_next()
+		await _wait(0.05)
+	reader._finish_writing()
+	await _wait(0.8)
+	await _shot("book_choices")
+	AppPrefs.text_scale = 1.3
+	await _wait(0.4)
+	await _shot("book_large_text")
+	AppPrefs.text_scale = 1.0
+	AppPrefs.theme_mode = "dark"
+	await _wait(0.4)
+	await _shot("book_dark")
+	Router.instance.pop()
+	await _wait(0.6)
+
 	AppPrefs.theme_mode = "dark"
 	await _wait(1.0)
 	await _shot("home_dark")

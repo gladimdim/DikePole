@@ -21,8 +21,7 @@ var _root: Control
 
 
 func _ready() -> void:
-	var background := PanelContainer.new()
-	background.theme_type_variation = &"Paper"
+	var background := PaperBackground.new()
 	background.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	add_child(UI.fill_parent(background))
 	_build()
@@ -130,18 +129,18 @@ func _continue_card() -> Control:
 
 	var picture := StoryImage.from_spec(spec)
 	picture.fit = StoryImage.Fit.COVER
-	picture.corner_radius = 14.0
-	picture.bottom_shade = 0.75
+	picture.corner_radius = 1.0
+	picture.bottom_shade = 0.0
 	picture.motion_duration = 18.0
 
-	var title_label := UI.label(title, &"OnImage", false)
+	var title_label := UI.label(title, &"Display", false)
 	title_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	var text := UI.vbox([UI.label(caps, &"OnImageCaps", false), title_label], 4)
+	var text := UI.vbox([UI.label(caps, &"Caps", false), title_label], 4)
 	if percent >= 0:
-		var line := ThinWidgets.progress_line(percent, Color(1, 1, 1, 0.25), Color.WHITE)
+		var line := ThinWidgets.progress_line(percent, AppTheme.hairline, AppTheme.accent)
 		line.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		line.size_flags_vertical = Control.SIZE_SHRINK_CENTER
-		var percent_label := UI.label("%d%%" % percent, &"OnImageCaps", false)
+		var percent_label := UI.label("%d%%" % percent, &"Caps", false)
 		var row := HBoxContainer.new()
 		row.add_theme_constant_override("separation", 10)
 		row.add_child(line)
@@ -150,15 +149,13 @@ func _continue_card() -> Control:
 	else:
 		var begin := HBoxContainer.new()
 		begin.add_theme_constant_override("separation", 2)
-		begin.add_child(UI.label(tr("home_begin"), &"OnImageCaps", false))
-		begin.add_child(LineIcon.create(LineIcon.Kind.CHEVRON_RIGHT, 14, Color(1, 1, 1, 0.85)))
+		begin.add_child(UI.label(tr("home_begin"), &"Caps", false))
+		begin.add_child(LineIcon.create(LineIcon.Kind.CHEVRON_RIGHT, 14, AppTheme.accent))
 		text.add_child(UI.margin(begin, 0, 6))
 	text.size_flags_vertical = Control.SIZE_SHRINK_END
 
-	var card := Control.new()
-	card.custom_minimum_size.y = 224
-	card.add_child(UI.fill_parent(picture))
-	card.add_child(UI.fill_parent(UI.margin(text, 18, 18, 18, 18)))
+	picture.custom_minimum_size.y = 150
+	var card := UI.vbox([picture, UI.margin(text, 2, 16, 2, 18), ThinWidgets.hairline()])
 	return Pressable.wrap(card, _on_card_pressed.bind(entry, percent >= 0))
 
 
