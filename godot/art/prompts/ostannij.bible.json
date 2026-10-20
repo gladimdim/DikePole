@@ -1,0 +1,17 @@
+{
+  "story": "ostannij",
+  "year": 1574,
+  "setting": "Deep winter 1574 in the Wild Fields near the Kalmius river. A newly founded Cossack sloboda of two small huts (kureni) with whitewashed clay walls, log beams, thatched roofs heavy with snow, a clay stove, wooden benches, an earthen floor, a tiny ice-rimmed window, and a stable with three horses. A forest road of pines, bare oaks and hazel thickets leads toward the main palanka of twenty huts beyond the forest, a snow-buried steppe and a frozen marshy river with dry reeds sticking out of the snow, and a lone burial mound. Weather: bright, freezing, sunny days after a three-day blizzard; snow knee-deep; breath steaming; grey dawns.",
+  "characters": {
+    "dmytro": "Dmytro, a 30-year-old Zaporozhian Cossack gaunt from illness, hollow cheeks, sunken tired eyes, dark-blond forelock, drooping dark-blond mustache, stubble, brown beaver-fur hat, grey wool svyta with bone buttons, heavy brown wool opancha cloak, dark-blue sharovary, black boots",
+    "otaman": "the otaman, a big-framed 55-year-old Cossack wasted by sickness, sallow greenish-pale face, grey forelock, long grey mustache, fur kalpak, black sheepskin coat over a red zhupan",
+    "otaman_cossacks": "four Cossacks of the otaman's hut, gaunt and pale after the sickness, sheepskin coats and fur hats, smoking matchlock samopals",
+    "dead_comrades": "Ostap and Mykhailo, Dmytro's two comrades taken by the sickness, always shown motionless and wrapped in grey wool blankets, faces not visible",
+    "horse": "a strong bay horse with a black mane and frost on its muzzle, harnessed to a low wooden sledge",
+    "wolf_pack": "a pack of grey Eurasian wolves with thick winter coats and amber eyes",
+    "wolf_leader": "the pack leader, a massive grey wolf much larger than the others, with a dark saddle of fur on its back",
+    "steppe_wolves": "lean tawny-grey steppe wolves, smaller than forest wolves but tireless"
+  },
+  "palette": "Winter: dazzling white snow with cold blue shadows, low golden winter sun, grey dawns and violet dusks; inside the hut dim brown and ochre with warm stove glow and a single sunbeam; orange campfire rings and white powder smoke against snow. Cossack clothes in grey, brown and dark blue.",
+  "notes": "Dmytro carries a heavy infantry matchlock (samopal) with a leather case, a spear, and a chekan (war hammer) in his belt, plus a powder horn and bullet pouch (which he loses in branch r.0.1.0). The dead comrades are always wrapped, faces hidden. Wolves must look like real wildlife, anatomically correct; wolf attacks are shown as leaps, snarls and circling, never wounds or blood. The otaman's 'risen corpse' look in r.0.1.0/18 is sickly pallor seen through smoke, not a monster. 1574: matchlocks, no flintlocks."
+}

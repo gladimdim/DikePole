@@ -1,0 +1,15 @@
+{
+  "story": "hotinska_riznya",
+  "year": 1621,
+  "setting": "Siege of Khotyn, September 1621. The Polish-Lithuanian and Zaporozhian camp of wagons and earthworks stands on the high right bank of the Dniester beside the stone towers of Khotyn fortress. On the opposite bank the Ottomans have leveled a platform for three huge bronze mortars firing carved stone balls, with gunners' tents, oxen and campfires behind. The story is one night raid by 70 Cossacks: swimming and rafting across the Dniester in total darkness, silencing sentries in riverside bushes and bulrush, storming the artillery camp disguised in Turkish coats with the Tatar cry 'Ala, ala', spiking the guns, carrying off powder, lead and plunder on small log rafts and dugouts, and returning to their own bank before dawn. Early autumn: cold nights, willows and oak thickets turning yellow.",
+  "characters": {
+    "dmytro": "Dmytro, a lean 27-year-old Zaporozhian Cossack with a sun-browned narrow face, long dark-brown forelock on a shaved head, drooping dark-brown mustache, no beard, small chin scar, linen shirt, dark-green sharovary, brown zhupan, red sash, worn black boots",
+    "kurinnyi": "the kurin otaman, a stocky 50-year-old Cossack with a broad weathered face, long grey mustache, grey forelock, thick brown beaver-fur hat, crimson zhupan, black sash with a pistol, yellow boots",
+    "khrypko": "Khrypko, a tall gaunt 60-year-old Cossack camp commander with hollow cheeks, white drooping mustache, black sheepskin kalpak, grey wool kuntush, brown sash",
+    "aga": "the Ottoman aga, a heavy-set man of 45 with a trimmed black beard and hooked nose, large white turban with a jeweled aigrette and heron plume, deep-blue silk kaftan embroidered with gold, curved kilij",
+    "ottoman_gunners": "Ottoman topçu gunners of mixed ages with short beards, brown and red wool kaftans, felt caps and small white turbans",
+    "janissaries": "Ottoman janissaries in long dark-blue coats and tall white börk felt caps, long matchlock muskets, yataghans"
+  },
+  "palette": "Night-dominated: deep indigo and blue-black river darkness, cold silver starlight and faint moon, warm amber campfires, raging orange of the burning Ottoman camp reflected on the black Dniester, white musket smoke; one grey-blue pre-dawn and one pink-grey dawn image. Cossack clothes in muted green, brown, crimson; Ottoman camp in white canvas, red banners, bronze.",
+  "notes": "The source text is extremely graphic; images must imply violence only (raised blades, muzzle flashes, smoke, fallen figures far away or out of focus, bound prisoners) with no wounds, no severed parts and no torture. The kurin otaman's beaver hat is his signature (it saves his life in one branch). Two branches differ in Dmytro's weapon: sabre (r.0) or spear (r.1). Khotyn fortress is on the Cossack side of the river; the mortars are on the far bank. No winged hussars."
+}
