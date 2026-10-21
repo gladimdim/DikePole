@@ -173,7 +173,7 @@ void fragment() {
 	vec4 from_c;
 	if (has_from) {
 		from_c = sample_mapped(from_tex, from_map, view);
-	} else if (reveal == REVEAL_SKETCH) {
+	} else if (reveal == REVEAL_SKETCH && progress < 1.0) {
 		from_c = vec4(pencil(view, UV), 1.0);
 	} else if (reveal == REVEAL_DEVELOP || reveal == REVEAL_INK) {
 		from_c = paper;

@@ -376,6 +376,354 @@
   }
  },
  "nodes": {
+  "hotinska_riznya/r.0.0.0/3": {
+   "image": "res://images/stories/hotinska_riznya/r.0.0.0_n3.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "hotinska_riznya/r.0.0.1/15": {
+   "image": "res://images/stories/hotinska_riznya/r.0.0.1_n15.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.45,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "hotinska_riznya/r.0.0.1/18": {
+   "image": "res://images/stories/hotinska_riznya/r.0.0.1_n18.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.45,
+     0.55
+    ]
+   },
+   "ambient": "none"
+  },
+  "hotinska_riznya/r.0.0/0": {
+   "image": "res://images/stories/hotinska_riznya/r.0.0_n0.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.45,
+     0.45
+    ]
+   },
+   "ambient": "none"
+  },
+  "hotinska_riznya/r.0.0/10": {
+   "image": "res://images/stories/hotinska_riznya/r.0.0_n10.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.55,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "hotinska_riznya/r.0.0/16": {
+   "image": "res://images/stories/hotinska_riznya/r.0.0_n16.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.55,
+     0.55
+    ]
+   },
+   "ambient": "none"
+  },
+  "hotinska_riznya/r.0.0/27": {
+   "image": "res://images/stories/hotinska_riznya/r.0.0_n27.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.35,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "hotinska_riznya/r.0.0/6": {
+   "image": "res://images/stories/hotinska_riznya/r.0.0_n6.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.6,
+     0.45
+    ]
+   },
+   "ambient": "none"
+  },
+  "hotinska_riznya/r.0.1/1": {
+   "image": "res://images/stories/hotinska_riznya/r.0.1_n1.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.6,
+     0.4
+    ]
+   },
+   "ambient": "none"
+  },
+  "hotinska_riznya/r.0.1/13": {
+   "image": "res://images/stories/hotinska_riznya/r.0.1_n13.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.55
+    ]
+   },
+   "ambient": "none"
+  },
+  "hotinska_riznya/r.0.1/20": {
+   "image": "res://images/stories/hotinska_riznya/r.0.1_n20.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.45,
+     0.6
+    ]
+   },
+   "ambient": "none"
+  },
+  "hotinska_riznya/r.0.1/26": {
+   "image": "res://images/stories/hotinska_riznya/r.0.1_n26.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.6,
+     0.45
+    ]
+   },
+   "ambient": "none"
+  },
+  "hotinska_riznya/r.0.1/33": {
+   "image": "res://images/stories/hotinska_riznya/r.0.1_n33.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.45,
+     0.55
+    ]
+   },
+   "ambient": "none"
+  },
+  "hotinska_riznya/r.0.1/37": {
+   "image": "res://images/stories/hotinska_riznya/r.0.1_n37.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.45,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "hotinska_riznya/r.0.1/4": {
+   "image": "res://images/stories/hotinska_riznya/r.0.1_n4.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "hotinska_riznya/r.0.1/40": {
+   "image": "res://images/stories/hotinska_riznya/r.0.1_n40.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.45,
+     0.45
+    ]
+   },
+   "ambient": "none"
+  },
+  "hotinska_riznya/r.0.1/8": {
+   "image": "res://images/stories/hotinska_riznya/r.0.1_n8.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.45,
+     0.55
+    ]
+   },
+   "ambient": "none"
+  },
+  "hotinska_riznya/r.0/0": {
+   "image": "res://images/stories/hotinska_riznya/r.0_n0.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "hotinska_riznya/r.0/4": {
+   "image": "res://images/stories/hotinska_riznya/r.0_n4.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.4,
+     0.55
+    ]
+   },
+   "ambient": "none"
+  },
+  "hotinska_riznya/r.1.0/12": {
+   "image": "res://images/stories/hotinska_riznya/r.1.0_n12.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.55
+    ]
+   },
+   "ambient": "none"
+  },
+  "hotinska_riznya/r.1.0/13": {
+   "image": "res://images/stories/hotinska_riznya/r.1.0_n13.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.45
+    ]
+   },
+   "ambient": "none"
+  },
+  "hotinska_riznya/r.1.0/4": {
+   "image": "res://images/stories/hotinska_riznya/r.1.0_n4.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "hotinska_riznya/r.1.0/8": {
+   "image": "res://images/stories/hotinska_riznya/r.1.0_n8.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.55
+    ]
+   },
+   "ambient": "none"
+  },
+  "hotinska_riznya/r.1.1/0": {
+   "image": "res://images/stories/hotinska_riznya/r.1.1_n0.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.55,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "hotinska_riznya/r.1.1/7": {
+   "image": "res://images/stories/hotinska_riznya/r.1.1_n7.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.45,
+     0.55
+    ]
+   },
+   "ambient": "none"
+  },
+  "hotinska_riznya/r.1/0": {
+   "image": "res://images/stories/hotinska_riznya/r.1_n0.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.55,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "hotinska_riznya/r.1/13": {
+   "image": "res://images/stories/hotinska_riznya/r.1_n13.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.45,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "hotinska_riznya/r.1/18": {
+   "image": "res://images/stories/hotinska_riznya/r.1_n18.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "hotinska_riznya/r.1/6": {
+   "image": "res://images/stories/hotinska_riznya/r.1_n6.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.45,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
   "hotinska_riznya/r/0": {
    "image": "res://images/stories/hotinska_riznya/r_n0.png",
    "reveal": "ink",
@@ -413,5 +761,18 @@
    "ambient": "none"
   }
  },
- "covers": {}
+ "covers": {
+  "hotinska_riznya": {
+   "image": "res://images/stories/hotinska_riznya/cover.png",
+   "reveal": "fade",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.6,
+     0.4
+    ]
+   },
+   "ambient": "none"
+  }
+ }
 }

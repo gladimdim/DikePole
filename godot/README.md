@@ -7,6 +7,8 @@ Offline interactive-fiction reader for Android and iOS. It's a port of the Flutt
 ```sh
 godot --path .                                   # run on desktop (412×915 phone-sized window)
 godot --headless --path . -s tests/run_tests.gd  # engine tests: every branch of every story + save/restore
+godot --headless --path . -s tests/khotyn_art_test.gd # full Khotyn art coverage + saved passages + animation
+godot --path . -- --effects=/tmp/effects        # includes original / new Khotyn drawing / cover comparison
 godot --path . -- --tour=/tmp/shots [--classic] [--dark]   # scripted walk that saves screenshots
 godot --path . -- --input-test [--classic]               # taps and swipes with real touch events
 godot --headless --path . --export-debug "Android" build/android/locadeserta-debug.apk
@@ -63,7 +65,9 @@ Each story node with an `imageType` has a stable id, `<story>/<page path>/<node 
 
 **Ambient effects** (inside `ambient_region`): `fire` (warm flicker), `mist` (drifting fog), `water` (ripple and glints), `wind` (grass/reed sway), `rain`, `snow`, `smoke`, `dust`, `night`.
 
-All of it is one shader (`anim/story_image.gdshader`), so it's cheap on mobile and needs no extra assets.
+All of it is one shader (`anim/story_image.gdshader`) and needs no extra assets. The pencil treatment samples neighboring pixels; measure its rendering cost on target phones.
+
+**Khotyn artwork:** all 32 passages are original sepia/graphite illustrations in the style of the three opening drawings, with fine organic linework and ivory paper margins. They use `ink`, static composition and no ambient distortion; no pencil filter is applied. The approved cover remains hyperrealistic and full color. The passage prompts record the three visual reference files.
 
 ### Adding generated pictures (Astra)
 

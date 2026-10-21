@@ -2,9 +2,13 @@
 
 Every story image is an **ultra-realistic photograph** that reads like a still from a big-budget historical film shot on location in Ukraine. One image per story node that has an `imageType`, plus one cover per story.
 
-## Khotyn opening: illustrated edition
+## Khotyn: illustrated edition, photographic cover
 
 The three opening illustrations of `hotinska_riznya` (`r/0`, `r/4`, `r/9`) override the photographic direction below at the user's request. Use fine pencil and pen hatching, in the spirit of Abraham van Westerveld's documentary drawings, in sepia/graphite on warm ivory paper. Each image depicts its exact `source_text`: Dmytro awake before the raid; the three Ottoman mortars with their untroubled crews; Dmytro choosing a weapon under a wagon. The full generation prompts are in `prompts/hotinska_riznya.jsonl`. These PNGs use an ink reveal with static composition and no ambient distortion; they stay drawings throughout the animation.
+
+All 32 passage images follow the same illustrated direction. Use the three opening drawings as visual references for every new scene (`reference_images` in each prompt). Generate the artwork itself as a drawing: fine organic marks following the forms, varied line weight, delicate faces, atmospheric distance and unfinished paper margins. Avoid a mechanical diagonal grid, uniform cross-hatching or a photograph passed through a pencil filter. Use sepia/graphite on ivory throughout, including night skies, fire and water. Each scene depicts its own passage, with the correct weapon for its branch.
+
+All passages use `reveal: ink`, `motion.type: static` and `ambient: none`, exactly like the opening drawings. No photo-to-pencil shader is applied. Only `cover.png` keeps the hyperrealistic full-color photographic direction and `reveal: fade`. Preserve the three original illustrations and the approved cover.
 
 ## 1. Output spec
 
@@ -69,7 +73,7 @@ Every prompt entry carries hints for `anim/story_image.gdshader` + `anim/story_i
 | `motion.focus` | `[x, y]` in 0..1 | where the subject is; `push_in` zooms toward it |
 | `ambient` | `none`, `fire`, `mist`, `water`, `wind`, `rain`, `snow`, `smoke`, `dust`, `night` | overlay effect: fire flicker, drifting mist, water shimmer, wind (grass/reed sway), rain streaks, snowfall, rising smoke, dust motes, moonlight breathing |
 | `ambient_region` | `[x, y, w, h]` in 0..1 (optional) | where the effect applies (e.g. the water in the lower third) |
-| `reveal` | `sketch`, `develop`, `ink`, `fade` | how the image appears: pencil sketch → photo, darkroom develop, ink-bleed mask, plain fade |
+| `reveal` | `sketch`, `develop`, `ink`, `fade` | pencil → photo, darkroom develop, ink-bleed mask, plain fade |
 
 Pick `reveal: sketch` by default (it keeps the original game's signature pencil-sketch ↔ photo look). Use `develop` for night/fire scenes, `ink` for dramatic moments (shots, deaths, decisions) and `fade` for quiet transitions.
 
