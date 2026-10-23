@@ -760,6 +760,930 @@
    },
    "ambient": "none"
   },
+  "kodak_night/r.0.0/14": {
+   "image": "res://images/stories/kodak_night/r.0.0_n14.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "kodak_night/r.0.0/19": {
+   "image": "res://images/stories/kodak_night/r.0.0_n19.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "kodak_night/r.0.0/25": {
+   "image": "res://images/stories/kodak_night/r.0.0_n25.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "kodak_night/r.0.0/27": {
+   "image": "res://images/stories/kodak_night/r.0.0_n27.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "kodak_night/r.0.0/35": {
+   "image": "res://images/stories/kodak_night/r.0.0_n35.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "kodak_night/r.0.0/36": {
+   "image": "res://images/stories/kodak_night/r.0.0_n36.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "kodak_night/r.0.0/4": {
+   "image": "res://images/stories/kodak_night/r.0.0_n4.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "kodak_night/r.0.0/40": {
+   "image": "res://images/stories/kodak_night/r.0.0_n40.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "kodak_night/r.0.0/43": {
+   "image": "res://images/stories/kodak_night/r.0.0_n43.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "kodak_night/r.0.0/46": {
+   "image": "res://images/stories/kodak_night/r.0.0_n46.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "kodak_night/r.0.0/52": {
+   "image": "res://images/stories/kodak_night/r.0.0_n52.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "kodak_night/r.0.0/53": {
+   "image": "res://images/stories/kodak_night/r.0.0_n53.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "kodak_night/r.0.0/56": {
+   "image": "res://images/stories/kodak_night/r.0.0_n56.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "kodak_night/r.0.0/61": {
+   "image": "res://images/stories/kodak_night/r.0.0_n61.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "kodak_night/r.0.0/66": {
+   "image": "res://images/stories/kodak_night/r.0.0_n66.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "kodak_night/r.0.0/67": {
+   "image": "res://images/stories/kodak_night/r.0.0_n67.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "kodak_night/r.0.0/9": {
+   "image": "res://images/stories/kodak_night/r.0.0_n9.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "kodak_night/r.0.1/11": {
+   "image": "res://images/stories/kodak_night/r.0.1_n11.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "kodak_night/r.0.1/15": {
+   "image": "res://images/stories/kodak_night/r.0.1_n15.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "kodak_night/r.0.1/19": {
+   "image": "res://images/stories/kodak_night/r.0.1_n19.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "kodak_night/r.0.1/2": {
+   "image": "res://images/stories/kodak_night/r.0.1_n2.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "kodak_night/r.0.1/26": {
+   "image": "res://images/stories/kodak_night/r.0.1_n26.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "kodak_night/r.0.1/33": {
+   "image": "res://images/stories/kodak_night/r.0.1_n33.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "kodak_night/r.0.1/38": {
+   "image": "res://images/stories/kodak_night/r.0.1_n38.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "kodak_night/r.0.1/41": {
+   "image": "res://images/stories/kodak_night/r.0.1_n41.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "kodak_night/r.0.1/45": {
+   "image": "res://images/stories/kodak_night/r.0.1_n45.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "kodak_night/r.0.1/50": {
+   "image": "res://images/stories/kodak_night/r.0.1_n50.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "kodak_night/r.0.1/54": {
+   "image": "res://images/stories/kodak_night/r.0.1_n54.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "kodak_night/r.0.1/8": {
+   "image": "res://images/stories/kodak_night/r.0.1_n8.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "kodak_night/r.0/1": {
+   "image": "res://images/stories/kodak_night/r.0_n1.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "kodak_night/r.0/11": {
+   "image": "res://images/stories/kodak_night/r.0_n11.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "kodak_night/r.0/19": {
+   "image": "res://images/stories/kodak_night/r.0_n19.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "kodak_night/r.0/26": {
+   "image": "res://images/stories/kodak_night/r.0_n26.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "kodak_night/r.0/28": {
+   "image": "res://images/stories/kodak_night/r.0_n28.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "kodak_night/r.0/3": {
+   "image": "res://images/stories/kodak_night/r.0_n3.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "kodak_night/r.0/30": {
+   "image": "res://images/stories/kodak_night/r.0_n30.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "kodak_night/r.0/33": {
+   "image": "res://images/stories/kodak_night/r.0_n33.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "kodak_night/r.0/36": {
+   "image": "res://images/stories/kodak_night/r.0_n36.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "kodak_night/r.0/39": {
+   "image": "res://images/stories/kodak_night/r.0_n39.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "kodak_night/r.0/45": {
+   "image": "res://images/stories/kodak_night/r.0_n45.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "kodak_night/r.0/47": {
+   "image": "res://images/stories/kodak_night/r.0_n47.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "kodak_night/r.0/50": {
+   "image": "res://images/stories/kodak_night/r.0_n50.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "kodak_night/r.0/53": {
+   "image": "res://images/stories/kodak_night/r.0_n53.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "kodak_night/r.0/57": {
+   "image": "res://images/stories/kodak_night/r.0_n57.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "kodak_night/r.0/60": {
+   "image": "res://images/stories/kodak_night/r.0_n60.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "kodak_night/r.0/65": {
+   "image": "res://images/stories/kodak_night/r.0_n65.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "kodak_night/r.0/68": {
+   "image": "res://images/stories/kodak_night/r.0_n68.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "kodak_night/r.0/72": {
+   "image": "res://images/stories/kodak_night/r.0_n72.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "kodak_night/r.0/8": {
+   "image": "res://images/stories/kodak_night/r.0_n8.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "kodak_night/r.1.0/1": {
+   "image": "res://images/stories/kodak_night/r.1.0_n1.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "kodak_night/r.1.0/10": {
+   "image": "res://images/stories/kodak_night/r.1.0_n10.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "kodak_night/r.1.0/13": {
+   "image": "res://images/stories/kodak_night/r.1.0_n13.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "kodak_night/r.1.0/18": {
+   "image": "res://images/stories/kodak_night/r.1.0_n18.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "kodak_night/r.1.0/23": {
+   "image": "res://images/stories/kodak_night/r.1.0_n23.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "kodak_night/r.1.0/29": {
+   "image": "res://images/stories/kodak_night/r.1.0_n29.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "kodak_night/r.1.0/33": {
+   "image": "res://images/stories/kodak_night/r.1.0_n33.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "kodak_night/r.1.0/36": {
+   "image": "res://images/stories/kodak_night/r.1.0_n36.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "kodak_night/r.1.0/39": {
+   "image": "res://images/stories/kodak_night/r.1.0_n39.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "kodak_night/r.1.0/41": {
+   "image": "res://images/stories/kodak_night/r.1.0_n41.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "kodak_night/r.1.0/46": {
+   "image": "res://images/stories/kodak_night/r.1.0_n46.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "kodak_night/r.1.0/50": {
+   "image": "res://images/stories/kodak_night/r.1.0_n50.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "kodak_night/r.1.0/53": {
+   "image": "res://images/stories/kodak_night/r.1.0_n53.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "kodak_night/r.1.0/57": {
+   "image": "res://images/stories/kodak_night/r.1.0_n57.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "kodak_night/r.1.0/59": {
+   "image": "res://images/stories/kodak_night/r.1.0_n59.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "kodak_night/r.1.0/63": {
+   "image": "res://images/stories/kodak_night/r.1.0_n63.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "kodak_night/r.1.0/67": {
+   "image": "res://images/stories/kodak_night/r.1.0_n67.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "kodak_night/r.1.0/7": {
+   "image": "res://images/stories/kodak_night/r.1.0_n7.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "kodak_night/r.1.0/73": {
+   "image": "res://images/stories/kodak_night/r.1.0_n73.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "kodak_night/r.1/1": {
+   "image": "res://images/stories/kodak_night/r.1_n1.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "kodak_night/r.1/11": {
+   "image": "res://images/stories/kodak_night/r.1_n11.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "kodak_night/r.1/18": {
+   "image": "res://images/stories/kodak_night/r.1_n18.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "kodak_night/r.1/19": {
+   "image": "res://images/stories/kodak_night/r.1_n19.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "kodak_night/r.1/22": {
+   "image": "res://images/stories/kodak_night/r.1_n22.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "kodak_night/r.1/26": {
+   "image": "res://images/stories/kodak_night/r.1_n26.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "kodak_night/r.1/29": {
+   "image": "res://images/stories/kodak_night/r.1_n29.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "kodak_night/r/0": {
+   "image": "res://images/stories/kodak_night/r_n0.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "kodak_night/r/4": {
+   "image": "res://images/stories/kodak_night/r_n4.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
   "zustrich_v_stepu/r.0.0/1": {
    "image": "res://images/stories/zustrich_v_stepu/r.0.0_n1.png",
    "reveal": "ink",
@@ -1094,6 +2018,18 @@
     "focus": [
      0.6,
      0.4
+    ]
+   },
+   "ambient": "none"
+  },
+  "kodak_night": {
+   "image": "res://images/stories/kodak_night/cover.png",
+   "reveal": "fade",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
     ]
    },
    "ambient": "none"

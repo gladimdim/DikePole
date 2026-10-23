@@ -16,6 +16,12 @@ All passages use `reveal: ink`, `motion.type: static` and `ambient: none`, exact
 
 Use `hotinska_riznya/r_n4.png` for drawing technique and `zustrich_v_stepu/r_n15.png` for Ivan (the tall rider on the grey horse) and Hlukhyi (the stockier man on foot). References establish the medium and identities, never the action or background of another passage. Preserve the branch facts: no firearms in the 1628 patrol; Ivan's hand injury belongs only to `r.0.0`; freed villagers have unbound hands; captured Jalai is disarmed and on foot. Only the 1648 epilogue ages Ivan and Jalai by twenty years. Keep violence implied and the different endings distinct.
 
+## Kodak Night: illustrated edition
+
+`kodak_night` uses 77 sepia/graphite passage illustrations on ivory paper, each tied to its exact story node, plus a full-color photographic cover. Passage art uses `reveal: ink`, `motion.type: static` and `ambient: none`; the cover uses `reveal: fade`. Prompts and reference paths are in `prompts/kodak_night.jsonl`.
+
+Keep Kodak's 1635 construction consistent: raw earthen bastions, ditch, sharpened oak palisade, a wooden inner fortlet and a turf-covered powder cellar. Never substitute a medieval stone castle. The baidaks have their masts lowered and tall reeds lashed around their sides. Distinguish Sulyma's stocky build and grey mustache from Hladkyi's lean face, hooked nose and dark forelock; Stets is a freckled, broad-nosed eighteen-year-old. Use the initial scenes as identity references without copying their actions into other passages. Keep each branch's weapons, daylight and aftermath distinct. Depict the darkest passages through reactions, smoke, empty space and fully shrouded bodies; never expose injuries or the contents of the sack.
+
 ## 1. Output spec
 
 | | |
