@@ -10,6 +10,12 @@ All 32 passage images follow the same illustrated direction. Use the three openi
 
 All passages use `reveal: ink`, `motion.type: static` and `ambient: none`, exactly like the opening drawings. No photo-to-pencil shader is applied. Only `cover.png` keeps the hyperrealistic full-color photographic direction and `reveal: fade`. Preserve the three original illustrations and the approved cover.
 
+## Encounter in the Steppe: illustrated edition
+
+`zustrich_v_stepu` follows the same complete illustrated treatment: all 27 passage images are original sepia/graphite drawings on ivory paper, with static composition, an ink reveal and no ambient distortion. Its cover remains a full-color photographic scene, matching the catalog convention established by Khotyn. Full prompts and reference paths are recorded in `prompts/zustrich_v_stepu.jsonl`.
+
+Use `hotinska_riznya/r_n4.png` for drawing technique and `zustrich_v_stepu/r_n15.png` for Ivan (the tall rider on the grey horse) and Hlukhyi (the stockier man on foot). References establish the medium and identities, never the action or background of another passage. Preserve the branch facts: no firearms in the 1628 patrol; Ivan's hand injury belongs only to `r.0.0`; freed villagers have unbound hands; captured Jalai is disarmed and on foot. Only the 1648 epilogue ages Ivan and Jalai by twenty years. Keep violence implied and the different endings distinct.
+
 ## 1. Output spec
 
 | | |
