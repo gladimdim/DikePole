@@ -8,7 +8,7 @@ var _background: ColorRect
 
 func _ready() -> void:
 	theme = AppTheme.theme
-	TranslationServer.set_locale(AppPrefs.language)
+	TranslationServer.set_locale("uk")
 
 	# Shows behind the notch / status bar area too.
 	_background = ColorRect.new()

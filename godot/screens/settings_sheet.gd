@@ -1,13 +1,12 @@
 class_name SettingsSheet
 extends Control
-## Bottom sheet with the reader's settings: theme, language, story text size,
-## vibration and the classic look. Slides up over a dimmed home screen.
+## Bottom sheet with the reader's settings: theme, story text size and
+## vibration. Slides up over a dimmed home screen.
 
 signal closed
 
 const SLIDE := 0.28
 const SCRIM_ALPHA := 0.45
-const SITE_URL := "https://locadeserta.com/"
 
 var _scrim: ColorRect
 var _sheet: PanelContainer
@@ -53,8 +52,10 @@ func _on_scrim_input(event: InputEvent) -> void:
 func _rebuild() -> void:
 	if _closing:
 		return
+	var top := _sheet.position.y
 	_sheet.queue_free()
 	_build_sheet()
+	_sheet.position.y = top
 	await get_tree().process_frame
 	_sheet.position.y = size.y - _sheet.size.y
 
@@ -87,14 +88,10 @@ func _build_sheet() -> void:
 		_caption("settings_theme"),
 		ThinWidgets.segmented([["light", "theme_light"], ["dark", "theme_dark"], ["system", "theme_system"]],
 				AppPrefs.theme_mode, func(mode: String) -> void: AppPrefs.theme_mode = mode),
-		UI.spacer(0, 20), _caption("settings_language"),
-		ThinWidgets.segmented([["uk", "Українська"], ["en", "English"]], AppPrefs.language, _set_language),
 		UI.spacer(0, 20), _caption("settings_text_size"),
 		ThinWidgets.segmented(sizes, AppPrefs.text_scale, func(scale: float) -> void: AppPrefs.text_scale = scale),
 		UI.spacer(0, 22), ThinWidgets.hairline(),
 		_switch_row("settings_haptics", "", AppPrefs.haptics, func(on: bool) -> void: AppPrefs.haptics = on),
-		ThinWidgets.hairline(),
-		_switch_row("settings_classic", "settings_classic_hint", AppPrefs.classic_look, _set_classic),
 		ThinWidgets.hairline(), UI.spacer(0, 16),
 		_footer(),
 	])
@@ -121,21 +118,6 @@ func _switch_row(key: String, hint: String, value: bool, on_toggled: Callable) -
 
 
 func _footer() -> Control:
-	var site := Pressable.wrap(UI.label("labelSiteLink", &"Meta"), Platform.open_url.bind(SITE_URL))
-	site.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	var version := UI.label("%s %s" % [tr("version"), ProjectSettings.get_setting("application/config/version")], &"Meta", false)
-	var row := HBoxContainer.new()
-	row.add_child(site)
-	row.add_child(version)
-	return row
-
-
-func _set_language(code: String) -> void:
-	AppPrefs.language = code
-	TranslationServer.set_locale(code)
-
-
-## The classic look swaps the whole app to the original screens (main.gd).
-func _set_classic(on: bool) -> void:
-	await get_tree().create_timer(0.2).timeout
-	AppPrefs.classic_look = on
+	version.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
+	return version

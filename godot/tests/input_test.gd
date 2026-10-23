@@ -35,6 +35,19 @@ func _run_home() -> void:
 	await _tap(gear)
 	await _wait(0.6)
 	_check(home._sheet != null, "the gear opens the settings")
+	# Each size change rebuilds the home screen; the sheet must stay on top of it.
+	var scale_before := AppPrefs.text_scale
+	for index in [3, 1]:
+		var sizes := home._sheet._sheet.find_children("*", "Control", true, false).filter(
+				func(node: Control) -> bool: return node is Pressable or node is BaseButton).filter(
+				func(node: Control) -> bool: return node.find_children("*", "Label", true, false).any(
+						func(label: Label) -> bool: return label.text == "Aa"))
+		await _tap(sizes[index] if index < sizes.size() else null)
+		await _wait(0.6)
+		_check(AppPrefs.text_scale == AppPrefs.TEXT_SCALES[index] and Router.instance.top() == home,
+				"tapping text size %d in the open settings changes it" % index)
+	AppPrefs.text_scale = scale_before
+	await _wait(0.3)
 	get_tree().root.propagate_notification(NOTIFICATION_WM_GO_BACK_REQUEST)
 	await _wait(0.5)
 	_check(home._sheet == null and Router.instance.depth() == 1, "back closes the settings")
@@ -49,6 +62,7 @@ func _run_home() -> void:
 	await _wait(1.0)
 	_check(Router.instance.top() is ReaderScreen, "the main button opens the reader")
 	await _next_in_reader()
+	await _reader_settings()
 
 	get_tree().root.propagate_notification(NOTIFICATION_WM_GO_BACK_REQUEST)
 	await _wait(0.8)
@@ -131,6 +145,42 @@ func _next_in_reader() -> void:
 						"a revealed choice advances to its story branch")
 	else:
 		_check(not reader.story.can_continue(), "the reader shows choices or an ending")
+
+
+## Menu > Settings in the reader: the text size changes the story text in place.
+func _reader_settings() -> void:
+	var reader := Router.instance.top() as ReaderScreen
+	if reader == null:
+		return
+	var menu: Control = null
+	for label in reader.find_children("*", "Label", true, false):
+		if label.text == "menu":
+			menu = label.get_parent()
+	await _tap(menu)
+	await _wait(0.3)
+	var item: Control = null
+	for label in reader.find_children("*", "Label", true, false):
+		if label.text == "settings_title" and label.is_visible_in_tree():
+			item = label
+	await _tap(item)
+	await _wait(0.6)
+	_check(reader._sheet != null, "the reader menu opens the settings")
+	if reader._sheet == null:
+		return
+	var scale_before := AppPrefs.text_scale
+	var book_size := AppTheme.theme.get_font_size("font_size", "Book")
+	var sizes := reader._sheet._sheet.find_children("*", "Pressable", true, false).filter(
+			func(node: Control) -> bool: return node.find_children("*", "Label", true, false).any(
+					func(label: Label) -> bool: return label.text == "Aa"))
+	await _tap(sizes[3] if sizes.size() > 3 else null)
+	await _wait(0.6)
+	_check(AppTheme.theme.get_font_size("font_size", "Book") > book_size and Router.instance.top() == reader,
+			"the largest text size enlarges the story text while reading")
+	get_tree().root.propagate_notification(NOTIFICATION_WM_GO_BACK_REQUEST)
+	await _wait(0.5)
+	_check(reader._sheet == null and Router.instance.top() == reader, "back closes the reader settings")
+	AppPrefs.text_scale = scale_before
+	await _wait(0.2)
 
 
 func _tap(control: Control) -> void:

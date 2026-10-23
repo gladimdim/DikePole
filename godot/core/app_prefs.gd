@@ -6,7 +6,6 @@ signal changed(key: String)
 
 const PREFS_PATH := "user://prefs.json"
 const SAVES_DIR := "user://saves"
-const SUPPORTED_LANGUAGES := ["uk", "en"]
 
 const THEME_MODES := ["light", "dark", "system"]
 const TEXT_SCALES := [0.9, 1.0, 1.15, 1.3]
@@ -42,22 +41,17 @@ var haptics: bool:
 	set(value):
 		_set_value("haptics", value)
 
-var language: String:
-	get:
-		var code: String = _values.get("languageCode", "uk")
-		return code if code in SUPPORTED_LANGUAGES else "uk"
-	set(value):
-		_set_value("languageCode", value)
-
 ## Original photo/sketch pairs and Flutter's plain cross-fade instead of the
-## generated pictures and new animations.
+## generated pictures and new animations. Not stored: only the tests turn it on.
 var classic_look: bool:
 	get:
-		return _values.get("classicLook", false)
+		return _classic_look
 	set(value):
-		_set_value("classicLook", value)
+		_classic_look = value
+		changed.emit("classicLook")
 
 var _values := {}
+var _classic_look := false
 
 
 func _init() -> void:
@@ -65,6 +59,8 @@ func _init() -> void:
 	var parsed = JSON.parse_string(text) if text != "" else null
 	if parsed is Dictionary:
 		_values = parsed
+	_values.erase("classicLook")
+	_values.erase("languageCode")
 	DirAccess.make_dir_recursive_absolute(SAVES_DIR)
 
 

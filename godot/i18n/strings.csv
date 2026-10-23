@@ -1,57 +1,57 @@
-keys,en,uk
-apptitle,Loca Deserta,Дике Поле
-version,Version,Версія
-start,Start,Почати
-startstory,Read,Читати
-lookingforheroes,Looking for heroes in Loca Deserta lands...,Шукаємо героїв в землях Дикого Поля...
-reset,Reset,Заново
-showstorydetails,More Details,Детальніше
-translationnotready,Translations are not yet ready for your language.,Переклад історії на вашу мову ще не готовий.
-menu,Menu,Меню
-backtostories,Back to stories,Назад до історій
-backtomenu,Back to menu,Назад до меню
-authors,Authors: ,Автори: 
-next,Next,Далі
-theend,THE END,Кінець
-theendstartoverquestion,This is the end. Start again?,"Це кінець, почати заново?"
-labelback,Back,Назад
-darkThemeLabel,Dark theme,Темна тема
-lightThemeLabel,Light theme,Світла тема
-labelSiteLink,Loca Deserta Universe Site,Сайт всесвіту Дике Поле
-classicAnimationsOn,Classic look: on,Класичний вигляд: увімк.
-classicAnimationsOff,Classic look: off,Класичний вигляд: вимк.
-home_tagline,Interactive stories of the Wild Fields,Інтерактивні історії Дикого Поля
-home_continue,Continue reading,Продовжити читання
-home_begin,Start reading,Почати читати
-home_stories,Stories,Історії
-filter_all,All,Усі
-filter_new,New,Нові
-filter_reading,Reading,Читаю
-filter_finished,Finished,Прочитані
-filter_empty,Nothing here yet,Тут поки порожньо
-meta_minutes,%d min,%d хв
-meta_endings,Endings %d/%d,Кінцівки %d/%d
-status_finished,Finished,Прочитано
-story_continue,Continue · %d%%,Продовжити · %d%%
-story_restart,Start over,Почати спочатку
-stat_minutes,min read,хв читання
-stat_choices,choices,виборів
-stat_endings,endings,кінцівки
-endings_title,Endings,Кінцівки
-ending_alive,Survived,Вижив
-ending_dead,Died,Загинув
-ending_open,Open ending,Відкритий фінал
-ending_hidden,Not found yet,Ще не знайдено
-story_in_en,In English,Англійською
-story_in_uk,In Ukrainian,Українською
-settings_title,Settings,Налаштування
-settings_theme,Theme,Тема
-theme_light,Light,Світла
-theme_dark,Dark,Темна
-theme_system,System,Системна
-settings_language,Language,Мова
-settings_text_size,Story text size,Розмір тексту історій
-settings_classic,Classic look,Класичний вигляд
-settings_classic_hint,The original design and pictures,Оригінальний дизайн та ілюстрації
-settings_haptics,Vibration,Вібрація
-reader_show_text,Show full passage,Показати весь уривок
+keys,uk
+apptitle,Дике Поле
+version,Версія
+start,Почати
+startstory,Читати
+lookingforheroes,Шукаємо героїв в землях Дикого Поля...
+reset,Заново
+showstorydetails,Детальніше
+translationnotready,Переклад історії на вашу мову ще не готовий.
+menu,Меню
+backtostories,Назад до історій
+backtomenu,Назад до меню
+authors,Автори: 
+next,Далі
+theend,Кінець
+theendstartoverquestion,"Це кінець, почати заново?"
+labelback,Назад
+darkThemeLabel,Темна тема
+lightThemeLabel,Світла тема
+labelSiteLink,Сайт всесвіту Дике Поле
+classicAnimationsOn,Класичний вигляд: увімк.
+classicAnimationsOff,Класичний вигляд: вимк.
+home_tagline,Інтерактивні історії Дикого Поля
+home_continue,Продовжити читання
+home_begin,Почати читати
+home_stories,Історії
+filter_all,Усі
+filter_new,Нові
+filter_reading,Читаю
+filter_finished,Прочитані
+filter_empty,Тут поки порожньо
+meta_minutes,%d хв
+meta_endings,Кінцівки %d/%d
+status_finished,Прочитано
+story_continue,Продовжити · %d%%
+story_restart,Почати спочатку
+stat_minutes,хв читання
+stat_choices,виборів
+stat_endings,кінцівки
+endings_title,Кінцівки
+ending_alive,Вижив
+ending_dead,Загинув
+ending_open,Відкритий фінал
+ending_hidden,Ще не знайдено
+story_in_en,Англійською
+story_in_uk,Українською
+settings_title,Налаштування
+settings_theme,Тема
+theme_light,Світла
+theme_dark,Темна
+theme_system,Системна
+settings_language,Мова
+settings_text_size,Розмір тексту історій
+settings_classic,Класичний вигляд
+settings_classic_hint,Оригінальний дизайн та ілюстрації
+settings_haptics,Вібрація
+reader_show_text,Показати весь уривок

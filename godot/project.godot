@@ -12,7 +12,6 @@ config_version=5
 
 config/name="Дике Поле"
 config/name_localized={
-"en": "Loca Deserta",
 "uk": "Дике Поле"
 }
 config/description="Loca Deserta. Interactive stories of the Wild Fields."
@@ -65,7 +64,7 @@ pointing/emulate_touch_from_mouse=true
 
 [internationalization]
 
-locale/translations=PackedStringArray("res://i18n/strings.en.translation", "res://i18n/strings.uk.translation")
+locale/translations=PackedStringArray("res://i18n/strings.uk.translation")
 locale/fallback="uk"
 
 [rendering]

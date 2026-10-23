@@ -103,9 +103,9 @@ func _build() -> void:
 		background = paper
 		primary = ink
 
-	if theme == null:
-		theme = Theme.new()
-	var t := theme
+	# Built aside and merged in one go: every set_* on the live theme would re-theme
+	# the whole UI, about a hundred times per rebuild.
+	var t := Theme.new()
 	# Flutter's bodyText2 (default text): Raleway-Bold 18, scaled by the reader's choice.
 	t.default_font = FONT_BODY
 	t.default_font_size = roundi(BODY_SIZE * AppPrefs.text_scale)
@@ -138,6 +138,10 @@ func _build() -> void:
 	t.set_stylebox("panel", "PanelContainer", StyleBoxEmpty.new())
 	t.set_stylebox("panel", "Paper", flat(paper))
 	t.set_type_variation("Paper", "PanelContainer")
+	if theme == null:
+		theme = t
+	else:
+		theme.merge_with(t)
 
 
 ## Rounded flat box, optionally outlined with a hairline.

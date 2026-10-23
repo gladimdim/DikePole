@@ -20,6 +20,7 @@ var _writing: InkText
 var _latest_passage: Control
 var _restoring := false
 var _scroll_revision := 0
+var _sheet: SettingsSheet
 
 
 ## Opens the story where the player left off (or from the beginning). The classic
@@ -40,6 +41,7 @@ func _ready() -> void:
 	var actions: Array[Dictionary] = [
 		{"text": "backtostories", "action": func() -> void: Router.instance.pop()},
 		{"text": "reset", "action": _reset},
+		{"text": "settings_title", "action": _open_settings},
 	]
 	add_child(NarrowScaffold.create(_build_body(), entry["title"], actions, true, false))
 	_attach(story, resume_saved)
@@ -207,6 +209,22 @@ func _on_choice(index: int) -> void:
 		return
 	Platform.haptic_medium()
 	story.go_to_next_page_by_index(index)
+
+
+## Android back closes the settings first.
+func handle_back() -> bool:
+	if _sheet and is_instance_valid(_sheet):
+		_sheet.close()
+		_sheet = null
+		return true
+	return false
+
+
+## Menu Settings: the home screen's sheet, so the text size changes while reading.
+func _open_settings() -> void:
+	_sheet = SettingsSheet.new()
+	add_child(UI.fill_parent(_sheet))
+	_sheet.closed.connect(func() -> void: _sheet = null)
 
 
 ## Menu Reset: reload the story from the bundle and start from the beginning.

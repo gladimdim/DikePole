@@ -36,5 +36,7 @@ if [[ "$SERIAL" == *:* ]]; then
 fi
 
 adb ${SERIAL:+-s "$SERIAL"} install -r --no-streaming "$APK"
-adb ${SERIAL:+-s "$SERIAL"} shell monkey -p gladimdim.locadeserta -c android.intent.category.LAUNCHER 1 >/dev/null
+# Not monkey: its random event can freeze rotation, which turns off auto-rotate.
+ACTIVITY="$(adb ${SERIAL:+-s "$SERIAL"} shell cmd package resolve-activity --brief -c android.intent.category.LAUNCHER gladimdim.locadeserta | tail -1 | tr -d '\r')"
+adb ${SERIAL:+-s "$SERIAL"} shell am start -n "$ACTIVITY" >/dev/null
 echo "Installed and started gladimdim.locadeserta"

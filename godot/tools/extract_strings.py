@@ -9,7 +9,7 @@ import csv
 import re
 import sys
 
-LANGS = ("en", "uk")
+LANGS = ("uk",)
 KEYS = (
     "apptitle", "version", "start", "startstory", "lookingforheroes", "reset",
     "showstorydetails", "translationnotready", "menu", "backtostories", "backtomenu",

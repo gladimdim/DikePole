@@ -8,7 +8,6 @@ enum Filter { ALL, NEW, READING, FINISHED }
 
 const SIDE := 20
 const COSSACK_PHOTO := "res://images/background/c_cossack_0.jpg"
-const SITE_URL := "https://locadeserta.com/"
 
 var _filter := Filter.ALL
 var _scroll: ScrollContainer
@@ -58,6 +57,9 @@ func _rebuild() -> void:
 func _build(animate := true) -> void:
 	_root = UI.vbox()
 	add_child(UI.fill_parent(_root))
+	# Rebuilt while the settings sheet is open (theme, text size): stay beneath it.
+	if _sheet and is_instance_valid(_sheet):
+		move_child(_root, _sheet.get_index())
 	_root.add_child(_header())
 
 	_scroll = ScrollContainer.new()
@@ -222,14 +224,9 @@ func _matches(entry: Dictionary) -> bool:
 
 
 func _footer() -> Control:
-	var link := UI.label("labelSiteLink", &"Meta")
-	var site := Pressable.wrap(link, Platform.open_url.bind(SITE_URL))
-	site.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	var version := UI.label("%s %s" % [tr("version"), ProjectSettings.get_setting("application/config/version")], &"Meta", false)
-	var row := HBoxContainer.new()
-	row.add_child(site)
-	row.add_child(version)
-	return UI.vbox([ThinWidgets.hairline(), UI.margin(row, 0, 14)])
+	version.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
+	return UI.vbox([ThinWidgets.hairline(), UI.margin(version, 0, 14)])
 
 
 func _open_settings() -> void:
