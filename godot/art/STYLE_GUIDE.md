@@ -28,6 +28,12 @@ Keep Kodak's 1635 construction consistent: raw earthen bastions, ditch, sharpene
 
 Use Khotyn `r_n4.png` for the drawing medium and `ostannij/r_n0.png` for Dmytro's identity. Preserve the winter 1574 setting, his illness and exhaustion, and branch-specific equipment. The palanka is twenty low thatched huts, never a castle. After losing the horse, he travels on foot with only what he can carry. In `r.0.1.1/14` the musket and powder supplies have been discarded. The otaman and four rescuers are living men recovering from illness; convey Dmytro's fear without depicting supernatural creatures. Keep violence implied.
 
+## 1550–1553: illustrated editions
+
+`pereprava` (1550, 22 passages), `hunting_bears` (1552, 13 passages), and `fire_in_steppe` (1553, 16 passages) use original Westerveld-inspired sepia/graphite drawings on warm ivory paper. All 51 passages use `reveal: ink`, `motion.type: static`, and `ambient: none`. Each story has an ultra-realistic full-color photographic cover with `reveal: fade`. PNG assets, prompts and reference paths are recorded in the respective JSONL files.
+
+Use Khotyn `r_n4.png` for the drawing medium and each story’s own `r_n0.png` for character continuity; references do not determine the new scene’s action or background. 22 passage drawings. Mykhailo and Ostap remain distinct. No ambusher before he is revealed; do not resurrect him after his death. Keep branch-specific injuries and equipment. Violence is implied. 13 passage drawings. Distinguish stocky greying Trokhym from lean dark-haired Vasyl. Preserve which wheel-lock firearm fires in each branch. In the fatal aftermath the hunters are covered bodies, not members of the search party. 16 passage drawings. Tatars are never visible. Fire burns wild vegetation, not the village. The successful village branch preserves every hut. The counterburn leaves a broad black strip. The village firebreak is ploughed by two oxen. In the tragic branch Dmytro has a closed right eye and a fallen grey horse; no graphic injury.
+
 ## 1. Output spec
 
 | | |

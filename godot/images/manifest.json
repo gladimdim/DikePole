@@ -376,6 +376,198 @@
   }
  },
  "nodes": {
+  "fire_in_steppe/r.0/0": {
+   "image": "res://images/stories/fire_in_steppe/r.0_n0.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "fire_in_steppe/r.0/11": {
+   "image": "res://images/stories/fire_in_steppe/r.0_n11.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "fire_in_steppe/r.0/4": {
+   "image": "res://images/stories/fire_in_steppe/r.0_n4.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "fire_in_steppe/r.0/7": {
+   "image": "res://images/stories/fire_in_steppe/r.0_n7.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "fire_in_steppe/r.1/2": {
+   "image": "res://images/stories/fire_in_steppe/r.1_n2.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "fire_in_steppe/r.1/4": {
+   "image": "res://images/stories/fire_in_steppe/r.1_n4.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "fire_in_steppe/r.2/0": {
+   "image": "res://images/stories/fire_in_steppe/r.2_n0.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "fire_in_steppe/r.2/10": {
+   "image": "res://images/stories/fire_in_steppe/r.2_n10.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "fire_in_steppe/r.2/13": {
+   "image": "res://images/stories/fire_in_steppe/r.2_n13.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "fire_in_steppe/r.2/17": {
+   "image": "res://images/stories/fire_in_steppe/r.2_n17.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "fire_in_steppe/r.2/19": {
+   "image": "res://images/stories/fire_in_steppe/r.2_n19.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "fire_in_steppe/r.2/2": {
+   "image": "res://images/stories/fire_in_steppe/r.2_n2.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "fire_in_steppe/r.2/6": {
+   "image": "res://images/stories/fire_in_steppe/r.2_n6.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "fire_in_steppe/r/0": {
+   "image": "res://images/stories/fire_in_steppe/r_n0.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "fire_in_steppe/r/2": {
+   "image": "res://images/stories/fire_in_steppe/r_n2.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "fire_in_steppe/r/4": {
+   "image": "res://images/stories/fire_in_steppe/r_n4.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
   "hotinska_riznya/r.0.0.0/3": {
    "image": "res://images/stories/hotinska_riznya/r.0.0.0_n3.png",
    "reveal": "ink",
@@ -750,6 +942,162 @@
   },
   "hotinska_riznya/r/9": {
    "image": "res://images/stories/hotinska_riznya/r_n9.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "hunting_bears/r.0/1": {
+   "image": "res://images/stories/hunting_bears/r.0_n1.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "hunting_bears/r.0/11": {
+   "image": "res://images/stories/hunting_bears/r.0_n11.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "hunting_bears/r.0/5": {
+   "image": "res://images/stories/hunting_bears/r.0_n5.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "hunting_bears/r.0/9": {
+   "image": "res://images/stories/hunting_bears/r.0_n9.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "hunting_bears/r.1/10": {
+   "image": "res://images/stories/hunting_bears/r.1_n10.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "hunting_bears/r.1/13": {
+   "image": "res://images/stories/hunting_bears/r.1_n13.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "hunting_bears/r.1/16": {
+   "image": "res://images/stories/hunting_bears/r.1_n16.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "hunting_bears/r.1/2": {
+   "image": "res://images/stories/hunting_bears/r.1_n2.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "hunting_bears/r.1/5": {
+   "image": "res://images/stories/hunting_bears/r.1_n5.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "hunting_bears/r/0": {
+   "image": "res://images/stories/hunting_bears/r_n0.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "hunting_bears/r/10": {
+   "image": "res://images/stories/hunting_bears/r_n10.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "hunting_bears/r/3": {
+   "image": "res://images/stories/hunting_bears/r_n3.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "hunting_bears/r/7": {
+   "image": "res://images/stories/hunting_bears/r_n7.png",
    "reveal": "ink",
    "motion": {
     "type": "static",
@@ -1864,6 +2212,270 @@
    },
    "ambient": "none"
   },
+  "pereprava/r.0/0": {
+   "image": "res://images/stories/pereprava/r.0_n0.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "pereprava/r.0/3": {
+   "image": "res://images/stories/pereprava/r.0_n3.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "pereprava/r.0/6": {
+   "image": "res://images/stories/pereprava/r.0_n6.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "pereprava/r.1/0": {
+   "image": "res://images/stories/pereprava/r.1_n0.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "pereprava/r.1/10": {
+   "image": "res://images/stories/pereprava/r.1_n10.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "pereprava/r.1/12": {
+   "image": "res://images/stories/pereprava/r.1_n12.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "pereprava/r.1/16": {
+   "image": "res://images/stories/pereprava/r.1_n16.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "pereprava/r.1/18": {
+   "image": "res://images/stories/pereprava/r.1_n18.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "pereprava/r.1/22": {
+   "image": "res://images/stories/pereprava/r.1_n22.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "pereprava/r.1/28": {
+   "image": "res://images/stories/pereprava/r.1_n28.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "pereprava/r.1/3": {
+   "image": "res://images/stories/pereprava/r.1_n3.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "pereprava/r.1/31": {
+   "image": "res://images/stories/pereprava/r.1_n31.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "pereprava/r.1/33": {
+   "image": "res://images/stories/pereprava/r.1_n33.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "pereprava/r.1/35": {
+   "image": "res://images/stories/pereprava/r.1_n35.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "pereprava/r.1/38": {
+   "image": "res://images/stories/pereprava/r.1_n38.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "pereprava/r.1/40": {
+   "image": "res://images/stories/pereprava/r.1_n40.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "pereprava/r.1/6": {
+   "image": "res://images/stories/pereprava/r.1_n6.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "pereprava/r/0": {
+   "image": "res://images/stories/pereprava/r_n0.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "pereprava/r/10": {
+   "image": "res://images/stories/pereprava/r_n10.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "pereprava/r/2": {
+   "image": "res://images/stories/pereprava/r_n2.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "pereprava/r/5": {
+   "image": "res://images/stories/pereprava/r_n5.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "pereprava/r/7": {
+   "image": "res://images/stories/pereprava/r_n7.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
   "zustrich_v_stepu/r.0.0/1": {
    "image": "res://images/stories/zustrich_v_stepu/r.0.0_n1.png",
    "reveal": "ink",
@@ -2190,6 +2802,18 @@
   }
  },
  "covers": {
+  "fire_in_steppe": {
+   "image": "res://images/stories/fire_in_steppe/cover.png",
+   "reveal": "fade",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
   "hotinska_riznya": {
    "image": "res://images/stories/hotinska_riznya/cover.png",
    "reveal": "fade",
@@ -2198,6 +2822,18 @@
     "focus": [
      0.6,
      0.4
+    ]
+   },
+   "ambient": "none"
+  },
+  "hunting_bears": {
+   "image": "res://images/stories/hunting_bears/cover.png",
+   "reveal": "fade",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
     ]
    },
    "ambient": "none"
@@ -2216,6 +2852,18 @@
   },
   "ostannij": {
    "image": "res://images/stories/ostannij/cover.png",
+   "reveal": "fade",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "pereprava": {
+   "image": "res://images/stories/pereprava/cover.png",
    "reveal": "fade",
    "motion": {
     "type": "static",

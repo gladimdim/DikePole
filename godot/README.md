@@ -87,3 +87,5 @@ Prompts follow `art/STYLE_GUIDE.md`. `tools/validate_prompts.py <story>` checks 
 - Progress is saved as a path into the bundled story, not as a copy of the page; it survives app updates that don't change the story's structure.
 - Dead-end pages without an ending (six in *After the Battle*) offer *Start over?* instead of leaving the reader without buttons.
 - The catalog → details hero never flew in Flutter (the tags differed). That is kept.
+
+**1550–1553 artwork:** `pereprava` (22 passages), `hunting_bears` (13), and `fire_in_steppe` (16) have complete sepia/graphite illustrated editions with static ink reveals and three ultra-realistic full-color covers. Prompts, character references and branch continuity notes are under `art/prompts/`.
