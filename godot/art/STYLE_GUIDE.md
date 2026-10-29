@@ -22,6 +22,12 @@ Use `hotinska_riznya/r_n4.png` for drawing technique and `zustrich_v_stepu/r_n15
 
 Keep Kodak's 1635 construction consistent: raw earthen bastions, ditch, sharpened oak palisade, a wooden inner fortlet and a turf-covered powder cellar. Never substitute a medieval stone castle. The baidaks have their masts lowered and tall reeds lashed around their sides. Distinguish Sulyma's stocky build and grey mustache from Hladkyi's lean face, hooked nose and dark forelock; Stets is a freckled, broad-nosed eighteen-year-old. Use the initial scenes as identity references without copying their actions into other passages. Keep each branch's weapons, daylight and aftermath distinct. Depict the darkest passages through reactions, smoke, empty space and fully shrouded bodies; never expose injuries or the contents of the sack.
 
+## The Last One: illustrated edition
+
+`ostannij` uses 15 Westerveld-inspired sepia/graphite passage drawings on ivory paper and a full-color photographic cover. Every passage uses `reveal: ink`, `motion.type: static` and `ambient: none`; the cover uses `reveal: fade`. Prompts and reference paths are in `prompts/ostannij.jsonl`.
+
+Use Khotyn `r_n4.png` for the drawing medium and `ostannij/r_n0.png` for Dmytro's identity. Preserve the winter 1574 setting, his illness and exhaustion, and branch-specific equipment. The palanka is twenty low thatched huts, never a castle. After losing the horse, he travels on foot with only what he can carry. In `r.0.1.1/14` the musket and powder supplies have been discarded. The otaman and four rescuers are living men recovering from illness; convey Dmytro's fear without depicting supernatural creatures. Keep violence implied.
+
 ## 1. Output spec
 
 | | |

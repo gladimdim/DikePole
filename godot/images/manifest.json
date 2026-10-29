@@ -1684,6 +1684,186 @@
    },
    "ambient": "none"
   },
+  "ostannij/r.0.1.0/10": {
+   "image": "res://images/stories/ostannij/r.0.1.0_n10.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "ostannij/r.0.1.0/13": {
+   "image": "res://images/stories/ostannij/r.0.1.0_n13.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "ostannij/r.0.1.0/18": {
+   "image": "res://images/stories/ostannij/r.0.1.0_n18.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "ostannij/r.0.1.0/2": {
+   "image": "res://images/stories/ostannij/r.0.1.0_n2.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "ostannij/r.0.1.0/5": {
+   "image": "res://images/stories/ostannij/r.0.1.0_n5.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "ostannij/r.0.1.1/0": {
+   "image": "res://images/stories/ostannij/r.0.1.1_n0.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "ostannij/r.0.1.1/14": {
+   "image": "res://images/stories/ostannij/r.0.1.1_n14.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "ostannij/r.0.1.1/5": {
+   "image": "res://images/stories/ostannij/r.0.1.1_n5.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "ostannij/r.0.1.1/9": {
+   "image": "res://images/stories/ostannij/r.0.1.1_n9.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "ostannij/r.0.1/1": {
+   "image": "res://images/stories/ostannij/r.0.1_n1.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "ostannij/r/0": {
+   "image": "res://images/stories/ostannij/r_n0.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "ostannij/r/13": {
+   "image": "res://images/stories/ostannij/r_n13.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "ostannij/r/18": {
+   "image": "res://images/stories/ostannij/r_n18.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "ostannij/r/3": {
+   "image": "res://images/stories/ostannij/r_n3.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "ostannij/r/6": {
+   "image": "res://images/stories/ostannij/r_n6.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
   "zustrich_v_stepu/r.0.0/1": {
    "image": "res://images/stories/zustrich_v_stepu/r.0.0_n1.png",
    "reveal": "ink",
@@ -2024,6 +2204,18 @@
   },
   "kodak_night": {
    "image": "res://images/stories/kodak_night/cover.png",
+   "reveal": "fade",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "ostannij": {
+   "image": "res://images/stories/ostannij/cover.png",
    "reveal": "fade",
    "motion": {
     "type": "static",

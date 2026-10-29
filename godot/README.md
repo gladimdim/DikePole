@@ -69,6 +69,8 @@ All of it is one shader (`anim/story_image.gdshader`) and needs no extra assets.
 
 **Khotyn artwork:** all 32 passages are original sepia/graphite illustrations in the style of the three opening drawings, with fine organic linework and ivory paper margins. They use `ink`, static composition and no ambient distortion; no pencil filter is applied. The approved cover remains hyperrealistic and full color. The passage prompts record the three visual reference files.
 
+**Ostannij artwork:** all 15 illustrated passages and the photographic cover are complete. The passage drawings follow the Westerveld-inspired sepia/graphite style, with static ink reveal and no ambient distortion.
+
 ### Adding generated pictures (Astra)
 
 1. `python3 -I tools/export_prompts.py`. It writes `art/prompts/export/astra_{characters,covers,scenes}.csv` and `astra_all.jsonl`, skipping pictures that already exist.
