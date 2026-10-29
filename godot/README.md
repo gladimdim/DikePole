@@ -14,7 +14,7 @@ godot --path . -- --input-test [--classic]               # taps and swipes with 
 godot --headless --path . --export-debug "Android" build/android/locadeserta-debug.apk
 ```
 
-- **Android (Play):** preset *Android (Play AAB)*. Install the build template once (`godot --headless --path . --install-android-build-template`). Then put the **original upload keystore** into the preset (`keystore/release*`). Without it Play rejects the update. `version/code` must stay above the Flutter build (126).
+- **Android (Play):** preset *Android (Play AAB)*. Install the build template once (`godot --headless --path . --install-android-build-template`). Supply the **original upload keystore** through `GODOT_ANDROID_KEYSTORE_RELEASE_PATH`, `GODOT_ANDROID_KEYSTORE_RELEASE_USER`, and `GODOT_ANDROID_KEYSTORE_RELEASE_PASSWORD` (see `tools/deploy_android.sh` for the local signing properties). Keep credentials out of the preset and Git. Increment both Android presets above the version currently on Play.
 - **iOS:** preset *iOS*. Set `application/app_store_team_id` and export on macOS with Xcode. Replace `icon.png` with a 1024×1024 icon before submitting; the current one is the 192 px launcher icon.
 
 ## Layout
@@ -89,3 +89,22 @@ Prompts follow `art/STYLE_GUIDE.md`. `tools/validate_prompts.py <story>` checks 
 - The catalog → details hero never flew in Flutter (the tags differed). That is kept.
 
 **1550–1553 artwork:** `pereprava` (22 passages), `hunting_bears` (13), and `fire_in_steppe` (16) have complete sepia/graphite illustrated editions with static ink reveals and three ultra-realistic full-color covers. Prompts, character references and branch continuity notes are under `art/prompts/`.
+
+**1580 and 1620 artwork:** `wolf_trap` (26 passages) and `after_the_battle` (51) have complete illustrated editions with static ink reveals and ultra-realistic full-color covers. Character and branch continuity, generation prompts and reference images are documented under `art/prompts/`.
+
+**1648 and 1651 artwork:** `krivava_pastka` (64 passages) and `last_battle_at_berestechko` (70) complete the illustrated catalog. Both use Westerveld-inspired sepia/graphite drawings with static ink reveals and ultra-realistic full-color covers. Prompts and character references are under `art/prompts/`; the images were generated with the built-in `image_gen` tool.
+
+### Store screenshots
+
+Capture the actual app UI with isolated save data:
+
+```bash
+XDG_DATA_HOME="$(mktemp -d)" godot --path . --resolution 1080x2160 tools/capture_store.tscn -- --out=/tmp/dikepole-store-shots
+```
+
+The six captures show the home, Berestechko cover, Bloody Trap passage, choices, ending, and catalog. Review them before replacing `../locadeserta/playstore/metadata/uk/images/phoneScreenshots/`.
+
+### Android 2.0.1 (2128)
+
+Release notes and production track payload: `../locadeserta/playstore/releases/2128.json`.
+The AAB uses an install-time asset pack for artwork (about 194 MiB) and a base module of about 50 MiB. For this release, run `gplay preflight` with `--max-size 500M`; the CLI's default whole-archive 200 MiB budget is outdated and does not account for the asset pack. Google Play's module and asset-pack limits are documented at https://support.google.com/googleplay/android-developer/answer/9859372. Validate the edit on Play before committing it. The scanner flags standard Gradle version metadata as a developer artifact; it contains only metadata and Gradle plugin versions. ARM64 native libraries were separately checked for 16 KiB segment alignment with `readelf -lW`.

@@ -376,6 +376,618 @@
   }
  },
  "nodes": {
+  "after_the_battle/r.0.0.0.0.0.0/0": {
+   "image": "res://images/stories/after_the_battle/r.0.0.0.0.0.0_n0.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "after_the_battle/r.0.0.0.0.0.0/6": {
+   "image": "res://images/stories/after_the_battle/r.0.0.0.0.0.0_n6.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "after_the_battle/r.0.0.0.0.0.1/6": {
+   "image": "res://images/stories/after_the_battle/r.0.0.0.0.0.1_n6.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "after_the_battle/r.0.0.0.0.0/1": {
+   "image": "res://images/stories/after_the_battle/r.0.0.0.0.0_n1.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "after_the_battle/r.0.0.0.0.0/11": {
+   "image": "res://images/stories/after_the_battle/r.0.0.0.0.0_n11.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "after_the_battle/r.0.0.0.0.0/7": {
+   "image": "res://images/stories/after_the_battle/r.0.0.0.0.0_n7.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "after_the_battle/r.0.0.0.0.1/3": {
+   "image": "res://images/stories/after_the_battle/r.0.0.0.0.1_n3.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "after_the_battle/r.0.0.0.0/1": {
+   "image": "res://images/stories/after_the_battle/r.0.0.0.0_n1.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "after_the_battle/r.0.0.0.0/5": {
+   "image": "res://images/stories/after_the_battle/r.0.0.0.0_n5.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "after_the_battle/r.0.0.0.0/8": {
+   "image": "res://images/stories/after_the_battle/r.0.0.0.0_n8.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "after_the_battle/r.0.0.0.1.0/3": {
+   "image": "res://images/stories/after_the_battle/r.0.0.0.1.0_n3.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "after_the_battle/r.0.0.0/1": {
+   "image": "res://images/stories/after_the_battle/r.0.0.0_n1.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "after_the_battle/r.0.0.1.0.0.0/0": {
+   "image": "res://images/stories/after_the_battle/r.0.0.1.0.0.0_n0.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "after_the_battle/r.0.0.1.0.0.0/2": {
+   "image": "res://images/stories/after_the_battle/r.0.0.1.0.0.0_n2.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "after_the_battle/r.0.0.1.0.0.0/9": {
+   "image": "res://images/stories/after_the_battle/r.0.0.1.0.0.0_n9.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "after_the_battle/r.0.0.1.0.0.1/0": {
+   "image": "res://images/stories/after_the_battle/r.0.0.1.0.0.1_n0.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "after_the_battle/r.0.0.1.0.0.1/7": {
+   "image": "res://images/stories/after_the_battle/r.0.0.1.0.0.1_n7.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "after_the_battle/r.0.0.1.0.0/0": {
+   "image": "res://images/stories/after_the_battle/r.0.0.1.0.0_n0.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "after_the_battle/r.0.0.1.0.0/6": {
+   "image": "res://images/stories/after_the_battle/r.0.0.1.0.0_n6.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "after_the_battle/r.0.0.1.0.1.0/13": {
+   "image": "res://images/stories/after_the_battle/r.0.0.1.0.1.0_n13.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "after_the_battle/r.0.0.1.0.1.0/20": {
+   "image": "res://images/stories/after_the_battle/r.0.0.1.0.1.0_n20.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "after_the_battle/r.0.0.1.0.1.0/8": {
+   "image": "res://images/stories/after_the_battle/r.0.0.1.0.1.0_n8.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "after_the_battle/r.0.0.1.0/2": {
+   "image": "res://images/stories/after_the_battle/r.0.0.1.0_n2.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "after_the_battle/r.0.0.1.1.0/2": {
+   "image": "res://images/stories/after_the_battle/r.0.0.1.1.0_n2.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "after_the_battle/r.0.0.1/3": {
+   "image": "res://images/stories/after_the_battle/r.0.0.1_n3.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "after_the_battle/r.0.1/0": {
+   "image": "res://images/stories/after_the_battle/r.0.1_n0.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "after_the_battle/r.0.1/6": {
+   "image": "res://images/stories/after_the_battle/r.0.1_n6.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "after_the_battle/r.0/5": {
+   "image": "res://images/stories/after_the_battle/r.0_n5.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "after_the_battle/r.1.0.0.0.0/0": {
+   "image": "res://images/stories/after_the_battle/r.1.0.0.0.0_n0.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "after_the_battle/r.1.0.0.0.0/6": {
+   "image": "res://images/stories/after_the_battle/r.1.0.0.0.0_n6.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "after_the_battle/r.1.0.0.0.0/9": {
+   "image": "res://images/stories/after_the_battle/r.1.0.0.0.0_n9.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "after_the_battle/r.1.0.0.0.1/5": {
+   "image": "res://images/stories/after_the_battle/r.1.0.0.0.1_n5.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "after_the_battle/r.1.0.0.0.1/7": {
+   "image": "res://images/stories/after_the_battle/r.1.0.0.0.1_n7.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "after_the_battle/r.1.0.0.0/0": {
+   "image": "res://images/stories/after_the_battle/r.1.0.0.0_n0.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "after_the_battle/r.1.0.0.0/12": {
+   "image": "res://images/stories/after_the_battle/r.1.0.0.0_n12.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "after_the_battle/r.1.0.0.0/3": {
+   "image": "res://images/stories/after_the_battle/r.1.0.0.0_n3.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "after_the_battle/r.1.0.0.0/9": {
+   "image": "res://images/stories/after_the_battle/r.1.0.0.0_n9.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "after_the_battle/r.1.0.0.1.0/0": {
+   "image": "res://images/stories/after_the_battle/r.1.0.0.1.0_n0.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "after_the_battle/r.1.0.0.1.0/16": {
+   "image": "res://images/stories/after_the_battle/r.1.0.0.1.0_n16.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "after_the_battle/r.1.0.0.1.0/19": {
+   "image": "res://images/stories/after_the_battle/r.1.0.0.1.0_n19.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "after_the_battle/r.1.0.0.1.0/22": {
+   "image": "res://images/stories/after_the_battle/r.1.0.0.1.0_n22.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "after_the_battle/r.1.0.0.1.0/9": {
+   "image": "res://images/stories/after_the_battle/r.1.0.0.1.0_n9.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "after_the_battle/r.1.0.0.1/1": {
+   "image": "res://images/stories/after_the_battle/r.1.0.0.1_n1.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "after_the_battle/r.1.0.0/0": {
+   "image": "res://images/stories/after_the_battle/r.1.0.0_n0.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "after_the_battle/r.1.0.0/6": {
+   "image": "res://images/stories/after_the_battle/r.1.0.0_n6.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "after_the_battle/r.1.0.1.0/2": {
+   "image": "res://images/stories/after_the_battle/r.1.0.1.0_n2.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "after_the_battle/r.1.0/1": {
+   "image": "res://images/stories/after_the_battle/r.1.0_n1.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "after_the_battle/r.1/0": {
+   "image": "res://images/stories/after_the_battle/r.1_n0.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "after_the_battle/r/0": {
+   "image": "res://images/stories/after_the_battle/r_n0.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "after_the_battle/r/2": {
+   "image": "res://images/stories/after_the_battle/r_n2.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "after_the_battle/r/4": {
+   "image": "res://images/stories/after_the_battle/r_n4.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
   "fire_in_steppe/r.0/0": {
    "image": "res://images/stories/fire_in_steppe/r.0_n0.png",
    "reveal": "ink",
@@ -2032,6 +2644,1614 @@
    },
    "ambient": "none"
   },
+  "krivava_pastka/r.0.0.0/2": {
+   "image": "res://images/stories/krivava_pastka/r.0.0.0_n2.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "krivava_pastka/r.0.0.1/2": {
+   "image": "res://images/stories/krivava_pastka/r.0.0.1_n2.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "krivava_pastka/r.0.0.1/9": {
+   "image": "res://images/stories/krivava_pastka/r.0.0.1_n9.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "krivava_pastka/r.0.0/1": {
+   "image": "res://images/stories/krivava_pastka/r.0.0_n1.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "krivava_pastka/r.0.0/11": {
+   "image": "res://images/stories/krivava_pastka/r.0.0_n11.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "krivava_pastka/r.0.0/14": {
+   "image": "res://images/stories/krivava_pastka/r.0.0_n14.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "krivava_pastka/r.0.0/19": {
+   "image": "res://images/stories/krivava_pastka/r.0.0_n19.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "krivava_pastka/r.0.0/20": {
+   "image": "res://images/stories/krivava_pastka/r.0.0_n20.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "krivava_pastka/r.0.0/23": {
+   "image": "res://images/stories/krivava_pastka/r.0.0_n23.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "krivava_pastka/r.0.0/29": {
+   "image": "res://images/stories/krivava_pastka/r.0.0_n29.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "krivava_pastka/r.0.0/33": {
+   "image": "res://images/stories/krivava_pastka/r.0.0_n33.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "krivava_pastka/r.0.0/5": {
+   "image": "res://images/stories/krivava_pastka/r.0.0_n5.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "krivava_pastka/r.0.0/8": {
+   "image": "res://images/stories/krivava_pastka/r.0.0_n8.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "krivava_pastka/r.0.1.0/11": {
+   "image": "res://images/stories/krivava_pastka/r.0.1.0_n11.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "krivava_pastka/r.0.1.0/16": {
+   "image": "res://images/stories/krivava_pastka/r.0.1.0_n16.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "krivava_pastka/r.0.1.0/19": {
+   "image": "res://images/stories/krivava_pastka/r.0.1.0_n19.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "krivava_pastka/r.0.1.0/22": {
+   "image": "res://images/stories/krivava_pastka/r.0.1.0_n22.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "krivava_pastka/r.0.1.0/26": {
+   "image": "res://images/stories/krivava_pastka/r.0.1.0_n26.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "krivava_pastka/r.0.1.0/29": {
+   "image": "res://images/stories/krivava_pastka/r.0.1.0_n29.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "krivava_pastka/r.0.1.0/3": {
+   "image": "res://images/stories/krivava_pastka/r.0.1.0_n3.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "krivava_pastka/r.0.1.0/33": {
+   "image": "res://images/stories/krivava_pastka/r.0.1.0_n33.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "krivava_pastka/r.0.1.0/38": {
+   "image": "res://images/stories/krivava_pastka/r.0.1.0_n38.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "krivava_pastka/r.0.1.0/43": {
+   "image": "res://images/stories/krivava_pastka/r.0.1.0_n43.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "krivava_pastka/r.0.1.0/7": {
+   "image": "res://images/stories/krivava_pastka/r.0.1.0_n7.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "krivava_pastka/r.0.1.1/0": {
+   "image": "res://images/stories/krivava_pastka/r.0.1.1_n0.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "krivava_pastka/r.0.1.1/15": {
+   "image": "res://images/stories/krivava_pastka/r.0.1.1_n15.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "krivava_pastka/r.0.1.1/19": {
+   "image": "res://images/stories/krivava_pastka/r.0.1.1_n19.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "krivava_pastka/r.0.1.1/22": {
+   "image": "res://images/stories/krivava_pastka/r.0.1.1_n22.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "krivava_pastka/r.0.1.1/24": {
+   "image": "res://images/stories/krivava_pastka/r.0.1.1_n24.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "krivava_pastka/r.0.1.1/4": {
+   "image": "res://images/stories/krivava_pastka/r.0.1.1_n4.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "krivava_pastka/r.0.1.1/8": {
+   "image": "res://images/stories/krivava_pastka/r.0.1.1_n8.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "krivava_pastka/r.0.1/0": {
+   "image": "res://images/stories/krivava_pastka/r.0.1_n0.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "krivava_pastka/r.0.1/4": {
+   "image": "res://images/stories/krivava_pastka/r.0.1_n4.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "krivava_pastka/r.0.1/8": {
+   "image": "res://images/stories/krivava_pastka/r.0.1_n8.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "krivava_pastka/r.1.0/0": {
+   "image": "res://images/stories/krivava_pastka/r.1.0_n0.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "krivava_pastka/r.1.0/3": {
+   "image": "res://images/stories/krivava_pastka/r.1.0_n3.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "krivava_pastka/r.1.1/0": {
+   "image": "res://images/stories/krivava_pastka/r.1.1_n0.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "krivava_pastka/r.1.1/15": {
+   "image": "res://images/stories/krivava_pastka/r.1.1_n15.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "krivava_pastka/r.1.1/20": {
+   "image": "res://images/stories/krivava_pastka/r.1.1_n20.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "krivava_pastka/r.1.1/25": {
+   "image": "res://images/stories/krivava_pastka/r.1.1_n25.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "krivava_pastka/r.1.1/28": {
+   "image": "res://images/stories/krivava_pastka/r.1.1_n28.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "krivava_pastka/r.1/0": {
+   "image": "res://images/stories/krivava_pastka/r.1_n0.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "krivava_pastka/r.1/13": {
+   "image": "res://images/stories/krivava_pastka/r.1_n13.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "krivava_pastka/r.1/17": {
+   "image": "res://images/stories/krivava_pastka/r.1_n17.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "krivava_pastka/r.1/19": {
+   "image": "res://images/stories/krivava_pastka/r.1_n19.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "krivava_pastka/r.1/24": {
+   "image": "res://images/stories/krivava_pastka/r.1_n24.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "krivava_pastka/r.1/28": {
+   "image": "res://images/stories/krivava_pastka/r.1_n28.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "krivava_pastka/r.1/31": {
+   "image": "res://images/stories/krivava_pastka/r.1_n31.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "krivava_pastka/r.1/33": {
+   "image": "res://images/stories/krivava_pastka/r.1_n33.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "krivava_pastka/r.1/37": {
+   "image": "res://images/stories/krivava_pastka/r.1_n37.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "krivava_pastka/r.1/41": {
+   "image": "res://images/stories/krivava_pastka/r.1_n41.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "krivava_pastka/r.1/44": {
+   "image": "res://images/stories/krivava_pastka/r.1_n44.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "krivava_pastka/r.1/47": {
+   "image": "res://images/stories/krivava_pastka/r.1_n47.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "krivava_pastka/r.1/5": {
+   "image": "res://images/stories/krivava_pastka/r.1_n5.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "krivava_pastka/r.1/51": {
+   "image": "res://images/stories/krivava_pastka/r.1_n51.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "krivava_pastka/r.1/55": {
+   "image": "res://images/stories/krivava_pastka/r.1_n55.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "krivava_pastka/r.1/60": {
+   "image": "res://images/stories/krivava_pastka/r.1_n60.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "krivava_pastka/r.1/9": {
+   "image": "res://images/stories/krivava_pastka/r.1_n9.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "krivava_pastka/r/0": {
+   "image": "res://images/stories/krivava_pastka/r_n0.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "krivava_pastka/r/12": {
+   "image": "res://images/stories/krivava_pastka/r_n12.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "krivava_pastka/r/16": {
+   "image": "res://images/stories/krivava_pastka/r_n16.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "krivava_pastka/r/19": {
+   "image": "res://images/stories/krivava_pastka/r_n19.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "krivava_pastka/r/3": {
+   "image": "res://images/stories/krivava_pastka/r_n3.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "krivava_pastka/r/9": {
+   "image": "res://images/stories/krivava_pastka/r_n9.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "last_battle_at_berestechko/r.0/1": {
+   "image": "res://images/stories/last_battle_at_berestechko/r.0_n1.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "last_battle_at_berestechko/r.0/12": {
+   "image": "res://images/stories/last_battle_at_berestechko/r.0_n12.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "last_battle_at_berestechko/r.0/14": {
+   "image": "res://images/stories/last_battle_at_berestechko/r.0_n14.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "last_battle_at_berestechko/r.0/18": {
+   "image": "res://images/stories/last_battle_at_berestechko/r.0_n18.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "last_battle_at_berestechko/r.0/23": {
+   "image": "res://images/stories/last_battle_at_berestechko/r.0_n23.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "last_battle_at_berestechko/r.0/25": {
+   "image": "res://images/stories/last_battle_at_berestechko/r.0_n25.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "last_battle_at_berestechko/r.0/27": {
+   "image": "res://images/stories/last_battle_at_berestechko/r.0_n27.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "last_battle_at_berestechko/r.0/3": {
+   "image": "res://images/stories/last_battle_at_berestechko/r.0_n3.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "last_battle_at_berestechko/r.0/32": {
+   "image": "res://images/stories/last_battle_at_berestechko/r.0_n32.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "last_battle_at_berestechko/r.0/35": {
+   "image": "res://images/stories/last_battle_at_berestechko/r.0_n35.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "last_battle_at_berestechko/r.0/36": {
+   "image": "res://images/stories/last_battle_at_berestechko/r.0_n36.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "last_battle_at_berestechko/r.0/42": {
+   "image": "res://images/stories/last_battle_at_berestechko/r.0_n42.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "last_battle_at_berestechko/r.0/54": {
+   "image": "res://images/stories/last_battle_at_berestechko/r.0_n54.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "last_battle_at_berestechko/r.0/7": {
+   "image": "res://images/stories/last_battle_at_berestechko/r.0_n7.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "last_battle_at_berestechko/r.0/9": {
+   "image": "res://images/stories/last_battle_at_berestechko/r.0_n9.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "last_battle_at_berestechko/r.1.0.0/10": {
+   "image": "res://images/stories/last_battle_at_berestechko/r.1.0.0_n10.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "last_battle_at_berestechko/r.1.0.0/14": {
+   "image": "res://images/stories/last_battle_at_berestechko/r.1.0.0_n14.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "last_battle_at_berestechko/r.1.0.0/16": {
+   "image": "res://images/stories/last_battle_at_berestechko/r.1.0.0_n16.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "last_battle_at_berestechko/r.1.0.0/2": {
+   "image": "res://images/stories/last_battle_at_berestechko/r.1.0.0_n2.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "last_battle_at_berestechko/r.1.0.0/20": {
+   "image": "res://images/stories/last_battle_at_berestechko/r.1.0.0_n20.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "last_battle_at_berestechko/r.1.0.0/26": {
+   "image": "res://images/stories/last_battle_at_berestechko/r.1.0.0_n26.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "last_battle_at_berestechko/r.1.0.0/6": {
+   "image": "res://images/stories/last_battle_at_berestechko/r.1.0.0_n6.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "last_battle_at_berestechko/r.1.0.0/8": {
+   "image": "res://images/stories/last_battle_at_berestechko/r.1.0.0_n8.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "last_battle_at_berestechko/r.1.0.1.0/1": {
+   "image": "res://images/stories/last_battle_at_berestechko/r.1.0.1.0_n1.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "last_battle_at_berestechko/r.1.0.1.0/6": {
+   "image": "res://images/stories/last_battle_at_berestechko/r.1.0.1.0_n6.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "last_battle_at_berestechko/r.1.0.1.0/9": {
+   "image": "res://images/stories/last_battle_at_berestechko/r.1.0.1.0_n9.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "last_battle_at_berestechko/r.1.0.1.1/12": {
+   "image": "res://images/stories/last_battle_at_berestechko/r.1.0.1.1_n12.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "last_battle_at_berestechko/r.1.0.1.1/14": {
+   "image": "res://images/stories/last_battle_at_berestechko/r.1.0.1.1_n14.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "last_battle_at_berestechko/r.1.0.1.1/4": {
+   "image": "res://images/stories/last_battle_at_berestechko/r.1.0.1.1_n4.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "last_battle_at_berestechko/r.1.0.1.1/9": {
+   "image": "res://images/stories/last_battle_at_berestechko/r.1.0.1.1_n9.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "last_battle_at_berestechko/r.1.0.1/1": {
+   "image": "res://images/stories/last_battle_at_berestechko/r.1.0.1_n1.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "last_battle_at_berestechko/r.1.0.1/11": {
+   "image": "res://images/stories/last_battle_at_berestechko/r.1.0.1_n11.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "last_battle_at_berestechko/r.1.0.1/22": {
+   "image": "res://images/stories/last_battle_at_berestechko/r.1.0.1_n22.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "last_battle_at_berestechko/r.1.0.1/25": {
+   "image": "res://images/stories/last_battle_at_berestechko/r.1.0.1_n25.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "last_battle_at_berestechko/r.1.0.1/30": {
+   "image": "res://images/stories/last_battle_at_berestechko/r.1.0.1_n30.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "last_battle_at_berestechko/r.1.0.1/33": {
+   "image": "res://images/stories/last_battle_at_berestechko/r.1.0.1_n33.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "last_battle_at_berestechko/r.1.0/12": {
+   "image": "res://images/stories/last_battle_at_berestechko/r.1.0_n12.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "last_battle_at_berestechko/r.1.0/5": {
+   "image": "res://images/stories/last_battle_at_berestechko/r.1.0_n5.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "last_battle_at_berestechko/r.1.0/9": {
+   "image": "res://images/stories/last_battle_at_berestechko/r.1.0_n9.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "last_battle_at_berestechko/r.1/0": {
+   "image": "res://images/stories/last_battle_at_berestechko/r.1_n0.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "last_battle_at_berestechko/r.1/13": {
+   "image": "res://images/stories/last_battle_at_berestechko/r.1_n13.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "last_battle_at_berestechko/r.1/16": {
+   "image": "res://images/stories/last_battle_at_berestechko/r.1_n16.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "last_battle_at_berestechko/r.1/21": {
+   "image": "res://images/stories/last_battle_at_berestechko/r.1_n21.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "last_battle_at_berestechko/r.1/25": {
+   "image": "res://images/stories/last_battle_at_berestechko/r.1_n25.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "last_battle_at_berestechko/r.1/3": {
+   "image": "res://images/stories/last_battle_at_berestechko/r.1_n3.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "last_battle_at_berestechko/r.1/30": {
+   "image": "res://images/stories/last_battle_at_berestechko/r.1_n30.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "last_battle_at_berestechko/r.1/33": {
+   "image": "res://images/stories/last_battle_at_berestechko/r.1_n33.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "last_battle_at_berestechko/r.1/36": {
+   "image": "res://images/stories/last_battle_at_berestechko/r.1_n36.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "last_battle_at_berestechko/r.1/40": {
+   "image": "res://images/stories/last_battle_at_berestechko/r.1_n40.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "last_battle_at_berestechko/r.1/9": {
+   "image": "res://images/stories/last_battle_at_berestechko/r.1_n9.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "last_battle_at_berestechko/r/0": {
+   "image": "res://images/stories/last_battle_at_berestechko/r_n0.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "last_battle_at_berestechko/r/14": {
+   "image": "res://images/stories/last_battle_at_berestechko/r_n14.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "last_battle_at_berestechko/r/19": {
+   "image": "res://images/stories/last_battle_at_berestechko/r_n19.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "last_battle_at_berestechko/r/23": {
+   "image": "res://images/stories/last_battle_at_berestechko/r_n23.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "last_battle_at_berestechko/r/27": {
+   "image": "res://images/stories/last_battle_at_berestechko/r_n27.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "last_battle_at_berestechko/r/3": {
+   "image": "res://images/stories/last_battle_at_berestechko/r_n3.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "last_battle_at_berestechko/r/33": {
+   "image": "res://images/stories/last_battle_at_berestechko/r_n33.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "last_battle_at_berestechko/r/37": {
+   "image": "res://images/stories/last_battle_at_berestechko/r_n37.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "last_battle_at_berestechko/r/44": {
+   "image": "res://images/stories/last_battle_at_berestechko/r_n44.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "last_battle_at_berestechko/r/48": {
+   "image": "res://images/stories/last_battle_at_berestechko/r_n48.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "last_battle_at_berestechko/r/52": {
+   "image": "res://images/stories/last_battle_at_berestechko/r_n52.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "last_battle_at_berestechko/r/55": {
+   "image": "res://images/stories/last_battle_at_berestechko/r_n55.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "last_battle_at_berestechko/r/6": {
+   "image": "res://images/stories/last_battle_at_berestechko/r_n6.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "last_battle_at_berestechko/r/61": {
+   "image": "res://images/stories/last_battle_at_berestechko/r_n61.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "last_battle_at_berestechko/r/66": {
+   "image": "res://images/stories/last_battle_at_berestechko/r_n66.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "last_battle_at_berestechko/r/69": {
+   "image": "res://images/stories/last_battle_at_berestechko/r_n69.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "last_battle_at_berestechko/r/73": {
+   "image": "res://images/stories/last_battle_at_berestechko/r_n73.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "last_battle_at_berestechko/r/79": {
+   "image": "res://images/stories/last_battle_at_berestechko/r_n79.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "last_battle_at_berestechko/r/82": {
+   "image": "res://images/stories/last_battle_at_berestechko/r_n82.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "last_battle_at_berestechko/r/9": {
+   "image": "res://images/stories/last_battle_at_berestechko/r_n9.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
   "ostannij/r.0.1.0/10": {
    "image": "res://images/stories/ostannij/r.0.1.0_n10.png",
    "reveal": "ink",
@@ -2476,6 +4696,318 @@
    },
    "ambient": "none"
   },
+  "wolf_trap/r.0.0/1": {
+   "image": "res://images/stories/wolf_trap/r.0.0_n1.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "wolf_trap/r.0.0/10": {
+   "image": "res://images/stories/wolf_trap/r.0.0_n10.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "wolf_trap/r.0.0/4": {
+   "image": "res://images/stories/wolf_trap/r.0.0_n4.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "wolf_trap/r.0.0/7": {
+   "image": "res://images/stories/wolf_trap/r.0.0_n7.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "wolf_trap/r.0.1/10": {
+   "image": "res://images/stories/wolf_trap/r.0.1_n10.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "wolf_trap/r.0.1/13": {
+   "image": "res://images/stories/wolf_trap/r.0.1_n13.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "wolf_trap/r.0.1/2": {
+   "image": "res://images/stories/wolf_trap/r.0.1_n2.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "wolf_trap/r.0.1/5": {
+   "image": "res://images/stories/wolf_trap/r.0.1_n5.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "wolf_trap/r.0/0": {
+   "image": "res://images/stories/wolf_trap/r.0_n0.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "wolf_trap/r.0/1": {
+   "image": "res://images/stories/wolf_trap/r.0_n1.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "wolf_trap/r.0/3": {
+   "image": "res://images/stories/wolf_trap/r.0_n3.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "wolf_trap/r.1/1": {
+   "image": "res://images/stories/wolf_trap/r.1_n1.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "wolf_trap/r.1/10": {
+   "image": "res://images/stories/wolf_trap/r.1_n10.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "wolf_trap/r.1/13": {
+   "image": "res://images/stories/wolf_trap/r.1_n13.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "wolf_trap/r.1/16": {
+   "image": "res://images/stories/wolf_trap/r.1_n16.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "wolf_trap/r.1/18": {
+   "image": "res://images/stories/wolf_trap/r.1_n18.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "wolf_trap/r.1/22": {
+   "image": "res://images/stories/wolf_trap/r.1_n22.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "wolf_trap/r.1/26": {
+   "image": "res://images/stories/wolf_trap/r.1_n26.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "wolf_trap/r.1/4": {
+   "image": "res://images/stories/wolf_trap/r.1_n4.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "wolf_trap/r.1/7": {
+   "image": "res://images/stories/wolf_trap/r.1_n7.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "wolf_trap/r/0": {
+   "image": "res://images/stories/wolf_trap/r_n0.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "wolf_trap/r/12": {
+   "image": "res://images/stories/wolf_trap/r_n12.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "wolf_trap/r/3": {
+   "image": "res://images/stories/wolf_trap/r_n3.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "wolf_trap/r/5": {
+   "image": "res://images/stories/wolf_trap/r_n5.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "wolf_trap/r/6": {
+   "image": "res://images/stories/wolf_trap/r_n6.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "wolf_trap/r/9": {
+   "image": "res://images/stories/wolf_trap/r_n9.png",
+   "reveal": "ink",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
   "zustrich_v_stepu/r.0.0/1": {
    "image": "res://images/stories/zustrich_v_stepu/r.0.0_n1.png",
    "reveal": "ink",
@@ -2802,6 +5334,18 @@
   }
  },
  "covers": {
+  "after_the_battle": {
+   "image": "res://images/stories/after_the_battle/cover.png",
+   "reveal": "fade",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
   "fire_in_steppe": {
    "image": "res://images/stories/fire_in_steppe/cover.png",
    "reveal": "fade",
@@ -2850,6 +5394,30 @@
    },
    "ambient": "none"
   },
+  "krivava_pastka": {
+   "image": "res://images/stories/krivava_pastka/cover.png",
+   "reveal": "fade",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "last_battle_at_berestechko": {
+   "image": "res://images/stories/last_battle_at_berestechko/cover.png",
+   "reveal": "fade",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
   "ostannij": {
    "image": "res://images/stories/ostannij/cover.png",
    "reveal": "fade",
@@ -2864,6 +5432,18 @@
   },
   "pereprava": {
    "image": "res://images/stories/pereprava/cover.png",
+   "reveal": "fade",
+   "motion": {
+    "type": "static",
+    "focus": [
+     0.5,
+     0.5
+    ]
+   },
+   "ambient": "none"
+  },
+  "wolf_trap": {
+   "image": "res://images/stories/wolf_trap/cover.png",
    "reveal": "fade",
    "motion": {
     "type": "static",

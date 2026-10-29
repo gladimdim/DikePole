@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="PackedScene" path="res://screens/main.tscn" id="1"]
+[ext_resource type="Script" path="res://tools/capture_store.gd" id="2"]
+
+[node name="StoreCapture" type="Node"]
+
+[node name="Main" parent="." instance=ExtResource("1")]
+
+[node name="Capture" type="Node" parent="."]
+script = ExtResource("2")

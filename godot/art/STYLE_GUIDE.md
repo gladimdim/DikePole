@@ -34,6 +34,20 @@ Use Khotyn `r_n4.png` for the drawing medium and `ostannij/r_n0.png` for Dmytro'
 
 Use Khotyn `r_n4.png` for the drawing medium and each story’s own `r_n0.png` for character continuity; references do not determine the new scene’s action or background. 22 passage drawings. Mykhailo and Ostap remain distinct. No ambusher before he is revealed; do not resurrect him after his death. Keep branch-specific injuries and equipment. Violence is implied. 13 passage drawings. Distinguish stocky greying Trokhym from lean dark-haired Vasyl. Preserve which wheel-lock firearm fires in each branch. In the fatal aftermath the hunters are covered bodies, not members of the search party. 16 passage drawings. Tatars are never visible. Fire burns wild vegetation, not the village. The successful village branch preserves every hut. The counterburn leaves a broad black strip. The village firebreak is ploughed by two oxen. In the tragic branch Dmytro has a closed right eye and a fallen grey horse; no graphic injury.
 
+## 1580 and 1620: illustrated editions
+
+`wolf_trap` (1580, 26 passages) and `after_the_battle` (1620, 51 passages) use Westerveld-inspired sepia/graphite drawings on ivory paper. All 77 passage PNGs use `reveal: ink`, `motion.type: static` and `ambient: none`. Each cover is an ultra-realistic full-color photograph with `reveal: fade`. Prompts and local reference paths are recorded in the respective JSONL files.
+
+In `wolf_trap`, distinguish the renegade Cossacks from Tatars. Ostap begins on Sasko’s dark bay horse with a white blaze and later takes captured shaggy horses. Do not show him alive in his fatal branch’s search and burial scenes. Depict punishments through graves, empty ropes and solemn witnesses. In `after_the_battle`, Dmytro wears the captured Tatar cap and quilted coat only in `r.0.0.0.*`; other branches retain his torn captive clothes. The scarred interrogator and otaman are the same person. Preserve the small dugout canoes, reed-lashed chaika, hidden cove and branch-specific companions. Keep violence implied.
+
+## 1648 and 1651: illustrated editions
+
+`krivava_pastka` (64 passages) and `last_battle_at_berestechko` (70 passages) use original Westerveld-inspired sepia/graphite drawings on ivory paper, with static ink reveals and no ambient distortion. Each cover is an ultra-realistic full-color photograph with a fade reveal. The JSONL prompt sets record the built-in image_gen tool and exact local references.
+
+For Zhovti Vody, preserve the crescent ambush, turf-covered trench across the road, branch-camouflaged wagons and eighteen-barrel ozhyha. Polish hussars have no wings. Ivan's wrapped right hand and later head bandage belong to the organ-gun branch; flashbacks show him at eighteen. Potocki wears a servant's shirt only in the trench branch. Never show Ivan alive in his burial scene.
+
+For Berestechko, distinguish Ivan, Dzhalai, Bezruchko and Borodavko. Ivan and Dzhalai are bare-chested only while digging; Ivan wears a muddy captured crimson coat while pretending to be dead. Keep the marshy ford, triangular earthwork, small grove and branch-specific survivors consistent. The rearguard has no artillery. Dmytro appears only in the opening scene, the kobzar only in the final ballad. Imply violence through smoke, reactions, distance and covered bodies.
+
 ## 1. Output spec
 
 | | |
